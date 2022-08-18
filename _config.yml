@@ -1,6 +1,6 @@
 # Site settings
 title: Course Website
-subtitle: Title of the Course
+subtitle: AREC 705
 description: |
     Add a description of your course. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Etiam fermentum massa id justo varius, vitae blandit nibh aliquet. 
@@ -13,19 +13,19 @@ description: |
     Proin ullamcorper tristique nisi, quis hendrerit turpis. Donec non congue velit. 
     Praesent accumsan odio egestas, mollis lorem eget, euismod arcu. 
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://csy-arec-705.github.io" # the base hostname & protocol for your site
+url: "https://csu-arec-705.github.io" # the base hostname & protocol for your site
 syllabus: "https://github.com/svmiller/svm-r-markdown-templates/blob/master/syllabus-example/svm-rmarkdown-syllabus-example.pdf"
-githubdir: "svmiller/course-website"
+githubdir: "csu-arec-705/csu-arec-705.github.io"
 
 # Author/user information
-email: svmille@clemson.edu
-twitter_username: stevenvmiller
-github_username:  svmiller
-authorurl: "http://svmiller.com"
+email: alexandra.e.hill@colostate.edu
+#twitter_username: stevenvmiller
+#github_username:  svmiller
+authorurl: "https://alexandraehill.github.io"
 address: |
-    Department of Political Science
-    232 Brackett Hall
-    Clemson, SC 29634-1354
+    Department of Agricultural and Resource Economics
+    Colorado State University
+    Nutrien 213
 
 
 # Build settings
