@@ -1,0 +1,94 @@
+{
+  "main": {
+    "id": "591335368caee8bd",
+    "type": "split",
+    "children": [
+      {
+        "id": "5d9974f517bcc9bd",
+        "type": "leaf",
+        "state": {
+          "type": "graph",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "acb66550930e9d39",
+    "type": "split",
+    "children": [
+      {
+        "id": "ae7e64e6d1ae447a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "48c634a7da576a9e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "ff77a14b0596395a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "98fcfc8c81830aaf",
+    "type": "split",
+    "children": [
+      {
+        "id": "37f50039f6f2764e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b2703c3e45e007ed",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "5d9974f517bcc9bd",
+  "lastOpenFiles": [
+    "course-materials.md",
+    "lectures.md",
+    "README.md",
+    "_posts/2015-08-16-welcome-to-jekyll.md",
+    "blog.md",
+    "syllabus/svm-rmarkdown-syllabus-example.pdf"
+  ]
+}
