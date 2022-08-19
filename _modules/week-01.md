@@ -10,6 +10,8 @@ Keshav, S. How to Read a Paper. <a  href="https://web.stanford.edu/class/ee384m/
 
 Just, R.E. & Pope, R.D. (2001). The Agricultural Producer: Theory and Statistical Measurement. In B. Gardner & G. Rausser (Eds.), Handbook of Agricultural Economics, Volume 1 (pp. 629-741). Elsevier Science B.V. Link: <a  href="https://www.sciencedirect.com/science/article/pii/S1574007201100150" target="_blank">Link</a> <br>
 
+Sunding & Zilberman (2001). The Agricultural Innovation Process: Research and Technology Adoption in a Changing Agricultural Sector. In B. Gardner & G. Rausser (Eds.), Handbook of Agricultural Economics, Volume 1 (pp. 207-261). Elsevier Science B.V. <a  href="https://www.sciencedirect.com/science/article/pii/S1574007201100071" target="_blank">Link</a> <br>
 
+Kumbhakar, S. C., Wang, H.-J., & Horncastle, A. P. (2015). A Practitioner's Guide to Stochastic Frontier Analysis Using Stata. Cambridge: Cambridge University Press. 
 </div>
 
