@@ -1,6 +1,6 @@
 # Site settings
-title: Course Website
-subtitle: AREC 705
+title: AREC 705 Course Website
+subtitle: Home Page
 description: |
     Welcome to the course webpage for AREC 705 -- Agricultural Production and Technological Change. Throughout this course we will be studying and applying modern theoretical and empirical approaches to understand agricultural producer decision-making, including decision-making over multiple stages and under risk, the generation, adoption, and diffusion of agricultural technologies, measurements of technical efficiency and productivity, and advanced models of agricultural markets. My goal in this course is to equip you with an array of theoretical and empirical modeling tools that will enable you to conduct research related to and relevant for agricultural producers. On this website you will find the course syllabus, weekly reading assignments, lecture slides and notes, and a link to the google classroom you will use to submit assignments. 
 baseurl: "" # the subpath of your site, e.g. /blog/
