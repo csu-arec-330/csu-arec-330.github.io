@@ -2,16 +2,7 @@
 title: Course Website
 subtitle: AREC 705
 description: |
-    Add a description of your course. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Etiam fermentum massa id justo varius, vitae blandit nibh aliquet. 
-    Nam consequat accumsan massa id lacinia. Proin ac placerat neque. Vivamus ornare eget tortor ac tincidunt. 
-    Mauris semper viverra dui in molestie. Proin bibendum metus orci, quis sollicitudin ligula pretium non. 
-    Integer nec lacus eget neque laoreet semper. Pellentesque eu dolor rutrum, consectetur enim nec, fermentum odio. 
-    Duis venenatis metus cursus, ultrices nulla in, dapibus urna. Fusce pellentesque eros sed justo viverra ultricies. 
-    Morbi porttitor dui ut erat congue accumsan. Donec eget turpis quam. Nam quis lobortis nisl. 
-    Pellentesque varius tincidunt purus, dictum sodales leo suscipit quis. 
-    Proin ullamcorper tristique nisi, quis hendrerit turpis. Donec non congue velit. 
-    Praesent accumsan odio egestas, mollis lorem eget, euismod arcu. 
+    Welcome to the course webpage for AREC 705 -- Agricultural Production and Technological Change. Throughout this course we will be studying and applying modern theoretical and empirical approaches to understand agricultural producer decision-making, including decision-making over multiple stages and under risk, the generation, adoption, and diffusion of agricultural technologies, measurements of technical efficiency and productivity, and advanced models of agricultural markets. My goal in this course is to equip you with an array of theoretical and empirical modeling tools that will enable you to conduct research related to and relevant for agricultural producers. On this website you will find the course syllabus, weekly reading assignments, lecture slides and notes, 
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://csu-arec-705.github.io" # the base hostname & protocol for your site
 syllabus: "https://github.com/svmiller/svm-r-markdown-templates/blob/master/syllabus-example/svm-rmarkdown-syllabus-example.pdf"
@@ -24,8 +15,7 @@ email: alexandra.e.hill@colostate.edu
 authorurl: "https://alexandraehill.github.io"
 address: |
     Department of Agricultural and Resource Economics
-    Colorado State University
-    Nutrien 213
+    Colorado State University | Nutrien 213
 
 
 # Build settings
