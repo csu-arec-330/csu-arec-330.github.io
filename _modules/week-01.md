@@ -1,5 +1,5 @@
 ---
-title: Course Overview
+title: "Week 1: Course Overview"
 ---
 
 | **Aug 23 & Aug 25**               |
