@@ -22,6 +22,9 @@ address: |
 markdown: kramdown
 
 # module setup
+# Collections for website data
+collections:
+  modules:
 defaults:
   - scope:
       path: ''
