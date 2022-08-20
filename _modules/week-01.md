@@ -6,12 +6,13 @@ title: "Week 1: Course Overview"
 <b><u>Aug 23 & Aug 25</u></b> <br> <br>
 <!--<a  href="/lectures/08_23_22-AREC-705.pdf" target="_blank">Download Lecture</a> <br> <br>-->
 <b>Referenced Journal Articles and Resources:</b> <br>
-Keshav, S. How to Read a Paper. <a  href="https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf" target="_blank">Link </a> <br>
 
-Just, R.E. & Pope, R.D. (2001). The Agricultural Producer: Theory and Statistical Measurement. In B. Gardner & G. Rausser (Eds.), Handbook of Agricultural Economics, Volume 1 (pp. 629-741). Elsevier Science B.V. Link: <a  href="https://www.sciencedirect.com/science/article/pii/S1574007201100150" target="_blank">Link</a> <br>
+<ul>
+  <li>Keshav, S. How to Read a Paper. <a  href="https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf" target="_blank">Link </a> </li>
+  <li>Just, R.E. & Pope, R.D. (2001). The Agricultural Producer: Theory and Statistical Measurement. In B. Gardner & G. Rausser (Eds.), Handbook of Agricultural Economics, Volume 1 (pp. 629-741). Elsevier Science B.V. Link: <a  href="https://www.sciencedirect.com/science/article/pii/S1574007201100150" target="_blank">Link</a></li>
+  <li>Sunding & Zilberman (2001). The Agricultural Innovation Process: Research and Technology Adoption in a Changing Agricultural Sector. In B. Gardner & G. Rausser (Eds.), Handbook of Agricultural Economics, Volume 1 (pp. 207-261). Elsevier Science B.V. <a  href="https://www.sciencedirect.com/science/article/pii/S1574007201100071" target="_blank">Link</a></li>
+  <li>Kumbhakar, S. C., Wang, H.-J., & Horncastle, A. P. (2015). A Practitioner's Guide to Stochastic Frontier Analysis Using Stata. Cambridge: Cambridge University Press.</li>
+</ul>
 
-Sunding & Zilberman (2001). The Agricultural Innovation Process: Research and Technology Adoption in a Changing Agricultural Sector. In B. Gardner & G. Rausser (Eds.), Handbook of Agricultural Economics, Volume 1 (pp. 207-261). Elsevier Science B.V. <a  href="https://www.sciencedirect.com/science/article/pii/S1574007201100071" target="_blank">Link</a> <br>
-
-Kumbhakar, S. C., Wang, H.-J., & Horncastle, A. P. (2015). A Practitioner's Guide to Stochastic Frontier Analysis Using Stata. Cambridge: Cambridge University Press. 
 </div>
 
