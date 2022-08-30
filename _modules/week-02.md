@@ -18,9 +18,9 @@ title: "Week 2: Producer Theory and Analysis - Perennials"
 
 <ul>
   <li> Wickens, M.R. & Greenfield, J.N. (1973). The Econometrics of Agricultural Supply: An Application to the World Coffee Market. <i>The Review of Economics and Statistics, 55(4)</i>: 433--440. <a  href="https://www.jstor.org/stable/1925665" target="_blank">Link</a></li>
-  <li> Akiyama, T. \& Trivedi, P.K. (1987). Vintage Production Approach to Perennial Crop Supply: An Application to Tea in Major Producing Countries. <i>Journal of Econometrics, 36</i>: 133--161. <a  href="http://www.sciencedirect.com/science/article/pii/0304-4076(87)90047-9" target="_blank">Link</a></li> 
-  <li> Devadoss, S. \& Luckstead, J. (2010). An Analysis of Apple Supply Response. <i>International Journal of Production Economics, 124</i>: 265--271. <a  href="https://www.sciencedirect.com/science/article/abs/pii/S0925527309004277" target="_blank">Link</a></li> 
-  <li>  Gotsch, N. \& Wohlgenant, M.K. (2000). A Welfare Analysis of Biological Technical Change under Different Supply Shift Assumptions: The Case of Cocoa in Malaysia. <i>Canadian Journal of Agricultural Economics, 49</i>: 87--104. <a  href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1744-7976.2001.tb00292.x" target="_blank">Link</a></li> 
+  <li> Akiyama, T. & Trivedi, P.K. (1987). Vintage Production Approach to Perennial Crop Supply: An Application to Tea in Major Producing Countries. <i>Journal of Econometrics, 36</i>: 133--161. <a  href="http://www.sciencedirect.com/science/article/pii/0304-4076(87)90047-9" target="_blank">Link</a></li> 
+  <li> Devadoss, S. & Luckstead, J. (2010). An Analysis of Apple Supply Response. <i>International Journal of Production Economics, 124</i>: 265--271. <a  href="https://www.sciencedirect.com/science/article/abs/pii/S0925527309004277" target="_blank">Link</a></li> 
+  <li>  Gotsch, N. & Wohlgenant, M.K. (2000). A Welfare Analysis of Biological Technical Change under Different Supply Shift Assumptions: The Case of Cocoa in Malaysia. <i>Canadian Journal of Agricultural Economics, 49</i>: 87--104. <a  href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1744-7976.2001.tb00292.x" target="_blank">Link</a></li> 
 </ul>
 
 </div>
