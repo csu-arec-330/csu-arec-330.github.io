@@ -16,7 +16,7 @@ title: "Week 1: Course Overview"
 
   <li>Chaubey, V. (2017). The Little Book of Research Writing: CreateSpace Independent Publishing Platform.</li>
 
- <li>Gentzkow, M. \& Shapiro, J.M. (2014). Code and Data for the Social Sciences: A Practitioner's Guide. <a  href="https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf" target="_blank">Link</a></li>
+ <li>Gentzkow, M. & Shapiro, J.M. (2014). Code and Data for the Social Sciences: A Practitioner's Guide. <a  href="https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf" target="_blank">Link</a></li>
 
  <li>Head, Keith. The Introduction Formula. <a  href="http://blogs.ubc.ca/khead/research/research-advice/formula" target="_blank">Link</a></li>
 </ul>
