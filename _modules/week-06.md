@@ -4,7 +4,7 @@ title: "Week 6: Advanced Producer Theory: Annual Production, Risk, and Technolog
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
 <b><u>Sep 27 & Sep 29</u></b> <br> <br>
-<!--<a  href="/lectures/Week 05.pdf" target="_blank">Download Lecture</a> <br> <br>-->
+<a  href="/lectures/Week 06.pdf" target="_blank">Download Lecture</a> <br> <br>
 <b>Assigned Readings for 9/27:</b> <br>
 
 <ul>
