@@ -22,7 +22,6 @@ title: "Week 4: Producer Theory and Analysis - Optimal Perennial Production"
   <li>Cairns, R.D. (2017). Faustmann's Formula's for Forests. <i>Natural Resource Modeling, 30(1)</i>: 52-73.</li>
   <li>Salo, S. & Tahvonen, O. (2002). On Equilibrium Cycles and Normal Forests in Optimal Harvesting of Tree Vintages. <i>Journal of Environmental Economics and Management, 44</i>: 1-22. ></li>
   <li>Nerlove, M. & Bessler, D.A. (2001). Expectations, Information, and Dynamics. In B. Gardner & G. Rausser (Eds.), <i>Handbook of Agricultural Economics</i>, Volume 1 (pp. 629-741). Elsevier Science B.V.</li>
-
 </ul>
 
 
