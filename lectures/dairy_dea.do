@@ -13,6 +13,11 @@ help dea
 * need DMU variable
 rename v1 dmu
 
+* run CRS DEA IO
+dea  llabor = ly , rts(crs) saving(dairy_dea_stata.dta) ort(in)
+use dairy_dea_stata.dta, clear
+
+
 * run VRS DEA IO (will also return CRS)
 dea  llabor = ly , rts(vrs) saving(dairy_dea_stata.dta) ort(in)
 
