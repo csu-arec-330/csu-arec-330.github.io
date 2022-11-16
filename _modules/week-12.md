@@ -4,7 +4,7 @@ title: "Week 12 & 13: Advanced Market Models: EDM"
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
 <b><u>Nov 08 - 17 </u></b> <br> <br>
-<a  href="/lectures/Week 11.csv" target="_blank">Lecture Slides</a> <br> <br>
+<a  href="/lectures/Week 11.pdf" target="_blank">Lecture Slides</a> <br> <br>
 <b>Assigned Readings (11/08):</b> <br>
 
 <ul>

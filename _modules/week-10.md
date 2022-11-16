@@ -4,8 +4,8 @@ title: "Week 10: Efficiency and Productivity Analysis: SFA"
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
 <b><u>Oct 25 & Oct 27</u></b> <br> <br>
-<a  href="/lectures/Week 09.csv" target="_blank">SFA Lecture Slides</a> <br> <br>
-<a  href="/lectures/Organics_SFA.do" target="_blank">Download Reading Notes</a> <br> <br>
+<a  href="/lectures/Week 09.pdf" target="_blank">SFA Lecture Slides</a> <br> <br>
+<a  href="/lectures/Organics_SFA.pdf" target="_blank">Download Reading Notes</a> <br> <br>
 <a  href="/lectures/dairy_dea_1input_1output.ipynb" target="_blank">Download SFA Notes</a> <br> <br>
 <a  href="/lectures/sfa_complete.do" target="_blank">Download SFA STATA do file</a> <br> <br>
 <b>Assigned Readings (10/27):</b> <br>
