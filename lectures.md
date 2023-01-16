@@ -22,7 +22,7 @@ permalink: /lectures/
 
 </ul> -->
 
-This page contains link to the lectures I give throughout the semester. Clicking the title of the week's lecture will go to a PDF, embedded in the user's browser, by default. The bottom right icons link to the Github directory for the lecture (<i class="fab fa-github"></i>), the R Markdown document for the lecture (<i class="fab fa-r-project"></i>), and a PDF, embedded on Github, for the lecture (<i class="fas fa-file-pdf"></i>).
+This page contains link to the lectures we give throughout the semester. Clicking the title of the week's lecture will go to an html file, embedded in the user's browser, by default. The bottom right icons link to the Github directory for the lecture (<i class="fab fa-github"></i>), the R Markdown document for the lecture (<i class="fab fa-r-project"></i>), and a PDF, embedded on Github, for the lecture (<i class="fas fa-file-pdf"></i>).
 
 <ul id="archive">
 {% for lectures in site.data.lectures %}
