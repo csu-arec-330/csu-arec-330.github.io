@@ -1,12 +1,12 @@
 # Site settings
-title: AREC 705 Course Website
+title: AREC 330 Course Website
 subtitle: Home Page
 description: |
-    Welcome to the course webpage for AREC 705 -- Agricultural Production and Technological Change. Throughout this course we will be studying and applying modern theoretical and empirical approaches to understand agricultural producer decision-making, including decision-making over multiple stages and under risk, the generation, adoption, and diffusion of agricultural technologies, measurements of technical efficiency and productivity, and advanced models of agricultural markets. My goal in this course is to equip you with an array of theoretical and empirical modeling tools that will enable you to conduct research related to and relevant for agricultural producers. On this website you will find the course syllabus, weekly reading assignments, lecture slides and notes, and a link to the google classroom you will use to submit assignments. 
+    Welcome to the course webpage for AREC 330 -- Data-Driven Decision Making in Agricultural and Resource Economics. The world generates [2.5 quintillion bytes](https://financesonline.com/how-much-data-is-created-every-day/#:~:text=Every%20day%20Big%20Data%20statistics,(2021%2C%20February%209).) of data each day. One of the key modern business challenges is transforming that data into actionable insights that improve decision making (i.e., data-driven decision making). Transforming data into information is not magic. It requires understanding the decision problem, organizing and processing data, analyzing data, and finally presenting information. This course will introduce you to this process of transforming data into actionable insights and build a core set of competencies with two commonly used software: R and Tableau. Since we only have 16 weeks, the most important lesson you will learn in this class is how to teach yourself what you need to know in the future. You will learn these skills by completing the three group projects over the semester.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://csu-arec-705.github.io" # the base hostname & protocol for your site
+url: "https://csu-arec-330.github.io" # the base hostname & protocol for your site
 syllabus: "https://github.com/svmiller/svm-r-markdown-templates/blob/master/syllabus-example/svm-rmarkdown-syllabus-example.pdf"
-githubdir: "csu-arec-705/csu-arec-705.github.io"
+githubdir: "csu-arec-330/csu-arec-330.github.io"
 
 # Author/user information
 email: alexandra.e.hill@colostate.edu
