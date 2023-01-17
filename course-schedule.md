@@ -7,7 +7,6 @@ description: Listing of course modules, topics, dates, and assignments
 
 
 
-<html>
 <head>
 <style>
 table {
@@ -22,7 +21,6 @@ th, td {
 </style>
 </head>
 <body>
-<hr/>
 	<table cellspacing="0" border="1">
 		<thead>
 			<tr>
@@ -242,5 +240,4 @@ th, td {
             </tr> 
         </tfoot>
 	</table>
-</hr>
-</html>
+</body>
