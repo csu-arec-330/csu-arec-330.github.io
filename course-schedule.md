@@ -14,7 +14,6 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
-
 th, td {
   padding: 8px;
   text-align: left;
@@ -242,4 +241,6 @@ th, td {
                 <td colspan="5"><em>All problem sets are due the following Tuesday by 11:59pm unless otherwise discussed. All quizzes will be taken during lecture on the indicated day.</td> 
             </tr> 
         </tfoot>
-	</html>
+	</table>
+</hr>
+</html>
