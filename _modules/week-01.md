@@ -3,7 +3,7 @@ title: "Week 1: Course Overview"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Jan 18 & Aug 20</u></b> <br> <br>
+<b><u>Jan 18 & Jan 20</u></b> <br> <br>
 <!--
 <a  href="/lectures/Week 01 - Overview.pdf" target="_blank">Download Lecture</a> <br> <br>
 <b>Referenced Journal Articles and Resources:</b> <br>
