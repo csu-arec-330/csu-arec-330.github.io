@@ -106,6 +106,23 @@ Tableau offers a variety of products that each serve a specific purpose. In this
 
 **Tableau Server and Online** are *paid* cloud services that enable organizations to host workboks, data sources, prep flows, and data extracts published through Tableau Prep or Desktop. You can schedule data extracts and analyses to be automatically refreshed as often as every 15 minutes. These services are an alternative to Tableau Public for data and analyses that are confidential to an organization, but that can be usefully shared within the organization. 
 
+## Tableau File Types
+
+Tableau uses several different file types:
+
+- Workbooks (.twb) - Hold one or more worksheets or dashboards. These do not include the data.
+
+- Bookmarks (.tbm) - Contain a single worksheet and are easy to share your work.
+
+- Packaged Workbooks (.twbx) - Contain the workbook along with any other supporting data or images.
+
+- Extract (.hyper or .tde) - Local copy of a subset or entire data that you can use to share with others.
+
+- Data Source (.tds) - Shortcut for quickly connecting to the data. These files do not contain the actual data but rather the information to connect.
+
+- Packaged Data Source (.tdsx) - Contains the data source file as well as any local file data. 
+
+
 ## Tableau Desktop Views
 
 ### The Start Page
@@ -143,9 +160,11 @@ The **Data Pane** lists all the fields from the source data. It also lists the n
 
 **Measures** list all fields that contain quantifiable data.
 
-The **Filters** card allows you to include and exclude specific data.
+The **Pages** shelf lets you break a view into a series of pages so you can better analyze how a specific field affects the rest of the data in a view.
 
-The **Marks** card is used to set different properties for fields in the visualization.
+The **Filters** shelf allows you to include and exclude specific data.
+
+The **Marks** shelf is used to set different properties for fields in the visualization.
 
 The **Columns** and **Rows** Shelves are used to create a structure for your visualization.
 

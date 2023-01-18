@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -195,6 +195,18 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Tableau Prep</strong> is a tool to prepare your data for analysis in Tableau Desktop. It allows you to combine data from multiple sources, clean your data, and transform your data. Because Tableau Prep is not as powerful of an analysis tool as R, we will be using R to accomplish these tasks instead.</p>
 <p><strong>Tableau Server and Online</strong> are <em>paid</em> cloud services that enable organizations to host workboks, data sources, prep flows, and data extracts published through Tableau Prep or Desktop. You can schedule data extracts and analyses to be automatically refreshed as often as every 15 minutes. These services are an alternative to Tableau Public for data and analyses that are confidential to an organization, but that can be usefully shared within the organization.</p>
 </section>
+<section id="tableau-file-types" class="level2">
+<h2 class="anchored" data-anchor-id="tableau-file-types">Tableau File Types</h2>
+<p>Tableau uses several different file types:</p>
+<ul>
+<li><p>Workbooks (.twb) - Hold one or more worksheets or dashboards. These do not include the data.</p></li>
+<li><p>Bookmarks (.tbm) - Contain a single worksheet and are easy to share your work.</p></li>
+<li><p>Packaged Workbooks (.twbx) - Contain the workbook along with any other supporting data or images.</p></li>
+<li><p>Extract (.hyper or .tde) - Local copy of a subset or entire data that you can use to share with others.</p></li>
+<li><p>Data Source (.tds) - Shortcut for quickly connecting to the data. These files do not contain the actual data but rather the information to connect.</p></li>
+<li><p>Packaged Data Source (.tdsx) - Contains the data source file as well as any local file data.</p></li>
+</ul>
+</section>
 <section id="tableau-desktop-views" class="level2">
 <h2 class="anchored" data-anchor-id="tableau-desktop-views">Tableau Desktop Views</h2>
 <section id="the-start-page" class="level3">
@@ -221,8 +233,9 @@ ul.task-list li input[type="checkbox"] {
 <p>The <strong>Data Pane</strong> lists all the fields from the source data. It also lists the name of the data conection.</p>
 <p><strong>Dimensions</strong> list all fields that contain qualitative or categorical data.</p>
 <p><strong>Measures</strong> list all fields that contain quantifiable data.</p>
-<p>The <strong>Filters</strong> card allows you to include and exclude specific data.</p>
-<p>The <strong>Marks</strong> card is used to set different properties for fields in the visualization.</p>
+<p>The <strong>Pages</strong> shelf lets you break a view into a series of pages so you can better analyze how a specific field affects the rest of the data in a view.</p>
+<p>The <strong>Filters</strong> shelf allows you to include and exclude specific data.</p>
+<p>The <strong>Marks</strong> shelf is used to set different properties for fields in the visualization.</p>
 <p>The <strong>Columns</strong> and <strong>Rows</strong> Shelves are used to create a structure for your visualization.</p>
 <p>The <strong>View Pane</strong> shows your visualization.</p>
 </section>
