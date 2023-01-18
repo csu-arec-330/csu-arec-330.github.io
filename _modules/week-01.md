@@ -21,7 +21,7 @@ title: "Week 1: Course Overview"
 
 <a  href="/unit_00/inputs/supermarket_sales.csv" download>Download Supermarket Sales Data</a> <br>
 
-<a  href="/unit_00/inputs/supermarketdata_describe.html" download>Description of Supermarket Sales Data</a>
+<a  href="/unit_00/inputs/supermarketdata_describe.html" target="_blank">Description of Supermarket Sales Data</a>
 
 </div>
 
