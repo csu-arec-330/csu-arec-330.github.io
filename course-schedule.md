@@ -49,7 +49,7 @@ th, td {
 				<td rowspan="2">2</td>
 				<td style="min-width:50px">Wed, Jan 25</td>
 				<td style="min-width:50px">Making data-driven decisions</td>
-				<td style="min-width:50px"></td>
+				<td style="min-width:50px">Quiz 1</td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, Jan 27</td>
@@ -61,7 +61,7 @@ th, td {
 				<td rowspan="2">3</td>
 				<td style="min-width:50px">Wed, Feb 01</td>
 				<td style="min-width:50px">Economic Theory of Decision Making</td>
-				<td style="min-width:50px">Quiz 1</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, Feb 03</td>
@@ -97,7 +97,7 @@ th, td {
 				<td rowspan="2">6</td>
 				<td style="min-width:50px">Wed, Feb 22</td>
 				<td style="min-width:50px">Time Series Historical Trends Analysis</td>
-				<td style="min-width:50px"></td>
+				<td style="min-width:50px">Quiz 3</td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, Feb 24</td>
@@ -109,7 +109,7 @@ th, td {
 				<td rowspan="2">7</td>
 				<td style="min-width:50px">Wed, March 01</td>
 				<td style="min-width:50px">Technicals of Time Series Forecasting</td>
-				<td style="min-width:50px">Quiz 3</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, March 03</td>
@@ -159,7 +159,7 @@ th, td {
 				<td rowspan="2">10</td>
 				<td style="min-width:50px">Wed, March 29</td>
 				<td style="min-width:50px">Intro to Causal Inference</td>
-				<td style="min-width:50px"></td>
+				<td style="min-width:50px">Quiz 5</td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, March 31</td>
@@ -171,7 +171,7 @@ th, td {
 				<td rowspan="2">11</td>
 				<td style="min-width:50px">Wed, April 05</td>
 				<td style="min-width:50px">Causal Inference with Panel Data</td>
-				<td style="min-width:50px">Quiz 5</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, April 07</td>
