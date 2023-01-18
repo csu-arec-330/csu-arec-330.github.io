@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Supermarket Sales Data Overview</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="supermarketdata_describe_files/libs/clipboard/clipboard.min.js"></script>
+<script src="supermarketdata_describe_files/libs/quarto-html/quarto.js"></script>
+<script src="supermarketdata_describe_files/libs/quarto-html/popper.min.js"></script>
+<script src="supermarketdata_describe_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="supermarketdata_describe_files/libs/quarto-html/anchor.min.js"></script>
+<link href="supermarketdata_describe_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="supermarketdata_describe_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="supermarketdata_describe_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="supermarketdata_describe_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="supermarketdata_describe_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Supermarket Sales Data Overview</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="supermarket-sales-data" class="level2">
+<h2 class="anchored" data-anchor-id="supermarket-sales-data">Supermarket Sales Data</h2>
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description">Description</h3>
+<p>This supermarket dataset is a collection of data that provides information about the transactions that took place in a supermarket chain. The dataset includes sales observations from 3 different branches over a 3 month period. This dataset includes information such as the date and time of the transaction, the products that were purchased, the price of each product, the total amount spent on the transaction, and other relevant details.</p>
+<p>We will use this dataset to perform exploratory data analysis and gain insights into the behavior of the supermarket customers. We will use this dataset to identify trends and patterns in customer behavior to develop marketing and advertising strategies.</p>
+<p>Overall, this supermarket dataset can be a valuable tool for understanding and predicting the behavior of supermarket customers, and for making data-driven decisions that can improve the performance of a supermarket business.</p>
+<p>This dataset is available from kaggle: <a href="https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales">https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales</a></p>
+</section>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables</h3>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 87%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable Name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Invoice id</td>
+<td style="text-align: left;">Computer generated sales slip invoice identification number</td>
+</tr>
+<tr class="even">
+<td>Branch</td>
+<td style="text-align: left;">Branch of supercenter (3 branches are available identified by A, B and C).</td>
+</tr>
+<tr class="odd">
+<td>City</td>
+<td style="text-align: left;">Location of supercenter</td>
+</tr>
+<tr class="even">
+<td>Customer</td>
+<td style="text-align: left;">Type of customers, recorded by Members for customers using member card and Normal for without member card.</td>
+</tr>
+<tr class="odd">
+<td>Gender</td>
+<td style="text-align: left;">Gender of customer</td>
+</tr>
+<tr class="even">
+<td>Product line</td>
+<td style="text-align: left;">General item categorization groups - Electronic accessories, Fashion accessories, Food and beverages, Health and beauty, Home and lifestyle, Sports and travel</td>
+</tr>
+<tr class="odd">
+<td>Unit Price</td>
+<td style="text-align: left;">Price of each product in $</td>
+</tr>
+<tr class="even">
+<td>Quantity</td>
+<td style="text-align: left;">Number of products purchased by customer</td>
+</tr>
+<tr class="odd">
+<td>Tax</td>
+<td style="text-align: left;">5% tax fee for customer buying</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td style="text-align: left;">Total price including tax</td>
+</tr>
+<tr class="odd">
+<td>Date</td>
+<td style="text-align: left;">Date of purchase (Record available from January 2019 to March 2019)</td>
+</tr>
+<tr class="even">
+<td>Time</td>
+<td style="text-align: left;">Purchase time (10am to 9pm)</td>
+</tr>
+<tr class="odd">
+<td>Payment</td>
+<td style="text-align: left;">Payment used by customer for purchase, 3 methods are available – Cash, Credit card and Ewallet</td>
+</tr>
+<tr class="even">
+<td>COGS</td>
+<td style="text-align: left;">Cost of goods sold</td>
+</tr>
+<tr class="odd">
+<td>Gross margin percentage</td>
+<td style="text-align: left;">Gross margin percentage</td>
+</tr>
+<tr class="even">
+<td>Gross income</td>
+<td style="text-align: left;">Gross income</td>
+</tr>
+<tr class="odd">
+<td>Rating</td>
+<td style="text-align: left;">Customer stratification rating on their overall shopping experience (On a scale from 1 to 10)</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
