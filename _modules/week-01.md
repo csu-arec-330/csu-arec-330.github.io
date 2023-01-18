@@ -19,7 +19,7 @@ title: "Week 1: Course Overview"
 
 <a  href="/unit_00/ps1.html" target="_blank">Problem Set 1 Instructions</a> <br>
 
-<a  href="/unit_00/inputs/supermarket_sales.csv" download>Download Supermarket Sales Data</a>
+<a  href="/unit_00/inputs/supermarket_sales.csv" download>Download Supermarket Sales Data</a> <br>
 
 <a  href="/unit_00/inputs/supermarketdata_describe.html" download>Description of Supermarket Sales Data</a>
 
