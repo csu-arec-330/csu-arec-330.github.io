@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>handout_00_week_01</title>
+<title>Week 1 Handout: Tableau Terminology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -43,16 +43,29 @@ ul.task-list li input[type="checkbox"] {
 
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 1 Handout: Tableau Terminology</h1>
+</div>
 
 
-<section id="arec-330-handout-1-tableau-terminology" class="level2">
-<h2 class="anchored" data-anchor-id="arec-330-handout-1-tableau-terminology">AREC 330 Handout 1: Tableau Terminology</h2>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <p><strong>Learning Objective</strong>: Define key Tableau terminology</p>
-<section id="tableau-common-types-of-data-and-data-fields" class="level3">
-<h3 class="anchored" data-anchor-id="tableau-common-types-of-data-and-data-fields">Tableau Common Types of Data and Data Fields</h3>
+<section id="tableau-common-types-of-data-and-data-fields" class="level2">
+<h2 class="anchored" data-anchor-id="tableau-common-types-of-data-and-data-fields">Tableau Common Types of Data and Data Fields</h2>
 <p>Tableau terminology consists of general data literacy as well as terminology specific to Tableau.</p>
-<section id="data-sets" class="level4">
-<h4 class="anchored" data-anchor-id="data-sets">Data Sets</h4>
+<section id="data-sets" class="level3">
+<h3 class="anchored" data-anchor-id="data-sets">Data Sets</h3>
 <p>Data sets, databases, or data sources are collections of data. The different types of data sets that are used in Tableau include:</p>
 <ul>
 <li><p><strong>Spreadsheets</strong> organize data in a <em>flat</em> structure, meaning records are stored as single rows of data. MS Excel and Google Sheets are examples.</p></li>
@@ -62,8 +75,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Metadata</strong> is a set of data that describes other data. For example data fields (next) are stored as metadata.</p></li>
 </ul>
 </section>
-<section id="data-fields" class="level4">
-<h4 class="anchored" data-anchor-id="data-fields">Data Fields</h4>
+<section id="data-fields" class="level3">
+<h3 class="anchored" data-anchor-id="data-fields">Data Fields</h3>
 <p>When users <em>connect</em> Tableau to databases, Tableau automatically assigns the <em>data fields</em> in the data set a <em>role</em> and <em>type</em>.</p>
 <ul>
 <li><p><strong>Data Fields</strong> are the columns in your data set. They are also known as <em>variables</em>. They include a single piece of information for records (rows) in your data sets.</p></li>
@@ -76,8 +89,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="data-aggregation" class="level3">
-<h3 class="anchored" data-anchor-id="data-aggregation">Data Aggregation</h3>
+<section id="data-aggregation" class="level2">
+<h2 class="anchored" data-anchor-id="data-aggregation">Data Aggregation</h2>
 <p><strong>Data aggregation</strong> refers to how data is combined. The level of <strong>granularity</strong> or <strong>aggregation</strong> in a row of data impacts the questions we can answer with the data and the visualizations we can create. Less aggregate (or disaggregate or more granular) data will have more observations that aggregated data. For example, data on average corn yields by state each year (Table 1) are less aggregate, and consist of more observations, than average corn yields for the entire U.S. by year (Table 2). More aggregated data combine the less aggregated data in some logical and useful way. In the corn yield example, the data are aggregated by taking the average yield across all states within the year. However, you might also take the maximum, minimum, or median values (or a variety of other statistics).</p>
 <table class="table">
 <thead>
@@ -173,7 +186,6 @@ ul.task-list li input[type="checkbox"] {
 <p>[Average U.S. Corn Yields by State (Less Aggregated/More Granular) Wide Format]</p>
 <p><strong>Note that Tableau prefers long-formatted data</strong> — once the data is loaded into Tableau in long format you can perform aggregations.</p>
 <p><strong>Note that most regression analyses require wide-formatted data</strong> — to accomplish this we can reshape our data in R to prepare it for analysis.</p>
-</section>
 </section>
 
 </main>

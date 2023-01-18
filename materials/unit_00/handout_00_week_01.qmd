@@ -1,12 +1,17 @@
-## AREC 330 Handout 1: Tableau Terminology 
+---
+title: "Week 1 Handout: Tableau Terminology"
+format: 
+  html:
+    theme: zephyr
+---
 
 **Learning Objective**: Define key Tableau terminology
 
-### Tableau Common Types of Data and Data Fields
+## Tableau Common Types of Data and Data Fields
 
 Tableau terminology consists of general data literacy as well as terminology specific to Tableau. 
 
-#### Data Sets
+### Data Sets
 Data sets, databases, or data sources are collections of data. The different types of data sets that are used in Tableau include:
 
 - **Spreadsheets** organize data in a *flat* structure, meaning records are stored as single rows of data. MS Excel and Google Sheets are examples.
@@ -18,7 +23,7 @@ Data sets, databases, or data sources are collections of data. The different typ
 
 - **Metadata** is a set of data that describes other data. For example data fields (next) are stored as metadata.
 
-#### Data Fields
+### Data Fields
 
 When users *connect* Tableau to databases, Tableau automatically assigns the *data fields* in the data set a *role* and *type*. 
 
@@ -32,7 +37,7 @@ When users *connect* Tableau to databases, Tableau automatically assigns the *da
 
 - **Type:** String, Integer, Date, Geographic, etc. 
 
-### Data Aggregation
+## Data Aggregation
 
 **Data aggregation** refers to how data is combined. The level of **granularity** or **aggregation** in a row of data impacts the questions we can answer with the data and the visualizations we can create. Less aggregate  (or disaggregate or more granular) data will have more observations that aggregated data. For example, data on average corn yields by state each year (Table 1) are less aggregate, and consist of more observations, than average corn yields for the entire U.S. by year (Table 2). More aggregated data combine the less aggregated data in some logical and useful way. In the corn yield example, the data are aggregated by taking the average yield across all states within the year. However, you might also take the maximum, minimum, or median values (or a variety of other statistics). 
 
