@@ -13,7 +13,7 @@ title: "Week 1: Course Overview"
 
 <a  href="/materials/unit_00/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br>
 
-<a  href="/materials/unit_00/inputs/supermarket_sales.csv" target="_blank">Supermarket Sales Data</a>
+<a  href="/materials/unit_00/inputs/supermarket_sales.csv" download>Supermarket Sales Data</a>
 
 </div>
 
