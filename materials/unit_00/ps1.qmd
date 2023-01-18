@@ -1,0 +1,60 @@
+---
+title: "Problem Set 1: Introduction to R and Tableau"
+format: 
+  html:
+    theme: zephyr
+---
+
+## Part 1: R
+
+<!-- Link to website -->
+1. Create a variable called `myage` and assign it the value of your age.
+
+2. Create a vector called `grades` containing the following values: 88, 92, 75, 99, and 80.
+
+3. Using indexing, print the third element of the `grades` vector to the console.
+
+4. Create a data frame called `student_info` containing the following columns: Name, Age, Gender, Grade. The data should be as follows:
+
+```{r,echo=FALSE,results='asis'}
+knitr::kable(data.frame(
+   Name = c("John", "Emily", "Michael", "Jessica"),
+   Age = c(20, 22, 19, 21),
+   Major = c("AgBiz", "ENRE", "ENRE", "AgBiz"),
+   Absent = c(TRUE, TRUE, FALSE, FALSE)
+))
+
+```
+
+5. Download this [data set](inputs/mydata.csv) in csv format to a known location on your machine. The dataset should be called `mydata.csv`. Using the `setwd()` function, set your working directory to the location where you have a file called `mydata.csv`
+
+6. Using the `read.csv()` function, read in the file `mydata.csv` and assign it to an object called `mydata`.
+
+7. Install and load the package `readr`.
+
+8. Write a brief explanation of what you did in steps 1-7 and how it relates to the tutorial.
+
+## Part 2: Tableau
+Connect to the `supermarket_sales.csv` and answer the following questions using information on the `Start Page` and `Data Source Page`
+
+1.  What type of connection did you use to connect to `supermarket_sales.csv`?
+
+2.  What type of data is `supermarket_sales.csv`?
+
+3.  How many sheets are included in `supermarket_sales.csv`?
+
+4.  How many data fields are included in `supermarket_sales.csv`?
+
+5.  What is the role of the variable `City`?
+
+6.  What is the type of the variable `City`?
+
+7.  What is the role of the variable `Total`?
+
+8.  What is the type of the variable `Total`?
+
+9.  Open a new sheet. Drag the variable `Total` to the Rows shelf and the variable `City` to the Columns shelf. Give your sheet a useful title, save your workbook, and publish your workbook to your Tableau Public site. 
+
+## How to Submit
+
+You should create a new webpage on your google site titled `Problem Set 1`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions and your answer to question 8 in paragraph form. Part 2 should contain your answers to each question 1-8 and a link to your workbook on your Tableau Public site. Submit the link to your google site webpage in Canvas.

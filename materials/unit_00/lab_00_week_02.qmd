@@ -1,0 +1,54 @@
+---
+title: "Week 2 Lab: Processing Data with R"
+format: html
+---
+
+Notes:
+
+- walk through steps in excel to illustrate what is happening
+
+
+## Data Problems
+
+Data is not always perfect.  Often times datasets contain errors that you need to correct before the data can be used.  This process is called data cleaning.  Data errors are introduced by human error during data entry, the failure of machines that automatically generate data, and corruption of stored data.
+
+
+## Lab Exercise
+
+1. Calculate the total value of the sale using the *unit_price* and *quantity* columns.  Name the new column *subtotal*.
+
+2. Create a dataset containing only the subset of sales from the product line *food and beverages*.
+
+3. Create a dataset containing only the subset of sales from the product line *food and beverages* and excluding the *date* and *time* columns (fields or variables). 
+
+4. Sort the dataset resulting from steps 1-3 by subtotal in descending order. 
+
+
+## Problem Set
+
+1. All sales in the supermarket are subject to a 5% tax (assessed on sale subtotal).  **First**, calculate a new column with the sales tax charged on each sale.  **Second**, calculate the value of the total sale (inclusive of the tax).
+
+2. The supermarket wants to know the sale margin (the amount received in excess of the costs of the goods and services).  Calculate the supermarket's [gross income](https://www.investopedia.com/terms/g/grossincome.asp) for each sale.
+
+3. The dataset you were given to work with contains the cost of goods and services (the column name is `cogs`).  However, analysts need you to calculate the cost per item.  You can assume that each item in the sale has the same unit cost.
+
+----------------------------------------
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

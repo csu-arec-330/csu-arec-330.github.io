@@ -1,0 +1,65 @@
+---
+title: "Slide Deck Template"
+format: 
+  revealjs:
+    theme: default
+---
+
+## Introduction
+
+Start with something exciting that motivates the content of the slides
+
+## Learning Objectives
+
+1. first
+
+2. second
+
+## Agenda
+
+Schedule of the data 
+
+Remove if redundant with learning objectives
+
+## Content
+
+## Summary
+
+I heard/read that we should be allocating 5 min or so to recap the key points of the lecture
+
+<!-- ################## -->
+# Example Slides
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+with(mtcars,plot(disp,mpg))
+```
+
+## Multiple Columns
+:::: {.columns}
+
+::: {.column width="40%"}
+Some descriptive text
+:::
+
+::: {.column width="60%"}
+```{r}
+with(mtcars,plot(disp,mpg))
+```
+:::
+
+::::

@@ -1,0 +1,168 @@
+---
+title: "Syllabus AREC 330 Data-Driven Decision Making"
+format: 
+  html:
+    theme: zephyr
+  pdf: default
+---
+
+<!-- lumen, materia, minty, sandstone, simplex, superhero, yeti -->
+
+
+## When and Where
+
+Lecture: Nutrien 135, Wed 1:00 - 1:50 PM
+
+Lab: Nutrien 103, Fri 1:00 - 2:40 PM
+
+
+## Who
+
+**Alexandra Hill** (Instructor), [alexandra.e.hill\@colostate.edu](mailto:alexandra.e.hill@colostate.edu), 970-491-3577, Nutrien 213
+
+Office Hours: Th 2-3PM & by appt
+
+**Jude Bayham** (Instructor), [jbayham\@colostate.edu](mailto:jbayham@colostate.edu), 970-491-2836, Nutrien 203
+
+Office Hours: W 2-3PM & by appt <https://go.oncehub.com/jude_bayham>
+
+**Zarif Rasul** (TA), [Zarif.Rasul\@colostate.edu](mailto:Zarif.Rasul@colostate.edu)
+
+Office Hours: M 2-3PM & Th 3-4PM Nutrien 165
+
+
+## Course Description and Objectives
+
+The world generates [2.5 quintillion bytes](https://financesonline.com/how-much-data-is-created-every-day/#:~:text=Every%20day%20Big%20Data%20statistics,(2021%2C%20February%209).) of data each day. One of the key modern business challenges is transforming that data into actionable insights that improve decision making (i.e., data-driven decision making). Transforming data into information is not magic. It requires understanding the decision problem, organizing and processing data, analyzing data, and finally presenting information. This course will introduce you to this process of transforming data into actionable insights and build a core set of competencies with two commonly used software: R and Tableau. Since we only have 16 weeks, the most important lesson you will learn in this class is how to teach yourself what you need to know in the future. You will learn these skills by completing the three group projects over the semester.
+
+## Course Materials
+
+All course materials are freely available on the course website: . There is no single textbook that you need to purchase. Course deliverables will be submitted on Canvas unless otherwise noted.
+
+The course will require the use of [R (statistical computing software)](https://www.r-project.org/) and [Tableau (business intelligence software)](https://www.tableau.com/). R is an open source platform free to anyone. Tableau is freely available to you while you are a student at CSU. You will need to use these tools outside of class, so we recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
+
+We will use iClicker software to take attendance at lecture and assess understanding of the material.  If you have not already joined the course, you can do so using this link: <https://join.iclicker.com/BIDY>
+
+## Course Structure
+
+**Projects** The course is organized into four projects intended to develop different analytical skills. The projects will be completed in teams.  The project in each unit will be completed in parts.  The parts will be submitted as weekly assignments.  However, the final project deliverable will be worth the majority of points.  
+
+**Teams** Many careers require teamwork in some form. In this course, you will work in teams to complete your assignments and present your work. Team projects will train students to collaborate with peers as they likely will do in the workplace. Group work can also lead to freeriding so, students will evaluate themselves and each other after each project. The evaluation will provide the students the opportunity to explain their contribution and those of their peers. The instructors will be available to resolve disputes within a team. However, the most productive arrangement for this class (and in your future workplace) is to communicate expectations with your colleagues and do your part of the project.
+
+**Website** Students will create a website that will serve as a repository for projects/assignments. If this is your first time creating a website, we recommend [google sites](https://sites.google.com) - a free and easy to use website editing and hosting tool.   It will also serve as a record of their work in a presentable format that can be shared within or outside of CSU. *There are many other tools for building and hosting websites.  Please come talk to us if you have another option in mind or would like learn a more advanced option.*
+
+
+**Quizzes** There will be quizzes approximately every two weeks.  The quizzes will be administered on Canvas and cover topics ranging from data processing to graphical presentation of information.
+
+**Attendance and Participation** There will be iClicker questions incorporated into most lecture materials. These questions are intended to test understanding of lecture materials and provide the instructors with real-time feedback on comprehension. Responses will account for a small portion of the overall course grade.
+
+## Course Expectations and Policies
+
+We will communicate with you through your CSU email (@rams.colostate.edu) and through Canvas. Email is the best way to reach us. When many students have the same kind of question, we may reply to the entire class or post documents on the class website.
+
+During class, please turn off your cell phones and put them away. Be respectful of each other and your instructors/TA. Much of the course content will require the use of computers. Please use laptops and lab computers appropriately (do not watch media in class).
+
+
+
+## Course Outline
+
+-   Project 00
+
+    -   What is Data-Driven Decision Making (D$^3$M)?
+
+    -   Introduction to R and Tableau
+
+    -   Introduction to data processing
+    
+    -   Developing a workflow; Breaking a project into parts
+
+-   Project 01: Price Forecasting
+
+    -   How can price forecasting can influence business decisions?
+
+    -   Time series analysis
+    
+    -   Forecasting
+
+    -   Telling a story with your data analysis
+
+-   Project 02: Labor Productivity
+
+    -   How can a firm study labor productivity to be more efficient?
+    
+    -   Exploratory Data Analysis
+
+    -   Basics of causal inference
+
+    -   How to present a statistical model
+
+-   Project 03: Predicting Wildfire Severity
+
+    -   How can early indicators influence land management decisions?
+
+    -   Introduction to spatial data processing
+
+    -   Maps in Tableau
+
+    -   Dynamic plots in Tableau
+
+## Grading
+
+**Quizzes**: There will be approximately 8 quizzes worth 20% of your final grade.
+
+**Projects**: There will be four projects in this course. The first (introductory) project will be worth 15% of your final grade. The remaining three projects will each by worth approximately 20% of your final grade (75% total for projects).
+
+**Attendance and Participation**: There will be iClicker questions incorporated into most lecture materials. Completing iClicker polls will account for 5% of your final grade.
+
+Letter grades will be assigned based on the conventional CSU grading scale (93% or more = A, 90% - 92% = A-, 88% - 89% = B+, 83% - 87% = B, 80% - 82% = B-, 78% - 79% = C+, 73% - 77% = C, 70% - 72% = C-, 60% - 69% = D, less than 60% = F)
+
+If you have made it this far reading the syllabus, kudos to you! Please send the TA (Zarif Rasul) an email with the subject "arec 330 extra credit" and tell him your favorite vegetable. You will receive 5 points of extra credit for completing this before class on Friday, Jan 20, 2023.
+
+## Principles of Community
+
+The Principles of Community support the Colorado State University mission and vision of access, research, teaching, service and engagement. A collaborative, and vibrant community is a foundation for learning, critical inquiry, and discovery. Therefore, each member of the CSU community has a responsibility to uphold these principles when engaging with one another and acting on behalf of the University
+
+*Inclusion*: We create and nurture inclusive environments and welcome, value and affirm all members of our community, including their various identities, skills, ideas, talents, and contributions.
+
+*Integrity*: We are accountable for our actions and will act ethically and honestly in all our interactions.
+
+*Respect*: We honor the inherent dignity of all people within an environment where we are committed to freedom of expression, critical discourse, and the advancement of knowledge.
+
+*Service*: We are responsible, individually and collectively, to give of our time, talents, and resources to promote the well-being of each other and the development of our local, regional, and global communities.
+
+*Social Justice*: We have the right to be treated and the responsibility to treat others with fairness and equity, the duty to challenge prejudice, and to uphold the laws, policies and procedures that promote justice in all respects.
+
+## Mental Health Statement
+
+Need Help?
+
+CSU is a community that cares for you. If you are struggling with drugs or alcohol and/or experiencing depression, anxiety, overwhelming stress or thoughts of hurting yourself or others please know there is help available. Counseling Services has trained professionals who can help. Contact 970.491.6053 or go to http://health.colostate.edu. If you are concerned about a friend or peer, tell someone at by calling 970.491.1350 to discuss your concerns with a professional who can discreetly connect the distressed individual with the proper resources (http://supportandsafety.colostate.edu/tellsomeone). Rams take care of Rams. Reach out and ask for help if you or someone you know is having a difficult time.
+
+## Sexual Assault and Violence Elimination
+
+CSU's Student Sexual Harassment and Violence policy, following national guidance from the Office of Civil Rights, requires that professors follow CSU policy as a "mandatory reporter" of any personal disclosure of sexual harassment, abuse, and/or violence related experiences or incidents shared with the professor in person, via email, and/or in classroom papers or homework exercises. These disclosures include but are not limited to reports of personal relational abuse, relational/domestic violence, and stalking. While professors are often able to help students locate appropriate channels of assistance on campus (e.g., see the CSU Health Network link below), disclosure by the student to the professor requires that the professor inform appropriate CSU channels to help ensure that the student's safety and welfare is being addressed, even if the student requests that the disclosure not be shared.
+
+For counseling support and assistance, please see The CSU HEALTH NETWORK, which includes a variety of counseling services that can be accessed at: http://www.health.colostate.edu/. And, The Sexual Assault Victim Assistance Team is a confidential resource for students that does not have a reporting requirement and that can be of great help to students who have experienced sexual assault. The web address is http://www.wgac.colostate.edu/need-help-support.
+
+## Academic Integrity
+
+Academic misconduct (see examples below) undermines the educational experience at Colorado State University, lowers morale by engendering a skeptical attitude about the quality of education, and negatively affects the relationship between students and faculty/instructors.
+
+Faculty/Instructors are expected to use reasonably practical means of preventing and detecting academic misconduct. Any student found responsible for having engaged in academic misconduct will be subject to academic penalty and/or University disciplinary action.
+
+Students are encouraged to positively impact the academic integrity culture of CSU by reporting incidents of academic misconduct.
+
+Examples of academic misconduct include (but are not limited to):
+
+1.  Cheating -- Cheating includes using unauthorized sources of information and providing or receiving unauthorized assistance on any form of academic work or engaging in any behavior specifically prohibited by the instructor in the course syllabus or class presentation.  **Do not use generative AI (e.g., Chat GPT) to generate content that you represent as your own.  You may use the tool as a coding assistant to solve problems and help you understand the software used in the course**
+
+2.  Plagiarism -- Plagiarism includes the copying of language, structure, images, ideas, or thoughts of another, and representing them as one's own without proper acknowledgment, and is related only to work submitted for credit. Also included is the failure to cite sources properly; sources must always be appropriately referenced, whether the source is printed, electronic or spoken.
+
+3.  Unauthorized Possession or Disposition of Academic Materials -- Unauthorized possession or disposition of academic materials includes the unauthorized selling or purchasing of examinations, term papers, or other academic work; stealing another student's work; and using information from or possessing exams that an instructor did not authorize for release to students.
+
+4.  Falsification -- Falsification encompasses any untruth, either verbal or written, in one's academic work.
+
+5.  Facilitation of any act of Academic Misconduct -- Facilitation of any act of academic misconduct includes knowingly assisting another to commit an act of misconduct.
+
+
+![Classroom Agreement](extra_files/classroom_agreement.pdf){width=100% height="1040" }

@@ -1,0 +1,262 @@
+---
+title: "Week 1 Lab: Introduction to R and Tableau"
+format: 
+  html:
+    theme: zephyr
+---
+
+
+## Learning Objectives
+
+- Open R/Rstudio and ensure it is functioning properly
+
+- Get oriented with RStudio
+
+- Conduct basic calculations in R
+
+- Navigate directories from within R
+
+- Read in an external data set in R
+
+- Load a package in R
+
+- Create your google site and a project page
+
+- Apply for Teableau academic license
+
+- Download Tableau desktop and ensure working correctly
+
+- Register for Tableau public
+
+- Describe the flow of analysis in Tableau Desktop
+
+- Identify key areas of the Tableau Desktop workspace
+
+- Demonstrate how to connect Tableau to a database
+
+- Identify the role and type of data fields
+
+- Build a simple data visualization
+
+- Demonstrate how to share your data visualization
+
+
+## Introduction to R
+
+Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.
+
+Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <https://cran.r-project.org/>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>.
+
+RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient.  Open up RStudio and you should see something that looks like this:
+
+![](figs/01-rstudio.png)
+
+
+
+The RStudio interface is divided into several panels:
+
+- The Console panel is where you can enter and run R commands.
+
+- The Source panel is where you can open and edit R scripts, which are files that contain R code.
+
+- The Environment and History panels display information about the current environment and command history.
+
+- The Files, Plots, Packages, and Help panels provide access to various resources and tools.
+
+Now that you have both R and RStudio installed and running, let's dive into some basic concepts of the R programming language.
+
+First, R is an interpreted language, which means that you can enter commands directly into the console and see the results immediately. You can start the R console by opening RStudio and clicking on the "Console" tab.
+
+### Basics
+
+To assign a value to a variable in R, you can use the assignment operator `<-` or `=` like this:
+
+
+```{r}
+x <- 5
+
+x = 5 #Does the same thing
+```
+
+Here, we have created a variable called `x` and assigned it the value of 5.  Anything following the hashtag on the same line is interpreted as a comment and not executed. Once you assign a variable a value, you can see it in your environment panel.  You can use the `print()` function to display the value of a variable:
+```{r}
+print(x)
+```
+
+**Stop and open a new R script.  Because R is a command-line application, we can write a script (i.e., text file) with a sequence of commands.  There are many benefits to scripting.  First, you can save a record of the commands if you need to reproduce the analysis.  Second, you can share it with others so they can reproduce it. Third, you can easily change a part of your script to see what happens.**
+
+You can also perform basic arithmetic operations in R using the standard operators (`+, -, *, /`):
+```{r}
+y <- 3
+z <- x + y
+print(z)
+```
+
+First, we assign the variable `y` the value 3.  Then, we assign `z` the value of `x` (assigned 5 earlier) plus `y` (just assigned 3), which sum to 8.
+
+*Comprehension check: Try assigning the variables `a` and `b` different values and dividing them.*
+
+R also has a wide range of data types, including: numerical, character, and logical.  Variables can be different datatypes.  Collections of variables are called a vector - a one-dimensional array of data.  You can create a vector using the "c()" function, which stands for concatenate.  A vector may only contain one type of data.
+
+```{r}
+numbers <- c(1, 2, 3, 4, 5)
+characters <- c("a", "b", "c")
+logical <- c(TRUE, FALSE, TRUE)
+```
+
+
+### Indexing
+
+A single entry in a vector is called an element. You can access elements of a vector using the square bracket notation:
+
+```{r}
+print(numbers[1])
+```
+
+*Comprehension check: Try accessing a different element of the vector `numbers` or one of the other vectors.*
+
+You can also access series of elements in the vector.  To access a continuous range of values use the colon `:`
+```{r}
+print(characters[2:3])
+```
+
+You can even use a vector of index values to call discontinuous subsets of the vector.
+```{r}
+print(characters[c(1,3)])
+```
+  
+Depending on the datatype, there are functions that operate on the vector.  For example, you can sum the elements of the numeric vector `numbers`.
+```{r}
+print(sum(numbers))
+```
+
+*Comprehension check: Can you sum the numbers of the vector `characters`?  How about logical?*
+
+
+*Challenge: Can you figure out how to calculate the product of the vector `numbers`?*
+
+You can also add, subtract, multiply, and divide all of the numbers in a vector
+```{r}
+print(numbers+5)
+```
+
+Or add, subtract, multiply, and divide numbers of equal-length vectors
+```{r}
+print(numbers + numbers*2)
+```
+
+### data.frames
+
+Using R like a fancy calculator is intended to help you understand how R works.  R is generally used to analyze data sets.  Data sets are collections of equal-length vectors in a table or what R calls a `data.frame`. Here is a simple example:
+```{r}
+print(data.frame(a=c(1:3),
+                 b=c(4:6),
+                 d=c(7:9)))
+```
+Where `a,b,d` are the column or variable names and the `1,2,3` on the far left are row numbers.
+
+You can build a data.frame using the vectors above and assign the object a name.
+```{r}
+df <- data.frame(numbers=numbers[1:3],
+                 characters,
+                 logical)
+
+print(df)
+```
+
+*Comprehension check: Why did I subset the vector numbers?*
+
+Creating data.frames by hand is tedious.  Fortunately, R has some utilities to read data stored in certain files types.  Before we explore R's ability to read data, we must understand how R interacts with the rest of the computer's operating system.  At any point in time, you are in an active directory (similar to windows explorer or macos finder).  You can ask R to tell you the current working directory.
+```{r}
+getwd()
+```
+
+The response to this command will depend on the directory structure on your machine.  You can navigate your directory structure using the command `setwd()`. When you have multiple projects with multiple files on your machine, it will be important that you understand R's working directory and how to change it.  The syntax will depend on whether you are on a windows or mac.  First, locate the data file that you downloaded for this exercise.  You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the `setwd()` command.  The structure of this command is `directory/subdirectory1/subdirectory2/etc`.  The path needs to be in quotes to tell R that you are inputing characters and not variables.
+
+
+### Reading data
+To read data into R, we will use another function built into R.  We will be reading a file type called *comma-separated values* denoted by the file extension *.csv*.  The commas separate the variables, so R knows where a new variable starts.  We will read the file into a data.frame called `supersales`.  You can download the file [here](inputs/supermarket_sales.csv).
+```{r}
+super_sales <- read.csv("inputs/supermarket_sales.csv")
+```
+
+### Naming Objects
+
+You can give objects almost any name as long as it does not start with a number.  However, you want to choose descriptive names so that your future self and others will find it easier to read.  I prefer what is called [snake_case](https://en.wikipedia.org/wiki/Snake_case) where words are separated by an underscore and all lower case.  There are other options and it is a matter of opinion.  I suggest choosing one and sticking with it.
+
+### Packages or Libraries
+
+Finally, R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.^[If you like this concept, you might explore the linux operating system. I prefer [Ubuntu](https://ubuntu.com/download).] You can install and load a package using the "install.packages()" and "library()" functions:
+
+install.packages("dplyr")
+library(dplyr)
+
+Here, we have installed and loaded the "dplyr" package, which provides a wide range of functions for data manipulation.
+
+### Documentation
+
+Documentation is critical to understanding how functions and packages work in R.  There is a help tab in the lower right panel in RStudio.  You can also place your cursor in the function name in your code and press F1 to bring up the help for that function.  R documentation always provides a brief description, information about arguments (or inputs), information about outputs, and some examples of how you would use it.  Learning to read the documentation is critical for learning new packages.
+
+
+## Google Site
+
+[Google sites](https://sites.google.com/) is an easy-to-use website editing and hosting service.  You will create a website as a portfolio for your work in the course.  **You will complete your assignments by building webpages in your website**.  We encourage you to develop this website to showcase your work and market yourself to future employers.
+
+
+## Tableau Setup
+
+We will be using two Tableau products in this course (although there are many more - see handout): Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free. 
+
+Visit [Tableau for students](https://www.tableau.com/academic/students) and apply for your 1-year academic license.
+
+Visit [Tableau Desktop](https://www.tableau.com/products/desktop) and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license.
+
+Visit [Tableau Public](https://public.tableau.com/app/discover) and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.
+
+If you are ever feeling lost in this class, I recommend checking out some of Tableau's free [eLearning resources](https://elearning.tableau.com). We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.
+
+## Introduction to Tableau: The Tableau Workflow 
+
+Connect -> Analyze -> Share 
+
+[Video: The Tableau Tableau Desktop Workflow](https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr)
+
+### Connect
+
+You will **connect** to your data on the **data source page** following these steps:
+
+1.  Establish a connection
+
+2.  View available sheets
+
+3.  Select the first sheet you want to work with
+
+4.  View and edit sheet metadata
+
+5.  Connect additional sheets (optional)
+
+### Analyze
+
+You will **analyze** your data in a **worksheet**/**workspace** following these steps:
+
+1.  Click on `Sheet 1` at the bottom of the Tableau Desktop window. 
+
+2.  Use the `Data Pane` to view the data source and explore data fields within a worksheet
+
+3.  Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.
+
+4.  View your visualization in the `View Pane`.
+
+Next time we will go more in depth on the features of the workspace, but for now this is what you need to know.
+
+### Share
+
+You will **share** your **worksheet** on Tableau Public by following these steps:
+
+1.  Connect Tableau Desktop to your Tableau Public account. Server -> Tableau Public
+
+2.  Publish. Server -> Publish Workbook. OR Server -> Tableau Public -> Save to Tableau Public
+
+You should also save a local copy of your work as a Tableau Workbook. File -> Save. OR click the floppy disk icon (![](figs/save.png){width=5%}) at the top of the page.
+
+Next time we will cover how to embed your visualization in your google page, but for now you can just use the URL to share your work.

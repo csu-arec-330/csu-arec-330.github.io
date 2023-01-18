@@ -1,0 +1,9 @@
+Notes while developing materials
+
+Possible questions for mini project (week 4):
+- What product line has the highest gross income?
+- What product line has the highest rating?
+- Can you identify the sales that lost the supermarket money?
+
+Possible curve balls
+- Credit cards require a processing fee of 2% and ewallets have a processing fee of 1%

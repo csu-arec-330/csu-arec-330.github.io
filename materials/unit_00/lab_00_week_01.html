@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 1 Lab: Introduction to R and Tableau</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="lab_00_week_01_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab_00_week_01_files/libs/quarto-html/quarto.js"></script>
+<script src="lab_00_week_01_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab_00_week_01_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab_00_week_01_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab_00_week_01_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab_00_week_01_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab_00_week_01_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab_00_week_01_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab_00_week_01_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 1 Lab: Introduction to R and Tableau</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<ul>
+<li><p>Open R/Rstudio and ensure it is functioning properly</p></li>
+<li><p>Get oriented with RStudio</p></li>
+<li><p>Conduct basic calculations in R</p></li>
+<li><p>Navigate directories from within R</p></li>
+<li><p>Read in an external data set in R</p></li>
+<li><p>Load a package in R</p></li>
+<li><p>Create your google site and a project page</p></li>
+<li><p>Apply for Teableau academic license</p></li>
+<li><p>Download Tableau desktop and ensure working correctly</p></li>
+<li><p>Register for Tableau public</p></li>
+<li><p>Describe the flow of analysis in Tableau Desktop</p></li>
+<li><p>Identify key areas of the Tableau Desktop workspace</p></li>
+<li><p>Demonstrate how to connect Tableau to a database</p></li>
+<li><p>Identify the role and type of data fields</p></li>
+<li><p>Build a simple data visualization</p></li>
+<li><p>Demonstrate how to share your data visualization</p></li>
+</ul>
+</section>
+<section id="introduction-to-r" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-r">Introduction to R</h2>
+<p>Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.</p>
+<p>Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <a href="https://rstudio.com/" class="uri">https://rstudio.com/</a>.</p>
+<p>RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient. Open up RStudio and you should see something that looks like this:</p>
+<p><img src="figs/01-rstudio.png" class="img-fluid"></p>
+<p>The RStudio interface is divided into several panels:</p>
+<ul>
+<li><p>The Console panel is where you can enter and run R commands.</p></li>
+<li><p>The Source panel is where you can open and edit R scripts, which are files that contain R code.</p></li>
+<li><p>The Environment and History panels display information about the current environment and command history.</p></li>
+<li><p>The Files, Plots, Packages, and Help panels provide access to various resources and tools.</p></li>
+</ul>
+<p>Now that you have both R and RStudio installed and running, let’s dive into some basic concepts of the R programming language.</p>
+<p>First, R is an interpreted language, which means that you can enter commands directly into the console and see the results immediately. You can start the R console by opening RStudio and clicking on the “Console” tab.</p>
+<section id="basics" class="level3">
+<h3 class="anchored" data-anchor-id="basics">Basics</h3>
+<p>To assign a value to a variable in R, you can use the assignment operator <code>&lt;-</code> or <code>=</code> like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">5</span> <span class="co">#Does the same thing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here, we have created a variable called <code>x</code> and assigned it the value of 5. Anything following the hashtag on the same line is interpreted as a comment and not executed. Once you assign a variable a value, you can see it in your environment panel. You can use the <code>print()</code> function to display the value of a variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p><strong>Stop and open a new R script. Because R is a command-line application, we can write a script (i.e., text file) with a sequence of commands. There are many benefits to scripting. First, you can save a record of the commands if you need to reproduce the analysis. Second, you can share it with others so they can reproduce it. Third, you can easily change a part of your script to see what happens.</strong></p>
+<p>You can also perform basic arithmetic operations in R using the standard operators (<code>+, -, *, /</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p>First, we assign the variable <code>y</code> the value 3. Then, we assign <code>z</code> the value of <code>x</code> (assigned 5 earlier) plus <code>y</code> (just assigned 3), which sum to 8.</p>
+<p><em>Comprehension check: Try assigning the variables <code>a</code> and <code>b</code> different values and dividing them.</em></p>
+<p>R also has a wide range of data types, including: numerical, character, and logical. Variables can be different datatypes. Collections of variables are called a vector - a one-dimensional array of data. You can create a vector using the “c()” function, which stands for concatenate. A vector may only contain one type of data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>characters <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="indexing" class="level3">
+<h3 class="anchored" data-anchor-id="indexing">Indexing</h3>
+<p>A single entry in a vector is called an element. You can access elements of a vector using the square bracket notation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p><em>Comprehension check: Try accessing a different element of the vector <code>numbers</code> or one of the other vectors.</em></p>
+<p>You can also access series of elements in the vector. To access a continuous range of values use the colon <code>:</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(characters[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "b" "c"</code></pre>
+</div>
+</div>
+<p>You can even use a vector of index values to call discontinuous subsets of the vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(characters[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "c"</code></pre>
+</div>
+</div>
+<p>Depending on the datatype, there are functions that operate on the vector. For example, you can sum the elements of the numeric vector <code>numbers</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sum</span>(numbers))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<p><em>Comprehension check: Can you sum the numbers of the vector <code>characters</code>? How about logical?</em></p>
+<p><em>Challenge: Can you figure out how to calculate the product of the vector <code>numbers</code>?</em></p>
+<p>You can also add, subtract, multiply, and divide all of the numbers in a vector</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers<span class="sc">+</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p>Or add, subtract, multiply, and divide numbers of equal-length vectors</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers <span class="sc">+</span> numbers<span class="sc">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3  6  9 12 15</code></pre>
+</div>
+</div>
+</section>
+<section id="data.frames" class="level3">
+<h3 class="anchored" data-anchor-id="data.frames">data.frames</h3>
+<p>Using R like a fancy calculator is intended to help you understand how R works. R is generally used to analyze data sets. Data sets are collections of equal-length vectors in a table or what R calls a <code>data.frame</code>. Here is a simple example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">a=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b=</span><span class="fu">c</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">d=</span><span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  a b d
+1 1 4 7
+2 2 5 8
+3 3 6 9</code></pre>
+</div>
+</div>
+<p>Where <code>a,b,d</code> are the column or variable names and the <code>1,2,3</code> on the far left are row numbers.</p>
+<p>You can build a data.frame using the vectors above and assign the object a name.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">numbers=</span>numbers[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                 characters,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                 logical)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  numbers characters logical
+1       1          a    TRUE
+2       2          b   FALSE
+3       3          c    TRUE</code></pre>
+</div>
+</div>
+<p><em>Comprehension check: Why did I subset the vector numbers?</em></p>
+<p>Creating data.frames by hand is tedious. Fortunately, R has some utilities to read data stored in certain files types. Before we explore R’s ability to read data, we must understand how R interacts with the rest of the computer’s operating system. At any point in time, you are in an active directory (similar to windows explorer or macos finder). You can ask R to tell you the current working directory.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/alexandrahill/Documents/GitHub/AREC_330/unit_00"</code></pre>
+</div>
+</div>
+<p>The response to this command will depend on the directory structure on your machine. You can navigate your directory structure using the command <code>setwd()</code>. When you have multiple projects with multiple files on your machine, it will be important that you understand R’s working directory and how to change it. The syntax will depend on whether you are on a windows or mac. First, locate the data file that you downloaded for this exercise. You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the <code>setwd()</code> command. The structure of this command is <code>directory/subdirectory1/subdirectory2/etc</code>. The path needs to be in quotes to tell R that you are inputing characters and not variables.</p>
+</section>
+<section id="reading-data" class="level3">
+<h3 class="anchored" data-anchor-id="reading-data">Reading data</h3>
+<p>To read data into R, we will use another function built into R. We will be reading a file type called <em>comma-separated values</em> denoted by the file extension <em>.csv</em>. The commas separate the variables, so R knows where a new variable starts. We will read the file into a data.frame called <code>supersales</code>. You can download the file <a href="inputs/supermarket_sales.csv">here</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>super_sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"inputs/supermarket_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="naming-objects" class="level3">
+<h3 class="anchored" data-anchor-id="naming-objects">Naming Objects</h3>
+<p>You can give objects almost any name as long as it does not start with a number. However, you want to choose descriptive names so that your future self and others will find it easier to read. I prefer what is called <a href="https://en.wikipedia.org/wiki/Snake_case">snake_case</a> where words are separated by an underscore and all lower case. There are other options and it is a matter of opinion. I suggest choosing one and sticking with it.</p>
+</section>
+<section id="packages-or-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="packages-or-libraries">Packages or Libraries</h3>
+<p>Finally, R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> You can install and load a package using the “install.packages()” and “library()” functions:</p>
+<p>install.packages(“dplyr”) library(dplyr)</p>
+<p>Here, we have installed and loaded the “dplyr” package, which provides a wide range of functions for data manipulation.</p>
+</section>
+<section id="documentation" class="level3">
+<h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
+<p>Documentation is critical to understanding how functions and packages work in R. There is a help tab in the lower right panel in RStudio. You can also place your cursor in the function name in your code and press F1 to bring up the help for that function. R documentation always provides a brief description, information about arguments (or inputs), information about outputs, and some examples of how you would use it. Learning to read the documentation is critical for learning new packages.</p>
+</section>
+</section>
+<section id="google-site" class="level2">
+<h2 class="anchored" data-anchor-id="google-site">Google Site</h2>
+<p><a href="https://sites.google.com/">Google sites</a> is an easy-to-use website editing and hosting service. You will create a website as a portfolio for your work in the course. <strong>You will complete your assignments by building webpages in your website</strong>. We encourage you to develop this website to showcase your work and market yourself to future employers.</p>
+</section>
+<section id="tableau-setup" class="level2">
+<h2 class="anchored" data-anchor-id="tableau-setup">Tableau Setup</h2>
+<p>We will be using two Tableau products in this course (although there are many more - see handout): Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free.</p>
+<p>Visit <a href="https://www.tableau.com/academic/students">Tableau for students</a> and apply for your 1-year academic license.</p>
+<p>Visit <a href="https://www.tableau.com/products/desktop">Tableau Desktop</a> and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license.</p>
+<p>Visit <a href="https://public.tableau.com/app/discover">Tableau Public</a> and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.</p>
+<p>If you are ever feeling lost in this class, I recommend checking out some of Tableau’s free <a href="https://elearning.tableau.com">eLearning resources</a>. We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.</p>
+</section>
+<section id="introduction-to-tableau-the-tableau-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-tableau-the-tableau-workflow">Introduction to Tableau: The Tableau Workflow</h2>
+<p>Connect -&gt; Analyze -&gt; Share</p>
+<p><a href="https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr">Video: The Tableau Tableau Desktop Workflow</a></p>
+<section id="connect" class="level3">
+<h3 class="anchored" data-anchor-id="connect">Connect</h3>
+<p>You will <strong>connect</strong> to your data on the <strong>data source page</strong> following these steps:</p>
+<ol type="1">
+<li><p>Establish a connection</p></li>
+<li><p>View available sheets</p></li>
+<li><p>Select the first sheet you want to work with</p></li>
+<li><p>View and edit sheet metadata</p></li>
+<li><p>Connect additional sheets (optional)</p></li>
+</ol>
+</section>
+<section id="analyze" class="level3">
+<h3 class="anchored" data-anchor-id="analyze">Analyze</h3>
+<p>You will <strong>analyze</strong> your data in a <strong>worksheet</strong>/<strong>workspace</strong> following these steps:</p>
+<ol type="1">
+<li><p>Click on <code>Sheet 1</code> at the bottom of the Tableau Desktop window.</p></li>
+<li><p>Use the <code>Data Pane</code> to view the data source and explore data fields within a worksheet</p></li>
+<li><p>Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.</p></li>
+<li><p>View your visualization in the <code>View Pane</code>.</p></li>
+</ol>
+<p>Next time we will go more in depth on the features of the workspace, but for now this is what you need to know.</p>
+</section>
+<section id="share" class="level3">
+<h3 class="anchored" data-anchor-id="share">Share</h3>
+<p>You will <strong>share</strong> your <strong>worksheet</strong> on Tableau Public by following these steps:</p>
+<ol type="1">
+<li><p>Connect Tableau Desktop to your Tableau Public account. Server -&gt; Tableau Public</p></li>
+<li><p>Publish. Server -&gt; Publish Workbook. OR Server -&gt; Tableau Public -&gt; Save to Tableau Public</p></li>
+</ol>
+<p>You should also save a local copy of your work as a Tableau Workbook. File -&gt; Save. OR click the floppy disk icon (<img src="figs/save.png" class="img-fluid" style="width:5.0%">) at the top of the page.</p>
+<p>Next time we will cover how to embed your visualization in your google page, but for now you can just use the URL to share your work.</p>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>If you like this concept, you might explore the linux operating system. I prefer <a href="https://ubuntu.com/download">Ubuntu</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
