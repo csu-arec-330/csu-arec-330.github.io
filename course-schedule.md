@@ -49,12 +49,12 @@ th, td {
 				<td rowspan="2">2</td>
 				<td style="min-width:50px">Wed, Jan 25</td>
 				<td style="min-width:50px">Making data-driven decisions</td>
-				<td style="min-width:50px">Quiz 1</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, Jan 27</td>
 				<td style="min-width:50px">R: Intro</td>
-				<td style="min-width:50px">PS2</td>
+				<td style="min-width:50px">Quiz 1, PS2</td>
 			</tr>
 			<tr>
 				<td rowspan="2">0</td>
@@ -73,12 +73,12 @@ th, td {
 				<td rowspan="2">4</td>
 				<td style="min-width:50px">Wed, Feb 08</td>
 				<td style="min-width:50px">OLS Regression Fundamentals</td>
-				<td style="min-width:50px">Quiz 2</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, Feb 10</td>
 				<td style="min-width:50px">Complete Workflow</td>
-				<td style="min-width:50px">PS4: Project 0</td>
+				<td style="min-width:50px">Quiz 2, PS4: Project 0</td>
 			</tr>
 			<tr>
 				<td rowspan="2">1</td>
@@ -97,12 +97,12 @@ th, td {
 				<td rowspan="2">6</td>
 				<td style="min-width:50px">Wed, Feb 22</td>
 				<td style="min-width:50px">Time Series Historical Trends Analysis</td>
-				<td style="min-width:50px">Quiz 3</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, Feb 24</td>
 				<td style="min-width:50px">Time Series Visualizations</td>
-				<td style="min-width:50px">PS6</td>
+				<td style="min-width:50px">Quiz 3, PS6</td>
 			</tr>
 			<tr>
 				<td rowspan="2">1</td>
@@ -121,12 +121,12 @@ th, td {
 				<td rowspan="2">8</td>
 				<td style="min-width:50px">Wed, March 08</td>
 				<td style="min-width:50px">How to Present</td>
-				<td style="min-width:50px">Quiz 4</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, March 10</td>
 				<td style="min-width:50px">Student Presentations</td>
-				<td style="min-width:50px">PS8: Project 1</td>
+				<td style="min-width:50px">Quiz 4, PS8: Project 1</td>
 			</tr>
 			<tr>
 				<td style="min-width:50px"></td>
@@ -159,12 +159,12 @@ th, td {
 				<td rowspan="2">10</td>
 				<td style="min-width:50px">Wed, March 29</td>
 				<td style="min-width:50px">Intro to Causal Inference</td>
-				<td style="min-width:50px">Quiz 5</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, March 31</td>
 				<td style="min-width:50px">Exploring Regression Controls, Significance, and Functional Form</td>
-				<td style="min-width:50px">PS10</td>
+				<td style="min-width:50px">Quiz 5, PS10</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
@@ -183,12 +183,12 @@ th, td {
 				<td rowspan="2">12</td>
 				<td style="min-width:50px">Wed, April 12</td>
 				<td style="min-width:50px">How to Present Regression Results</td>
-				<td style="min-width:50px">Quiz 6</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, April 14</td>
 				<td style="min-width:50px">Presentations</td>
-				<td style="min-width:50px">PS12: Project 2</td>
+				<td style="min-width:50px">Quiz 6, PS12: Project 2</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
@@ -207,24 +207,24 @@ th, td {
 				<td rowspan="2">14</td>
 				<td style="min-width:50px">Wed, April 26</td>
 				<td style="min-width:50px">Spatial and Temporal Aggregation</td>
-				<td style="min-width:50px">Quiz 7</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, April 28</td>
 				<td style="min-width:50px">R packages for date and time manipulation</td>
-				<td style="min-width:50px">PS14</td>
+				<td style="min-width:50px">Quiz 7, PS14</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
 				<td rowspan="2">15</td>
 				<td style="min-width:50px">Wed, May 03</td>
 				<td style="min-width:50px">Model Specification; How to Present Maps and Model Selection</td>
-				<td style="min-width:50px">Quiz 8</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, May 05</td>
 				<td style="min-width:50px">Model Specifications and Interactive Mapping</td>
-				<td style="min-width:50px">PS15: Project 3</td>
+				<td style="min-width:50px">Quiz 8, PS15: Project 3</td>
 			</tr>
 			<tr>
 				<td style="min-width:50px"></td>
@@ -236,7 +236,7 @@ th, td {
 		</tbody>
         <tfoot> 
             <tr> 
-                <td colspan="5">All problem sets are due the following Tuesday by 11:59pm unless otherwise discussed. All quizzes will be taken during lecture on the indicated day.</td> 
+                <td colspan="5">All problem sets are due the following Tuesday by 11:59pm unless otherwise discussed. All quizzes will be taken during lab on the indicated day.</td> 
             </tr> 
         </tfoot>
 	</table>

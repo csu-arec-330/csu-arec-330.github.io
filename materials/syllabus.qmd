@@ -52,7 +52,7 @@ We will use iClicker software to take attendance at lecture and assess understan
 **Website** Students will create a website that will serve as a repository for projects/assignments. If this is your first time creating a website, we recommend [google sites](https://sites.google.com) - a free and easy to use website editing and hosting tool.   It will also serve as a record of their work in a presentable format that can be shared within or outside of CSU. *There are many other tools for building and hosting websites.  Please come talk to us if you have another option in mind or would like learn a more advanced option.*
 
 
-**Quizzes** There will be quizzes approximately every two weeks.  The quizzes will be administered on Canvas and cover topics ranging from data processing to graphical presentation of information.
+**Quizzes** There will be quizzes approximately every two weeks.  The quizzes will be administered on Canvas and must be taken in class on the indicated lab day. Quizzes will cover topics ranging from data processing to graphical presentation of information.
 
 **Attendance and Participation** There will be iClicker questions incorporated into most lecture materials. These questions are intended to test understanding of lecture materials and provide the instructors with real-time feedback on comprehension. Responses will account for a small portion of the overall course grade.
 

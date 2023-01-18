@@ -1,0 +1,26 @@
+---
+title: "Week 3 Lab: Tableau Fundamentals"
+format: 
+  html:
+    theme: zephyr
+---
+
+## Learning Objectives
+
+## Lab Overview
+
+In week 1 of the course we covered the basic Tableau flow of analysis: Connect -> Analyze -> Share. Each of you followed this flow in problem set 1 to produce a simple data visualization using the grocery store spending dataset. 
+
+Today we are going to go in more detail in each of these steps.
+
+## Connecting Data Sources -- More Advanced Options
+
+~~1.  Establish a connection~~
+
+~~2.  View available sheets~~
+
+~~3.  Select the first sheet you want to work with~~
+
+4.  View and edit sheet metadata
+
+5.  Connect additional sheets (optional)
