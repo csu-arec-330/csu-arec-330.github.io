@@ -13,6 +13,12 @@ title: "Week 1: Course Overview"
 
 <a  href="/materials/unit_00/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br>
 
+<a  href="/materials/unit_00/lab_00_week_01.html" target="_blank">Week 1 Lab Notes</a> <br> <br>
+
+<b>Problem Set 1 Materials - Due Tuesday, Jan 24 by 11:59 PM:</b> <br>
+
+<a  href="/materials/unit_00/ps1.html" target="_blank">Week 1 Lab Notes</a> <br>
+
 <a  href="/materials/unit_00/inputs/supermarket_sales.csv" download>Supermarket Sales Data</a>
 
 </div>
