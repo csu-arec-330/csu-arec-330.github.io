@@ -13,7 +13,7 @@ title: "Week 1: Course Overview"
 
 <a  href="/materials/unit_00/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br> <br>
 
-Dataset for Lab and Problem Set 1: <a  href="/materials/unit_00/supermarket_sales.csv" target="_blank">Click to download supermarket_sales.csv</a>
+Dataset for Lab and Problem Set 1: <a  href="/materials/unit_00/inputs/supermarket_sales.csv" target="_blank">Click to download supermarket_sales.csv</a>
 
 </div>
 
