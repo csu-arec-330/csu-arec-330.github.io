@@ -105,3 +105,48 @@ Tableau offers a variety of products that each serve a specific purpose. In this
 **Tableau Prep** is a tool to prepare your data for analysis in Tableau Desktop. It allows you to combine data from multiple sources, clean your data, and transform your data. Because Tableau Prep is not as powerful of an analysis tool as R, we will be using R to accomplish these tasks instead.
 
 **Tableau Server and Online** are *paid* cloud services that enable organizations to host workboks, data sources, prep flows, and data extracts published through Tableau Prep or Desktop. You can schedule data extracts and analyses to be automatically refreshed as often as every 15 minutes. These services are an alternative to Tableau Public for data and analyses that are confidential to an organization, but that can be usefully shared within the organization. 
+
+## Tableau Desktop Views
+
+### The Start Page
+![](figs/start_page.jpg)
+
+Tableau opens on the **Start Page**.
+
+The **Connect** area lists the data source types you can connect to. These include **file-based**, **server-based**, and **saved** data sources.
+
+The **Open** area shows thumbnail images and links to recently used or saved visualizations. At the bottom are sample workbooks included in Tableau Desktop.
+
+The **Discover** area gives links to training information and helpful resources.
+
+### The Data Source Page
+![](figs/data_source_page.png)
+
+The **Data Source Page** lets us select the tables or sheets we want to use from our data.
+
+**Connections** shows the name of the data source.
+
+**Sheets** lists the names of the worksheets in the data source. 
+
+To select a sheet, you can drag it to the **Canvas** or double-click it.
+
+The **Metadata** shows information about the data, such as the field name and data type. You can edit the metadata on this page.
+
+The **Data Preview** shows the first 1,000 rows of the data.
+
+### Worksheets/Workspaces
+![](figs/worksheet.png)
+
+The **Data Pane** lists all the fields from the source data. It also lists the name of the data conection.
+
+**Dimensions** list all fields that contain qualitative or categorical data.
+
+**Measures** list all fields that contain quantifiable data.
+
+The **Filters** card allows you to include and exclude specific data.
+
+The **Marks** card is used to set different properties for fields in the visualization.
+
+The **Columns** and **Rows** Shelves are used to create a structure for your visualization.
+
+The **View Pane** shows your visualization.
