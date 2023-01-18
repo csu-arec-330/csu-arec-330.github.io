@@ -11,9 +11,9 @@ title: "Week 1: Course Overview"
 
 <b>Lab Materials - Fri, Jan 20, 2023:</b> <br>
 
-<a  href="/materials/unit_00/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br> <br>
+<a  href="/materials/unit_00/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br>
 
-Dataset for Lab and Problem Set 1: <a  href="/materials/unit_00/inputs/supermarket_sales.csv" target="_blank">Click to download supermarket_sales.csv</a>
+<a  href="/materials/unit_00/inputs/supermarket_sales.csv" target="_blank">Supermarket Sales Data</a>
 
 </div>
 
