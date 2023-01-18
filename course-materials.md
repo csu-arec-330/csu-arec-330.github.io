@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Course Materials and Schedule
+title: Course Materials
 permalink: /course-materials/
 description: Listing of course materials associated with each module
 ---
