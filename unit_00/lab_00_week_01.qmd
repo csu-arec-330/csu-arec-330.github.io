@@ -41,7 +41,6 @@ format:
 - Demonstrate how to share your data visualization
 
 
---------------------------
 ## Introduction to R
 
 Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.
@@ -203,7 +202,6 @@ Documentation is critical to understanding how functions and packages work in R.
 
 [Google sites](https://sites.google.com/) is an easy-to-use website editing and hosting service.  You will create a website as a portfolio for your work in the course.  **You will complete your assignments by building webpages in your website**.  We encourage you to develop this website to showcase your work and market yourself to future employers.
 
---------------------------
 
 ## Tableau Setup
 
@@ -217,7 +215,7 @@ Visit [Tableau Public](https://public.tableau.com/app/discover) and create an ac
 
 If you are ever feeling lost in this class, I recommend checking out some of Tableau's free [eLearning resources](https://elearning.tableau.com). We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.
 
-## The Tableau Workflow 
+## Introduction to Tableau: The Tableau Workflow 
 
 Connect -> Analyze -> Share 
 
