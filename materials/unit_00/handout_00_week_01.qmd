@@ -1,4 +1,4 @@
-## Tableau Terminology
+## AREC 330 Handout 1: Tableau Terminology 
 
 **Learning Objective**: Define key Tableau terminology
 
@@ -73,7 +73,7 @@ When users *connect* Tableau to databases, Tableau automatically assigns the *da
 	4. Month-level
 
 	5. Day-level
-    
+
 	6. And more!
 
 **Data Aggregation in Tableau:** Once you *connect* Tableau to a dataset, there are several ways to *aggregate* your data. By default, Tableau likes to sum *measures* with common *dimensions*, but you can also construct averages, percentages, and much, much more!
