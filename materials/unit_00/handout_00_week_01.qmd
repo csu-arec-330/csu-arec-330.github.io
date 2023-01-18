@@ -93,3 +93,15 @@ When users *connect* Tableau to databases, Tableau automatically assigns the *da
 **Note that Tableau prefers long-formatted data** — once the data is loaded into Tableau in long format you can perform aggregations.
 
 **Note that most regression analyses require wide-formatted data** — to accomplish this we can reshape our data in R to prepare it for analysis.
+
+## Tableau Products
+
+Tableau offers a variety of products that each serve a specific purpose. In this course we will be using Tableau Desktop and Tableau Public, but it might be useful to have an idea of their other products.
+
+**Tableau Desktop** is a desktop application that allows you to access, visualize, and analyze your data. It uses an intuitive drag and drop interface and can be used offline. It can be used to create interactive dashboards and stories and can also publish to a server or online environment.
+
+**Tableau Public** is a free cloud service that allows you to share data with the world. To share a project through Tableau Public, you must publish it through Tableau Desktop. Tableau Public is browser-based (rather than locally installed) and can only be accessed online. Tableau Public should NOT be used for sharing confidential data. 
+
+**Tableau Prep** is a tool to prepare your data for analysis in Tableau Desktop. It allows you to combine data from multiple sources, clean your data, and transform your data. Because Tableau Prep is not as powerful of an analysis tool as R, we will be using R to accomplish these tasks instead.
+
+**Tableau Server and Online** are *paid* cloud services that enable organizations to host workboks, data sources, prep flows, and data extracts published through Tableau Prep or Desktop. You can schedule data extracts and analyses to be automatically refreshed as often as every 15 minutes. These services are an alternative to Tableau Public for data and analyses that are confidential to an organization, but that can be usefully shared within the organization. 

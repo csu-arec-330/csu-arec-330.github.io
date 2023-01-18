@@ -8,6 +8,7 @@ title: "Week 1: Course Overview"
 <a  href="/materials/unit_00/lecture_00_week_01.html" target="_blank">Lecture Slides - Wed, Jan 18, 2023</a> <br> <br>
 
 <a  href="/materials/unit_00/handout_00_week_01.html" target="_blank">Tableau Terminology Handout - Fri, Jan 20, 2023</a> <br> <br>
+
 <!--
 <b>Referenced Journal Articles and Resources:</b> <br>
 <ul>
