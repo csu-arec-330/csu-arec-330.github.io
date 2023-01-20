@@ -53,7 +53,7 @@ th, td {
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, Jan 27</td>
-				<td style="min-width:50px">R: Intro</td>
+				<td style="min-width:50px">R and Tableau Intro I</td>
 				<td style="min-width:50px">Quiz 1, PS2</td>
 			</tr>
 			<tr>
@@ -65,7 +65,7 @@ th, td {
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, Feb 03</td>
-				<td style="min-width:50px">Tableau: Intro</td>
+				<td style="min-width:50px">R and Tableau Intro II</td>
 				<td style="min-width:50px">PS3</td>
 			</tr>
 			<tr>
