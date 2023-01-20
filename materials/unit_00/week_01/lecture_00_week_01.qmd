@@ -35,7 +35,7 @@ The team uses in-game data to drive team management decisions
 
 ## Agenda
 
-[Syllabus](../syllabus.html) and orientation
+[Syllabus](../../syllabus.html) and orientation
 
 Introduction to D$^3$M
 
@@ -137,9 +137,9 @@ How does Amazon use the data it collects?
 
 - More scrolling!
 
-## Overview of the D$^3$M process 
+<!-- ## Overview of the D$^3$M process  -->
 
-![](figs/inline-project-management-data-driven-decision-making-2-2x.webp){fig-align="center"}
+<!-- ![](figs/inline-project-management-data-driven-decision-making-2-2x.webp){fig-align="center"} -->
 
 ## Summary and Reminders
 
