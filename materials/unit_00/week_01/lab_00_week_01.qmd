@@ -3,6 +3,7 @@ title: "Week 1 Lab: Introduction to R and Tableau"
 format: 
   html:
     theme: zephyr
+    toc: true
 ---
 
 
@@ -45,7 +46,7 @@ format:
 
 Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.
 
-Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <https://cran.r-project.org/>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>.
+Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <https://cran.r-project.org/>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>. Alternatively, you will have access to a version of RStudio on a CSU server that you can access via web browser here: <http://darecompute-01.aggie.colostate.edu:8787/>.  I will provide you with log in credentials in class.
 
 RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient.  Open up RStudio and you should see something that looks like this:
 
@@ -166,6 +167,8 @@ print(df)
 
 *Comprehension check: Why did I subset the vector numbers?*
 
+### Reading data
+
 Creating data.frames by hand is tedious.  Fortunately, R has some utilities to read data stored in certain files types.  Before we explore R's ability to read data, we must understand how R interacts with the rest of the computer's operating system.  At any point in time, you are in an active directory (similar to windows explorer or macos finder).  You can ask R to tell you the current working directory.
 ```{r}
 getwd()
@@ -174,10 +177,10 @@ getwd()
 The response to this command will depend on the directory structure on your machine.  You can navigate your directory structure using the command `setwd()`. When you have multiple projects with multiple files on your machine, it will be important that you understand R's working directory and how to change it.  The syntax will depend on whether you are on a windows or mac.  First, locate the data file that you downloaded for this exercise.  You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the `setwd()` command.  The structure of this command is `directory/subdirectory1/subdirectory2/etc`.  The path needs to be in quotes to tell R that you are inputing characters and not variables.
 
 
-### Reading data
+
 To read data into R, we will use another function built into R.  We will be reading a file type called *comma-separated values* denoted by the file extension *.csv*.  The commas separate the variables, so R knows where a new variable starts.  We will read the file into a data.frame called `supersales`.  You can download the file [here](inputs/supermarket_sales.csv).
 ```{r}
-super_sales <- read.csv("inputs/supermarket_sales.csv")
+super_sales <- read.csv("../inputs/supermarket_sales.csv")
 ```
 
 ### Naming Objects
@@ -188,10 +191,14 @@ You can give objects almost any name as long as it does not start with a number.
 
 Finally, R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.^[If you like this concept, you might explore the linux operating system. I prefer [Ubuntu](https://ubuntu.com/download).] You can install and load a package using the "install.packages()" and "library()" functions:
 
-install.packages("dplyr")
+```{r}
+#Run only once 
+#install.packages("dplyr")
 library(dplyr)
+```
 
-Here, we have installed and loaded the "dplyr" package, which provides a wide range of functions for data manipulation.
+
+Here, we have installed and loaded the "dplyr" package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session.
 
 ### Documentation
 
@@ -260,3 +267,7 @@ You will **share** your **worksheet** on Tableau Public by following these steps
 You should also save a local copy of your work as a Tableau Workbook. File -> Save. OR click the floppy disk icon (![](figs/save.png){width=5%}) at the top of the page.
 
 Next time we will cover how to embed your visualization in your google page, but for now you can just use the URL to share your work.
+
+-----------
+
+Get started on the problem set here: <https://csu-arec-330.github.io/course-materials/> 

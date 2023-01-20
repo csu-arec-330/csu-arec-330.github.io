@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -100,10 +100,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link" data-scroll-target="#introduction-to-r">Introduction to R</a>
+  <ul class="collapse">
+  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
+  <li><a href="#indexing" id="toc-indexing" class="nav-link" data-scroll-target="#indexing">Indexing</a></li>
+  <li><a href="#data.frames" id="toc-data.frames" class="nav-link" data-scroll-target="#data.frames">data.frames</a></li>
+  <li><a href="#reading-data" id="toc-reading-data" class="nav-link" data-scroll-target="#reading-data">Reading data</a></li>
+  <li><a href="#naming-objects" id="toc-naming-objects" class="nav-link" data-scroll-target="#naming-objects">Naming Objects</a></li>
+  <li><a href="#packages-or-libraries" id="toc-packages-or-libraries" class="nav-link" data-scroll-target="#packages-or-libraries">Packages or Libraries</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
+  </ul></li>
+  <li><a href="#google-site" id="toc-google-site" class="nav-link" data-scroll-target="#google-site">Google Site</a></li>
+  <li><a href="#tableau-setup" id="toc-tableau-setup" class="nav-link" data-scroll-target="#tableau-setup">Tableau Setup</a></li>
+  <li><a href="#introduction-to-tableau-the-tableau-workflow" id="toc-introduction-to-tableau-the-tableau-workflow" class="nav-link" data-scroll-target="#introduction-to-tableau-the-tableau-workflow">Introduction to Tableau: The Tableau Workflow</a>
+  <ul class="collapse">
+  <li><a href="#connect" id="toc-connect" class="nav-link" data-scroll-target="#connect">Connect</a></li>
+  <li><a href="#analyze" id="toc-analyze" class="nav-link" data-scroll-target="#analyze">Analyze</a></li>
+  <li><a href="#share" id="toc-share" class="nav-link" data-scroll-target="#share">Share</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -147,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="introduction-to-r" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-to-r">Introduction to R</h2>
 <p>Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.</p>
-<p>Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <a href="https://rstudio.com/" class="uri">https://rstudio.com/</a>.</p>
+<p>Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <a href="https://rstudio.com/" class="uri">https://rstudio.com/</a>. Alternatively, you will have access to a version of RStudio on a CSU server that you can access via web browser here: <a href="http://darecompute-01.aggie.colostate.edu:8787/" class="uri">http://darecompute-01.aggie.colostate.edu:8787/</a>. I will provide you with log in credentials in class.</p>
 <p>RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient. Open up RStudio and you should see something that looks like this:</p>
 <p><img src="figs/01-rstudio.png" class="img-fluid"></p>
 <p>The RStudio interface is divided into several panels:</p>
@@ -271,20 +297,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p><em>Comprehension check: Why did I subset the vector numbers?</em></p>
+</section>
+<section id="reading-data" class="level3">
+<h3 class="anchored" data-anchor-id="reading-data">Reading data</h3>
 <p>Creating data.frames by hand is tedious. Fortunately, R has some utilities to read data stored in certain files types. Before we explore R’s ability to read data, we must understand how R interacts with the rest of the computer’s operating system. At any point in time, you are in an active directory (similar to windows explorer or macos finder). You can ask R to tell you the current working directory.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/alexandrahill/Documents/GitHub/AREC_330/unit_00"</code></pre>
+<pre><code>[1] "/Users/jbayham/git_projects/csu-arec-330.github.io/materials/unit_00/week_01"</code></pre>
 </div>
 </div>
 <p>The response to this command will depend on the directory structure on your machine. You can navigate your directory structure using the command <code>setwd()</code>. When you have multiple projects with multiple files on your machine, it will be important that you understand R’s working directory and how to change it. The syntax will depend on whether you are on a windows or mac. First, locate the data file that you downloaded for this exercise. You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the <code>setwd()</code> command. The structure of this command is <code>directory/subdirectory1/subdirectory2/etc</code>. The path needs to be in quotes to tell R that you are inputing characters and not variables.</p>
-</section>
-<section id="reading-data" class="level3">
-<h3 class="anchored" data-anchor-id="reading-data">Reading data</h3>
 <p>To read data into R, we will use another function built into R. We will be reading a file type called <em>comma-separated values</em> denoted by the file extension <em>.csv</em>. The commas separate the variables, so R knows where a new variable starts. We will read the file into a data.frame called <code>supersales</code>. You can download the file <a href="inputs/supermarket_sales.csv">here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>super_sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"inputs/supermarket_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>super_sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../inputs/supermarket_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="naming-objects" class="level3">
@@ -294,8 +320,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="packages-or-libraries" class="level3">
 <h3 class="anchored" data-anchor-id="packages-or-libraries">Packages or Libraries</h3>
 <p>Finally, R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> You can install and load a package using the “install.packages()” and “library()” functions:</p>
-<p>install.packages(“dplyr”) library(dplyr)</p>
-<p>Here, we have installed and loaded the “dplyr” package, which provides a wide range of functions for data manipulation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run only once </span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("dplyr")</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+</div>
+<p>Here, we have installed and loaded the “dplyr” package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the <code>library()</code> command each session.</p>
 </section>
 <section id="documentation" class="level3">
 <h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
@@ -349,6 +393,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>You should also save a local copy of your work as a Tableau Workbook. File -&gt; Save. OR click the floppy disk icon (<img src="figs/save.png" class="img-fluid" style="width:5.0%">) at the top of the page.</p>
 <p>Next time we will cover how to embed your visualization in your google page, but for now you can just use the URL to share your work.</p>
+<hr>
+<p>Get started on the problem set here: <a href="https://csu-arec-330.github.io/course-materials/" class="uri">https://csu-arec-330.github.io/course-materials/</a></p>
 </section>
 </section>
 
