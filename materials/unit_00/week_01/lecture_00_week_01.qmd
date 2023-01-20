@@ -35,9 +35,21 @@ The team uses in-game data to drive team management decisions
 
 ## Agenda
 
+&nbsp; 
+
 [Syllabus](../../syllabus.html) and orientation
 
+&nbsp; 
+
 Introduction to D$^3$M
+
+&nbsp; 
+
+Introduction to R
+
+&nbsp; 
+
+Introduction to Tableau
 
 
 ## D$^3$M {.smaller}
@@ -153,6 +165,13 @@ What are the course objectives?
 
 &nbsp; 
 
-Bring computers on Friday
+Up Next: What is R? What is Tableau?
 
 
+<!--
+&nbsp; 
+
+Bring computers on Friday -->
+
+## What is Tableau?
+{{< video https://youtu.be/gAruNQGxYMA width="100%" height="100%" >}}
