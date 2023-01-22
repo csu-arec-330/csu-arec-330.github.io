@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -304,14 +304,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/jbayham/git_projects/csu-arec-330.github.io/materials/unit_00/week_01"</code></pre>
+<pre><code>[1] "/Users/judebayham/Documents/git_projects/csu-arec-330.github.io/materials/unit_00/week_01"</code></pre>
 </div>
 </div>
 <p>The response to this command will depend on the directory structure on your machine. You can navigate your directory structure using the command <code>setwd()</code>. When you have multiple projects with multiple files on your machine, it will be important that you understand R’s working directory and how to change it. The syntax will depend on whether you are on a windows or mac. First, locate the data file that you downloaded for this exercise. You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the <code>setwd()</code> command. The structure of this command is <code>directory/subdirectory1/subdirectory2/etc</code>. The path needs to be in quotes to tell R that you are inputing characters and not variables.</p>
-<p>To read data into R, we will use another function built into R. We will be reading a file type called <em>comma-separated values</em> denoted by the file extension <em>.csv</em>. The commas separate the variables, so R knows where a new variable starts. We will read the file into a data.frame called <code>supersales</code>. You can download the file <a href="inputs/supermarket_sales.csv">here</a>.</p>
+<p>See this video tutorial for additional help: <a href="https://youtu.be/dFSPmjSynCs" class="uri">https://youtu.be/dFSPmjSynCs</a></p>
+<p>To read data into R, we will use another function built into R. We will be reading a file type called <em>comma-separated values</em> denoted by the file extension <em>.csv</em>. The commas separate the variables, so R knows where a new variable starts. We will read the file into a data.frame called <code>super_sales</code>. You can download the file <a href="../inputs/supermarket_sales.csv">here</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>super_sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../inputs/supermarket_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>See this video tutorial for additional help: <a href="https://youtu.be/ULjXUW5yeDM" class="uri">https://youtu.be/ULjXUW5yeDM</a></p>
 </section>
 <section id="naming-objects" class="level3">
 <h3 class="anchored" data-anchor-id="naming-objects">Naming Objects</h3>
@@ -340,6 +342,7 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 <p>Here, we have installed and loaded the “dplyr” package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the <code>library()</code> command each session.</p>
+<p>See this video tutorial for additional help: <a href="https://youtu.be/l5bmDv98zX4" class="uri">https://youtu.be/l5bmDv98zX4</a></p>
 </section>
 <section id="documentation" class="level3">
 <h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
