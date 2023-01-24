@@ -121,12 +121,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#google-site" id="toc-google-site" class="nav-link" data-scroll-target="#google-site">Google Site</a></li>
   <li><a href="#tableau-setup" id="toc-tableau-setup" class="nav-link" data-scroll-target="#tableau-setup">Tableau Setup</a></li>
-  <li><a href="#introduction-to-tableau-the-tableau-workflow" id="toc-introduction-to-tableau-the-tableau-workflow" class="nav-link" data-scroll-target="#introduction-to-tableau-the-tableau-workflow">Introduction to Tableau: The Tableau Workflow</a>
-  <ul class="collapse">
-  <li><a href="#connect" id="toc-connect" class="nav-link" data-scroll-target="#connect">Connect</a></li>
-  <li><a href="#analyze" id="toc-analyze" class="nav-link" data-scroll-target="#analyze">Analyze</a></li>
-  <li><a href="#share" id="toc-share" class="nav-link" data-scroll-target="#share">Share</a></li>
-  </ul></li>
   </ul>
 </nav>
 </div>
@@ -152,6 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
+<li><p>This lab contributes to Course Objectives 2, 3, &amp; 4</p></li>
 <li><p>Open R/Rstudio and ensure it is functioning properly</p></li>
 <li><p>Get oriented with RStudio</p></li>
 <li><p>Conduct basic calculations in R</p></li>
@@ -162,12 +157,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Apply for Teableau academic license</p></li>
 <li><p>Download Tableau desktop and ensure working correctly</p></li>
 <li><p>Register for Tableau public</p></li>
-<li><p>Describe the flow of analysis in Tableau Desktop</p></li>
-<li><p>Identify key areas of the Tableau Desktop workspace</p></li>
-<li><p>Demonstrate how to connect Tableau to a database</p></li>
-<li><p>Identify the role and type of data fields</p></li>
-<li><p>Build a simple data visualization</p></li>
-<li><p>Demonstrate how to share your data visualization</p></li>
 </ul>
 </section>
 <section id="introduction-to-r" class="level2">
@@ -304,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/judebayham/Documents/git_projects/csu-arec-330.github.io/materials/unit_00/week_01"</code></pre>
+<pre><code>[1] "/Users/alexandrahill/Documents/GitHub/csu-arec-330.github.io/materials/unit_00/week_01"</code></pre>
 </div>
 </div>
 <p>The response to this command will depend on the directory structure on your machine. You can navigate your directory structure using the command <code>setwd()</code>. When you have multiple projects with multiple files on your machine, it will be important that you understand R’s working directory and how to change it. The syntax will depend on whether you are on a windows or mac. First, locate the data file that you downloaded for this exercise. You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the <code>setwd()</code> command. The structure of this command is <code>directory/subdirectory1/subdirectory2/etc</code>. The path needs to be in quotes to tell R that you are inputing characters and not variables.</p>
@@ -360,45 +349,8 @@ Attaching package: 'dplyr'</code></pre>
 <p>Visit <a href="https://www.tableau.com/products/desktop">Tableau Desktop</a> and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license.</p>
 <p>Visit <a href="https://public.tableau.com/app/discover">Tableau Public</a> and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.</p>
 <p>If you are ever feeling lost in this class, I recommend checking out some of Tableau’s free <a href="https://elearning.tableau.com">eLearning resources</a>. We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.</p>
-</section>
-<section id="introduction-to-tableau-the-tableau-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-tableau-the-tableau-workflow">Introduction to Tableau: The Tableau Workflow</h2>
-<p>Connect -&gt; Analyze -&gt; Share</p>
-<p><a href="https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr">Video: The Tableau Tableau Desktop Workflow</a></p>
-<section id="connect" class="level3">
-<h3 class="anchored" data-anchor-id="connect">Connect</h3>
-<p>You will <strong>connect</strong> to your data on the <strong>data source page</strong> following these steps:</p>
-<ol type="1">
-<li><p>Establish a connection</p></li>
-<li><p>View available sheets</p></li>
-<li><p>Select the first sheet you want to work with</p></li>
-<li><p>View and edit sheet metadata</p></li>
-<li><p>Connect additional sheets (optional)</p></li>
-</ol>
-</section>
-<section id="analyze" class="level3">
-<h3 class="anchored" data-anchor-id="analyze">Analyze</h3>
-<p>You will <strong>analyze</strong> your data in a <strong>worksheet</strong>/<strong>workspace</strong> following these steps:</p>
-<ol type="1">
-<li><p>Click on <code>Sheet 1</code> at the bottom of the Tableau Desktop window.</p></li>
-<li><p>Use the <code>Data Pane</code> to view the data source and explore data fields within a worksheet</p></li>
-<li><p>Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.</p></li>
-<li><p>View your visualization in the <code>View Pane</code>.</p></li>
-</ol>
-<p>Next time we will go more in depth on the features of the workspace, but for now this is what you need to know.</p>
-</section>
-<section id="share" class="level3">
-<h3 class="anchored" data-anchor-id="share">Share</h3>
-<p>You will <strong>share</strong> your <strong>worksheet</strong> on Tableau Public by following these steps:</p>
-<ol type="1">
-<li><p>Connect Tableau Desktop to your Tableau Public account. Server -&gt; Tableau Public</p></li>
-<li><p>Publish. Server -&gt; Publish Workbook. OR Server -&gt; Tableau Public -&gt; Save to Tableau Public</p></li>
-</ol>
-<p>You should also save a local copy of your work as a Tableau Workbook. File -&gt; Save. OR click the floppy disk icon (<img src="figs/save.png" class="img-fluid" style="width:5.0%">) at the top of the page.</p>
-<p>Next time we will cover how to embed your visualization in your google page, but for now you can just use the URL to share your work.</p>
 <hr>
 <p>Get started on the problem set here: <a href="https://csu-arec-330.github.io/course-materials/" class="uri">https://csu-arec-330.github.io/course-materials/</a></p>
-</section>
 </section>
 
 
