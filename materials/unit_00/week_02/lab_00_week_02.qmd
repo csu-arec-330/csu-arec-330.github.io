@@ -7,6 +7,8 @@ Notes:
 
 - walk through steps in excel to illustrate what is happening
 
+### This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
+
 ## Learning Objectives R
 
 ## Learning Objectives Tableau
@@ -16,7 +18,7 @@ Notes:
 
 - Demonstrate how to connect Tableau to a database
 
-- Identify the role and type of data fields
+- Identify the role and type of data fields 
 
 - Choose an appropriate data visualization based on a business scenario and audience.
 
@@ -133,3 +135,12 @@ You should also save a local copy of your work as a Tableau Workbook. File -> Sa
 
 3.  Embed your visualization in your google website.
 
+## Applying The Tableau Workflow
+
+Using the Supermarket Sales data, contruct data visualizations that answer the following questions:
+
+1.  Which product line as the lowest average customer rating?
+
+2.  Does this differ by store branch?
+
+3.  What actionable insights does this analysis reveal for the stores?
