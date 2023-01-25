@@ -8,7 +8,7 @@ title: "Week 2: Making Data-Driven Decisions"
 <b>Lecture Materials - Wed, Jan 25, 2023:</b> <br>
 
 <!--
-<a  href="/materials/unit_00/week_02/lecture_00_week_01.html" target="_blank">Lecture Slides</a> <br> <br>
+<a  href="/materials/unit_00/week_02/lecture_00_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
 -->
 
 <b>Lab Materials - Fri, Jan 27, 2023:</b> <br>
