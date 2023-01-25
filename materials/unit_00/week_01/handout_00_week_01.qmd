@@ -5,7 +5,10 @@ format:
     theme: zephyr
 ---
 
-**Learning Objective**: Define key Tableau terminology
+## Learning Objectives
+
+-  Define key Tableau terminology [CO 1]
+
 
 ## Tableau Common Types of Data and Data Fields
 

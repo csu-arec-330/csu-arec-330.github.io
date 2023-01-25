@@ -9,37 +9,27 @@ format:
 
 ## Learning Objectives
 
-- Open R/Rstudio and ensure it is functioning properly
+-  This lab contributes to Course Objectives 2, 3, & 4
 
-- Get oriented with RStudio
+-  Open R/Rstudio and ensure it is functioning properly
 
-- Conduct basic calculations in R
+-  Get oriented with RStudio
 
-- Navigate directories from within R
+-  Conduct basic calculations in R
 
-- Read in an external data set in R
+-  Navigate directories from within R
 
-- Load a package in R
+-  Read in an external data set in R
 
-- Create your google site and a project page
+-  Load a package in R
 
-- Apply for Teableau academic license
+-  Create your google site and a project page
 
-- Download Tableau desktop and ensure working correctly
+-  Apply for Teableau academic license
 
-- Register for Tableau public
+-  Download Tableau desktop and ensure working correctly
 
-- Describe the flow of analysis in Tableau Desktop
-
-- Identify key areas of the Tableau Desktop workspace
-
-- Demonstrate how to connect Tableau to a database
-
-- Identify the role and type of data fields
-
-- Build a simple data visualization
-
-- Demonstrate how to share your data visualization
+-  Register for Tableau public
 
 
 ## Introduction to R
@@ -176,12 +166,14 @@ getwd()
 
 The response to this command will depend on the directory structure on your machine.  You can navigate your directory structure using the command `setwd()`. When you have multiple projects with multiple files on your machine, it will be important that you understand R's working directory and how to change it.  The syntax will depend on whether you are on a windows or mac.  First, locate the data file that you downloaded for this exercise.  You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the `setwd()` command.  The structure of this command is `directory/subdirectory1/subdirectory2/etc`.  The path needs to be in quotes to tell R that you are inputing characters and not variables.
 
+See this video tutorial for additional help: <https://youtu.be/dFSPmjSynCs>
 
-
-To read data into R, we will use another function built into R.  We will be reading a file type called *comma-separated values* denoted by the file extension *.csv*.  The commas separate the variables, so R knows where a new variable starts.  We will read the file into a data.frame called `supersales`.  You can download the file [here](inputs/supermarket_sales.csv).
+To read data into R, we will use another function built into R.  We will be reading a file type called *comma-separated values* denoted by the file extension *.csv*.  The commas separate the variables, so R knows where a new variable starts.  We will read the file into a data.frame called `super_sales`.  You can download the file [here](../inputs/supermarket_sales.csv).
 ```{r}
 super_sales <- read.csv("../inputs/supermarket_sales.csv")
 ```
+
+See this video tutorial for additional help: <https://youtu.be/ULjXUW5yeDM>
 
 ### Naming Objects
 
@@ -199,6 +191,8 @@ library(dplyr)
 
 
 Here, we have installed and loaded the "dplyr" package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session.
+
+See this video tutorial for additional help: <https://youtu.be/l5bmDv98zX4>
 
 ### Documentation
 
@@ -221,52 +215,6 @@ Visit [Tableau Desktop](https://www.tableau.com/products/desktop) and download T
 Visit [Tableau Public](https://public.tableau.com/app/discover) and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.
 
 If you are ever feeling lost in this class, I recommend checking out some of Tableau's free [eLearning resources](https://elearning.tableau.com). We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.
-
-## Introduction to Tableau: The Tableau Workflow 
-
-Connect -> Analyze -> Share 
-
-[Video: The Tableau Tableau Desktop Workflow](https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr)
-
-### Connect
-
-You will **connect** to your data on the **data source page** following these steps:
-
-1.  Establish a connection
-
-2.  View available sheets
-
-3.  Select the first sheet you want to work with
-
-4.  View and edit sheet metadata
-
-5.  Connect additional sheets (optional)
-
-### Analyze
-
-You will **analyze** your data in a **worksheet**/**workspace** following these steps:
-
-1.  Click on `Sheet 1` at the bottom of the Tableau Desktop window. 
-
-2.  Use the `Data Pane` to view the data source and explore data fields within a worksheet
-
-3.  Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.
-
-4.  View your visualization in the `View Pane`.
-
-Next time we will go more in depth on the features of the workspace, but for now this is what you need to know.
-
-### Share
-
-You will **share** your **worksheet** on Tableau Public by following these steps:
-
-1.  Connect Tableau Desktop to your Tableau Public account. Server -> Tableau Public
-
-2.  Publish. Server -> Publish Workbook. OR Server -> Tableau Public -> Save to Tableau Public
-
-You should also save a local copy of your work as a Tableau Workbook. File -> Save. OR click the floppy disk icon (![](figs/save.png){width=5%}) at the top of the page.
-
-Next time we will cover how to embed your visualization in your google page, but for now you can just use the URL to share your work.
 
 -----------
 

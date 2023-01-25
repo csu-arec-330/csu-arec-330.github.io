@@ -38,9 +38,29 @@ Office Hours: W 2-3PM & by appt <https://go.oncehub.com/jude_bayham>
 Office Hours: M 2-3PM & Th 3-4PM Nutrien 165
 
 
-## Course Description and Objectives
+## Course Description
 
 The world generates [2.5 quintillion bytes](https://financesonline.com/how-much-data-is-created-every-day/#:~:text=Every%20day%20Big%20Data%20statistics,(2021%2C%20February%209).) of data each day. One of the key modern business challenges is transforming that data into actionable insights that improve decision making (i.e., data-driven decision making). Transforming data into information is not magic. It requires understanding the decision problem, organizing and processing data, analyzing data, and finally presenting information. This course will introduce you to this process of transforming data into actionable insights and build a core set of competencies with two commonly used software: R and Tableau. Since we only have 16 weeks, the most important lesson you will learn in this class is how to teach yourself what you need to know in the future. You will learn these skills by completing the three group projects over the semester.
+
+## Course Objectives
+
+1.  Recognize how to efficiently acquire data from a variety of sources
+
+2.  Implement best practices for coding
+
+3.  Demonstrate data literacy
+
+4.  Use R and Tableau to read, manipulate,  and organize data in a variety of structures and formats
+
+5.  Examine real-world business and policy questions using appropriate data, analytical techniques, and visualizations
+
+6.  Support business and policy recommendations by conveying findings as a comprehensive story in a manner appropriate for business settings and policy makers
+
+7.  Construct appropriate summary statistics and analyses to inform business and policy decisions	
+
+8.  Design interactive data visualizations to inform business and policy decisions
+
+Throughout the semester, course materials will indicate which of these 8 learning objectives the materials are contributing to by referencing the course objective (CO)number.
 
 ## Course Materials
 
