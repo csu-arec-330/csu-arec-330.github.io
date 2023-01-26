@@ -34,7 +34,7 @@ Connect to the `supermarket_sales.csv` and answer the following questions using 
 10. Create a data visualization that shows total spending for males and females in each city a store is located in. Give your figure a useful title and ensure that axes labels are easy to read and informative. What did you find? Discuss how the stores could use this information to increase sales.
 
 
-11. Save your workbook and publish it to your Tableau Public site. 
+11. Title your two sheets 'PS2 Q9' and 'PS2 Q10', save your workbook, and publish it to your Tableau Public site. 
 
 
 
