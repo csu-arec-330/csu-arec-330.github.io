@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -100,10 +100,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
+  <li><a href="#data-processing-with-r" id="toc-data-processing-with-r" class="nav-link" data-scroll-target="#data-processing-with-r">Data processing with R</a>
+  <ul class="collapse">
+  <li><a href="#starting-a-task-or-project-in-r" id="toc-starting-a-task-or-project-in-r" class="nav-link" data-scroll-target="#starting-a-task-or-project-in-r">Starting a task or project in R</a></li>
+  <li><a href="#read-the-data-into-r" id="toc-read-the-data-into-r" class="nav-link" data-scroll-target="#read-the-data-into-r">Read the data into R</a></li>
+  <li><a href="#modifying-the-dataframe" id="toc-modifying-the-dataframe" class="nav-link" data-scroll-target="#modifying-the-dataframe">Modifying the dataframe</a></li>
+  <li><a href="#select-and-rename" id="toc-select-and-rename" class="nav-link" data-scroll-target="#select-and-rename">2. Select (and rename)</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter">3. Filter</a></li>
+  <li><a href="#arrange-or-sort" id="toc-arrange-or-sort" class="nav-link" data-scroll-target="#arrange-or-sort">5. Arrange (or sort)</a></li>
+  <li><a href="#log-file" id="toc-log-file" class="nav-link" data-scroll-target="#log-file">Log file</a></li>
+  </ul></li>
+  <li><a href="#tableau-setup" id="toc-tableau-setup" class="nav-link" data-scroll-target="#tableau-setup">Tableau Setup</a></li>
+  <li><a href="#introduction-to-tableau-the-tableau-workflow" id="toc-introduction-to-tableau-the-tableau-workflow" class="nav-link" data-scroll-target="#introduction-to-tableau-the-tableau-workflow">Introduction to Tableau: The Tableau Workflow</a>
+  <ul class="collapse">
+  <li><a href="#connect" id="toc-connect" class="nav-link" data-scroll-target="#connect">Connect</a></li>
+  <li><a href="#analyze" id="toc-analyze" class="nav-link" data-scroll-target="#analyze">Analyze</a></li>
+  <li><a href="#share" id="toc-share" class="nav-link" data-scroll-target="#share">Share</a></li>
+  </ul></li>
+  <li><a href="#applying-the-tableau-workflow" id="toc-applying-the-tableau-workflow" class="nav-link" data-scroll-target="#applying-the-tableau-workflow">Applying The Tableau Workflow</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -123,15 +150,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Notes:</p>
-<ul>
-<li>walk through steps in excel to illustrate what is happening</li>
-</ul>
-<section id="this-lab-contributes-to-course-objectives-2-3-4-5-8" class="level3">
-<h3 class="anchored" data-anchor-id="this-lab-contributes-to-course-objectives-2-3-4-5-8">This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8</h3>
-</section>
+<p><img src="figs/shopping.webp" class="img-fluid"></p>
+<div style="font-size: 1.5em">
+<p>This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8</p>
+</div>
 <section id="learning-objectives-r" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
+<ul>
+<li><p>Read in data and evaluate datatypes</p></li>
+<li><p>Calculate new columns based on existing columns</p></li>
+<li><p>Subset or filter rows of the data</p></li>
+<li><p>Subset or select columns of the data</p></li>
+</ul>
 </section>
 <section id="learning-objectives-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
@@ -145,45 +175,113 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Demonstrate how to share your data visualization</p></li>
 </ul>
 </section>
-<section id="data-problems" class="level2">
-<h2 class="anchored" data-anchor-id="data-problems">Data Problems</h2>
-<p>Data is not always perfect. Often times datasets contain errors that you need to correct before the data can be used. This process is called data cleaning. Data errors are introduced by human error during data entry, the failure of machines that automatically generate data, and corruption of stored data.</p>
-</section>
-<section id="lab-exercise" class="level2">
-<h2 class="anchored" data-anchor-id="lab-exercise">Lab Exercise</h2>
+<section id="data-processing-with-r" class="level2">
+<h2 class="anchored" data-anchor-id="data-processing-with-r">Data processing with R</h2>
+<p>Data processing is an important step in analysis. It can be complicated depending on the number of data sources, quality of the data, and structure of the data. We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.</p>
+<section id="starting-a-task-or-project-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="starting-a-task-or-project-in-r">Starting a task or project in R</h3>
 <ol type="1">
-<li><p>Calculate the total value of the sale using the <em>unit_price</em> and <em>quantity</em> columns. Name the new column <em>subtotal</em>.</p></li>
-<li><p>Create a dataset containing only the subset of sales from the product line <em>food and beverages</em>.</p></li>
-<li><p>Create a dataset containing only the subset of sales from the product line <em>food and beverages</em> and excluding the <em>date</em> and <em>time</em> columns (fields or variables).</p></li>
-<li><p>Sort the dataset resulting from steps 1-3 by subtotal in descending order.</p></li>
+<li><p>Open RStudio either on your own computer or access it via the DARE server: <a href="http://darecompute-01.aggie.colostate.edu:8787/" class="uri">http://darecompute-01.aggie.colostate.edu:8787/</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p></li>
+<li><p>Open up a new script.</p></li>
+<li><p>Write a brief comment in the first line describing what the script will do.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This script will process a sample dataset for problem set 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li><p>Load any libraries/packages used in the script.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In this lab, we will use 3 packages: <code>readr,dplyr,janitor</code>.</p></li>
+<li><p>Set the working directory to a known location. This may be a new directory where you will store any external data and save the code file.</p></li>
 </ol>
 </section>
-<section id="problem-set" class="level2">
-<h2 class="anchored" data-anchor-id="problem-set">Problem Set</h2>
+<section id="read-the-data-into-r" class="level3">
+<h3 class="anchored" data-anchor-id="read-the-data-into-r">Read the data into R</h3>
 <ol type="1">
-<li><p>All sales in the supermarket are subject to a 5% tax (assessed on sale subtotal). <strong>First</strong>, calculate a new column with the sales tax charged on each sale. <strong>Second</strong>, calculate the value of the total sale (inclusive of the tax).</p></li>
-<li><p>The supermarket wants to know the sale margin (the amount received in excess of the costs of the goods and services). Calculate the supermarket’s <a href="https://www.investopedia.com/terms/g/grossincome.asp">gross income</a> for each sale.</p></li>
-<li><p>The dataset you were given to work with contains the cost of goods and services (the column name is <code>cogs</code>). However, analysts need you to calculate the cost per item. You can assume that each item in the sale has the same unit cost.</p></li>
+<li><p>Download <code>supermarket_sales.csv</code> to the project directory.</p></li>
+<li><p>Use the function <code>read_csv()</code> to read <code>supermarket_sales.csv</code> into a dataframe called <code>supermarket_raw</code>.</p></li>
+<li><p>Take a look at the dataframe. There are a few ways to look at the dataframe:</p></li>
 </ol>
-<hr>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<ul>
+<li><p>Type the name of the dataframe in the console. This shows the data in the first several rows of the first several columns.</p></li>
+<li><p>Use the function <code>View()</code> with the dataframe name as the argument. Alternatively, you can click on the name of the object in the environment pane.</p></li>
+<li><p>Use the function <code>glimpse()</code> with the dataframe name as the argument.</p></li>
+</ul>
+<p><strong>Variable names</strong>: You’ll notice that some of the variable names have spaces. This is allowed in R, but they are awkward because you will be using these names in your code. We will cover renaming variables later today, but there is a function to <em>clean</em> (i.e., modify) the names. The function called <code>clean_names()</code> is part of the <code>janitor</code> package.</p>
+<blockquote class="blockquote">
+<p>Try it on your own: use the <code>clean_names()</code> function to convert all of the column names to snake_case. Reference the documentation in the help tab of the lower right panel.</p>
+</blockquote>
+<p>Check the datatypes of the variables in the dataframe. Do they make sense?</p>
+<p>A quick note about a symbol in R code called the “pipe” <code>%&gt;%</code> or <code>|&gt;</code>. The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe. You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). Video tutorial here: <a href="https://youtu.be/e_SQnJpS5fA" class="uri">https://youtu.be/e_SQnJpS5fA</a></p>
 </section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<section id="modifying-the-dataframe" class="level3">
+<h3 class="anchored" data-anchor-id="modifying-the-dataframe">Modifying the dataframe</h3>
+<p>You will often need to modify the data you read in. The package <code>dplyr</code> contains a set of utilities that help you modify dataframes.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <code>dplyr</code> argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a>):</p>
+<ol type="1">
+<li><p><code>mutate()</code> adds new variables that are functions of existing variables</p></li>
+<li><p><code>select()</code> picks variables based on their names.</p></li>
+<li><p><code>filter()</code> picks cases based on their values.</p></li>
+<li><p><code>summarise()</code> reduces multiple values down to a single summary.</p></li>
+<li><p><code>arrange()</code> changes the ordering of the rows.</p></li>
+</ol>
+<p>The following exercises will introduce you to these core functions while exploring the supermarket_sales data. These functions will all return a dataframe as the output.</p>
+<section id="mutate" class="level4">
+<h4 class="anchored" data-anchor-id="mutate">1. Mutate</h4>
+<p><code>mutate()</code> is the function to create or add new variables. Let’s recreate the column <code>total</code> by multiplying the columns <code>unit_price</code> and <code>quantity</code>. Note that we create a new variable called <code>total_calc</code> and assign this dataframe to a new object called <code>my_super_sales</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw,<span class="at">total_calc=</span>unit_price<span class="sc">*</span>quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>You can add options to executable code like this</p>
+<blockquote class="blockquote">
+<p>Is the result <code>total_calc</code> equal to the existing column <code>total</code>? Why or why not?</p>
+</blockquote>
+<p>You can perform most mathematical operations on numeric columns and other types of operations on string or character data types. The key point to remember is that mutate operations must output a vector that is the same length as the dataframe.</p>
+</section>
+</section>
+<section id="select-and-rename" class="level3">
+<h3 class="anchored" data-anchor-id="select-and-rename">2. Select (and rename)</h3>
+<p><code>select()</code> is a function to subset columns from the dataframe. Suppose you want to create a new dataframe with only the invoice id, the city, the reported total, and the calculated total.</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales,invoice_id,city,total,total_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><code>rename()</code> is a related function used to rename columns rather than subset them. Suppose that you didn’t like the name <code>city</code> and wanted to call it <code>market</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">rename</span>(select_super_sales,<span class="at">market=</span>city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+<p>You can combine the operations using the rename syntax to rename a column inside of a select statement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales,invoice_id,<span class="at">market=</span>city,total,total_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filter" class="level3">
+<h3 class="anchored" data-anchor-id="filter">3. Filter</h3>
+<p><code>filter()</code> is a function to subset the rows of a dataframe based on a condition that returns a <code>TRUE</code> or <code>FALSE</code>. This is a very general concept used in all sorts of programming applications. In this context, we will write a statement that is true for some elements of the vector <code>city</code> (renamed to market). To filter the dataframe to only data from the market “Yangon”, we write</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales,market<span class="sc">==</span><span class="st">"Yangon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The statement <code>market=="Yangon"</code> can be evaluated on every row as either <code>TRUE</code> or <code>FALSE</code>. This command keeps only the rows where the market name equals the exact word “Yangon.” This is case sensitive because the statement is comparing the market name in each row. You can also create statements using the greater than <code>&gt;</code> or less than <code>&lt;</code> comparing numeric values. You can find more information on logical operators here: <a href="https://www.statmethods.net/management/operators.html" class="uri">https://www.statmethods.net/management/operators.html</a></p>
+</section>
+<section id="arrange-or-sort" class="level3">
+<h3 class="anchored" data-anchor-id="arrange-or-sort">5. Arrange (or sort)</h3>
+<p><code>arrange()</code> is a function that modifies the order of the rows in the dataframe based on the values of a column or set of columns. R can sort numeric and character strings (alphabetical). Let’s start by sorting the dataframe in ascending order based on the column <code>total</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(yangon_super_sales,total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can sort on multiple columns. The order determines how the data are sorted. Let’s use the dataset with all of the markets (<code>select_super_sales</code>) and sort based on market, then by total in descending order to see the top sales in each market.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>super_sales_top <span class="ot">&lt;-</span> <span class="fu">arrange</span>(select_super_sales,market,<span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function <code>desc()</code> is short for descending and indicates that the total should be sorted in descending order.</p>
+<p><strong>Remember to comment in your code so you can refer back to see what you did.</strong></p>
+</section>
+<section id="log-file" class="level3">
+<h3 class="anchored" data-anchor-id="log-file">Log file</h3>
+<p>To output the log from sourcing an R script to a text file, you can use the <code>sink()</code> function. The <code>sink()</code> function redirects R output to a file or connection.</p>
+<p>For example, to redirect the output to a file named “log.txt”, you can use the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"log.txt"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"script.R"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will run the script “script.R” and redirect all the output to the file “log.txt”. Once the script is finished, you can use the <code>sink()</code> function again to stop redirecting the output and return it to the console.</p>
+</section>
 </section>
 <section id="tableau-setup" class="level2">
 <h2 class="anchored" data-anchor-id="tableau-setup">Tableau Setup</h2>
@@ -244,7 +342,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Install if necessary.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The package <code>dplyr</code> is part of a larger set of packages known as the <code>tidyverse</code> <a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>. The term <em>tidy</em> refers to a structure of data. There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available. Most of what I teach in this class will be part of the tidyverse or adherant to its principles. Video tutorial here: <a href="https://youtu.be/bUM3wX4YZDc" class="uri">https://youtu.be/bUM3wX4YZDc</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
