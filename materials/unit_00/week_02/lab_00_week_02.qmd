@@ -10,6 +10,7 @@ format:
 ```{r}
 #| include: false
 
+#install.packages("pacman")
 library(pacman)
 p_load(readr,dplyr,janitor)
 
