@@ -48,6 +48,6 @@ Connect to the `supermarket_sales.csv` and answer the following questions using 
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 1`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas.
+You should create a new webpage on your google site titled `Problem Set 2`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas.
 
 Part 2 should contain answers to each question 1-10, including embedded figures from your Tableau Public site for questions 9 & 10. Submit the link to your google site webpage in Canvas.
