@@ -13,7 +13,7 @@ title: "Week 2: Making Data-Driven Decisions"
 
 <b>Lab Materials - Fri, Jan 27, 2023:</b> <br>
 
-<!--
+
 <a  href="/materials/unit_00/week_01/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br>
 
 <a  href="/materials/unit_00/week_02/lab_00_week_02.html" target="_blank">Week 2 Lab Notes</a> <br> <br>
@@ -21,7 +21,7 @@ title: "Week 2: Making Data-Driven Decisions"
 
 <b>Problem Set 2 Materials - Due Tuesday, Jan 31 by 11:59 PM:</b> <br>
 
-<a  href="/materials/unit_00/week_02/ps2.html" target="_blank">Problem Set 1 Instructions</a> <br>
+<a  href="/materials/unit_00/week_02/ps2.html" target="_blank">Problem Set 2 Instructions</a> <br>
 
 <a  href="/materials/unit_00/inputs/supermarket_sales.csv" download>Download Supermarket Sales Data</a> <br>
 
