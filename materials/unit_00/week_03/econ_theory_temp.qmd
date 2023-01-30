@@ -1,5 +1,5 @@
 ---
-title: "Week 3: Effective Data Visualizations"
+title: "Week 3: Economic Theory of Decision Making"
 format: 
   revealjs:
     theme: night
