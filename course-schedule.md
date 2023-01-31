@@ -60,7 +60,7 @@ th, td {
 				<td rowspan="2">0</td>
 				<td rowspan="2">3</td>
 				<td style="min-width:50px">Wed, Feb 01</td>
-				<td style="min-width:50px">Economic Theory of Decision Making</td>
+				<td style="min-width:50px">Effective Data Visualizations</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
