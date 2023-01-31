@@ -1,0 +1,261 @@
+---
+title: "Week 2 Lab: R and Tableau Intro I"
+format: 
+  html:
+    theme: zephyr
+    toc: true
+---
+
+
+```{r}
+#| include: false
+
+library(pacman)
+p_load(readr,dplyr,janitor)
+
+#read in data and column names
+supermarket_raw <- read_csv("../inputs/supermarket_sales.csv") %>%
+  clean_names()
+
+```
+
+
+![](figs/shopping.webp)
+
+::: {style="font-size: 1.5em"}
+This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
+:::
+
+## Learning Objectives R
+- Read in data and evaluate datatypes
+
+- Calculate new columns based on existing columns
+
+- Subset or filter rows of the data
+
+- Subset or select columns of the data
+
+## Learning Objectives Tableau
+- Describe the flow of analysis in Tableau Desktop
+
+- Identify key areas of the Tableau Desktop workspace
+
+- Demonstrate how to connect Tableau to a database
+
+- Identify the role and type of data fields 
+
+- Choose an appropriate data visualization based on a business scenario and audience.
+
+- Build a simple data visualization
+
+- Demonstrate how to share your data visualization
+
+
+
+## Data processing with R
+
+Data processing is an important step in analysis.  It can be complicated depending on the number of data sources, quality of the data, and structure of the data.  We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.
+
+
+### Starting a task or project in R
+
+1. Open RStudio either on your own computer or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus.  If you are on campus, the link should take you to the RStudio sign on page.]. 
+
+2. Open up a new script.  
+
+3. Write a brief comment in the first line describing what the script will do.  
+```{r}
+#This script will process a sample dataset for problem set 2
+```
+
+4. Load any libraries/packages used in the script.^[Install if necessary.]  In this lab, we will use 3 packages: `readr,dplyr,janitor`.  
+
+5. Set the working directory to a known location.  This may be a new directory where you will store any external data and save the code file.
+
+### Read the data into R
+
+1. Download `supermarket_sales.csv` to the project directory.
+
+2. Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw`.
+
+3. Take a look at the dataframe.  There are a few ways to look at the dataframe:
+
+  - Type the name of the dataframe in the console.  This shows the data in the first several rows of the first several columns.
+  
+  - Use the function `View()` with the dataframe name as the argument.  Alternatively, you can click on the name of the object in the environment pane. 
+  
+  - Use the function `glimpse()` with the dataframe name as the argument.
+
+**Variable names**: You'll notice that some of the variable names have spaces.  This is allowed in R, but they are awkward because you will be using these names in your code.  We will cover renaming variables later today, but there is a function to *clean* (i.e., modify) the names.  The function called `clean_names()` is part of the `janitor` package.
+
+> Try it on your own: use the `clean_names()` function to convert all of the column names to snake_case.  Reference the documentation in the help tab of the lower right panel.
+
+Check the datatypes of the variables in the dataframe.  Do they make sense?
+
+A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). Video tutorial here: <https://youtu.be/e_SQnJpS5fA>
+
+### Modifying the dataframe
+
+You will often need to modify the data you read in.  The package `dplyr` contains a set of utilities that help you modify dataframes.^[The package `dplyr` is part of a larger set of packages known as the `tidyverse` <https://www.tidyverse.org/>.  The term *tidy* refers to a structure of data.  There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available.  Most of what I teach in this class will be part of the tidyverse or adherant to its principles.  Video tutorial here: <https://youtu.be/bUM3wX4YZDc>] `dplyr` argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<https://dplyr.tidyverse.org/>):
+
+1. `mutate()` adds new variables that are functions of existing variables
+
+2.  `select()` picks variables based on their names.
+
+3.  `filter()` picks cases based on their values.
+
+4. `summarise()` reduces multiple values down to a single summary.
+
+5.  `arrange()` changes the ordering of the rows.
+
+The following exercises will introduce you to these core functions while exploring the supermarket_sales data.  These functions will all return a dataframe as the output.
+
+#### 1. Mutate
+
+`mutate()` is the function to create or add new variables.  Let's recreate the column `total` by multiplying the columns `unit_price` and `quantity`.  Note that we create a new variable called `total_calc` and assign this dataframe to a new object called `my_super_sales`.
+
+```{r}
+my_super_sales <- mutate(supermarket_raw,total_calc=unit_price*quantity)
+```
+
+> Is the result `total_calc` equal to the existing column `total`?  Why or why not?
+
+You can perform most mathematical operations on numeric columns and other types of operations on string or character data types.  The key point to remember is that mutate operations must output a vector that is the same length as the dataframe.
+
+### 2. Select (and rename)
+
+`select()` is a function to subset columns from the dataframe. Suppose you want to create a new dataframe with only the invoice id, the city, the reported total, and the calculated total.
+
+```{r}
+select_super_sales <- select(my_super_sales,invoice_id,city,total,total_calc)
+```
+
+`rename()` is a related function used to rename columns rather than subset them.  Suppose that you didn't like the name `city` and wanted to call it `market`.
+
+```{r}
+select_super_sales <- rename(select_super_sales,market=city)
+```
+
+You can combine the operations using the rename syntax to rename a column inside of a select statement.
+
+```{r}
+select_super_sales <- select(my_super_sales,invoice_id,market=city,total,total_calc)
+```
+
+### 3. Filter
+
+`filter()` is a function to subset the rows of a dataframe based on a condition that returns a `TRUE` or `FALSE`. This is a very general concept used in all sorts of programming applications.  In this context, we will write a statement that is true for some elements of the vector `city` (renamed to market).  To filter the dataframe to only data from the market "Yangon", we write
+
+```{r}
+yangon_super_sales <- filter(select_super_sales,market=="Yangon")
+```
+
+The statement `market=="Yangon"` can be evaluated on every row as either `TRUE` or `FALSE`.  This command keeps only the rows where the market name equals the exact word "Yangon."  This is case sensitive because the statement is comparing the market name in each row.  You can also create statements using the greater than `>` or less than `<` comparing numeric values.  You can find more information on logical operators here: <https://www.statmethods.net/management/operators.html>
+
+### 5. Arrange (or sort)
+
+`arrange()` is a function that modifies the order of the rows in the dataframe based on the values of a column or set of columns.  R can sort numeric and character strings (alphabetical).  Let's start by sorting the dataframe in ascending order based on the column `total`.
+
+```{r}
+yangon_super_sales_sorted <- arrange(yangon_super_sales,total)
+```
+
+You can sort on multiple columns.  The order determines how the data are sorted.  Let's use the dataset with all of the markets (`select_super_sales`) and sort based on market, then by total in descending order to see the top sales in each market.
+
+```{r}
+super_sales_top <- arrange(select_super_sales,market,desc(total))
+```
+
+The function `desc()` is short for descending and indicates that the total should be sorted in descending order.
+
+**Remember to comment in your code so you can refer back to see what you did.**
+
+
+### Log file
+
+To output the log from sourcing an R script to a text file, you can use the `sink()` function. The `sink()` function redirects R output to a file or connection.
+
+For example, to redirect the output to a file named "log.txt", you can use the following command:
+
+```{r}
+#| eval: false
+sink("log.txt")
+source("script.R")
+sink()
+
+```
+
+This will run the script "script.R" and redirect all the output to the file "log.txt". Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console.
+
+
+## Tableau Setup
+
+We will be using two Tableau products in this course (although there are many more - see handout): Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free. 
+
+Visit [Tableau for students](https://www.tableau.com/academic/students) and apply for your 1-year academic license.
+
+Visit [Tableau Desktop](https://www.tableau.com/products/desktop) and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license.
+
+Visit [Tableau Public](https://public.tableau.com/app/discover) and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.
+
+If you are ever feeling lost in this class, I recommend checking out some of Tableau's free [eLearning resources](https://elearning.tableau.com). We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.
+
+## Introduction to Tableau: The Tableau Workflow 
+
+Connect -> Analyze -> Share 
+
+[Video: The Tableau Desktop Workflow](https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr)
+
+### Connect
+
+You will **connect** to your data on the **data source page** following these steps:
+
+1.  Establish a connection
+
+2.  View available sheets
+
+3.  Select the first sheet you want to work with
+
+4.  View and edit sheet metadata
+
+5.  Connect additional sheets (optional)
+
+### Analyze
+
+You will **analyze** your data in a **worksheet**/**workspace** following these steps:
+
+1.  Click on `Sheet 1` at the bottom of the Tableau Desktop window. 
+
+2.  Use the `Data Pane` to view the data source and explore data fields within a worksheet
+
+3.  Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.
+
+4.  View your visualization in the `View Pane`.
+
+5.  Change aggregations
+
+6.  Use `Show Me`
+
+Throughout the course you will continue to learn new features of the analysis capabilities of Tableau, but for now this is what you need to know.
+
+### Share
+
+You will **share** your **worksheet** on Tableau Public by following these steps:
+
+1.  Connect Tableau Desktop to your Tableau Public account. Server -> Tableau Public
+
+2.  Publish. Server -> Publish Workbook. OR Server -> Tableau Public -> Save to Tableau Public
+
+You should also save a local copy of your work as a Tableau Workbook. File -> Save. OR click the floppy disk icon (![](figs/save.png){width=5%}) at the top of the page.
+
+3.  Embed your visualization in your google website.
+
+## Applying The Tableau Workflow
+
+Using the Supermarket Sales data, contruct data visualizations that answer the following questions:
+
+1.  Which product line as the lowest average customer rating?
+
+2.  Does this differ by store branch?
+
+3.  What actionable insights does this analysis reveal for the stores?
