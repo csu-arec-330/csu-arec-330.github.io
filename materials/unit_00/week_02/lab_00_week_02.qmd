@@ -10,6 +10,7 @@ format:
 ```{r}
 #| include: false
 
+#install.packages("pacman")
 library(pacman)
 p_load(readr,dplyr,janitor)
 
@@ -236,6 +237,8 @@ You will **analyze** your data in a **worksheet**/**workspace** following these 
 
 6.  Use `Show Me`
 
+7.  Use the `Marks Card`
+
 Throughout the course you will continue to learn new features of the analysis capabilities of Tableau, but for now this is what you need to know.
 
 ### Share
@@ -254,8 +257,14 @@ You should also save a local copy of your work as a Tableau Workbook. File -> Sa
 
 Using the Supermarket Sales data, contruct data visualizations that answer the following questions:
 
-1.  Which product line as the lowest average customer rating?
+1.  Which product line has the lowest average customer rating?
 
 2.  Does this differ by store branch?
 
 3.  What actionable insights does this analysis reveal for the stores?
+
+4.  How have average customer ratings changed over time?
+
+5.  Does this differ by store branch?
+
+6.  What actionable insights does this analysis reveal for the stores?

@@ -1,5 +1,5 @@
 ---
-title: "Week 3: Economic Theory of Decision Making"
+title: "Week 3: Effective Data Visualizations"
 format: 
   revealjs:
     theme: night
@@ -10,330 +10,441 @@ format:
 
 ## Objectives
 
-1.  Position this course in the AREC curriculum 
+1.  Explain the importance of data visualizations. [CO 6]
 
-2.  Understand the importance of thinking through a problem to set up your analysis.
+2.  Identify effective data visualizations. [CO 5]
 
-3.  Apply microeconomic theory to a real-world problem to generate testable hypotheses
+3.  Describe the five guidelines for effective data visualizations. [CO 5]
+
+4.  Next time... Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]
+
 
 ## Agenda
 
 &nbsp; 
 
-What is Economics?
+Why use data visualizations?
 
 &nbsp; 
 
-What is microeconomic theory? (ECON/AREC 202)
+Comparing data visualizations - consensus or differing opinions?
 
 &nbsp; 
 
-How can we use microeconomic theory to guide our decision-making?
+Five guidelines for effective data visualizations.
 
 
-## An Example
+## Why use data visualizations?
 
-![Source: <https://www.hazeldellmushrooms.com/farm/>](includes/hazeldell.jpeg)
-
-
-## Data analysis as part of the solution
+Suppose I do some research on US government spending on a variety of public programs, including health care, Social Security, and others.
 
 &nbsp; 
 
-Instead of relying on experience or gut instinct alone, they can use careful data analysis to help guide their decisions (e.g., google, amazon)
+I find that Federal spending on health care and Social Security programs increased dramitically, but this was not the case for other programs.
 
 &nbsp; 
 
-Objective data analysis is less susceptible to psychological biases
+**Which of the following slides best tells this story?**
+
+##
+![](includes/fed_budget.png){width="120%"}
+
+##
+![](includes/fed_budget2.png){width="120%"}
+
+##
+![](includes/fed_spending.png){width="120%"}
+
+##
+![](includes/fed_budget3.png){width="120%"}
+
+##
+![](includes/fig4.png){width="120%"}
+
+## Which slide best tells our story?
 
 &nbsp; 
 
-Data analysis alone is rarely the solution
+ &nbsp; &nbsp; &nbsp; A. ![](includes/fed_budget.png){width="35%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; B.  ![](includes/fed_budget2.png){width="35%"}
+
+C. ![](includes/fed_spending.png){width="25%"}  &nbsp; &nbsp;D.  ![](includes/fed_budget3.png){width="25%"} &nbsp; &nbsp;E.  ![](includes/fig4.png){width="25%"}
 
 
-## Cogitive or psychological biases
+## Why use data visualizations?
+&nbsp; 
 
-Predictable mental errors that arise from our limited ability to process information objectively 
-
--  Examples: confirmation bias, anchoring, gambler's fallacy
-
-Strong positive and negative emotions can influence decisions (Bucurean, 2018)
-
-Behavioral economics studies why people behave the way they do
-
-
-::: {.notes}
-Confirmation bias is the tendency to search for, interpret, focus on and remember information in a way that confirms one's preconceptions. 
-
-The anchoring bias, or focalism, is the tendency to rely too heavily—to "anchor"—on one trait or piece of information when making decisions (usually the first piece of information acquired on that subject).
-
-Gambler's fallacy, the tendency to think that future probabilities are altered by past events, when in reality they are unchanged
-
-
-
-Empirical evidence: 
-First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart. 
-
-
-:::
-
-
-##  {.smaller}
-
-![source: <https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/>](figs/Intuition-vs-Data-Driven-Decision-1.webp)
-
-## D^3^M is expanding rapidly
-
-![Figure 1. Adoption of Data-Driven Decision-Making in US Manufacturing (Brynjolfsson & McElheran, 2016, AER)](figs/AER_fig.png)
-
-
-## D^3^M process overview
-
-1. Define objective
-
-2. Establish hypothesis
-
-3. Identify data need, build data process, collect data
-
-4. Analyze data
-
-5. Communicate insights
-
-
-
-
-::: aside
-Adapted from <https://www.smartsheet.com/data-driven-decision-making-management>
-:::
-
-## 1. Define question or objective
-
-What is the business or operational question you are trying to answer?
-
-- Do we sell now or hold?
-
-- Do we contract for feed?
-
-What resources do you need?
-
-## You Do It: 1. Define question or objective  {.smaller}
+Which of the slides best tells this story?
 
 &nbsp; 
 
-**In Pairs**: Identify a business that you might be interested in starting some day or any organization that you might want to work for. The business/organization should be related to agrulture and/or natural resources.
+**Why?**
 
 &nbsp; 
 
-1.  Briefly describe this business (give the name if it already exists)
+**How else could you improve these slides?**
 
-2.  Define a question or objective that business might face.
-
+## Why use data visualizations?
 &nbsp; 
 
-Include responses to both 1 and 2 in your iclicker response (140 characters).
-
-## 2. Establish hypothesis
+What is the most important consideration when showcasing your work?
 
 &nbsp; 
-
-What do you think the answer is and why?
-
-&nbsp; 
-
-You should be able to describe the mechanics of the system  and explain your hypothesis
-
-## You Do It: 2. Establish hypothesis
-
-&nbsp; 
-
-**In Your Same Pairs**: What do you think the answer is and **why**?
-
-&nbsp; 
-
-&nbsp; 
-
-Write a short response in the iclicker field (140 characters).
-
-## 3. Data
-
-&nbsp; 
-
-What data do you need to answer your question?
-
-&nbsp; 
-
-How will you assemble the data? Do you need equipment?  Will the data be reliable?
-
-&nbsp; 
-
-Collect data in a way that it can be analyzed - not sticky notes.
-
-## You Do It: 3. Data
-
-&nbsp; 
-
-**In Your Same Pairs**: What data do you need to answer your question?  
-
-&nbsp; 
-
-List the data sources that come to mind in the iclicker field.
-
-&nbsp; 
-
-**Think about**: How will you collect and assemble these data? Do they already exist?
-
-## 4. Analyze data
-
-&nbsp; 
-
-Design an analysis strategy to answer your question
-
-&nbsp; 
-
-Model different scenarios?
-
-&nbsp; 
-
-What can be changed to better achieve your objective?
-
-## 5. Communicate insights
-
-&nbsp; 
-
-Use the data to tell a story
-
-&nbsp; 
-
-Articulate the benefits of the change
-
-## You Do It: Analyze and Communicate
-
-**In Your Same Pairs Discuss**: 
-
-1.  How would you analyze these data to answer your question? What software would you use? What statistics would you construct?
-
-2.  How would you communicate your findings to other people in the business? What visualizations might be useful?
-
-
-## D^3^M across scales 
-
-People make decisions all day every day - some are big and consequential and some are small.  
-
-Data can help make better decisions across the spectrum, and in some cases, may be the only determinant. 
 
 ::: {.incremental}
-- Would you trust an algorithm to make decisions based on data without human input?
+*People* will read, listen to, or see your findings. 
 
-- How much would you rely on data for strategic decisions?
+&nbsp; 
+
+Yet most people spend very little time thinking about how to communicate their findings.
 :::
 
+## What are *effective* data visualizations?
+&nbsp; 
+
+We often spend days, weeks, months, or (sadly) years compiling and analyzing information for reports.
+
+&nbsp; 
+
+But most people spend minutes or hours designing the figures to showcase the data.
+
+&nbsp; 
+
+We might think people will just "get it" or that "the numbers will speak for themselves"
+
+## What are *effective* data visualizations?
+&nbsp; 
+
+Which of the visualizations best tells our story about federal spending?
+
+##
+![](includes/fig3.png){width="120%"}
+
+##
+![](includes/fig2.png){width="120%"}
+
+##
+![](includes/fig4_2.png){width="120%"}
+
+##
+![](includes/fig1.png){width="120%"}
+
+## Which is the most effective vis?
+
+ &nbsp; &nbsp; &nbsp; &nbsp;A. ![](includes/fig3.png){width="30%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B.  ![](includes/fig2.png){width="30%"}
+
+ &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/fig4_2.png){width="30%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D.  ![](includes/fig1.png){width="30%"} 
+
+## What is an *effective* data vis?
+&nbsp; 
+
+Which vis best tells this story?
+
+&nbsp; 
+
+**Why?**
+
+&nbsp; 
+
+**How else could you improve these visualizations?**
+
+## 5 guidelines for a better data vis
+
+&nbsp; 
+
+0.  Identify your objective 
+
+1.  Show the data
+
+2.  Reduce the clutter
+
+3.  Integrate the graphics and text
+
+4.  Avoid the spaghetti chart
+
+5.  Start with gray
+
+::: aside
+Adapted from *Better Data Visualizations* by Jonathan Schwabish
+:::
+
+## 0. Identify your objective
+
+&nbsp; 
+
+Before designing your visualization, answer these questions: 
+
+&nbsp; 
+
+**What do I want my figure to convey?**
+
+&nbsp; 
+
+**What do I want my audience to do with this message?**
+
+##
+![](includes/fig4_2.png){width="120%"}
 
 ::: {.notes}
-How about a thermostat at home or cruise control in your car
+What does this figure convey?
+
+Do you come away from this figure with an idea of what you should do in response to this information?
+
+What if we retitled it - Federal Spending on non-health care related social welfare programs is lagging?
+
+What if we retitled it - The Federal Government is over-spending on Health Care?
 :::
 
-
-
-# Data storytelling
-
-
-## Importance of storytelling
+## 1. Show (me!) the Data
 
 &nbsp; 
 
-Storytelling is fundamental to human existence.  We connect, share, teach and learn through stories.
+Your audience will only grasp your point, argument, or story if they can *see* the data supporting it.
 
 &nbsp; 
 
-Statistics provide evidence but we need stories to truly communicate the insights to the audience
+As visualization creators, our first challenge is deciding how much data to show and the best way to show it.
+
+##  1. Show (me!) the Data
 
 &nbsp; 
 
-Our brains are predisposed to remember stories
+![](includes/guide1.png){width="120%"}
 
-## 3 elements of a data story
+## 2.  Reduce the clutter
 
-![Source: Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.](figs/data_storytelling.png)
+The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
 
-::: {.notes}
-- Explain: narrative and data help explain what is happening.  Context and commentary guide the audience through the meaning of what is being shared.
+Some examples?
 
-- Enlighten: a picture is worth a thousand words or numbers.  Graphs and charts help you see trends and patterns.  We will discuss some of the theory and best practices for making effective graphics.  You want to make it as simple as possible for the audience to see your insight.
+-  Heavy tick marks and gridlines 
 
-- Engage: narrative and visuals help engage the audience.  We spend billions on visual media entertainment.  The best movies may have good effects but definitely have a good story.
+## To Grid or Not to Grid
+
+&nbsp; 
+
+![](includes/grid1.png){width="48%"} &nbsp;![](includes/grid2.png){width="48%"}
+
+::: aside
+Source: <https://medium.com/biovinci/good-chart-bad-chart-b6a6725f8795>
+:::
+## 2.  Reduce the clutter
+
+The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
+
+Some examples?
+
+-  Heavy tick marks and gridlines 
+
+-  Overlapping and overwhelming data markers
+
+## Why tho?
+
+![](includes/image10.png){width="80%"}
+
+::: aside
+Source: <https://dvia.samizdat.cc/2017/line-graph/>
 :::
 
-## Data story ≠ data visualization
+## 2.  Reduce the clutter
 
-&nbsp; 
+The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
 
-While clear and appealing data visualizations are part of a data story, they are not data stories by themselves.
+Some examples?
 
-&nbsp; 
+-  Heavy tick marks and gridlines 
 
-Data stories bring your analytical insights to life
+-  Overlapping and overwhelming data markers
 
-## Six elements of a data story
+-  Gradient colors or patterns, adding dimensions
 
-1. Data foundation
+## No Thanks, Excel.
 
-2. Main point
+![](includes/excel1.png){width="100%"}
 
-3. Explanatory focus (vs exploratory)
+## 2.  Reduce the clutter
 
-4. Linear sequence
+The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
 
-5. Dramatic elements
+Some examples?
 
-6. Visual anchors
+-  Heavy tick marks and gridlines 
 
-::: {.notes}
-1. Story is grounded in data - something real that is observable
+-  Overlapping and overwhelming data markers
 
-2. The story needs to have a main point.  Have something to say.
+-  Gradient colors or patterns, adding dimensions
 
-3. Your goal is to explain some insight.  What is going on?  Who are the actors?  What are the mechanisms?  This relates to what we will discuss about causal inference.
+-  Too much text, too many labels, overkill!
 
-4. Your story will consist of a series of supporting points or information that are tied together to build to some larger point.  The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.
+## Too Much.
 
-5. Dramatic elements include characters, setting, plots.  These elements help humanize the data story and make it relatable.  Set some context: sales are $200k.  Is that good or bad?  It depends on previous sales.  Be selective about the information - only include information that helps to advance the narrative.
+![](includes/line1.png){width="90%"}
 
-6. Visual anchors are the charts and graphs or other visuals you rely on to tell the story.  We will spend considerable time on developing effective visuals to help tell your story.
-
+::: aside
+Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
 :::
 
-## Review Question 1
+## No thanks, Excel.
 
-Which of the following is NOT one of the 5 steps in the D^3^M process?
+![](includes/excel1.png){width="100%"}
 
-A.  Define objective
+## Simpler = Better
 
-B.  Analyze data
+![](includes/simple1.png){width="100%"}
 
-C.  Apply intuition
+## 3. Integrate graphics and text
 
-D.  Communicate insights
+Our main focus when creating a visualization is on the graphical elements - bars, points, lines, etc.
 
-## Review Question 2
+&nbsp; 
 
-Which of the following is one of the reasons it is important to use data when making (important) decisions? 
+But the text we include is often just as important. In fact, the included annotations are vitally important to audience comprehension.
 
-A.  Gut instincts are often correct
+&nbsp; 
 
-B.  Data analysis is less susceptible to biases
+3 ways to integrate graphs and visuals: (1) Remove legends; (2) Create active titles; (3) Add detail
 
-C.  Data analysis is more susceptible to biases
+::: notes
+Recall the exercise on slide titles from earlier.
+:::
 
-D.  Annecdotal evidence is more convincing when communicating insights
+## Which graph do you like best?
+![](includes/legend1.png){width="100%"}
 
+## Which graph do you like best?
+![](includes/legend2.png){width="100%"}
 
+## Which graph do you like best?
+![](includes/legend3.png){width="100%"}
+
+## Which graph do you like best?
+![](includes/legend4.png){width="100%"}
+
+## Which graph do you like best?
+ &nbsp; &nbsp; &nbsp; &nbsp;A. ![](includes/legend1.png){width="35%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B.  ![](includes/legend2.png){width="35%"}
+
+ &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/legend3.png){width="35%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D.  ![](includes/legend4.png){width="35%"} 
+
+## Removing legends
+
+&nbsp; 
+
+Legends take up valuable space.
+
+&nbsp; 
+
+When possible, remove them.
+
+&nbsp; 
+
+Adding data labels directly on the chart makes it faster and easier to interpret and gives our data more space.
+
+## Active titles
+
+&nbsp; 
+
+Write your vis titles like a newspaper headline. 
+
+&nbsp; 
+
+Your title should tell the audience *what they should learn from your data*.
+
+&nbsp; 
+
+## Which title is more useful?
+
+&nbsp; 
+
+![](includes/fed_budget.png){width="48%"} ![](includes/fig4.png){width="48%"}
+
+## Add detail
+
+&nbsp; 
+
+Annotations allows audience members - esp. those with less data vis experience - to grasp and understand the content quickly.
+
+&nbsp; 
+
+Colors draw the readers' attention to key points and can differentiate between "good" and "bad".
+
+##
+
+&nbsp; 
+
+![](includes/neil.png)
+
+##
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;![](includes/crime.png){width="60%"}
+
+## 4. Avoid the spaghetti chart
+
+&nbsp; 
+
+Avoid figures that contain too much information - line charts that look like spaghetti.
+
+&nbsp; 
+
+One solution is to convey less information - what is vital?
+
+&nbsp; 
+
+Another is to break one chart into smaller parts, ideally with identical formatting.
+
+## Spaghetti!
+![](includes/noodles.png)
+
+## Better
+![](includes/better.png)
+
+## Even better - what's your point?
+![](includes/better3.png)
+
+## 5. Start with gray
+
+&nbsp; 
+
+One last piece of advice - whenever you make your graph, start with all gray data elements. 
+
+&nbsp; 
+
+This will force you to be **purposeful** and **strategic** in your use of color, labels, and other elements.
+
+&nbsp; 
+
+When using R, Tableau, Excel, or really any program literally starting in gray would take some effort. But consider this a mental process... 
+
+## Starting with color vs. gray
+
+&nbsp; 
+
+![](includes/gray1.png)
+
+::: notes
+When you start with all gray, it is pretty clear that this cannot be your finished version of the graph. This forces you to put some thought into what the finished version should look like.
+:::
+
+## Strategically adding color
+
+&nbsp; 
+
+![](includes/gray2.png)
+
+::: notes
+Here you might have chosen to highlight the top two lines. Once you do that, you think... why did I choose these two? Maybe my take-away is not currently what I have as my slide title.
+:::
+
+## Objectives
+
+1.  Explain the importance of data visualizations. [CO 6]
+
+2.  Identify effective data visualizations. [CO 5]
+
+3.  Describe the five guidelines for effective data visualizations. [CO 5]
+
+4.  Next time... Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]
 
 ## References {.scrollable}
+Schwabish, J. (2016). *Better Presentations: A Guide for Scholars, Researchers, and Wonks*. Columbia University Press. <https://policyviz.com/pv_books/better-presentations-a-guide-for-scholars-researchers-and-wonks/>
 
 &nbsp; 
 
-Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
-
-&nbsp; 
-
-Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.
+Schwabish, J. (2021). *Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks*. Columbia University Press. <https://policyviz.com/pv_books/better-data-visualizations-a-guide-for-scholars-researchers-and-wonks/>

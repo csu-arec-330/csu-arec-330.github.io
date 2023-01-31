@@ -3,6 +3,7 @@ title: "Week 3 Lab: Tableau Fundamentals"
 format: 
   html:
     theme: zephyr
+    toc: true
 ---
 
 ## Learning Objectives
@@ -24,3 +25,18 @@ Today we are going to go in more detail in each of these steps.
 4.  View and edit sheet metadata
 
 5.  Connect additional sheets (optional)
+
+
+## R: `dplyr` continued
+
+Last week we introduced the five `dplyr` verbs generally used to manipulate data.  We covered `mutate, filter, select,` and `arrange`.  We skipped over `summarize`.  Today we will introduce `summarize` and a helpful companion function `group_by`.  The `summarize` function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data. 
+
+Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). We can use `summarize()` to calculate the total number of units sold in the dataset.   
+
+```{r}
+#| eval: false
+total_sold <- summarize(supermarket_raw,quantity_summed=sum(quantity)) 
+
+
+```
+

@@ -9,7 +9,7 @@
 <link href="lecture_00_week_03_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.2.313">
 
-  <title>Week 3: Economic Theory of Decision Making</title>
+  <title>Week 3: Effective Data Visualizations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -323,7 +323,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 3: Economic Theory of Decision Making</h1>
+  <h1 class="title">Week 3: Effective Data Visualizations</h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -332,242 +332,256 @@
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
 <ol type="1">
-<li><p>Position this course in the AREC curriculum</p></li>
-<li><p>Understand the importance of thinking through a problem to set up your analysis.</p></li>
-<li><p>Apply microeconomic theory to a real-world problem to generate testable hypotheses</p></li>
+<li><p>Explain the importance of data visualizations. [CO 6]</p></li>
+<li><p>Identify effective data visualizations. [CO 5]</p></li>
+<li><p>Describe the five guidelines for effective data visualizations. [CO 5]</p></li>
+<li><p>Next time… Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]</p></li>
 </ol>
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <p>&nbsp;</p>
-<p>What is Economics?</p>
+<p>Why use data visualizations?</p>
 <p>&nbsp;</p>
-<p>What is microeconomic theory? (ECON/AREC 202)</p>
+<p>Comparing data visualizations - consensus or differing opinions?</p>
 <p>&nbsp;</p>
-<p>How can we use microeconomic theory to guide our decision-making?</p>
+<p>Five guidelines for effective data visualizations.</p>
 </section>
-<section id="an-example" class="slide level2">
-<h2>An Example</h2>
-
-<img data-src="includes/hazeldell.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://www.hazeldellmushrooms.com/farm/" class="uri">https://www.hazeldellmushrooms.com/farm/</a></p></section>
-<section id="data-analysis-as-part-of-the-solution" class="slide level2">
-<h2>Data analysis as part of the solution</h2>
+<section id="why-use-data-visualizations" class="slide level2">
+<h2>Why use data visualizations?</h2>
+<p>Suppose I do some research on US government spending on a variety of public programs, including health care, Social Security, and others.</p>
 <p>&nbsp;</p>
-<p>Instead of relying on experience or gut instinct alone, they can use careful data analysis to help guide their decisions (e.g., google, amazon)</p>
+<p>I find that Federal spending on health care and Social Security programs increased dramitically, but this was not the case for other programs.</p>
 <p>&nbsp;</p>
-<p>Objective data analysis is less susceptible to psychological biases</p>
-<p>&nbsp;</p>
-<p>Data analysis alone is rarely the solution</p>
+<p><strong>Which of the following slides best tells this story?</strong></p>
 </section>
-<section id="cogitive-or-psychological-biases" class="slide level2">
-<h2>Cogitive or psychological biases</h2>
-<p>Predictable mental errors that arise from our limited ability to process information objectively</p>
-<ul>
-<li>Examples: confirmation bias, anchoring, gambler’s fallacy</li>
-</ul>
-<p>Strong positive and negative emotions can influence decisions (Bucurean, 2018)</p>
-<p>Behavioral economics studies why people behave the way they do</p>
-<aside class="notes">
-<p>Confirmation bias is the tendency to search for, interpret, focus on and remember information in a way that confirms one’s preconceptions.</p>
-<p>The anchoring bias, or focalism, is the tendency to rely too heavily—to “anchor”—on one trait or piece of information when making decisions (usually the first piece of information acquired on that subject).</p>
-<p>Gambler’s fallacy, the tendency to think that future probabilities are altered by past events, when in reality they are unchanged</p>
-<p>Empirical evidence: First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="section" class="slide level2 smaller">
+<section id="section" class="slide level2">
 <h2></h2>
 
-<img data-src="figs/Intuition-vs-Data-Driven-Decision-1.webp" class="r-stretch quarto-figure-center"><p class="caption">source: <a href="https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/" class="uri">https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/</a></p></section>
-<section id="d3m-is-expanding-rapidly" class="slide level2">
-<h2>D<sup>3</sup>M is expanding rapidly</h2>
+<img data-src="includes/fed_budget.png" style="width:120.0%" class="r-stretch"></section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 
-<img data-src="figs/AER_fig.png" class="r-stretch quarto-figure-center"><p class="caption">Figure 1. Adoption of Data-Driven Decision-Making in US Manufacturing (Brynjolfsson &amp; McElheran, 2016, AER)</p></section>
-<section id="d3m-process-overview" class="slide level2">
-<h2>D<sup>3</sup>M process overview</h2>
-<ol type="1">
-<li><p>Define objective</p></li>
-<li><p>Establish hypothesis</p></li>
-<li><p>Identify data need, build data process, collect data</p></li>
-<li><p>Analyze data</p></li>
-<li><p>Communicate insights</p></li>
+<img data-src="includes/fed_budget2.png" style="width:120.0%" class="r-stretch"></section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/fed_spending.png" style="width:120.0%" class="r-stretch"></section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/fed_budget3.png" style="width:120.0%" class="r-stretch"></section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/fig4.png" style="width:120.0%" class="r-stretch"></section>
+<section id="which-slide-best-tells-our-story" class="slide level2">
+<h2>Which slide best tells our story?</h2>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp; &nbsp; A. <img data-src="includes/fed_budget.png" style="width:35.0%"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; B. <img data-src="includes/fed_budget2.png" style="width:35.0%"></p>
+<p>C. <img data-src="includes/fed_spending.png" style="width:25.0%"> &nbsp; &nbsp;D. <img data-src="includes/fed_budget3.png" style="width:25.0%"> &nbsp; &nbsp;E. <img data-src="includes/fig4.png" style="width:25.0%"></p>
+</section>
+<section id="why-use-data-visualizations-1" class="slide level2">
+<h2>Why use data visualizations?</h2>
+<p>&nbsp;</p>
+<p>Which of the slides best tells this story?</p>
+<p>&nbsp;</p>
+<p><strong>Why?</strong></p>
+<p>&nbsp;</p>
+<p><strong>How else could you improve these slides?</strong></p>
+</section>
+<section id="why-use-data-visualizations-2" class="slide level2">
+<h2>Why use data visualizations?</h2>
+<p>&nbsp;</p>
+<p>What is the most important consideration when showcasing your work?</p>
+<p>&nbsp;</p>
+<div>
+<p><em>People</em> will read, listen to, or see your findings.</p>
+<p>&nbsp;</p>
+<p>Yet most people spend very little time thinking about how to communicate their findings.</p>
+</div>
+</section>
+<section id="what-are-effective-data-visualizations" class="slide level2">
+<h2>What are <em>effective</em> data visualizations?</h2>
+<p>&nbsp;</p>
+<p>We often spend days, weeks, months, or (sadly) years compiling and analyzing information for reports.</p>
+<p>&nbsp;</p>
+<p>But most people spend minutes or hours designing the figures to showcase the data.</p>
+<p>&nbsp;</p>
+<p>We might think people will just “get it” or that “the numbers will speak for themselves”</p>
+</section>
+<section id="what-are-effective-data-visualizations-1" class="slide level2">
+<h2>What are <em>effective</em> data visualizations?</h2>
+<p>&nbsp;</p>
+<p>Which of the visualizations best tells our story about federal spending?</p>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/fig3.png" style="width:120.0%" class="r-stretch"></section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/fig2.png" style="width:120.0%" class="r-stretch"></section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/fig4_2.png" style="width:120.0%" class="r-stretch"></section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/fig1.png" style="width:120.0%" class="r-stretch"></section>
+<section id="which-is-the-most-effective-vis" class="slide level2">
+<h2>Which is the most effective vis?</h2>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;A. <img data-src="includes/fig3.png" style="width:30.0%"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B. <img data-src="includes/fig2.png" style="width:30.0%"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;C. <img data-src="includes/fig4_2.png" style="width:30.0%"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D. <img data-src="includes/fig1.png" style="width:30.0%"></p>
+</section>
+<section id="what-is-an-effective-data-vis" class="slide level2">
+<h2>What is an <em>effective</em> data vis?</h2>
+<p>&nbsp;</p>
+<p>Which vis best tells this story?</p>
+<p>&nbsp;</p>
+<p><strong>Why?</strong></p>
+<p>&nbsp;</p>
+<p><strong>How else could you improve these visualizations?</strong></p>
+</section>
+<section id="guidelines-for-a-better-data-vis" class="slide level2">
+<h2>5 guidelines for a better data vis</h2>
+<p>&nbsp;</p>
+<ol start="0" type="1">
+<li><p>Identify your objective</p></li>
+<li><p>Show the data</p></li>
+<li><p>Reduce the clutter</p></li>
+<li><p>Integrate the graphics and text</p></li>
+<li><p>Avoid the spaghetti chart</p></li>
+<li><p>Start with gray</p></li>
 </ol>
 
 <aside><div>
-<p>Adapted from <a href="https://www.smartsheet.com/data-driven-decision-making-management" class="uri">https://www.smartsheet.com/data-driven-decision-making-management</a></p>
+<p>Adapted from <em>Better Data Visualizations</em> by Jonathan Schwabish</p>
 </div></aside></section>
-<section id="define-question-or-objective" class="slide level2">
-<h2>1. Define question or objective</h2>
-<p>What is the business or operational question you are trying to answer?</p>
-<ul>
-<li><p>Do we sell now or hold?</p></li>
-<li><p>Do we contract for feed?</p></li>
-</ul>
-<p>What resources do you need?</p>
+<section id="identify-your-objective" class="slide level2">
+<h2>0. Identify your objective</h2>
+<p>&nbsp;</p>
+<p>Before designing your visualization, answer these questions:</p>
+<p>&nbsp;</p>
+<p><strong>What do I want my figure to convey?</strong></p>
+<p>&nbsp;</p>
+<p><strong>What do I want my audience to do with this message?</strong></p>
 </section>
-<section id="you-do-it-1.-define-question-or-objective" class="slide level2 smaller">
-<h2>You Do It: 1. Define question or objective</h2>
-<p>&nbsp;</p>
-<p><strong>In Pairs</strong>: Identify a business that you might be interested in starting some day or any organization that you might want to work for. The business/organization should be related to agrulture and/or natural resources.</p>
-<p>&nbsp;</p>
-<ol type="1">
-<li><p>Briefly describe this business (give the name if it already exists)</p></li>
-<li><p>Define a question or objective that business might face.</p></li>
-</ol>
-<p>&nbsp;</p>
-<p>Include responses to both 1 and 2 in your iclicker response (140 characters).</p>
-</section>
-<section id="establish-hypothesis" class="slide level2">
-<h2>2. Establish hypothesis</h2>
-<p>&nbsp;</p>
-<p>What do you think the answer is and why?</p>
-<p>&nbsp;</p>
-<p>You should be able to describe the mechanics of the system and explain your hypothesis</p>
-</section>
-<section id="you-do-it-2.-establish-hypothesis" class="slide level2">
-<h2>You Do It: 2. Establish hypothesis</h2>
-<p>&nbsp;</p>
-<p><strong>In Your Same Pairs</strong>: What do you think the answer is and <strong>why</strong>?</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>Write a short response in the iclicker field (140 characters).</p>
-</section>
-<section id="data" class="slide level2">
-<h2>3. Data</h2>
-<p>&nbsp;</p>
-<p>What data do you need to answer your question?</p>
-<p>&nbsp;</p>
-<p>How will you assemble the data? Do you need equipment? Will the data be reliable?</p>
-<p>&nbsp;</p>
-<p>Collect data in a way that it can be analyzed - not sticky notes.</p>
-</section>
-<section id="you-do-it-3.-data" class="slide level2">
-<h2>You Do It: 3. Data</h2>
-<p>&nbsp;</p>
-<p><strong>In Your Same Pairs</strong>: What data do you need to answer your question?</p>
-<p>&nbsp;</p>
-<p>List the data sources that come to mind in the iclicker field.</p>
-<p>&nbsp;</p>
-<p><strong>Think about</strong>: How will you collect and assemble these data? Do they already exist?</p>
-</section>
-<section id="analyze-data" class="slide level2">
-<h2>4. Analyze data</h2>
-<p>&nbsp;</p>
-<p>Design an analysis strategy to answer your question</p>
-<p>&nbsp;</p>
-<p>Model different scenarios?</p>
-<p>&nbsp;</p>
-<p>What can be changed to better achieve your objective?</p>
-</section>
-<section id="communicate-insights" class="slide level2">
-<h2>5. Communicate insights</h2>
-<p>&nbsp;</p>
-<p>Use the data to tell a story</p>
-<p>&nbsp;</p>
-<p>Articulate the benefits of the change</p>
-</section>
-<section id="you-do-it-analyze-and-communicate" class="slide level2">
-<h2>You Do It: Analyze and Communicate</h2>
-<p><strong>In Your Same Pairs Discuss</strong>:</p>
-<ol type="1">
-<li><p>How would you analyze these data to answer your question? What software would you use? What statistics would you construct?</p></li>
-<li><p>How would you communicate your findings to other people in the business? What visualizations might be useful?</p></li>
-</ol>
-</section>
-<section id="d3m-across-scales" class="slide level2">
-<h2>D<sup>3</sup>M across scales</h2>
-<p>People make decisions all day every day - some are big and consequential and some are small.</p>
-<p>Data can help make better decisions across the spectrum, and in some cases, may be the only determinant.</p>
-<div>
-<ul>
-<li class="fragment"><p>Would you trust an algorithm to make decisions based on data without human input?</p></li>
-<li class="fragment"><p>How much would you rely on data for strategic decisions?</p></li>
-</ul>
-</div>
-<aside class="notes">
-<p>How about a thermostat at home or cruise control in your car</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section>
-<section id="data-storytelling" class="title-slide slide level1 center">
-<h1>Data storytelling</h1>
+<section id="section-9" class="slide level2">
+<h2></h2>
 
+<img data-src="includes/fig4_2.png" style="width:120.0%" class="r-stretch"><aside class="notes">
+<p>What does this figure convey?</p>
+<p>Do you come away from this figure with an idea of what you should do in response to this information?</p>
+<p>What if we retitled it - Federal Spending on non-health care related social welfare programs is lagging?</p>
+<p>What if we retitled it - The Federal Government is over-spending on Health Care?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="importance-of-storytelling" class="slide level2">
-<h2>Importance of storytelling</h2>
+<section id="show-me-the-data" class="slide level2">
+<h2>1. Show (me!) the Data</h2>
 <p>&nbsp;</p>
-<p>Storytelling is fundamental to human existence. We connect, share, teach and learn through stories.</p>
+<p>Your audience will only grasp your point, argument, or story if they can <em>see</em> the data supporting it.</p>
 <p>&nbsp;</p>
-<p>Statistics provide evidence but we need stories to truly communicate the insights to the audience</p>
-<p>&nbsp;</p>
-<p>Our brains are predisposed to remember stories</p>
+<p>As visualization creators, our first challenge is deciding how much data to show and the best way to show it.</p>
 </section>
-<section id="elements-of-a-data-story" class="slide level2">
-<h2>3 elements of a data story</h2>
+<section id="show-me-the-data-1" class="slide level2">
+<h2>1. Show (me!) the Data</h2>
+<p>&nbsp;</p>
 
-<img data-src="figs/data_storytelling.png" class="r-stretch quarto-figure-center"><p class="caption">Source: Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.</p><aside class="notes">
+<img data-src="includes/guide1.png" style="width:120.0%" class="r-stretch"></section>
+<section id="reduce-the-clutter" class="slide level2">
+<h2>2. Reduce the clutter</h2>
+<p>The use of unneccessary visual elements distracts your audience from the central data and clutters the page.</p>
+<p>Some examples?</p>
 <ul>
-<li><p>Explain: narrative and data help explain what is happening. Context and commentary guide the audience through the meaning of what is being shared.</p></li>
-<li><p>Enlighten: a picture is worth a thousand words or numbers. Graphs and charts help you see trends and patterns. We will discuss some of the theory and best practices for making effective graphics. You want to make it as simple as possible for the audience to see your insight.</p></li>
-<li><p>Engage: narrative and visuals help engage the audience. We spend billions on visual media entertainment. The best movies may have good effects but definitely have a good story.</p></li>
+<li>Heavy tick marks and gridlines</li>
 </ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="data-story-data-visualization" class="slide level2">
-<h2>Data story ≠ data visualization</h2>
+<section id="to-grid-or-not-to-grid" class="slide level2">
+<h2>To Grid or Not to Grid</h2>
 <p>&nbsp;</p>
-<p>While clear and appealing data visualizations are part of a data story, they are not data stories by themselves.</p>
-<p>&nbsp;</p>
-<p>Data stories bring your analytical insights to life</p>
+<p><img data-src="includes/grid1.png" style="width:48.0%"> &nbsp;<img data-src="includes/grid2.png" style="width:48.0%"></p>
+
+<aside><div>
+<p>Source: <a href="https://medium.com/biovinci/good-chart-bad-chart-b6a6725f8795" class="uri">https://medium.com/biovinci/good-chart-bad-chart-b6a6725f8795</a></p>
+</div></aside></section>
+<section id="reduce-the-clutter-1" class="slide level2">
+<h2>2. Reduce the clutter</h2>
+<p>The use of unneccessary visual elements distracts your audience from the central data and clutters the page.</p>
+<p>Some examples?</p>
+<ul>
+<li><p>Heavy tick marks and gridlines</p></li>
+<li><p>Overlapping and overwhelming data markers</p></li>
+</ul>
 </section>
-<section id="six-elements-of-a-data-story" class="slide level2">
-<h2>Six elements of a data story</h2>
-<ol type="1">
-<li><p>Data foundation</p></li>
-<li><p>Main point</p></li>
-<li><p>Explanatory focus (vs exploratory)</p></li>
-<li><p>Linear sequence</p></li>
-<li><p>Dramatic elements</p></li>
-<li><p>Visual anchors</p></li>
-</ol>
+<section id="why-tho" class="slide level2">
+<h2>Why tho?</h2>
+<p><img data-src="includes/image10.png" style="width:80.0%"></p>
+
+<aside><div>
+<p>Source: <a href="https://dvia.samizdat.cc/2017/line-graph/" class="uri">https://dvia.samizdat.cc/2017/line-graph/</a></p>
+</div></aside></section>
+<section id="reduce-the-clutter-2" class="slide level2">
+<h2>2. Reduce the clutter</h2>
+<p>The use of unneccessary visual elements distracts your audience from the central data and clutters the page.</p>
+<p>Some examples?</p>
+<ul>
+<li><p>Heavy tick marks and gridlines</p></li>
+<li><p>Overlapping and overwhelming data markers</p></li>
+<li><p>Gradient colors or patterns, adding dimensions</p></li>
+</ul>
+</section>
+<section id="no-thanks-excel." class="slide level2">
+<h2>No Thanks, Excel.</h2>
+
+<img data-src="includes/excel1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="reduce-the-clutter-3" class="slide level2">
+<h2>2. Reduce the clutter</h2>
+<p>The use of unneccessary visual elements distracts your audience from the central data and clutters the page.</p>
+<p>Some examples?</p>
+<ul>
+<li><p>Heavy tick marks and gridlines</p></li>
+<li><p>Overlapping and overwhelming data markers</p></li>
+<li><p>Gradient colors or patterns, adding dimensions</p></li>
+<li><p>Too much text, too many labels, overkill!</p></li>
+</ul>
+</section>
+<section id="too-much." class="slide level2">
+<h2>Too Much.</h2>
+<p><img data-src="includes/line1.png" style="width:90.0%"></p>
+
+<aside><div>
+<p>Source: <a href="https://getdolphins.com/blog/the-worst-graphs-of-2017/" class="uri">https://getdolphins.com/blog/the-worst-graphs-of-2017/</a></p>
+</div></aside></section>
+<section id="no-thanks-excel.-1" class="slide level2">
+<h2>No thanks, Excel.</h2>
+
+<img data-src="includes/excel1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="simpler-better" class="slide level2">
+<h2>Simpler = Better</h2>
+
+<img data-src="includes/simple1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="integrate-graphics-and-text" class="slide level2">
+<h2>3. Integrate graphics and text</h2>
+<p>Our main focus when creating a visualization is on the graphical elements - bars, points, lines, etc.</p>
+<p>&nbsp;</p>
+<p>But the text we include is often just as important. In fact, the included annotations are vitally important to audience comprehension.</p>
+<p>&nbsp;</p>
+<p>3 ways to integrate graphs and visuals: (1) Remove legends; (2) Create active titles; (3) Add detail</p>
 <aside class="notes">
-<ol type="1">
-<li><p>Story is grounded in data - something real that is observable</p></li>
-<li><p>The story needs to have a main point. Have something to say.</p></li>
-<li><p>Your goal is to explain some insight. What is going on? Who are the actors? What are the mechanisms? This relates to what we will discuss about causal inference.</p></li>
-<li><p>Your story will consist of a series of supporting points or information that are tied together to build to some larger point. The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.</p></li>
-<li><p>Dramatic elements include characters, setting, plots. These elements help humanize the data story and make it relatable. Set some context: sales are $200k. Is that good or bad? It depends on previous sales. Be selective about the information - only include information that helps to advance the narrative.</p></li>
-<li><p>Visual anchors are the charts and graphs or other visuals you rely on to tell the story. We will spend considerable time on developing effective visuals to help tell your story.</p></li>
-</ol>
+<p>Recall the exercise on slide titles from earlier.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -580,36 +594,149 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="review-question-1" class="slide level2">
-<h2>Review Question 1</h2>
-<p>Which of the following is NOT one of the 5 steps in the D<sup>3</sup>M process?</p>
-<ol type="A">
-<li><p>Define objective</p></li>
-<li><p>Analyze data</p></li>
-<li><p>Apply intuition</p></li>
-<li><p>Communicate insights</p></li>
-</ol>
+<section id="which-graph-do-you-like-best" class="slide level2">
+<h2>Which graph do you like best?</h2>
+
+<img data-src="includes/legend1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="which-graph-do-you-like-best-1" class="slide level2">
+<h2>Which graph do you like best?</h2>
+
+<img data-src="includes/legend2.png" style="width:100.0%" class="r-stretch"></section>
+<section id="which-graph-do-you-like-best-2" class="slide level2">
+<h2>Which graph do you like best?</h2>
+
+<img data-src="includes/legend3.png" style="width:100.0%" class="r-stretch"></section>
+<section id="which-graph-do-you-like-best-3" class="slide level2">
+<h2>Which graph do you like best?</h2>
+
+<img data-src="includes/legend4.png" style="width:100.0%" class="r-stretch"></section>
+<section id="which-graph-do-you-like-best-4" class="slide level2">
+<h2>Which graph do you like best?</h2>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;A. <img data-src="includes/legend1.png" style="width:35.0%"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B. <img data-src="includes/legend2.png" style="width:35.0%"></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;C. <img data-src="includes/legend3.png" style="width:35.0%"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D. <img data-src="includes/legend4.png" style="width:35.0%"></p>
 </section>
-<section id="review-question-2" class="slide level2">
-<h2>Review Question 2</h2>
-<p>Which of the following is one of the reasons it is important to use data when making (important) decisions?</p>
-<ol type="A">
-<li><p>Gut instincts are often correct</p></li>
-<li><p>Data analysis is less susceptible to biases</p></li>
-<li><p>Data analysis is more susceptible to biases</p></li>
-<li><p>Annecdotal evidence is more convincing when communicating insights</p></li>
+<section id="removing-legends" class="slide level2">
+<h2>Removing legends</h2>
+<p>&nbsp;</p>
+<p>Legends take up valuable space.</p>
+<p>&nbsp;</p>
+<p>When possible, remove them.</p>
+<p>&nbsp;</p>
+<p>Adding data labels directly on the chart makes it faster and easier to interpret and gives our data more space.</p>
+</section>
+<section id="active-titles" class="slide level2">
+<h2>Active titles</h2>
+<p>&nbsp;</p>
+<p>Write your vis titles like a newspaper headline.</p>
+<p>&nbsp;</p>
+<p>Your title should tell the audience <em>what they should learn from your data</em>.</p>
+<p>&nbsp;</p>
+</section>
+<section id="which-title-is-more-useful" class="slide level2">
+<h2>Which title is more useful?</h2>
+<p>&nbsp;</p>
+<p><img data-src="includes/fed_budget.png" style="width:48.0%"> <img data-src="includes/fig4.png" style="width:48.0%"></p>
+</section>
+<section id="add-detail" class="slide level2">
+<h2>Add detail</h2>
+<p>&nbsp;</p>
+<p>Annotations allows audience members - esp.&nbsp;those with less data vis experience - to grasp and understand the content quickly.</p>
+<p>&nbsp;</p>
+<p>Colors draw the readers’ attention to key points and can differentiate between “good” and “bad”.</p>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<p>&nbsp;</p>
+
+<img data-src="includes/neil.png" class="r-stretch"></section>
+<section id="section-11" class="slide level2">
+<h2></h2>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img data-src="includes/crime.png" style="width:60.0%"></p>
+</section>
+<section id="avoid-the-spaghetti-chart" class="slide level2">
+<h2>4. Avoid the spaghetti chart</h2>
+<p>&nbsp;</p>
+<p>Avoid figures that contain too much information - line charts that look like spaghetti.</p>
+<p>&nbsp;</p>
+<p>One solution is to convey less information - what is vital?</p>
+<p>&nbsp;</p>
+<p>Another is to break one chart into smaller parts, ideally with identical formatting.</p>
+</section>
+<section id="spaghetti" class="slide level2">
+<h2>Spaghetti!</h2>
+
+<img data-src="includes/noodles.png" class="r-stretch"></section>
+<section id="better" class="slide level2">
+<h2>Better</h2>
+
+<img data-src="includes/better.png" class="r-stretch"></section>
+<section id="even-better---whats-your-point" class="slide level2">
+<h2>Even better - what’s your point?</h2>
+
+<img data-src="includes/better3.png" class="r-stretch"></section>
+<section id="start-with-gray" class="slide level2">
+<h2>5. Start with gray</h2>
+<p>&nbsp;</p>
+<p>One last piece of advice - whenever you make your graph, start with all gray data elements.</p>
+<p>&nbsp;</p>
+<p>This will force you to be <strong>purposeful</strong> and <strong>strategic</strong> in your use of color, labels, and other elements.</p>
+<p>&nbsp;</p>
+<p>When using R, Tableau, Excel, or really any program literally starting in gray would take some effort. But consider this a mental process…</p>
+</section>
+<section id="starting-with-color-vs.-gray" class="slide level2">
+<h2>Starting with color vs.&nbsp;gray</h2>
+<p>&nbsp;</p>
+
+<img data-src="includes/gray1.png" class="r-stretch"><aside class="notes">
+<p>When you start with all gray, it is pretty clear that this cannot be your finished version of the graph. This forces you to put some thought into what the finished version should look like.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="strategically-adding-color" class="slide level2">
+<h2>Strategically adding color</h2>
+<p>&nbsp;</p>
+
+<img data-src="includes/gray2.png" class="r-stretch"><aside class="notes">
+<p>Here you might have chosen to highlight the top two lines. Once you do that, you think… why did I choose these two? Maybe my take-away is not currently what I have as my slide title.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="objectives-1" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li><p>Explain the importance of data visualizations. [CO 6]</p></li>
+<li><p>Identify effective data visualizations. [CO 5]</p></li>
+<li><p>Describe the five guidelines for effective data visualizations. [CO 5]</p></li>
+<li><p>Next time… Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]</p></li>
 </ol>
 </section>
 <section id="references" class="slide level2 scrollable">
 <h2>References</h2>
+<p>Schwabish, J. (2016). <em>Better Presentations: A Guide for Scholars, Researchers, and Wonks</em>. Columbia University Press. <a href="https://policyviz.com/pv_books/better-presentations-a-guide-for-scholars-researchers-and-wonks/" class="uri">https://policyviz.com/pv_books/better-presentations-a-guide-for-scholars-researchers-and-wonks/</a></p>
 <p>&nbsp;</p>
-<p>Brynjolfsson, Erik, and Kristina McElheran. “The rapid adoption of data-driven decision-making.” American Economic Review 106.5 (2016): 133-39.</p>
-<p>&nbsp;</p>
-<p>Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.</p>
+<p>Schwabish, J. (2021). <em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em>. Columbia University Press. <a href="https://policyviz.com/pv_books/better-data-visualizations-a-guide-for-scholars-researchers-and-wonks/" class="uri">https://policyviz.com/pv_books/better-data-visualizations-a-guide-for-scholars-researchers-and-wonks/</a></p>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
