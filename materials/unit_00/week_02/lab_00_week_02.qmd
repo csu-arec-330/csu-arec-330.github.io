@@ -180,7 +180,7 @@ For example, to redirect the output to a file named "log.txt", you can use the f
 ```{r}
 #| eval: false
 sink("log.txt")
-source("script.R")
+source("script.R",echo = T)
 sink()
 
 ```
