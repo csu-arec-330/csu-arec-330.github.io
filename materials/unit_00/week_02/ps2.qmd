@@ -13,7 +13,7 @@ format:
 
 3. Create a dataframe containing only the columns `city, product_line, unit_price, quantity, total, rating` from the product line `Food and beverages`. 
 
-4. Sort the dataframe `quantity` by subtotal in descending order. 
+4. Sort the dataframe by `quantity` in descending order. 
 
 5. Generate a log file from your script. See the section in the lab file for reference.
 
