@@ -181,12 +181,12 @@ For example, to redirect the output to a file named "log.txt", you can use the f
 ```{r}
 #| eval: false
 sink("log.txt")
-source("script.R",echo = T)
+source("script.R",echo = TRUE)
 sink()
 
 ```
 
-This will run the script "script.R" and redirect all the output to the file "log.txt". Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console.
+This will run the script "script.R" and redirect all the output to the file "log.txt". `echo=TRUE` ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of "script.R" because the command `source()` is equivalent to running every line of "script.R."
 
 
 ## Tableau Setup
