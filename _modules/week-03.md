@@ -1,16 +1,16 @@
 ---
-title: "Week 2: Making Data-Driven Decisions"
+title: "Week 3: Effective Data Visualizations"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Jan 25 & Jan 27</u></b> <br> <br>
+<b><u>Feb 01 & Feb 03</u></b> <br> <br>
 
-<b>Lecture Materials - Wed, Jan 25, 2023:</b> <br>
-
-
-<a  href="/materials/unit_00/week_02/lecture_00_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
+<b>Lecture Materials - Wed, Feb 01, 2023:</b> <br>
 
 
+<a  href="/materials/unit_00/week_03/lecture_00_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
+
+<!--
 <b>Lab Materials - Fri, Jan 27, 2023:</b> <br>
 
 
@@ -26,6 +26,6 @@ title: "Week 2: Making Data-Driven Decisions"
 <a  href="/materials/unit_00/inputs/supermarket_sales.csv" download>Download Supermarket Sales Data</a> <br>
 
 <a  href="/materials/unit_00/inputs/supermarketdata_describe.html" target="_blank">Description of Supermarket Sales Data</a>
-
+-->
 </div>
 
