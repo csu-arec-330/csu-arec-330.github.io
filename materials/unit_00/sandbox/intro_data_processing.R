@@ -9,10 +9,10 @@ library(pacman)
 p_load(readr,dplyr,janitor)
 
 #read in data and column names
-supermarket_raw <- read_csv("unit_00/cache/supermarket_mod.csv") %>%
+supermarket_raw <- read_csv("materials/unit_00/inputs/supermarket_sales.csv") %>%
   clean_names()
 
-#Look at data both in viewer and in console
+#Look at data both in viewer, in console, and in excel
 glimpse(supermarket_raw)
 
 #Discuss data types
@@ -21,41 +21,24 @@ glimpse(supermarket_raw)
 
 #Assignment 1: simple processing - filtering, selecting, transforming
 #Modifying columns - mutate
-supermarket_sales <- mutate(supermarket_raw,total=unit_price*quantity)
+my_super_sales <- mutate(supermarket_raw,total_calc=unit_price*quantity)
+glimpse(my_super_sales)
 
-#Sorting
+my_super_sales <- mutate(supermarket_raw,total_calc=unit_price*quantity*1.05,
+                         check_tax=tax_5_percent/cogs)
 
-
-#Filtering
-table(supermarket_raw$product_line)
-supermarket_food <- filter(supermarket_raw,product_line=="Food and beverages")
+glimpse(my_super_sales)
 
 #Selecting
-supermarket_food_subset <- select(supermarket_food,
-                                  invoice_id,
-                                  branch,
-                                  city,
-                                  customer_type,
-                                  gender,
-                                  total,
-                                  payment)
-
-write_csv(supermarket_food_subset,"supermarket_food_subset.csv")
+select_super_sales <- select(my_super_sales,invoice_id,city,total,total_calc)
+glimpse(select_super_sales)
 
 
+#Sorting
+yangon_super_sales_sorted <- arrange(yangon_super_sales,total)
+glimpse(yangon_super_sales_sorted)
 
-#Check data
-super_checked <- supermarket_raw %>%
-  mutate(total_check = unit_price*quantity + tax_5_percent)
 
-glimpse(select(super_checked,total,total_check))
+super_sales_top <- arrange(select_super_sales,city,desc(total))
+glimpse(super_sales_top)
 
-mutate(super_checked,gross_margin_check=gross_income/cogs*100) %>%
-  select(gross_margin_check,gross_margin_percentage)
-
-p_load(ggplot2)
-
-supermarket_raw %>%
-  ggplot(aes(gross_income,rating)) +
-  geom_point() +
-  facet_wrap(~product_line)

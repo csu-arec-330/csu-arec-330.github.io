@@ -4,7 +4,7 @@ library(pacman)
 p_load(readr,dplyr,janitor)
 
 #Read in data
-supermarket_raw <- read_csv("unit_00/inputs/supermarket_sales.csv") %>%
+supermarket_raw <- read_csv("materials/unit_00/inputs/supermarket_sales.csv") %>%
   clean_names()
 
 set.seed(20)
