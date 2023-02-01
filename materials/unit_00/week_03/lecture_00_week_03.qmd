@@ -40,9 +40,13 @@ Suppose I do some research on US government spending on a variety of public prog
 
 &nbsp; 
 
+. . . 
+
 I find that Federal spending on health care and Social Security programs increased dramitically, but this was not the case for other programs.
 
 &nbsp; 
+
+. . . 
 
 **Which of the following slides best tells this story?**
 
@@ -77,26 +81,31 @@ Which of the slides best tells this story?
 
 &nbsp; 
 
+. . . 
+
 **Why?**
 
 &nbsp; 
 
+. . . 
+
 **How else could you improve these slides?**
 
-## Why use data visualizations?
+## Why use data visualizations? 
 &nbsp; 
 
 What is the most important consideration when showcasing your work?
 
 &nbsp; 
 
-::: {.incremental}
+. . . 
+
 *People* will read, listen to, or see your findings. 
 
 &nbsp; 
 
-Yet most people spend very little time thinking about how to communicate their findings.
-:::
+Yet most of us spend very little time thinking about how to communicate our findings.
+
 
 ## What are *effective* data visualizations?
 &nbsp; 
@@ -141,9 +150,13 @@ Which vis best tells this story?
 
 &nbsp; 
 
+. . . 
+
 **Why?**
 
 &nbsp; 
+
+. . . 
 
 **How else could you improve these visualizations?**
 
@@ -214,6 +227,8 @@ As visualization creators, our first challenge is deciding how much data to show
 
 The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
 
+. . . 
+
 Some examples?
 
 -  Heavy tick marks and gridlines 
@@ -283,6 +298,22 @@ Some examples?
 Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
 :::
 
+## 2.  Reduce the clutter
+
+The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
+
+Some examples?
+
+-  Heavy tick marks and gridlines 
+
+-  Overlapping and overwhelming data markers
+
+-  Gradient colors or patterns, adding dimensions
+
+-  Too much text, too many labels, overkill!
+
+Simpler = Better
+
 ## No thanks, Excel.
 
 ![](includes/excel1.png){width="100%"}
@@ -290,6 +321,14 @@ Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
 ## Simpler = Better
 
 ![](includes/simple1.png){width="100%"}
+
+## What changes would you make?
+
+![](includes/line1.png){width="90%"}
+
+::: aside
+Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
+:::
 
 ## 3. Integrate graphics and text
 
@@ -307,19 +346,19 @@ But the text we include is often just as important. In fact, the included annota
 Recall the exercise on slide titles from earlier.
 :::
 
-## Which graph do you like best?
+## Which vis do you like best?
 ![](includes/legend1.png){width="100%"}
 
-## Which graph do you like best?
+## Which vis do you like best?
 ![](includes/legend2.png){width="100%"}
 
-## Which graph do you like best?
+## Which vis do you like best?
 ![](includes/legend3.png){width="100%"}
 
-## Which graph do you like best?
+## Which vis do you like best?
 ![](includes/legend4.png){width="100%"}
 
-## Which graph do you like best?
+## Which vis do you like best?
  &nbsp; &nbsp; &nbsp; &nbsp;A. ![](includes/legend1.png){width="35%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B.  ![](includes/legend2.png){width="35%"}
 
  &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/legend3.png){width="35%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D.  ![](includes/legend4.png){width="35%"} 
@@ -374,6 +413,22 @@ Colors draw the readers' attention to key points and can differentiate between "
 
 ##
  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;![](includes/crime.png){width="60%"}
+
+
+## 3. Integrate graphics and text
+
+&nbsp; 
+
+1.  Remove legends
+
+&nbsp; 
+
+2.  Create active titles 
+
+&nbsp; 
+
+3.  Add detail - annotations and color
+
 
 ## 4. Avoid the spaghetti chart
 
@@ -441,6 +496,55 @@ Here you might have chosen to highlight the top two lines. Once you do that, you
 3.  Describe the five guidelines for effective data visualizations. [CO 5]
 
 4.  Next time... Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]
+
+## Objective 1 Review Question
+
+&nbsp; 
+
+&nbsp; 
+
+&nbsp; 
+
+Why use data visualizations instead of text?
+
+## Objective 2 Review Question
+
+&nbsp; 
+
+Which vis?
+
+
+## Which vis do you like best?
+![](includes/acre1.png){width="100%"}
+
+## Which vis do you like best?
+![](includes/acre2.png){width="100%"}
+
+## Which vis do you like best?
+![](includes/acre3.png){width="100%"}
+
+## Obj. 2: Which vis?
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;A. ![](includes/acre1.png){width="29%"} 
+
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B.  ![](includes/acre2.png){width="35%"} &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/acre3.png){width="35%"} 
+
+## Objective 3 Review Question
+
+&nbsp; 
+
+Which of the following steps should you accomplish before even starting your data vis?
+
+&nbsp; 
+
+A.  Start with gray
+
+B.  Show the data
+
+C.  Identify your objective
+
+D.  Construct an active title
+
+
 
 ## References {.scrollable}
 Schwabish, J. (2016). *Better Presentations: A Guide for Scholars, Researchers, and Wonks*. Columbia University Press. <https://policyviz.com/pv_books/better-presentations-a-guide-for-scholars-researchers-and-wonks/>
