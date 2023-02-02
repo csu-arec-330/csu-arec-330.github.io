@@ -10,8 +10,9 @@ format:
 ```{r}
 #| include: false
 
-#install.packages("pacman")
+#install.packages("janitor")
 library(pacman)
+library(tidyverse)
 p_load(readr,dplyr,janitor)
 
 #read in data and column names
