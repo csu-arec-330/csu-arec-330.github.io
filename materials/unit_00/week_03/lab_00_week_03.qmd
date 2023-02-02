@@ -173,6 +173,8 @@ What if instead of having Branch/Product line at the top, we just rename A as Br
 
 What if we want to **remove the legend**?
 
+**Adding a caption** that describes details about your visualization. -> Right click the visualization.
+
 ### 6. Other features in the toolbar
 
 Let's explore the Tableau toolbar... Hover over each icon in the toolbar... Click each icon in the toolbar!
