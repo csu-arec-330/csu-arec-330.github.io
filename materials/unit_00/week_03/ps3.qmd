@@ -7,55 +7,30 @@ format:
 
 ## Part 1: R
 
-1. Calculate the total value of the sale using the `unit_price` and `quantity` columns.  Name the new column `subtotal`.  Then verify that the value labeled `tax_5_percent` is indeed 5% of the `subtotal` by creating a new variable called `tax_verify`. Assign the object to a new dataframe.
 
-2. Create a dataframe containing only the subset of sales from the product line `Food and beverages`.
-
-3. Create a dataframe containing only the columns `city, product_line, unit_price, quantity, total, rating` from the product line `Food and beverages`. 
-
-4. Sort the dataframe by `quantity` in descending order. 
-
-5. Generate a log file from your script. See the section in the lab file for reference.
 
 ## Part 2: Tableau
 
 Connect to the `supermarket_sales.csv` and create *effective* data visualizations to answer the following questions that will help you determine staffing needs at each store branch. All visualizations should follow best practices for effective data visualizations, including a useful title, good formatting, and useful annotations.
 
-1.  What times of day have the highest and lowest total sales? Name the worksheet with this visualization `PS3_01`. What does this mean for staffing?
+1.  What times of day have the highest and lowest total sales? Explain what this means for staffing in the figure caption. Name the worksheet with this visualization `PS3_01`. 
 
-2.  Are there differences in peak sales hours across the three store branches? What does this mean for staffing at each store? Name the worksheet with this visualization `PS3_01`. 
+2.  Are there differences in peak sales hours across the three store branches? Explain what this means for staffing in the figure caption. Name the worksheet with this visualization `PS3_02`. 
 
 Now suppose that staffing needs are determined within departments. Department 1 includes products in the Fashion Accessories and Health and Beauty product lines. Department 2 includes products in the Food and Beverages and Home and Lifestyle product lines. Department 3 includes products in the Electronic Accessories and Sports and Travel product lines.
 
-3.  How do sales differ across departments in Yangon? What does this mean for staffing?
+3.  How do sales differ across departments in Yangon? Explain what this means for staffing in the figure caption. Name the worksheet with this visualization `PS3_03`. 
 
-4.  Which day of the week has the highest sales in Department 2 in Yangon? 
+4.  What percent of total sales in Yangon occur in Department 2 on Sundays? Explain what this means for staffing in the figure caption. Name the worksheet with this visualization `PS3_04`. 
 
-2.  What type of data is `supermarket_sales.csv`?
+5.  On which day of the week does Department 1 account for the largest percentage of total sales in Yangon? Explain what this means for staffing in the figure caption. Name the worksheet with this visualization `PS3_05`. (Hint: you will need to create a 100% stacked bar chart to answer this question) 
 
-3.  How many sheets are included in `supermarket_sales.csv`?
-
-4.  How many data fields are included in `supermarket_sales.csv`?
-
-5.  What is the role of the variable `City`?
-
-6.  What is the type of the variable `City`?
-
-7.  What is the role of the variable `Total`?
-
-8.  What is the type of the variable `Total`?
-
-9.  Create a data visualization that shows total spending by all customers in each city a store is located in. Give your sheet and figure a useful title and ensure that axes labels are easy to read and informative. What did you find? Discuss how the stores could use this information to increase sales.
-
-10. Create a data visualization that shows total spending for males and females in each city a store is located in. Give your figure a useful title and ensure that axes labels are easy to read and informative. What did you find? Discuss how the stores could use this information to increase sales.
-
-
-11. Title your two sheets 'PS2 Q9' and 'PS2 Q10', save your workbook, and publish it to your Tableau Public site. 
+Save your workbook and publish it to your Tableau Public site. 
 
 
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 2`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas.
+You should create a new webpage on your google site titled `Problem Set 3`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas.
 
-Part 2 should contain answers to each question 1-10, including embedded figures from your Tableau Public site for questions 9 & 10. Submit the link to your google site webpage in Canvas.
+Part 2 should contain the embedded workbook (with a tab for each figure) from your Tableau Public site. Submit the link to your google site webpage in Canvas.
