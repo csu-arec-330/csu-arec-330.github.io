@@ -12,6 +12,7 @@ This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 
 ## Learning Objectives R
 
+- Understand how to navigate directories on your file system
 
 ## Learning Objectives Tableau 
 
@@ -284,15 +285,92 @@ What are trend lines??
 
 ## R: `dplyr` continued
 
-Last week we introduced the five `dplyr` verbs generally used to manipulate data.  We covered `mutate, filter, select,` and `arrange`.  We skipped over `summarize`.  Today we will introduce `summarize` and a helpful companion function `group_by`.  The `summarize` function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data. 
+Last week we introduced the five `dplyr` verbs generally used to manipulate data.  We covered `mutate, filter, select,` and `arrange`.^[ See [lab 2](../week_02/lab_00_week_02.html#modifying-the-dataframe) for reference.]  We skipped over `summarize`.  Today we will introduce `summarize` and a helpful companion function `group_by`.  The `summarize` function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data. 
 
-Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). We can use `summarize()` to calculate the total number of units sold in the dataset.   
+Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). 
+
+>Note that you can read in data and files from directories other than your working directory.  You can include the directory in the file path.
+
+### 4. Summarize
+We can use `summarize()` to calculate the total number of units sold in the dataset.   
 
 
-
-`{r}
+```{r}
 #| eval: false
+summarize(supermarket_raw,quantity_summed=sum(quantity)) 
+
+```
+
+
+
+>Notice that the command above does not assign the output to an object.  It can be useful to quickly check the output of a command before assigning an object.  Is the variable `quantity_summed` accessible to you? In other words, could you call that value within R and perform other operations on it?  Can you modify that command to assign the output to an object called `total_sold`?
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
 
 total_sold <- summarize(supermarket_raw,quantity_summed=sum(quantity)) 
-`
+```
+
+**You do it**: Try calculating the average of the `quantity` variable.  In R, the function to calculate average is `mean()`.  Now calculate the maximum `unit_price`.  The function to calculate the maximum is `max()`.
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+#Mean quantity
+summarize(supermarket_raw,quantity_mean=mean(quantity)) 
+
+#Max price
+summarize(supermarket_raw,max_price=max(unit_price)) 
+```
+
+
+### Group by
+
+Often times, you need to perform some operation on a group of data.  You can think about this as a sequence of operations: part 1) subset the group that you want to focus on, and part 2) perform the operation. For example, you might want to know the quantity of goods sold by branch.  
+
+Step 1: Filter the data in each branch (let's just do branch A for example)
+```{r}
+#| eval: false
+branch_A_sales <- filter(supermarket_raw,branch=="A")
+```
+You should see a new dataframe called `branch_A_sales` with 340 observations.  All of the variables from `supermarket_raw` are there including `quantity`.
+
+Step 2: sum the quantity of goods sold
+```{r}
+#| eval: false
+branch_A_total_quantity <- summarize(branch_A_sales,total_quantity=sum(quantity))
+```
+
+**You try it**: do the same thing for branch B and C.  
+
+This is pretty tedious.  If operations in R or other programming languages seems tedious or repetitive, there are probably much better ways to do it.  In this case, we can use a function `group_by()`.  `group_by()` tells R to perform some operation like `sum` on each of the subgroups defined by another variable.  Let's sum the quantity by branch using `group_by()` and `summarize()`.  We will do this in two steps:
+
+Step 1: use `group_by()` to group the data by `branch`
+```{r}
+#| eval: false
+
+#This will create a signal for summarize but not perform any calculation.  
+super_sales_grouped_branch <- group_by(supermarket_raw,branch)
+```
+
+Step 2: use `summarize()` to calculate the total quantity (by branch)
+```{r}
+#| eval: false
+
+#This will create a signal for summarize but not perform any calculation.  
+total_quantity_by_branch <- summarize(super_sales_grouped_branch,total_quantity=sum(quantity))
+```
+
+Notice that the result has the quantity sum for each branch.  Do they match your manual calculations?
+
+**You try it**: Calculate the average `unit_price` for each `product_line` in the data. 
+
+### Chaining commands
+
+The script is a set of instructions for R that get executed in order.  In some cases, you do not care about or need the intermediate output.  The `group_by` and summarize sequence is a good example; you don't need to store the dataframe `super_sales_grouped_branch`.
+
 

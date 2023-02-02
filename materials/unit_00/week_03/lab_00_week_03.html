@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -61,7 +124,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#basic-line-charts-and-datetime" id="toc-basic-line-charts-and-datetime" class="nav-link" data-scroll-target="#basic-line-charts-and-datetime">10. Basic line charts and datetime</a></li>
   <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">11. Review</a></li>
   </ul></li>
-  <li><a href="#r-dplyr-continued" id="toc-r-dplyr-continued" class="nav-link" data-scroll-target="#r-dplyr-continued">R: <code>dplyr</code> continued</a></li>
+  <li><a href="#r-dplyr-continued" id="toc-r-dplyr-continued" class="nav-link" data-scroll-target="#r-dplyr-continued">R: <code>dplyr</code> continued</a>
+  <ul class="collapse">
+  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">4. Summarize</a></li>
+  <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">Group by</a></li>
+  <li><a href="#chaining-commands" id="toc-chaining-commands" class="nav-link" data-scroll-target="#chaining-commands">Chaining commands</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -88,6 +156,9 @@ ul.task-list li input[type="checkbox"] {
 <p>This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8</p>
 <section id="learning-objectives-r" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
+<ul>
+<li>Understand how to navigate directories on your file system</li>
+</ul>
 </section>
 <section id="learning-objectives-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
@@ -296,13 +367,78 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="r-dplyr-continued" class="level2">
 <h2 class="anchored" data-anchor-id="r-dplyr-continued">R: <code>dplyr</code> continued</h2>
-<p>Last week we introduced the five <code>dplyr</code> verbs generally used to manipulate data. We covered <code>mutate, filter, select,</code> and <code>arrange</code>. We skipped over <code>summarize</code>. Today we will introduce <code>summarize</code> and a helpful companion function <code>group_by</code>. The <code>summarize</code> function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data.</p>
-<p>Let’s return to our dataset <code>supermarket_sales.csv</code>. Use the function <code>read_csv()</code> to read <code>supermarket_sales.csv</code> into a dataframe called <code>supermarket_raw</code> (see <a href="../week_02/lab_00_week_02.html#read-the-data-into-r">lab 2</a>). We can use <code>summarize()</code> to calculate the total number of units sold in the dataset.</p>
-<p>`{r} #| eval: false</p>
-<p>total_sold &lt;- summarize(supermarket_raw,quantity_summed=sum(quantity)) `</p>
+<p>Last week we introduced the five <code>dplyr</code> verbs generally used to manipulate data. We covered <code>mutate, filter, select,</code> and <code>arrange</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> We skipped over <code>summarize</code>. Today we will introduce <code>summarize</code> and a helpful companion function <code>group_by</code>. The <code>summarize</code> function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data.</p>
+<p>Let’s return to our dataset <code>supermarket_sales.csv</code>. Use the function <code>read_csv()</code> to read <code>supermarket_sales.csv</code> into a dataframe called <code>supermarket_raw</code> (see <a href="../week_02/lab_00_week_02.html#read-the-data-into-r">lab 2</a>).</p>
+<blockquote class="blockquote">
+<p>Note that you can read in data and files from directories other than your working directory. You can include the directory in the file path.</p>
+</blockquote>
+<section id="summarize" class="level3">
+<h3 class="anchored" data-anchor-id="summarize">4. Summarize</h3>
+<p>We can use <code>summarize()</code> to calculate the total number of units sold in the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_summed=</span><span class="fu">sum</span>(quantity)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Notice that the command above does not assign the output to an object. It can be useful to quickly check the output of a command before assigning an object. Is the variable <code>quantity_summed</code> accessible to you? In other words, could you call that value within R and perform other operations on it? Can you modify that command to assign the output to an object called <code>total_sold</code>?</p>
+</blockquote>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>total_sold <span class="ot">&lt;-</span> <span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_summed=</span><span class="fu">sum</span>(quantity)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>You do it</strong>: Try calculating the average of the <code>quantity</code> variable. In R, the function to calculate average is <code>mean()</code>. Now calculate the maximum <code>unit_price</code>. The function to calculate the maximum is <code>max()</code>.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mean quantity</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_mean=</span><span class="fu">mean</span>(quantity)) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Max price</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">max_price=</span><span class="fu">max</span>(unit_price)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="group-by" class="level3">
+<h3 class="anchored" data-anchor-id="group-by">Group by</h3>
+<p>Often times, you need to perform some operation on a group of data. You can think about this as a sequence of operations: part 1) subset the group that you want to focus on, and part 2) perform the operation. For example, you might want to know the quantity of goods sold by branch.</p>
+<p>Step 1: Filter the data in each branch (let’s just do branch A for example)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You should see a new dataframe called <code>branch_A_sales</code> with 340 observations. All of the variables from <code>supermarket_raw</code> are there including <code>quantity</code>.</p>
+<p>Step 2: sum the quantity of goods sold</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>branch_A_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_A_sales,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>You try it</strong>: do the same thing for branch B and C.</p>
+<p>This is pretty tedious. If operations in R or other programming languages seems tedious or repetitive, there are probably much better ways to do it. In this case, we can use a function <code>group_by()</code>. <code>group_by()</code> tells R to perform some operation like <code>sum</code> on each of the subgroups defined by another variable. Let’s sum the quantity by branch using <code>group_by()</code> and <code>summarize()</code>. We will do this in two steps:</p>
+<p>Step 1: use <code>group_by()</code> to group the data by <code>branch</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create a signal for summarize but not perform any calculation.  </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>super_sales_grouped_branch <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Step 2: use <code>summarize()</code> to calculate the total quantity (by branch)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create a signal for summarize but not perform any calculation.  </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch <span class="ot">&lt;-</span> <span class="fu">summarize</span>(super_sales_grouped_branch,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that the result has the quantity sum for each branch. Do they match your manual calculations?</p>
+<p><strong>You try it</strong>: Calculate the average <code>unit_price</code> for each <code>product_line</code> in the data.</p>
+</section>
+<section id="chaining-commands" class="level3">
+<h3 class="anchored" data-anchor-id="chaining-commands">Chaining commands</h3>
+<p>The script is a set of instructions for R that get executed in order. In some cases, you do not care about or need the intermediate output. The <code>group_by</code> and summarize sequence is a good example; you don’t need to store the dataframe <code>super_sales_grouped_branch</code>.</p>
+</section>
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p> See <a href="../week_02/lab_00_week_02.html#modifying-the-dataframe">lab 2</a> for reference.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
