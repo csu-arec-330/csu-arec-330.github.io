@@ -55,19 +55,17 @@ Today we are going to go in more detail in the analyze step of the process. We w
 
 7.  Create calculated fields
 
-8.  More advanced bar charts
+8.  Sorting bar charts  
 
-9.  Use the `Marks` and `Filters` Cards
+9.  Using the `Marks` card and creating groups
 
-10.  Create groups
+10.  Formatting titles, axes, legends, etc.
 
-11.  Showing and hiding the legend
+14.  Stacked bar charts
 
-12.  Formatting titles, axes, etc.
+14.  Line charts
 
-13.  Line charts
-
-14.  Manipulating dates
+15.  Manipulating dates
 
 ### 7. Create calculated fields
 
@@ -87,7 +85,7 @@ Drag the relevant variables into the box. Type the appropriate function (multipl
 
 **You do it:** Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.
 
-### 8. More advanced bar charts
+### 8. Sorting bar charts
 
 Let's start off with our bar chart from last class where we looked at customer ratings by product line...
 
@@ -105,11 +103,28 @@ There are a two ways to sort bars on our chart:
 
 **You do it:** Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.
 
+### 9. Using the marks card and creating groups
+
 What if we want to **use color** to highlight the top category? 
 
 There are a few ways to do this:  
 -  Drag product line to `color` on the Marks card (then edit colors)
 -  Right click the bar you want to stand out and click `Group` (then edit colors)  
+
+What if we want to add **labels** with the value of the rating?  
+-  Label -> check `show mark labels`  
+
+**You do it:** Show mark labels and click around with the other options on the label card. What formatting do you like best?
+
+What if we want to change the **width of our bars**?  
+-  Size -> adjust!  
+
+What if we want to add some extra info on the box that appears when we hover over a bar?  
+-  Tooltip  
+
+**You do it:** Try adding some text to the tooltip. Click on Insert -> what else can you add to the tooltip?
+
+### 10. Formatting titles, axes, legends, etc.
 
 What if we want to **adjust the scale** of the y-axis so that differences across the bars are easier to see?  
 -  Right click the y-axis  
@@ -120,7 +135,14 @@ Now what happens if we compare these customer ratings across branches? Does the 
 
 **You do it:** Highlight the product line with the top rating at branch A - how does this rank in the other branches?
 
+**You do it:** Click on the different options in the legend - what happens?
 
+What if we want to **change the font size** (or color, etc.) of the axis labels?  
+-  Right click the axis you want to edit -> click Format  
+
+What if instead of having Branch/Product line at the top, we just rename A as Branch A, B as Branch B, etc.  
+-  Right click Branch / Product line -> Hide field labels  
+-  Right click branch -> Edit Aliases...  
 
 ## R: `dplyr` continued
 

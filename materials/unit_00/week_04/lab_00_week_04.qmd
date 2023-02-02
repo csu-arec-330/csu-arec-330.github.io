@@ -188,74 +188,45 @@ sink()
 This will run the script "script.R" and redirect all the output to the file "log.txt". Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console.
 
 
-## Tableau Setup
+## Tableau 
 
-We will be using two Tableau products in this course (although there are many more - see handout): Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free. 
+In week 2 of the course we covered the basic Tableau flow of analysis: Connect -> Analyze -> Share. Each of you followed this flow in problem set 2 to produce a simple data visualization using the grocery store spending dataset. 
 
-Visit [Tableau for students](https://www.tableau.com/academic/students) and apply for your 1-year academic license.
+Today we are going to go in more detail in the connect and share stages of Tabluea. 
 
-Visit [Tableau Desktop](https://www.tableau.com/products/desktop) and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license.
+### Connecting Data Sources -- More Advanced Options
 
-Visit [Tableau Public](https://public.tableau.com/app/discover) and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.
+~~1.  Establish a connection~~
 
-If you are ever feeling lost in this class, I recommend checking out some of Tableau's free [eLearning resources](https://elearning.tableau.com). We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.
+~~2.  View available sheets~~
 
-## Introduction to Tableau: The Tableau Workflow 
+~~3.  Select the first sheet you want to work with~~
 
-Connect -> Analyze -> Share 
+~~4.  View and edit sheet metadata~~
 
-[Video: The Tableau Desktop Workflow](https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr)
+5.  Create an extract
 
-### Connect
+6.  Save your data source for instant reusable access
 
-You will **connect** to your data on the **data source page** following these steps:
+7.  Create a relationship between sheets (merge or join)
 
-1.  Establish a connection
+8.  Union (stack/append) sheets with the same fields
 
-2.  View available sheets
+9.  Pivot a data field
 
-3.  Select the first sheet you want to work with
-
-4.  View and edit sheet metadata
-
-5.  Connect additional sheets (optional)
-
-### Analyze
-
-You will **analyze** your data in a **worksheet**/**workspace** following these steps:
-
-1.  Click on `Sheet 1` at the bottom of the Tableau Desktop window. 
-
-2.  Use the `Data Pane` to view the data source and explore data fields within a worksheet
-
-3.  Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.
-
-4.  View your visualization in the `View Pane`.
-
-5.  Change aggregations
-
-6.  Use `Show Me`
-
-Throughout the course you will continue to learn new features of the analysis capabilities of Tableau, but for now this is what you need to know.
 
 ### Share
 
-You will **share** your **worksheet** on Tableau Public by following these steps:
+For the purposes of this class, you will only need to understand how to share your visualizations following the steps from last lab (publish on Tableau Public, embed on your google site). 
 
-1.  Connect Tableau Desktop to your Tableau Public account. Server -> Tableau Public
+But another important aspect of sharing your analysis is building a **dashboard** (which you can share following the same process).
 
-2.  Publish. Server -> Publish Workbook. OR Server -> Tableau Public -> Save to Tableau Public
+**Dashboards** are used to bring together multiple sheets, allowing comparison between the data simultaneously.
 
-You should also save a local copy of your work as a Tableau Workbook. File -> Save. OR click the floppy disk icon (![](figs/save.png){width=5%}) at the top of the page.
+1.  Click on `New Dashboard` at the bottom of the Tableau Desktop window. 
 
-3.  Embed your visualization in your google website.
+2.  Drag your desired sheets to your dashboard.
 
-## Applying The Tableau Workflow
+3.  Move things around and add formatting.
 
-Using the Supermarket Sales data, contruct data visualizations that answer the following questions:
-
-1.  Which product line as the lowest average customer rating?
-
-2.  Does this differ by store branch?
-
-3.  What actionable insights does this analysis reveal for the stores?
+4.  Add interactivity. 
