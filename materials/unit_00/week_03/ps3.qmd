@@ -27,7 +27,7 @@ Connect to the `supermarket_sales.csv` and create *effective* data visualization
 
 Now suppose that staffing needs are determined within departments. Department 1 includes products in the Fashion Accessories and Health and Beauty product lines. Department 2 includes products in the Food and Beverages and Home and Lifestyle product lines. Department 3 includes products in the Electronic Accessories and Sports and Travel product lines.
 
-3.  Which department has the highest sales in Yangon? 
+3.  How do sales differ across departments in Yangon? What does this mean for staffing?
 
 4.  Which day of the week has the highest sales in Department 2 in Yangon? 
 
