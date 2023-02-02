@@ -6,7 +6,7 @@ format:
     toc: true
 ---
 
-![](figs/shopping.webp)
+![](includes/shopping.webp)
 
 This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 
@@ -17,37 +17,31 @@ This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 
 -  Apply advanced options in the connections page
 
+-  Identify the function of items on the Tableau Toolbar
 
+-  Create sorted and stacked bar charts
+
+-  Understand the functions of the `Marks` and `Filters` cards
+
+-  Create calculated fields
+
+-  Explain what it means to group your data
+
+-  Apply formatting features to make your visualization more effective
+
+-  Create a line chart
+
+-  Manipulate date-time fields
 
 ## Lab Overview
 
 In week 2 of the course we covered the basic Tableau flow of analysis: Connect -> Analyze -> Share. Each of you followed this flow in problem set 2 to produce a simple data visualization using the grocery store spending dataset. 
 
-Today we are going to go in more detail in each of these steps. In the analysis step we will also discuss a few ways to change the formatting of your visualizations to make them more effective.
+Today we are going to go in more detail in the analyze step of the process. We will learn to make a few new figures, we will learn more of the features of the Tableau analysis page, and we will discuss a few ways to change the formatting of your visualizations to make them more effective.
 
-## Connecting Data Sources -- More Advanced Options
+### Analyze Overview 
 
-~~1.  Establish a connection~~
-
-~~2.  View available sheets~~
-
-~~3.  Select the first sheet you want to work with~~
-
-~~4.  View and edit sheet metadata~~
-
-5.  Create an extract
-
-6.  Save your data source for instant reusable access
-
-7.  Create a relationship between sheets (merge or join)
-
-8.  Union (stack/append) sheets with the same fields
-
-9.  Pivot a data field
-
-### Analyze
-
-~~1.  Click on `Sheet 1` at the bottom of the Tableau Desktop window. ~~
+~~1.  Click on `Sheet 1` at the bottom of the Tableau Desktop window.~~
 
 ~~2.  Use the `Data Pane` to view the data source and explore data fields within a worksheet~~
 
@@ -59,37 +53,74 @@ Today we are going to go in more detail in each of these steps. In the analysis 
 
 ~~6.  Use `Show Me`~~
 
-7.  More advanced bar charts
+7.  Create calculated fields
 
-8.  Use the `Marks Card`
+8.  More advanced bar charts
 
-9.  Use the `Filters Card`
+9.  Use the `Marks` and `Filters` Cards
 
-10.  Create calculated fields
+10.  Create groups
 
 11.  Showing and hiding the legend
 
-12.  Formatting
+12.  Formatting titles, axes, etc.
 
 13.  Line charts
 
 14.  Manipulating dates
 
-### Share
+### 7. Create calculated fields
 
-For the purposes of this class, you will only need to understand how to share your visualizations following the steps from last lab (publish on Tableau Public, embed on your google site). 
+In your last assignment you were asked to use R to calculate the total value of the sale using the `unit_price` and `quantity` columns. (And name the new column `subtotal`.)
 
-But another important aspect of sharing your analysis is building a **dashboard** (which you can share following the same process).
+We can do this sort of calculation in Tableau too!
 
-**Dashboards** are used to bring together multiple sheets, allowing comparison between the data simultaneously.
+![](includes/newvar.png){width="60%"}
 
-1.  Click on `New Dashboard` at the bottom of the Tableau Desktop window. 
+Then select  `Create Calculated Field...`
 
-2.  Drag your desired sheets to your dashboard.
+Give your field a useful name (let's use `subtotal`).
 
-3.  Move things around and add formatting.
+Drag the relevant variables into the box. Type the appropriate function (multiply). Click OK. And Voila.
 
-4.  Add interactivity. 
+**You do it:** Validate that the value labeled `tax_5_percent` is indeed 5% of the `subtotal` by creating a new variable called `tax_verify`. 
+
+**You do it:** Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.
+
+### 8. More advanced bar charts
+
+Let's start off with our bar chart from last class where we looked at customer ratings by product line...
+
+From our lecture on Wednesday, what are some ways we could improve this visualization to answer the question "Which product line has the lowest average customer rating?"
+
+::: notes
+Title, adding color to highlight the top category, making font larger and easier to read, maybe changing axis range
+:::
+
+What about **sorting**?
+
+There are a two ways to sort bars on our chart:  
+-  use the toolbar  
+-  use the icon next to the y-axis label  
+
+**You do it:** Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.
+
+What if we want to **use color** to highlight the top category? 
+
+There are a few ways to do this:  
+-  Drag product line to `color` on the Marks card (then edit colors)
+-  Right click the bar you want to stand out and click `Group` (then edit colors)  
+
+What if we want to **adjust the scale** of the y-axis so that differences across the bars are easier to see?  
+-  Right click the y-axis  
+-  Click edit axis  
+-  Choose an appropriate range  
+
+Now what happens if we compare these customer ratings across branches? Does the product line with the top ratings vary by store?
+
+**You do it:** Highlight the product line with the top rating at branch A - how does this rank in the other branches?
+
+
 
 ## R: `dplyr` continued
 

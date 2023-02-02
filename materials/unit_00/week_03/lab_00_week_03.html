@@ -108,9 +108,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#lab-overview" id="toc-lab-overview" class="nav-link" data-scroll-target="#lab-overview">Lab Overview</a></li>
-  <li><a href="#connecting-data-sources-more-advanced-options" id="toc-connecting-data-sources-more-advanced-options" class="nav-link" data-scroll-target="#connecting-data-sources-more-advanced-options">Connecting Data Sources – More Advanced Options</a></li>
+  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
+  <li><a href="#lab-overview" id="toc-lab-overview" class="nav-link" data-scroll-target="#lab-overview">Lab Overview</a>
+  <ul class="collapse">
+  <li><a href="#analyze-overview" id="toc-analyze-overview" class="nav-link" data-scroll-target="#analyze-overview">Analyze Overview</a></li>
+  <li><a href="#create-calculated-fields" id="toc-create-calculated-fields" class="nav-link" data-scroll-target="#create-calculated-fields">7. Create calculated fields</a></li>
+  <li><a href="#more-advanced-bar-charts" id="toc-more-advanced-bar-charts" class="nav-link" data-scroll-target="#more-advanced-bar-charts">8. More advanced bar charts</a></li>
+  </ul></li>
   <li><a href="#r-dplyr-continued" id="toc-r-dplyr-continued" class="nav-link" data-scroll-target="#r-dplyr-continued">R: <code>dplyr</code> continued</a></li>
   </ul>
 </nav>
@@ -134,23 +139,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p><img src="includes/shopping.webp" class="img-fluid"></p>
+<p>This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8</p>
+<section id="learning-objectives-r" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
+</section>
+<section id="learning-objectives-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
+<ul>
+<li><p>Apply advanced options in the connections page</p></li>
+<li><p>Identify the function of items on the Tableau Toolbar</p></li>
+<li><p>Create sorted and stacked bar charts</p></li>
+<li><p>Understand the functions of the <code>Marks</code> and <code>Filters</code> cards</p></li>
+<li><p>Create calculated fields</p></li>
+<li><p>Explain what it means to group your data</p></li>
+<li><p>Apply formatting features to make your visualization more effective</p></li>
+<li><p>Create a line chart</p></li>
+<li><p>Manipulate date-time fields</p></li>
+</ul>
 </section>
 <section id="lab-overview" class="level2">
 <h2 class="anchored" data-anchor-id="lab-overview">Lab Overview</h2>
-<p>In week 1 of the course we covered the basic Tableau flow of analysis: Connect -&gt; Analyze -&gt; Share. Each of you followed this flow in problem set 1 to produce a simple data visualization using the grocery store spending dataset.</p>
-<p>Today we are going to go in more detail in each of these steps.</p>
-</section>
-<section id="connecting-data-sources-more-advanced-options" class="level2">
-<h2 class="anchored" data-anchor-id="connecting-data-sources-more-advanced-options">Connecting Data Sources – More Advanced Options</h2>
-<p><del>1. Establish a connection</del></p>
-<p><del>2. View available sheets</del></p>
-<p><del>3. Select the first sheet you want to work with</del></p>
-<ol start="4" type="1">
-<li><p>View and edit sheet metadata</p></li>
-<li><p>Connect additional sheets (optional)</p></li>
+<p>In week 2 of the course we covered the basic Tableau flow of analysis: Connect -&gt; Analyze -&gt; Share. Each of you followed this flow in problem set 2 to produce a simple data visualization using the grocery store spending dataset.</p>
+<p>Today we are going to go in more detail in the analyze step of the process. We will learn to make a few new figures, we will learn more of the features of the Tableau analysis page, and we will discuss a few ways to change the formatting of your visualizations to make them more effective.</p>
+<section id="analyze-overview" class="level3">
+<h3 class="anchored" data-anchor-id="analyze-overview">Analyze Overview</h3>
+<p><del>1. Click on <code>Sheet 1</code> at the bottom of the Tableau Desktop window.</del></p>
+<p><del>2. Use the <code>Data Pane</code> to view the data source and explore data fields within a worksheet</del></p>
+<p><del>3. Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.</del></p>
+<p><del>4. View your visualization in the <code>View Pane</code>.</del></p>
+<p><del>5. Change aggregations</del></p>
+<p><del>6. Use <code>Show Me</code></del></p>
+<ol start="7" type="1">
+<li><p>Create calculated fields</p></li>
+<li><p>More advanced bar charts</p></li>
+<li><p>Use the <code>Marks</code> and <code>Filters</code> Cards</p></li>
+<li><p>Create groups</p></li>
+<li><p>Showing and hiding the legend</p></li>
+<li><p>Formatting titles, axes, etc.</p></li>
+<li><p>Line charts</p></li>
+<li><p>Manipulating dates</p></li>
 </ol>
+</section>
+<section id="create-calculated-fields" class="level3">
+<h3 class="anchored" data-anchor-id="create-calculated-fields">7. Create calculated fields</h3>
+<p>In your last assignment you were asked to use R to calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns. (And name the new column <code>subtotal</code>.)</p>
+<p>We can do this sort of calculation in Tableau too!</p>
+<p><img src="includes/newvar.png" class="img-fluid" style="width:60.0%"></p>
+<p>Then select <code>Create Calculated Field...</code></p>
+<p>Give your field a useful name (let’s use <code>subtotal</code>).</p>
+<p>Drag the relevant variables into the box. Type the appropriate function (multiply). Click OK. And Voila.</p>
+<p><strong>You do it:</strong> Validate that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>.</p>
+<p><strong>You do it:</strong> Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.</p>
+</section>
+<section id="more-advanced-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="more-advanced-bar-charts">8. More advanced bar charts</h3>
+<p>Let’s start off with our bar chart from last class where we looked at customer ratings by product line…</p>
+<p>From our lecture on Wednesday, what are some ways we could improve this visualization to answer the question “Which product line has the lowest average customer rating?”</p>
+<div class="notes">
+<p>Title, adding color to highlight the top category, making font larger and easier to read, maybe changing axis range</p>
+</div>
+<p>What about <strong>sorting</strong>?</p>
+<p>There are a two ways to sort bars on our chart:<br>
+- use the toolbar<br>
+- use the icon next to the y-axis label</p>
+<p><strong>You do it:</strong> Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.</p>
+<p>What if we want to <strong>use color</strong> to highlight the top category?</p>
+<p>There are a few ways to do this:<br>
+- Drag product line to <code>color</code> on the Marks card (then edit colors) - Right click the bar you want to stand out and click <code>Group</code> (then edit colors)</p>
+<p>What if we want to <strong>adjust the scale</strong> of the y-axis so that differences across the bars are easier to see?<br>
+- Right click the y-axis<br>
+- Click edit axis<br>
+- Choose an appropriate range</p>
+<p>Now what happens if we compare these customer ratings across branches? Does the product line with the top ratings vary by store?</p>
+<p><strong>You do it:</strong> Highlight the product line with the top rating at branch A - how does this rank in the other branches?</p>
+</section>
 </section>
 <section id="r-dplyr-continued" class="level2">
 <h2 class="anchored" data-anchor-id="r-dplyr-continued">R: <code>dplyr</code> continued</h2>
