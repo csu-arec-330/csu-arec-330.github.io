@@ -15,21 +15,19 @@ This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 
 ## Learning Objectives Tableau 
 
--  Apply advanced options in the connections page
-
 -  Identify the function of items on the Tableau Toolbar
 
--  Create sorted and stacked bar charts
+-  Create sorted, stacked, and bar in bar charts
 
 -  Understand the functions of the `Marks` and `Filters` cards
 
 -  Create calculated fields
 
--  Explain what it means to group your data
+-  Explain what it means to group your data 
 
 -  Apply formatting features to make your visualization more effective
 
--  Create a line chart
+-  Create line charts
 
 -  Manipulate date-time fields
 
