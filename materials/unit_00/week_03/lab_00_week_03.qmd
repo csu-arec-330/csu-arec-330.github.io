@@ -6,13 +6,24 @@ format:
     toc: true
 ---
 
-## Learning Objectives
+![](figs/shopping.webp)
+
+This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
+
+## Learning Objectives R
+
+
+## Learning Objectives Tableau 
+
+-  Apply advanced options in the connections page
+
+
 
 ## Lab Overview
 
-In week 1 of the course we covered the basic Tableau flow of analysis: Connect -> Analyze -> Share. Each of you followed this flow in problem set 1 to produce a simple data visualization using the grocery store spending dataset. 
+In week 2 of the course we covered the basic Tableau flow of analysis: Connect -> Analyze -> Share. Each of you followed this flow in problem set 2 to produce a simple data visualization using the grocery store spending dataset. 
 
-Today we are going to go in more detail in each of these steps.
+Today we are going to go in more detail in each of these steps. In the analysis step we will also discuss a few ways to change the formatting of your visualizations to make them more effective.
 
 ## Connecting Data Sources -- More Advanced Options
 
@@ -22,10 +33,63 @@ Today we are going to go in more detail in each of these steps.
 
 ~~3.  Select the first sheet you want to work with~~
 
-4.  View and edit sheet metadata
+~~4.  View and edit sheet metadata~~
 
-5.  Connect additional sheets (optional)
+5.  Create an extract
 
+6.  Save your data source for instant reusable access
+
+7.  Create a relationship between sheets (merge or join)
+
+8.  Union (stack/append) sheets with the same fields
+
+9.  Pivot a data field
+
+### Analyze
+
+~~1.  Click on `Sheet 1` at the bottom of the Tableau Desktop window. ~~
+
+~~2.  Use the `Data Pane` to view the data source and explore data fields within a worksheet~~
+
+~~3.  Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.~~
+
+~~4.  View your visualization in the `View Pane`.~~
+
+~~5.  Change aggregations~~
+
+~~6.  Use `Show Me`~~
+
+7.  More advanced bar charts
+
+8.  Use the `Marks Card`
+
+9.  Use the `Filters Card`
+
+10.  Create calculated fields
+
+11.  Showing and hiding the legend
+
+12.  Formatting
+
+13.  Line charts
+
+14.  Manipulating dates
+
+### Share
+
+For the purposes of this class, you will only need to understand how to share your visualizations following the steps from last lab (publish on Tableau Public, embed on your google site). 
+
+But another important aspect of sharing your analysis is building a **dashboard** (which you can share following the same process).
+
+**Dashboards** are used to bring together multiple sheets, allowing comparison between the data simultaneously.
+
+1.  Click on `New Dashboard` at the bottom of the Tableau Desktop window. 
+
+2.  Drag your desired sheets to your dashboard.
+
+3.  Move things around and add formatting.
+
+4.  Add interactivity. 
 
 ## R: `dplyr` continued
 
