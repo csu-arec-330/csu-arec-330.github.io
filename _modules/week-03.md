@@ -11,17 +11,14 @@ title: "Week 3: Effective Data Visualizations"
 <a  href="/materials/unit_00/week_03/lecture_00_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
 
 <!--
-<b>Lab Materials - Fri, Jan 27, 2023:</b> <br>
+<b>Lab Materials - Fri, Feb 03, 2023:</b> <br>
+
+<a  href="/materials/unit_00/week_03/lab_00_week_03.html" target="_blank">Week 3 Lab Notes</a> <br> <br>
 
 
-<a  href="/materials/unit_00/week_01/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br>
+<b>Problem Set 3 Materials - Due Thursday, Feb 09 by 11:59 PM:</b> <br>
 
-<a  href="/materials/unit_00/week_02/lab_00_week_02.html" target="_blank">Week 2 Lab Notes</a> <br> <br>
-
-
-<b>Problem Set 2 Materials - Due Tuesday, Jan 31 by 11:59 PM:</b> <br>
-
-<a  href="/materials/unit_00/week_02/ps2.html" target="_blank">Problem Set 2 Instructions</a> <br>
+<a  href="/materials/unit_00/week_03/ps3.html" target="_blank">Problem Set 3 Instructions</a> <br>
 
 <a  href="/materials/unit_00/inputs/supermarket_sales.csv" download>Download Supermarket Sales Data</a> <br>
 
