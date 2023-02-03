@@ -10,10 +10,6 @@ format:
 
 This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 
-## Learning Objectives R
-
-- Understand how to navigate directories on your file system
-
 ## Learning Objectives Tableau 
 
 -  Identify the function of items on the Tableau Toolbar
@@ -31,6 +27,11 @@ This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 -  Create line charts
 
 -  Manipulate date-time fields
+
+## Learning Objectives R
+
+- Understand how to navigate directories on your file system
+
 
 ## Tableau Lab Overview
 
@@ -173,6 +174,8 @@ What if instead of having Branch/Product line at the top, we just rename A as Br
 What if we want to **remove the legend**?
 
 **Adding a caption** that describes details about your visualization. -> Right click the visualization.
+
+**Marking** or **annotating** a single point. -> Right click -> Mark Label or Annotate
 
 ### 6. Other features in the toolbar
 
