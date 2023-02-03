@@ -24,5 +24,12 @@ title: "Week 3: Effective Data Visualizations"
 
 <a  href="/materials/unit_00/inputs/supermarketdata_describe.html" target="_blank">Description of Supermarket Sales Data</a>
 
+<b>Additional Resources:</b> <br>
+
+<a  href="https://32net.id/bukaheula/share/SYCWaE5oc1kTqt9D6VLB0wqSno3PFMgUBWRAWeh9.pdf" target="_blank">*Better Data Visualizations* by Jonathan Schwabish - Free PDF </a> <br>
+
+
+<a  href="https://policyviz.com/resources/" target="_blank">Jonathan Schwabish - Data Vis Resources </a> <br>
+
 </div>
 
