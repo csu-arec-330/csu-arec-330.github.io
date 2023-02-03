@@ -15,7 +15,7 @@ title: "Week 3: Effective Data Visualizations"
 
 <a  href="/materials/unit_00/week_03/lab_00_week_03.html" target="_blank">Week 3 Lab Notes</a> <br> <br>
 
-<!--
+
 <b>Problem Set 3 Materials - Due Thursday, Feb 09 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_00/week_03/ps3.html" target="_blank">Problem Set 3 Instructions</a> <br>
@@ -23,6 +23,6 @@ title: "Week 3: Effective Data Visualizations"
 <a  href="/materials/unit_00/inputs/supermarket_sales.csv" download>Download Supermarket Sales Data</a> <br>
 
 <a  href="/materials/unit_00/inputs/supermarketdata_describe.html" target="_blank">Description of Supermarket Sales Data</a>
--->
+
 </div>
 
