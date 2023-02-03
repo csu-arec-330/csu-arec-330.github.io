@@ -32,6 +32,12 @@ This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 
 - Understand how to navigate directories on your file system
 
+- Use the `summarize` and `group_by` functions
+
+- Understand how to chain commands
+
+- Bind dataframes together
+
 
 ## Tableau Lab Overview
 
@@ -374,6 +380,32 @@ Notice that the result has the quantity sum for each branch.  Do they match your
 
 ### Chaining commands
 
-The script is a set of instructions for R that get executed in order.  In some cases, you do not care about or need the intermediate output.  The `group_by` and summarize sequence is a good example; you don't need to store the dataframe `super_sales_grouped_branch`.
+The script is a set of instructions for R that get executed in order.  In some cases, you do not care about or need to save the intermediate output.  The `group_by` and summarize sequence is a good example; you don't need to store the dataframe `super_sales_grouped_branch` unless there is a clear use for it later.  The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]  Let's return to our `group_by()` and `summarize()` sequence and use the pipe technique rather than assign the intermediate step to a dataframe.
 
+```{r}
+#| eval: false
 
+#Using the pipe to chain two statements 
+total_quantity_by_branch_pipe <- group_by(supermarket_raw,branch) %>% #group by branch and pass the output to summarize
+  summarize(.,total_quantity=sum(quantity)) #Sum the quantity by branch
+```
+
+### Appending data
+
+In many cases, you will need to combine parts of datasets into a single larger dataset.  Let's return to the example of breaking up the dataset by branch.  If you have not created dataframes for each branch above, do it using these commands:
+
+```{r}
+#| eval: false
+branch_A_sales <- filter(supermarket_raw,branch=="A")
+branch_B_sales <- filter(supermarket_raw,branch=="B")
+branch_C_sales <- filter(supermarket_raw,branch=="C")
+```
+
+Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name.  Suppose you were given the data as three separate files and you read them into these dataframes.  However, you want to profile company sales across the branches.  You need to append them together.  The `dplyr` function to append rows is `bind_rows()`.^[[`bind_rows()`](https://dplyr.tidyverse.org/reference/bind.html) is a more efficient version of a function in base R called `rbind()`.]  
+
+```{r}
+#| eval: false
+super_reconstruct <- bind_rows(branch_A_sales,branch_B_sales,branch_C_sales) 
+```
+
+Note that `bind_rows()` looks for shared column names in each dataframe.  If one dataframe is missing a column, it will be filled with `NA`. `NA` in R stands for "Not Available" or "Not Applicable." It is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an "NA" value, it treats it differently from other values, and special functions are often used to handle missing data. 

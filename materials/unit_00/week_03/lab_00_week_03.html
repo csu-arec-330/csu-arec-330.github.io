@@ -129,6 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">4. Summarize</a></li>
   <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">Group by</a></li>
   <li><a href="#chaining-commands" id="toc-chaining-commands" class="nav-link" data-scroll-target="#chaining-commands">Chaining commands</a></li>
+  <li><a href="#appending-data" id="toc-appending-data" class="nav-link" data-scroll-target="#appending-data">Appending data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -170,7 +171,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="learning-objectives-r" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
 <ul>
-<li>Understand how to navigate directories on your file system</li>
+<li><p>Understand how to navigate directories on your file system</p></li>
+<li><p>Use the <code>summarize</code> and <code>group_by</code> functions</p></li>
+<li><p>Understand how to chain commands</p></li>
+<li><p>Bind dataframes together</p></li>
 </ul>
 </section>
 <section id="tableau-lab-overview" class="level2">
@@ -429,7 +433,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="chaining-commands" class="level3">
 <h3 class="anchored" data-anchor-id="chaining-commands">Chaining commands</h3>
-<p>The script is a set of instructions for R that get executed in order. In some cases, you do not care about or need the intermediate output. The <code>group_by</code> and summarize sequence is a good example; you don’t need to store the dataframe <code>super_sales_grouped_branch</code>.</p>
+<p>The script is a set of instructions for R that get executed in order. In some cases, you do not care about or need to save the intermediate output. The <code>group_by</code> and summarize sequence is a good example; you don’t need to store the dataframe <code>super_sales_grouped_branch</code> unless there is a clear use for it later. The symbol known as the pipe, <code>%&gt;%</code>, means take the output of the function on the left and use it as an input for the function on the right.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Let’s return to our <code>group_by()</code> and <code>summarize()</code> sequence and use the pipe technique rather than assign the intermediate step to a dataframe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the pipe to chain two statements </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch) <span class="sc">%&gt;%</span> <span class="co">#group by branch and pass the output to summarize</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(.,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity)) <span class="co">#Sum the quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="appending-data" class="level3">
+<h3 class="anchored" data-anchor-id="appending-data">Appending data</h3>
+<p>In many cases, you will need to combine parts of datasets into a single larger dataset. Let’s return to the example of breaking up the dataset by branch. If you have not created dataframes for each branch above, do it using these commands:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name. Suppose you were given the data as three separate files and you read them into these dataframes. However, you want to profile company sales across the branches. You need to append them together. The <code>dplyr</code> function to append rows is <code>bind_rows()</code>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales,branch_B_sales,branch_C_sales) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that <code>bind_rows()</code> looks for shared column names in each dataframe. If one dataframe is missing a column, it will be filled with <code>NA</code>. <code>NA</code> in R stands for “Not Available” or “Not Applicable.” It is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an “NA” value, it treats it differently from other values, and special functions are often used to handle missing data.</p>
 </section>
 </section>
 
@@ -438,6 +461,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ol>
 <li id="fn1"><p> See <a href="../week_02/lab_00_week_02.html#modifying-the-dataframe">lab 2</a> for reference.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The pipe was originally introduced in the package <a href="https://magrittr.tidyverse.org/reference/pipe.html"><code>magrittr</code></a> and is represented by the symbol <code>%&gt;%</code>. The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol <code>|&gt;</code>. They are not equivalent. I will use the <code>magrittr</code> pipe in this class.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> is a more efficient version of a function in base R called <code>rbind()</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
