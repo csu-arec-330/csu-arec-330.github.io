@@ -7,7 +7,15 @@ format:
 
 ## Part 1: R
 
+Read in the dataset `supermarket_sales.csv`.
 
+1. Use `dplyr` commands to calculate the median sales by payment type
+
+2. You are asked to develop a new performance indicator for the company.  You wonder if the transaction rating per unit price might provide insights into consumer preferences for different product lines.  Calculate the rating per unit price for each transaction and call this new variable `rup`.
+
+3. Then calculate the mean `rup` and unit price by product line across the dataset.  Print the contents of this dataframe into the console using the `print()` function.
+
+*Use the sink command to generate a text file that indicates your script ran in R.*
 
 ## Part 2: Tableau
 
