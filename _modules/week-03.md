@@ -10,12 +10,12 @@ title: "Week 3: Effective Data Visualizations"
 
 <a  href="/materials/unit_00/week_03/lecture_00_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
 
-<!--
+
 <b>Lab Materials - Fri, Feb 03, 2023:</b> <br>
 
 <a  href="/materials/unit_00/week_03/lab_00_week_03.html" target="_blank">Week 3 Lab Notes</a> <br> <br>
 
-
+<!--
 <b>Problem Set 3 Materials - Due Thursday, Feb 09 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_00/week_03/ps3.html" target="_blank">Problem Set 3 Instructions</a> <br>
