@@ -72,7 +72,7 @@ th, td {
 				<td rowspan="2">0</td>
 				<td rowspan="2">4</td>
 				<td style="min-width:50px">Wed, Feb 08</td>
-				<td style="min-width:50px">OLS Regression Fundamentals</td>
+				<td style="min-width:50px">Question-focused analysis</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
