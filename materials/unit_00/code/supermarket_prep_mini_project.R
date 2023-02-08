@@ -60,14 +60,14 @@ measure_time <- format(sample(seq(as.POSIXct("2019-01-01 10:00:00"), as.POSIXct(
 
 payment <- sample(c("Ewallet", "Cash", "Credit card"), n_obs, replace = TRUE)
 
-gross_margin_percentage <- round(runif(100, 1, 10), 2)
+#gross_margin_percentage <- round(runif(100, 1, 10), 2)
 
 rating <- round(runif(n_obs, 4, 10), 1)
 
 # Combine data into a dataframe
 df <- data.frame(invoice_id, city, customer_type, gender, product_line, 
                  unit_price, quantity, measure_date, measure_time, 
-                 payment, gross_margin_percentage, rating) %>%
+                 payment, rating) %>%
   mutate(
     branch=case_when(
       city=="Yangon" ~ "A",
@@ -76,11 +76,16 @@ df <- data.frame(invoice_id, city, customer_type, gender, product_line,
     quantity=floor(ifelse((city=="Yangon" & product_line=="Electronic accessories" & dplyr::between(measure_date,as_date("2019-08-01"),as_date("2019-12-31"))),quantity*0.2,quantity)),
     quantity=floor(ifelse((city=="Yangon" & product_line=="Electronic accessories" & !dplyr::between(measure_date,as_date("2019-08-01"),as_date("2019-12-31"))),quantity*2.5,quantity)),
     rating=round(ifelse((city=="Yangon" & product_line=="Electronic accessories" & dplyr::between(measure_date,as_date("2019-05-01"),as_date("2019-12-31"))),rating*0.2,rating),1),
-    tax_5_percent=round(unit_price * quantity * 0.05, 4),
-    total=round(unit_price * quantity + tax_5_percent, 4),
-    cogs=round(total * runif(n_obs, 0.5, 0.9), 2),
-    gross_income=round(total * gross_margin_percentage/100, 2)
-    )
+    subtotal=round(unit_price * quantity, 4),
+    tax_5_percent=round(subtotal * 0.05, 4),
+    total=round(subtotal + tax_5_percent, 4),
+    cogs=round(subtotal * runif(n_obs, 0.5, 0.9), 2),
+    gross_income=round(subtotal - cogs, 2),
+    gross_margin_percentage=round(gross_income/subtotal*100,2),
+    gross_income=floor(ifelse((payment=="Ewallet"),NA,gross_income)),
+    gross_margin_percentage=floor(ifelse((payment=="Ewallet"),NA,gross_margin_percentage)),
+    ) %>%
+  select(-subtotal)
 
 #GGally::ggpairs(select(df,where(is.numeric)))
 

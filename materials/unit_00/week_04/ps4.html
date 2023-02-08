@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Problem Set 4: Mini Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="ps4_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ps4_files/libs/quarto-html/quarto.js"></script>
+<script src="ps4_files/libs/quarto-html/popper.min.js"></script>
+<script src="ps4_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ps4_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ps4_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ps4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ps4_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ps4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ps4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Problem Set 4: Mini Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>The objectives of the project are:</p>
+<ul>
+<li><p>to integrate the R and Tableau skills that you have learned so far in the course</p></li>
+<li><p>to analyze data with a question or insight in mind</p></li>
+<li><p>to communicate your insight through a webpage</p></li>
+</ul>
+<section id="prompt" class="level2">
+<h2 class="anchored" data-anchor-id="prompt">Prompt</h2>
+<p>You are the analysts tapped to investigate trends in sales data from three branches from 2017 through 2019. You are not given much direction, but the boss (decision maker) wants to use data to make better decisions. First, you should explore the data (conduct exploratory data analysis). Your goal is to identify an insight worth sharing with management. Once you find an insight, develop your <a href="https://csu-arec-330.github.io/materials/unit_00/week_04/lecture_00_week_04.html#/story-overview">data story</a>.</p>
+</section>
+<section id="r-data-processing" class="level2">
+<h2 class="anchored" data-anchor-id="r-data-processing">R: Data Processing</h2>
+<ol type="1">
+<li><p>There was a problem integrating the Ewallet payment system data with the rest of the dataset. The <code>gross_income</code> and <code>gross_margin_percentage</code> values are missing for transactions with Ewallet payments. Use other information in the dataset to fill in the missing values. <em>You can check your work by comparing your calculated values with those present in the dataset.</em></p></li>
+<li><p>You are given the data in three separate files (one for each year). You need to append the datasets (or bind them together) to produce a single dataset that you can output for Tableau to read.</p></li>
+<li><p>Use R to write a csv file that your can read into Tableau.</p></li>
+</ol>
+</section>
+<section id="tableau-data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="tableau-data-visualization">Tableau: Data Visualization</h2>
+<p>Use Tableau to produce <strong>at least three visualizations</strong> that help you tell your data story. These can be static or interactive visualizations. The visualizations should adhere to the <a href="../week_03/lecture_00_week_03.html#/guidelines-for-a-better-data-vis">guidelines for better data visualizations</a>.</p>
+</section>
+<section id="google-sites-webpage" class="level2">
+<h2 class="anchored" data-anchor-id="google-sites-webpage">Google sites: Webpage</h2>
+<p>You will present your analysis in a webpage report. The webpage should contain a written narrative and data visualizations that support your narrative. We expect the written narrative to be 500 to 750 words.</p>
+<p>Here are some questions to consider as you engage in your analysis</p>
+<ul>
+<li><p>What are the sales trends over time? Are the patterns stable across branches/years?</p></li>
+<li><p>What products generate the most sales? Which products yield the highest gross income? Does this vary by location?</p></li>
+<li><p>How is customer satisfaction trending? Does this vary by location or product?</p></li>
+</ul>
+<p>Here are some questions to consider as you develop the webpage (not in any particular order):</p>
+<ul>
+<li><p>What is your insight? use data visuals to explain why something is the way it is</p></li>
+<li><p>What is the action or change your insight implies? <!-- increase sales, identify underperforming regions --></p></li>
+<li><p>What are your key visuals? Do they support a consistent narrative?</p></li>
+<li><p>Does your webpage contain the data story elements? Question or compelling hook, Characters and setting, Preliminaries, Answer (or insight), Next steps</p></li>
+<li><p>Who is the audience? <!-- management team --></p></li>
+<li><p>What are the shortcomings of your analysis? How might you alter your data collection processes to revisit your question in the future?</p></li>
+</ul>
+</section>
+<section id="how-to-submit" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
+<p>You should create a new webpage on your google site titled <code>Unit 0 Mini Project</code>. This webpage should include a write up of your analysis including a brief description of any data processing steps. Generate a log file from your R code and submit that to Canvas. Submit the link to your google site webpage in Canvas.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -5,62 +5,68 @@ format:
     theme: zephyr
 ---
 
-The objective of this assignment is to integrate R and Tableau to answer a business question.
+The objectives of the project are:
+
+- to integrate the R and Tableau skills that you have learned so far in the course 
+
+- to analyze data with a question or insight in mind
+
+- to communicate your insight through a webpage
+
+## Prompt
+
+You are the analysts tapped to investigate trends in sales data from three branches from 2017 through 2019.  You are not given much direction, but the boss (decision maker) wants to use data to make better decisions.  First, you should explore the data (conduct exploratory data analysis).  Your goal is to identify an insight worth sharing with management.  Once you find an insight, develop your [data story](https://csu-arec-330.github.io/materials/unit_00/week_04/lecture_00_week_04.html#/story-overview).  
+
+
+## R: Data Processing
+
+1. There was a problem integrating the Ewallet payment system data with the rest of the dataset.  The `gross_income` and `gross_margin_percentage` values are missing for transactions with Ewallet payments.  Use other information in the dataset to fill in the missing values.  *You can check your work by comparing your calculated values with those present in the dataset.*
+
+2. You are given the data in three separate files (one for each year). You need to append the datasets (or bind them together) to produce a single dataset that you can output for Tableau to read.
+
+3. Use R to write a csv file that your can read into Tableau.
 
 
 
+## Tableau: Data Visualization
+
+Use Tableau to produce **at least three visualizations** that help you tell your data story.  These can be static or interactive visualizations.  The visualizations should adhere to the [guidelines for better data visualizations](../week_03/lecture_00_week_03.html#/guidelines-for-a-better-data-vis).
 
 
 
-Discuss the shortcomings of your analysis.  How might you alter your data collection processes to revisit your question in the future?
+## Google sites: Webpage
+
+You will present your analysis in a webpage report. The webpage should contain a written narrative and data visualizations that support your narrative. We expect the written narrative to be 500 to 750 words.  
 
 
-<!-- ------------------------------------ -->
 
+Here are some questions to consider as you engage in your analysis  
 
-## Part 1: R
+- What are the sales trends over time? Are the patterns stable across branches/years?
 
-1. Calculate the total value of the sale using the `unit_price` and `quantity` columns.  Name the new column `subtotal`.  Then verify that the value labeled `tax_5_percent` is indeed 5% of the `subtotal` by creating a new variable called `tax_verify`. Assign the object to a new dataframe.
+- What products generate the most sales?  Which products yield the highest gross income? Does this vary by location?
 
-2. Create a dataframe containing only the subset of sales from the product line `Food and beverages`.
+- How is customer satisfaction trending?  Does this vary by location or product?
 
-3. Create a dataframe containing only the columns `city, product_line, unit_price, quantity, total, rating` from the product line `Food and beverages`. 
+Here are some questions to consider as you develop the webpage (not in any particular order):
 
-4. Sort the dataframe `quantity` by subtotal in descending order. 
+- What is your insight?  use data visuals to explain why something is the way it is
 
-5. Generate a log file from your script. See the section in the lab file for reference.
+- What is the action or change your insight implies? 
+<!-- increase sales, identify underperforming regions -->
 
-## Part 2: Getting Started with Tableau
+- What are your key visuals?  Do they support a consistent narrative?
 
-Connect to the `supermarket_sales.csv` and answer the following questions using information on the `Start Page`, `Data Source Page`, and by opening a new `Worksheet`.
+- Does your webpage contain the data story elements? Question or compelling hook, Characters and setting, 
+Preliminaries, Answer (or insight), Next steps
 
-1.  What type of connection did you use to connect to `supermarket_sales.csv`?
+- Who is the audience? 
+<!-- management team -->
 
-2.  What type of data is `supermarket_sales.csv`?
-
-3.  How many sheets are included in `supermarket_sales.csv`?
-
-4.  How many data fields are included in `supermarket_sales.csv`?
-
-5.  What is the role of the variable `City`?
-
-6.  What is the type of the variable `City`?
-
-7.  What is the role of the variable `Total`?
-
-8.  What is the type of the variable `Total`?
-
-9.  Create a data visualization that shows total spending by all customers in each city a store is located in. Give your sheet and figure a useful title and ensure that axes labels are easy to read and informative. What did you find? Discuss how the stores could use this information to increase sales.
-
-10. Create a data visualization that shows total spending for males and females in each city a store is located in. Give your figure a useful title and ensure that axes labels are easy to read and informative. What did you find? Discuss how the stores could use this information to increase sales.
-
-
-11. Title your two sheets 'PS2 Q9' and 'PS2 Q10', save your workbook, and publish it to your Tableau Public site. 
+- What are the shortcomings of your analysis?  How might you alter your data collection processes to revisit your question in the future?
 
 
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 2`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas.
-
-Part 2 should contain answers to each question 1-10, including embedded figures from your Tableau Public site for questions 9 & 10. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your google site titled `Unit 0 Mini Project`. This webpage should include a write up of your analysis including a brief description of any data processing steps. Generate a log file from your R code and submit that to Canvas. Submit the link to your google site webpage in Canvas.
