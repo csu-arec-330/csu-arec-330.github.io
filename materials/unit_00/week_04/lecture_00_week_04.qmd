@@ -10,12 +10,13 @@ format:
 
 ## Agenda 
 
+Identify a question
 
-item 1
+Develop a hypothesis
 
-item 2
+Tell the story with your data
 
-item 3
+Brainstorm project ideas
 
 
 <!-- example of big text fit to slide width -->
@@ -216,7 +217,7 @@ Make sure the visual is effective - clearly illustrates the point
 
 
 
-## Next steps
+## Next steps {.scrollable}
 
 Recommendations (if appropriate)^[It may not be appropriate for you to make direct recommendations. Try to frame the discussion.]
 
@@ -229,15 +230,32 @@ Example analysis:
 :::
 
 :::{.fragment}
-- Customers: the members and non members
+- Conduct market survey to better understand why members purchase these items on the weekend
 :::
+
+
+## Brainstorm project ideas {.scrollable style="font-size: .7em"}
+
+Understanding customer behavior: analyze customer behavior and preferences, such as the most popular product lines and the average purchase frequency.
+
+Sales and revenue analysis: analyze sales and revenue trends, such as the average invoice value and the contribution of different branches to the overall revenue.
+
+Customer segmentation: segment customers based on demographics, such as gender and customer type, to understand their purchasing behavior and tailor marketing campaigns accordingly.
+
+Pricing strategy: analyze the effect of changes in pricing on product demand and to determine the optimal pricing strategy for different product lines.
+
+Marketing optimization: evaluate the effectiveness of different marketing channels and optimize marketing spending.
+
+Operations optimization: analyze the efficiency of operations, including the cost of goods sold, and optimize processes to increase profitability.
+
+Customer satisfaction analysis: analyze customer satisfaction using the "rating" field and make improvements to the customer experience.
+
+
+
 <!-- ------------------------------------------ -->
 
 ## References {.scrollable .smaller}
 
-
-
-Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
 
 
 Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.
