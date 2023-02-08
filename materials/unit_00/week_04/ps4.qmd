@@ -1,9 +1,22 @@
 ---
-title: "Problem Set 2: Introduction to R and Tableau"
+title: "Problem Set 4: Mini Project"
 format: 
   html:
     theme: zephyr
 ---
+
+The objective of this assignment is to integrate R and Tableau to answer a business question.
+
+
+
+
+
+
+Discuss the shortcomings of your analysis.  How might you alter your data collection processes to revisit your question in the future?
+
+
+<!-- ------------------------------------ -->
+
 
 ## Part 1: R
 

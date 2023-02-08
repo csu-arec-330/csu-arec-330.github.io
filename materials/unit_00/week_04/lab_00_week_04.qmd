@@ -27,34 +27,15 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 :::
 
 ## Learning Objectives R
-- Read in data and evaluate datatypes
 
-- Calculate new columns based on existing columns
-
-- Subset or filter rows of the data
-
-- Subset or select columns of the data
 
 ## Learning Objectives Tableau
-- Describe the flow of analysis in Tableau Desktop
-
-- Identify key areas of the Tableau Desktop workspace
-
-- Demonstrate how to connect Tableau to a database
-
-- Identify the role and type of data fields 
-
-- Choose an appropriate data visualization based on a business scenario and audience.
-
-- Build a simple data visualization
-
-- Demonstrate how to share your data visualization
 
 
 
 ## Data processing with R
 
-Data processing is an important step in analysis.  It can be complicated depending on the number of data sources, quality of the data, and structure of the data.  We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.
+You now have 3 years worth of data 
 
 
 ### Starting a task or project in R
