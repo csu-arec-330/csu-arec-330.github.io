@@ -18,7 +18,7 @@ title: "Week 4: Mini Project"
 
 <b>Project Materials - Due Thursday, Feb 16 by 11:59 PM:</b> <br>
 
-<!--- <a  href="/materials/unit_00/week_04/ps4.html" target="_blank">Problem Set 4 Instructions</a> <br> -->
+ <a  href="/materials/unit_00/week_04/ps4.html" target="_blank">Problem Set 4 Instructions</a> <br> 
 
 <a  href="/materials/unit_00/inputs/supermarket_sales_2017.csv" download>Download 2017 Supermarket Sales Data</a> <br>
 
