@@ -1,340 +1,243 @@
 ---
-title: "Week 2: Data Driven Decision Making and Data Story Telling"
+title: "Week 4: Question-Focused Analysis"
 format: 
   revealjs:
-    theme: night
+    theme: [night, custom.scss]
     slide-number: c/t
     # logo: path.png
     # center: TRUE
 ---
 
-## Agenda
-
-&nbsp; 
-
-D^3^M 
-
-- Why? cognitive biases
-
-- How? develop a process
-
-&nbsp; 
-
-Data storytelling
-
-- Why? it works
-
-- Intro on how to tell a data story
-
-# D^3^M 
-
-## Fundamental problem
-
-&nbsp; 
-
-&nbsp; 
-
-People that run businesses, government, or other organizations are striving to reach some goal and need to adapt to changing conditions
+## Agenda 
 
 
-## Data analysis as part of the solution
+item 1
 
-&nbsp; 
+item 2
 
-Instead of relying on experience or gut instinct alone, they can use careful data analysis to help guide their decisions (e.g., google, amazon)
-
-&nbsp; 
-
-Objective data analysis is less susceptible to psychological biases
-
-&nbsp; 
-
-Data analysis alone is rarely the solution
+item 3
 
 
-## Cogitive or psychological biases
+<!-- example of big text fit to slide width -->
 
-Predictable mental errors that arise from our limited ability to process information objectively 
+<!-- ::: {.r-fit-text} -->
+<!-- Big Text -->
+<!-- ::: -->
 
--  Examples: confirmation bias, anchoring, gambler's fallacy
 
-Strong positive and negative emotions can influence decisions (Bucurean, 2018)
 
-Behavioral economics studies why people behave the way they do
+## Identify a question
 
+A question might be driven by a business decision or goal
+
+- We need to cut costs. Can we reallocate labor more efficiently?
+
+- We want to increase profits. Can we increase marketing efforts on profitable product lines?
+
+## Refine the question 
+
+Can we answer the question with the available data?
+
+Is the question specific enough? 
+
+Will the answer explain a phenomenon?
+
+
+## Exercise
+
+Are these questions answerable with the `supermarket_sales` dataset? why?
+
+::: {style="font-size: .7em"}
+
+1. We need to cut costs. Can we reallocate labor more efficiently?
+
+2. We want to increase profits. Can we increase marketing efforts on profitable product lines?
+
+:::
+
+![](includes/super_sales.jpg)
+
+## Develop a hypothesis
+
+What do you think the answer is?  Why?
+
+The *Why* part of your answer will help guide your analysis of the data
+
+
+## Let the question drive the analysis
+
+Think through how you can analyze the data to answer your question
+
+The evidence should support your conclusions
+
+## Example Analysis 
+
+We have a limited budget for a promotion campaign.  
+
+**Question**: Which product(s) have a high customer rating by members?  What day of the week do members buy those products?
+
+What kind of visual would help you answer part 1? and part 2?
+
+## Example Analysis cont.
+
+:::: {.columns style="text-align: center"}
+
+::: {.column width="50%"}
+Which product(s) have a high customer rating by members?
+![](includes/rating_by_cust_type.png)
+:::
+
+::: {.column width="50%"}
+What day of the week do members buy those products?
+![](includes/spending_cust_type_dow.png)
+:::
+
+::::
+
+## Example Analysis cont.
+
+:::: {.columns style="text-align: center"}
+
+::: {.column width="50%"}
+![](includes/rating_by_cust_type.png)
+:::
+
+::: {.column width="50%"}
+![](includes/spending_cust_type_dow.png)
+:::
+
+::::
+
+What else might you investigate during your exploratory data analysis (EDA)?
 
 ::: {.notes}
-Confirmation bias is the tendency to search for, interpret, focus on and remember information in a way that confirms one's preconceptions. 
-
-The anchoring bias, or focalism, is the tendency to rely too heavily—to "anchor"—on one trait or piece of information when making decisions (usually the first piece of information acquired on that subject).
-
-Gambler's fallacy, the tendency to think that future probabilities are altered by past events, when in reality they are unchanged
-
-
-
-Empirical evidence: 
-First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart. 
-
-
+Does this vary by city/branch?
 :::
 
+## Keep a record of your exploration
 
-##  {.smaller}
+Keep a notebook as you explore your dataset.  
 
-![source: <https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/>](figs/Intuition-vs-Data-Driven-Decision-1.webp)
+How did you find your insight?  *Especially important for Tableau*
 
-## D^3^M is expanding rapidly
+Your process may help you tell your story
 
-![Figure 1. Adoption of Data-Driven Decision-Making in US Manufacturing (Brynjolfsson & McElheran, 2016, AER)](figs/AER_fig.png)
+## Know when to quit
 
+Data analysis can be fun
 
-## D^3^M process overview
+You may be tempted to "check one more thing"
 
-1. Define objective
+Stay focused on your question and quit when you have answered it
 
-2. Establish hypothesis
+## Tell the story with data
 
-3. Identify data need, build data process, collect data
+Develop a narrative
 
-4. Analyze data
+Create effective visuals
 
-5. Communicate insights
-
-
-
-
-::: aside
-Adapted from <https://www.smartsheet.com/data-driven-decision-making-management>
-:::
-
-## 1. Define question or objective
-
-What is the business or operational question you are trying to answer?
-
-- Do we sell now or hold?
-
-- Do we contract for feed?
-
-What resources do you need?
-
-## You Do It: 1. Define question or objective  {.smaller}
-
-&nbsp; 
-
-**In Pairs**: Identify a business that you might be interested in starting some day or any organization that you might want to work for. The business/organization should be related to agrulture and/or natural resources.
-
-&nbsp; 
-
-1.  Briefly describe this business (give the name if it already exists)
-
-2.  Define a question or objective that business might face.
-
-&nbsp; 
-
-Include responses to both 1 and 2 in your iclicker response (140 characters).
-
-## 2. Establish hypothesis
-
-&nbsp; 
-
-What do you think the answer is and why?
-
-&nbsp; 
-
-You should be able to describe the mechanics of the system  and explain your hypothesis
-
-## You Do It: 2. Establish hypothesis
-
-&nbsp; 
-
-**In Your Same Pairs**: What do you think the answer is and **why**?
-
-&nbsp; 
-
-&nbsp; 
-
-Write a short response in the iclicker field (140 characters).
-
-## 3. Data
-
-&nbsp; 
-
-What data do you need to answer your question?
-
-&nbsp; 
-
-How will you assemble the data? Do you need equipment?  Will the data be reliable?
-
-&nbsp; 
-
-Collect data in a way that it can be analyzed - not sticky notes.
-
-## You Do It: 3. Data
-
-&nbsp; 
-
-**In Your Same Pairs**: What data do you need to answer your question?  
-
-&nbsp; 
-
-List the data sources that come to mind in the iclicker field.
-
-&nbsp; 
-
-**Think about**: How will you collect and assemble these data? Do they already exist?
-
-## 4. Analyze data
-
-&nbsp; 
-
-Design an analysis strategy to answer your question
-
-&nbsp; 
-
-Model different scenarios?
-
-&nbsp; 
-
-What can be changed to better achieve your objective?
-
-## 5. Communicate insights
-
-&nbsp; 
-
-Use the data to tell a story
-
-&nbsp; 
-
-Articulate the benefits of the change
-
-## You Do It: Analyze and Communicate
-
-**In Your Same Pairs Discuss**: 
-
-1.  How would you analyze these data to answer your question? What software would you use? What statistics would you construct?
-
-2.  How would you communicate your findings to other people in the business? What visualizations might be useful?
-
-
-## D^3^M across scales 
-
-People make decisions all day every day - some are big and consequential and some are small.  
-
-Data can help make better decisions across the spectrum, and in some cases, may be the only determinant. 
-
-::: {.incremental}
-- Would you trust an algorithm to make decisions based on data without human input?
-
-- How much would you rely on data for strategic decisions?
-:::
-
+Let's continue with our example analysis
 
 ::: {.notes}
-How about a thermostat at home or cruise control in your car
+For the mini project, the final deliverable will be a report rather than a presentation.  You can still use many of the story telling techniques like having a narrative and effective visuals
+:::
+
+## Story overview
+
+Start with the question^[Sometimes you won't have a clear question.  You are communicating an insight and you need to get the audience to care.]
+
+Characters and setting
+
+Preliminaries
+
+Answer (or insight)
+
+Next steps
+
+## Question
+
+If given a question, review it and transition into setting^[If not, you may need to develop the setting a bit]
+
+In our example analysis, we were given the questions:
+
+- Which product(s) have a high customer rating by members?  
+
+- What day of the week do members buy those products?
+
+## Characters and context
+
+Who are the characters?
+
+:::{.fragment}
+- Customers: the members and non members
+:::
+
+What is the setting?
+
+:::{.fragment}
+- Sales in Q1 2019 at three stores
+
+- Transaction level data where customers rate the product and buying experience after a purchase
+:::
+
+## Preliminaries
+
+You will often need to set up your main point with supporting evidence (effective visuals)
+
+A common strategy is to start with the big picture and drill down to the insight or answer to the question
+
+Where could you start with the example analysis?
+
+:::{.fragment}
+- Sales by product category
+:::
+
+:::{.fragment}
+How would you drill deeper?
+:::
+
+## Key insight or answer {.scrollable}
+
+The most important part of your story
+
+Make sure the visual is effective - clearly illustrates the point
+
+::: {style="font-size: .7em;color:coral;text-align: center;background-color: white;opacity:0.9"}
+
+**Members rate health and beauty products highest among categories**
+
+![Figure 1. Average transaction rating by members across product category in 2019 Q1.](includes/rating_by_cust_type finalized.png){style="color:gray"}
+
+
+**Members spend more on health and beauty products on the weekend**
+
+![Figure 2. Average spending on health and beauty per transaction by members by day of week in 2019 Q1.](includes/spending_customer_final.png){style="color:gray"}
 :::
 
 
 
-# Data storytelling
+## Next steps
 
+Recommendations (if appropriate)^[It may not be appropriate for you to make direct recommendations. Try to frame the discussion.]
 
-## Importance of storytelling
+Any additional analysis needed?  Briefly describe
 
-&nbsp; 
+Example analysis: 
 
-Storytelling is fundamental to human existence.  We connect, share, teach and learn through stories.
-
-&nbsp; 
-
-Statistics provide evidence but we need stories to truly communicate the insights to the audience
-
-&nbsp; 
-
-Our brains are predisposed to remember stories
-
-## 3 elements of a data story
-
-![Source: Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.](figs/data_storytelling.png)
-
-::: {.notes}
-- Explain: narrative and data help explain what is happening.  Context and commentary guide the audience through the meaning of what is being shared.
-
-- Enlighten: a picture is worth a thousand words or numbers.  Graphs and charts help you see trends and patterns.  We will discuss some of the theory and best practices for making effective graphics.  You want to make it as simple as possible for the audience to see your insight.
-
-- Engage: narrative and visuals help engage the audience.  We spend billions on visual media entertainment.  The best movies may have good effects but definitely have a good story.
+:::{.fragment}
+- Design promotion for health and beauty products on the weekend
 :::
 
-## Data story ≠ data visualization
-
-&nbsp; 
-
-While clear and appealing data visualizations are part of a data story, they are not data stories by themselves.
-
-&nbsp; 
-
-Data stories bring your analytical insights to life
-
-## Six elements of a data story
-
-1. Data foundation
-
-2. Main point
-
-3. Explanatory focus (vs exploratory)
-
-4. Linear sequence
-
-5. Dramatic elements
-
-6. Visual anchors
-
-::: {.notes}
-1. Story is grounded in data - something real that is observable
-
-2. The story needs to have a main point.  Have something to say.
-
-3. Your goal is to explain some insight.  What is going on?  Who are the actors?  What are the mechanisms?  This relates to what we will discuss about causal inference.
-
-4. Your story will consist of a series of supporting points or information that are tied together to build to some larger point.  The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.
-
-5. Dramatic elements include characters, setting, plots.  These elements help humanize the data story and make it relatable.  Set some context: sales are $200k.  Is that good or bad?  It depends on previous sales.  Be selective about the information - only include information that helps to advance the narrative.
-
-6. Visual anchors are the charts and graphs or other visuals you rely on to tell the story.  We will spend considerable time on developing effective visuals to help tell your story.
-
+:::{.fragment}
+- Customers: the members and non members
 :::
+<!-- ------------------------------------------ -->
 
-## Review Question 1
-
-Which of the following is NOT one of the 5 steps in the D^3^M process?
-
-A.  Define objective
-
-B.  Analyze data
-
-C.  Apply intuition
-
-D.  Communicate insights
-
-## Review Question 2
-
-Which of the following is one of the reasons it is important to use data when making (important) decisions? 
-
-A.  Gut instincts are often correct
-
-B.  Data analysis is less susceptible to biases
-
-C.  Data analysis is more susceptible to biases
-
-D.  Annecdotal evidence is more convincing when communicating insights
+## References {.scrollable .smaller}
 
 
-
-## References {.scrollable}
-
-&nbsp; 
 
 Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
 
-&nbsp; 
 
 Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.
