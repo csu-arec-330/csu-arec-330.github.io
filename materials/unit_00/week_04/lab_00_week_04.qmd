@@ -1,5 +1,5 @@
 ---
-title: "Week 2 Lab: R and Tableau Intro I"
+title: "Week 4 Lab: Mini Project"
 format: 
   html:
     theme: zephyr
@@ -7,20 +7,9 @@ format:
 ---
 
 
-```{r}
-#| include: false
-
-library(pacman)
-p_load(readr,dplyr,janitor)
-
-#read in data and column names
-supermarket_raw <- read_csv("../inputs/supermarket_sales.csv") %>%
-  clean_names()
-
-```
 
 
-![](figs/shopping.webp)
+![](includes/shopping.webp)
 
 ::: {style="font-size: 1.5em"}
 This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
@@ -32,182 +21,21 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 ## Learning Objectives Tableau
 
 
+## Project Overview
 
-## Data processing with R
+The objective of the project is to bring together the R and Tableau skills that you have learned so far in the course. 
 
-You now have 3 years worth of data 
+You are the analysts tapped to investigate trends in the data.  You are not given much direction, but the boss (decision maker) wants to use data to improve decision making
 
+Overview of workflow
 
-### Starting a task or project in R
+# R Skills
 
-1. Open RStudio either on your own computer or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus.  If you are on campus, the link should take you to the RStudio sign on page.]. 
+You now have 3 years worth of data.  Reading data directly from urls
 
-2. Open up a new script.  
+Binding rows of data
 
-3. Write a brief comment in the first line describing what the script will do.  
-```{r}
-#This script will process a sample dataset for problem set 2
-```
+Cleaning data: engineer some NAs into the gross margin percentage
 
-4. Load any libraries/packages used in the script.^[Install if necessary.]  In this lab, we will use 3 packages: `readr,dplyr,janitor`.  
 
-5. Set the working directory to a known location.  This may be a new directory where you will store any external data and save the code file.
 
-### Read the data into R
-
-1. Download `supermarket_sales.csv` to the project directory.
-
-2. Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw`.
-
-3. Take a look at the dataframe.  There are a few ways to look at the dataframe:
-
-  - Type the name of the dataframe in the console.  This shows the data in the first several rows of the first several columns.
-  
-  - Use the function `View()` with the dataframe name as the argument.  Alternatively, you can click on the name of the object in the environment pane. 
-  
-  - Use the function `glimpse()` with the dataframe name as the argument.
-
-**Variable names**: You'll notice that some of the variable names have spaces.  This is allowed in R, but they are awkward because you will be using these names in your code.  We will cover renaming variables later today, but there is a function to *clean* (i.e., modify) the names.  The function called `clean_names()` is part of the `janitor` package.
-
-> Try it on your own: use the `clean_names()` function to convert all of the column names to snake_case.  Reference the documentation in the help tab of the lower right panel.
-
-Check the datatypes of the variables in the dataframe.  Do they make sense?
-
-A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). Video tutorial here: <https://youtu.be/e_SQnJpS5fA>
-
-### Modifying the dataframe
-
-You will often need to modify the data you read in.  The package `dplyr` contains a set of utilities that help you modify dataframes.^[The package `dplyr` is part of a larger set of packages known as the `tidyverse` <https://www.tidyverse.org/>.  The term *tidy* refers to a structure of data.  There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available.  Most of what I teach in this class will be part of the tidyverse or adherant to its principles.  Video tutorial here: <https://youtu.be/bUM3wX4YZDc>] `dplyr` argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<https://dplyr.tidyverse.org/>):
-
-1. `mutate()` adds new variables that are functions of existing variables
-
-2.  `select()` picks variables based on their names.
-
-3.  `filter()` picks cases based on their values.
-
-4. `summarise()` reduces multiple values down to a single summary.
-
-5.  `arrange()` changes the ordering of the rows.
-
-The following exercises will introduce you to these core functions while exploring the supermarket_sales data.  These functions will all return a dataframe as the output.
-
-#### 1. Mutate
-
-`mutate()` is the function to create or add new variables.  Let's recreate the column `total` by multiplying the columns `unit_price` and `quantity`.  Note that we create a new variable called `total_calc` and assign this dataframe to a new object called `my_super_sales`.
-
-```{r}
-my_super_sales <- mutate(supermarket_raw,total_calc=unit_price*quantity)
-```
-
-> Is the result `total_calc` equal to the existing column `total`?  Why or why not?
-
-You can perform most mathematical operations on numeric columns and other types of operations on string or character data types.  The key point to remember is that mutate operations must output a vector that is the same length as the dataframe.
-
-### 2. Select (and rename)
-
-`select()` is a function to subset columns from the dataframe. Suppose you want to create a new dataframe with only the invoice id, the city, the reported total, and the calculated total.
-
-```{r}
-select_super_sales <- select(my_super_sales,invoice_id,city,total,total_calc)
-```
-
-`rename()` is a related function used to rename columns rather than subset them.  Suppose that you didn't like the name `city` and wanted to call it `market`.
-
-```{r}
-select_super_sales <- rename(select_super_sales,market=city)
-```
-
-You can combine the operations using the rename syntax to rename a column inside of a select statement.
-
-```{r}
-select_super_sales <- select(my_super_sales,invoice_id,market=city,total,total_calc)
-```
-
-### 3. Filter
-
-`filter()` is a function to subset the rows of a dataframe based on a condition that returns a `TRUE` or `FALSE`. This is a very general concept used in all sorts of programming applications.  In this context, we will write a statement that is true for some elements of the vector `city` (renamed to market).  To filter the dataframe to only data from the market "Yangon", we write
-
-```{r}
-yangon_super_sales <- filter(select_super_sales,market=="Yangon")
-```
-
-The statement `market=="Yangon"` can be evaluated on every row as either `TRUE` or `FALSE`.  This command keeps only the rows where the market name equals the exact word "Yangon."  This is case sensitive because the statement is comparing the market name in each row.  You can also create statements using the greater than `>` or less than `<` comparing numeric values.  You can find more information on logical operators here: <https://www.statmethods.net/management/operators.html>
-
-### 5. Arrange (or sort)
-
-`arrange()` is a function that modifies the order of the rows in the dataframe based on the values of a column or set of columns.  R can sort numeric and character strings (alphabetical).  Let's start by sorting the dataframe in ascending order based on the column `total`.
-
-```{r}
-yangon_super_sales_sorted <- arrange(yangon_super_sales,total)
-```
-
-You can sort on multiple columns.  The order determines how the data are sorted.  Let's use the dataset with all of the markets (`select_super_sales`) and sort based on market, then by total in descending order to see the top sales in each market.
-
-```{r}
-super_sales_top <- arrange(select_super_sales,market,desc(total))
-```
-
-The function `desc()` is short for descending and indicates that the total should be sorted in descending order.
-
-**Remember to comment in your code so you can refer back to see what you did.**
-
-
-### Log file
-
-To output the log from sourcing an R script to a text file, you can use the `sink()` function. The `sink()` function redirects R output to a file or connection.
-
-For example, to redirect the output to a file named "log.txt", you can use the following command:
-
-```{r}
-#| eval: false
-sink("log.txt")
-source("script.R")
-sink()
-
-```
-
-This will run the script "script.R" and redirect all the output to the file "log.txt". Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console.
-
-
-## Tableau 
-
-In week 2 of the course we covered the basic Tableau flow of analysis: Connect -> Analyze -> Share. Each of you followed this flow in problem set 2 to produce a simple data visualization using the grocery store spending dataset. 
-
-Today we are going to go in more detail in the connect and share stages of Tabluea. 
-
-### Connecting Data Sources -- More Advanced Options
-
-~~1.  Establish a connection~~
-
-~~2.  View available sheets~~
-
-~~3.  Select the first sheet you want to work with~~
-
-~~4.  View and edit sheet metadata~~
-
-5.  Create an extract
-
-6.  Save your data source for instant reusable access
-
-7.  Create a relationship between sheets (merge or join)
-
-8.  Union (stack/append) sheets with the same fields
-
-9.  Pivot a data field
-
-
-### Share
-
-For the purposes of this class, you will only need to understand how to share your visualizations following the steps from last lab (publish on Tableau Public, embed on your google site). 
-
-But another important aspect of sharing your analysis is building a **dashboard** (which you can share following the same process).
-
-**Dashboards** are used to bring together multiple sheets, allowing comparison between the data simultaneously.
-
-1.  Click on `New Dashboard` at the bottom of the Tableau Desktop window. 
-
-2.  Drag your desired sheets to your dashboard.
-
-3.  Move things around and add formatting.
-
-4.  Add interactivity. 
