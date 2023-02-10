@@ -18,7 +18,6 @@ Tell the story with your data
 
 Brainstorm project ideas
 
-
 <!-- example of big text fit to slide width -->
 
 <!-- ::: {.r-fit-text} -->

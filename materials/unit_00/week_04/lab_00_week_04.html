@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 4 Lab: Mini Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="lab_00_week_04_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab_00_week_04_files/libs/quarto-html/quarto.js"></script>
+<script src="lab_00_week_04_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab_00_week_04_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab_00_week_04_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab_00_week_04_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab_00_week_04_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab_00_week_04_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab_00_week_04_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab_00_week_04_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a>
+  <ul class="collapse">
+  <li><a href="#reading-data-from-a-url" id="toc-reading-data-from-a-url" class="nav-link" data-scroll-target="#reading-data-from-a-url">Reading data from a URL</a></li>
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data processing</a></li>
+  <li><a href="#exporting-dataframes" id="toc-exporting-dataframes" class="nav-link" data-scroll-target="#exporting-dataframes">Exporting dataframes</a></li>
+  </ul></li>
+  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 4 Lab: Mini Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><img src="includes/digital-transformation.jpg" class="img-fluid"></p>
+<div style="font-size: 1.5em">
+<p>This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8</p>
+</div>
+<section id="learning-objectives-r" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
+</section>
+<section id="learning-objectives-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
+</section>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>The objective of the project is to integrate the R and Tableau skills that you have learned so far in the course, conduct an analysis, and present your findings. We have covered most of the skills you will need to conduct your analysis. This lab will cover a few tasks that will aid you in developing an entire analytics workflow. By workflow, we mean a sequence of steps beginning with an R script and ending with a set of steps in Tableau to create visuals.</p>
+</section>
+<section id="r" class="level2">
+<h2 class="anchored" data-anchor-id="r">R</h2>
+<p>You now have 3 years worth of data (2017 - 2019). The data are hosted on the course materials webpage here: <a href="https://csu-arec-330.github.io/course-materials/" class="uri">https://csu-arec-330.github.io/course-materials/</a>. The structure of the data is the same in each year, but you need to combine them into a single dataframe. Inspect the data - there are some slight problems that need fixing. Then you need to export the data to be used in Tableau.</p>
+<p>Start a new R script and get set up:</p>
+<ul>
+<li><p>write a brief description of the script</p></li>
+<li><p>set working directory</p></li>
+<li><p>load required packages</p></li>
+</ul>
+<section id="reading-data-from-a-url" class="level3">
+<h3 class="anchored" data-anchor-id="reading-data-from-a-url">Reading data from a URL</h3>
+<p>Up until now, we have downloaded data and read it into R or Tableau. We want you to understand the process of reading data from your file system and understand the structure of your file system. However, R is capable of downloading and reading files directly from web addresses. Using the <code>read_csv()</code> function from the <code>readr</code> package, you will read in the data and assign the output to a new dataframe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>super_2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"your_url_here.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Do the same for years 2018 and 2019.</p>
+<p>On occasion datasets are hosted on a website and updated regularly. Writing an R script to pull data from another website and process it can save you time in the future.</p>
+</section>
+<section id="data-processing" class="level3">
+<h3 class="anchored" data-anchor-id="data-processing">Data processing</h3>
+<p>Now you have three dataframes with the same columns. You need to append 2018 and 2019 onto 2017 (i.e., bind the dataframes together).</p>
+<p>Once you have a single dataframe with all of the years, inspect the dataframe for missing data. Use the appropriate <code>dplyr</code> functions to fill in the missing data.</p>
+</section>
+<section id="exporting-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="exporting-dataframes">Exporting dataframes</h3>
+<p>So far, you have read in data and processed it all within R. For this project, you will need to export the cleaned data from R in a format that can be read into Tableau. The <code>readr</code> package contains <code>write_*()</code> functions that are analogous to the <code>read_*()</code> functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(your_dataframe,<span class="st">"filename.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Read through the documentation. Since <code>write_csv()</code> is writing data, you need to tell R what dataframe (e.g., <code>super_2017</code>) you want to write and the name of the file you intend to create <code>filename.csv</code>. Note that you can also write to another directory just as you read from another directory in week 03.</p>
+</section>
+</section>
+<section id="tableau" class="level2">
+<h2 class="anchored" data-anchor-id="tableau">Tableau</h2>
+<p>So far, we have focused on making single graphics. One strength of Tableau is the ability to create interactive dashboards with interconnected elements. Follow the steps from previous labs to connect to the dataset and create two graphics:</p>
+<ol type="1">
+<li><p>A line graph plotting total sales by date</p></li>
+<li><p>A bar chart plotting the count of transactions by payment type</p></li>
+</ol>
+<p>Now create a dashboard with these two visualizations. Then create a filter based on city that applies to both visualizations. The result should be a two-part dashboard with a filter that applies to both visualizations.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

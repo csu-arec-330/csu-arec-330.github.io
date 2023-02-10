@@ -9,7 +9,7 @@ format:
 
 
 
-![](includes/shopping.webp)
+![](includes/digital-transformation.jpg)
 
 ::: {style="font-size: 1.5em"}
 This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
@@ -23,19 +23,63 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 
 ## Project Overview
 
-The objective of the project is to bring together the R and Tableau skills that you have learned so far in the course. 
+The objective of the project is to integrate the R and Tableau skills that you have learned so far in the course, conduct an analysis, and present your findings. We have covered most of the skills you will need to conduct your analysis.  This lab will cover a few tasks that will aid you in developing an entire analytics workflow.  By workflow, we mean a sequence of steps beginning with an R script and ending with a set of steps in Tableau to create visuals. 
 
-You are the analysts tapped to investigate trends in the data.  You are not given much direction, but the boss (decision maker) wants to use data to improve decision making
+## R 
 
-Overview of workflow
+You now have 3 years worth of data (2017 - 2019). The data are hosted on the course materials webpage here: <https://csu-arec-330.github.io/course-materials/>.  The structure of the data is the same in each year, but you need to combine them into a single dataframe.  Inspect the data - there are some slight problems that need fixing.  Then you need to export the data to be used in Tableau.
 
-# R Skills
+Start a new R script and get set up:
 
-You now have 3 years worth of data.  Reading data directly from urls
+- write a brief description of the script
 
-Binding rows of data
+- set working directory
 
-Cleaning data: engineer some NAs into the gross margin percentage
+- load required packages
+
+### Reading data from a URL
+
+Up until now, we have downloaded data and read it into R or Tableau. We want you to understand the process of reading data from your file system and understand the structure of your file system.  However, R is capable of downloading and reading files directly from web addresses. Using the `read_csv()` function from the `readr` package, you will read in the data and assign the output to a new dataframe.
+
+```{r}
+#| eval: false
+
+super_2017 <- read_csv("your_url_here.csv")
+```
+
+Do the same for years 2018 and 2019.
+
+On occasion datasets are hosted on a website and updated regularly.  Writing an R script to pull data from another website and process it can save you time in the future. 
+
+### Data processing
+
+Now you have three dataframes with the same columns. You need to append 2018 and 2019 onto 2017 (i.e., bind the dataframes together).
+
+Once you have a single dataframe with all of the years, inspect the dataframe for missing data.  Use the appropriate `dplyr` functions to fill in the missing data.
+
+### Exporting dataframes
+
+So far, you have read in data and processed it all within R. For this project, you will need to export the cleaned data from R in a format that can be read into Tableau.  The `readr` package contains `write_*()` functions that are analogous to the `read_*()` functions.  
+
+```{r}
+#| eval: false
+
+write_csv(your_dataframe,"filename.csv")
+```
+
+Read through the documentation. Since `write_csv()` is writing data, you need to tell R what dataframe (e.g., `super_2017`) you want to write and the name of the file you intend to create `filename.csv`. Note that you can also write to another directory just as you read from another directory in week 03.
+
+
+## Tableau
+
+So far, we have focused on making single graphics.  One strength of Tableau is the ability to create interactive dashboards with interconnected elements.  Follow the steps from previous labs to connect to the dataset and create two graphics:
+
+1. A line graph plotting total sales by date
+
+2. A bar chart plotting the count of transactions by payment type
+
+Now create a dashboard with these two visualizations.  Then create a filter based on city that applies to both visualizations.  The result should be a two-part dashboard with a filter that applies to both visualizations.
+
 
 
 
