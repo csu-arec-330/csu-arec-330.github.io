@@ -72,6 +72,8 @@ write_csv(your_dataframe,"filename.csv")
 
 Read through the documentation. Since `write_csv()` is writing data, you need to tell R what dataframe (e.g., `super_2017`) you want to write and the name of the file you intend to create `filename.csv`. Note that you can also write to another directory just as you read from another directory in week 03.
 
+{{< video https://youtu.be/uy_XIVghxWw aspect-ratio="16x9" >}}
+
 
 ## Tableau
 
