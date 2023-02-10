@@ -127,6 +127,6 @@ Now create a dashboard with these two visualizations by following these steps:
 
 -  Try adding an extension (just pick one that sounds cool)
 
-
+{{< video https://youtu.be/9XsVbQAfoOE aspect-ratio="16x9" >}}
 
 
