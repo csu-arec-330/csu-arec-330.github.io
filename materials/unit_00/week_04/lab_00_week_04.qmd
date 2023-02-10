@@ -7,8 +7,6 @@ format:
 ---
 
 
-
-
 ![](includes/digital-transformation.jpg)
 
 ::: {style="font-size: 1.5em"}
@@ -20,6 +18,11 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 
 ## Learning Objectives Tableau
 
+- Combine sheets into a dashboard
+
+- Add interactivity to your dashboard
+
+- Format your dashboard
 
 ## Project Overview
 
@@ -78,7 +81,51 @@ So far, we have focused on making single graphics.  One strength of Tableau is t
 
 2. A bar chart plotting the count of transactions by payment type
 
-Now create a dashboard with these two visualizations.  Then create a filter based on city that applies to both visualizations.  The result should be a two-part dashboard with a filter that applies to both visualizations.
+Now create a dashboard with these two visualizations by following these steps:
+
+1.  Click the 'New Dashboard' icon at the bottom of Tableau Desktop.
+
+2.  Drag each of your visualizations (one at a time) to the dashboard window. 
+
+3.  Experiment with moving these visualizations around, resizing them, and editing their titles. 
+
+4.  Add interactivity 1: Create a filter based on payment type by:
+
+-  selecting the bar chart, 
+
+-  clicking 'More Options' (the little down arrow on the toolbar next to the graph), 
+
+-  and selecting 'Use as filter'. 
+
+-  What did this do?
+
+5.  Add interactivity 2: Create a filter based on city that applied to both visualizations by:
+
+-  Go back to the worksheet with your line graph, 
+
+-  drag the field 'City' to the filters card (and select all).
+
+-  Go back to your dashboard,
+
+-  select the line chart,
+
+-  click `More Options' -> `Filter' -> `City'
+
+-  Change the city filters, what happens?
+
+-  Select the new pane with your city filter, 
+
+-  click 'More Options' -> 'Apply to Worksheets' -> 'Selected Worksheets'
+
+-  What did this do?
+
+6.  Play around with formatting:
+
+-  Try adding text. Can you change the text box so that you can place it on top of your figures?
+
+-  Try adding an image from the web.
+
+-  Try adding an extension (just pick one that sounds cool)
 
 
 
