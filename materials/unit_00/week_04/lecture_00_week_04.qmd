@@ -2,7 +2,7 @@
 title: "Week 4: Question-Focused Analysis"
 format: 
   revealjs:
-    theme: [night, custom.scss]
+    theme: [night, ../../custom.scss]
     slide-number: c/t
     # logo: path.png
     # center: TRUE
