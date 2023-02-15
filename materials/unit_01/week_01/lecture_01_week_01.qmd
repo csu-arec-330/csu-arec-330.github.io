@@ -171,7 +171,7 @@ Certain techniques are designed to analyze time series data
 
 Forecasting is a common need
 
-Introductions in this course (See [Hyndman & Athanasopoulos (2021)](https://otexts.com/fpp3/basic-steps.html))
+Introductions in this course (see [Hyndman & Athanasopoulos (2021)](https://otexts.com/fpp3/basic-steps.html))
 
 # Project 1
 

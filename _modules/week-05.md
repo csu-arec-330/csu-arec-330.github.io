@@ -3,7 +3,7 @@ title: "Week 4: Mini Project"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Feb 07 & Feb 10</u></b> <br> <br>
+<b><u>Feb 15 & Feb 17</u></b> <br> <br>
 
 <b>Lecture Materials - Wed, Feb 15, 2023:</b> <br>
 
