@@ -334,7 +334,7 @@
 <p>Motivation for analyzing time series data</p>
 <p>Time series analysis</p>
 <p>Forecasting and prediction</p>
-<p>Project 1</p>
+<p>Project 1 overview</p>
 <!-- example of big text fit to slide width -->
 <!-- ::: {.r-fit-text} -->
 <!-- Big Text -->
@@ -413,23 +413,40 @@
 <p><img data-src="includes/emplstl-1.png" style="width:60.0%"></p>
 </div>
 </section>
-<section id="forecasting-examples" class="slide level2">
-<h2>Forecasting Examples</h2>
-<p>Forecasting power demand to device whether to build new power plant</p>
-<p>Forecasting call volumes to schedule staff in call center</p>
-<p>Forecasting inventory requirements meet demands</p>
+<section id="structural-breaks" class="slide level2 scrollable">
+<h2>Structural breaks</h2>
+<p>Analysts may want to identify changes in the time series that are not just noise</p>
+<p>Statistically identifying these changes can be the goal of the analysis or an exploratory exercise</p>
+<div style="text-align: center">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="includes/structural_break.png" style="width:70.0%"></p>
+<p></p><figcaption>Synthetic time series with three data generating mechanisms</figcaption><p></p>
+</figure>
+</div>
+</div>
 </section>
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
+<p>Briefly describe one reason for a structural break in a time series.</p>
+</section>
+<section id="forecasting-examples" class="slide level2">
+<h2>Forecasting Examples</h2>
+<p>Forecasting power demand to decide whether to build new power plant</p>
+<p>Forecasting call volumes to schedule staff in call center</p>
+<p>Forecasting inventory requirements meet demands</p>
+</section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
 <p>How could you use forecasting to improve decision-making in ag business or environmental and natural resource management? Provide an example</p>
 </section>
-<section id="forecasting" class="slide level2 scrollable">
-<h2>Forecasting</h2>
+<section id="forecasting-overview" class="slide level2 scrollable">
+<h2>Forecasting overview</h2>
 <p>Using historical data to develop a model, then using the model to predict the future</p>
 <p>Model quality depends on past data and assumptions</p>
-<p>Forecasts are uncertain</p>
+<p>Forecasts are uncertain; we can quantify some of that uncertainty</p>
 <div style="text-align: center">
-<p><img data-src="includes/austa2-1.png"></p>
+<p><img data-src="includes/austa2-1.png" style="width:70.0%"></p>
 </div>
 </section>
 <section id="forecasting-steps" class="slide level2">
@@ -444,19 +461,69 @@
 
 <aside><div>
 <p>Source: <a href="https://otexts.com/fpp3/basic-steps.html">Hyndman &amp; Athanasopoulos (2021)</a></p>
-</div></aside></section></section>
+</div></aside></section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p>Time series data is a common structure of data</p>
+<p>Certain techniques are designed to analyze time series data</p>
+<p>Forecasting is a common need</p>
+<p>Introductions in this course (See <a href="https://otexts.com/fpp3/basic-steps.html">Hyndman &amp; Athanasopoulos (2021)</a>)</p>
+</section></section>
 <section>
-<section id="project-1-overview" class="title-slide slide level1 center">
-<h1>Project 1 Overview</h1>
+<section id="project-1" class="title-slide slide level1 center">
+<h1>Project 1</h1>
+
+</section>
+<section id="project-1-overview" class="slide level2">
+<h2>Project 1 overview</h2>
+<p>Groups of 2</p>
 <p>Choose an ag biz or enre management question to answer with time series data</p>
 <p>Collect time series data</p>
 <p>Analyze trends</p>
 <p>Generate a forecast</p>
+<p>Present results in class Fri March 10</p>
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<p>Historical corn prices and future equipment sales <!-- https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales --></p>
-<!-- ------------------------------------------ -->
+<section id="example-corn-and-combines" class="slide level2 scrollable">
+<h2>Example: Corn and Combines</h2>
+<div style="text-align: center">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="includes/corn_prices.jpeg" style="width:70.0%"></p>
+<p></p><figcaption><a href="https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales" class="uri">https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales</a></figcaption><p></p>
+</figure>
+</div>
+</div>
+<!-- Historical corn prices and future equipment sales  -->
+<p>Context: Equipment dealers sell more when ag prices rise. Most people grow corn near dealer x.</p>
+<p>Question: Will corn prices rise or fall in the next year and by how much?</p>
+<p>Approach: Analyze time series of corn prices (decomp). Forecast corn PPI one year.</p>
+<p>Present: Provide context (plot raw data) and describe decision. Explain your insights. Use effective graphics. Tell your data story.</p>
+</section>
+<section id="finding-data" class="slide level2">
+<h2>Finding data</h2>
+<p>Many sources of public data (e.g., <a href="https://fred.stlouisfed.org/categories/33528">St Louis FED</a>, <a href="https://business-science.github.io/tidyquant/">tidyquant</a>)</p>
+<p>Choose data appropriate to answer the question</p>
+<p>Ali and Jude can help</p>
+</section>
+<section id="analysis" class="slide level2">
+<h2>Analysis</h2>
+<p>Must include some:</p>
+<ul>
+<li><p>time series analysis (unit 1 week 2)</p></li>
+<li><p>forecasting (unit 2 week 3)</p></li>
+</ul>
+</section>
+<section id="process" class="slide level2">
+<h2>Process</h2>
+<p>Identify an interesting question</p>
+<p>Collect data</p>
+<p>Develop analysis strategy, explore, refine</p>
+<p>Develop presentation</p>
+</section></section>
+<section>
+<section id="get-started" class="title-slide slide level1 center">
+<h1>Get Started</h1>
+
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>

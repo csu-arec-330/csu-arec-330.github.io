@@ -17,7 +17,7 @@ Time series analysis
 
 Forecasting and prediction
 
-Project 1
+Project 1 overview
 
 
 <!-- example of big text fit to slide width -->
@@ -105,9 +105,25 @@ Decomposition statistically deconstructs a time series into several components:
 :::
 
 
+## Structural breaks {.scrollable}
+
+Analysts may want to identify changes in the time series that are not just noise
+
+Statistically identifying these changes can be the goal of the analysis or an exploratory exercise
+
+::: {style="text-align: center"}
+![Synthetic time series with three data generating mechanisms](includes/structural_break.png){width="70%"}
+:::
+
+
+## Exercise
+
+Briefly describe one reason for a structural break in a time series.
+
+
 ## Forecasting Examples
 
-Forecasting power demand to device whether to build new power plant
+Forecasting power demand to decide whether to build new power plant
 
 Forecasting call volumes to schedule staff in call center
 
@@ -119,16 +135,16 @@ How could you use forecasting to improve decision-making in ag business or envir
 
 
 
-## Forecasting {.scrollable}
+## Forecasting overview {.scrollable}
 
 Using historical data to develop a model, then using the model to predict the future
 
 Model quality depends on past data and assumptions
 
-Forecasts are uncertain 
+Forecasts are uncertain; we can quantify some of that uncertainty
 
 ::: {style="text-align: center"}
-![](includes/austa2-1.png)
+![](includes/austa2-1.png){width="70%"}
 :::
 
 ## Forecasting steps
@@ -147,7 +163,21 @@ Forecasts are uncertain
 Source: [Hyndman & Athanasopoulos (2021)](https://otexts.com/fpp3/basic-steps.html)
 :::
 
-# Project 1 Overview
+## Summary
+
+Time series data is a common structure of data
+
+Certain techniques are designed to analyze time series data
+
+Forecasting is a common need
+
+Introductions in this course (See [Hyndman & Athanasopoulos (2021)](https://otexts.com/fpp3/basic-steps.html))
+
+# Project 1
+
+## Project 1 overview
+
+Groups of 2
 
 Choose an ag biz or enre management question to answer with time series data
 
@@ -160,16 +190,52 @@ Generate a forecast
 Present results in class Fri March 10
 
 
-##
-
-Historical corn prices and future equipment sales 
-<!-- https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales -->
+## Example: Corn and Combines {.scrollable}
 
 
+::: {style="text-align: center"}
+![<https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales>](includes/corn_prices.jpeg){width="70%"}
+:::
+<!-- Historical corn prices and future equipment sales  -->
+
+Context: Equipment dealers sell more when ag prices rise.  Most people grow corn near dealer x.
+
+Question: Will corn prices rise or fall in the next year and by how much?
+
+Approach: Analyze time series of corn prices (decomp).  Forecast corn PPI one year.
+
+Present: Provide context (plot raw data) and describe decision. Explain your insights.  Use effective graphics. Tell your data story.
+
+
+## Finding data
+
+Many sources of public data (e.g., [St Louis FED](https://fred.stlouisfed.org/categories/33528), [tidyquant](https://business-science.github.io/tidyquant/))
+
+Choose data appropriate to answer the question 
+
+Ali and Jude can help
 
 
 
-<!-- ------------------------------------------ -->
+## Analysis
+
+Must include some:
+
+- time series analysis (unit 1 week 2)
+
+- forecasting (unit 2 week 3)
+
+## Process
+
+Identify an interesting question
+
+Collect data
+
+Develop analysis strategy, explore, refine
+
+Develop presentation
+
+# Get Started
 
 ## References {.scrollable .smaller}
 
