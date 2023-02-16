@@ -7,7 +7,7 @@ format:
 ---
 
 
-![](includes/digital-transformation.jpg)
+![](includes/generic_forecasting.webp)
 
 ::: {style="font-size: 1.5em"}
 This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
@@ -15,6 +15,9 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 
 ## Learning Objectives R
 
+- Reading in time series data
+
+- Understand how to work with dates
 
 
 ## Learning Objectives Tableau
