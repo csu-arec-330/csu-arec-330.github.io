@@ -1,0 +1,94 @@
+---
+title: "Week 5 Lab: Time Series Exploratory Data Analysis (EDA)"
+format: 
+  html:
+    theme: zephyr
+    toc: true
+---
+
+
+![](includes/digital-transformation.jpg)
+
+::: {style="font-size: 1.5em"}
+This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
+:::
+
+## Learning Objectives R
+
+
+
+## Learning Objectives Tableau
+
+- Understand date functions
+
+- Use date functions in calculated fields
+
+- Visualizing time series data 
+
+- Visualizing structural breaks 
+
+## Unit 1 Project Overview
+
+The objective of the project is to integrate the R and Tableau skills that you have learned so far in the course, conduct an analysis, and present your findings. We have covered most of the skills you will need to conduct your analysis.  This lab will cover a few tasks that will aid you in developing an entire analytics workflow.  By workflow, we mean a sequence of steps beginning with an R script and ending with a set of steps in Tableau to create visuals. 
+
+## R 
+
+
+
+## Tableau
+
+So far, we have focused on making single graphics.  One strength of Tableau is the ability to create interactive dashboards with interconnected elements.  Follow the steps from previous labs to connect to the dataset and create two graphics:
+
+1. A line graph plotting total sales by date
+
+2. A bar chart plotting the count of transactions by payment type
+
+Now create a dashboard with these two visualizations by following these steps:
+
+1.  Click the 'New Dashboard' icon at the bottom of Tableau Desktop.
+
+2.  Drag each of your visualizations (one at a time) to the dashboard window. 
+
+3.  Experiment with moving these visualizations around, resizing them, and editing their titles. 
+
+4.  Add interactivity 1: Create a filter based on payment type by:
+
+-  selecting the bar chart, 
+
+-  clicking 'More Options' (the little down arrow on the toolbar next to the graph), 
+
+-  and selecting 'Use as filter'. 
+
+-  What did this do?
+
+5.  Add interactivity 2: Create a filter based on city that applied to both visualizations by:
+
+-  Go back to the worksheet with your line graph, 
+
+-  drag the field 'City' to the filters card (and select all).
+
+-  Go back to your dashboard,
+
+-  select the line chart,
+
+-  click `More Options' -> `Filter' -> `City'
+
+-  Change the city filters, what happens?
+
+-  Select the new pane with your city filter, 
+
+-  click 'More Options' -> 'Apply to Worksheets' -> 'Selected Worksheets'
+
+-  What did this do?
+
+6.  Play around with formatting:
+
+-  Try adding text. Can you change the text box so that you can place it on top of your figures?
+
+-  Try adding an image from the web.
+
+-  Try adding an extension (just pick one that sounds cool)
+
+{{< video https://youtu.be/9XsVbQAfoOE aspect-ratio="16x9" >}}
+
+
