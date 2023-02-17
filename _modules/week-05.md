@@ -13,15 +13,15 @@ title: "Week 4: Mini Project"
 
 <b>Lab Materials - Fri, Feb 17, 2023:</b> <br>
 
-<a  href="/materials/unit_00/inputs/carrots_prices.csv" download>Download Carrot Price Data</a> <br>
+<a  href="/materials/unit_01/week_01/lab_01_week_04.html" target="_blank">Week 4 Lab Notes</a> <br> 
 
-<a  href="/materials/unit_00/inputs/corn_prices.csv" download>Download Corn Price Data</a> <br>
+<a  href="/materials/unit_01/inputs/carrots_prices.csv" download>Download Carrot Price Data</a> <br>
 
-<a  href="/materials/unit_00/inputs/tomatoes_prices.csv" target="_blank">Download Tomato Price Data</a> <br> 
+<a  href="/materials/unit_01/inputs/corn_prices.csv" download>Download Corn Price Data</a> <br>
 
-<!--
-<a  href="/materials/unit_00/week_04/lab_00_week_04.html" target="_blank">Week 4 Lab Notes</a> <br> <br> 
--->
+<a  href="/materials/unit_01/inputs/tomatoes_prices.csv" target="_blank">Download Tomato Price Data</a> <br> 
+
+
 
 <!--
 <b>Project Materials - Due Thursday, Feb 23 by 11:59 PM:</b> <br>
