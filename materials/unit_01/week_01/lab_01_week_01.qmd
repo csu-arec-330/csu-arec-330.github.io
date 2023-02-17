@@ -28,7 +28,11 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 
 - Visualizing time series data 
 
+- Creating and interpreting trend lines
+
 - Visualizing structural breaks 
+
+- Creating panes to visualize mutiple time series
 
 ## Unit 1 Project Overview
 
@@ -40,58 +44,115 @@ The objective of the project is to integrate the R and Tableau skills that you h
 
 ## Tableau
 
-So far, we have focused on making single graphics.  One strength of Tableau is the ability to create interactive dashboards with interconnected elements.  Follow the steps from previous labs to connect to the dataset and create two graphics:
+A key attribute of time series data is that we observe values of variables across **time**. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.  
 
-1. A line graph plotting total sales by date
+### 1. Date functions
 
-2. A bar chart plotting the count of transactions by payment type
+### 2. Use date functions in calculated fields
 
-Now create a dashboard with these two visualizations by following these steps:
+### 3. Visualize time series data
 
-1.  Click the 'New Dashboard' icon at the bottom of Tableau Desktop.
+What types of visualizations are most appropriate for time series data?  
 
-2.  Drag each of your visualizations (one at a time) to the dashboard window. 
+-  Line graphs
 
-3.  Experiment with moving these visualizations around, resizing them, and editing their titles. 
+-  Bar charts  
 
-4.  Add interactivity 1: Create a filter based on payment type by:
+-  Dot plots
 
--  selecting the bar chart, 
+-  Others?
 
--  clicking 'More Options' (the little down arrow on the toolbar next to the graph), 
+Let's experiment with creating these visualizations for time series:  
 
--  and selecting 'Use as filter'. 
+1.  Create a line graph that shows the value of one commodity over time.  
 
--  What did this do?
+2.  Add markers to your line graph
 
-5.  Add interactivity 2: Create a filter based on city that applied to both visualizations by:
+3.  Change your line graph to a bar graph dot chart
 
--  Go back to the worksheet with your line graph, 
+4.  Change your bar graph to a dot plot
 
--  drag the field 'City' to the filters card (and select all).
+5.  Change the size size, colors, and opacity of the dots in your dot plot (use the `Size` and `Color` icons)
 
--  Go back to your dashboard,
+6.  Change the markers in your chart from dots to a different shape (use the dropdown menu on the `Marks` card, then use the `Shape` icons)
 
--  select the line chart,
+Now let's experiment with changing what data is shown in your chart:  
 
--  click `More Options' -> `Filter' -> `City'
+1.  Change your x-axis to monthly (month-year)  
 
--  Change the city filters, what happens?
+2.  Create one line that shows the average value of the commodity each month, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?  
 
--  Select the new pane with your city filter, 
-
--  click 'More Options' -> 'Apply to Worksheets' -> 'Selected Worksheets'
-
--  What did this do?
-
-6.  Play around with formatting:
-
--  Try adding text. Can you change the text box so that you can place it on top of your figures?
-
--  Try adding an image from the web.
-
--  Try adding an extension (just pick one that sounds cool)
-
-{{< video https://youtu.be/9XsVbQAfoOE aspect-ratio="16x9" >}}
+3.  Restrict your date ranges so that your visualization only shows the last 5 years of data (use the `Filters` card)
 
 
+### 4. Creating and interpreting trend lines
+
+Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know *how* they are created? Let's start with a linear trend line... 
+
+-  What does a linear trend line tell you about your time series data?  
+
+Now, let's talk some specifics about linear trend lines in Tableau... 
+
+1.  Open a new worksheet and create a line chart showing mean weekly values of the commodity from 2006 to 2018
+
+2.  Add a trend line to your chart
+
+3.  When you click on the trend line, what information does Tableau give you about it? What does this information mean? 
+
+4.  When you click on `describe trend model` what information does Tableau give you about it?
+
+5.  Change your x-axis to monthly (month-year). Did your trend line change? How do you know? Why did or didn't the trend line change when you changed the date aggregation?
+
+6.  Add confidence bands to your trend line. What do these confidence bands tell you?
+
+
+### 5. Visualizing structural breaks
+
+Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to *test* for structural breaks in your data that we will demonstrate in R, but for now let's go over a couple ways to visualize structural breaks that we identify with the very sophisticated "eyeball method". 
+
+1.  Looking at your visualization of mean monthly commodity prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 2006 to 2018?  
+
+2.  Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.  
+
+3.  Add a **reference line** at this month-year. Does anything happen to your trend line? 
+
+Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let's go through two methods for doing this:
+
+**Method 1:** Separate your time series by adding color
+
+1.  Create a new calculated field named `before_after_break`. Use the `IF` and `THEN` functions and an appropriate `Date` function to populate this variable with "after" if the date if after the break you identified in the data and "before" if the date is before the break.  
+
+2.  Drag this variable to the `Color` card.
+
+3.  Add trend lines to your visualization. What happens?
+
+**Method 2:** Separate your time series by segmenting the x-axis
+
+1.  Drag your new variable from the `Marks` card to the `columns` shelf.
+
+2.  Sort your variable so that the "after" time period is shown following the "before" time period.
+
+3.  In the x-axis Edit Axis menu, select `independed axis ranges for each row or column` (access this menu by right clicking on the x-axis)
+
+4.  Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.
+
+
+### 6. Creating panes to visualize mutiple time series
+
+Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.
+
+Let's start by bringing in some price data for a few new commodities.
+
+1.  On the `Data Source` page connect to the following data sources: 
+
+2.  We are going to `append` these data sources to our current working file
+
+XX
+
+Now that we have all these data sources in a single file and they are structured in a "long" format, we are going to construct time series plots that let us compare trends in these commodity prices across time.
+
+1.  Open a new worksheet and create a line plot of the prices over time with a different colored line for each commodity (drag the field `commodity` to the `Color` icon)
+
+2.  Now drag the `commodity` field to the `Rows` shelf. Try adjusting the view until averything fits nicely on your screen
+
+3.  Now use your `before_after_break` variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.
