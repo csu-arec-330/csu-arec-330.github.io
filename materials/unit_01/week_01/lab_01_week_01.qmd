@@ -48,7 +48,60 @@ A key attribute of time series data is that we observe values of variables acros
 
 ### 1. Date functions
 
+Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.
+
+You can explore these functions by going to `create calculated field` and choosing `Date`. You can look through these on your own, but I will highlight a few here.
+
+-  DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number. 
+
+    - For example, DATEPART (‘month’, #January 23, 2021#) = 1
+
+    - Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.
+
+- DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.
+
+    - For example, DATENAME (‘month’, #January 23, 2021#) = January
+
+- DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.
+
+    - For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021
+
+- DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part. 
+
+    - For example, DATEDIFF ('day', #January 23, 2021#, #February 24, 2021#) = 32              and DATEDIFF ('month', #January 23, 2021#, #February 24, 2021#) = 1
+
+- DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date. 
+
+    - For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021. 
+                
+- MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record. 
+
+    - For example, MIN ([Order Date]) returns the earliest date in the Order Date field.
+
+- MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record. 
+
+    - For example, MAX ([Order Date]) returns the latest date in the Order Date field.
+
+Here are some handy definitions for date_time arguments:
+
+![](includes/date_args.png)
+
 ### 2. Use date functions in calculated fields
+
+Connect to the `carrots_prices.csv` data and use the expressions above to do the following:
+
+1. Create a calculated field named `months_ago` that determines the number of months between the commodity price data and today.
+
+2.  Create a calculated field named `first_date` that determines the earliest date in the data.
+
+3.  Create a calculated field named `last_date` that determines the last date that the carrot price index was less than 135.
+
+4.  Create a new variable called `month` that only includes the month.
+
+5.  Create a new variable called `year` that only includes the year.
+
+6.  Create a new date variable called `my_date` that assigns a new date using your `month` and `year` variables and sets the day as 15.
+
 
 ### 3. Visualize time series data
 
@@ -64,7 +117,7 @@ What types of visualizations are most appropriate for time series data?
 
 Let's experiment with creating these visualizations for time series:  
 
-1.  Create a line graph that shows the value of one commodity over time.  
+1.  Create a line graph that shows the value of carrots over time (by month)
 
 2.  Add markers to your line graph
 
@@ -78,11 +131,11 @@ Let's experiment with creating these visualizations for time series:
 
 Now let's experiment with changing what data is shown in your chart:  
 
-1.  Change your x-axis to monthly (month-year)  
+1.  Change your x-axis to annual
 
-2.  Create one line that shows the average value of the commodity each month, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?  
+2.  Create one line that shows the average value of the commodity each year, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?  
 
-3.  Restrict your date ranges so that your visualization only shows the last 5 years of data (use the `Filters` card)
+3.  Restrict your date ranges so that your visualization only shows the last 20 years of data (use the `Filters` card)
 
 
 ### 4. Creating and interpreting trend lines
@@ -91,9 +144,11 @@ Now we are going to add a trend line to our visualization. I am sure you are all
 
 -  What does a linear trend line tell you about your time series data?  
 
+-  How is this trend line estimated? (conceptually... we will go through some equations on Wednesday!)
+
 Now, let's talk some specifics about linear trend lines in Tableau... 
 
-1.  Open a new worksheet and create a line chart showing mean weekly values of the commodity from 2006 to 2018
+1.  Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022
 
 2.  Add a trend line to your chart
 
@@ -101,20 +156,18 @@ Now, let's talk some specifics about linear trend lines in Tableau...
 
 4.  When you click on `describe trend model` what information does Tableau give you about it?
 
-5.  Change your x-axis to monthly (month-year). Did your trend line change? How do you know? Why did or didn't the trend line change when you changed the date aggregation?
-
-6.  Add confidence bands to your trend line. What do these confidence bands tell you?
+5.  Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn't the trend line change when you changed the date aggregation?
 
 
 ### 5. Visualizing structural breaks
 
 Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to *test* for structural breaks in your data that we will demonstrate in R, but for now let's go over a couple ways to visualize structural breaks that we identify with the very sophisticated "eyeball method". 
 
-1.  Looking at your visualization of mean monthly commodity prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 2006 to 2018?  
+1.  Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?  
 
 2.  Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.  
 
-3.  Add a **reference line** at this month-year. Does anything happen to your trend line? 
+3.  Add a **reference line** at this month-year. (Right click on the x-axis and select `Reference Line`) Does anything happen to your trend line? 
 
 Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let's go through two methods for doing this:
 
@@ -143,16 +196,20 @@ Sometimes we might want to view multiple time series in separate figures. We can
 
 Let's start by bringing in some price data for a few new commodities.
 
-1.  On the `Data Source` page connect to the following data sources: 
+1.  On the `Data Source` page connect to the following data sources `corn_prices.csv` and `tomatoes_prices.csv`
 
-2.  We are going to `append` these data sources to our current working file
+2.  We are going to create a `relationship` between these data sources and our current working file
 
-XX
+3.  With the carrot data in the `canvas`, drag one of the other data sources next to it in the canvas. Do the same with the other data source.
 
-Now that we have all these data sources in a single file and they are structured in a "long" format, we are going to construct time series plots that let us compare trends in these commodity prices across time.
+4.  Now go to a new worksheet, what do you see? What did we just accomplish?
 
-1.  Open a new worksheet and create a line plot of the prices over time with a different colored line for each commodity (drag the field `commodity` to the `Color` icon)
+Now that we have all these data sources in a single file and they are structured in a "wide" format, we are going to construct time series plots that let us compare trends in these commodity prices across time.
 
-2.  Now drag the `commodity` field to the `Rows` shelf. Try adjusting the view until averything fits nicely on your screen
+1.  Open a new worksheet and create a line plot of the prices over time for each commodity
+
+2.  Now try formatting your figure. Change colors, adjust sizes, etc.
 
 3.  Now use your `before_after_break` variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.
+
+### 7. If we have extra time... let's do some quick table calculations!
