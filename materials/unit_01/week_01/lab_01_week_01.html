@@ -110,13 +110,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
   <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
+  <li><a href="#unit-1-project-overview" id="toc-unit-1-project-overview" class="nav-link" data-scroll-target="#unit-1-project-overview">Unit 1 Project Overview</a></li>
   <li><a href="#time-series-with-r" id="toc-time-series-with-r" class="nav-link" data-scroll-target="#time-series-with-r">Time series with R</a>
   <ul class="collapse">
   <li><a href="#importing-time-series-data" id="toc-importing-time-series-data" class="nav-link" data-scroll-target="#importing-time-series-data">Importing time series data</a></li>
   <li><a href="#accessing-data-via-api" id="toc-accessing-data-via-api" class="nav-link" data-scroll-target="#accessing-data-via-api">Accessing data via API</a></li>
   <li><a href="#replacing-values-based-on-a-criteria" id="toc-replacing-values-based-on-a-criteria" class="nav-link" data-scroll-target="#replacing-values-based-on-a-criteria">Replacing values based on a criteria</a></li>
   </ul></li>
-  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a></li>
+  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
+  <ul class="collapse">
+  <li><a href="#date-functions" id="toc-date-functions" class="nav-link" data-scroll-target="#date-functions">1. Date functions</a></li>
+  <li><a href="#use-date-functions-in-calculated-fields" id="toc-use-date-functions-in-calculated-fields" class="nav-link" data-scroll-target="#use-date-functions-in-calculated-fields">2. Use date functions in calculated fields</a></li>
+  <li><a href="#visualize-time-series-data" id="toc-visualize-time-series-data" class="nav-link" data-scroll-target="#visualize-time-series-data">3. Visualize time series data</a></li>
+  <li><a href="#creating-and-interpreting-trend-lines" id="toc-creating-and-interpreting-trend-lines" class="nav-link" data-scroll-target="#creating-and-interpreting-trend-lines">4. Creating and interpreting trend lines</a></li>
+  <li><a href="#visualizing-structural-breaks" id="toc-visualizing-structural-breaks" class="nav-link" data-scroll-target="#visualizing-structural-breaks">5. Visualizing structural breaks</a></li>
+  <li><a href="#creating-panes-to-visualize-mutiple-time-series" id="toc-creating-panes-to-visualize-mutiple-time-series" class="nav-link" data-scroll-target="#creating-panes-to-visualize-mutiple-time-series">6. Creating panes to visualize mutiple time series</a></li>
+  <li><a href="#if-we-have-extra-time-lets-do-some-quick-table-calculations" id="toc-if-we-have-extra-time-lets-do-some-quick-table-calculations" class="nav-link" data-scroll-target="#if-we-have-extra-time-lets-do-some-quick-table-calculations">7. If we have extra time… let’s do some quick table calculations!</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -148,6 +158,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><p>Reading in time series data</p></li>
 <li><p>Understand how to work with dates</p></li>
+<li><p>Downloading data via API</p></li>
 </ul>
 </section>
 <section id="learning-objectives-tableau" class="level2">
@@ -156,8 +167,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Understand date functions</p></li>
 <li><p>Use date functions in calculated fields</p></li>
 <li><p>Visualizing time series data</p></li>
+<li><p>Creating and interpreting trend lines</p></li>
 <li><p>Visualizing structural breaks</p></li>
+<li><p>Creating panes to visualize mutiple time series</p></li>
 </ul>
+</section>
+<section id="unit-1-project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="unit-1-project-overview">Unit 1 Project Overview</h2>
 </section>
 <section id="time-series-with-r" class="level1">
 <h1>Time series with R</h1>
@@ -300,6 +316,141 @@ APU0000708111     WPU017107
 </section>
 <section id="tableau" class="level1">
 <h1>Tableau</h1>
+<p>======= A key attribute of time series data is that we observe values of variables across <strong>time</strong>. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.</p>
+<section id="date-functions" class="level3">
+<h3 class="anchored" data-anchor-id="date-functions">1. Date functions</h3>
+<p>Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.</p>
+<p>You can explore these functions by going to <code>create calculated field</code> and choosing <code>Date</code>. You can look through these on your own, but I will highlight a few here.</p>
+<ul>
+<li><p>DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number.</p>
+<ul>
+<li><p>For example, DATEPART (‘month’, #January 23, 2021#) = 1</p></li>
+<li><p>Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.</p></li>
+</ul></li>
+<li><p>DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.</p>
+<ul>
+<li>For example, DATENAME (‘month’, #January 23, 2021#) = January</li>
+</ul></li>
+<li><p>DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.</p>
+<ul>
+<li>For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021</li>
+</ul></li>
+<li><p>DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part.</p>
+<ul>
+<li>For example, DATEDIFF (‘day’, #January 23, 2021#, #February 24, 2021#) = 32 and DATEDIFF (‘month’, #January 23, 2021#, #February 24, 2021#) = 1</li>
+</ul></li>
+<li><p>DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date.</p>
+<ul>
+<li>For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021.</li>
+</ul></li>
+<li><p>MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record.</p>
+<ul>
+<li>For example, MIN ([Order Date]) returns the earliest date in the Order Date field.</li>
+</ul></li>
+<li><p>MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record.</p>
+<ul>
+<li>For example, MAX ([Order Date]) returns the latest date in the Order Date field.</li>
+</ul></li>
+</ul>
+<p>Here are some handy definitions for date_time arguments:</p>
+<p><img src="includes/date_args.png" class="img-fluid"></p>
+</section>
+<section id="use-date-functions-in-calculated-fields" class="level3">
+<h3 class="anchored" data-anchor-id="use-date-functions-in-calculated-fields">2. Use date functions in calculated fields</h3>
+<p>Connect to the <code>carrots_prices.csv</code> data and use the expressions above to do the following:</p>
+<ol type="1">
+<li><p>Create a calculated field named <code>months_ago</code> that determines the number of months between the commodity price data and today.</p></li>
+<li><p>Create a calculated field named <code>first_date</code> that determines the earliest date in the data.</p></li>
+<li><p>Create a calculated field named <code>last_date</code> that determines the last date that the carrot price index was less than 135.</p></li>
+<li><p>Create a new variable called <code>month</code> that only includes the month.</p></li>
+<li><p>Create a new variable called <code>year</code> that only includes the year.</p></li>
+<li><p>Create a new date variable called <code>my_date</code> that assigns a new date using your <code>month</code> and <code>year</code> variables and sets the day as 15.</p></li>
+</ol>
+</section>
+<section id="visualize-time-series-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-time-series-data">3. Visualize time series data</h3>
+<p>What types of visualizations are most appropriate for time series data?</p>
+<ul>
+<li><p>Line graphs</p></li>
+<li><p>Bar charts</p></li>
+<li><p>Dot plots</p></li>
+<li><p>Others?</p></li>
+</ul>
+<p>Let’s experiment with creating these visualizations for time series:</p>
+<ol type="1">
+<li><p>Create a line graph that shows the value of carrots over time (by month)</p></li>
+<li><p>Add markers to your line graph</p></li>
+<li><p>Change your line graph to a bar graph dot chart</p></li>
+<li><p>Change your bar graph to a dot plot</p></li>
+<li><p>Change the size size, colors, and opacity of the dots in your dot plot (use the <code>Size</code> and <code>Color</code> icons)</p></li>
+<li><p>Change the markers in your chart from dots to a different shape (use the dropdown menu on the <code>Marks</code> card, then use the <code>Shape</code> icons)</p></li>
+</ol>
+<p>Now let’s experiment with changing what data is shown in your chart:</p>
+<ol type="1">
+<li><p>Change your x-axis to annual</p></li>
+<li><p>Create one line that shows the average value of the commodity each year, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?</p></li>
+<li><p>Restrict your date ranges so that your visualization only shows the last 20 years of data (use the <code>Filters</code> card)</p></li>
+</ol>
+</section>
+<section id="creating-and-interpreting-trend-lines" class="level3">
+<h3 class="anchored" data-anchor-id="creating-and-interpreting-trend-lines">4. Creating and interpreting trend lines</h3>
+<p>Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know <em>how</em> they are created? Let’s start with a linear trend line…</p>
+<ul>
+<li><p>What does a linear trend line tell you about your time series data?</p></li>
+<li><p>How is this trend line estimated? (conceptually… we will go through some equations on Wednesday!)</p></li>
+</ul>
+<p>Now, let’s talk some specifics about linear trend lines in Tableau…</p>
+<ol type="1">
+<li><p>Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022</p></li>
+<li><p>Add a trend line to your chart</p></li>
+<li><p>When you click on the trend line, what information does Tableau give you about it? What does this information mean?</p></li>
+<li><p>When you click on <code>describe trend model</code> what information does Tableau give you about it?</p></li>
+<li><p>Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn’t the trend line change when you changed the date aggregation?</p></li>
+</ol>
+</section>
+<section id="visualizing-structural-breaks" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-structural-breaks">5. Visualizing structural breaks</h3>
+<p>Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to <em>test</em> for structural breaks in your data that we will demonstrate in R, but for now let’s go over a couple ways to visualize structural breaks that we identify with the very sophisticated “eyeball method”.</p>
+<ol type="1">
+<li><p>Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?</p></li>
+<li><p>Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.</p></li>
+<li><p>Add a <strong>reference line</strong> at this month-year. (Right click on the x-axis and select <code>Reference Line</code>) Does anything happen to your trend line?</p></li>
+</ol>
+<p>Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let’s go through two methods for doing this:</p>
+<p><strong>Method 1:</strong> Separate your time series by adding color</p>
+<ol type="1">
+<li><p>Create a new calculated field named <code>before_after_break</code>. Use the <code>IF</code> and <code>THEN</code> functions and an appropriate <code>Date</code> function to populate this variable with “after” if the date if after the break you identified in the data and “before” if the date is before the break.</p></li>
+<li><p>Drag this variable to the <code>Color</code> card.</p></li>
+<li><p>Add trend lines to your visualization. What happens?</p></li>
+</ol>
+<p><strong>Method 2:</strong> Separate your time series by segmenting the x-axis</p>
+<ol type="1">
+<li><p>Drag your new variable from the <code>Marks</code> card to the <code>columns</code> shelf.</p></li>
+<li><p>Sort your variable so that the “after” time period is shown following the “before” time period.</p></li>
+<li><p>In the x-axis Edit Axis menu, select <code>independed axis ranges for each row or column</code> (access this menu by right clicking on the x-axis)</p></li>
+<li><p>Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.</p></li>
+</ol>
+</section>
+<section id="creating-panes-to-visualize-mutiple-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="creating-panes-to-visualize-mutiple-time-series">6. Creating panes to visualize mutiple time series</h3>
+<p>Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.</p>
+<p>Let’s start by bringing in some price data for a few new commodities.</p>
+<ol type="1">
+<li><p>On the <code>Data Source</code> page connect to the following data sources <code>corn_prices.csv</code> and <code>tomatoes_prices.csv</code></p></li>
+<li><p>We are going to create a <code>relationship</code> between these data sources and our current working file</p></li>
+<li><p>With the carrot data in the <code>canvas</code>, drag one of the other data sources next to it in the canvas. Do the same with the other data source.</p></li>
+<li><p>Now go to a new worksheet, what do you see? What did we just accomplish?</p></li>
+</ol>
+<p>Now that we have all these data sources in a single file and they are structured in a “wide” format, we are going to construct time series plots that let us compare trends in these commodity prices across time.</p>
+<ol type="1">
+<li><p>Open a new worksheet and create a line plot of the prices over time for each commodity</p></li>
+<li><p>Now try formatting your figure. Change colors, adjust sizes, etc.</p></li>
+<li><p>Now use your <code>before_after_break</code> variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.</p></li>
+</ol>
+</section>
+<section id="if-we-have-extra-time-lets-do-some-quick-table-calculations" class="level3">
+<h3 class="anchored" data-anchor-id="if-we-have-extra-time-lets-do-some-quick-table-calculations">7. If we have extra time… let’s do some quick table calculations!</h3>
+</section>
 </section>
 
 
