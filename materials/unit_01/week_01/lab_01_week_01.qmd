@@ -94,14 +94,12 @@ egg_raw_c <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/A
 ```
 
 ```{r}
-#| eval: false
 
 glimpse(egg_raw_c)
 ```
 
 We need to tell R how to interpret that date. `lubridate` contains many functions to help with this.  See the [documentation](https://lubridate.tidyverse.org/index.html) for more information and examples. 
 ```{r}
-#| eval: false
 
 egg_raw_c %>%
   mutate(DATE=mdy(CHAR_DATE)) %>%
@@ -125,13 +123,12 @@ We can use APIs to query data. FRED maintains an API that can be accessed using 
 - Third, we can specify the date range with the `from` and `to` parameters.  Remember to use the YYYY-MM-DD format.
 
 ```{r}
-#| eval: false
+
 #install.packages("tidquant")
 library(tidyquant,quietly = T)
 ```
 
 ```{r}
-#| eval: false
 
 egg_raw_tq <- tq_get(c("APU0000708111"),get = "economic.data",from="1990-01-01",to="2023-02-23")
 
@@ -141,7 +138,6 @@ glimpse(egg_raw_tq)
 You can download multiple time series at once by using a vector of identifiers. Let's download the producer price index to compare to the retail price of a dozen eggs.  The identifier is `WPU017107`.  Note that I am going to overwrite the existing object `egg_raw_tq` because I am going to download the retail price series as well as the producer price index.
 
 ```{r}
-#| eval: false
 
 egg_raw_tq <- tq_get(c("APU0000708111","WPU017107"),get = "economic.data",from="1990-01-01",to="2023-02-23")
 
@@ -152,14 +148,12 @@ Notice that there are still 3 columns.  The new data is stacked.  We can confirm
 
 1. Use the `unique()` function to see what values for symbol are in the dataset
 ```{r}
-#| eval: false
 
 unique(egg_raw_tq$symbol)
 ```
 
 2. Use `table()` to see the counts by each value
 ```{r}
-#| eval: false
 
 table(egg_raw_tq$symbol)
 ```
@@ -170,7 +164,6 @@ table(egg_raw_tq$symbol)
 
 The time series are currently identified by the variable `symbol`.  These codes are not informative.  Let's replace them with better labels.  There is a function in the `dplyr` package called `case_when()` designed for this purpose.
 ```{r}
-#| eval: false
 
 egg_out <- egg_raw_tq %>%
   mutate(description=case_when(
@@ -180,8 +173,6 @@ egg_out <- egg_raw_tq %>%
 ```
 
 Now the dataset is ready for export in .csv format so you can import it into Tableau.
-
-
 
 
 # Tableau

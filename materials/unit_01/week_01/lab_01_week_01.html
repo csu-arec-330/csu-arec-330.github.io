@@ -204,12 +204,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are many instances where you collect data that has a date obvious to humans but not machines. In these cases, you need to give R some guidance. We will use functions from the library called <code>lubridate</code>, designed to help work with dates. Read in a modified version of the data that you can download <a href="https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv">here</a>. I assigned the dataframe to an object called <code>egg_raw_c</code> to avoid overwriting the existing data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 517
+Columns: 2
+$ APU0000708111 &lt;dbl&gt; 0.879, 0.774, 0.812, 0.797, 0.737, 0.731, 0.776, 0.907, …
+$ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/1980", …</code></pre>
+</div>
 </div>
 <p>We need to tell R how to interpret that date. <code>lubridate</code> contains many functions to help with this. See the <a href="https://lubridate.tidyverse.org/index.html">documentation</a> for more information and examples.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>egg_raw_c <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATE=</span><span class="fu">mdy</span>(CHAR_DATE)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>egg_raw_c <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DATE=</span><span class="fu">mdy</span>(CHAR_DATE)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 517
+Columns: 3
+$ APU0000708111 &lt;dbl&gt; 0.879, 0.774, 0.812, 0.797, 0.737, 0.731, 0.776, 0.907, …
+$ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/1980", …
+$ DATE          &lt;date&gt; 1980-01-01, 1980-02-01, 1980-03-01, 1980-04-01, 1980-05…</code></pre>
+</div>
 </div>
 <video here="">
 </video></section>
@@ -229,32 +242,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Third, we can specify the date range with the <code>from</code> and <code>to</code> parameters. Remember to use the YYYY-MM-DD format.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidquant")</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant,<span class="at">quietly =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidquant")</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant,<span class="at">quietly =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"APU0000708111"</span>),<span class="at">get =</span> <span class="st">"economic.data"</span>,<span class="at">from=</span><span class="st">"1990-01-01"</span>,<span class="at">to=</span><span class="st">"2023-02-23"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"APU0000708111"</span>),<span class="at">get =</span> <span class="st">"economic.data"</span>,<span class="at">from=</span><span class="st">"1990-01-01"</span>,<span class="at">to=</span><span class="st">"2023-02-23"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 397
+Columns: 3
+$ symbol &lt;chr&gt; "APU0000708111", "APU0000708111", "APU0000708111", "APU00007081…
+$ date   &lt;date&gt; 1990-01-01, 1990-02-01, 1990-03-01, 1990-04-01, 1990-05-01, 19…
+$ price  &lt;dbl&gt; 1.223, 1.041, 1.111, 1.092, 0.940, 0.930, 0.899, 0.954, 0.946, …</code></pre>
+</div>
 </div>
 <p>You can download multiple time series at once by using a vector of identifiers. Let’s download the producer price index to compare to the retail price of a dozen eggs. The identifier is <code>WPU017107</code>. Note that I am going to overwrite the existing object <code>egg_raw_tq</code> because I am going to download the retail price series as well as the producer price index.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"APU0000708111"</span>,<span class="st">"WPU017107"</span>),<span class="at">get =</span> <span class="st">"economic.data"</span>,<span class="at">from=</span><span class="st">"1990-01-01"</span>,<span class="at">to=</span><span class="st">"2023-02-23"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"APU0000708111"</span>,<span class="st">"WPU017107"</span>),<span class="at">get =</span> <span class="st">"economic.data"</span>,<span class="at">from=</span><span class="st">"1990-01-01"</span>,<span class="at">to=</span><span class="st">"2023-02-23"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 771
+Columns: 3
+$ symbol &lt;chr&gt; "APU0000708111", "APU0000708111", "APU0000708111", "APU00007081…
+$ date   &lt;date&gt; 1990-01-01, 1990-02-01, 1990-03-01, 1990-04-01, 1990-05-01, 19…
+$ price  &lt;dbl&gt; 1.223, 1.041, 1.111, 1.092, 0.940, 0.930, 0.899, 0.954, 0.946, …</code></pre>
+</div>
 </div>
 <p>Notice that there are still 3 columns. The new data is stacked. We can confirm this a few ways:</p>
 <ol type="1">
 <li>Use the <code>unique()</code> function to see what values for symbol are in the dataset</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(egg_raw_tq<span class="sc">$</span>symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(egg_raw_tq<span class="sc">$</span>symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "APU0000708111" "WPU017107"    </code></pre>
+</div>
 </div>
 <ol start="2" type="1">
 <li>Use <code>table()</code> to see the counts by each value</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(egg_raw_tq<span class="sc">$</span>symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(egg_raw_tq<span class="sc">$</span>symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+APU0000708111     WPU017107 
+          397           374 </code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
 <p>Why does the retail series <code>APU0000708111</code> have more observations?</p>
@@ -264,11 +299,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="replacing-values-based-on-a-criteria">Replacing values based on a criteria</h2>
 <p>The time series are currently identified by the variable <code>symbol</code>. These codes are not informative. Let’s replace them with better labels. There is a function in the <code>dplyr</code> package called <code>case_when()</code> designed for this purpose.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>egg_out <span class="ot">&lt;-</span> egg_raw_tq <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">description=</span><span class="fu">case_when</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"APU0000708111"</span> <span class="sc">~</span> <span class="st">"Retail Price"</span>, <span class="co">#if symbol equals APU0000708111, then replace value with Retail Price</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"WPU017107"</span> <span class="sc">~</span> <span class="st">"Producer Price"</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>egg_out <span class="ot">&lt;-</span> egg_raw_tq <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">description=</span><span class="fu">case_when</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"APU0000708111"</span> <span class="sc">~</span> <span class="st">"Retail Price"</span>, <span class="co">#if symbol equals APU0000708111, then replace value with Retail Price</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"WPU017107"</span> <span class="sc">~</span> <span class="st">"Producer Price"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now the dataset is ready for export in .csv format so you can import it into Tableau.</p>
 </section>
