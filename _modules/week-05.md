@@ -19,7 +19,7 @@ title: "Week 4: Mini Project"
 
 <a  href="/materials/unit_01/inputs/corn_prices.csv" download>Download Corn Price Data</a> <br>
 
-<a  href="/materials/unit_01/inputs/tomatoes_prices.csv" target="_blank">Download Tomato Price Data</a> <br> 
+<a  href="/materials/unit_01/inputs/tomatoes_prices.csv" target="_blank">Download Tomato Price Data</a> <br> <br> 
 
 
 
