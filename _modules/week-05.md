@@ -10,23 +10,29 @@ title: "Week 4: Mini Project"
 
 <a  href="/materials/unit_01/week_01/lecture_01_week_01.html" target="_blank">Lecture Slides</a> <br> <br>
 
+
+<b>Lab Materials - Fri, Feb 17, 2023:</b> <br>
+
+<a  href="/materials/unit_00/inputs/carrots_prices.csv" download>Download Carrot Price Data</a> <br>
+
+<a  href="/materials/unit_00/inputs/corn_prices.csv" download>Download Corn Price Data</a> <br>
+
+<a  href="/materials/unit_00/inputs/tomatoes_prices.csv" target="_blank">Download Tomato Price Data</a> <br> 
+
 <!--
-<b>Lab Materials - Fri, Feb 10, 2023:</b> <br>
-
 <a  href="/materials/unit_00/week_04/lab_00_week_04.html" target="_blank">Week 4 Lab Notes</a> <br> <br> 
+-->
 
-
-<b>Project Materials - Due Thursday, Feb 16 by 11:59 PM:</b> <br>
+<!--
+<b>Project Materials - Due Thursday, Feb 23 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_00/week_04/ps4.html" target="_blank">Problem Set 4 Instructions</a> <br> 
 
-<a  href="/materials/unit_00/inputs/supermarket_sales_2017.csv" download>Download 2017 Supermarket Sales Data</a> <br>
+<a  href="/materials/unit_00/inputs/carrots_prices.csv" download>Download Carrot Price Data</a> <br>
 
-<a  href="/materials/unit_00/inputs/supermarket_sales_2018.csv" download>Download 2018 Supermarket Sales Data</a> <br>
+<a  href="/materials/unit_00/inputs/corn_prices.csv" download>Download Corn Price Data</a> <br>
 
-<a  href="/materials/unit_00/inputs/supermarket_sales_2019.csv" download>Download 2019 Supermarket Sales Data</a> <br>
-
-<a  href="/materials/unit_00/inputs/supermarketdata_describe.html" target="_blank">Description of Supermarket Sales Data</a> <br> <br>
+<a  href="/materials/unit_00/inputs/tomatoes_prices.csv" target="_blank">Download Tomato Price Data</a> <br> <br>
 
 -->
 
