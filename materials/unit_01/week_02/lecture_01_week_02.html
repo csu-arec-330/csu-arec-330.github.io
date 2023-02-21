@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="lecture_01_week_01_files/libs/clipboard/clipboard.min.js"></script>
-<script src="lecture_01_week_01_files/libs/quarto-html/tabby.min.js"></script>
-<script src="lecture_01_week_01_files/libs/quarto-html/popper.min.js"></script>
-<script src="lecture_01_week_01_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="lecture_01_week_01_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="lecture_01_week_01_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="lecture_01_week_01_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="lecture_01_week_02_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture_01_week_02_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture_01_week_02_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture_01_week_02_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture_01_week_02_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture_01_week_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="lecture_01_week_02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.2.280">
 
-  <title>Week 5:  Intro to Time Series   and Project 1 Overview</title>
+  <title>Week 6:  Intro to Trends and Forecasting </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="lecture_01_week_01_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="lecture_01_week_01_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="lecture_01_week_02_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture_01_week_02_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -28,11 +28,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="lecture_01_week_01_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="lecture_01_week_01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="lecture_01_week_01_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="lecture_01_week_01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="lecture_01_week_01_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="lecture_01_week_02_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="lecture_01_week_02_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture_01_week_02_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture_01_week_02_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture_01_week_02_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -323,7 +323,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 5: <br>Intro to Time Series <br> and Project 1 Overview</h1>
+  <h1 class="title">Week 6: <br>Intro to Trends and Forecasting<br></h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -331,10 +331,11 @@
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<p>Motivation for analyzing time series data</p>
-<p>Time series analysis</p>
-<p>Forecasting and prediction</p>
-<p>Project 1 overview</p>
+<p>Linear trend analysis</p>
+<p>Non-linear trend analysis</p>
+<p>Forecasting using trends</p>
+<p>Motivation for structural breaks</p>
+<p>Project 1 reminder</p>
 <!-- example of big text fit to slide width -->
 <!-- ::: {.r-fit-text} -->
 <!-- Big Text -->
@@ -348,23 +349,26 @@
 </section>
 <section id="cautionary-note" class="slide level2">
 <h2>Cautionary note</h2>
+<ul>
+<li><p>We will teach you enough to be dangerous</p></li>
+<li><p>We are introducing you to the tip of the analytical iceberg. Learn more before you put this into practice.</p></li>
+<li><p>Incorrect analysis can lead to worse conclusions than no analysis</p></li>
+</ul>
 <div>
 <ul>
-<li class="fragment"><p>We will teach you enough to be dangerous</p></li>
-<li class="fragment"><p>We are introducing you to the tip of the analytical iceberg. Learn more before you put this into practice.</p></li>
-<li class="fragment"><p>Incorrect analysis can lead to worse conclusions than no analysis</p></li>
+<li class="fragment">Be wary of causal conclusions!</li>
 </ul>
 </div>
 </section>
-<section id="intro-to-time-series-analysis" class="title-slide slide level1 center">
-<h1>Intro to Time Series Analysis</h1>
+<section id="intro-to-linear-regressions" class="title-slide slide level1 center">
+<h1>Intro to Linear Regressions</h1>
 
 </section>
 
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p>The problem: <br> We don’t know what will <br> happen in the future</p>
+<p><strong>The objective:</strong> <br> We want to understand the <br> relationship between two variables</p>
 </div>
 </section>
 
@@ -372,158 +376,187 @@
 <section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p>The solution: <br> We can use past data to <br> make a guess about the future*</p>
+<p><strong>The simple solution:</strong> <br> Assume the relationship is linear <br> and estimate the “average” trend</p>
 </div>
 </section>
-<section id="what-is-time-series-data" class="slide level2 scrollable">
-<h2>What is time series data?</h2>
-<p>Time series data is a sequence of data points collected over time.</p>
-<p>It typically consists of observations taken at regular intervals (e.g.&nbsp;every hour, every day, every week, etc.) and can be used to study trends and patterns over time.</p>
+<section id="linear-regression-the-intuition" class="slide level2">
+<h2>Linear regression: The intuition</h2>
 <div style="text-align: center">
-<p><img data-src="includes/grocery_sales.jpg" style="width:80.0%"></p>
+<p><img data-src="includes/carrot_scatter.png" style="width:80.0%"></p>
 </div>
 </section>
-<section id="how-is-time-series-data-used-in-business" class="slide level2">
-<h2>How is time series data used in business</h2>
-<p>Time Series Analysis</p>
-<ul>
-<li><p>learn about trends</p></li>
-<li><p>compare current period to past periods</p></li>
-</ul>
-<p>Forecasting</p>
-<ul>
-<li><p>educated guess about future values</p></li>
-<li><p>develop business strategy around forecasts</p></li>
-</ul>
-</section>
-<section id="time-series-decomposition" class="slide level2">
-<h2>Time series decomposition</h2>
-<p>Decomposition statistically deconstructs a time series into several components:</p>
+<section id="linear-regression-the-intuition-1" class="slide level2 scrollable">
+<h2>Linear regression: The intuition</h2>
+<p>How could we use these data to answer:</p>
 <ol type="1">
-<li><p>seasonality</p></li>
-<li><p>trend</p></li>
-<li><p>residuals or “noise”</p></li>
+<li><p>Are carrot prices, on average, increasing or decreasing?</p></li>
+<li><p>How much do observed carrot prices deviate from the average trend?</p></li>
+<li><p>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</p></li>
 </ol>
-<p><a href="https://otexts.com/fpp3/decomposition.html">Hyndman &amp; Athanasopoulos (2021)</a></p>
 </section>
-<section id="example" class="slide level2 scrollable">
-<h2>Example</h2>
-<div style="text-align: center">
-<p><img data-src="includes/usretailemployment-1.png" style="width:80.0%"></p>
-<p><img data-src="includes/emplstl-1.png" style="width:60.0%"></p>
-</div>
-</section>
-<section id="structural-breaks" class="slide level2 scrollable">
-<h2>Structural breaks</h2>
-<p>Analysts may want to identify changes in the time series that are not just noise</p>
-<p>Statistically identifying these changes can be the goal of the analysis or an exploratory exercise</p>
-<div style="text-align: center">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="includes/structural_break.png" style="width:70.0%"></p>
-<p></p><figcaption>Synthetic time series with three data generating mechanisms</figcaption><p></p>
-</figure>
-</div>
-</div>
-</section>
-<section id="exercise" class="slide level2">
-<h2>Exercise</h2>
-<p>Briefly describe one reason for a structural break in a time series.</p>
-</section>
-<section id="forecasting-examples" class="slide level2">
-<h2>Forecasting Examples</h2>
-<p>Forecasting power demand to decide whether to build new power plant</p>
-<p>Forecasting call volumes to schedule staff in call center</p>
-<p>Forecasting inventory requirements meet demands</p>
-</section>
-<section id="exercise-1" class="slide level2">
-<h2>Exercise</h2>
-<p>How could you use forecasting to improve decision-making in ag business or environmental and natural resource management? Provide an example</p>
-</section>
-<section id="forecasting-overview" class="slide level2 scrollable">
-<h2>Forecasting overview</h2>
-<p>Using historical data to develop a model, then using the model to predict the future</p>
-<p>Model quality depends on past data and assumptions</p>
-<p>Forecasts are uncertain; we can quantify some of that uncertainty</p>
-<div style="text-align: center">
-<p><img data-src="includes/austa2-1.png" style="width:70.0%"></p>
-</div>
-</section>
-<section id="forecasting-steps" class="slide level2">
-<h2>Forecasting steps</h2>
-<ol type="1">
-<li><p>Problem definition</p></li>
-<li><p>Gathering data and institutional knowledge</p></li>
-<li><p>Preliminary (exploratory) analysis</p></li>
-<li><p>Choosing and fitting models</p></li>
-<li><p>Using and evaluating a forecast model</p></li>
-</ol>
-
-<aside><div>
-<p>Source: <a href="https://otexts.com/fpp3/basic-steps.html">Hyndman &amp; Athanasopoulos (2021)</a></p>
-</div></aside></section>
-<section id="summary" class="slide level2">
-<h2>Summary</h2>
-<p>Time series data is a common structure of data</p>
-<p>Certain techniques are designed to analyze time series data</p>
-<p>Forecasting is a common need</p>
-<p>Introductions in this course (see <a href="https://otexts.com/fpp3/basic-steps.html">Hyndman &amp; Athanasopoulos (2021)</a>)</p>
+<section id="exercise-1-which-trend-line-is-best" class="slide level2">
+<h2>Exercise 1: Which trend line is best?</h2>
+<p><img data-src="includes/carrot_trend2.png" style="width:45.0%"><img data-src="includes/carrot_trend3.png" style="width:45.0%"> <img data-src="includes/carrot_trend1.png" style="width:45.0%"><img data-src="includes/carrot_trend4.png" style="width:45.0%"></p>
 </section></section>
 <section>
-<section id="project-1" class="title-slide slide level1 center">
-<h1>Project 1</h1>
+<section id="section-2" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p><strong>Which trend line is best?</strong> <br> Why?<br></p>
+</div>
+</section>
+<section id="linear-regression-the-intuition-2" class="slide level2 scrollable">
+<h2>Linear regression: The intuition</h2>
 
+<img data-src="includes/carrot_ols1.png" style="width:80.0%" class="r-stretch"></section>
+<section id="the-ordinary-least-squares-regression" class="slide level2">
+<h2>The Ordinary Least Squares Regression</h2>
+<p>Ordinary Least Squares (OLS) is the most common estimation method for linear models.</p>
+<p>For a good reason:</p>
+<p>As long as your model satisfies the OLS assumptions you’re getting the BEST possible estimates.</p>
+<p>BEST = accurate (unbiased) + most precise (best)</p>
+<p>Tableau, Excel, and other programs use OLS to estimate trend lines.</p>
 </section>
-<section id="project-1-overview" class="slide level2">
-<h2>Project 1 overview</h2>
-<p>Groups of 2</p>
-<p>Choose an ag biz or enre management question to answer with time series data</p>
-<p>Collect time series data</p>
-<p>Analyze trends</p>
-<p>Generate a forecast</p>
-<p>Present results in class Fri March 10</p>
-</section>
-<section id="example-corn-and-combines" class="slide level2 scrollable">
-<h2>Example: Corn and Combines</h2>
-<div style="text-align: center">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="includes/corn_prices.jpeg" style="width:70.0%"></p>
-<p></p><figcaption><a href="https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales" class="uri">https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales</a></figcaption><p></p>
-</figure>
-</div>
-</div>
-<!-- Historical corn prices and future equipment sales  -->
-<p>Context: Equipment dealers sell more when ag prices rise. Most people grow corn near dealer x.</p>
-<p>Question: Will corn prices rise or fall in the next year and by how much?</p>
-<p>Approach: Analyze time series of corn prices (decomp). Forecast corn PPI one year.</p>
-<p>Present: Provide context (plot raw data) and describe decision. Explain your insights. Use effective graphics. Tell your data story.</p>
-</section>
-<section id="finding-data" class="slide level2">
-<h2>Finding data</h2>
-<p>Many sources of public data (e.g., <a href="https://fred.stlouisfed.org/categories/33528">St Louis FED</a>, <a href="https://business-science.github.io/tidyquant/">tidyquant</a>)</p>
-<p>Choose data appropriate to answer the question</p>
-<p>Ali and Jude can help</p>
-</section>
-<section id="analysis" class="slide level2">
-<h2>Analysis</h2>
-<p>Must include some:</p>
+<section id="ols-unbiased" class="slide level2 scrollable">
+<h2>OLS: Unbiased</h2>
+<p>What do we mean by “unbiased”?</p>
 <ul>
-<li><p>time series analysis (unit 1 week 2)</p></li>
-<li><p>forecasting (unit 2 week 3)</p></li>
+<li><p>predictions are correct on average</p></li>
+<li><p>the average value of errors (the distance between observations and predictions) equals zero</p></li>
 </ul>
-</section>
-<section id="process" class="slide level2">
-<h2>Process</h2>
-<p>Identify an interesting question</p>
-<p>Collect data</p>
-<p>Develop analysis strategy, explore, refine</p>
-<p>Develop presentation</p>
 </section></section>
 <section>
-<section id="get-started" class="title-slide slide level1 center">
-<h1>Get Started</h1>
+<section id="section-3" class="title-slide slide level1 center">
+<h1></h1>
 
+<img data-src="includes/estimates_bias.png" style="width:100.0%" class="r-stretch"><div style="font-size: 80%;">
+<p><em>Source:</em> <a href="https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/">Statistics by Jim</a></p>
+</div>
+</section>
+<section id="ols-best" class="slide level2 scrollable">
+<h2>OLS: Best</h2>
+<p>What do we mean by “best”?</p>
+<ul>
+<li><p>predictions have the smallest possible variance</p></li>
+<li><p>larger variance = larger probability that our estimates are further away from the correct/true/observed value</p></li>
+</ul>
+</section></section>
+<section>
+<section id="section-4" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="includes/estimates_precision.png" style="width:100.0%" class="r-stretch"><div style="font-size: 80%;">
+<p><em>Source:</em> <a href="https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/">Statistics by Jim</a></p>
+</div>
+</section>
+<section id="ols-equation" class="slide level2">
+<h2>OLS: Equation</h2>
+
+<img data-src="includes/reg_eq.png" style="width:100.0%" class="r-stretch"></section>
+<section id="ols-estimation" class="slide level2">
+<h2>OLS: Estimation</h2>
+<p><strong>Problem:</strong></p>
+<p>We need to estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> using observed values of <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span></p>
+<p><strong>Solution:</strong></p>
+<p><span class="math display">\[
+\widehat{\beta}_0 = \bar{Y} - \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}\cdot \bar{X}
+\]</span></p>
+<p><span class="math display">\[
+\widehat{\beta}_1 = \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}
+\]</span></p>
+</section>
+<section id="ols-interpretting-tableau-output" class="slide level2">
+<h2>OLS: Interpretting Tableau output</h2>
+
+<img data-src="includes/carrot_trend_desc.png" style="width:100.0%" class="r-stretch"></section>
+<section id="q-what-is-our-y-variable" class="slide level2">
+<h2>Q: What is our “Y” variable?</h2>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>A. <code>months_since_crisis</code></p>
+<p>B. <code>0.0728323</code></p>
+<p>C. <code>Avg. Carrot price</code></p>
+<p>D. <code>189.513</code></p>
+</section>
+<section id="q-what-is-our-x-variable" class="slide level2">
+<h2>Q: What is our “X” variable?</h2>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>A. <code>months_since_crisis</code></p>
+<p>B. <code>0.0728323</code></p>
+<p>C. <code>Avg. Carrot price</code></p>
+<p>D. <code>189.513</code></p>
+</section>
+<section id="q-what-is-our-estimate-of-beta_0" class="slide level2">
+<h2>Q: What is our estimate of <span class="math inline">\(\beta_0\)</span>?</h2>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>A. <code>months_since_crisis</code></p>
+<p>B. <code>0.0728323</code></p>
+<p>C. <code>Avg. Carrot price</code></p>
+<p>D. <code>189.513</code></p>
+</section>
+<section id="q-what-is-our-estimate-of-beta_1" class="slide level2">
+<h2>Q: What is our estimate of <span class="math inline">\(\beta_1\)</span>?</h2>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>A. <code>months_since_crisis</code></p>
+<p>B. <code>0.0728323</code></p>
+<p>C. <code>Avg. Carrot price</code></p>
+<p>D. <code>189.513</code></p>
+</section>
+<section id="discussion-interpretting-tableau-output" class="slide level2">
+<h2>Discussion: Interpretting Tableau output</h2>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p><span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
+\]</span></p>
+<p>What is does <span class="math inline">\(\beta_0\)</span> represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?</p>
+</section>
+<section id="discussion-interpretting-tableau-output-1" class="slide level2">
+<h2>Discussion: Interpretting Tableau output</h2>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p><span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
+\]</span></p>
+<p>What is does <span class="math inline">\(\beta_1\)</span> represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?</p>
+</section>
+<section id="interpretting-tableau-output-what-is-r2" class="slide level2">
+<h2>Interpretting Tableau output: What is <span class="math inline">\(R^2\)</span>?</h2>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><ul>
+<li><p>A statistical measure of “fit”</p></li>
+<li><p>It tells us how much variation of the <span class="math inline">\(Y\)</span> variable is explained by the <span class="math inline">\(X\)</span> variable(s)</p></li>
+<li><p>Higher <span class="math inline">\(R^2\)</span> = better fit; <span class="math inline">\(R^2\)</span> = 1 <span class="math inline">\(\Rightarrow\)</span> all variation is explained</p></li>
+</ul>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/r_sq.png" style="width:100.0%" class="r-stretch"></section>
+<section id="interpretting-what-is-p-value" class="slide level2">
+<h2>Interpretting: What is P-value?</h2>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><ul>
+<li><p>Tableau’s default P-value is a measure of the significance for slope parameter <span class="math inline">\(\beta_1\)</span></p></li>
+<li><p>smaller p-value = better</p></li>
+<li><p>A p-value of 0.05 or less is often considered statistically significant <span class="math inline">\(\Rightarrow\)</span> statistically significantly different from 0</p></li>
+</ul>
+</section>
+<section id="interpretting-what-is-p-value-1" class="slide level2">
+<h2>Interpretting: What is P-value?</h2>
+<p>Note that clicking “describe trend line” will also give you a p-value for the intercept parameter.</p>
+
+<img data-src="includes/tableau_describe.png" style="width:100.0%" class="r-stretch"></section>
+<section id="q-how-well-does-the-model-fit-the-data" class="slide level2">
+<h2>Q: How well does the model fit the data?</h2>
+
+<img data-src="includes/exercise.png" style="width:100.0%" class="r-stretch"><p>A. Extremely well</p>
+<p>B. Decent</p>
+<p>C. Not well</p>
+</section>
+<section id="q-how-confident-are-you-that-the-estimated-slope-is-different-from-zero" class="slide level2">
+<h2>Q: How confident are you that the estimated slope is different from zero?</h2>
+
+<img data-src="includes/exercise.png" style="width:100.0%" class="r-stretch"><p>A. Very</p>
+<p>B. Somewhat</p>
+<p>C. Not at all</p>
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>
@@ -536,19 +569,19 @@
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="lecture_01_week_01_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="lecture_01_week_01_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture_01_week_02_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
