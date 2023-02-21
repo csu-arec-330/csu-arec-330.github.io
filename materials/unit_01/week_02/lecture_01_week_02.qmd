@@ -13,7 +13,7 @@ format:
 
 Linear trend analysis
 
-Non-linear trend analysis
+Interpretting trend analysis
 
 Forecasting using trends
 
@@ -247,13 +247,13 @@ What is does $\beta_1$ represent? How can we interpret it? What does it mean for
 
 - It tells us how much variation of the $Y$ variable is explained by the $X$ variable(s)
 
-- Higher $R^2$ =  better fit; $R^2$ = 1 $\Rightarrow$ all variation is explained
+- Higher $R^2$ =  better fit; $R^2$ = 1 $\Rightarrow$ all variation is explained; [More info](https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/statistics/regression-and-correlation/coefficient-of-determination-r-squared.html)
 
 ## 
 
 ![](includes/r_sq.png){width="100%"}
 
-## Interpretting: What is P-value?
+## Interpretting output: What is P-value?
 
 ![](includes/tableau_reg.png){width="100%"}
 
@@ -261,7 +261,7 @@ What is does $\beta_1$ represent? How can we interpret it? What does it mean for
 
 - smaller p-value = better 
 
-- A p-value of 0.05 or less is often considered statistically significant $\Rightarrow$ statistically significantly different from 0
+- A p-value of 0.05 or less is often considered statistically significant $\Rightarrow$ statistically significantly different from 0; [More info](https://www.w3schools.com/datascience/ds_linear_regression_pvalue.asp)
 
 ## Interpretting: What is P-value?
 
