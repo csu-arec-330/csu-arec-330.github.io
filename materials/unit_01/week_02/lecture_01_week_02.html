@@ -7,7 +7,7 @@
 <link href="lecture_01_week_02_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_01_week_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_01_week_02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.313">
+  <meta name="generator" content="quarto-1.2.280">
 
   <title>Week 6:  Intro to Trends and Forecasting </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -568,6 +568,55 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 \hat{Y} = 189.513 + 0.0728323*(250) = 207.721
 \]</span></p>
 </section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<div style="text-align: center">
+<p><img data-src="includes/linear_forecast.png" style="width:80.0%"></p>
+</div>
+</section>
+<section id="considerations-when-using-ols-to-forecast" class="slide level2">
+<h2>Considerations when using OLS to forecast</h2>
+<ol type="1">
+<li>Is your relationship linear?</li>
+</ol>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<div style="text-align: center">
+<p><img data-src="includes/nonlinear_trend.webp" style="width:80.0%"></p>
+</div>
+</section>
+<section id="considerations-when-using-ols-to-forecast-1" class="slide level2">
+<h2>Considerations when using OLS to forecast</h2>
+<ol type="1">
+<li><p>Is your relationship linear?</p>
+<ul>
+<li>Consider including a non-linear transformation of your X variable, e.g., <span class="math inline">\(Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i\)</span></li>
+</ul></li>
+<li><p>What time period should you use to estimate the trend?</p></li>
+</ol>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<div style="text-align: center">
+<p><img data-src="includes/carrot_longtrend.png" style="width:80.0%"></p>
+</div>
+</section>
+<section id="considerations-when-using-ols-to-forecast-2" class="slide level2">
+<h2>Considerations when using OLS to forecast</h2>
+<ol type="1">
+<li><p>Is your relationship linear?</p>
+<ul>
+<li>Consider including a non-linear transformation of your X variable, e.g., <span class="math inline">\(Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i\)</span></li>
+</ul></li>
+<li><p>What time period should you use to estimate the trend?</p>
+<ul>
+<li><p>Test for structural breaks</p></li>
+<li><p>Decide how to account for structural breaks</p></li>
+<li><p>E.G., are structural breaks regularly occuring? (perhaps prices jump every 20 years)</p></li>
+</ul></li>
+</ol>
+</section>
 <section id="cautionary-note" class="slide level2">
 <h2>Cautionary note</h2>
 <ul>
@@ -588,15 +637,20 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 </div>
 </section></section>
 <section>
-<section id="section-6" class="title-slide slide level1 center">
+<section id="section-9" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
 <p>CORRELATION <span class="math inline">\(\neq\)</span> CAUSATION</p>
 </div>
 </section>
-<section id="references" class="slide level2 scrollable smaller">
-<h2>References</h2>
-<p>Hyndman, R.J., &amp; Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <a href="https://otexts.com/fpp3/" class="uri">https://otexts.com/fpp3/</a>. Accessed on 02-14-2023.</p>
+<section id="reminder-project-1" class="slide level2">
+<h2>REMINDER: Project 1</h2>
+<p>Groups of 2</p>
+<p>Choose an ag biz or enre management question to answer with time series data</p>
+<p>Collect time series data</p>
+<p>Analyze trends</p>
+<p>Generate a forecast</p>
+<p>Present results in class Fri March 10</p>
 <div class="footer footer-default">
 
 </div>

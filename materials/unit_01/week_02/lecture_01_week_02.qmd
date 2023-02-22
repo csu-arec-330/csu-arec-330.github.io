@@ -306,6 +306,51 @@ $$
 \hat{Y} = 189.513 + 0.0728323*(250) = 207.721
 $$
 
+
+## 
+::: {style="text-align: center"}
+![](includes/linear_forecast.png){width="80%"}
+
+::: 
+
+## Considerations when using OLS to forecast
+
+1. Is your relationship linear?
+
+## 
+::: {style="text-align: center"}
+![](includes/nonlinear_trend.webp){width="80%"}
+
+::: 
+
+## Considerations when using OLS to forecast
+
+1. Is your relationship linear?
+
+    - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
+
+2. What time period should you use to estimate the trend?
+
+## 
+::: {style="text-align: center"}
+![](includes/carrot_longtrend.png){width="80%"}
+
+::: 
+
+## Considerations when using OLS to forecast
+
+1. Is your relationship linear?
+
+    - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
+
+2. What time period should you use to estimate the trend?
+
+    - Test for structural breaks
+
+    - Decide how to account for structural breaks
+
+    - E.G., are structural breaks regularly occuring? (perhaps prices jump every 20 years)
+
 ## Cautionary note 
 
 - We will teach you enough to be dangerous
@@ -336,8 +381,16 @@ CORRELATION $\neq$ CAUSATION
 
 
 
-## References {.scrollable .smaller}
+## REMINDER: Project 1
 
+Groups of 2
 
+Choose an ag biz or enre management question to answer with time series data
 
-Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <https://otexts.com/fpp3/>. Accessed on 02-14-2023.
+Collect time series data
+
+Analyze trends 
+
+Generate a forecast 
+
+Present results in class Fri March 10
