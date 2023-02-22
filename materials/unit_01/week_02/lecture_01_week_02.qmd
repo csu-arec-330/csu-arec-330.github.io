@@ -11,7 +11,7 @@ format:
 
 ## Agenda 
 
-Linear trend analysis
+Linear regression/trend analysis
 
 Interpretting trend analysis
 
@@ -66,7 +66,7 @@ How could we use these data to answer:
 
 1.  Are carrot prices, on average, increasing or decreasing?
 
-2.  How much do observed carrot prices deviate from the average trend?
+2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
 
 3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
 
@@ -80,6 +80,17 @@ How could we use these data to answer:
 Why?<br> 
 :::
 
+## Linear regression: The intuition {.scrollable}
+
+How could we use these data to answer:
+
+1.  **Are carrot prices, on average, increasing or decreasing?**
+
+    - **Increasing (slightly)**
+
+2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
+
+3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
 
 ## Linear regression: The intuition {.scrollable}
 
@@ -240,6 +251,21 @@ What is does $\beta_1$ represent? How can we interpret it? What does it mean for
 
 ![](includes/r_sq.png){width="100%"}
 
+## Linear regression: The intuition {.scrollable}
+
+How could we use these data to answer:
+
+1.  Are carrot prices, on average, increasing or decreasing?
+
+    - Increasing (slightly)
+
+2.  **How much of the observed variation in carrot prices can be explained by a simple trend line?**
+
+    - **Not much!**
+
+3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
+
+
 ## Interpretting output: What is P-value?
 
 ![](includes/tableau_reg.png){width="100%"}
@@ -312,6 +338,23 @@ $$
 ![](includes/linear_forecast.png){width="80%"}
 
 ::: 
+
+## Linear regression: The intuition {.scrollable}
+
+How could we use these data to answer:
+
+1.  Are carrot prices, on average, increasing or decreasing?
+
+    - Increasing (slightly)
+
+2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
+
+    - Not much!
+
+3.  **What is the most reasonable prediction of carrot prices 250 months after the financial crisis?**
+
+    - **BEST estimate: 207**
+
 
 ## Considerations when using OLS to forecast
 

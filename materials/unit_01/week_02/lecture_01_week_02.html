@@ -7,7 +7,7 @@
 <link href="lecture_01_week_02_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_01_week_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_01_week_02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.2.313">
 
   <title>Week 6:  Intro to Trends and Forecasting </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -331,7 +331,7 @@
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<p>Linear trend analysis</p>
+<p>Linear regression/trend analysis</p>
 <p>Interpretting trend analysis</p>
 <p>Forecasting using trends</p>
 <p>Motivation for structural breaks</p>
@@ -377,7 +377,7 @@
 <p>How could we use these data to answer:</p>
 <ol type="1">
 <li><p>Are carrot prices, on average, increasing or decreasing?</p></li>
-<li><p>How much do observed carrot prices deviate from the average trend?</p></li>
+<li><p>How much of the observed variation in carrot prices can be explained by a simple trend line?</p></li>
 <li><p>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</p></li>
 </ol>
 </section>
@@ -393,6 +393,18 @@
 </div>
 </section>
 <section id="linear-regression-the-intuition-2" class="slide level2 scrollable">
+<h2>Linear regression: The intuition</h2>
+<p>How could we use these data to answer:</p>
+<ol type="1">
+<li><p><strong>Are carrot prices, on average, increasing or decreasing?</strong></p>
+<ul>
+<li><strong>Increasing (slightly)</strong></li>
+</ul></li>
+<li><p>How much of the observed variation in carrot prices can be explained by a simple trend line?</p></li>
+<li><p>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</p></li>
+</ol>
+</section>
+<section id="linear-regression-the-intuition-3" class="slide level2 scrollable">
 <h2>Linear regression: The intuition</h2>
 
 <img data-src="includes/carrot_ols1.png" style="width:80.0%" class="r-stretch"></section>
@@ -517,6 +529,21 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 <h2></h2>
 
 <img data-src="includes/r_sq.png" style="width:100.0%" class="r-stretch"></section>
+<section id="linear-regression-the-intuition-4" class="slide level2 scrollable">
+<h2>Linear regression: The intuition</h2>
+<p>How could we use these data to answer:</p>
+<ol type="1">
+<li><p>Are carrot prices, on average, increasing or decreasing?</p>
+<ul>
+<li>Increasing (slightly)</li>
+</ul></li>
+<li><p><strong>How much of the observed variation in carrot prices can be explained by a simple trend line?</strong></p>
+<ul>
+<li><strong>Not much!</strong></li>
+</ul></li>
+<li><p>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</p></li>
+</ol>
+</section>
 <section id="interpretting-output-what-is-p-value" class="slide level2">
 <h2>Interpretting output: What is P-value?</h2>
 
@@ -573,6 +600,24 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 <div style="text-align: center">
 <p><img data-src="includes/linear_forecast.png" style="width:80.0%"></p>
 </div>
+</section>
+<section id="linear-regression-the-intuition-5" class="slide level2 scrollable">
+<h2>Linear regression: The intuition</h2>
+<p>How could we use these data to answer:</p>
+<ol type="1">
+<li><p>Are carrot prices, on average, increasing or decreasing?</p>
+<ul>
+<li>Increasing (slightly)</li>
+</ul></li>
+<li><p>How much of the observed variation in carrot prices can be explained by a simple trend line?</p>
+<ul>
+<li>Not much!</li>
+</ul></li>
+<li><p><strong>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</strong></p>
+<ul>
+<li><strong>BEST estimate: 207</strong></li>
+</ul></li>
+</ol>
 </section>
 <section id="considerations-when-using-ols-to-forecast" class="slide level2">
 <h2>Considerations when using OLS to forecast</h2>
