@@ -35,19 +35,6 @@ Project 1 reminder
 <!-- ::: -->
 <!-- :::: -->
 
-## Cautionary note 
-
-- We will teach you enough to be dangerous
-
-- We are introducing you to the tip of the analytical iceberg.  Learn more before you put this into practice.
-
-- Incorrect analysis can lead to worse conclusions than no analysis
-
-::: {.incremental}
-
-- Be wary of causal conclusions!
-
-:::
 
 # Intro to Linear Regressions
 
@@ -291,6 +278,63 @@ A. Very
 B. Somewhat
 
 C. Not at all
+
+## Using OLS regressions to forecast
+
+::: {style="text-align: center"}
+![](includes/forecast.jpeg){width="75%"}
+
+::: 
+
+## Using OLS regressions to forecast
+
+**How?**
+
+- Continue/extend your trend beyond your time series
+
+- Tableau and other programs can do this for you automatically
+
+- You can also do this manually by plugging in values of your $X$ variable(s)...
+
+## Using OLS regressions to forecast
+
+**What is the most reasonable prediction of carrot prices 250 months after the financial crisis?**
+
+![](includes/tableau_reg.png){width="100%"}
+
+$$
+\hat{Y} = 189.513 + 0.0728323*(250) = 207.721
+$$
+
+## Cautionary note 
+
+- We will teach you enough to be dangerous
+
+- We are introducing you to the tip of the analytical iceberg.  Learn more before you put this into practice.
+
+- Incorrect analysis can lead to worse conclusions than no analysis
+
+::: {.incremental}
+
+- Be wary of causal conclusions!
+
+:::
+
+## The "effect" of education on income?
+
+::: {style="text-align: center"}
+![](includes/income_educ.png){width="70%"}
+
+:::
+
+
+# 
+::: {.r-fit-text }
+CORRELATION $\neq$ CAUSATION
+
+:::
+
+
 
 ## References {.scrollable .smaller}
 

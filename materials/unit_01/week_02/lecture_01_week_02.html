@@ -7,7 +7,7 @@
 <link href="lecture_01_week_02_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_01_week_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_01_week_02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.2.313">
 
   <title>Week 6:  Intro to Trends and Forecasting </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -347,19 +347,6 @@
 <!-- ::: -->
 <!-- :::: -->
 </section>
-<section id="cautionary-note" class="slide level2">
-<h2>Cautionary note</h2>
-<ul>
-<li><p>We will teach you enough to be dangerous</p></li>
-<li><p>We are introducing you to the tip of the analytical iceberg. Learn more before you put this into practice.</p></li>
-<li><p>Incorrect analysis can lead to worse conclusions than no analysis</p></li>
-</ul>
-<div>
-<ul>
-<li class="fragment">Be wary of causal conclusions!</li>
-</ul>
-</div>
-</section>
 <section id="intro-to-linear-regressions" class="title-slide slide level1 center">
 <h1>Intro to Linear Regressions</h1>
 
@@ -557,6 +544,55 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 <img data-src="includes/exercise.png" style="width:100.0%" class="r-stretch"><p>A. Very</p>
 <p>B. Somewhat</p>
 <p>C. Not at all</p>
+</section>
+<section id="using-ols-regressions-to-forecast" class="slide level2">
+<h2>Using OLS regressions to forecast</h2>
+<div style="text-align: center">
+<p><img data-src="includes/forecast.jpeg" style="width:75.0%"></p>
+</div>
+</section>
+<section id="using-ols-regressions-to-forecast-1" class="slide level2">
+<h2>Using OLS regressions to forecast</h2>
+<p><strong>How?</strong></p>
+<ul>
+<li><p>Continue/extend your trend beyond your time series</p></li>
+<li><p>Tableau and other programs can do this for you automatically</p></li>
+<li><p>You can also do this manually by plugging in values of your <span class="math inline">\(X\)</span> variable(s)…</p></li>
+</ul>
+</section>
+<section id="using-ols-regressions-to-forecast-2" class="slide level2">
+<h2>Using OLS regressions to forecast</h2>
+<p><strong>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</strong></p>
+
+<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p><span class="math display">\[
+\hat{Y} = 189.513 + 0.0728323*(250) = 207.721
+\]</span></p>
+</section>
+<section id="cautionary-note" class="slide level2">
+<h2>Cautionary note</h2>
+<ul>
+<li><p>We will teach you enough to be dangerous</p></li>
+<li><p>We are introducing you to the tip of the analytical iceberg. Learn more before you put this into practice.</p></li>
+<li><p>Incorrect analysis can lead to worse conclusions than no analysis</p></li>
+</ul>
+<div>
+<ul>
+<li class="fragment">Be wary of causal conclusions!</li>
+</ul>
+</div>
+</section>
+<section id="the-effect-of-education-on-income" class="slide level2">
+<h2>The “effect” of education on income?</h2>
+<div style="text-align: center">
+<p><img data-src="includes/income_educ.png" style="width:70.0%"></p>
+</div>
+</section></section>
+<section>
+<section id="section-6" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p>CORRELATION <span class="math inline">\(\neq\)</span> CAUSATION</p>
+</div>
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>
