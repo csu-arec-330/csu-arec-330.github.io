@@ -40,6 +40,13 @@ First, you need to load your time series data into R and set up your script (des
 
 ```{r}
 #| eval: false
+#This lab...
+
+library(tidyquant)
+library(dplyr)
+library(readr)
+library(forecast)
+
 carrot <- tq_get(c("WPU01130212"),get = "economic.data",from="2007-08-01")
 ```
 
@@ -191,7 +198,7 @@ Tableau has its own forecasting features, but these are much less informative an
 
 ## 1. Tableau’s Forecasting
 
-Let’s load our carrot price data into Tableau and check out Tableau’s forecasting features.
+Let’s load your carrot price data you exported from R into Tableau and check out Tableau’s forecasting features.
 
 1. Once you are connected to the carrot price data, let’s create a filter for our entire workbook so that we only use more recent data (after our structural break) in the forecasting exercise.  
 
