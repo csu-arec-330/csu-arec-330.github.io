@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Problem Set 6: Creating and Visualizing Forecasts</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="ps6_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ps6_files/libs/quarto-html/quarto.js"></script>
+<script src="ps6_files/libs/quarto-html/popper.min.js"></script>
+<script src="ps6_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ps6_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ps6_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ps6_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ps6_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ps6_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ps6_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Problem Set 6: Creating and Visualizing Forecasts</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="part-1-r" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-r">Part 1: R</h2>
+<ol type="1">
+<li><p>All computer programs track time numerically relative to an epoch. What is the numeric value of the assignment due date 02/23/2023?</p></li>
+<li><p>Use the <code>tidyquant</code> package to access the FRED API and download 3 time series datasets.</p></li>
+<li><p>Use <code>case_when()</code> to change the name of the series to something more descriptive.</p></li>
+<li><p>Export the data in .csv format for Tableau</p></li>
+</ol>
+</section>
+<section id="part-2-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-tableau">Part 2: Tableau</h2>
+<ol type="1">
+<li><p>In Tableau, connect to the file you exported from R with your original price time series data, the forecast, and the (three) components of your decomposition. If needed for your analysis, filter your data on the <code>Date</code> field so that all worksheets in your workbook start at the date you want to begin your analysis.</p></li>
+<li><p>Use observed prices to create a forecast in Tableau that uses an additive trend line and additive seasonality. Recall that you will need to filter these data on your indicator variable for whether the price values are forecasted or not (in lab we named this variable <code>Forecast</code>)</p></li>
+<li><p>Create a new visualization that shows the forecasts you created in R. Combine this and the Tableau forecast into a data dashboard. Add a text box to your dashboard and explain any differences between the forecasted estimates and explain why you think the forecasts are different. Once you have created this dashboard you can <code>hide</code> your worksheets you used to create this dashboard by right clicking on them and selecting <code>Hide</code>. This will clean up your workbook.</p></li>
+<li><p>Next create a new worksheet that shows each of the components of your forecast decomposition (the one you did in R). Add a discussion of each of these components as a caption in your worksheet – what are the overall trends in the data? Which seasons have higher or lower prices? How much variation is unexplained by the trend and seasonality components?</p></li>
+<li><p>Finally, create a dashboard that shows seasonal trends in your data by month and by quarter. You can use any visualization(s) of your choosing in this dashboard. Add a text box that describes key take-aways from your analysis and that answers the following questions: Are there more apparent trends in your data when comparing across months or across quarters? Are there noteable differences in the annual trends within a given month or quarter? Do these trends align with the seasonal decomposition you found in your R analysis?</p></li>
+<li><p>Once you have created your dashboard you can <code>hide</code> your worksheets you used to create the dashboards by right clicking on them and selecting <code>Hide</code>. This will clean up your workbook. The final workbook you publish should include your two data dashboards and your single worksheet with the R decomposition.</p></li>
+<li><p>Format your visualizations by adding color, useful titles, appropriate marker labels, text annotations, etc. that help your audience understand your analysis.</p></li>
+<li><p>Publish this workbook on Tableau public.</p></li>
+</ol>
+</section>
+<section id="how-to-submit" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
+<p>You should create a new webpage on your google site titled <code>Problem Set 6</code>. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Part 2 should include an embedded version of your Tableau dashboards and worksheets (you should be able to toggle between dashboards and worksheets by using tabs in this embedded view, but email Ali if you need help getting this to work). Submit the link to your google site webpage in Canvas.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

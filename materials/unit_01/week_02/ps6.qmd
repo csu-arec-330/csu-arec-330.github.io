@@ -18,31 +18,23 @@ format:
 
 ## Part 2: Tableau
 
-1.  In Tableau, connect to the file you exported from R with your original price time series data, the forecast, and the (three) components of your decomposition.
+1.  In Tableau, connect to the file you exported from R with your original price time series data, the forecast, and the (three) components of your decomposition. If needed for your analysis, filter your data on the `Date` field so that all worksheets in your workbook start at the date you want to begin your analysis. 
 
-2. Use observed prices to create a forecast in Tableau that uses an additive trend line and additive seasonality. 
+2. Use observed prices to create a forecast in Tableau that uses an additive trend line and additive seasonality. Recall that you will need to filter these data on your indicator variable for whether the price values are forecasted or not (in lab we named this variable `Forecast`)
 
 3.  Create a new visualization that shows the forecasts you created in R. Combine this and the Tableau forecast into a data dashboard. Add a text box to your dashboard and explain any differences between the forecasted estimates and explain why you think the forecasts are different. Once you have created this dashboard you can `hide` your worksheets you used to create this dashboard by right clicking on them and selecting `Hide`. This will clean up your workbook.
 
 4. Next create a new worksheet that shows each of the components of your forecast decomposition (the one you did in R). Add a discussion of each of these components as a caption in your worksheet -- what are the overall trends in the data? Which seasons have higher or lower prices? How much variation is unexplained by the trend and seasonality components?
 
-5.  Finally, create a dashboard that shows seasonal trends in your data by month and by quarter. You can use any visualization(s) of your choosing in this dashboard. Add a text box that describes key take-aways from your analysis and that answers the following questions: Are there more apparent trends in your data when comparing across months or across quarters? Are therenoteable differences in the annual trends within a given month or quarter?
+5.  Finally, create a dashboard that shows seasonal trends in your data by month and by quarter. You can use any visualization(s) of your choosing in this dashboard. Add a text box that describes key take-aways from your analysis and that answers the following questions: Are there more apparent trends in your data when comparing across months or across quarters? Are there noteable differences in the annual trends within a given month or quarter? Do these trends align with the seasonal decomposition you found in your R analysis?
 
-What can this visualization tell you about trends in the time series by month? By quarter?
+6.  Once you have created your dashboard you can `hide` your worksheets you used to create the dashboards by right clicking on them and selecting `Hide`. This will clean up your workbook. The final workbook you publish should include your two data dashboards and your single worksheet with the R decomposition.
 
-new field called `months_around_financial_crisis` that calculates the number of months between the indicated month and the month the 2008 financial crisis was first reflected in U.S. stock markets (August 2007). 
+7. Format your visualizations by adding color, useful titles, appropriate marker labels, text annotations, etc. that help your audience understand your analysis.
 
-3. Create a visualization that shows monthly prices for your three commodities, using your new `months_around_financial_crisis` variable as the time dimension (x-axis).
-
-4. Create a structural break in your time series at the time of the financial crisis. Add trend lines for each series leading up to and following the financial crisis.
-
-5. In the caption of your figure, explain whether or not these three commodities appeared to be influence by the financial crisis. Does any difference across commodities make sense? 
-
-6. Finally, format your visualization by limiting the time window (to something that helps the audience see differences before and after the crisis), adding color, a useful title, appropriate marker labels, text annotations, etc. 
-
-7. Choose one of your commodities to focus on. Create a new visualization that shows **annual** trends in maximum, minimum, and average prices for this commodity before and after the financial crisis (note you will not be able to do this with the monthly variable you created...). Does this annual analysis change your results or conclusions about the impacts of the financial crisis for this commoditiy? Discuss any differences, similarities, or additional insights from this analysis in the figure caption.
+8. Publish this workbook on Tableau public.
 
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 5`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Part 2 should contain your evidence of completing steps 1 & 2 and a link to your Tableau Public site. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your google site titled `Problem Set 6`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Part 2 should include an embedded version of your Tableau dashboards and worksheets (you should be able to toggle between dashboards and worksheets by using tabs in this embedded view, but email Ali if you need help getting this to work). Submit the link to your google site webpage in Canvas.
