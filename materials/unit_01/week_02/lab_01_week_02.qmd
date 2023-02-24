@@ -22,17 +22,13 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 ## Learning Objectives Tableau
 
-- Understand date functions
+- Apply Tableau's default forecasting
 
-- Use date functions in calculated fields
+- Customize Tableau's forecasting
 
-- Visualizing time series data 
+- Visualize decompositions and forecasts created in R
 
-- Creating and interpreting trend lines
-
-- Visualizing structural breaks 
-
-- Creating panes to visualize mutiple time series
+- Create advanced visualizations to demonstrate seasonality and overall trends in time series data
 
 ## Unit 1 Project Overview
 
@@ -191,174 +187,100 @@ write_csv(final_out,"carrot_forecast.csv")
 
 # Tableau
 
-A key attribute of time series data is that we observe values of variables across **time**. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.  
+Tableau has its own forecasting features, but these are much less informative and flexible than what you ca do in R. Today we will show you how to use and customize Tableau’s forecasting features, how to create visualizations using your (improved) R forecasts, and we will show you how to create visualizations that show trends and cyclicality in your data — key components of your forecast!
 
-### 1. Date functions
+## 1. Tableau’s Forecasting
 
-Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.
+Let’s load our carrot price data into Tableau and check out Tableau’s forecasting features.
 
-You can explore these functions by going to `create calculated field` and choosing `Date`. You can look through these on your own, but I will highlight a few here.
+1. Once you are connected to the carrot price data, let’s create a filter for our entire workbook so that we only use more recent data (after our structural break) in the forecasting exercise.  
 
--  DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number. 
+    - On the Data Source page, click `filter` in the top right.
 
-    - For example, DATEPART (‘month’, #January 23, 2021#) = 1
+  	- Filter Date to begin August 1, 2007
 
-    - Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.
+2. Open a new worksheet and plot the monthly carrot price data over time.  
 
-- DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.
+3. Two ways to add a forecast - Right click or go to the `Analytics` tab on the left pane.  
 
-    - For example, DATENAME (‘month’, #January 23, 2021#) = January
+Now you have added a forecast line that Tableau has decided is a good fit of your data. (Along with 95% confidence bands) Let’s explore this forecast.
 
-- DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.
+1. Right click on your visualization and select `Forecast` -> `Describe Forecast...`  
 
-    - For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021
+  	- Did Tableau use the entire time period when constructing the forecast?
 
-- DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part. 
+    	- What time period is Tableau forecasting for?
 
-    - For example, DATEDIFF ('day', #January 23, 2021#, #February 24, 2021#) = 32              and DATEDIFF ('month', #January 23, 2021#, #February 24, 2021#) = 1
+	- Does Tableau think this forecast is accurate?
 
-- DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date. 
+  	- If you want to learn more about this description, click the link at the bottom of the window.
 
-    - For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021. 
-                
-- MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record. 
+2. Click on `Models` at the top of the window.
 
-    - For example, MIN ([Order Date]) returns the earliest date in the Order Date field.
+  	- This gives you information about the forecasting model Tableau has applied, including how it is weighting values (past vs. more recent), and measures of “fit”.
 
-- MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record. 
+  	- If you want to learn more about the Tableau forecasting models, click the link at the bottom of the window.
 
-    - For example, MAX ([Order Date]) returns the latest date in the Order Date field.
+Now, let’s adjust Tableau’s recommended forecast as we see fit.
 
-Here are some handy definitions for date_time arguments:
+1. Right click on your visualization and select `Forecast` -> `Forecast Options...`
 
-![](includes/date_args.png)
+2. Adjust the forecast length by selecting `Exactly` or `Until`
 
-### 2. Use date functions in calculated fields
+3. Adjust the ignored periods (this is useful if your data only include part of a year, or if you have reason to believe the more recent data are not as useful) - what happens to the forecast as you adjust this?
 
-Connect to the `carrots_prices.csv` data and use the expressions above to do the following:
+4. Change the forecast model from `Automatic` to `Custom` and adjust the model parameters. Which do you like best?
 
-1. Create a calculated field named `months_ago` that determines the number of months between the commodity price data and today.
+5. Once you have created a forecast you are satisfied with, exit the popup window. Right click your worksheet tab and select `Duplicate as Crosstab`. Now you can easily see the values of your forecast.
 
-2.  Create a calculated field named `first_date` that determines the earliest date in the data.
 
-3.  Create a calculated field named `last_date` that determines the last date that the carrot price index was less than 135.
+Note that the initial forecast you saw was the one that Tableau determined to yield the highest quality prediction given your data, but it really was not a great prediction. R has much better forecasting capabilities, including more flexibility in the models you can apply, and more transparent algorithms. Best practice is to forecast in R, then visualize your forecast and its decomposition in Tableau.
 
-4.  Create a new variable called `month` that only includes the month.
+## 2. Visualizing R Forecasts in Tableau
 
-5.  Create a new variable called `year` that only includes the year.
+First, let’s visualize our decomposition:
 
-6.  Create a new date variable called `my_date` that assigns a new date using your `month` and `year` variables and sets the day as 15.
+1. Connect to the carrot price forecast data you exported in R. To keep everything in the same workbook, create a connection between these data and your original carrot price data (using the Date) variable
 
+2. Plot your raw data
 
-### 3. Visualize time series data
+3. Add the trend line you calculated in R to the pane below this
 
-What types of visualizations are most appropriate for time series data?  
+4. Show the seasonality you calculated in R in a pane below this
 
--  Line graphs
+5. Finally, show the residuals in the pane below this
 
--  Bar charts  
+6. You can also play with combining these figures as you see appropriate (e.g., I like to look at the trend line in the same pane as the actual data)
 
--  Dot plots
+7. As an aside - let’s change the raw price data to a “moving average” using Tableau’s quick table calculation. Why is this moving average different from the one you calculated in R?
 
--  Others?
 
-Let's experiment with creating these visualizations for time series:  
+Next, let’s visualize our forecast:
 
-1.  Create a line graph that shows the value of carrots over time (by month)
+1. Open a new worksheet and plot your carrot price data.
 
-2.  Add markers to your line graph
+2. Add your forecasted data from R. Change the color of the forecasted data to clarify which is forecasted and which is observed.
 
-3.  Change your line graph to a bar graph dot chart
+And voila! You have both created a good forecast and visualized its components along with the forecast.
 
-4.  Change your bar graph to a dot plot
+## 3. Additional Visualizations for Visualizing Seasonality
 
-5.  Change the size size, colors, and opacity of the dots in your dot plot (use the `Size` and `Color` icons)
+I will now quickly walk you through some ideas for showing and identifying seasonality in your data, as well as separating seasonality from overall trends.
 
-6.  Change the markers in your chart from dots to a different shape (use the dropdown menu on the `Marks` card, then use the `Shape` icons)
+1. Line graph over month
 
-Now let's experiment with changing what data is shown in your chart:  
+  	- Gives you some idea of average trends month to month
 
-1.  Change your x-axis to annual
+2. Lines for each year over month
 
-2.  Create one line that shows the average value of the commodity each year, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?  
+  	- Gives you some idea of month to month trends across years
 
-3.  Restrict your date ranges so that your visualization only shows the last 20 years of data (use the `Filters` card)
+3. Heat map
 
+  	- Gives you some idea of months with larger and smaller prices across years
 
-### 4. Creating and interpreting trend lines
+  	- Gives you some idea of months with larger changes in prices across years
 
-Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know *how* they are created? Let's start with a linear trend line... 
+4. Cycle map
 
--  What does a linear trend line tell you about your time series data?  
-
--  How is this trend line estimated? (conceptually... we will go through some equations on Wednesday!)
-
-Now, let's talk some specifics about linear trend lines in Tableau... 
-
-1.  Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022
-
-2.  Add a trend line to your chart
-
-3.  When you click on the trend line, what information does Tableau give you about it? What does this information mean? 
-
-4.  When you click on `describe trend model` what information does Tableau give you about it?
-
-5.  Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn't the trend line change when you changed the date aggregation?
-
-
-### 5. Visualizing structural breaks
-
-Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to *test* for structural breaks in your data that we will demonstrate in R, but for now let's go over a couple ways to visualize structural breaks that we identify with the very sophisticated "eyeball method". 
-
-1.  Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?  
-
-2.  Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.  
-
-3.  Add a **reference line** at this month-year. (Right click on the x-axis and select `Reference Line`) Does anything happen to your trend line? 
-
-Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let's go through two methods for doing this:
-
-**Method 1:** Separate your time series by adding color
-
-1.  Create a new calculated field named `before_after_break`. Use the `IF` and `THEN` functions and an appropriate `Date` function to populate this variable with "after" if the date if after the break you identified in the data and "before" if the date is before the break.  
-
-2.  Drag this variable to the `Color` card.
-
-3.  Add trend lines to your visualization. What happens?
-
-**Method 2:** Separate your time series by segmenting the x-axis
-
-1.  Drag your new variable from the `Marks` card to the `columns` shelf.
-
-2.  Sort your variable so that the "after" time period is shown following the "before" time period.
-
-3.  In the x-axis Edit Axis menu, select `independed axis ranges for each row or column` (access this menu by right clicking on the x-axis)
-
-4.  Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.
-
-
-### 6. Creating panes to visualize mutiple time series
-
-Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.
-
-Let's start by bringing in some price data for a few new commodities.
-
-1.  On the `Data Source` page connect to the following data sources `corn_prices.csv` and `tomatoes_prices.csv`
-
-2.  We are going to create a `relationship` between these data sources and our current working file
-
-3.  With the carrot data in the `canvas`, drag one of the other data sources next to it in the canvas. Do the same with the other data source.
-
-4.  Now go to a new worksheet, what do you see? What did we just accomplish?
-
-Now that we have all these data sources in a single file and they are structured in a "wide" format, we are going to construct time series plots that let us compare trends in these commodity prices across time.
-
-1.  Open a new worksheet and create a line plot of the prices over time for each commodity
-
-2.  Now try formatting your figure. Change colors, adjust sizes, etc.
-
-3.  Now use your `before_after_break` variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.
-
-### 7. If we have extra time... let's do some quick table calculations!
-
-{{< video https://youtu.be/6oOu5DqtakY aspect-ratio="16x9" >}}
+  	- This is the best way of visualizing (within year) seasonality and larger trends (across years)
