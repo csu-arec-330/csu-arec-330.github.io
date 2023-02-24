@@ -11,7 +11,7 @@ title: "Week 6: Intro to Linear Regression and Forecasting"
 <a  href="/materials/unit_01/week_02/lecture_01_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
 
 
-<b>Lab Materials - Fri, Feb 17, 2023:</b> <br>
+<b>Lab Materials - Fri, Feb 24, 2023:</b> <br>
 
 <a  href="/materials/unit_01/week_01/lab_01_week_02.html" target="_blank">Week 6 Lab Notes</a> <br> 
 
