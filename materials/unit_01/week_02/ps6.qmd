@@ -7,13 +7,13 @@ format:
 
 ## Part 1: R
 
-1. All computer programs track time numerically relative to an epoch.  What is the numeric value of the assignment due date 02/23/2023?
+1. Complete a time series decomposition using the time series that you collect for your project.
 
-2. Use the `tidyquant` package to access the FRED API and download 3 time series datasets.  
+2. Generate a "[seasonally-adjusted](https://otexts.com/fpp3/components.html#seasonally-adjusted-data)" time series of your observed data. Make note of this variable since you will need to export it with your other data.
 
-3. Use `case_when()` to change the name of the series to something more descriptive.
+3. Use R to create a 3 year forecast of your chosen time series. Follow the steps we went through in lab.  Create a new variable that indicates the new data you have created is a forecast.
 
-4. Export the data in .csv format for Tableau
+4. Create a dataframe with the following variables: `measure_date`, `price`, `trend`, `seasonal`, `residual`, `sa_price`, `forecast` (indicator of forecasted data). 
 
 
 ## Part 2: Tableau
