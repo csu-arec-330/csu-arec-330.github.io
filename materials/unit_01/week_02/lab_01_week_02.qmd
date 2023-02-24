@@ -1,0 +1,264 @@
+---
+title: "Week 6 Lab: Regression and Structural Breaks"
+format: 
+  html:
+    theme: zephyr
+    toc: true
+---
+
+
+![](includes/generic_forecasting.webp)
+
+::: {style="font-size: 1.5em"}
+This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
+:::
+
+## Learning Objectives R
+
+- 
+
+
+## Learning Objectives Tableau
+
+- Understand date functions
+
+- Use date functions in calculated fields
+
+- Visualizing time series data 
+
+- Creating and interpreting trend lines
+
+- Visualizing structural breaks 
+
+- Creating panes to visualize mutiple time series
+
+## Unit 1 Project Overview
+
+# R: Time Series Decomposition and Forecast
+
+### Step 1: Load your data
+
+First, you need to load your time series data into R and set up your script (description, working directory, load packages).
+
+```{r}
+#| eval: false
+carrot <- tq_get(c("WPU01130212"),get = "economic.data",from="2007-08-01")
+```
+
+### Step 2: Convert your data into a time series object
+
+Next, you need to convert your data into a time series object that R can work with. To do this, you can use the `ts()` function in R. The `ts()` function takes two arguments: `data` and `frequency.` `data` is a vector or matrix of your time series data, and `frequency` is the number of observations per unit time (e.g., the number of observations per year, per month, etc.). In the case of the carrots dataset, the frequency is 12 (since there are 12 observations per year).
+
+To convert the `carrot` dataset into a time series object, run the following command:
+
+```{r}
+#| eval: false
+carrot_ts <- ts(carrot$price,frequency = 12,start=c(2007,8))
+```
+
+This will create a new time series object called `ts_data.`
+
+### Step 3: Decompose your time series data
+
+Now that you have your time series data in a format that R can work with, you can use the `decompose()` function to decompose it into its underlying components. The `decompose()` function takes one argument: `x`, which is the time series object you want to decompose.
+
+To decompose the `carrot_ts` time series object, run the following command:
+
+```{r}
+#| eval: false
+carrot_decomp <- decompose(carrot_ts)
+```
+
+
+This will create a new object called `carrot_decomp` that contains the decomposed components of the `carrot_ts` time series object.
+
+### Step 4: Examine the results of the decomposition
+
+Finally, you can examine the results of the time series decomposition by plotting the decomposed components. The `carrot_decomp` object contains four components: `trend`, `seasonal`, `random`, and `figure`. You can access each of these components using the `$` operator.
+
+To plot the decomposed components, run the following command:
+
+```{r}
+#| eval: false
+plot(carrot_decomp$trend)
+plot(carrot_decomp$seasonal)
+plot(carrot_decomp$random)
+```
+
+This will create three separate plots that show the trend, seasonal, and random components of the time series data. You can use these plots to better understand the underlying patterns in your data.
+
+
+
+# Tableau
+
+A key attribute of time series data is that we observe values of variables across **time**. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.  
+
+### 1. Date functions
+
+Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.
+
+You can explore these functions by going to `create calculated field` and choosing `Date`. You can look through these on your own, but I will highlight a few here.
+
+-  DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number. 
+
+    - For example, DATEPART (‘month’, #January 23, 2021#) = 1
+
+    - Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.
+
+- DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.
+
+    - For example, DATENAME (‘month’, #January 23, 2021#) = January
+
+- DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.
+
+    - For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021
+
+- DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part. 
+
+    - For example, DATEDIFF ('day', #January 23, 2021#, #February 24, 2021#) = 32              and DATEDIFF ('month', #January 23, 2021#, #February 24, 2021#) = 1
+
+- DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date. 
+
+    - For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021. 
+                
+- MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record. 
+
+    - For example, MIN ([Order Date]) returns the earliest date in the Order Date field.
+
+- MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record. 
+
+    - For example, MAX ([Order Date]) returns the latest date in the Order Date field.
+
+Here are some handy definitions for date_time arguments:
+
+![](includes/date_args.png)
+
+### 2. Use date functions in calculated fields
+
+Connect to the `carrots_prices.csv` data and use the expressions above to do the following:
+
+1. Create a calculated field named `months_ago` that determines the number of months between the commodity price data and today.
+
+2.  Create a calculated field named `first_date` that determines the earliest date in the data.
+
+3.  Create a calculated field named `last_date` that determines the last date that the carrot price index was less than 135.
+
+4.  Create a new variable called `month` that only includes the month.
+
+5.  Create a new variable called `year` that only includes the year.
+
+6.  Create a new date variable called `my_date` that assigns a new date using your `month` and `year` variables and sets the day as 15.
+
+
+### 3. Visualize time series data
+
+What types of visualizations are most appropriate for time series data?  
+
+-  Line graphs
+
+-  Bar charts  
+
+-  Dot plots
+
+-  Others?
+
+Let's experiment with creating these visualizations for time series:  
+
+1.  Create a line graph that shows the value of carrots over time (by month)
+
+2.  Add markers to your line graph
+
+3.  Change your line graph to a bar graph dot chart
+
+4.  Change your bar graph to a dot plot
+
+5.  Change the size size, colors, and opacity of the dots in your dot plot (use the `Size` and `Color` icons)
+
+6.  Change the markers in your chart from dots to a different shape (use the dropdown menu on the `Marks` card, then use the `Shape` icons)
+
+Now let's experiment with changing what data is shown in your chart:  
+
+1.  Change your x-axis to annual
+
+2.  Create one line that shows the average value of the commodity each year, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?  
+
+3.  Restrict your date ranges so that your visualization only shows the last 20 years of data (use the `Filters` card)
+
+
+### 4. Creating and interpreting trend lines
+
+Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know *how* they are created? Let's start with a linear trend line... 
+
+-  What does a linear trend line tell you about your time series data?  
+
+-  How is this trend line estimated? (conceptually... we will go through some equations on Wednesday!)
+
+Now, let's talk some specifics about linear trend lines in Tableau... 
+
+1.  Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022
+
+2.  Add a trend line to your chart
+
+3.  When you click on the trend line, what information does Tableau give you about it? What does this information mean? 
+
+4.  When you click on `describe trend model` what information does Tableau give you about it?
+
+5.  Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn't the trend line change when you changed the date aggregation?
+
+
+### 5. Visualizing structural breaks
+
+Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to *test* for structural breaks in your data that we will demonstrate in R, but for now let's go over a couple ways to visualize structural breaks that we identify with the very sophisticated "eyeball method". 
+
+1.  Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?  
+
+2.  Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.  
+
+3.  Add a **reference line** at this month-year. (Right click on the x-axis and select `Reference Line`) Does anything happen to your trend line? 
+
+Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let's go through two methods for doing this:
+
+**Method 1:** Separate your time series by adding color
+
+1.  Create a new calculated field named `before_after_break`. Use the `IF` and `THEN` functions and an appropriate `Date` function to populate this variable with "after" if the date if after the break you identified in the data and "before" if the date is before the break.  
+
+2.  Drag this variable to the `Color` card.
+
+3.  Add trend lines to your visualization. What happens?
+
+**Method 2:** Separate your time series by segmenting the x-axis
+
+1.  Drag your new variable from the `Marks` card to the `columns` shelf.
+
+2.  Sort your variable so that the "after" time period is shown following the "before" time period.
+
+3.  In the x-axis Edit Axis menu, select `independed axis ranges for each row or column` (access this menu by right clicking on the x-axis)
+
+4.  Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.
+
+
+### 6. Creating panes to visualize mutiple time series
+
+Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.
+
+Let's start by bringing in some price data for a few new commodities.
+
+1.  On the `Data Source` page connect to the following data sources `corn_prices.csv` and `tomatoes_prices.csv`
+
+2.  We are going to create a `relationship` between these data sources and our current working file
+
+3.  With the carrot data in the `canvas`, drag one of the other data sources next to it in the canvas. Do the same with the other data source.
+
+4.  Now go to a new worksheet, what do you see? What did we just accomplish?
+
+Now that we have all these data sources in a single file and they are structured in a "wide" format, we are going to construct time series plots that let us compare trends in these commodity prices across time.
+
+1.  Open a new worksheet and create a line plot of the prices over time for each commodity
+
+2.  Now try formatting your figure. Change colors, adjust sizes, etc.
+
+3.  Now use your `before_after_break` variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.
+
+### 7. If we have extra time... let's do some quick table calculations!
+
+{{< video https://youtu.be/6oOu5DqtakY aspect-ratio="16x9" >}}

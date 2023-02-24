@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 6 Lab: Regression and Structural Breaks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="lab_01_week_02_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab_01_week_02_files/libs/quarto-html/quarto.js"></script>
+<script src="lab_01_week_02_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab_01_week_02_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab_01_week_02_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab_01_week_02_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab_01_week_02_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab_01_week_02_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab_01_week_02_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab_01_week_02_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
+  <li><a href="#unit-1-project-overview" id="toc-unit-1-project-overview" class="nav-link" data-scroll-target="#unit-1-project-overview">Unit 1 Project Overview</a></li>
+  <li><a href="#r-time-series-decomposition-and-forecast" id="toc-r-time-series-decomposition-and-forecast" class="nav-link" data-scroll-target="#r-time-series-decomposition-and-forecast">R: Time Series Decomposition and Forecast</a>
+  <ul class="collapse">
+  <li><a href="#step-1-load-your-data" id="toc-step-1-load-your-data" class="nav-link" data-scroll-target="#step-1-load-your-data">Step 1: Load your data</a></li>
+  <li><a href="#step-2-convert-your-data-into-a-time-series-object" id="toc-step-2-convert-your-data-into-a-time-series-object" class="nav-link" data-scroll-target="#step-2-convert-your-data-into-a-time-series-object">Step 2: Convert your data into a time series object</a></li>
+  <li><a href="#step-3-decompose-your-time-series-data" id="toc-step-3-decompose-your-time-series-data" class="nav-link" data-scroll-target="#step-3-decompose-your-time-series-data">Step 3: Decompose your time series data</a></li>
+  <li><a href="#step-4-examine-the-results-of-the-decomposition" id="toc-step-4-examine-the-results-of-the-decomposition" class="nav-link" data-scroll-target="#step-4-examine-the-results-of-the-decomposition">Step 4: Examine the results of the decomposition</a></li>
+  </ul></li>
+  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
+  <ul class="collapse">
+  <li><a href="#date-functions" id="toc-date-functions" class="nav-link" data-scroll-target="#date-functions">1. Date functions</a></li>
+  <li><a href="#use-date-functions-in-calculated-fields" id="toc-use-date-functions-in-calculated-fields" class="nav-link" data-scroll-target="#use-date-functions-in-calculated-fields">2. Use date functions in calculated fields</a></li>
+  <li><a href="#visualize-time-series-data" id="toc-visualize-time-series-data" class="nav-link" data-scroll-target="#visualize-time-series-data">3. Visualize time series data</a></li>
+  <li><a href="#creating-and-interpreting-trend-lines" id="toc-creating-and-interpreting-trend-lines" class="nav-link" data-scroll-target="#creating-and-interpreting-trend-lines">4. Creating and interpreting trend lines</a></li>
+  <li><a href="#visualizing-structural-breaks" id="toc-visualizing-structural-breaks" class="nav-link" data-scroll-target="#visualizing-structural-breaks">5. Visualizing structural breaks</a></li>
+  <li><a href="#creating-panes-to-visualize-mutiple-time-series" id="toc-creating-panes-to-visualize-mutiple-time-series" class="nav-link" data-scroll-target="#creating-panes-to-visualize-mutiple-time-series">6. Creating panes to visualize mutiple time series</a></li>
+  <li><a href="#if-we-have-extra-time-lets-do-some-quick-table-calculations" id="toc-if-we-have-extra-time-lets-do-some-quick-table-calculations" class="nav-link" data-scroll-target="#if-we-have-extra-time-lets-do-some-quick-table-calculations">7. If we have extra time… let’s do some quick table calculations!</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 6 Lab: Regression and Structural Breaks</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><img src="includes/generic_forecasting.webp" class="img-fluid"></p>
+<div style="font-size: 1.5em">
+<p>This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8</p>
+</div>
+<section id="learning-objectives-r" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
+<ul>
+<li></li>
+</ul>
+</section>
+<section id="learning-objectives-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
+<ul>
+<li><p>Understand date functions</p></li>
+<li><p>Use date functions in calculated fields</p></li>
+<li><p>Visualizing time series data</p></li>
+<li><p>Creating and interpreting trend lines</p></li>
+<li><p>Visualizing structural breaks</p></li>
+<li><p>Creating panes to visualize mutiple time series</p></li>
+</ul>
+</section>
+<section id="unit-1-project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="unit-1-project-overview">Unit 1 Project Overview</h2>
+</section>
+<section id="r-time-series-decomposition-and-forecast" class="level1">
+<h1>R: Time Series Decomposition and Forecast</h1>
+<section id="step-1-load-your-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-load-your-data">Step 1: Load your data</h3>
+<p>First, you need to load your time series data into R and set up your script (description, working directory, load packages).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),<span class="at">get =</span> <span class="st">"economic.data"</span>,<span class="at">from=</span><span class="st">"2007-08-01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-convert-your-data-into-a-time-series-object" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-convert-your-data-into-a-time-series-object">Step 2: Convert your data into a time series object</h3>
+<p>Next, you need to convert your data into a time series object that R can work with. To do this, you can use the <code>ts()</code> function in R. The <code>ts()</code> function takes two arguments: <code>data</code> and <code>frequency.</code> <code>data</code> is a vector or matrix of your time series data, and <code>frequency</code> is the number of observations per unit time (e.g., the number of observations per year, per month, etc.). In the case of the carrots dataset, the frequency is 12 (since there are 12 observations per year).</p>
+<p>To convert the <code>carrot</code> dataset into a time series object, run the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>carrot_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot<span class="sc">$</span>price,<span class="at">frequency =</span> <span class="dv">12</span>,<span class="at">start=</span><span class="fu">c</span>(<span class="dv">2007</span>,<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will create a new time series object called <code>ts_data.</code></p>
+</section>
+<section id="step-3-decompose-your-time-series-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-decompose-your-time-series-data">Step 3: Decompose your time series data</h3>
+<p>Now that you have your time series data in a format that R can work with, you can use the <code>decompose()</code> function to decompose it into its underlying components. The <code>decompose()</code> function takes one argument: <code>x</code>, which is the time series object you want to decompose.</p>
+<p>To decompose the <code>carrot_ts</code> time series object, run the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>carrot_decomp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(carrot_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will create a new object called <code>carrot_decomp</code> that contains the decomposed components of the <code>carrot_ts</code> time series object.</p>
+</section>
+<section id="step-4-examine-the-results-of-the-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-examine-the-results-of-the-decomposition">Step 4: Examine the results of the decomposition</h3>
+<p>Finally, you can examine the results of the time series decomposition by plotting the decomposed components. The <code>carrot_decomp</code> object contains four components: <code>trend</code>, <code>seasonal</code>, <code>random</code>, and <code>figure</code>. You can access each of these components using the <code>$</code> operator.</p>
+<p>To plot the decomposed components, run the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>trend)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>seasonal)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will create three separate plots that show the trend, seasonal, and random components of the time series data. You can use these plots to better understand the underlying patterns in your data.</p>
+</section>
+</section>
+<section id="tableau" class="level1">
+<h1>Tableau</h1>
+<p>A key attribute of time series data is that we observe values of variables across <strong>time</strong>. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.</p>
+<section id="date-functions" class="level3">
+<h3 class="anchored" data-anchor-id="date-functions">1. Date functions</h3>
+<p>Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.</p>
+<p>You can explore these functions by going to <code>create calculated field</code> and choosing <code>Date</code>. You can look through these on your own, but I will highlight a few here.</p>
+<ul>
+<li><p>DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number.</p>
+<ul>
+<li><p>For example, DATEPART (‘month’, #January 23, 2021#) = 1</p></li>
+<li><p>Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.</p></li>
+</ul></li>
+<li><p>DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.</p>
+<ul>
+<li>For example, DATENAME (‘month’, #January 23, 2021#) = January</li>
+</ul></li>
+<li><p>DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.</p>
+<ul>
+<li>For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021</li>
+</ul></li>
+<li><p>DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part.</p>
+<ul>
+<li>For example, DATEDIFF (‘day’, #January 23, 2021#, #February 24, 2021#) = 32 and DATEDIFF (‘month’, #January 23, 2021#, #February 24, 2021#) = 1</li>
+</ul></li>
+<li><p>DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date.</p>
+<ul>
+<li>For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021.</li>
+</ul></li>
+<li><p>MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record.</p>
+<ul>
+<li>For example, MIN ([Order Date]) returns the earliest date in the Order Date field.</li>
+</ul></li>
+<li><p>MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record.</p>
+<ul>
+<li>For example, MAX ([Order Date]) returns the latest date in the Order Date field.</li>
+</ul></li>
+</ul>
+<p>Here are some handy definitions for date_time arguments:</p>
+<p><img src="includes/date_args.png" class="img-fluid"></p>
+</section>
+<section id="use-date-functions-in-calculated-fields" class="level3">
+<h3 class="anchored" data-anchor-id="use-date-functions-in-calculated-fields">2. Use date functions in calculated fields</h3>
+<p>Connect to the <code>carrots_prices.csv</code> data and use the expressions above to do the following:</p>
+<ol type="1">
+<li><p>Create a calculated field named <code>months_ago</code> that determines the number of months between the commodity price data and today.</p></li>
+<li><p>Create a calculated field named <code>first_date</code> that determines the earliest date in the data.</p></li>
+<li><p>Create a calculated field named <code>last_date</code> that determines the last date that the carrot price index was less than 135.</p></li>
+<li><p>Create a new variable called <code>month</code> that only includes the month.</p></li>
+<li><p>Create a new variable called <code>year</code> that only includes the year.</p></li>
+<li><p>Create a new date variable called <code>my_date</code> that assigns a new date using your <code>month</code> and <code>year</code> variables and sets the day as 15.</p></li>
+</ol>
+</section>
+<section id="visualize-time-series-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-time-series-data">3. Visualize time series data</h3>
+<p>What types of visualizations are most appropriate for time series data?</p>
+<ul>
+<li><p>Line graphs</p></li>
+<li><p>Bar charts</p></li>
+<li><p>Dot plots</p></li>
+<li><p>Others?</p></li>
+</ul>
+<p>Let’s experiment with creating these visualizations for time series:</p>
+<ol type="1">
+<li><p>Create a line graph that shows the value of carrots over time (by month)</p></li>
+<li><p>Add markers to your line graph</p></li>
+<li><p>Change your line graph to a bar graph dot chart</p></li>
+<li><p>Change your bar graph to a dot plot</p></li>
+<li><p>Change the size size, colors, and opacity of the dots in your dot plot (use the <code>Size</code> and <code>Color</code> icons)</p></li>
+<li><p>Change the markers in your chart from dots to a different shape (use the dropdown menu on the <code>Marks</code> card, then use the <code>Shape</code> icons)</p></li>
+</ol>
+<p>Now let’s experiment with changing what data is shown in your chart:</p>
+<ol type="1">
+<li><p>Change your x-axis to annual</p></li>
+<li><p>Create one line that shows the average value of the commodity each year, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?</p></li>
+<li><p>Restrict your date ranges so that your visualization only shows the last 20 years of data (use the <code>Filters</code> card)</p></li>
+</ol>
+</section>
+<section id="creating-and-interpreting-trend-lines" class="level3">
+<h3 class="anchored" data-anchor-id="creating-and-interpreting-trend-lines">4. Creating and interpreting trend lines</h3>
+<p>Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know <em>how</em> they are created? Let’s start with a linear trend line…</p>
+<ul>
+<li><p>What does a linear trend line tell you about your time series data?</p></li>
+<li><p>How is this trend line estimated? (conceptually… we will go through some equations on Wednesday!)</p></li>
+</ul>
+<p>Now, let’s talk some specifics about linear trend lines in Tableau…</p>
+<ol type="1">
+<li><p>Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022</p></li>
+<li><p>Add a trend line to your chart</p></li>
+<li><p>When you click on the trend line, what information does Tableau give you about it? What does this information mean?</p></li>
+<li><p>When you click on <code>describe trend model</code> what information does Tableau give you about it?</p></li>
+<li><p>Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn’t the trend line change when you changed the date aggregation?</p></li>
+</ol>
+</section>
+<section id="visualizing-structural-breaks" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-structural-breaks">5. Visualizing structural breaks</h3>
+<p>Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to <em>test</em> for structural breaks in your data that we will demonstrate in R, but for now let’s go over a couple ways to visualize structural breaks that we identify with the very sophisticated “eyeball method”.</p>
+<ol type="1">
+<li><p>Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?</p></li>
+<li><p>Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.</p></li>
+<li><p>Add a <strong>reference line</strong> at this month-year. (Right click on the x-axis and select <code>Reference Line</code>) Does anything happen to your trend line?</p></li>
+</ol>
+<p>Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let’s go through two methods for doing this:</p>
+<p><strong>Method 1:</strong> Separate your time series by adding color</p>
+<ol type="1">
+<li><p>Create a new calculated field named <code>before_after_break</code>. Use the <code>IF</code> and <code>THEN</code> functions and an appropriate <code>Date</code> function to populate this variable with “after” if the date if after the break you identified in the data and “before” if the date is before the break.</p></li>
+<li><p>Drag this variable to the <code>Color</code> card.</p></li>
+<li><p>Add trend lines to your visualization. What happens?</p></li>
+</ol>
+<p><strong>Method 2:</strong> Separate your time series by segmenting the x-axis</p>
+<ol type="1">
+<li><p>Drag your new variable from the <code>Marks</code> card to the <code>columns</code> shelf.</p></li>
+<li><p>Sort your variable so that the “after” time period is shown following the “before” time period.</p></li>
+<li><p>In the x-axis Edit Axis menu, select <code>independed axis ranges for each row or column</code> (access this menu by right clicking on the x-axis)</p></li>
+<li><p>Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.</p></li>
+</ol>
+</section>
+<section id="creating-panes-to-visualize-mutiple-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="creating-panes-to-visualize-mutiple-time-series">6. Creating panes to visualize mutiple time series</h3>
+<p>Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.</p>
+<p>Let’s start by bringing in some price data for a few new commodities.</p>
+<ol type="1">
+<li><p>On the <code>Data Source</code> page connect to the following data sources <code>corn_prices.csv</code> and <code>tomatoes_prices.csv</code></p></li>
+<li><p>We are going to create a <code>relationship</code> between these data sources and our current working file</p></li>
+<li><p>With the carrot data in the <code>canvas</code>, drag one of the other data sources next to it in the canvas. Do the same with the other data source.</p></li>
+<li><p>Now go to a new worksheet, what do you see? What did we just accomplish?</p></li>
+</ol>
+<p>Now that we have all these data sources in a single file and they are structured in a “wide” format, we are going to construct time series plots that let us compare trends in these commodity prices across time.</p>
+<ol type="1">
+<li><p>Open a new worksheet and create a line plot of the prices over time for each commodity</p></li>
+<li><p>Now try formatting your figure. Change colors, adjust sizes, etc.</p></li>
+<li><p>Now use your <code>before_after_break</code> variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.</p></li>
+</ol>
+</section>
+<section id="if-we-have-extra-time-lets-do-some-quick-table-calculations" class="level3">
+<h3 class="anchored" data-anchor-id="if-we-have-extra-time-lets-do-some-quick-table-calculations">7. If we have extra time… let’s do some quick table calculations!</h3>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/6oOu5DqtakY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
