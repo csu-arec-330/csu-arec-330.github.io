@@ -263,7 +263,7 @@ Next, let’s visualize our forecast:
 
 And voila! You have both created a good forecast and visualized its components along with the forecast.
 
-## 3. Additional Visualizations for Visualizing Seasonality
+## 3. Additional Visualizations for Understanding Seasonality
 
 I will now quickly walk you through some ideas for showing and identifying seasonality in your data, as well as separating seasonality from overall trends.
 
