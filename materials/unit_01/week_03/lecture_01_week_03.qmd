@@ -1,5 +1,5 @@
 ---
-title: "Week 6: <br>Intro to Trends and Forecasting<br>"
+title: "Week 7: <br>Intro to Trends and Forecasting<br>"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -11,13 +11,7 @@ format:
 
 ## Agenda 
 
-Linear regression/trend analysis
-
-Interpretting trend analysis
-
-Forecasting using trends
-
-Motivation for structural breaks
+Forecast prediction intervals
 
 Project 1 reminder
 

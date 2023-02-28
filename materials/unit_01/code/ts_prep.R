@@ -55,23 +55,9 @@ reg_dat <- tibble(y=sim_mean) %>%
 test_lm <- lm(y ~ x,data=reg_dat)
 summary(test_lm)
 
-#Testing for structural breaks
-fs <- Fstats(y ~ x,data=reg_dat,from = 100,to=200)
-summary(fs)
-plot(fs)
-plot(fs,pval=T)
-
-#Recreate Fstats output to understand
-cut1=100
-reg_dat1 <- reg_dat[1:cut1,]
-reg_dat2 <- reg_dat[cut1+1:nrow(reg_dat),]
-
-m1 <- lm(y ~ x,data = reg_dat1)
-m2 <- lm(y ~ x,data = reg_dat2)
-
-m1$residuals
 
 ################################
+#Week 2
 #Read in Ali's carrots data
 carrot <- tq_get(c("WPU01130212"),get = "economic.data",from="2007-08-01")
 
@@ -123,4 +109,5 @@ carrot_forecast <- carrot_trend_forecast$mean + carrot_seasonal_forecast$mean + 
 # Print the forecast for the next 12 months
 plot(carrot_forecast)
 
-
+######################################################
+#Week 3

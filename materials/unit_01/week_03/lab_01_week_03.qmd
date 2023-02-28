@@ -1,5 +1,5 @@
 ---
-title: "Week 6 Lab: Regression and Structural Breaks"
+title: "Week 7 Lab: Forecasting and Prediction Intervals"
 format: 
   html:
     theme: zephyr
@@ -15,9 +15,9 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 ## Learning Objectives R
 
-- Understand time series decomposition in R
+- Understand the statistics of prediction intervals
 
-- Understand the steps of forecasting using a decomposition in R
+- Understand how to conduct a forecast with prediction intervals in R
 
 
 ## Learning Objectives Tableau
@@ -30,13 +30,15 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 - Create advanced visualizations to demonstrate seasonality and overall trends in time series data
 
-## Unit 1 Project Overview
 
-# R: Time Series Decomposition
+
+# R: Time Series Forecast
+
+Last week we learned how to build a forecast from the components of the time series decomposition (Trend, Seasonality, and Residual). We made some relatively simple assumptions about how these components would behave in the future.  
 
 ### Step 1: Load your data
 
-First, you need to load your time series data into R and set up your script (description, working directory, load packages).
+First, let's load the time series data into R and set up your script (description, working directory, load packages).  We will continue using the carrot price data.  We are going to start using a new library that you will need to install if it isn't already installed. I am going to start using the `pacman` library to load and install packages.
 
 ```{r}
 #| eval: false
