@@ -13,7 +13,7 @@ format:
 
 Forecast prediction intervals
 
-Advanced forecasting I: Exponential models
+Advanced forecasting I: Additive vs. Multiplicative models
 
 Advanced forecasting II: Cross-validation
 
@@ -134,395 +134,151 @@ $\widehat{y}_{T+h|T}$ is our prediction of $y$ $h$ periods from the end of our d
 
 $\widehat{\sigma}_h$ is an estimate of the standard deviation for the $h$-step forecast
 
+## Prediction intervals: The multiplier
+
+This equation can be written more generally as:
+$$
+\widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
+$$
+
+where the multiplier $c$ depends on the prediction interval you desire:
+
+| Percentage  | Multiplier  |
+|:------:|:------:|
+| 80  | 1.28  |
+| 85  | 1.44  |
+| 90 | 1.64  |
+| 95 | 1.96   |
+| 99 | 2.58   |
+
+::: {style="font-size: 80%;"}
+Note that these all assume a normal distribution of future observations.
+:::
+
+## Prediction intervals: Standard deviation
+
+When forecasting 1 step ahead ($h=1$), we will estimate the standard deviation of the forecast distribution according to:
+
+$$
+\widehat{\sigma} = \sqrt{\frac{1}{T-K-M}\sum^T_{t=1}e^2_t}
+$$
+
+where,
+
+$K$ is the number of parameters estimated in the forecasting method,
+
+$M$ is the number of missing values in the residuals,
+
+$e_t$ is the residual at time $t$ (recall your decomposition...) 
+
+## Prediction intervals: Standard deviation
+
+When forecasting $h$ steps ahead ($h\geq 1$), we can estimate the standard deviation of the forecast distribution according to:
+
+$$
+\widehat{\sigma}_h = \widehat{\sigma}\sqrt{h}
+$$
+
+Note that there are many other methods for estimating the standard deviation of the forecasting distribution.
+
+This formula is for the Na&iuml;ve method, and is among the simplest.
+
+
+# 
+::: {.r-fit-text }
+**Prediction intervals: Application** <br> <br>
+
+In lab this week, <br>
+we will show you how to <br>
+estimate prediction intervals in R <br>
+and plot them in Tableau. 
+:::
+
+# Additive vs. Multiplicative Models
+
+## Additive vs. Multiplicative Decompositions
+There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative.
+
+These are known as classical decomposition methods, and are estimated according to:
+
+1. Additive: $y_t = T_t + S_t + R_t$
+
+2. Multiplicative: $y_t = T_t \times S_t \times R_t$
+
+::: {style="font-size: 80%;"}
+Note there are a few other options for forecasting using decompositions, but we won't cover them in this class.
+
+This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html>
+:::
+
+
+# Validating Predictions
+
 # 
 ::: {.r-fit-text }
 **The objective:** <br>
-We want to understand the <br> 
-relationship between two variables
-:::
-#
-
-::: {.r-fit-text }
-**The simple solution:** <br> 
-Assume the relationship is linear <br> 
-and estimate the "average" trend
+We want to show our audience <br> 
+that they should trust our predictions.
 :::
 
-
-## Linear regression: The intuition
-
-::: {style="text-align: center"}
-![](includes/carrot_scatter.png){width="80%"}
-
-::: 
-
-## Linear regression: The intuition {.scrollable}
-
-How could we use these data to answer:
-
-1.  Are carrot prices, on average, increasing or decreasing?
-
-2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
-
-3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
-
-## Exercise 1: Which trend line is best?
-![](includes/carrot_trend2.png){width="45%"}![](includes/carrot_trend3.png){width="45%"}
-![](includes/carrot_trend1.png){width="45%"}![](includes/carrot_trend4.png){width="45%"}
 
 #
 ::: {.r-fit-text }
-**Which trend line is best?** <br> 
-Why?<br> 
+**The solution:** <br> 
+time series cross-validation 
 :::
 
-## Linear regression: The intuition {.scrollable}
 
-How could we use these data to answer:
+## Time series cross-validation: The intuition
 
-1.  **Are carrot prices, on average, increasing or decreasing?**
+Construct a series of "training" and "test" sets of data.
 
-    - **Increasing (slightly)**
+Use your "training" set to construct a forecast (following the same methods in your main forecast).
 
-2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
+Evaluate the accuracy of your forecast using your "test" set.
 
-3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
+## Time series cross-validation: Test set 1
 
-## Linear regression: The intuition {.scrollable}
+Training data =  blue
 
-![](includes/carrot_ols1.png){width="80%"}
+Test data =  orange
 
-## The Ordinary Least Squares Regression 
+::: {style="text-align: center"}
+![](includes/train_test1.png){width="75%"}
+:::
 
-Ordinary Least Squares (OLS) is the most common estimation method for linear models.
+## Time series cross-validation: Test set 2
 
-For a good reason: 
+Training data =  blue
 
-As long as your model satisfies the OLS assumptions you're getting the BEST possible estimates.
+Test data =  orange
 
-BEST = accurate (unbiased) + most precise (best)
+::: {style="text-align: center"}
+![](includes/train_test2.png){width="75%"}
+:::
 
-Tableau, Excel, and other programs use OLS to estimate trend lines.
+## Time series cross-validation: Evaluating?
 
-## OLS: Unbiased {.scrollable}
+Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:
 
-What do we mean by "unbiased"?
+- Mean Forecast Error (MFE)
 
-- predictions are correct on average
+- Mean Absolute Error (MAE)
 
-- the average value of errors (the distance between observations and predictions) equals zero
+- Root Mean Square Error (RMSE)
 
-# 
-![](includes/estimates_bias.png){width="100%"}
+- Mean Absolute Percentage Error (MAPE)
+
+Choose the forecasting model that minimizes prediction error according to these measures.
 
 ::: {style="font-size: 80%;"}
-*Source:* [Statistics by Jim](https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/)
-
+This is a useful resource for these evaluation methods: <https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>
 :::
 
-## OLS: Best {.scrollable}
-
-What do we mean by "best"?
-
-- predictions have the smallest possible variance
-
-- larger variance = larger probability that our estimates are further away from the correct/true/observed value
-
-# 
-![](includes/estimates_precision.png){width="100%"}
-
-::: {style="font-size: 80%;"}
-*Source:* [Statistics by Jim](https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/)
-
-:::
-
-
-## OLS: Equation
-
-![](includes/reg_eq.png){width="100%"}
-
-## OLS: Estimation {.scrollable}
-
-**Problem:** 
-
-We need to estimate $\beta_0$ and $\beta_1$ using observed values of $Y_i$ and $X_i$
-
-**Solution:** 
-
-$$
-\widehat{\beta}_0 = \bar{Y} - \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}\cdot \bar{X}
-$$
-
-$$
-\widehat{\beta}_1 = \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}
-$$
-
-## OLS: Interpretting Tableau output
-
-![](includes/carrot_trend_desc.png){width="100%"}
-
-## Q: What is our "Y" variable?
-
-![](includes/tableau_reg.png){width="100%"}
-
-
-A. `months_since_crisis`
-
-B. `0.0728323`
-
-C. `Avg. Carrot price`
-
-D. `189.513`
-
-## Q: What is our "X" variable?
-
-![](includes/tableau_reg.png){width="100%"}
-
-A. `months_since_crisis`
-
-B. `0.0728323`
-
-C. `Avg. Carrot price`
-
-D. `189.513`
-
-
-## Q: What is our estimate of $\beta_0$?
-
-![](includes/tableau_reg.png){width="100%"}
-
-
-A. `months_since_crisis`
-
-B. `0.0728323`
-
-C. `Avg. Carrot price`
-
-D. `189.513`
-
-## Q: What is our estimate of $\beta_1$?
-
-![](includes/tableau_reg.png){width="100%"}
-
-A. `months_since_crisis`
-
-B. `0.0728323`
-
-C. `Avg. Carrot price`
-
-D. `189.513`
-
-## Discussion: Interpretting Tableau output
-
-![](includes/tableau_reg.png){width="100%"}
-
-$$
-Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
-$$
-
-What is does $\beta_0$ represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?
-
-## Discussion: Interpretting Tableau output
-
-![](includes/tableau_reg.png){width="100%"}
-
-$$
-Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
-$$
-
-What is does $\beta_1$ represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?
-
-
-## Interpretting Tableau output: What is $R^2$?
-
-![](includes/tableau_reg.png){width="100%"}
-
-- A statistical measure of "fit"
-
-- It tells us how much variation of the $Y$ variable is explained by the $X$ variable(s)
-
-- Higher $R^2$ =  better fit; $R^2$ = 1 $\Rightarrow$ all variation is explained; [More info](https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/statistics/regression-and-correlation/coefficient-of-determination-r-squared.html)
-
-## 
-
-![](includes/r_sq.png){width="100%"}
-
-## Linear regression: The intuition {.scrollable}
-
-How could we use these data to answer:
-
-1.  Are carrot prices, on average, increasing or decreasing?
-
-    - Increasing (slightly)
-
-2.  **How much of the observed variation in carrot prices can be explained by a simple trend line?**
-
-    - **Not much!**
-
-3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
-
-
-## Interpretting output: What is P-value?
-
-![](includes/tableau_reg.png){width="100%"}
-
-- Tableau's default P-value is a measure of the significance for slope parameter $\beta_1$
-
-- smaller p-value = better 
-
-- A p-value of 0.05 or less is often considered statistically significant $\Rightarrow$ statistically significantly different from 0; [More info](https://www.w3schools.com/datascience/ds_linear_regression_pvalue.asp)
-
-## Interpretting: What is P-value?
-
-Note that clicking "describe trend line" will also give you a p-value for the intercept parameter.
-
-![](includes/tableau_describe.png){width="100%"}
-
-
-## Q: How well does the model fit the data?
-
-![](includes/exercise.png){width="100%"}
-
-
-A. Extremely well
-
-B. Decent
-
-C. Not well
-
-## Q: How confident are you that the estimated slope is different from zero?
-
-![](includes/exercise.png){width="100%"}
-
-
-A. Very
-
-B. Somewhat
-
-C. Not at all
-
-## Using OLS regressions to forecast
-
-::: {style="text-align: center"}
-![](includes/forecast.jpeg){width="75%"}
-
-::: 
-
-## Using OLS regressions to forecast
-
-**How?**
-
-- Continue/extend your trend beyond your time series
-
-- Tableau and other programs can do this for you automatically
-
-- You can also do this manually by plugging in values of your $X$ variable(s)...
-
-## Using OLS regressions to forecast
-
-**What is the most reasonable prediction of carrot prices 250 months after the financial crisis?**
-
-![](includes/tableau_reg.png){width="100%"}
-
-$$
-\hat{Y} = 189.513 + 0.0728323*(250) = 207.721
-$$
-
-
-## 
-::: {style="text-align: center"}
-![](includes/linear_forecast.png){width="80%"}
-
-::: 
-
-## Linear regression: The intuition {.scrollable}
-
-How could we use these data to answer:
-
-1.  Are carrot prices, on average, increasing or decreasing?
-
-    - Increasing (slightly)
-
-2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
-
-    - Not much!
-
-3.  **What is the most reasonable prediction of carrot prices 250 months after the financial crisis?**
-
-    - **BEST estimate: 207**
-
-
-## Considerations when using OLS to forecast
-
-1. Is your relationship linear?
-
-## 
-::: {style="text-align: center"}
-![](includes/nonlinear_trend.webp){width="80%"}
-
-::: 
-
-## Considerations when using OLS to forecast
-
-1. Is your relationship linear?
-
-    - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
-
-2. What time period should you use to estimate the trend?
-
-## 
-::: {style="text-align: center"}
-![](includes/carrot_longtrend.png){width="80%"}
-
-::: 
-
-## Considerations when using OLS to forecast
-
-1. Is your relationship linear?
-
-    - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
-
-2. What time period should you use to estimate the trend?
-
-    - Test for structural breaks
-
-    - Decide how to account for structural breaks
-
-    - E.G., are structural breaks regularly occuring? (perhaps prices jump every 20 years)
-
-## Cautionary note 
-
-- We will teach you enough to be dangerous
-
-- We are introducing you to the tip of the analytical iceberg.  Learn more before you put this into practice.
-
-- Incorrect analysis can lead to worse conclusions than no analysis
-
-::: {.incremental}
-
-- Be wary of causal conclusions!
-
-:::
-
-## The "effect" of education on income?
-
-::: {style="text-align: center"}
-![](includes/income_educ.png){width="70%"}
-
-:::
-
-
-# 
-::: {.r-fit-text }
-CORRELATION $\neq$ CAUSATION
-
-:::
 
 
 
 ## REMINDER: Project 1
-
-Groups of 2
 
 Choose an ag biz or enre management question to answer with time series data
 
@@ -532,4 +288,34 @@ Analyze trends
 
 Generate a forecast 
 
-Present results in class Fri March 10
+Generate prediction intervals
+
+Present results and conclusions in class Fri March 10
+
+## EXAMPLE: The Question
+
+I am currently growing almonds and walnuts, and in the coming season I will plant a new orchard. 
+
+- Almond trees need to mature for 3-4 years before they are ready for harvest.
+
+- Walnut trees need to mature for 4-7 years before they are ready for harvest.
+
+- Both trees will continue producing for roughly 25 years.
+
+How can I decide which trees to plant?
+
+## EXAMPLE: The Data and Analysis
+
+**DATA:** Time series data on almond and walnut prices.
+
+**ANALYSIS:** Forecast prices for the next 10 years (really 25 would better answer your Q, but is probably too long of a prediction period)
+
+**ANSWER:** I will plant walnuts because over a 10 year horizon they would yield higher revenues than almond trees, despite that I would have to wait longer before selling them.
+
+## References {.scrollable .smaller}
+
+Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <https://otexts.com/fpp3/>. Accessed on 02-28-2023.
+
+A useful blog post: <https://mins.space/blog/2020-07-30-forecasting-through-decomposition/>
+
+Another useful blog post: <https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>

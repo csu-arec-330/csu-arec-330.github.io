@@ -332,7 +332,7 @@
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <p>Forecast prediction intervals</p>
-<p>Advanced forecasting I: Exponential models</p>
+<p>Advanced forecasting I: Additive vs.&nbsp;Multiplicative models</p>
 <p>Advanced forecasting II: Cross-validation</p>
 <p>Project 1 reminder and details</p>
 <!-- example of big text fit to slide width -->
@@ -435,351 +435,178 @@
 <p>where, <span class="math inline">\(\widehat{y}_{T+h|T}\)</span> is our prediction of <span class="math inline">\(y\)</span> <span class="math inline">\(h\)</span> periods from the end of our data,</p>
 <p>1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal…,</p>
 <p><span class="math inline">\(\widehat{\sigma}_h\)</span> is an estimate of the standard deviation for the <span class="math inline">\(h\)</span>-step forecast</p>
+</section>
+<section id="prediction-intervals-the-multiplier" class="slide level2">
+<h2>Prediction intervals: The multiplier</h2>
+<p>This equation can be written more generally as: <span class="math display">\[
+\widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
+\]</span></p>
+<p>where the multiplier <span class="math inline">\(c\)</span> depends on the prediction interval you desire:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Percentage</th>
+<th style="text-align: center;">Multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">1.28</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">85</td>
+<td style="text-align: center;">1.44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">1.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">95</td>
+<td style="text-align: center;">1.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">99</td>
+<td style="text-align: center;">2.58</td>
+</tr>
+</tbody>
+</table>
+<div style="font-size: 80%;">
+<p>Note that these all assume a normal distribution of future observations.</p>
+</div>
+</section>
+<section id="prediction-intervals-standard-deviation" class="slide level2">
+<h2>Prediction intervals: Standard deviation</h2>
+<p>When forecasting 1 step ahead (<span class="math inline">\(h=1\)</span>), we will estimate the standard deviation of the forecast distribution according to:</p>
+<p><span class="math display">\[
+\widehat{\sigma} = \sqrt{\frac{1}{T-K-M}\sum^T_{t=1}e^2_t}
+\]</span></p>
+<p>where,</p>
+<p><span class="math inline">\(K\)</span> is the number of parameters estimated in the forecasting method,</p>
+<p><span class="math inline">\(M\)</span> is the number of missing values in the residuals,</p>
+<p><span class="math inline">\(e_t\)</span> is the residual at time <span class="math inline">\(t\)</span> (recall your decomposition…)</p>
+</section>
+<section id="prediction-intervals-standard-deviation-1" class="slide level2">
+<h2>Prediction intervals: Standard deviation</h2>
+<p>When forecasting <span class="math inline">\(h\)</span> steps ahead (<span class="math inline">\(h\geq 1\)</span>), we can estimate the standard deviation of the forecast distribution according to:</p>
+<p><span class="math display">\[
+\widehat{\sigma}_h = \widehat{\sigma}\sqrt{h}
+\]</span></p>
+<p>Note that there are many other methods for estimating the standard deviation of the forecasting distribution.</p>
+<p>This formula is for the Naïve method, and is among the simplest.</p>
 </section></section>
 <section id="section-2" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p><strong>The objective:</strong> <br> We want to understand the <br> relationship between two variables</p>
+<p><strong>Prediction intervals: Application</strong> <br> <br></p>
+<p>In lab this week, <br> we will show you how to <br> estimate prediction intervals in R <br> and plot them in Tableau.</p>
 </div>
 </section>
 
 <section>
+<section id="additive-vs.-multiplicative-models" class="title-slide slide level1 center">
+<h1>Additive vs.&nbsp;Multiplicative Models</h1>
+
+</section>
+<section id="additive-vs.-multiplicative-decompositions" class="slide level2">
+<h2>Additive vs.&nbsp;Multiplicative Decompositions</h2>
+<p>There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative.</p>
+<p>These are known as classical decomposition methods, and are estimated according to:</p>
+<ol type="1">
+<li><p>Additive: <span class="math inline">\(y_t = T_t + S_t + R_t\)</span></p></li>
+<li><p>Multiplicative: <span class="math inline">\(y_t = T_t \times S_t \times R_t\)</span></p></li>
+</ol>
+<div style="font-size: 80%;">
+<p>Note there are a few other options for forecasting using decompositions, but we won’t cover them in this class.</p>
+<p>This is a useful resource for more information on these methods and others: <a href="https://otexts.com/fpp3/classical-decomposition.html" class="uri">https://otexts.com/fpp3/classical-decomposition.html</a></p>
+</div>
+</section></section>
+<section id="validating-predictions" class="title-slide slide level1 center">
+<h1>Validating Predictions</h1>
+
+</section>
+
 <section id="section-3" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p><strong>The simple solution:</strong> <br> Assume the relationship is linear <br> and estimate the “average” trend</p>
+<p><strong>The objective:</strong> <br> We want to show our audience <br> that they should trust our predictions.</p>
 </div>
 </section>
-<section id="linear-regression-the-intuition" class="slide level2">
-<h2>Linear regression: The intuition</h2>
-<div style="text-align: center">
-<p><img data-src="includes/carrot_scatter.png" style="width:80.0%"></p>
-</div>
-</section>
-<section id="linear-regression-the-intuition-1" class="slide level2 scrollable">
-<h2>Linear regression: The intuition</h2>
-<p>How could we use these data to answer:</p>
-<ol type="1">
-<li><p>Are carrot prices, on average, increasing or decreasing?</p></li>
-<li><p>How much of the observed variation in carrot prices can be explained by a simple trend line?</p></li>
-<li><p>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</p></li>
-</ol>
-</section>
-<section id="exercise-1-which-trend-line-is-best" class="slide level2">
-<h2>Exercise 1: Which trend line is best?</h2>
-<p><img data-src="includes/carrot_trend2.png" style="width:45.0%"><img data-src="includes/carrot_trend3.png" style="width:45.0%"> <img data-src="includes/carrot_trend1.png" style="width:45.0%"><img data-src="includes/carrot_trend4.png" style="width:45.0%"></p>
-</section></section>
+
 <section>
 <section id="section-4" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p><strong>Which trend line is best?</strong> <br> Why?<br></p>
+<p><strong>The solution:</strong> <br> time series cross-validation</p>
 </div>
 </section>
-<section id="linear-regression-the-intuition-2" class="slide level2 scrollable">
-<h2>Linear regression: The intuition</h2>
-<p>How could we use these data to answer:</p>
-<ol type="1">
-<li><p><strong>Are carrot prices, on average, increasing or decreasing?</strong></p>
-<ul>
-<li><strong>Increasing (slightly)</strong></li>
-</ul></li>
-<li><p>How much of the observed variation in carrot prices can be explained by a simple trend line?</p></li>
-<li><p>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</p></li>
-</ol>
+<section id="time-series-cross-validation-the-intuition" class="slide level2">
+<h2>Time series cross-validation: The intuition</h2>
+<p>Construct a series of “training” and “test” sets of data.</p>
+<p>Use your “training” set to construct a forecast (following the same methods in your main forecast).</p>
+<p>Evaluate the accuracy of your forecast using your “test” set.</p>
 </section>
-<section id="linear-regression-the-intuition-3" class="slide level2 scrollable">
-<h2>Linear regression: The intuition</h2>
-
-<img data-src="includes/carrot_ols1.png" style="width:80.0%" class="r-stretch"></section>
-<section id="the-ordinary-least-squares-regression" class="slide level2">
-<h2>The Ordinary Least Squares Regression</h2>
-<p>Ordinary Least Squares (OLS) is the most common estimation method for linear models.</p>
-<p>For a good reason:</p>
-<p>As long as your model satisfies the OLS assumptions you’re getting the BEST possible estimates.</p>
-<p>BEST = accurate (unbiased) + most precise (best)</p>
-<p>Tableau, Excel, and other programs use OLS to estimate trend lines.</p>
-</section>
-<section id="ols-unbiased" class="slide level2 scrollable">
-<h2>OLS: Unbiased</h2>
-<p>What do we mean by “unbiased”?</p>
-<ul>
-<li><p>predictions are correct on average</p></li>
-<li><p>the average value of errors (the distance between observations and predictions) equals zero</p></li>
-</ul>
-</section></section>
-<section>
-<section id="section-5" class="title-slide slide level1 center">
-<h1></h1>
-
-<img data-src="includes/estimates_bias.png" style="width:100.0%" class="r-stretch"><div style="font-size: 80%;">
-<p><em>Source:</em> <a href="https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/">Statistics by Jim</a></p>
-</div>
-</section>
-<section id="ols-best" class="slide level2 scrollable">
-<h2>OLS: Best</h2>
-<p>What do we mean by “best”?</p>
-<ul>
-<li><p>predictions have the smallest possible variance</p></li>
-<li><p>larger variance = larger probability that our estimates are further away from the correct/true/observed value</p></li>
-</ul>
-</section></section>
-<section>
-<section id="section-6" class="title-slide slide level1 center">
-<h1></h1>
-
-<img data-src="includes/estimates_precision.png" style="width:100.0%" class="r-stretch"><div style="font-size: 80%;">
-<p><em>Source:</em> <a href="https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/">Statistics by Jim</a></p>
-</div>
-</section>
-<section id="ols-equation" class="slide level2">
-<h2>OLS: Equation</h2>
-
-<img data-src="includes/reg_eq.png" style="width:100.0%" class="r-stretch"></section>
-<section id="ols-estimation" class="slide level2 scrollable">
-<h2>OLS: Estimation</h2>
-<p><strong>Problem:</strong></p>
-<p>We need to estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> using observed values of <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span></p>
-<p><strong>Solution:</strong></p>
-<p><span class="math display">\[
-\widehat{\beta}_0 = \bar{Y} - \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}\cdot \bar{X}
-\]</span></p>
-<p><span class="math display">\[
-\widehat{\beta}_1 = \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}
-\]</span></p>
-</section>
-<section id="ols-interpretting-tableau-output" class="slide level2">
-<h2>OLS: Interpretting Tableau output</h2>
-
-<img data-src="includes/carrot_trend_desc.png" style="width:100.0%" class="r-stretch"></section>
-<section id="q-what-is-our-y-variable" class="slide level2">
-<h2>Q: What is our “Y” variable?</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>A. <code>months_since_crisis</code></p>
-<p>B. <code>0.0728323</code></p>
-<p>C. <code>Avg. Carrot price</code></p>
-<p>D. <code>189.513</code></p>
-</section>
-<section id="q-what-is-our-x-variable" class="slide level2">
-<h2>Q: What is our “X” variable?</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>A. <code>months_since_crisis</code></p>
-<p>B. <code>0.0728323</code></p>
-<p>C. <code>Avg. Carrot price</code></p>
-<p>D. <code>189.513</code></p>
-</section>
-<section id="q-what-is-our-estimate-of-beta_0" class="slide level2">
-<h2>Q: What is our estimate of <span class="math inline">\(\beta_0\)</span>?</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>A. <code>months_since_crisis</code></p>
-<p>B. <code>0.0728323</code></p>
-<p>C. <code>Avg. Carrot price</code></p>
-<p>D. <code>189.513</code></p>
-</section>
-<section id="q-what-is-our-estimate-of-beta_1" class="slide level2">
-<h2>Q: What is our estimate of <span class="math inline">\(\beta_1\)</span>?</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>A. <code>months_since_crisis</code></p>
-<p>B. <code>0.0728323</code></p>
-<p>C. <code>Avg. Carrot price</code></p>
-<p>D. <code>189.513</code></p>
-</section>
-<section id="discussion-interpretting-tableau-output" class="slide level2">
-<h2>Discussion: Interpretting Tableau output</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p><span class="math display">\[
-Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
-\]</span></p>
-<p>What is does <span class="math inline">\(\beta_0\)</span> represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?</p>
-</section>
-<section id="discussion-interpretting-tableau-output-1" class="slide level2">
-<h2>Discussion: Interpretting Tableau output</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p><span class="math display">\[
-Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
-\]</span></p>
-<p>What is does <span class="math inline">\(\beta_1\)</span> represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?</p>
-</section>
-<section id="interpretting-tableau-output-what-is-r2" class="slide level2">
-<h2>Interpretting Tableau output: What is <span class="math inline">\(R^2\)</span>?</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><ul>
-<li><p>A statistical measure of “fit”</p></li>
-<li><p>It tells us how much variation of the <span class="math inline">\(Y\)</span> variable is explained by the <span class="math inline">\(X\)</span> variable(s)</p></li>
-<li><p>Higher <span class="math inline">\(R^2\)</span> = better fit; <span class="math inline">\(R^2\)</span> = 1 <span class="math inline">\(\Rightarrow\)</span> all variation is explained; <a href="https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/statistics/regression-and-correlation/coefficient-of-determination-r-squared.html">More info</a></p></li>
-</ul>
-</section>
-<section id="section-7" class="slide level2">
-<h2></h2>
-
-<img data-src="includes/r_sq.png" style="width:100.0%" class="r-stretch"></section>
-<section id="linear-regression-the-intuition-4" class="slide level2 scrollable">
-<h2>Linear regression: The intuition</h2>
-<p>How could we use these data to answer:</p>
-<ol type="1">
-<li><p>Are carrot prices, on average, increasing or decreasing?</p>
-<ul>
-<li>Increasing (slightly)</li>
-</ul></li>
-<li><p><strong>How much of the observed variation in carrot prices can be explained by a simple trend line?</strong></p>
-<ul>
-<li><strong>Not much!</strong></li>
-</ul></li>
-<li><p>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</p></li>
-</ol>
-</section>
-<section id="interpretting-output-what-is-p-value" class="slide level2">
-<h2>Interpretting output: What is P-value?</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><ul>
-<li><p>Tableau’s default P-value is a measure of the significance for slope parameter <span class="math inline">\(\beta_1\)</span></p></li>
-<li><p>smaller p-value = better</p></li>
-<li><p>A p-value of 0.05 or less is often considered statistically significant <span class="math inline">\(\Rightarrow\)</span> statistically significantly different from 0; <a href="https://www.w3schools.com/datascience/ds_linear_regression_pvalue.asp">More info</a></p></li>
-</ul>
-</section>
-<section id="interpretting-what-is-p-value" class="slide level2">
-<h2>Interpretting: What is P-value?</h2>
-<p>Note that clicking “describe trend line” will also give you a p-value for the intercept parameter.</p>
-
-<img data-src="includes/tableau_describe.png" style="width:100.0%" class="r-stretch"></section>
-<section id="q-how-well-does-the-model-fit-the-data" class="slide level2">
-<h2>Q: How well does the model fit the data?</h2>
-
-<img data-src="includes/exercise.png" style="width:100.0%" class="r-stretch"><p>A. Extremely well</p>
-<p>B. Decent</p>
-<p>C. Not well</p>
-</section>
-<section id="q-how-confident-are-you-that-the-estimated-slope-is-different-from-zero" class="slide level2">
-<h2>Q: How confident are you that the estimated slope is different from zero?</h2>
-
-<img data-src="includes/exercise.png" style="width:100.0%" class="r-stretch"><p>A. Very</p>
-<p>B. Somewhat</p>
-<p>C. Not at all</p>
-</section>
-<section id="using-ols-regressions-to-forecast" class="slide level2">
-<h2>Using OLS regressions to forecast</h2>
+<section id="time-series-cross-validation-test-set-1" class="slide level2">
+<h2>Time series cross-validation: Test set 1</h2>
+<p>Training data = blue</p>
+<p>Test data = orange</p>
 <div style="text-align: center">
-<p><img data-src="includes/forecast.jpeg" style="width:75.0%"></p>
+<p><img data-src="includes/train_test1.png" style="width:75.0%"></p>
 </div>
 </section>
-<section id="using-ols-regressions-to-forecast-1" class="slide level2">
-<h2>Using OLS regressions to forecast</h2>
-<p><strong>How?</strong></p>
+<section id="time-series-cross-validation-test-set-2" class="slide level2">
+<h2>Time series cross-validation: Test set 2</h2>
+<p>Training data = blue</p>
+<p>Test data = orange</p>
+<div style="text-align: center">
+<p><img data-src="includes/train_test2.png" style="width:75.0%"></p>
+</div>
+</section>
+<section id="time-series-cross-validation-evaluating" class="slide level2">
+<h2>Time series cross-validation: Evaluating?</h2>
+<p>Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:</p>
 <ul>
-<li><p>Continue/extend your trend beyond your time series</p></li>
-<li><p>Tableau and other programs can do this for you automatically</p></li>
-<li><p>You can also do this manually by plugging in values of your <span class="math inline">\(X\)</span> variable(s)…</p></li>
+<li><p>Mean Forecast Error (MFE)</p></li>
+<li><p>Mean Absolute Error (MAE)</p></li>
+<li><p>Root Mean Square Error (RMSE)</p></li>
+<li><p>Mean Absolute Percentage Error (MAPE)</p></li>
 </ul>
-</section>
-<section id="using-ols-regressions-to-forecast-2" class="slide level2">
-<h2>Using OLS regressions to forecast</h2>
-<p><strong>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</strong></p>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p><span class="math display">\[
-\hat{Y} = 189.513 + 0.0728323*(250) = 207.721
-\]</span></p>
-</section>
-<section id="section-8" class="slide level2">
-<h2></h2>
-<div style="text-align: center">
-<p><img data-src="includes/linear_forecast.png" style="width:80.0%"></p>
-</div>
-</section>
-<section id="linear-regression-the-intuition-5" class="slide level2 scrollable">
-<h2>Linear regression: The intuition</h2>
-<p>How could we use these data to answer:</p>
-<ol type="1">
-<li><p>Are carrot prices, on average, increasing or decreasing?</p>
-<ul>
-<li>Increasing (slightly)</li>
-</ul></li>
-<li><p>How much of the observed variation in carrot prices can be explained by a simple trend line?</p>
-<ul>
-<li>Not much!</li>
-</ul></li>
-<li><p><strong>What is the most reasonable prediction of carrot prices 250 months after the financial crisis?</strong></p>
-<ul>
-<li><strong>BEST estimate: 207</strong></li>
-</ul></li>
-</ol>
-</section>
-<section id="considerations-when-using-ols-to-forecast" class="slide level2">
-<h2>Considerations when using OLS to forecast</h2>
-<ol type="1">
-<li>Is your relationship linear?</li>
-</ol>
-</section>
-<section id="section-9" class="slide level2">
-<h2></h2>
-<div style="text-align: center">
-<p><img data-src="includes/nonlinear_trend.webp" style="width:80.0%"></p>
-</div>
-</section>
-<section id="considerations-when-using-ols-to-forecast-1" class="slide level2">
-<h2>Considerations when using OLS to forecast</h2>
-<ol type="1">
-<li><p>Is your relationship linear?</p>
-<ul>
-<li>Consider including a non-linear transformation of your X variable, e.g., <span class="math inline">\(Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i\)</span></li>
-</ul></li>
-<li><p>What time period should you use to estimate the trend?</p></li>
-</ol>
-</section>
-<section id="section-10" class="slide level2">
-<h2></h2>
-<div style="text-align: center">
-<p><img data-src="includes/carrot_longtrend.png" style="width:80.0%"></p>
-</div>
-</section>
-<section id="considerations-when-using-ols-to-forecast-2" class="slide level2">
-<h2>Considerations when using OLS to forecast</h2>
-<ol type="1">
-<li><p>Is your relationship linear?</p>
-<ul>
-<li>Consider including a non-linear transformation of your X variable, e.g., <span class="math inline">\(Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i\)</span></li>
-</ul></li>
-<li><p>What time period should you use to estimate the trend?</p>
-<ul>
-<li><p>Test for structural breaks</p></li>
-<li><p>Decide how to account for structural breaks</p></li>
-<li><p>E.G., are structural breaks regularly occuring? (perhaps prices jump every 20 years)</p></li>
-</ul></li>
-</ol>
-</section>
-<section id="cautionary-note" class="slide level2">
-<h2>Cautionary note</h2>
-<ul>
-<li><p>We will teach you enough to be dangerous</p></li>
-<li><p>We are introducing you to the tip of the analytical iceberg. Learn more before you put this into practice.</p></li>
-<li><p>Incorrect analysis can lead to worse conclusions than no analysis</p></li>
-</ul>
-<div>
-<ul>
-<li class="fragment">Be wary of causal conclusions!</li>
-</ul>
-</div>
-</section>
-<section id="the-effect-of-education-on-income" class="slide level2">
-<h2>The “effect” of education on income?</h2>
-<div style="text-align: center">
-<p><img data-src="includes/income_educ.png" style="width:70.0%"></p>
-</div>
-</section></section>
-<section>
-<section id="section-11" class="title-slide slide level1 center">
-<h1></h1>
-<div class="r-fit-text">
-<p>CORRELATION <span class="math inline">\(\neq\)</span> CAUSATION</p>
+<p>Choose the forecasting model that minimizes prediction error according to these measures.</p>
+<div style="font-size: 80%;">
+<p>This is a useful resource for these evaluation methods: <a href="https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b" class="uri">https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b</a></p>
 </div>
 </section>
 <section id="reminder-project-1" class="slide level2">
 <h2>REMINDER: Project 1</h2>
-<p>Groups of 2</p>
 <p>Choose an ag biz or enre management question to answer with time series data</p>
 <p>Collect time series data</p>
 <p>Analyze trends</p>
 <p>Generate a forecast</p>
-<p>Present results in class Fri March 10</p>
+<p>Generate prediction intervals</p>
+<p>Present results and conclusions in class Fri March 10</p>
+</section>
+<section id="example-the-question" class="slide level2">
+<h2>EXAMPLE: The Question</h2>
+<p>I am currently growing almonds and walnuts, and in the coming season I will plant a new orchard.</p>
+<ul>
+<li><p>Almond trees need to mature for 3-4 years before they are ready for harvest.</p></li>
+<li><p>Walnut trees need to mature for 4-7 years before they are ready for harvest.</p></li>
+<li><p>Both trees will continue producing for roughly 25 years.</p></li>
+</ul>
+<p>How can I decide which trees to plant?</p>
+</section>
+<section id="example-the-data-and-analysis" class="slide level2">
+<h2>EXAMPLE: The Data and Analysis</h2>
+<p><strong>DATA:</strong> Time series data on almond and walnut prices.</p>
+<p><strong>ANALYSIS:</strong> Forecast prices for the next 10 years (really 25 would better answer your Q, but is probably too long of a prediction period)</p>
+<p><strong>ANSWER:</strong> I will plant walnuts because over a 10 year horizon they would yield higher revenues than almond trees, despite that I would have to wait longer before selling them.</p>
+</section>
+<section id="references" class="slide level2 scrollable smaller">
+<h2>References</h2>
+<p>Hyndman, R.J., &amp; Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <a href="https://otexts.com/fpp3/" class="uri">https://otexts.com/fpp3/</a>. Accessed on 02-28-2023.</p>
+<p>A useful blog post: <a href="https://mins.space/blog/2020-07-30-forecasting-through-decomposition/" class="uri">https://mins.space/blog/2020-07-30-forecasting-through-decomposition/</a></p>
+<p>Another useful blog post: <a href="https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b" class="uri">https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b</a></p>
 <div class="footer footer-default">
 
 </div>
