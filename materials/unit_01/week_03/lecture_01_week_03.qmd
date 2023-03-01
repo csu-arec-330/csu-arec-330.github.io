@@ -317,6 +317,50 @@ How can I decide which trees to plant?
 
 **ANSWER:** I will plant walnuts because over a 10 year horizon they would yield higher revenues than almond trees, despite that I would have to wait longer before selling them.
 
+## Presentation Overview {.scrollable}
+
+Your presentations should be roughly 8 minutes. (let's say 6-9 minutes)
+
+You should begin your presentation with the following: 
+
+- Who are you? (what business, organization, etc. wants an answer to your question)
+
+- Who is your audience? (business executive team, policy makers, consumers?)
+
+You should then:
+
+- Give us any relevant background info that is necessary to understanding your question (as in my example...)
+
+- State your question
+
+## Presentation Content {.scrollable}
+
+Data:
+
+- Describe where your data is from
+
+- Provide summary statistics and visualizations
+
+Analysis:
+
+- What forecasting model did you use? Why?
+
+- Show your forecast and prediction intervals
+
+Discussion/Conclusion:
+
+- How did you use your forecast to answer your question?
+
+- What are the key take-aways for your intended audience?
+
+- What are limitations to your analysis?
+
+## Final Project Submission {.scrollable}
+
+Each group member will be responsible for providing this information in a report on their google site. You can both have an identical report, but must post it to your personal webpage.
+
+Your report should summarize the same information as your presentation, and can include additional information and visualizations if they are helpful for answering your question.
+
 ## References {.scrollable .smaller}
 
 Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <https://otexts.com/fpp3/>. Accessed on 02-28-2023.
