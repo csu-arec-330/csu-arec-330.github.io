@@ -122,6 +122,45 @@ In Tableau (and most other software) prediction intervals are shown with shaded 
 ![100 possible future paths of 5 year forecast with 95% prediction intervals](includes/carrot_price_spaghetti.png){width="100%"}
 :::
 
+## Review Question 1 
+
+**Which of the following best defines confidence intervals?**
+
+A. A range of values used to estimate a population parameter with a specified level of confidence.
+
+B. A range of values that represents the mean of a sample.
+
+C. A range of values used to estimate a future value of a variable with a specified level of confidence.
+
+D. A range of values that is used to test a hypothesis about a population parameter.
+
+## Review Question 2 
+
+**Which of the following best defines prediction intervals?**
+
+A. A range of values used to estimate a population parameter with a specified level of confidence.
+
+B. A range of values that represents the mean of a sample.
+
+C. A range of values used to estimate a future value of a variable with a specified level of confidence.
+
+D. A range of values that is used to test a hypothesis about a population parameter.
+
+
+## Review Question 3 
+
+**Which of the following best describes the difference between prediction and confidence intervals?**
+
+A. Confidence intervals estimate future values of a variable, while prediction intervals estimate population parameters.
+
+B. Confidence intervals estimate population parameters, while prediction intervals estimate future values of a variable.
+
+C. Confidence intervals are used for small sample sizes, while prediction intervals are used for large sample sizes.
+
+D. Confidence intervals are used for large sample sizes, while prediction intervals are used for small sample sizes.
+
+E. Confidence intervals and prediction intervals are the same thing.
+
 ## Prediction intervals: Estimation
 
 Like CIs, prediction intervals require a few inputs and assumptions.
@@ -279,8 +318,6 @@ Choose the forecasting model that minimizes prediction error according to these 
 ::: {style="font-size: 80%;"}
 This is a useful resource for these evaluation methods: <https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>
 :::
-
-
 
 
 ## REMINDER: Project 1
