@@ -147,7 +147,7 @@ C. A range of values used to estimate a future value of a variable with a specif
 D. A range of values that is used to test a hypothesis about a population parameter.
 
 
-## Review Question 3 
+## Review Question 3 {.smaller}
 
 **Which of the following best describes the difference between prediction and confidence intervals?**
 
