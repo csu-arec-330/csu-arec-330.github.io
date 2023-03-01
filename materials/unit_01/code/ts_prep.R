@@ -150,9 +150,15 @@ carrot_ts %>%
   autoplot(carrot_ts) #plot the forecast. note that respecifying the observed data places the observed data in the plot (if omitted, it only plots the forecast)
 
 
+fit <- carrot_ts %>%
+  model(my_ets=ETS(price ~ trend(method="A") + season(method="A") + error(method="A")))
 
+carrot_forecast <- fit %>%
+  fabletools::forecast(h="5 years")
 
-
+carrot_forecast_out <- carrot_forecast %>%
+  hilo(level = 95) %>%
+  unpack_hilo(cols = "95%")
 
 #Generate spaghetti plot 
 carrot_sp <- carrot_ts %>%
@@ -162,8 +168,8 @@ carrot_sp <- carrot_ts %>%
 
 #Define prediction interval
 carrot_sp_bounds <- carrot_sp %>%
-  summarize(low=quantile(.sim,.1),
-            high=quantile(.sim,.9)) %>%
+  summarize(low=quantile(.sim,.05),
+            high=quantile(.sim,.95)) %>%
   pivot_longer(-date)
 
 #spaghetti plot
