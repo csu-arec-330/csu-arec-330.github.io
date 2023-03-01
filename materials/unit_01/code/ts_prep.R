@@ -109,5 +109,79 @@ carrot_forecast <- carrot_trend_forecast$mean + carrot_seasonal_forecast$mean + 
 # Print the forecast for the next 12 months
 plot(carrot_forecast)
 
+##########
+#Now do with fpp3
+library(tidyquant)
+library(fpp3)
+
+carrot <- tq_get(c("WPU01130212"),get = "economic.data",from="2007-08-01")
+
+carrot_ts <- carrot %>%
+  select(date,price) %>%
+  mutate(date=yearmonth(date)) %>%
+  as_tsibble()
+
+carrot_ts %>%
+  model(classical_decomposition(price, type = "additive")) %>%
+  components() %>%
+  autoplot() 
+
 ######################################################
-#Week 3
+#Week 3: demonstrate forecasting with fable/fpp3 and prediction intervals
+
+
+library(tidyquant)
+library(fpp3)
+
+carrot <- tq_get(c("WPU01130212"),get = "economic.data",from="1990-01-01")
+
+
+#Prep data
+carrot_ts <- carrot %>%
+  select(date,price) %>%
+  mutate(date=yearmonth(date)) %>%
+  as_tsibble()
+
+#Simple model
+carrot_ts %>%
+  #model(MEAN(price)) %>% #fit model
+  model(ETS(price ~ trend(method="A") + season(method="A") + error(method="A"))) %>%
+  forecast(h="5 years") %>% #specify forecast
+  autoplot(carrot_ts) #plot the forecast. note that respecifying the observed data places the observed data in the plot (if omitted, it only plots the forecast)
+
+
+
+
+
+
+#Generate spaghetti plot 
+carrot_sp <- carrot_ts %>%
+  #model(MEAN(price)) %>% #fit model
+  model(ETS(price ~ trend(method="A") + season(method="A") + error(method="A"))) %>%
+  generate(h="5 years",times=200,bootstrap=T)
+
+#Define prediction interval
+carrot_sp_bounds <- carrot_sp %>%
+  summarize(low=quantile(.sim,.1),
+            high=quantile(.sim,.9)) %>%
+  pivot_longer(-date)
+
+#spaghetti plot
+ggplot() +
+  geom_line(data=carrot_ts,aes(x=date,y=price)) +
+  geom_line(data=carrot_sp,aes(x=date,y=.sim,group=.rep),color="red",alpha=.05) +
+  geom_line(data=carrot_sp_bounds,aes(x=date,y=value,group=name),size=1,color="darkred") +
+  theme_bw(base_size = 15) +
+  labs(x=NULL,y="Carrot Price")
+
+ggsave("materials/unit_01/week_03/includes/carrot_price_spaghetti.png",width = 9,height = 4,units = "in")
+
+#Zoom in
+ggplot() +
+  geom_line(data=carrot_ts %>% filter_index("2015 Jan" ~ .),aes(x=date,y=price)) +
+  geom_line(data=carrot_sp,aes(x=date,y=.sim,group=.rep),color="red",alpha=.1) +
+  geom_line(data=carrot_sp_bounds,aes(x=date,y=value,group=name),size=1,color="darkred") +
+  theme_bw(base_size = 15) +
+  labs(x=NULL,y="Carrot Price")
+
+ggsave("materials/unit_01/week_03/includes/carrot_price_spaghetti_zoom.png",width = 7,height = 4,units = "in")

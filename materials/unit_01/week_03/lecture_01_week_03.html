@@ -7,7 +7,7 @@
 <link href="lecture_01_week_03_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_01_week_03_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_01_week_03_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.313">
+  <meta name="generator" content="quarto-1.2.280">
 
   <title>Week 8:  Prediction Intervals and Advanced Forecasting Options </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -376,7 +376,7 @@
 <li><p>Perhaps we are reasonably sure the true price will be between 200 and 350…</p></li>
 </ul>
 </section>
-<section id="prediction-intervals-the-intuition" class="slide level2">
+<section id="prediction-intervals-the-intuition" class="slide level2 scrollable">
 <h2>Prediction intervals: The intuition</h2>
 <p>The intuition for prediction intervals begins with understanding <em>confidence intervals</em>:</p>
 <ol type="1">
@@ -407,7 +407,7 @@
 <li><p>How are confidence intervals different from prediction intervals?</p>
 <ul>
 <li><p>Prediction intervals are concerned with bounding our <em>predictions</em>.</p></li>
-<li><p>Prediction intervals are always wider than CIs becayse of the added uncertainty involved in predicting a single response versus estimating the mean response.</p></li>
+<li><p>Prediction intervals are always wider than CIs because of the added uncertainty involved in predicting a single response versus estimating the mean response.</p></li>
 <li><p>Prediction intervals increase as we try to forecast further in the future.</p></li>
 </ul></li>
 </ol>
@@ -418,11 +418,23 @@
 <p><strong>The intuitive interpretation</strong>: we are 95% confident that our prediction interval contains/encompasses the value of our outcome variable that will be realized.</p>
 <p>In Tableau (and most other software) prediction intervals are shown with shaded regions around the prediction.</p>
 </section></section>
-<section>
 <section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
 <div style="text-align: center">
-<p><img data-src="includes/Tableau_forecast.png" style="width:100.0%"></p>
+<p><img data-src="includes/Tableau_forecast.png" style="width:80.0%"></p>
+</div>
+</section>
+
+<section>
+<section id="section-2" class="title-slide slide level1 center">
+<h1></h1>
+<div style="text-align: center">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="includes/carrot_price_spaghetti.png" style="width:100.0%"></p>
+<p></p><figcaption>100 possible future paths of 5 year forecast with 95% prediction intervals</figcaption><p></p>
+</figure>
+</div>
 </div>
 </section>
 <section id="prediction-intervals-estimation" class="slide level2">
@@ -436,7 +448,7 @@
 <p>1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal…,</p>
 <p><span class="math inline">\(\widehat{\sigma}_h\)</span> is an estimate of the standard deviation for the <span class="math inline">\(h\)</span>-step forecast</p>
 </section>
-<section id="prediction-intervals-the-multiplier" class="slide level2">
+<section id="prediction-intervals-the-multiplier" class="slide level2 scrollable">
 <h2>Prediction intervals: The multiplier</h2>
 <p>This equation can be written more generally as: <span class="math display">\[
 \widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
@@ -476,7 +488,7 @@
 <p>Note that these all assume a normal distribution of future observations.</p>
 </div>
 </section>
-<section id="prediction-intervals-standard-deviation" class="slide level2">
+<section id="prediction-intervals-standard-deviation" class="slide level2 scrollable">
 <h2>Prediction intervals: Standard deviation</h2>
 <p>When forecasting 1 step ahead (<span class="math inline">\(h=1\)</span>), we will estimate the standard deviation of the forecast distribution according to:</p>
 <p><span class="math display">\[
@@ -496,7 +508,7 @@
 <p>Note that there are many other methods for estimating the standard deviation of the forecasting distribution.</p>
 <p>This formula is for the Naïve method, and is among the simplest.</p>
 </section></section>
-<section id="section-2" class="title-slide slide level1 center">
+<section id="section-3" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
 <p><strong>Prediction intervals: Application</strong> <br> <br></p>
@@ -527,7 +539,7 @@
 
 </section>
 
-<section id="section-3" class="title-slide slide level1 center">
+<section id="section-4" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
 <p><strong>The objective:</strong> <br> We want to show our audience <br> that they should trust our predictions.</p>
@@ -535,7 +547,7 @@
 </section>
 
 <section>
-<section id="section-4" class="title-slide slide level1 center">
+<section id="section-5" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
 <p><strong>The solution:</strong> <br> time series cross-validation</p>
@@ -547,7 +559,7 @@
 <p>Use your “training” set to construct a forecast (following the same methods in your main forecast).</p>
 <p>Evaluate the accuracy of your forecast using your “test” set.</p>
 </section>
-<section id="time-series-cross-validation-test-set-1" class="slide level2">
+<section id="time-series-cross-validation-test-set-1" class="slide level2 scrollable">
 <h2>Time series cross-validation: Test set 1</h2>
 <p>Training data = blue</p>
 <p>Test data = orange</p>
@@ -555,7 +567,7 @@
 <p><img data-src="includes/train_test1.png" style="width:75.0%"></p>
 </div>
 </section>
-<section id="time-series-cross-validation-test-set-2" class="slide level2">
+<section id="time-series-cross-validation-test-set-2" class="slide level2 scrollable">
 <h2>Time series cross-validation: Test set 2</h2>
 <p>Training data = blue</p>
 <p>Test data = orange</p>

@@ -69,7 +69,7 @@ a given point in time
 
 - Perhaps we are reasonably sure the true price will be between 200 and 350...
 
-## Prediction intervals: The intuition 
+## Prediction intervals: The intuition {.scrollable}
 
 The intuition for prediction intervals begins with understanding *confidence intervals*:
 
@@ -99,7 +99,7 @@ The intuition for prediction intervals begins with understanding *confidence int
 
     - Prediction intervals are concerned with bounding our *predictions*.
 
-    - Prediction intervals are always wider than CIs becayse of the added uncertainty involved in predicting a single response versus estimating the mean response.
+    - Prediction intervals are always wider than CIs because of the added uncertainty involved in predicting a single response versus estimating the mean response.
 
     - Prediction intervals increase as we try to forecast further in the future.
 
@@ -114,7 +114,12 @@ In Tableau (and most other software) prediction intervals are shown with shaded 
 
 # 
 ::: {style="text-align: center"}
-![](includes/Tableau_forecast.png){width="100%"}
+![](includes/Tableau_forecast.png){width="80%"}
+:::
+
+# 
+::: {style="text-align: center"}
+![100 possible future paths of 5 year forecast with 95% prediction intervals](includes/carrot_price_spaghetti.png){width="100%"}
 :::
 
 ## Prediction intervals: Estimation
@@ -134,7 +139,7 @@ $\widehat{y}_{T+h|T}$ is our prediction of $y$ $h$ periods from the end of our d
 
 $\widehat{\sigma}_h$ is an estimate of the standard deviation for the $h$-step forecast
 
-## Prediction intervals: The multiplier
+## Prediction intervals: The multiplier {.scrollable}
 
 This equation can be written more generally as:
 $$
@@ -155,7 +160,7 @@ where the multiplier $c$ depends on the prediction interval you desire:
 Note that these all assume a normal distribution of future observations.
 :::
 
-## Prediction intervals: Standard deviation
+## Prediction intervals: Standard deviation {.scrollable}
 
 When forecasting 1 step ahead ($h=1$), we will estimate the standard deviation of the forecast distribution according to:
 
@@ -237,7 +242,7 @@ Use your "training" set to construct a forecast (following the same methods in y
 
 Evaluate the accuracy of your forecast using your "test" set.
 
-## Time series cross-validation: Test set 1
+## Time series cross-validation: Test set 1 {.scrollable}
 
 Training data =  blue
 
@@ -247,7 +252,7 @@ Test data =  orange
 ![](includes/train_test1.png){width="75%"}
 :::
 
-## Time series cross-validation: Test set 2
+## Time series cross-validation: Test set 2 {.scrollable}
 
 Training data =  blue
 
