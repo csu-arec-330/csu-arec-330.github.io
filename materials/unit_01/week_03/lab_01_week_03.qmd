@@ -32,49 +32,96 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 
 
-# R: Time Series Forecast
+# R: Time Series Forecast and Prediction Interval
 
-Last week we learned how to build a forecast from the components of the time series decomposition (Trend, Seasonality, and Residual). We made some relatively simple assumptions about how these components would behave in the future.  
+Last week we learned how to build a forecast from the components of the time series decomposition (Trend, Seasonality, and Residual). We made some relatively simple assumptions about how these components would behave in the future. R has many time series analysis and forecasting tools. Because the libraries containing the tools are open source and written by R users, the structure of the functions and object created by them may vary. We are going to start using a new library called `fpp3` that you will need to install if it isn't already installed. `fpp3` is a meta-library that loads a series of time series forecasting libraries that make time series analysis and forecasting much easier. The library `fpp3` was created as the companion to the textbook [Forecasting: Principles and Practice (3rd ed)](https://otexts.com/fpp3/)]. The main libraries we will be using are `fable` and `feasts`.  `fable` contains many time series models that you might want to use to understand and forecast data. `feasts` contains a set of `dplyr`-like tools to work with time series data. This set of packages makes it *very easy* to run models and extract the information you want.
+
+The goal today is to look at prediction intervals, which are related to confidence intervals but pertain to your forecast.  
+
+
 
 ### Step 1: Load your data
 
-First, let's load the time series data into R and set up your script (description, working directory, load packages).  We will continue using the carrot price data.  We are going to start using a new library that you will need to install if it isn't already installed. I am going to start using the `pacman` library to load and install packages.
+First, let's load the time series data into R and set up your script (description, working directory, load packages).  We will continue using the carrot price data.  
 
 ```{r}
 #| eval: false
 #This lab...
 
 library(tidyquant)
-library(dplyr)
-library(readr)
-library(forecast)
+library(fpp3)
 
 carrot <- tq_get(c("WPU01130212"),get = "economic.data",from="2007-08-01")
 ```
 
 ### Step 2: Convert your data into a time series object
 
-Next, you need to convert your data into a time series object that R can work with. To do this, you can use the `ts()` function in R. The `ts()` function takes two arguments: `data` and `frequency.` `data` is a vector or matrix of your time series data, and `frequency` is the number of observations per unit time (e.g., the number of observations per year, per month, etc.). In the case of the carrots dataset, the frequency is 12 (since there are 12 observations per year).
-
-To convert the `carrot` dataset into a time series object, run the following command:
+Like last week, we need to convert our data into a time series dataframe called a `tsibble`:
 
 ```{r}
 #| eval: false
-carrot_ts <- ts(carrot$price,frequency = 12,start=c(2007,8))
+
+#Prep data
+carrot_ts <- carrot %>%
+  select(date,price) %>% #select only the date and price variables
+  mutate(date=yearmonth(date)) %>% #convert the date into yearmonth format so the models understand the unit of observation
+  as_tsibble() #convert the data to a tsibble object - similar to a tibble or data.frame but for time series data
 ```
 
-This will create a new time series object called `ts_data.`
+This will create a new time series `tibble` object called `carrot_ts.`
 
-### Step 3: Decompose your time series data
+### Step 3: Tidy forecast workflow
 
-Now that you have your time series data in a format that R can work with, you can use the `decompose()` function to decompose it into its underlying components. The `decompose()` function takes one argument: `x`, which is the time series object you want to decompose.
+Again, our objective is to build a forecast model and extract the key pieces of information, so that we can send them to Tableau.  One of the benefits of the `fpp3` package is that it simplifies model building process in a structure that is compatible with the pipe, `%>%`. We will recreate the forecasting model that we built in parts last week. Recall that we first decomposed the carrot price time series into `trend`, `seasonal`, and `random` components, and built a forecasting model based on each component, then put it all back together.^[I've included more information about the model in [week 2](../week_02/lab_01_week_02.html) of this unit lab notes.] That process can be called a workflow - a set of steps for completing a task. We will translate the workflow we built into the structure of the new package.
 
-To decompose the `carrot_ts` time series object, run the following command:
+#### 3a: Define the model
+
+We have the time series data prepared for modeling. Now, we need to define the model. We defined individual forecasts for each of the three components in week 2. We used the function, `forecast`, which uses an `exponential smoothing` method by default. We can be more explicit in defining an exponential smoothing model of each component.
 
 ```{r}
 #| eval: false
-carrot_decomp <- decompose(carrot_ts)
+#Fit the model
+fit <- carrot_ts %>%
+  model(my_ets=ETS(price ~ trend(method="A") + season(method="A") + error(method="A"))) #fit model
 ```
+
+The function model is used to define the forecasting model.  In this case, we define an exponential smoothing model, `ETS()`, based on three components: `trend`, `season`, and `error`. The argument `method="A"` in each component tells the model that we want those components to be *additive* rather than multiplicative. Finally, we define the model as `my_ets`. In short, this defines the model that we built in parts in week 2. Inspecting `fit` shows that this just defines the model but doesn't do anything with it.^[You can extract model coefficient estimates using the command `tidy(fit)` if you need to extract them.] 
+
+Note that `model` is a powerful function capable of specifying many models at once.  You may want to compare model fits or estimate models on several price series simultaneously.  See more information [here](https://fable.tidyverts.org/articles/fable.html).
+
+#### 3b: Forecast the model
+
+Now that we have specified the model, we need to actually run the forecast. We will use a function called `forecast()` from the `fabletools` library (related to `fable`).  However, this function is different from the previously used forecast function. When there are potential conflicts between functions with the same name from different libraries, you can specify the library, so R does not try to use the wrong one. We specify that we want to forecast our `ETS` model for 5 years. The function understands that you want 5 years worth of monthly forecasts (remember the data is stored as monthly data); this is equivalent to `h=60` because 60 months is 5 years.
+
+```{r}
+#| eval: false
+#Forecast the model
+carrot_forecast <- fit %>%
+  fabletools::forecast(h="5 years") #forecast model for 5 years
+```
+
+Inspect `carrot_forecast` and you will see that it contains mean and variance information for each month of the 5 year forecast.  
+
+#### 3c: Plot the forecast
+
+Finally, you want to visualize your forecast. You can pass `carrot_forecast` into the function `autoplot()` that understands how to read forecast output. Note that `autoplot()` plots only the forecast by default. Adding the observed data `carrot_ts` tells the function to include the observed data in the plot.
+
+```{r}
+#| eval: false
+#Plot the forecast
+autoplot(carrot_forecast,carrot_ts) #forecast model for 5 years
+```
+You can see that the mean, the 80%, and the 90% prediction intervals are included.
+
+See [Hyndman and Athanasopoulos](https://otexts.com/fpp3/a-tidy-forecasting-workflow.html) for more information on developing a workflow with these time series tools.
+
+### Prediction intervals
+
+
+
+
+
+
 
 
 This will create a new object called `carrot_decomp` that contains the decomposed components of the `carrot_ts` time series object.
