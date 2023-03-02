@@ -22,13 +22,11 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 ## Learning Objectives Tableau
 
-- Apply Tableau's default forecasting
+- Plot your prediction intervals
 
-- Customize Tableau's forecasting
+- Using Tableau stories to present
 
-- Visualize decompositions and forecasts created in R
-
-- Create advanced visualizations to demonstrate seasonality and overall trends in time series data
+- Embedding Tableau in Powerpoint to present
 
 
 
@@ -145,102 +143,66 @@ write_csv(to_export,"carrot_forecast.csv")
 
 {{< video https://youtu.be/KMrGAUcnM00 aspect-ratio="16x9" >}}
 
-# Tableau
+# Tableau 
 
-Tableau has its own forecasting features, but these are much less informative and flexible than what you ca do in R. Today we will show you how to use and customize Tableau’s forecasting features, how to create visualizations using your (improved) R forecasts, and we will show you how to create visualizations that show trends and cyclicality in your data — key components of your forecast!
+## Plotting prediction intervals in Tableau
 
-## 1. Tableau’s Forecasting
+Last time we showed that if you apply Tableau's forecasting features, Tableau will automatically plot prediction intervals for you. But what if you want to plot the prediction intervals you created in R instead?
 
-Let’s load your carrot price data you exported from R into Tableau and check out Tableau’s forecasting features.
+### Option 1: Don't worry about shading
 
-1. Once you are connected to the carrot price data, let’s create a filter for our entire workbook so that we only use more recent data (after our structural break) in the forecasting exercise.  
+1. Connect to the `carrot_forecast` dataset you just exported from R.
 
-    - On the Data Source page, click `filter` in the top right.
+2. Create two new calculated fields. One called `Observed Price` and one called `Forecasted Price`. You can create both of these using an IF THEN statement, for `Observed Price` we want all prices through the end of our data (January 1, 2023): `IF [Date] <= #January 1, 2023# THEN [Price] ELSE NULL END`. You should write a similar statement to get `Forecasted Price` after this date...
 
-  	- Filter Date to begin August 1, 2007
+3. Create a line chart that includes `Observed Price`, `Forecasted Price`, `Upper`, and `Lower`.
 
-2. Open a new worksheet and plot the monthly carrot price data over time.  
+4. Change the colors to something useful. Let's do the same gray shade for both upper and lower. 
 
-3. Two ways to add a forecast - Right click or go to the `Analytics` tab on the left pane.  
+### Option 2: Let's jump through some hoops to add shading
 
-Now you have added a forecast line that Tableau has decided is a good fit of your data. (Along with 95% confidence bands) Let’s explore this forecast.
+1. Duplicate your previous worksheet.
 
-1. Right click on your visualization and select `Forecast` -> `Describe Forecast...`  
+2. Change your chart to an Area Chart.
 
-  	- Did Tableau use the entire time period when constructing the forecast?
+3. "unstack" your lines by going to `Analysis` -> `Stack Marks` -> `Off`
 
-    	- What time period is Tableau forecasting for?
+4. Rearrange the order of your forecast and prediction intervals: Lower, Forecast, Upper. 
 
-	- Does Tableau think this forecast is accurate?
+5. Change your colors - white for `Observed Price` and `Lower`, gray for `Upper` and `Forecasted Price`.
 
-  	- If you want to learn more about this description, click the link at the bottom of the window.
+6. Create a new line graph by dragging the original `Price` field to the Rows Shelf.
 
-2. Click on `Models` at the top of the window.
+7. Change this new pane to a line chart.
 
-  	- This gives you information about the forecasting model Tableau has applied, including how it is weighting values (past vs. more recent), and measures of “fit”.
+8. Change the colors to reflect forecasted and original prices by creating a new calculated field that equals "Forecasted Price" after January 1, 2023, and that equals "Observed Price" before then. Drag this calculated field to the Colors Card.
 
-  	- If you want to learn more about the Tableau forecasting models, click the link at the bottom of the window.
+9. Combine your charts by creating a dual axis. Right click the Y-axis -> Select `Dual Axis`
 
-Now, let’s adjust Tableau’s recommended forecast as we see fit.
+10. Sychronize your axes. Right click the second Y-axis -> Select `Synchronize Axis`. You can then hide this axis. Right click -> Click `Show Header` to de-select it.
 
-1. Right click on your visualization and select `Forecast` -> `Forecast Options...`
+11. Notice that the area under the lines no longer has your y-axis gridlines. Let's just get rid of all the gridlines to make this look a bit nicer. Right click on your chart -> select `Format`. In the format pane, naviage to the lines icon, change Grid Lines to `None`.
 
-2. Adjust the forecast length by selecting `Exactly` or `Until`
+12. Finally, go back to your last sheet. Notice that the colors between your sheets are linked. Tableau does this to ensure your sheets are cohesive, but sometimes we want different colors for the same variable. The workaround for this is to duplicate each of the variables you want to assign a different color and use those in this sheet instead of the original variables. 
 
-3. Adjust the ignored periods (this is useful if your data only include part of a year, or if you have reason to believe the more recent data are not as useful) - what happens to the forecast as you adjust this?
+## Presenting Tableau Option 1: Stories
 
-4. Change the forecast model from `Automatic` to `Custom` and adjust the model parameters. Which do you like best?
+Tableau Desktop includes its own method for presenting your analyses. These are called stories. This tutorial will show you how to put together a simple story.
 
-5. Once you have created a forecast you are satisfied with, exit the popup window. Right click your worksheet tab and select `Duplicate as Crosstab`. Now you can easily see the values of your forecast.
+1. Create a new story by clicking the `New Story` tab at the bottom of the window. Change the size to Powerpoint.
 
+2. Let's create an intro slide by creating a new Dashboard. Add a background image and a text box.
 
-Note that the initial forecast you saw was the one that Tableau determined to yield the highest quality prediction given your data, but it really was not a great prediction. R has much better forecasting capabilities, including more flexibility in the models you can apply, and more transparent algorithms. Best practice is to forecast in R, then visualize your forecast and its decomposition in Tableau.
+3. Add your intro slide to your story.
 
-## 2. Visualizing R Forecasts in Tableau
+4. Add a new (blank) story point and bring in one of your worksheets. Give this story point a useful title.
 
-First, let’s visualize our decomposition:
+5. See what your story looks like in presentation mode. Note that you can hide the story title to make this look a bit nicer.
 
-1. Connect to the carrot price forecast data you exported in R. To keep everything in the same workbook, create a connection between these data and your original carrot price data (using the Date) variable
+6. Note that if you like the formatting features of Powerpoint for text slides, you can also create these slides in powerpoint, export them as images and then add those images to Dashboards. 
 
-2. Plot your raw data
+## Presenting Tableau Option 2: Embed in Powerpoint
 
-3. Add the trend line you calculated in R to the pane below this
+You can also embed interactive Tableau dashboards from your Tableau Public account directly into powerpoint. This will require you to install the Web Viewer Add-in. I won't walk you through how to do this right now, but you can follow these instructions to set this up: <https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp>
 
-4. Show the seasonality you calculated in R in a pane below this
-
-5. Finally, show the residuals in the pane below this
-
-6. You can also play with combining these figures as you see appropriate (e.g., I like to look at the trend line in the same pane as the actual data)
-
-7. As an aside - let’s change the raw price data to a “moving average” using Tableau’s quick table calculation. Why is this moving average different from the one you calculated in R?
-
-
-Next, let’s visualize our forecast:
-
-1. Open a new worksheet and plot your carrot price data.
-
-2. Add your forecasted data from R. Change the color of the forecasted data to clarify which is forecasted and which is observed.
-
-And voila! You have both created a good forecast and visualized its components along with the forecast.
-
-## 3. Additional Visualizations for Understanding Seasonality
-
-I will now quickly walk you through some ideas for showing and identifying seasonality in your data, as well as separating seasonality from overall trends.
-
-1. Line graph over month
-
-  	- Gives you some idea of average trends month to month
-
-2. Lines for each year over month
-
-  	- Gives you some idea of month to month trends across years
-
-3. Heat map
-
-  	- Gives you some idea of months with larger and smaller prices across years
-
-  	- Gives you some idea of months with larger changes in prices across years
-
-4. Cycle map
-
-  	- This is the best way of visualizing (within year) seasonality and larger trends (across years)
+## Now get together with your teammate and spend some time on your project!
