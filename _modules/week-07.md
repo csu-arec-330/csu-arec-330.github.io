@@ -10,7 +10,7 @@ title: "Week 7: Prediction Intervals, Forecasting Options, and Presenting in Tab
 
 <a  href="/materials/unit_01/week_03/lecture_01_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
 
-<!---
+
 <b>Lab Materials - Fri, Mar 3, 2023:</b> <br>
 
 <a  href="/materials/unit_01/week_03/lab_01_week_03.html" target="_blank">Week 6 Lab Notes</a> <br> 
@@ -19,7 +19,7 @@ title: "Week 7: Prediction Intervals, Forecasting Options, and Presenting in Tab
 
 
 
-
+<!---
 
 <b>Problem Set 6 Materials - Due Thursday, March 2 by 11:59 PM:</b> <br>
 
