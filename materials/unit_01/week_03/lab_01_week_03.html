@@ -240,7 +240,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract prediction interval</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_out <span class="ot">&lt;-</span> carrot_forecast <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co">#extract 95% prediction interval</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unpack_hilo</span>(<span class="at">cols =</span> <span class="st">"95%"</span>) <span class="co">#unpack into own columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span><span class="sc">$</span>lower,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span><span class="sc">$</span>upper</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co">#unpack into own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="preparing-to-export" class="level3">
@@ -249,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Prepare data for export</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>part2 <span class="ot">&lt;-</span> carrot_forecast_out <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date,<span class="at">price=</span>.mean,<span class="st">`</span><span class="at">95%_lower</span><span class="st">`</span>,<span class="st">`</span><span class="at">95%_upper</span><span class="st">`</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date,<span class="at">price=</span>.mean,<span class="st">`</span><span class="at">lower</span><span class="st">`</span>,<span class="st">`</span><span class="at">upper</span><span class="st">`</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>to_export <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_ts,part2)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -305,6 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="presenting-tableau-option-2-embed-in-powerpoint" class="level2">
 <h2 class="anchored" data-anchor-id="presenting-tableau-option-2-embed-in-powerpoint">Presenting Tableau Option 2: Embed in Powerpoint</h2>
 <p>You can also embed interactive Tableau dashboards from your Tableau Public account directly into powerpoint. This will require you to install the Web Viewer Add-in. I won’t walk you through how to do this right now, but you can follow these instructions to set this up: <a href="https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp" class="uri">https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp</a></p>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/U2oDUOeDHI8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="now-get-together-with-your-teammate-and-spend-some-time-on-your-project" class="level2">
 <h2 class="anchored" data-anchor-id="now-get-together-with-your-teammate-and-spend-some-time-on-your-project">Now get together with your teammate and spend some time on your project!</h2>
