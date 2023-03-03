@@ -13,7 +13,7 @@ title: "Week 7: Prediction Intervals, Forecasting Options, and Presenting in Tab
 
 <b>Lab Materials - Fri, Mar 3, 2023:</b> <br>
 
-<a  href="/materials/unit_01/week_03/lab_01_week_03.html" target="_blank">Week 6 Lab Notes</a> <br> 
+<a  href="/materials/unit_01/week_03/lab_01_week_03.html" target="_blank">Week 7 Lab Notes</a> <br> 
 
 <a  href="/materials/unit_01/inputs/carrots_prices.csv" download>Download Carrot Price Data</a> <br>
 
