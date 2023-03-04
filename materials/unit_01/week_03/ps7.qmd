@@ -1,40 +1,115 @@
 ---
-title: "Problem Set 6: Creating and Visualizing Forecasts"
+title: "Unit 1: Final Project and Presentations"
 format: 
   html:
     theme: zephyr
 ---
 
-## Part 1: R
+## Overview
 
-1. Complete a time series decomposition using the time series that you collect for your project.
+The goal of this project is for you to apply the tools for time series analysis that we have covered in the course to answer a real world question. 
 
-2. Generate a "[seasonally-adjusted](https://otexts.com/fpp3/components.html#seasonally-adjusted-data)" time series of your observed data. Make note of this variable since you will need to export it with your other data.
+### The Question
 
-3. Use R to create a 3 year forecast of your chosen time series. Follow the steps we went through in lab.  Create a new variable that indicates the new data you have created is a forecast.
+**The question** should be one related to agriculture, the environment, or natural resources and of interest to a business/company, a marketing board, policy makers, non-governmental organizations (NGO), or other nonprofit organizations. The question must be one that can be answered with time series data. For example:
 
-4. Create a dataframe with the following variables: `measure_date`, `price`, `trend`, `seasonal`, `residual`, `sa_price`, `forecast` (indicator of forecasted data). 
+- **Business:** Which commodity should I plant now to harvest in 5 years?
+
+- **Marketing Board:** What marketing campaign should we run to to ensure that there is sufficient demand for the future production of strawberries?
+
+- **Policy maker:** Which commodities should we consider subsidizing to ensure continued domestic production?
+
+- **NGO/Nonprofit:** What is will demand be for electric cars in 5 years and what can we do to increase it?
+
+### The Data
+
+You will be responsible for collecting your own time series data to answer this question. Here are a few useful resources to help you in this process:
+
+- [Economic data from the St. Louis Fed](https://fred.stlouisfed.org/tags/series)
+
+- [USDA Ag Marketing Service Market News Data](https://www.ams.usda.gov/market-news)
+
+- [US EPA Pollution Data](https://www.epa.gov/outdoor-air-quality-data/download-daily-data)
+
+- [Statista](https://www.statista.com) - Database of thousands of statistics on a wide range of topics, including media, the environment, business and industry, sports, communication, health care and more. 
+
+- [Gallup Analytics](https://www.gallup.com/analytics/318923/world-poll-public-datasets.aspx)
+
+- [US Census Data](https://data.census.gov/profile?q=United+States&g=0100000US)
+
+- [Kaggle](https://www.kaggle.com)
+
+### The Analysis
+
+Our expectation is that you will use time series data from any of the above sources in a forecasting exercise. The length of your forecast and the specific forecasting model you apply will depend on your research question and the underlying data. The only strict requirements are: 
+
+0. Present summary statistics of your data. We recommend including: a visual analysis including a trend line and identification of structural breaks, and the mean, standard deviation, and range of values. 
+
+1. Construct a decomposition-style forecast and estimate associated prediction intervals in R
+
+2. Plot the decomposition, forecast, and prediction intervals in Tableau 
+
+3. Discuss any assumptions you made in your analysis - did you account for structural breaks? Did you use your full time series? What model did you use and why? Did you need to interpolate any missing values in your data?
+
+4. Identify limitations to your analysis (are you certain you are using the best forecasting method?)
+
+5. Use the forecast to answer your research question
+
+### The Presentation - In Class 3/10/2023 (80 points)
+
+**Overall presentation expectations:** (20 points total)
+
+Your presentations should be 6-9 minutes long. (5 points)
+
+Your presentations be engaging, follow a logical structure, and should tell a cohesive story that answers your stated question. (5 points)
+
+Your visualizations should be well formatted and appropriate for your analysis/presentation (10 points)
+
+**Presentation Introduction, Background, and Question:** (15 points total)
+
+You should begin your presentation with the following: (5 points)
+
+- Who are you? (what business, organization, etc. wants an answer to your question) 
+
+- Who is your audience? (business executive team, policy makers, consumers?) 
+
+You should then: 
+
+- Give us any relevant background info that is necessary to understanding your question (as in my example...) (5 points)
+
+- State your question (5 points - the question should be realistic (i.e., something a real world company would like an answer to), clearly stated, and answerable with a time series forecasting analysis)
+
+**Presentation Data and Analysis:** (35 points total)
+
+Data: 
+
+- Describe where your data is from (5 points)
+
+- Provide summary statistics and visualizations (10 points, see step 0 under `Analysis` above)
+
+Analysis:
+
+- What forecasting model did you use? (5 points)
+
+- What assumptions did you make in your analysis?  What are limitations to your analysis? (5 points, see steps 3 and 4 under `Analysis` above)
+
+- Plot and describe your decomposition, forecast, and prediction intervals in Tableau. (10 points)
+
+**Presentation Discussion/Conclusion:** (10 points total)
+
+- How did you use your forecast to answer your question? What is the answer to your question?
+
+- What are the key take-aways for your intended audience?
 
 
-## Part 2: Tableau
+### The Write-up/Online Submission - Due 11:59 PM 3/10/2023 (40 points)
 
-1.  In Tableau, connect to the file you exported from R with your original price time series data, the forecast, and the (three) components of your decomposition. If needed for your analysis, filter your data on the `Date` field so that all worksheets in your workbook start at the date you want to begin your analysis. 
+You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code.
 
-2. Use observed prices to create a forecast in Tableau that uses an additive trend line and additive seasonality. Recall that you will need to filter these data on your indicator variable for whether the price values are forecasted or not (in lab we named this variable `Forecast`)
+Because much of the presentation grade is tied to the content of your report, grading for the report will be based on: 
 
-3.  Create a new visualization that shows the forecasts you created in R. Combine this and the Tableau forecast into a data dashboard. Add a text box to your dashboard and explain any differences between the forecasted estimates and explain why you think the forecasts are different. Once you have created this dashboard you can `hide` your worksheets you used to create this dashboard by right clicking on them and selecting `Hide`. This will clean up your workbook.
+1. Is your code correct and well-explained (use comments to explain what you do at each step!) (15 points)
 
-4. Next create a new worksheet that shows each of the components of your forecast decomposition (the one you did in R). Add a discussion of each of these components as a caption in your worksheet -- what are the overall trends in the data? Which seasons have higher or lower prices? How much variation is unexplained by the trend and seasonality components?
+2. Is your report readable and useful? We will not assess the quality of your research question, visualizations, or any other content included in your presentation, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (15 points)
 
-5.  Finally, create a dashboard that shows seasonal trends in your data by month and by quarter. You can use any visualization(s) of your choosing in this dashboard. Add a text box that describes key take-aways from your analysis and that answers the following questions: Are there more apparent trends in your data when comparing across months or across quarters? Are there noteable differences in the annual trends within a given month or quarter? Do these trends align with the seasonal decomposition you found in your R analysis?
-
-6.  Once you have created your dashboard you can `hide` your worksheets you used to create the dashboards by right clicking on them and selecting `Hide`. This will clean up your workbook. The final workbook you publish should include your two data dashboards and your single worksheet with the R decomposition.
-
-7. Format your visualizations by adding color, useful titles, appropriate marker labels, text annotations, etc. that help your audience understand your analysis.
-
-8. Publish this workbook on Tableau public.
-
-
-## How to Submit
-
-You should create a new webpage on your google site titled `Problem Set 6`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Part 2 should include an embedded version of your Tableau dashboards and worksheets (you should be able to toggle between dashboards and worksheets by using tabs in this embedded view, but email Ali if you need help getting this to work). Submit the link to your google site webpage in Canvas.
+3. Formatting and structure. Is your report easy to follow, with appropriate integration of writing, analysis, and code? (10 points)
