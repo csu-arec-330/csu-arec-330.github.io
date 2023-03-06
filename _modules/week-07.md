@@ -19,15 +19,17 @@ title: "Week 7: Prediction Intervals, Forecasting Options, and Presenting in Tab
 
 
 
+
+
+<b>Project Materials - Due Friday, March 10 (presentation) and March 20 (report) by 11:59 PM:</b> <br>
+
+<a  href="/materials/unit_01/week_03/ps7.html" target="_blank">Project 1 Instructions</a> <br> 
+
+<a  href="/materials/unit_01/week_03/project_1_rubric.html" target="_blank">Project 1 Rubric</a> <br> 
+
+
+
 <!---
-
-<b>Problem Set 6 Materials - Due Thursday, March 2 by 11:59 PM:</b> <br>
-
-<a  href="/materials/unit_01/week_02/ps6.html" target="_blank">Problem Set 6 Instructions</a> <br> 
-
-
-
-
 <b>Additional Resources:</b> <br>
 
 <a  href="https://32net.id/bukaheula/share/SYCWaE5oc1kTqt9D6VLB0wqSno3PFMgUBWRAWeh9.pdf" target="_blank"><i>Better Data Visualizations</i> by Jonathan Schwabish - Free PDF </a> <br>
