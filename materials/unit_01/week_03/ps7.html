@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Unit 1: Final Project and Presentations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="ps7_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ps7_files/libs/quarto-html/quarto.js"></script>
+<script src="ps7_files/libs/quarto-html/popper.min.js"></script>
+<script src="ps7_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ps7_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ps7_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ps7_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ps7_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ps7_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ps7_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Unit 1: Final Project and Presentations</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The goal of this project is for you to apply the tools for time series analysis that we have covered in the course to answer a real world question.</p>
+<section id="the-question" class="level3">
+<h3 class="anchored" data-anchor-id="the-question">The Question</h3>
+<p><strong>The question</strong> should be one related to agriculture, the environment, or natural resources and of interest to a business/company, a marketing board, policy makers, non-governmental organizations (NGO), or other nonprofit organizations. The question must be one that can be answered with time series data. For example:</p>
+<ul>
+<li><p><strong>Business:</strong> Which commodity should I plant now to harvest in 5 years?</p></li>
+<li><p><strong>Marketing Board:</strong> What marketing campaign should we run to to ensure that there is sufficient demand for the future production of strawberries?</p></li>
+<li><p><strong>Policy maker:</strong> Which commodities should we consider subsidizing to ensure continued domestic production?</p></li>
+<li><p><strong>NGO/Nonprofit:</strong> What is will demand be for electric cars in 5 years and what can we do to increase it?</p></li>
+</ul>
+</section>
+<section id="the-data" class="level3">
+<h3 class="anchored" data-anchor-id="the-data">The Data</h3>
+<p>You will be responsible for collecting your own time series data to answer this question. Here are a few useful resources to help you in this process:</p>
+<ul>
+<li><p><a href="https://fred.stlouisfed.org/tags/series">Economic data from the St.&nbsp;Louis Fed</a></p></li>
+<li><p><a href="https://www.ams.usda.gov/market-news">USDA Ag Marketing Service Market News Data</a></p></li>
+<li><p><a href="https://www.epa.gov/outdoor-air-quality-data/download-daily-data">US EPA Pollution Data</a></p></li>
+<li><p><a href="https://www.statista.com">Statista</a> - Database of thousands of statistics on a wide range of topics, including media, the environment, business and industry, sports, communication, health care and more.</p></li>
+<li><p><a href="https://www.gallup.com/analytics/318923/world-poll-public-datasets.aspx">Gallup Analytics</a></p></li>
+<li><p><a href="https://data.census.gov/profile?q=United+States&amp;g=0100000US">US Census Data</a></p></li>
+<li><p><a href="https://www.kaggle.com">Kaggle</a></p></li>
+</ul>
+</section>
+<section id="the-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="the-analysis">The Analysis</h3>
+<p>Our expectation is that you will use time series data from any of the above sources in a forecasting exercise. The length of your forecast and the specific forecasting model you apply will depend on your research question and the underlying data. The only strict requirements are:</p>
+<ol start="0" type="1">
+<li><p>Present summary statistics of your data. We recommend including: a visual analysis including a trend line and identification of structural breaks, and the mean, standard deviation, and range of values.</p></li>
+<li><p>Construct a decomposition-style forecast and estimate associated prediction intervals in R</p></li>
+<li><p>Plot the decomposition, forecast, and prediction intervals in Tableau</p></li>
+<li><p>Discuss any assumptions you made in your analysis - did you account for structural breaks? Did you use your full time series? What model did you use and why? Did you need to interpolate any missing values in your data?</p></li>
+<li><p>Identify limitations to your analysis (are you certain you are using the best forecasting method?)</p></li>
+<li><p>Use the forecast to answer your research question</p></li>
+</ol>
+</section>
+<section id="the-presentation---in-class-3102023-80-points" class="level3">
+<h3 class="anchored" data-anchor-id="the-presentation---in-class-3102023-80-points">The Presentation - In Class 3/10/2023 (80 points)</h3>
+<p><strong>Overall presentation expectations:</strong> (20 points total)</p>
+<p>Your presentations should be 6-9 minutes long. (5 points)</p>
+<p>Your presentations be engaging, follow a logical structure, and should tell a cohesive story that answers your stated question. (5 points)</p>
+<p>Your visualizations should be well formatted and appropriate for your analysis/presentation (10 points)</p>
+<p><strong>Presentation Introduction, Background, and Question:</strong> (15 points total)</p>
+<p>You should begin your presentation with the following: (5 points)</p>
+<ul>
+<li><p>Who are you? (what business, organization, etc. wants an answer to your question)</p></li>
+<li><p>Who is your audience? (business executive team, policy makers, consumers?)</p></li>
+</ul>
+<p>You should then:</p>
+<ul>
+<li><p>Give us any relevant background info that is necessary to understanding your question (as in my example…) (5 points)</p></li>
+<li><p>State your question (5 points - the question should be realistic (i.e., something a real world company would like an answer to), clearly stated, and answerable with a time series forecasting analysis)</p></li>
+</ul>
+<p><strong>Presentation Data and Analysis:</strong> (35 points total)</p>
+<p>Data:</p>
+<ul>
+<li><p>Describe where your data is from (5 points)</p></li>
+<li><p>Provide summary statistics and visualizations (10 points, see step 0 under <code>Analysis</code> above)</p></li>
+</ul>
+<p>Analysis:</p>
+<ul>
+<li><p>What forecasting model did you use? (5 points)</p></li>
+<li><p>What assumptions did you make in your analysis? What are limitations to your analysis? (5 points, see steps 3 and 4 under <code>Analysis</code> above)</p></li>
+<li><p>Plot and describe your decomposition, forecast, and prediction intervals in Tableau. (10 points)</p></li>
+</ul>
+<p><strong>Presentation Discussion/Conclusion:</strong> (10 points total)</p>
+<ul>
+<li><p>How did you use your forecast to answer your question? What is the answer to your question?</p></li>
+<li><p>What are the key take-aways for your intended audience?</p></li>
+</ul>
+</section>
+<section id="the-write-uponline-submission---due-1159-pm-3102023-40-points" class="level3">
+<h3 class="anchored" data-anchor-id="the-write-uponline-submission---due-1159-pm-3102023-40-points">The Write-up/Online Submission - Due 11:59 PM 3/10/2023 (40 points)</h3>
+<p>You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code.</p>
+<p>Because much of the presentation grade is tied to the content of your report, grading for the report will be based on:</p>
+<ol type="1">
+<li><p>Is your code correct and well-explained (use comments to explain what you do at each step!) (15 points)</p></li>
+<li><p>Is your report readable and useful? We will not assess the quality of your research question, visualizations, or any other content included in your presentation, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (15 points)</p></li>
+<li><p>Formatting and structure. Is your report easy to follow, with appropriate integration of writing, analysis, and code? (10 points)</p></li>
+</ol>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
