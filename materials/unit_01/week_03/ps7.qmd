@@ -9,6 +9,8 @@ format:
 
 The goal of this project is for you to apply the tools for time series analysis that we have covered in the course to answer a real world question. 
 
+[**Rubric**](project_1_rubric.html)
+
 ### The Question
 
 **The question** should be one related to agriculture, the environment, or natural resources and of interest to a business/company, a marketing board, policy makers, non-governmental organizations (NGO), or other nonprofit organizations. The question must be one that can be answered with time series data. For example:
@@ -61,7 +63,7 @@ Our expectation is that you will use time series data from any of the above sour
 
 Your presentations should be 6-9 minutes long. (5 points)
 
-Your presentations be engaging, follow a logical structure, and should tell a cohesive story that answers your stated question. (5 points)
+Your presentation should be engaging, follow a logical structure, and should tell a cohesive story that answers your stated question. (5 points)
 
 Your visualizations should be well formatted and appropriate for your analysis/presentation (10 points)
 
@@ -102,14 +104,15 @@ Analysis:
 - What are the key take-aways for your intended audience?
 
 
-### The Write-up/Online Submission - Due 11:59 PM 3/10/2023 (40 points)
+### The Write-up/Online Submission - Due 11:59 PM 3/20/2023 (40 points)
 
-You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code.
+You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code. The written portion of the assignment is due later so that you can incorporate feedback that you receive during the oral presentation in class.
 
 Because much of the presentation grade is tied to the content of your report, grading for the report will be based on: 
 
-1. Is your code correct and well-explained (use comments to explain what you do at each step!) (15 points)
+1. Is your code correct and well-explained (use comments to explain what you do at each step!)? Produce an R log.txt file using the `sink()` command and include it as an appendix to your write up. (15 points)
 
-2. Is your report readable and useful? We will not assess the quality of your research question, visualizations, or any other content included in your presentation, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (15 points)
+2. Is your report readable and useful? We will not assess the quality of your research question, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (15 points)
 
-3. Formatting and structure. Is your report easy to follow, with appropriate integration of writing, analysis, and code? (10 points)
+3. Organization, formatting and structure. Is your report organized, presented in a logical order, with appropriate integration of writing, analysis, and code? (10 points)
+

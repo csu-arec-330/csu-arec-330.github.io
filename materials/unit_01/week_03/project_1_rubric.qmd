@@ -1,0 +1,35 @@
+---
+title: "Project 1 Rubric"
+format: 
+  html:
+    theme: [zephyr, ../../custom_doc.scss]
+---
+
+## Oral Presentation {.center-head}
+
+::: {.column-screen}
+
+| Criteria                           | Exceeds Requirements (90% - 100%)                                              | Meets Requirements (80% - 89%)                                                           | Nearly Meets Requirements (70% - 79%)                                                |
+|------------------------------------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| Presentation Length (5 points)     | On time                                                                        | Slightly under or over                                                                   | Too short or too long                                                                 |
+| Structure and Cohesion (5 points)  | The presentation has a clear and creative structure that tells a compelling and cohesive story that answers the stated question. | The presentation is fairly clear and tells a story that answers the stated question. | The presentation lacks a clear structure and does not tell a cohesive story that answers the stated question. |
+| Visualizations (10 points)         | The visualizations are well formatted, appropriate for the analysis/presentation, and visually engaging. | The visualizations are well formatted and appropriate for the analysis/presentation, but may be slightly lacking in detail or creativity. | The visualizations are poorly formatted and/or inappropriate for the analysis/presentation. |
+| Introduction (10 points)           | The introduction clearly identifies the business/organization and the audience, provides relevant background information, and is engaging. | The introduction identifies the audience, and provides some relevant background information. | The introduction does not clearly identify the business/organization or the audience, and does not provide relevant background information. |
+| Question (5 points)                | The question is realistic, clearly stated, and answerable with a time series forecasting analysis. | The question is somewhat realistic and answerable with a time series forecasting analysis. | The question is not realistic, clearly stated, or answerable with a time series forecasting analysis. |
+| Data Description (15 points)       | The description of the data source, summary statistics, and visuals are clear and complete. | The description of the data source, summary statistics, and visuals are complete but not entirely clear. | The description of the data source is incomplete or unclear. Summary statistics and visuals are incomplete or unclear. |
+| Analysis (20 points)               | The forecasting model is identified, assumptions and limitations are clearly discussed, and the decomposition, forecast, and prediction intervals are plotted and described in a clear and creative way. | The forecasting model is described, assumptions and limitations are mentioned, and the decomposition, forecast, and prediction intervals are plotted and described. | The forecasting model is not clearly explained, assumptions and limitations are not discussed, and/or the decomposition, forecast, and prediction intervals are not plotted or described. |
+| Discussion/Conclusion (10 points) | The forecast is used to answer the question in a clear and creative way, and the key takeaways for the audience are clear and engaging. The next steps of a more in depth analysis are discussed. | The forecast is used to answer the question, and the key takeaways for the audience are clear. | The forecast is not used to answer the question, or the key takeaways for the audience are not clear. |
+
+:::
+
+## Written Report {.center-head}
+
+::: {.column-screen}
+
+| Criteria                    | Exceeds Requirements (90% - 100%) | Meets Requirements (80% - 89%) | Nearly Meets Requirements (70% - 79%) |
+|--------------------------------|----------------------------------|--------------------------------|---------------------------------------|
+| Code Quality and Explanation (15 points)  | The code is correct, well-organized, and easy to follow, with clear and detailed comments explaining what is happening at each step of the process.  The log file shows that all steps of the code run without error. | The code is generally correct, but may be difficult to follow or lacking in detail. Some comments are provided to explain what is happening at each step of the process. | The code contains errors, is poorly organized, and/or is difficult to follow. Comments are either missing or insufficient to explain what is happening at each step of the process. |
+| Readability and Usefulness of Report (15 points)  | The report is well-written, clearly explains what was done and why, and is easy to understand for the intended audience. The report includes all necessary information for the audience to make informed decisions based on the analysis. | The report is generally well-written and explains what was done and why, but may lack clarity or be confusing in places. Some information necessary for the audience may be missing or unclear. | The report is poorly written and/or does not clearly explain what was done and why. The report may be difficult to understand or missing important information for the audience to make informed decisions based on the analysis. |
+| Formatting and Structure  (10 points)    | The report is well-structured, with clear headings, appropriate use of visual aids, and a logical flow of information. The writing, analysis, and code are well-integrated and easy to follow. | The report is generally well-structured, but may lack clarity or be confusing in places. The writing, analysis, and code are mostly well-integrated but some improvements could be made. | The report is poorly structured and difficult to follow. The writing, analysis, and code are not well-integrated and improvements are necessary. |
+
+:::
