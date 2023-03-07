@@ -1,5 +1,5 @@
 ---
-title: "Week 8: <br>Prediction Intervals and Advanced Forecasting Options<br>"
+title: "Week 7: <br>Prediction Intervals and Advanced Forecasting Options<br>"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
