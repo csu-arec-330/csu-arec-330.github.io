@@ -22,17 +22,27 @@ Example project
 library(pacman)
 p_load(tidyquant,dplyr,readr,forecast,fpp3,scales)
 
-if(!file.exists("materials/unit_01/inputs/carrot_1990.rds")){
+if(!file.exists("../inputs/carrot_1990.rds")){
   carrot <- tq_get(c("WPU01130212"),get = "economic.data",from="1980-01-01")
   saveRDS(carrot,"../inputs/carrot_1990.rds")
 } else {
   carrot <- readRDS("../inputs/carrot_1990.rds")
 }
 
+if(!file.exists("../inputs/carrot_inputs.rds")){
+  carrot_inputs <- tq_get(c("WPU01130212","WPU0652"),get = "economic.data",from="1980-01-01")
+  saveRDS(carrot_inputs,"../inputs/carrot_inputs.rds")
+} else {
+  carrot_inputs <- readRDS("../inputs/carrot_inputs.rds")
+}
+
 carrot_ts <- carrot %>%
   select(date,price) %>%
   mutate(date=yearmonth(date)) %>%
   as_tsibble()
+
+snames <- tibble(symbol=c("WPU01130212","WPU0652"),
+                 name=c("Carrot PPI 1982=100","Fertilizer PPI 1982=100"))
 ```
 
 # Will carrot prices continue to rise
@@ -46,13 +56,24 @@ AREC 330
 ## Introduction
 
 <!-- Briefly introduce the recent rise in food prices and its impact on carrot prices -->
+:::: {.columns}
 
-State the objective of the presentation
+::: {.column width="50%"}
+Carrots are delicious and people buy them
+
+Growers want to know what the price will be in the future
+
+Objective: forecast mid and long term carrot prices 
+:::
+
+::: {.column width="50%"}
+![](https://www.almanac.com/sites/default/files/styles/or/public/image_nodes/carrots-table_popidar-ss.jpg?itok=-6KDefXK)
+:::
+
+::::
 
 ## Current State of Carrot Prices
 
-Present data on the current price of carrots and how it compares to historical data
-Discuss the factors that have contributed to the rise in carrot prices
 
 ```{r}
 #| echo: false
@@ -64,431 +85,93 @@ carrot_ts %>%
   as_tsibble() %>%
   autoplot(price,color="lightgray") +
   geom_line(aes(y=trend),color="darkorange",size=1) +
-  scale_y_continuous(labels = dollar) +
-  labs(y=NULL,x=NULL,title = "Carrot Prices") +
+  #scale_y_continuous(labels = dollar) +
+  labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
   theme_bw(base_size = 15)
 ```
 
 
-## Trends and Seasonality
+## Is it just seasonality?
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-align: center
+carrot_ts %>%
+  model(classical_decomposition(price,type="additive")) %>%
+  components() %>%
+  autoplot() +
+  #geom_line(aes(y=trend),color="darkorange",size=1) +
+  #scale_y_continuous(labels = dollar) +
+  labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
+  theme_bw(base_size = 13)
+```
+
+## Is it input prices? {.scrollable}
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-align: center
+carrot_inputs %>%
+  inner_join(snames) %>%
+  ggplot(aes(x=yearmonth(date),y=price)) +
+  geom_line() +
+  facet_wrap(~name,ncol = 1,scales = "free") +
+  labs(y=NULL,x=NULL) +
+  theme_bw(base_size = 13)
+
+```
+
+# Will prices continue to rise?
+
+## Forecast Scenario: high prices persist
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-align: center
+
+#Forecast
+carrot_ts %>%
+  #filter(date>yearmonth("2000 Jan")) %>%
+  model(
+    additive = ETS(price ~ error("A") + trend("A") + season("A"))
+  ) %>%
+  forecast(h = "5 years") %>%
+  autoplot(carrot_ts %>% filter(date>yearmonth("2000 Jan")),level=80) +
+  labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
+  theme_bw(base_size = 13)
+
+```
 
 
-## Medium-Term Forecast (1-3 years)
+## Forecast Scenario: high prices subside
 
-Present data on the expected changes in supply and demand for carrots over the next 3-4 years
-Discuss any potential medium-term trends or events that may impact carrot prices
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-align: center
 
+#Forecast
+carrot_ts %>%
+  filter(date<yearmonth("2021 Jan")) %>%
+  model(
+    additive = ETS(price ~ error("A") + trend("A") + season("A"))
+  ) %>%
+  forecast(h = "5 years") %>%
+  mutate(date=date+24) %>%
+  autoplot(carrot_ts %>% filter(date>yearmonth("2000 Jan")),level=80) +
+  labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
+  theme_bw(base_size = 13)
 
-## Long-Term Forecast (5 years)
+```
 
-Present data on the expected changes in supply and demand for carrots over the next 5 years
-Discuss any potential long-term trends or events that may impact carrot prices
-
-
-## Factors Impacting Carrot Prices
-
-Discuss the factors that are likely to have the greatest impact on carrot prices over the next 5 years
-Provide an overview of how these factors are likely to interact with each other
 
 ## Conclusion
 
-Summarize the key points of the presentation
-Restate the forecast for carrot prices over the next 5 years
-Provide recommendations for stakeholders who may be impacted by changes in carrot prices
-Slide 9:
-Q&A
+Carrot prices are near all time highs
 
-Allow time for questions from the audience
-Address any additional concerns or questions that were not covered in the presentation
-Slide 10:
-Thank You
+If current prices remain high, the price index is expected to reach nearly 300
 
-Thank the audience for their time and attention
-Provide contact information for further questions or discussions.
-
-
-<!-- example of big text fit to slide width -->
-
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
-
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
-
-
-# Intro to Prediction Intervals
-
-## But first... A review question {.scrollable .smaller}
-
-![](includes/tableau_reg.png){width="100%"}
-
-
-Which value indicates whether the estimated relationship between carrot prices and time is statistically significantly different from zero?
-
-A. 0.0728323  
-
-B. 189.513  
-
-C. 0.0288396  
-
-D. 0.0204868  
-
-# 
-::: {.r-fit-text }
-**What are *prediction intervals*?** <br> <br>
-The interval within which we expect  <br> 
-values of our $y$ variable to lie at <br> 
-a given point in time
-:::
-
-## Prediction intervals: An Example 
-
-- Our forecast from last time predicted that carrot prices will be 275.91 on January 1, 2025.
-
-- We recognize that it is incredibly unlikely for us to perfectly predict carrot prices in two years...
-
-- Instead, what if we construct a *range* of estimates that we are pretty confident encompasses the true value of carrot prices in two years?
-
-- Perhaps we are reasonably sure the true price will be between 200 and 350...
-
-## Prediction intervals: The intuition {.scrollable}
-
-The intuition for prediction intervals begins with understanding *confidence intervals*:
-
-1. What are confidence intervals (CIs)?
-
-    - A range of values that describe the uncertainty of an estimate.
-
-    - Similarly to p-values, CIs give us information on whether estimates are statistically significantly different from zero - does the interval include 0?
-
-    - CIs go beyond p-values and give us the range of possible effects or correlations.
-
-## Prediction intervals: The intuition 
-
-2. How are confidence intervals calculated?
-
-    - Using the estimate, its standard error, the sample size, critical values, and an assumption on the distribution of your data.
-
-![](includes/tableau_describe.png){width="100%"}
-
-<!--
-    - The 95% CI for the relationship between our time variable and carrot prices is 
--->
-
-## Prediction intervals: The intuition 
-
-3. How are confidence intervals different from prediction intervals?
-
-    - Prediction intervals are concerned with bounding our *predictions*.
-
-    - Prediction intervals are always wider than CIs because of the added uncertainty involved in predicting a single response versus estimating the mean response.
-
-    - Prediction intervals increase as we try to forecast further in the future.
-
-
-## Prediction intervals: The intuition 
-
-The most frequently used prediction (and confidence) interval is 95%.
-
-**The intuitive interpretation**: we are 95% confident that our prediction interval contains/encompasses the value of our outcome variable that will be realized.
-
-In Tableau (and most other software) prediction intervals are shown with shaded regions around the prediction.
-
-# 
-::: {style="text-align: center"}
-![](includes/Tableau_forecast.png){width="80%"}
-:::
-
-# 
-::: {style="text-align: center"}
-![100 possible future paths of 5 year forecast with 95% prediction intervals](includes/carrot_price_spaghetti.png){width="100%"}
-:::
-
-## Review Question 1 
-
-**Which of the following best defines confidence intervals?**
-
-A. A range of values used to estimate a population parameter with a specified level of confidence.
-
-B. A range of values that represents the mean of a sample.
-
-C. A range of values used to estimate a future value of a variable with a specified level of confidence.
-
-D. A range of values that is used to test a hypothesis about a population parameter.
-
-## Review Question 2 
-
-**Which of the following best defines prediction intervals?**
-
-A. A range of values used to estimate a population parameter with a specified level of confidence.
-
-B. A range of values that represents the mean of a sample.
-
-C. A range of values used to estimate a future value of a variable with a specified level of confidence.
-
-D. A range of values that is used to test a hypothesis about a population parameter.
-
-
-## Review Question 3 {.smaller}
-
-**Which of the following best describes the difference between prediction and confidence intervals?**
-
-A. Confidence intervals estimate future values of a variable, while prediction intervals estimate population parameters.
-
-B. Confidence intervals estimate population parameters, while prediction intervals estimate future values of a variable.
-
-C. Confidence intervals are used for small sample sizes, while prediction intervals are used for large sample sizes.
-
-D. Confidence intervals are used for large sample sizes, while prediction intervals are used for small sample sizes.
-
-E. Confidence intervals and prediction intervals are the same thing.
-
-## Prediction intervals: Estimation
-
-Like CIs, prediction intervals require a few inputs and assumptions.
-
-The formula for the standard 95% prediction interval for the $h$-step forecast is:
-
-$$
-\widehat{y}_{T+h|T} \pm 1.96 \cdot \widehat{\sigma}_h
-$$
-
-where,
-$\widehat{y}_{T+h|T}$ is our prediction of $y$ $h$ periods from the end of our data,
-
-1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal...,
-
-$\widehat{\sigma}_h$ is an estimate of the standard deviation for the $h$-step forecast
-
-## Prediction intervals: The multiplier {.scrollable}
-
-This equation can be written more generally as:
-$$
-\widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
-$$
-
-where the multiplier $c$ depends on the prediction interval you desire:
-
-| Percentage  | Multiplier  |
-|:------:|:------:|
-| 80  | 1.28  |
-| 85  | 1.44  |
-| 90 | 1.64  |
-| 95 | 1.96   |
-| 99 | 2.58   |
-
-::: {style="font-size: 80%;"}
-Note that these all assume a normal distribution of future observations.
-:::
-
-## Prediction intervals: Standard deviation {.scrollable}
-
-When forecasting 1 step ahead ($h=1$), we will estimate the standard deviation of the forecast distribution according to:
-
-$$
-\widehat{\sigma} = \sqrt{\frac{1}{T-K-M}\sum^T_{t=1}e^2_t}
-$$
-
-where,
-
-$K$ is the number of parameters estimated in the forecasting method,
-
-$M$ is the number of missing values in the residuals,
-
-$e_t$ is the residual at time $t$ (recall your decomposition...) 
-
-## Prediction intervals: Standard deviation
-
-When forecasting $h$ steps ahead ($h\geq 1$), we can estimate the standard deviation of the forecast distribution according to:
-
-$$
-\widehat{\sigma}_h = \widehat{\sigma}\sqrt{h}
-$$
-
-Note that there are many other methods for estimating the standard deviation of the forecasting distribution.
-
-This formula is for the Na&iuml;ve method, and is among the simplest.
-
-
-# 
-::: {.r-fit-text }
-**Prediction intervals: Application** <br> <br>
-
-In lab this week, <br>
-we will show you how to <br>
-estimate prediction intervals in R <br>
-and plot them in Tableau. 
-:::
-
-# Additive vs. Multiplicative Models
-
-## Additive vs. Multiplicative Decompositions
-There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative.
-
-These are known as classical decomposition methods, and are estimated according to:
-
-1. Additive: $y_t = T_t + S_t + R_t$
-
-2. Multiplicative: $y_t = T_t \times S_t \times R_t$
-
-::: {style="font-size: 80%;"}
-Note there are a few other options for forecasting using decompositions, but we won't cover them in this class.
-
-This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html>
-:::
-
-
-# Validating Predictions
-
-# 
-::: {.r-fit-text }
-**The objective:** <br>
-We want to show our audience <br> 
-that they should trust our predictions.
-:::
-
-
-#
-::: {.r-fit-text }
-**The solution:** <br> 
-time series cross-validation 
-:::
-
-
-## Time series cross-validation: The intuition
-
-Construct a series of "training" and "test" sets of data.
-
-Use your "training" set to construct a forecast (following the same methods in your main forecast).
-
-Evaluate the accuracy of your forecast using your "test" set.
-
-## Time series cross-validation: Test set 1 {.scrollable}
-
-Training data =  blue
-
-Test data =  orange
-
-::: {style="text-align: center"}
-![](includes/train_test1.png){width="75%"}
-:::
-
-## Time series cross-validation: Test set 2 {.scrollable}
-
-Training data =  blue
-
-Test data =  orange
-
-::: {style="text-align: center"}
-![](includes/train_test2.png){width="75%"}
-:::
-
-## Time series cross-validation: Evaluating?
-
-Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:
-
-- Mean Forecast Error (MFE)
-
-- Mean Absolute Error (MAE)
-
-- Root Mean Square Error (RMSE)
-
-- Mean Absolute Percentage Error (MAPE)
-
-Choose the forecasting model that minimizes prediction error according to these measures.
-
-::: {style="font-size: 80%;"}
-This is a useful resource for these evaluation methods: <https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>
-:::
-
-
-## REMINDER: Project 1
-
-Choose an ag biz or enre management question to answer with time series data
-
-Collect time series data
-
-Analyze trends 
-
-Generate a forecast 
-
-Generate prediction intervals
-
-Present results and conclusions in class Fri March 10
-
-## EXAMPLE: The Question
-
-I am currently growing almonds and walnuts, and in the coming season I will plant a new orchard. 
-
-- Almond trees need to mature for 3-4 years before they are ready for harvest.
-
-- Walnut trees need to mature for 4-7 years before they are ready for harvest.
-
-- Both trees will continue producing for roughly 25 years.
-
-How can I decide which trees to plant?
-
-## EXAMPLE: The Data and Analysis
-
-**DATA:** Time series data on almond and walnut prices.
-
-**ANALYSIS:** Forecast prices for the next 10 years (really 25 would better answer your Q, but is probably too long of a prediction period)
-
-**ANSWER:** I will plant walnuts because over a 10 year horizon they would yield higher revenues than almond trees, despite that I would have to wait longer before selling them.
-
-## Presentation Overview {.scrollable}
-
-Your presentations should be roughly 8 minutes. (let's say 6-9 minutes)
-
-You should begin your presentation with the following: 
-
-- Who are you? (what business, organization, etc. wants an answer to your question)
-
-- Who is your audience? (business executive team, policy makers, consumers?)
-
-You should then:
-
-- Give us any relevant background info that is necessary to understanding your question (as in my example...)
-
-- State your question
-
-## Presentation Content {.scrollable}
-
-Data:
-
-- Describe where your data is from
-
-- Provide summary statistics and visualizations
-
-Analysis:
-
-- What forecasting model did you use? Why?
-
-- Show your forecast and prediction intervals
-
-Discussion/Conclusion:
-
-- How did you use your forecast to answer your question?
-
-- What are the key take-aways for your intended audience?
-
-- What are limitations to your analysis?
-
-## Final Project Submission {.scrollable}
-
-Each group member will be responsible for providing this information in a report on their google site. You can both have an identical report, but must post it to your personal webpage.
-
-Your report should summarize the same information as your presentation, and can include additional information and visualizations if they are helpful for answering your question.
-
-## References {.scrollable .smaller}
-
-Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <https://otexts.com/fpp3/>. Accessed on 02-28-2023.
-
-A useful blog post: <https://mins.space/blog/2020-07-30-forecasting-through-decomposition/>
-
-Another useful blog post: <https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>
+If current prices subside, the price index is expected to remain below 250

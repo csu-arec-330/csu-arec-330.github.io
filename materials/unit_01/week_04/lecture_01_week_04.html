@@ -7,7 +7,7 @@
 <link href="lecture_01_week_04_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_01_week_04_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_01_week_04_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.2.280">
 
   <title>Week 8:  Project Overview and Example </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -347,380 +347,46 @@
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <!-- Briefly introduce the recent rise in food prices and its impact on carrot prices -->
-<p>State the objective of the presentation</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Carrots are delicious and people buy them</p>
+<p>Growers want to know what the price will be in the future</p>
+<p>Objective: forecast mid and long term carrot prices</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="https://www.almanac.com/sites/default/files/styles/or/public/image_nodes/carrots-table_popidar-ss.jpg?itok=-6KDefXK"></p>
+</div>
+</div>
 </section>
 <section id="current-state-of-carrot-prices" class="slide level2">
 <h2>Current State of Carrot Prices</h2>
-<p>Present data on the current price of carrots and how it compares to historical data Discuss the factors that have contributed to the rise in carrot prices</p>
 
-<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-4-1.png" width="1440" class="r-stretch quarto-figure-center"></section>
-<section id="trends-and-seasonality" class="slide level2">
-<h2>Trends and Seasonality</h2>
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-2-1.png" width="1440" class="r-stretch quarto-figure-center"></section>
+<section id="is-it-just-seasonality" class="slide level2">
+<h2>Is it just seasonality?</h2>
+
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="is-it-input-prices" class="slide level2 scrollable">
+<h2>Is it input prices?</h2>
+
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
+<section>
+<section id="will-prices-continue-to-rise" class="title-slide slide level1 center">
+<h1>Will prices continue to rise?</h1>
+
 </section>
-<section id="medium-term-forecast-1-3-years" class="slide level2">
-<h2>Medium-Term Forecast (1-3 years)</h2>
-<p>Present data on the expected changes in supply and demand for carrots over the next 3-4 years Discuss any potential medium-term trends or events that may impact carrot prices</p>
-</section>
-<section id="long-term-forecast-5-years" class="slide level2">
-<h2>Long-Term Forecast (5 years)</h2>
-<p>Present data on the expected changes in supply and demand for carrots over the next 5 years Discuss any potential long-term trends or events that may impact carrot prices</p>
-</section>
-<section id="factors-impacting-carrot-prices" class="slide level2">
-<h2>Factors Impacting Carrot Prices</h2>
-<p>Discuss the factors that are likely to have the greatest impact on carrot prices over the next 5 years Provide an overview of how these factors are likely to interact with each other</p>
-</section>
+<section id="forecast-scenario-high-prices-persist" class="slide level2">
+<h2>Forecast Scenario: high prices persist</h2>
+
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="forecast-scenario-high-prices-subside" class="slide level2">
+<h2>Forecast Scenario: high prices subside</h2>
+
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"></section>
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
-<p>Summarize the key points of the presentation Restate the forecast for carrot prices over the next 5 years Provide recommendations for stakeholders who may be impacted by changes in carrot prices Slide 9: Q&amp;A</p>
-<p>Allow time for questions from the audience Address any additional concerns or questions that were not covered in the presentation Slide 10: Thank You</p>
-<p>Thank the audience for their time and attention Provide contact information for further questions or discussions.</p>
-<!-- example of big text fit to slide width -->
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
-</section></section>
-<section>
-<section id="intro-to-prediction-intervals" class="title-slide slide level1 center">
-<h1>Intro to Prediction Intervals</h1>
-
-</section>
-<section id="but-first-a-review-question" class="slide level2 scrollable smaller">
-<h2>But first… A review question</h2>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>Which value indicates whether the estimated relationship between carrot prices and time is statistically significantly different from zero?</p>
-<p>A. 0.0728323</p>
-<p>B. 189.513</p>
-<p>C. 0.0288396</p>
-<p>D. 0.0204868</p>
-</section></section>
-<section>
-<section id="section" class="title-slide slide level1 center">
-<h1></h1>
-<div class="r-fit-text">
-<p><strong>What are <em>prediction intervals</em>?</strong> <br> <br> The interval within which we expect <br> values of our <span class="math inline">\(y\)</span> variable to lie at <br> a given point in time</p>
-</div>
-</section>
-<section id="prediction-intervals-an-example" class="slide level2">
-<h2>Prediction intervals: An Example</h2>
-<ul>
-<li><p>Our forecast from last time predicted that carrot prices will be 275.91 on January 1, 2025.</p></li>
-<li><p>We recognize that it is incredibly unlikely for us to perfectly predict carrot prices in two years…</p></li>
-<li><p>Instead, what if we construct a <em>range</em> of estimates that we are pretty confident encompasses the true value of carrot prices in two years?</p></li>
-<li><p>Perhaps we are reasonably sure the true price will be between 200 and 350…</p></li>
-</ul>
-</section>
-<section id="prediction-intervals-the-intuition" class="slide level2 scrollable">
-<h2>Prediction intervals: The intuition</h2>
-<p>The intuition for prediction intervals begins with understanding <em>confidence intervals</em>:</p>
-<ol type="1">
-<li><p>What are confidence intervals (CIs)?</p>
-<ul>
-<li><p>A range of values that describe the uncertainty of an estimate.</p></li>
-<li><p>Similarly to p-values, CIs give us information on whether estimates are statistically significantly different from zero - does the interval include 0?</p></li>
-<li><p>CIs go beyond p-values and give us the range of possible effects or correlations.</p></li>
-</ul></li>
-</ol>
-</section>
-<section id="prediction-intervals-the-intuition-1" class="slide level2">
-<h2>Prediction intervals: The intuition</h2>
-<ol start="2" type="1">
-<li><p>How are confidence intervals calculated?</p>
-<ul>
-<li>Using the estimate, its standard error, the sample size, critical values, and an assumption on the distribution of your data.</li>
-</ul></li>
-</ol>
-
-<!--
-    - The 95% CI for the relationship between our time variable and carrot prices is 
--->
-<img data-src="includes/tableau_describe.png" style="width:100.0%" class="r-stretch"></section>
-<section id="prediction-intervals-the-intuition-2" class="slide level2">
-<h2>Prediction intervals: The intuition</h2>
-<ol start="3" type="1">
-<li><p>How are confidence intervals different from prediction intervals?</p>
-<ul>
-<li><p>Prediction intervals are concerned with bounding our <em>predictions</em>.</p></li>
-<li><p>Prediction intervals are always wider than CIs because of the added uncertainty involved in predicting a single response versus estimating the mean response.</p></li>
-<li><p>Prediction intervals increase as we try to forecast further in the future.</p></li>
-</ul></li>
-</ol>
-</section>
-<section id="prediction-intervals-the-intuition-3" class="slide level2">
-<h2>Prediction intervals: The intuition</h2>
-<p>The most frequently used prediction (and confidence) interval is 95%.</p>
-<p><strong>The intuitive interpretation</strong>: we are 95% confident that our prediction interval contains/encompasses the value of our outcome variable that will be realized.</p>
-<p>In Tableau (and most other software) prediction intervals are shown with shaded regions around the prediction.</p>
-</section></section>
-<section id="section-1" class="title-slide slide level1 center">
-<h1></h1>
-<div style="text-align: center">
-<p><img data-src="includes/Tableau_forecast.png" style="width:80.0%"></p>
-</div>
-</section>
-
-<section>
-<section id="section-2" class="title-slide slide level1 center">
-<h1></h1>
-<div style="text-align: center">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="includes/carrot_price_spaghetti.png" style="width:100.0%"></p>
-<p></p><figcaption>100 possible future paths of 5 year forecast with 95% prediction intervals</figcaption><p></p>
-</figure>
-</div>
-</div>
-</section>
-<section id="review-question-1" class="slide level2">
-<h2>Review Question 1</h2>
-<p><strong>Which of the following best defines confidence intervals?</strong></p>
-<p>A. A range of values used to estimate a population parameter with a specified level of confidence.</p>
-<p>B. A range of values that represents the mean of a sample.</p>
-<p>C. A range of values used to estimate a future value of a variable with a specified level of confidence.</p>
-<p>D. A range of values that is used to test a hypothesis about a population parameter.</p>
-</section>
-<section id="review-question-2" class="slide level2">
-<h2>Review Question 2</h2>
-<p><strong>Which of the following best defines prediction intervals?</strong></p>
-<p>A. A range of values used to estimate a population parameter with a specified level of confidence.</p>
-<p>B. A range of values that represents the mean of a sample.</p>
-<p>C. A range of values used to estimate a future value of a variable with a specified level of confidence.</p>
-<p>D. A range of values that is used to test a hypothesis about a population parameter.</p>
-</section>
-<section id="review-question-3" class="slide level2 smaller">
-<h2>Review Question 3</h2>
-<p><strong>Which of the following best describes the difference between prediction and confidence intervals?</strong></p>
-<p>A. Confidence intervals estimate future values of a variable, while prediction intervals estimate population parameters.</p>
-<p>B. Confidence intervals estimate population parameters, while prediction intervals estimate future values of a variable.</p>
-<p>C. Confidence intervals are used for small sample sizes, while prediction intervals are used for large sample sizes.</p>
-<p>D. Confidence intervals are used for large sample sizes, while prediction intervals are used for small sample sizes.</p>
-<p>E. Confidence intervals and prediction intervals are the same thing.</p>
-</section>
-<section id="prediction-intervals-estimation" class="slide level2">
-<h2>Prediction intervals: Estimation</h2>
-<p>Like CIs, prediction intervals require a few inputs and assumptions.</p>
-<p>The formula for the standard 95% prediction interval for the <span class="math inline">\(h\)</span>-step forecast is:</p>
-<p><span class="math display">\[
-\widehat{y}_{T+h|T} \pm 1.96 \cdot \widehat{\sigma}_h
-\]</span></p>
-<p>where, <span class="math inline">\(\widehat{y}_{T+h|T}\)</span> is our prediction of <span class="math inline">\(y\)</span> <span class="math inline">\(h\)</span> periods from the end of our data,</p>
-<p>1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal…,</p>
-<p><span class="math inline">\(\widehat{\sigma}_h\)</span> is an estimate of the standard deviation for the <span class="math inline">\(h\)</span>-step forecast</p>
-</section>
-<section id="prediction-intervals-the-multiplier" class="slide level2 scrollable">
-<h2>Prediction intervals: The multiplier</h2>
-<p>This equation can be written more generally as: <span class="math display">\[
-\widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
-\]</span></p>
-<p>where the multiplier <span class="math inline">\(c\)</span> depends on the prediction interval you desire:</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Percentage</th>
-<th style="text-align: center;">Multiplier</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">80</td>
-<td style="text-align: center;">1.28</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">85</td>
-<td style="text-align: center;">1.44</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">90</td>
-<td style="text-align: center;">1.64</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">95</td>
-<td style="text-align: center;">1.96</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">99</td>
-<td style="text-align: center;">2.58</td>
-</tr>
-</tbody>
-</table>
-<div style="font-size: 80%;">
-<p>Note that these all assume a normal distribution of future observations.</p>
-</div>
-</section>
-<section id="prediction-intervals-standard-deviation" class="slide level2 scrollable">
-<h2>Prediction intervals: Standard deviation</h2>
-<p>When forecasting 1 step ahead (<span class="math inline">\(h=1\)</span>), we will estimate the standard deviation of the forecast distribution according to:</p>
-<p><span class="math display">\[
-\widehat{\sigma} = \sqrt{\frac{1}{T-K-M}\sum^T_{t=1}e^2_t}
-\]</span></p>
-<p>where,</p>
-<p><span class="math inline">\(K\)</span> is the number of parameters estimated in the forecasting method,</p>
-<p><span class="math inline">\(M\)</span> is the number of missing values in the residuals,</p>
-<p><span class="math inline">\(e_t\)</span> is the residual at time <span class="math inline">\(t\)</span> (recall your decomposition…)</p>
-</section>
-<section id="prediction-intervals-standard-deviation-1" class="slide level2">
-<h2>Prediction intervals: Standard deviation</h2>
-<p>When forecasting <span class="math inline">\(h\)</span> steps ahead (<span class="math inline">\(h\geq 1\)</span>), we can estimate the standard deviation of the forecast distribution according to:</p>
-<p><span class="math display">\[
-\widehat{\sigma}_h = \widehat{\sigma}\sqrt{h}
-\]</span></p>
-<p>Note that there are many other methods for estimating the standard deviation of the forecasting distribution.</p>
-<p>This formula is for the Naïve method, and is among the simplest.</p>
-</section></section>
-<section id="section-3" class="title-slide slide level1 center">
-<h1></h1>
-<div class="r-fit-text">
-<p><strong>Prediction intervals: Application</strong> <br> <br></p>
-<p>In lab this week, <br> we will show you how to <br> estimate prediction intervals in R <br> and plot them in Tableau.</p>
-</div>
-</section>
-
-<section>
-<section id="additive-vs.-multiplicative-models" class="title-slide slide level1 center">
-<h1>Additive vs.&nbsp;Multiplicative Models</h1>
-
-</section>
-<section id="additive-vs.-multiplicative-decompositions" class="slide level2">
-<h2>Additive vs.&nbsp;Multiplicative Decompositions</h2>
-<p>There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative.</p>
-<p>These are known as classical decomposition methods, and are estimated according to:</p>
-<ol type="1">
-<li><p>Additive: <span class="math inline">\(y_t = T_t + S_t + R_t\)</span></p></li>
-<li><p>Multiplicative: <span class="math inline">\(y_t = T_t \times S_t \times R_t\)</span></p></li>
-</ol>
-<div style="font-size: 80%;">
-<p>Note there are a few other options for forecasting using decompositions, but we won’t cover them in this class.</p>
-<p>This is a useful resource for more information on these methods and others: <a href="https://otexts.com/fpp3/classical-decomposition.html" class="uri">https://otexts.com/fpp3/classical-decomposition.html</a></p>
-</div>
-</section></section>
-<section id="validating-predictions" class="title-slide slide level1 center">
-<h1>Validating Predictions</h1>
-
-</section>
-
-<section id="section-4" class="title-slide slide level1 center">
-<h1></h1>
-<div class="r-fit-text">
-<p><strong>The objective:</strong> <br> We want to show our audience <br> that they should trust our predictions.</p>
-</div>
-</section>
-
-<section>
-<section id="section-5" class="title-slide slide level1 center">
-<h1></h1>
-<div class="r-fit-text">
-<p><strong>The solution:</strong> <br> time series cross-validation</p>
-</div>
-</section>
-<section id="time-series-cross-validation-the-intuition" class="slide level2">
-<h2>Time series cross-validation: The intuition</h2>
-<p>Construct a series of “training” and “test” sets of data.</p>
-<p>Use your “training” set to construct a forecast (following the same methods in your main forecast).</p>
-<p>Evaluate the accuracy of your forecast using your “test” set.</p>
-</section>
-<section id="time-series-cross-validation-test-set-1" class="slide level2 scrollable">
-<h2>Time series cross-validation: Test set 1</h2>
-<p>Training data = blue</p>
-<p>Test data = orange</p>
-<div style="text-align: center">
-<p><img data-src="includes/train_test1.png" style="width:75.0%"></p>
-</div>
-</section>
-<section id="time-series-cross-validation-test-set-2" class="slide level2 scrollable">
-<h2>Time series cross-validation: Test set 2</h2>
-<p>Training data = blue</p>
-<p>Test data = orange</p>
-<div style="text-align: center">
-<p><img data-src="includes/train_test2.png" style="width:75.0%"></p>
-</div>
-</section>
-<section id="time-series-cross-validation-evaluating" class="slide level2">
-<h2>Time series cross-validation: Evaluating?</h2>
-<p>Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:</p>
-<ul>
-<li><p>Mean Forecast Error (MFE)</p></li>
-<li><p>Mean Absolute Error (MAE)</p></li>
-<li><p>Root Mean Square Error (RMSE)</p></li>
-<li><p>Mean Absolute Percentage Error (MAPE)</p></li>
-</ul>
-<p>Choose the forecasting model that minimizes prediction error according to these measures.</p>
-<div style="font-size: 80%;">
-<p>This is a useful resource for these evaluation methods: <a href="https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b" class="uri">https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b</a></p>
-</div>
-</section>
-<section id="reminder-project-1" class="slide level2">
-<h2>REMINDER: Project 1</h2>
-<p>Choose an ag biz or enre management question to answer with time series data</p>
-<p>Collect time series data</p>
-<p>Analyze trends</p>
-<p>Generate a forecast</p>
-<p>Generate prediction intervals</p>
-<p>Present results and conclusions in class Fri March 10</p>
-</section>
-<section id="example-the-question" class="slide level2">
-<h2>EXAMPLE: The Question</h2>
-<p>I am currently growing almonds and walnuts, and in the coming season I will plant a new orchard.</p>
-<ul>
-<li><p>Almond trees need to mature for 3-4 years before they are ready for harvest.</p></li>
-<li><p>Walnut trees need to mature for 4-7 years before they are ready for harvest.</p></li>
-<li><p>Both trees will continue producing for roughly 25 years.</p></li>
-</ul>
-<p>How can I decide which trees to plant?</p>
-</section>
-<section id="example-the-data-and-analysis" class="slide level2">
-<h2>EXAMPLE: The Data and Analysis</h2>
-<p><strong>DATA:</strong> Time series data on almond and walnut prices.</p>
-<p><strong>ANALYSIS:</strong> Forecast prices for the next 10 years (really 25 would better answer your Q, but is probably too long of a prediction period)</p>
-<p><strong>ANSWER:</strong> I will plant walnuts because over a 10 year horizon they would yield higher revenues than almond trees, despite that I would have to wait longer before selling them.</p>
-</section>
-<section id="presentation-overview" class="slide level2 scrollable">
-<h2>Presentation Overview</h2>
-<p>Your presentations should be roughly 8 minutes. (let’s say 6-9 minutes)</p>
-<p>You should begin your presentation with the following:</p>
-<ul>
-<li><p>Who are you? (what business, organization, etc. wants an answer to your question)</p></li>
-<li><p>Who is your audience? (business executive team, policy makers, consumers?)</p></li>
-</ul>
-<p>You should then:</p>
-<ul>
-<li><p>Give us any relevant background info that is necessary to understanding your question (as in my example…)</p></li>
-<li><p>State your question</p></li>
-</ul>
-</section>
-<section id="presentation-content" class="slide level2 scrollable">
-<h2>Presentation Content</h2>
-<p>Data:</p>
-<ul>
-<li><p>Describe where your data is from</p></li>
-<li><p>Provide summary statistics and visualizations</p></li>
-</ul>
-<p>Analysis:</p>
-<ul>
-<li><p>What forecasting model did you use? Why?</p></li>
-<li><p>Show your forecast and prediction intervals</p></li>
-</ul>
-<p>Discussion/Conclusion:</p>
-<ul>
-<li><p>How did you use your forecast to answer your question?</p></li>
-<li><p>What are the key take-aways for your intended audience?</p></li>
-<li><p>What are limitations to your analysis?</p></li>
-</ul>
-</section>
-<section id="final-project-submission" class="slide level2 scrollable">
-<h2>Final Project Submission</h2>
-<p>Each group member will be responsible for providing this information in a report on their google site. You can both have an identical report, but must post it to your personal webpage.</p>
-<p>Your report should summarize the same information as your presentation, and can include additional information and visualizations if they are helpful for answering your question.</p>
-</section>
-<section id="references" class="slide level2 scrollable smaller">
-<h2>References</h2>
-<p>Hyndman, R.J., &amp; Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <a href="https://otexts.com/fpp3/" class="uri">https://otexts.com/fpp3/</a>. Accessed on 02-28-2023.</p>
-<p>A useful blog post: <a href="https://mins.space/blog/2020-07-30-forecasting-through-decomposition/" class="uri">https://mins.space/blog/2020-07-30-forecasting-through-decomposition/</a></p>
-<p>Another useful blog post: <a href="https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b" class="uri">https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b</a></p>
+<p>Carrot prices are near all time highs</p>
+<p>If current prices remain high, the price index is expected to reach nearly 300</p>
+<p>If current prices subside, the price index is expected to remain below 250</p>
 <div class="footer footer-default">
 
 </div>
