@@ -12,7 +12,7 @@ title: "Useful Links"
   <li><a  href="https://www.tableau.com/products/desktop" target="_blank">Tableau Desktop</a></li>
   <li><a  href="https://it.colostate.edu/cybersecurity/globalprotect-vpn/" target="_blank">Global Protect VPN</a></li>
   <li><a  href="https://sites.google.com/u/0/new?authuser=0" target="_blank">Google Sites</a></li> 
-</ul> <br><br>
+</ul> <br>
 
 <b>Some Sources for Time Series Data (Project 1):</b> <br>
 
