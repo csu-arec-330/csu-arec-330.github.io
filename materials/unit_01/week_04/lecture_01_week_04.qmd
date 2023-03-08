@@ -45,6 +45,18 @@ snames <- tibble(symbol=c("WPU01130212","WPU0652"),
                  name=c("Carrot PPI 1982=100","Fertilizer PPI 1982=100"))
 ```
 
+# Project Overview
+
+Presentation on Friday; Written report (webpage) Monday March 20
+
+Make sure you tell a story with your data
+
+Have a hook to grab the audience attention, give your audience context, pose your question, then answer it
+
+[Project Instructions](../week_03/ps7.html)
+
+
+
 # Will carrot prices continue to rise
 
 Jude and Ali
@@ -175,3 +187,5 @@ Carrot prices are near all time highs
 If current prices remain high, the price index is expected to reach nearly 300
 
 If current prices subside, the price index is expected to remain below 250
+
+# Questions
