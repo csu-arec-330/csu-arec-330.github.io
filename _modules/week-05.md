@@ -28,24 +28,7 @@ title: "Week 5: Intro to time series"
 
 <a  href="/materials/unit_01/week_01/ps5.html" target="_blank">Problem Set 5 Instructions</a> <br> 
 
-<!---
 
-<a  href="/materials/unit_00/inputs/carrots_prices.csv" download>Download Carrot Price Data</a> <br>
-
-<a  href="/materials/unit_00/inputs/corn_prices.csv" download>Download Corn Price Data</a> <br>
-
-<a  href="/materials/unit_00/inputs/tomatoes_prices.csv" target="_blank">Download Tomato Price Data</a> <br> <br>
-
--->
-
-<!---
-<b>Additional Resources:</b> <br>
-
-<a  href="https://32net.id/bukaheula/share/SYCWaE5oc1kTqt9D6VLB0wqSno3PFMgUBWRAWeh9.pdf" target="_blank"><i>Better Data Visualizations</i> by Jonathan Schwabish - Free PDF </a> <br>
-
-
-<a  href="https://policyviz.com/resources/" target="_blank">Jonathan Schwabish - Data Vis Resources </a> <br>
-
--->
 </div>
 
+<br> <br>

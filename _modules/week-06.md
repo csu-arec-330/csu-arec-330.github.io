@@ -28,16 +28,6 @@ title: "Week 6: Intro to Linear Regression and Forecasting"
 
 <a  href="/materials/unit_01/week_02/ps6.html" target="_blank">Problem Set 6 Instructions</a> <br> 
 
-
-
-<!---
-<b>Additional Resources:</b> <br>
-
-<a  href="https://32net.id/bukaheula/share/SYCWaE5oc1kTqt9D6VLB0wqSno3PFMgUBWRAWeh9.pdf" target="_blank"><i>Better Data Visualizations</i> by Jonathan Schwabish - Free PDF </a> <br>
-
-
-<a  href="https://policyviz.com/resources/" target="_blank">Jonathan Schwabish - Data Vis Resources </a> <br>
-
--->
 </div>
 
+<br> <br>

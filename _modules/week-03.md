@@ -33,3 +33,4 @@ title: "Week 3: Effective Data Visualizations"
 
 </div>
 
+<br> <br>
