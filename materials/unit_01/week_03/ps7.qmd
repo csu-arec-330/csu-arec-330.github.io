@@ -7,7 +7,7 @@ format:
 
 ## Overview
 
-The goal of this project is for you to apply the tools for time series analysis that we have covered in the course to answer a real world question. 
+The goal of this project is for you to apply the tools for time series analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
 
 [**Rubric**](project_1_rubric.html)
 

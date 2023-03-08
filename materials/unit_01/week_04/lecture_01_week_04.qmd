@@ -57,7 +57,7 @@ Have a hook to grab the audience attention, give your audience context, pose you
 
 
 
-# Will carrot prices continue to rise
+# Will carrot prices continue to rise?
 
 Jude and Ali
 
@@ -75,7 +75,7 @@ Carrots are delicious and people buy them
 
 Growers want to know what the price will be in the future
 
-Objective: forecast mid and long term carrot prices 
+Objective: forecast carrot prices in 5 years
 :::
 
 ::: {.column width="50%"}
@@ -91,6 +91,7 @@ Objective: forecast mid and long term carrot prices
 #| echo: false
 #| fig-width: 15
 #| fig-align: center
+#| fig-cap: "Trend calculated from STL decomposition using LOESS"
 carrot_ts %>%
   model(stl=STL(price)) %>%
   components() %>%
@@ -109,6 +110,7 @@ carrot_ts %>%
 #| echo: false
 #| fig-width: 10
 #| fig-align: center
+#| fig-cap: "Additive decomposition of PPI"
 carrot_ts %>%
   model(classical_decomposition(price,type="additive")) %>%
   components() %>%
@@ -141,8 +143,9 @@ carrot_inputs %>%
 
 ```{r}
 #| echo: false
-#| fig-width: 10
+#| fig-width: 13
 #| fig-align: center
+#| fig-cap: "Forecast based on exponential smoothing of components"
 
 #Forecast
 carrot_ts %>%
@@ -153,7 +156,7 @@ carrot_ts %>%
   forecast(h = "5 years") %>%
   autoplot(carrot_ts %>% filter(date>yearmonth("2000 Jan")),level=80) +
   labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
-  theme_bw(base_size = 13)
+  theme_bw(base_size = 15)
 
 ```
 
@@ -164,6 +167,7 @@ carrot_ts %>%
 #| echo: false
 #| fig-width: 10
 #| fig-align: center
+#| fig-cap: "Same ETS forecast based on data truncated at January 2021"
 
 #Forecast
 carrot_ts %>%
@@ -187,5 +191,7 @@ Carrot prices are near all time highs
 If current prices remain high, the price index is expected to reach nearly 300
 
 If current prices subside, the price index is expected to remain below 250
+
+My guess: carrot prices subside then gradually increase because of declining trend in fertilizer 
 
 # Questions

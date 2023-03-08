@@ -7,7 +7,7 @@
 <link href="lecture_01_week_04_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_01_week_04_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_01_week_04_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.2.269">
 
   <title>Week 8:  Project Overview and Example </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -347,7 +347,7 @@
 
 <section>
 <section id="will-carrot-prices-continue-to-rise" class="title-slide slide level1 center">
-<h1>Will carrot prices continue to rise</h1>
+<h1>Will carrot prices continue to rise?</h1>
 <p>Jude and Ali</p>
 <p>March 8, 2023</p>
 <p>AREC 330</p>
@@ -359,7 +359,7 @@
 <div class="column" style="width:50%;">
 <p>Carrots are delicious and people buy them</p>
 <p>Growers want to know what the price will be in the future</p>
-<p>Objective: forecast mid and long term carrot prices</p>
+<p>Objective: forecast carrot prices in 5 years</p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="https://www.almanac.com/sites/default/files/styles/or/public/image_nodes/carrots-table_popidar-ss.jpg?itok=-6KDefXK"></p>
 </div>
@@ -368,15 +368,15 @@
 <section id="current-state-of-carrot-prices" class="slide level2">
 <h2>Current State of Carrot Prices</h2>
 
-<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-2-1.png" width="1440" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-4-1.png" width="1440" class="r-stretch quarto-figure-center"><p class="caption">Trend calculated from STL decomposition using LOESS</p></section>
 <section id="is-it-just-seasonality" class="slide level2">
 <h2>Is it just seasonality?</h2>
 
-<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Additive decomposition of PPI</p></section>
 <section id="is-it-input-prices" class="slide level2 scrollable">
 <h2>Is it input prices?</h2>
 
-<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch quarto-figure-center"></section></section>
 <section>
 <section id="will-prices-continue-to-rise" class="title-slide slide level1 center">
 <h1>Will prices continue to rise?</h1>
@@ -385,16 +385,17 @@
 <section id="forecast-scenario-high-prices-persist" class="slide level2">
 <h2>Forecast Scenario: high prices persist</h2>
 
-<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-10-1.png" width="1248" class="r-stretch quarto-figure-center"><p class="caption">Forecast based on exponential smoothing of components</p></section>
 <section id="forecast-scenario-high-prices-subside" class="slide level2">
 <h2>Forecast Scenario: high prices subside</h2>
 
-<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Same ETS forecast based on data truncated at January 2021</p></section>
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
 <p>Carrot prices are near all time highs</p>
 <p>If current prices remain high, the price index is expected to reach nearly 300</p>
 <p>If current prices subside, the price index is expected to remain below 250</p>
+<p>My guess: carrot prices subside then gradually increase because of declining trend in fertilizer</p>
 </section></section>
 <section id="questions" class="title-slide slide level1 center">
 <h1>Questions</h1>
