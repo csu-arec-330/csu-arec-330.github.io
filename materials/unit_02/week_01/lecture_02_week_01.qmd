@@ -1,0 +1,257 @@
+---
+title: "Week 5: <br>Intro to Cross-Sectional Data <br> and Project 2 Overview"
+format: 
+  revealjs:
+    theme: [night, ../../custom.scss]
+    slide-number: c/t
+    width: 1400
+    # logo: path.png
+    # center: TRUE
+---
+
+## Agenda 
+
+What is cross-sectional data?
+
+Common types of cross-sectional data
+
+Visualizing cross-sectional data
+
+Analyzing cross-sectional data
+
+Project 2 overview and example
+
+
+<!-- example of big text fit to slide width -->
+
+<!-- ::: {.r-fit-text} -->
+<!-- Big Text -->
+<!-- ::: -->
+
+<!-- :::: {.columns style="text-align: center"} -->
+<!-- ::: {.column width="40%"} -->
+<!-- ::: -->
+<!-- ::: {.column width="60%"} -->
+<!-- ::: -->
+<!-- :::: -->
+
+## What is cross sectional data?
+::: {.incremental}
+
+- Cross-sectional data is collected by observing a study population at a single point in time or for a period of time and aggregating information to a single observation per subject.
+
+- We call it cross-sectional data because we are observing information for a slice, *snapshot*, or cross-section of a group subjects.
+
+- This differs from time series data in that we only observe information at a single point in time.
+::: 
+
+## 
+<section data-background-image="includes/cross-sectional.png" data-background-size="contain">
+</section>
+
+## 
+<section data-background-image="includes/cross-sectional-repeated.png" data-background-size="contain">
+</section>
+
+
+## Common types of cross-sectional data
+
+- Individual-level data
+
+## 
+<section data-background-image="includes/health-survey.png" data-background-size="contain">
+</section>
+
+## 
+<section data-background-image="includes/cex.png" data-background-size="contain">
+</section>
+
+
+## Common types of cross-sectional data
+
+- Individual-level data
+
+- Business or point of interest-level data
+
+## 
+<section data-background-image="includes/safegraph.png" data-background-size="contain">
+</section>
+
+## 
+<section data-background-image="includes/starbucks.png" data-background-size="contain">
+</section>
+
+## Common types of cross-sectional data
+
+- Individual-level data
+
+- Business or point of interest-level data
+
+- Country-level data
+
+## 
+<section data-background-iframe="https://public.tableau.com/shared/BZH34J4NW?:display_count=n&:showVizHome=no&:embed=true"
+          data-background-interactive>
+</section>
+
+## 
+<section data-background-iframe="https://ourworldindata.org/explorers/coronavirus-data-explorer?tab=map&zoomToSelection=true&facet=none&pickerSort=asc&pickerMetric=location&hideControls=true&Metric=Confirmed+deaths&Interval=7-day+rolling+average&Relative+to+Population=true&Color+by+test+positivity=false&country=IND~USA~GBR~CAN~DEU~FRA"
+          data-background-interactive>
+</section>
+
+## Common types of cross-sectional data
+
+- Individual-level data
+
+- Business or point of interest-level data
+
+- Country-level data
+
+- Region-level data
+
+
+## 
+<section data-background-image="includes/map.png" data-background-size="contain">
+</section>
+
+## 
+<section data-background-image="includes/map2.png" data-background-size="contain">
+</section>
+
+## Common types of cross-sectional data
+
+- Individual-level data
+
+- Business or point of interest-level data
+
+- Country-level data
+
+- Region-level data
+
+- Spatial data
+
+## 
+<section data-background-image="includes/smoke_plume.png" data-background-size="contain">
+</section>
+
+## 
+<section data-background-image="includes/snow.png" data-background-size="contain">
+</section>
+
+## Analyzing Cross-Sectional Data
+
+- Analyzing cross-section data typically consists of studying differences among subjects.
+
+- We can use cross-sectional data to ask *frequency-type* questions: 
+
+    - how common is the outcome? 
+
+    - how many people are impacted? 
+
+    - who is impacted?
+
+- Or *association-type* questions:
+
+    - what factors are associated with the outcome (age, gender, income, pollution, health, etc.)?
+
+## Analyzing Cross-Sectional Data: Examples
+
+- What is the association between average income and household food waste?
+
+- How much do consumers spend on coffee products in a particular area? Does coffee spending differ by age?
+
+- How could I use cross-sectional data to decide where to open a new grocery store? How many grocery stores are located in a particular area? 
+
+
+# 
+::: {.r-fit-text }
+The problem: <br>
+We don't know what will <br> 
+happen in the future
+:::
+#
+
+::: {.r-fit-text }
+The solution: <br> We can use past data to <br> make a guess about the future*
+:::
+
+
+## What is time series data? {.scrollable}
+
+Time series data is a sequence of data points collected over time. 
+
+It typically consists of observations taken at regular intervals (e.g. every hour, every day, every week, etc.) and can be used to study trends and patterns over time.
+
+::: {style="text-align: center"}
+![](includes/grocery_sales.jpg){width="80%"}
+:::
+
+# Project 1
+
+## Project 1 overview
+
+Groups of 2
+
+Choose an ag biz or enre management question to answer with time series data
+
+Collect time series data
+
+Analyze trends 
+
+Generate a forecast 
+
+Present results in class Fri March 10
+
+
+## Example: Corn and Combines {.scrollable}
+
+
+::: {style="text-align: center"}
+![<https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales>](includes/corn_prices.jpeg){width="70%"}
+:::
+<!-- Historical corn prices and future equipment sales  -->
+
+Context: Equipment dealers sell more when ag prices rise.  Most people grow corn near dealer x.
+
+Question: Will corn prices rise or fall in the next year and by how much?
+
+Approach: Analyze time series of corn prices (decomp).  Forecast corn PPI one year.
+
+Present: Provide context (plot raw data) and describe decision. Explain your insights.  Use effective graphics. Tell your data story.
+
+
+## Finding data
+
+Many sources of public data (e.g., [St Louis FED](https://fred.stlouisfed.org/categories/33528), [tidyquant](https://business-science.github.io/tidyquant/))
+
+Choose data appropriate to answer the question 
+
+Ali and Jude can help
+
+
+
+## Analysis
+
+Must include some:
+
+- time series analysis (unit 1 week 2)
+
+- forecasting (unit 2 week 3)
+
+## Process
+
+Identify an interesting question
+
+Collect data
+
+Develop analysis strategy, explore, refine
+
+Develop presentation
+
+# Get Started
+
+## References {.scrollable .smaller}
+
+
+
+Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <https://otexts.com/fpp3/>. Accessed on 02-14-2023.
