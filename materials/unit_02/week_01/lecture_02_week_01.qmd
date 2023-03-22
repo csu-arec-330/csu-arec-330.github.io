@@ -158,8 +158,6 @@ Project 2 overview and example
 
 - How could I use cross-sectional data to decide where to open a new grocery store? 
 
-# Project 2
-
 ## Project 2: Overview
 
 Form groups of 2 (THIS WEEK)
@@ -196,16 +194,20 @@ Present results in class Fri April 14$^{\text{th}}$.
 
 - I have collected county-level income and rent information from [The Opportunity Atlas](https://www.opportunityatlas.org)
 
-## 
+
+##   
 <section data-background-image="includes/Sheet1.png" data-background-size="contain">
 </section>
 
-## 
+
+##   
 <section data-background-image="includes/Sheet2.png" data-background-size="contain">
 </section>
 
-## 
+
+##   
 <section data-background-image="includes/Sheet3.png" data-background-size="contain">
 </section>
+
 
 # Get Started.
