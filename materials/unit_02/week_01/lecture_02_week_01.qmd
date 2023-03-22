@@ -13,9 +13,7 @@ format:
 
 What is cross-sectional data?
 
-Common types of cross-sectional data
-
-Visualizing cross-sectional data
+Common types of cross-sectional data and Vizzes
 
 Analyzing cross-sectional data
 
@@ -148,8 +146,6 @@ Project 2 overview and example
 
     - how many people are impacted? 
 
-    - who is impacted?
-
 - Or *association-type* questions:
 
     - what factors are associated with the outcome (age, gender, income, pollution, health, etc.)?
@@ -160,98 +156,56 @@ Project 2 overview and example
 
 - How much do consumers spend on coffee products in a particular area? Does coffee spending differ by age?
 
-- How could I use cross-sectional data to decide where to open a new grocery store? How many grocery stores are located in a particular area? 
+- How could I use cross-sectional data to decide where to open a new grocery store? 
 
+# Project 2
 
-# 
-::: {.r-fit-text }
-The problem: <br>
-We don't know what will <br> 
-happen in the future
-:::
-#
+## Project 2: Overview
 
-::: {.r-fit-text }
-The solution: <br> We can use past data to <br> make a guess about the future*
-:::
+Form groups of 2 (THIS WEEK)
 
+Choose an ag biz or enre management question to answer with publicly available cross-sectional data
 
-## What is time series data? {.scrollable}
+Collect cross-sectional data
 
-Time series data is a sequence of data points collected over time. 
+Perform an exploratory data analysis and assemble summary statistics; analyze spatial patterns, correlations, etc.; and construct visualizations to answer your research question.
 
-It typically consists of observations taken at regular intervals (e.g. every hour, every day, every week, etc.) and can be used to study trends and patterns over time.
+Present results in class Fri April 14$^{\text{th}}$.
 
-::: {style="text-align: center"}
-![](includes/grocery_sales.jpg){width="80%"}
-:::
+## Project 2: Example
 
-# Project 1
+**Research Objective:**
 
-## Project 1 overview
+- I am wanting to open a small independent grocery store, and I will use cross-sectional data to help me choose an appropriate location.
 
-Groups of 2
+**Important background details:**
 
-Choose an ag biz or enre management question to answer with time series data
+- My grocery store will target middle to upper income customers.
 
-Collect time series data
+- My main grocery retail competitors are Whole Foods and Trader Joes.
 
-Analyze trends 
+- I want to open my store somewhere in Colorado.
 
-Generate a forecast 
+## Project 2: Example
 
-Present results in class Fri March 10
+**Cross-Sectional Data:**
 
+- I have collected data on all U.S. Trader Joes locations from [Kaggle.com](https://www.kaggle.com/datasets/saejinmahlauheinert/trader-joes-locations)
 
-## Example: Corn and Combines {.scrollable}
+- I have collected data on all U.S. Whole Foods locations from [POI Factory](http://www.poi-factory.com/node/823)
 
+- I have collected county-level income and rent information from [The Opportunity Atlas](https://www.opportunityatlas.org)
 
-::: {style="text-align: center"}
-![<https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales>](includes/corn_prices.jpeg){width="70%"}
-:::
-<!-- Historical corn prices and future equipment sales  -->
+## 
+<section data-background-image="includes/Sheet1.png" data-background-size="contain">
+</section>
 
-Context: Equipment dealers sell more when ag prices rise.  Most people grow corn near dealer x.
+## 
+<section data-background-image="includes/Sheet2.png" data-background-size="contain">
+</section>
 
-Question: Will corn prices rise or fall in the next year and by how much?
+## 
+<section data-background-image="includes/Sheet3.png" data-background-size="contain">
+</section>
 
-Approach: Analyze time series of corn prices (decomp).  Forecast corn PPI one year.
-
-Present: Provide context (plot raw data) and describe decision. Explain your insights.  Use effective graphics. Tell your data story.
-
-
-## Finding data
-
-Many sources of public data (e.g., [St Louis FED](https://fred.stlouisfed.org/categories/33528), [tidyquant](https://business-science.github.io/tidyquant/))
-
-Choose data appropriate to answer the question 
-
-Ali and Jude can help
-
-
-
-## Analysis
-
-Must include some:
-
-- time series analysis (unit 1 week 2)
-
-- forecasting (unit 2 week 3)
-
-## Process
-
-Identify an interesting question
-
-Collect data
-
-Develop analysis strategy, explore, refine
-
-Develop presentation
-
-# Get Started
-
-## References {.scrollable .smaller}
-
-
-
-Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <https://otexts.com/fpp3/>. Accessed on 02-14-2023.
+# Get Started.
