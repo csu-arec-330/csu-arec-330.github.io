@@ -146,43 +146,43 @@ th, td {
 				<td rowspan="2">2</td>
 				<td rowspan="2">9</td>
 				<td style="min-width:50px">Wed, March 22</td>
-				<td style="min-width:50px">Project 2 Overview and Intro to Panel Data</td>
+				<td style="min-width:50px">Project 2 Overview and Intro to Cross-Sectional and Spatial Data</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, March 24</td>
-				<td style="min-width:50px">Panel Data EDA</td>
+				<td style="min-width:50px">Cross-Sectional and Spatial Data Visualizations in Tableau</td>
 				<td style="min-width:50px">PS9</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
 				<td rowspan="2">10</td>
 				<td style="min-width:50px">Wed, March 29</td>
-				<td style="min-width:50px">Intro to Causal Inference</td>
+				<td style="min-width:50px">Intro to Analyzing Cross-Sectional Data</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, March 31</td>
-				<td style="min-width:50px">Exploring Regression Controls, Significance, and Functional Form</td>
+				<td style="min-width:50px">Cross-Sectional EDA and Regression Analysis</td>
 				<td style="min-width:50px">Quiz 5, PS10</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
 				<td rowspan="2">11</td>
 				<td style="min-width:50px">Wed, April 05</td>
-				<td style="min-width:50px">Causal Inference with Panel Data</td>
+				<td style="min-width:50px">Spatial Data Aggregation and Analysis</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, April 07</td>
-				<td style="min-width:50px">Fixed Effects Regressions and Distributional Visualizations</td>
+				<td style="min-width:50px">Spatial Data Packages, Aggregation, Analysis, and Visualizations</td>
 				<td style="min-width:50px">PS11</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
 				<td rowspan="2">12</td>
 				<td style="min-width:50px">Wed, April 12</td>
-				<td style="min-width:50px">How to Present Regression Results</td>
+				<td style="min-width:50px">How to Present Regression Results and Interactive Mapping</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
@@ -194,36 +194,36 @@ th, td {
 				<td rowspan="2">3</td>
 				<td rowspan="2">13</td>
 				<td style="min-width:50px">Wed, April 19</td>
-				<td style="min-width:50px">Intro to Spatial Data</td>
+				<td style="min-width:50px">Project 3 Overview and Intro to Panel Data</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, April 21</td>
-				<td style="min-width:50px">Spatial Data Packages and Visualizations</td>
+				<td style="min-width:50px">Panel Data Packages, EDA, and Visualizations</td>
 				<td style="min-width:50px">PS13</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
 				<td rowspan="2">14</td>
 				<td style="min-width:50px">Wed, April 26</td>
-				<td style="min-width:50px">Spatial and Temporal Aggregation</td>
+				<td style="min-width:50px">Intro to Causal Analysis</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, April 28</td>
-				<td style="min-width:50px">R packages for date and time manipulation</td>
+				<td style="min-width:50px">Applications of Causal Analysis - R Packages, Choosing Controls, and Assessing Model Assumptions</td>
 				<td style="min-width:50px">Quiz 7, PS14</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
 				<td rowspan="2">15</td>
 				<td style="min-width:50px">Wed, May 03</td>
-				<td style="min-width:50px">Model Specification; How to Present Maps and Model Selection</td>
+				<td style="min-width:50px">Fixed Effects and Distributional Analyses</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td style="min-width:50px">Fri, May 05</td>
-				<td style="min-width:50px">Model Specifications and Interactive Mapping</td>
+				<td style="min-width:50px">Fixed Effects Regressions and Distributional Visualizations</td>
 				<td style="min-width:50px">Quiz 8, PS15: Project 3</td>
 			</tr>
 			<tr>
