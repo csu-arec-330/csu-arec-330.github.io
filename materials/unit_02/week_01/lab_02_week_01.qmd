@@ -1,5 +1,5 @@
 ---
-title: "Week 5 Lab: Time Series Exploratory Data Analysis (EDA)"
+title: "Week 9 Lab: Visualizing and Exploring Cross-Sectional Data in Tableau"
 format: 
   html:
     theme: zephyr
@@ -10,342 +10,114 @@ format:
 ![](includes/cross-sectional.png)
 
 ::: {style="font-size: 1.5em"}
-This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
+This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 :::
 
-## Learning Objectives R
-
-- Reading in time series data
-
-- Understand how to work with dates
-
-- Downloading data via API
 
 
 ## Learning Objectives Tableau
 
-- Understand date functions
+- Understand Tableau geocoding capabilities
 
-- Use date functions in calculated fields
+- Explain the different use cases of symbol and filled maps
 
-- Visualizing time series data 
+- Create symbol and filled maps
 
-- Creating and interpreting trend lines
+- Customize Tableau maps
 
-- Visualizing structural breaks 
+- Create visualizations to summarize individual-level data
 
-- Creating panes to visualize mutiple time series
+- Aggregate individual level-data by geographic region
 
-## Unit 1 Project Overview
-
-# Time series with R 
-
-The overall objective of this lab is to acquaint you with time series data.  Time series data is very common but not standardized.  Importantly, the notion of a date (and time) is foreign to machines.  They treat dates and times as numbers or counts relative to some start of time (usually called the epoch).  R uses January 1, 1970 as the epoch.  In contrast, MS Excel uses January 1, 1900 as the epoch.^[https://knowledge.broadcom.com/external/article/57052/how-to-convert-unix-epoch-time-values-in.html#:~:text=Epoch%20%2F%20UNIX%20time%20is%20the,on%20the%2070%20years%20difference.]  Prove it to yourself:
-```{r}
-#epoch
-as.numeric(as.Date("1970-01-01"))
-
-#add one day to see how dates are tracked
-as.numeric(as.Date("1970-01-02"))
-```
-
-## Importing time series data
-
-Importing time series data is similar to other types of data.  However, one needs to be aware of the date (or date and time). We have collected egg price data from the [St. Louis FED](https://fred.stlouisfed.org/series/APU0000708111) database called the Federal Reserve Economic Database (FRED).  You can download the data [here](../inputs/APU0000708111.csv), save it to your machine (and upload it to the server), and read it into R. Or, you can put the hyperlink directly into the `read_csv()` function.  Don't forget the steps to starting an R script: description of the script (comment), load (install if necessary) needed packages, set working directory.
-
-```{r}
-#| eval: false
-
-#From your machine or the server
-egg_raw <- read_csv("your_path/APU0000708111.csv")
-
-```
-
-```{r}
-#| include: false
-
-library(readr)
-library(dplyr)
-
-#From your machine or the server
-egg_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111.csv")
-
-```
-
-The `read_csv()` function will try to guess the data type.  In this case, it correctly identifies the variable `DATE` as a date. Check the data type of the variable by looking at the dataframe.
-
-```{r}
-#| eval: false
-
-glimpse(egg_raw)
-```
-
-There are many instances where you collect data that has a date obvious to humans but not machines. In these cases, you need to give R some guidance.  We will use functions from the library called `lubridate`, designed to help work with dates. Read in a modified version of the data that you can download [here](https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv). I assigned the dataframe to an object called `egg_raw_c` to avoid overwriting the existing data.
-
-```{r}
-#| include: false
-
-library(lubridate)
-library(tidyquant)
-
-#From your machine or the server
-egg_raw_c <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv")
-
-```
-
-```{r}
-
-glimpse(egg_raw_c)
-```
-
-We need to tell R how to interpret that date. `lubridate` contains many functions to help with this.  See the [documentation](https://lubridate.tidyverse.org/index.html) for more information and examples. 
-```{r}
-
-egg_raw_c %>%
-  mutate(DATE=mdy(CHAR_DATE)) %>%
-  glimpse()
-```
-
-{{< video https://youtu.be/zpTNJyiPiwE aspect-ratio="16x9" >}}
-
-## Accessing data via API
-
-API stands for Application Programming Interface and they facilitate much of the communication across the modern web.   
-
-![API schematic. Source: https://www.altexsoft.com/blog/engineering/what-is-api-definition-types-specifications-documentation/](https://content.altexsoft.com/media/2019/06/1.png)
-
-We can use APIs to query data. FRED maintains an API that can be accessed using the library `tidyquant`.  This library has a large array of finance analysis tools.  Right now, we will just use it to access FRED data.  `tidyquant` is installed on the server, but you may need to install it on your own machine (e.g., `install.packages("tidyquant")`). Load the library. See the [documentation](https://business-science.github.io/tidyquant/) for information on how to use the functions.  For this exercise, we will use the function `tq_get()` to access the FRED API.  Inspect the help for this particular function to see how to use it. This function can do many things so we need to be specific with some parameters:
-
-- First, we need to find the unique identifier from FRED that points to the data we want.  In this case, we are going to grab the same data that we downloaded, and the unique identifer happens to be the file name `"APU0000708111"`. Remember the quotes.
-
-- Second, the documentation tells us that to access data from FRED we need to set the `get` parameter to `"economic.data"`
-
-- Third, we can specify the date range with the `from` and `to` parameters.  Remember to use the YYYY-MM-DD format.
-
-```{r}
-
-#install.packages("tidquant")
-library(tidyquant,quietly = T)
-```
-
-```{r}
-
-egg_raw_tq <- tq_get(c("APU0000708111"),get = "economic.data",from="1990-01-01",to="2023-02-23")
-
-glimpse(egg_raw_tq)
-```
-
-You can download multiple time series at once by using a vector of identifiers. Let's download the producer price index to compare to the retail price of a dozen eggs.  The identifier is `WPU017107`.  Note that I am going to overwrite the existing object `egg_raw_tq` because I am going to download the retail price series as well as the producer price index.
-
-```{r}
-
-egg_raw_tq <- tq_get(c("APU0000708111","WPU017107"),get = "economic.data",from="1990-01-01",to="2023-02-23")
-
-glimpse(egg_raw_tq)
-```
-
-Notice that there are still 3 columns.  The new data is stacked.  We can confirm this a few ways:
-
-1. Use the `unique()` function to see what values for symbol are in the dataset
-```{r}
-
-unique(egg_raw_tq$symbol)
-```
-
-2. Use `table()` to see the counts by each value
-```{r}
-
-table(egg_raw_tq$symbol)
-```
-
->Why does the retail series `APU0000708111` have more observations?
-
-## Replacing values based on a criteria
-
-The time series are currently identified by the variable `symbol`.  These codes are not informative.  Let's replace them with better labels.  There is a function in the `dplyr` package called `case_when()` designed for this purpose.
-```{r}
-
-egg_out <- egg_raw_tq %>%
-  mutate(description=case_when(
-    symbol == "APU0000708111" ~ "Retail Price", #if symbol equals APU0000708111, then replace value with Retail Price
-    symbol == "WPU017107" ~ "Producer Price"
-  ))
-```
-
-Now the dataset is ready for export in .csv format so you can import it into Tableau.
-
-{{< video https://youtu.be/zuDOOmQtnrM aspect-ratio="16x9" >}}
 
 # Tableau
 
-A key attribute of time series data is that we observe values of variables across **time**. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.  
+The defining characteristic of cross-sectional data is that we observe values of variables at a single point in, or cross-section of time. Often, but not always, cross-sectional data have geographic compenents that allows us to use Tableau's mapping features when creating visualizations. Effective analysis of cross-sectional data begins with estimating and conveying useful summary statistics. Today, we will spend most of our time discussing how to do this with spatial data.
 
-### 1. Date functions
+### 1. Tableau's Geocoding
 
-Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.
+If you want to analyze your data geographically, you can plot your data on a map in Tableau.
 
-You can explore these functions by going to `create calculated field` and choosing `Date`. You can look through these on your own, but I will highlight a few here.
+When building map views, Tableau supports any latitude and longitude coordinates, as long as they are in decimal degrees. Tableau can also recognize and geocode the following geographic information types:
 
--  DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number. 
+- Airport Codes
 
-    - For example, DATEPART (‘month’, #January 23, 2021#) = 1
+- Cities
 
-    - Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.
+- Countries
 
-- DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.
+- Regions
 
-    - For example, DATENAME (‘month’, #January 23, 2021#) = January
+- Territories
 
-- DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.
+- States
 
-    - For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021
+- Provinces
 
-- DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part. 
+- Postcodes
 
-    - For example, DATEDIFF ('day', #January 23, 2021#, #February 24, 2021#) = 32              and DATEDIFF ('month', #January 23, 2021#, #February 24, 2021#) = 1
+- Core Based Statistical Areas (CBSAs)
 
-- DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date. 
+- Metropolitan Statistical Areas (MSAs)
 
-    - For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021. 
-                
-- MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record. 
+- U.S. Area Codes
 
-    - For example, MIN ([Order Date]) returns the earliest date in the Order Date field.
+- Congressional Districts
 
-- MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record. 
+- Zip Codes
 
-    - For example, MAX ([Order Date]) returns the latest date in the Order Date field.
+If you have geographic delineations besides these, you will have to use crosswalks or some other means to convert the delineations to one of these forms, or to generate latitudes and longitudes for specific points (e.g., addresses).
 
-Here are some handy definitions for date_time arguments:
+### 2. Tableau's Spatial Data Capabilities
 
-![](includes/date_args.png)
+Tableau can also connect to the following spatial file types:
 
-### 2. Use date functions in calculated fields
+- Shapefiles
 
-Connect to the `carrots_prices.csv` data and use the expressions above to do the following:
+- KML files
 
-1. Create a calculated field named `months_ago` that determines the number of months between the commodity price data and today.
+- GeoJSON files
 
-2.  Create a calculated field named `first_date` that determines the earliest date in the data.
+- TopoJSON files
 
-3.  Create a calculated field named `last_date` that determines the last date that the carrot price index was less than 135.
+- Esri File Geodatabases
 
-4.  Create a new variable called `month` that only includes the month.
+These types of files include detailed geographic information that enables us to plot shapes and single points. For example, we can load smoke plume data into Tableau:
 
-5.  Create a new variable called `year` that only includes the year.
+### 3. Symbol vs. Filled Maps
 
-6.  Create a new date variable called `my_date` that assigns a new date using your `month` and `year` variables and sets the day as 15.
+#### Symbol Maps
 
+A symbol map is effective for showing quantitative data for individual locations. For example, you can use a symbol map to show individual store locations on a map.
 
-### 3. Visualize time series data
+![](includes/Sheet1.png)
 
-What types of visualizations are most appropriate for time series data?  
+You might want to highlight which stores have [higher spending](https://www.safegraph.com/data-examples/ohio-grocery-spend)
 
--  Line graphs
+To create a symbol map, be sure your data source includes the following types of information:
 
--  Bar charts  
+- Quantitative values
 
--  Dot plots
+- Latitude and longitude coordinates or geographic locations recognized by Tableau
 
--  Others?
+Symbol maps work best with data containing large variations of values. Without enough variation, the symbols will appear approximately the same size in the view.
 
-Let's experiment with creating these visualizations for time series:  
+#### Filled Maps
 
-1.  Create a line graph that shows the value of carrots over time (by month)
+A filled map is ideal when you want to show ratio data. For example, if you wanted to see the percent of total podcast downloads across the United States, you could use a filled map to show trends spatially.
 
-2.  Add markers to your line graph
+![](includes/Sheet3.png)
 
-3.  Change your line graph to a bar graph dot chart
+To create a filled map, verify that your data source includes the following types of information:
 
-4.  Change your bar graph to a dot plot
+- Quantitative or qualitative values
 
-5.  Change the size size, colors, and opacity of the dots in your dot plot (use the `Size` and `Color` icons)
+- Geographic locations recognized by Tableau or custom polygons (from a spatial data file)
 
-6.  Change the markers in your chart from dots to a different shape (use the dropdown menu on the `Marks` card, then use the `Shape` icons)
+**Knowledge Check 1:** Suppose we have county-level data on average gas prices last year. What type of map would you use to show this information?
 
-Now let's experiment with changing what data is shown in your chart:  
+**Knowledge Check 2:** Suppose we have gas station-level data on gas prices yesterday. What type of map would you use to show this information?
 
-1.  Change your x-axis to annual
+### 4. Creating a Symbol Map
 
-2.  Create one line that shows the average value of the commodity each year, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?  
-
-3.  Restrict your date ranges so that your visualization only shows the last 20 years of data (use the `Filters` card)
-
-
-### 4. Creating and interpreting trend lines
-
-Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know *how* they are created? Let's start with a linear trend line... 
-
--  What does a linear trend line tell you about your time series data?  
-
--  How is this trend line estimated? (conceptually... we will go through some equations on Wednesday!)
-
-Now, let's talk some specifics about linear trend lines in Tableau... 
-
-1.  Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022
-
-2.  Add a trend line to your chart
-
-3.  When you click on the trend line, what information does Tableau give you about it? What does this information mean? 
-
-4.  When you click on `describe trend model` what information does Tableau give you about it?
-
-5.  Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn't the trend line change when you changed the date aggregation?
-
-
-### 5. Visualizing structural breaks
-
-Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to *test* for structural breaks in your data that we will demonstrate in R, but for now let's go over a couple ways to visualize structural breaks that we identify with the very sophisticated "eyeball method". 
-
-1.  Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?  
-
-2.  Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.  
-
-3.  Add a **reference line** at this month-year. (Right click on the x-axis and select `Reference Line`) Does anything happen to your trend line? 
-
-Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let's go through two methods for doing this:
-
-**Method 1:** Separate your time series by adding color
-
-1.  Create a new calculated field named `before_after_break`. Use the `IF` and `THEN` functions and an appropriate `Date` function to populate this variable with "after" if the date if after the break you identified in the data and "before" if the date is before the break.  
-
-2.  Drag this variable to the `Color` card.
-
-3.  Add trend lines to your visualization. What happens?
-
-**Method 2:** Separate your time series by segmenting the x-axis
-
-1.  Drag your new variable from the `Marks` card to the `columns` shelf.
-
-2.  Sort your variable so that the "after" time period is shown following the "before" time period.
-
-3.  In the x-axis Edit Axis menu, select `independed axis ranges for each row or column` (access this menu by right clicking on the x-axis)
-
-4.  Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.
-
-
-### 6. Creating panes to visualize mutiple time series
-
-Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.
-
-Let's start by bringing in some price data for a few new commodities.
-
-1.  On the `Data Source` page connect to the following data sources `corn_prices.csv` and `tomatoes_prices.csv`
-
-2.  We are going to create a `relationship` between these data sources and our current working file
-
-3.  With the carrot data in the `canvas`, drag one of the other data sources next to it in the canvas. Do the same with the other data source.
-
-4.  Now go to a new worksheet, what do you see? What did we just accomplish?
-
-Now that we have all these data sources in a single file and they are structured in a "wide" format, we are going to construct time series plots that let us compare trends in these commodity prices across time.
-
-1.  Open a new worksheet and create a line plot of the prices over time for each commodity
-
-2.  Now try formatting your figure. Change colors, adjust sizes, etc.
-
-3.  Now use your `before_after_break` variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.
-
-### 7. If we have extra time... let's do some quick table calculations!
-
-{{< video https://youtu.be/6oOu5DqtakY aspect-ratio="16x9" >}}
+Connect to the 

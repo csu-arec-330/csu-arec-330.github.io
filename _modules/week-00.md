@@ -26,10 +26,12 @@ title: "Useful Links"
   <li><a  href="https://www.kaggle.com" target="_blank">Kaggle</a></li>
 </ul> <br>
 
-<b>Some Sources for Cross-Sectional Data (Project 2):</b> <br>
+<b>Some Sources for Cross-Sectional and Spatial Data (Project 2):</b> <br>
 
 <ul>
   <li><a  href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" target="_blank">US EPA Pollution Annual Summary Data</a></li>
+  <li><a  href="https://www.eia.gov/maps/maps.htm#geodata" target="_blank">US Energy Information Administration Data</a></li>
+  <li><a  href="https://www.usgs.gov/mission-areas/water-resources/maps" target="_blank">USGS Water Resources Data</a></li>
   <li><a  href="https://www.opportunityatlas.org" target="_blank">The Opportunity Atlas</a></li>
   <li><a  href="http://www.poi-factory.com" target="_blank">POI Factory</a></li>
   <li><a  href="https://www.ipums.org" target="_blank">IPUMS - collection of public use microdata</a></li>

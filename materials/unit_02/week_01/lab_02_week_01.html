@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 9 Lab: Visualizing and Exploring Cross-Sectional Data in Tableau</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="lab_02_week_01_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab_02_week_01_files/libs/quarto-html/quarto.js"></script>
+<script src="lab_02_week_01_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab_02_week_01_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab_02_week_01_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab_02_week_01_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab_02_week_01_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab_02_week_01_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab_02_week_01_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab_02_week_01_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link active" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
+  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
+  <ul class="collapse">
+  <li><a href="#tableaus-geocoding" id="toc-tableaus-geocoding" class="nav-link" data-scroll-target="#tableaus-geocoding">1. Tableau’s Geocoding</a></li>
+  <li><a href="#tableaus-spatial-data-capabilities" id="toc-tableaus-spatial-data-capabilities" class="nav-link" data-scroll-target="#tableaus-spatial-data-capabilities">2. Tableau’s Spatial Data Capabilities</a></li>
+  <li><a href="#symbol-vs.-filled-maps" id="toc-symbol-vs.-filled-maps" class="nav-link" data-scroll-target="#symbol-vs.-filled-maps">3. Symbol vs.&nbsp;Filled Maps</a></li>
+  <li><a href="#use-date-functions-in-calculated-fields" id="toc-use-date-functions-in-calculated-fields" class="nav-link" data-scroll-target="#use-date-functions-in-calculated-fields">2. Use date functions in calculated fields</a></li>
+  <li><a href="#visualize-time-series-data" id="toc-visualize-time-series-data" class="nav-link" data-scroll-target="#visualize-time-series-data">3. Visualize time series data</a></li>
+  <li><a href="#creating-and-interpreting-trend-lines" id="toc-creating-and-interpreting-trend-lines" class="nav-link" data-scroll-target="#creating-and-interpreting-trend-lines">4. Creating and interpreting trend lines</a></li>
+  <li><a href="#visualizing-structural-breaks" id="toc-visualizing-structural-breaks" class="nav-link" data-scroll-target="#visualizing-structural-breaks">5. Visualizing structural breaks</a></li>
+  <li><a href="#creating-panes-to-visualize-mutiple-time-series" id="toc-creating-panes-to-visualize-mutiple-time-series" class="nav-link" data-scroll-target="#creating-panes-to-visualize-mutiple-time-series">6. Creating panes to visualize mutiple time series</a></li>
+  <li><a href="#if-we-have-extra-time-lets-do-some-quick-table-calculations" id="toc-if-we-have-extra-time-lets-do-some-quick-table-calculations" class="nav-link" data-scroll-target="#if-we-have-extra-time-lets-do-some-quick-table-calculations">7. If we have extra time… let’s do some quick table calculations!</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 9 Lab: Visualizing and Exploring Cross-Sectional Data in Tableau</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><img src="includes/cross-sectional.png" class="img-fluid"></p>
+<div style="font-size: 1.5em">
+<p>This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8</p>
+</div>
+<section id="learning-objectives-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
+<ul>
+<li><p>Understand Tableau geocoding capabilities</p></li>
+<li><p>Explain the different use cases of symbol and filled maps</p></li>
+<li><p>Create symbol and filled maps</p></li>
+<li><p>Customize Tableau maps</p></li>
+<li><p>Create visualizations to summarize individual-level data</p></li>
+<li><p>Aggregate individual level-data by geographic region</p></li>
+</ul>
+</section>
+<section id="tableau" class="level1">
+<h1>Tableau</h1>
+<p>The defining characteristic of cross-sectional data is that we observe values of variables at a single point in, or cross-section of time. Often, but not always, cross-sectional data have geographic compenents that allows us to use Tableau’s mapping features when creating visualizations. Effective analysis of cross-sectional data begins with estimating and conveying useful summary statistics. Today, we will spend most of our time discussing how to do this with spatial data.</p>
+<section id="tableaus-geocoding" class="level3">
+<h3 class="anchored" data-anchor-id="tableaus-geocoding">1. Tableau’s Geocoding</h3>
+<p>If you want to analyze your data geographically, you can plot your data on a map in Tableau.</p>
+<p>When building map views, Tableau supports any latitude and longitude coordinates, as long as they are in decimal degrees. Tableau can also recognize and geocode the following geographic information types:</p>
+<ul>
+<li><p>Airport Codes</p></li>
+<li><p>Cities</p></li>
+<li><p>Countries</p></li>
+<li><p>Regions</p></li>
+<li><p>Territories</p></li>
+<li><p>States</p></li>
+<li><p>Provinces</p></li>
+<li><p>Postcodes</p></li>
+<li><p>Core Based Statistical Areas (CBSAs)</p></li>
+<li><p>Metropolitan Statistical Areas (MSAs)</p></li>
+<li><p>U.S. Area Codes</p></li>
+<li><p>Congressional Districts</p></li>
+<li><p>Zip Codes</p></li>
+</ul>
+<p>If you have geographic delineations besides these, you will have to use crosswalks or some other means to convert the delineations to one of these forms, or to generate latitudes and longitudes for specific points (e.g., addresses).</p>
+</section>
+<section id="tableaus-spatial-data-capabilities" class="level3">
+<h3 class="anchored" data-anchor-id="tableaus-spatial-data-capabilities">2. Tableau’s Spatial Data Capabilities</h3>
+<p>Tableau can also connect to the following spatial file types:</p>
+<ul>
+<li><p>Shapefiles</p></li>
+<li><p>KML files</p></li>
+<li><p>GeoJSON files</p></li>
+<li><p>TopoJSON files</p></li>
+<li><p>Esri File Geodatabases</p></li>
+</ul>
+<p>These types of files include detailed geographic information that enables us to plot shapes and single points. For example, we can load smoke plume data into Tableau:</p>
+</section>
+<section id="symbol-vs.-filled-maps" class="level3">
+<h3 class="anchored" data-anchor-id="symbol-vs.-filled-maps">3. Symbol vs.&nbsp;Filled Maps</h3>
+<p>A symbol map is effective for showing quantitative data for individual locations. For example, you can use a symbol map to show individual store locations on a map.</p>
+<p><img src="includes/Sheet1.png" class="img-fluid"></p>
+<p>You might want to highlight which stores have <a href="https://www.safegraph.com/data-examples/ohio-grocery-spend">higher spending</a></p>
+<ul>
+<li><p>DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number.</p>
+<ul>
+<li><p>For example, DATEPART (‘month’, #January 23, 2021#) = 1</p></li>
+<li><p>Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.</p></li>
+</ul></li>
+<li><p>DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.</p>
+<ul>
+<li>For example, DATENAME (‘month’, #January 23, 2021#) = January</li>
+</ul></li>
+<li><p>DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.</p>
+<ul>
+<li>For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021</li>
+</ul></li>
+<li><p>DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part.</p>
+<ul>
+<li>For example, DATEDIFF (‘day’, #January 23, 2021#, #February 24, 2021#) = 32 and DATEDIFF (‘month’, #January 23, 2021#, #February 24, 2021#) = 1</li>
+</ul></li>
+<li><p>DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date.</p>
+<ul>
+<li>For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021.</li>
+</ul></li>
+<li><p>MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record.</p>
+<ul>
+<li>For example, MIN ([Order Date]) returns the earliest date in the Order Date field.</li>
+</ul></li>
+<li><p>MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record.</p>
+<ul>
+<li>For example, MAX ([Order Date]) returns the latest date in the Order Date field.</li>
+</ul></li>
+</ul>
+<p>Here are some handy definitions for date_time arguments:</p>
+</section>
+<section id="use-date-functions-in-calculated-fields" class="level3">
+<h3 class="anchored" data-anchor-id="use-date-functions-in-calculated-fields">2. Use date functions in calculated fields</h3>
+<p>Connect to the <code>carrots_prices.csv</code> data and use the expressions above to do the following:</p>
+<ol type="1">
+<li><p>Create a calculated field named <code>months_ago</code> that determines the number of months between the commodity price data and today.</p></li>
+<li><p>Create a calculated field named <code>first_date</code> that determines the earliest date in the data.</p></li>
+<li><p>Create a calculated field named <code>last_date</code> that determines the last date that the carrot price index was less than 135.</p></li>
+<li><p>Create a new variable called <code>month</code> that only includes the month.</p></li>
+<li><p>Create a new variable called <code>year</code> that only includes the year.</p></li>
+<li><p>Create a new date variable called <code>my_date</code> that assigns a new date using your <code>month</code> and <code>year</code> variables and sets the day as 15.</p></li>
+</ol>
+</section>
+<section id="visualize-time-series-data" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-time-series-data">3. Visualize time series data</h3>
+<p>What types of visualizations are most appropriate for time series data?</p>
+<ul>
+<li><p>Line graphs</p></li>
+<li><p>Bar charts</p></li>
+<li><p>Dot plots</p></li>
+<li><p>Others?</p></li>
+</ul>
+<p>Let’s experiment with creating these visualizations for time series:</p>
+<ol type="1">
+<li><p>Create a line graph that shows the value of carrots over time (by month)</p></li>
+<li><p>Add markers to your line graph</p></li>
+<li><p>Change your line graph to a bar graph dot chart</p></li>
+<li><p>Change your bar graph to a dot plot</p></li>
+<li><p>Change the size size, colors, and opacity of the dots in your dot plot (use the <code>Size</code> and <code>Color</code> icons)</p></li>
+<li><p>Change the markers in your chart from dots to a different shape (use the dropdown menu on the <code>Marks</code> card, then use the <code>Shape</code> icons)</p></li>
+</ol>
+<p>Now let’s experiment with changing what data is shown in your chart:</p>
+<ol type="1">
+<li><p>Change your x-axis to annual</p></li>
+<li><p>Create one line that shows the average value of the commodity each year, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?</p></li>
+<li><p>Restrict your date ranges so that your visualization only shows the last 20 years of data (use the <code>Filters</code> card)</p></li>
+</ol>
+</section>
+<section id="creating-and-interpreting-trend-lines" class="level3">
+<h3 class="anchored" data-anchor-id="creating-and-interpreting-trend-lines">4. Creating and interpreting trend lines</h3>
+<p>Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know <em>how</em> they are created? Let’s start with a linear trend line…</p>
+<ul>
+<li><p>What does a linear trend line tell you about your time series data?</p></li>
+<li><p>How is this trend line estimated? (conceptually… we will go through some equations on Wednesday!)</p></li>
+</ul>
+<p>Now, let’s talk some specifics about linear trend lines in Tableau…</p>
+<ol type="1">
+<li><p>Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022</p></li>
+<li><p>Add a trend line to your chart</p></li>
+<li><p>When you click on the trend line, what information does Tableau give you about it? What does this information mean?</p></li>
+<li><p>When you click on <code>describe trend model</code> what information does Tableau give you about it?</p></li>
+<li><p>Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn’t the trend line change when you changed the date aggregation?</p></li>
+</ol>
+</section>
+<section id="visualizing-structural-breaks" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-structural-breaks">5. Visualizing structural breaks</h3>
+<p>Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to <em>test</em> for structural breaks in your data that we will demonstrate in R, but for now let’s go over a couple ways to visualize structural breaks that we identify with the very sophisticated “eyeball method”.</p>
+<ol type="1">
+<li><p>Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?</p></li>
+<li><p>Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.</p></li>
+<li><p>Add a <strong>reference line</strong> at this month-year. (Right click on the x-axis and select <code>Reference Line</code>) Does anything happen to your trend line?</p></li>
+</ol>
+<p>Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let’s go through two methods for doing this:</p>
+<p><strong>Method 1:</strong> Separate your time series by adding color</p>
+<ol type="1">
+<li><p>Create a new calculated field named <code>before_after_break</code>. Use the <code>IF</code> and <code>THEN</code> functions and an appropriate <code>Date</code> function to populate this variable with “after” if the date if after the break you identified in the data and “before” if the date is before the break.</p></li>
+<li><p>Drag this variable to the <code>Color</code> card.</p></li>
+<li><p>Add trend lines to your visualization. What happens?</p></li>
+</ol>
+<p><strong>Method 2:</strong> Separate your time series by segmenting the x-axis</p>
+<ol type="1">
+<li><p>Drag your new variable from the <code>Marks</code> card to the <code>columns</code> shelf.</p></li>
+<li><p>Sort your variable so that the “after” time period is shown following the “before” time period.</p></li>
+<li><p>In the x-axis Edit Axis menu, select <code>independed axis ranges for each row or column</code> (access this menu by right clicking on the x-axis)</p></li>
+<li><p>Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.</p></li>
+</ol>
+</section>
+<section id="creating-panes-to-visualize-mutiple-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="creating-panes-to-visualize-mutiple-time-series">6. Creating panes to visualize mutiple time series</h3>
+<p>Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.</p>
+<p>Let’s start by bringing in some price data for a few new commodities.</p>
+<ol type="1">
+<li><p>On the <code>Data Source</code> page connect to the following data sources <code>corn_prices.csv</code> and <code>tomatoes_prices.csv</code></p></li>
+<li><p>We are going to create a <code>relationship</code> between these data sources and our current working file</p></li>
+<li><p>With the carrot data in the <code>canvas</code>, drag one of the other data sources next to it in the canvas. Do the same with the other data source.</p></li>
+<li><p>Now go to a new worksheet, what do you see? What did we just accomplish?</p></li>
+</ol>
+<p>Now that we have all these data sources in a single file and they are structured in a “wide” format, we are going to construct time series plots that let us compare trends in these commodity prices across time.</p>
+<ol type="1">
+<li><p>Open a new worksheet and create a line plot of the prices over time for each commodity</p></li>
+<li><p>Now try formatting your figure. Change colors, adjust sizes, etc.</p></li>
+<li><p>Now use your <code>before_after_break</code> variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.</p></li>
+</ol>
+</section>
+<section id="if-we-have-extra-time-lets-do-some-quick-table-calculations" class="level3">
+<h3 class="anchored" data-anchor-id="if-we-have-extra-time-lets-do-some-quick-table-calculations">7. If we have extra time… let’s do some quick table calculations!</h3>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/6oOu5DqtakY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
