@@ -120,4 +120,44 @@ To create a filled map, verify that your data source includes the following type
 
 ### 4. Creating a Symbol Map
 
-Connect to the 
+Connect to the dataset `arizona_grocery_foot_traffic.csv`. This is a very very VERY small slice of cell phone visit data from the company [Safegraph](https://www.safegraph.com). The slice includes all grocery retail stores in Arizona with a sufficiently large number of visitors in September of 2021. Visitors (including you if you happened to be in Arizona at that time...) are tracked via their cell phones. The data includes information on the store (name, location, NAICS code, etc.), the number of visits, visitors (unique cell phones), the median distance travelled to shop there, and the median amount of time spent there.
+
+Let's create a symbol map using the provided latitudes and longitudes of these stores.
+
+1. Drag `Longitude` to the Columns Shelf and `Latitude` to the Rows Shelf. (You will likely have to change these fields to `Dimensions`)
+
+2. Drag `Top Category` (this is the top sales category/type of each store) to the colors card.
+
+Which type of store appears to be the most prevalent?
+
+3. Now, let's drag `Raw Visit Counts` to the size card.
+
+Which type of store appears to have the most visitors?
+
+4. Now, let's add each store's name to the tooltip. Drag `Location Name` to the Tooltip card.
+
+**You Do It:** Make a new symbol map using each store's latitude and longitude, and choosing what information you want to include as colors, size, and in the tooltip. What did you uncover?
+
+Now, let's see what happens if we select a different geographical field to make our map. Select the fields `City` and `Raw Visit Counts` and select the Symbol Map in the Show Me Menu. What is this map showing?
+
+What if we change the aggregation of `Raw Visit Counts` to average instead of sum?
+
+### 5. Creating a Filled Map
+
+Let's start this exercise with using the same cell phone data. Select the fields `Postal Code` and `Raw Visit Counts` and go to the Show Me Menu. Now you should see that you can use either a symbol or filled map. Let's select the filled map.
+
+What is this showing you? Are you able to map multiple store attributes using this feature? Do you think the filled map or symbol map are better for these data?
+
+Connect to the dataset `rent_income_county.csv` and create one filled map that shows the median income in each county and one map that shows the median rent in each county.
+
+Now, create a new calculated field called `income to rent ratio` that equal income divided by rent for each county. Plot this new field on a map and filter your data so that your map only includes Arizona (hint: Arizona's FIPS code is 4). Which Arizona county has the highest income to rent ratio?
+
+### 6. Customizing your maps
+
+Tableau includes a variety of features you can include in your maps if you desire. Right click on your map and select `Background Layers...`
+
+Click through some of the map layer options until you find a combination you like.
+
+Now... let's integrate some of Tableau's more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.
+
+
