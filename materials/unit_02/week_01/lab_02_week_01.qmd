@@ -25,9 +25,7 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 
 - Customize Tableau maps
 
-- Create visualizations to summarize individual-level data
-
-- Aggregate individual level-data by geographic region
+- Aggregate individual-level data by geographic region
 
 
 # Tableau
@@ -158,6 +156,6 @@ Tableau includes a variety of features you can include in your maps if you desir
 
 Click through some of the map layer options until you find a combination you like.
 
-Now... let's integrate some of Tableau's more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.
+Now... let's add some of Tableau's more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.
 
 
