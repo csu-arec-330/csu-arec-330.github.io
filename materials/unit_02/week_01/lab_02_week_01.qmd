@@ -82,6 +82,9 @@ Tableau can also connect to the following spatial file types:
 
 These types of files include detailed geographic information that enables us to plot shapes and single points. For example, we can load smoke plume data into Tableau:
 
+![](includes/smoke_plume.png)
+
+
 ### 3. Symbol vs. Filled Maps
 
 #### Symbol Maps
