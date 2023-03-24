@@ -105,7 +105,7 @@ Symbol maps work best with data containing large variations of values. Without e
 
 #### Filled Maps
 
-A filled map is ideal when you want to show ratio data. For example, if you wanted to see the percent of total podcast downloads across the United States, you could use a filled map to show trends spatially.
+A filled map is ideal when you want to show ratio data. For example, if you wanted to see relative rental rates across Colorado counties, you could use a filled map to show spatial comparisons.
 
 ![](includes/Sheet3.png)
 
@@ -183,7 +183,7 @@ What is this combined map showing?
 
 ### 7. Working with Individual-level data
 
-Next let's connect to the dataset `acs_sample.csv`. These data come from the American Community Survey and include all households interviewed from 2017 to 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the [IPUMS website](https://www.ipums.org).
+Next let's connect to the dataset `acs_sample.csv`. These data come from the American Community Survey and include all Arizona households interviewed in 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the [IPUMS website](https://www.ipums.org).
 
 Create a filled map that shows average household income (in colors) by county.
 
@@ -195,7 +195,7 @@ Let's add a pie chart that shows the percentage of households that report receiv
 
 3. Drag the `County Fip` field to the detail card.
 
-4. Drag the `Foodstmp` field to the color card and change it to a dimension. 
+4. Drag the `Foodstmp` (this field is equal to 0 if the household did not receive Food Stamp benefits and is equal to 1 if they did) field to the color card and change it to a dimension. 
 
 5. Then drag the `Foodstmp` field to the angle card and change it to a count.
 
@@ -206,3 +206,5 @@ What is this figure showing?
 Which county has the highest average income?
 
 Which county has the highest food stamp usage?
+
+Using individual-level (or in this case, household-level) data, you might also be interested in comparing outcomes across dimensions other than geography. For example, how might we show how income and rent compare for AZ households participating in Food Stamps versus for those who do not?

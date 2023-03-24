@@ -145,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="filled-maps" class="level4">
 <h4 class="anchored" data-anchor-id="filled-maps">Filled Maps</h4>
-<p>A filled map is ideal when you want to show ratio data. For example, if you wanted to see the percent of total podcast downloads across the United States, you could use a filled map to show trends spatially.</p>
+<p>A filled map is ideal when you want to show ratio data. For example, if you wanted to see relative rental rates across Colorado counties, you could use a filled map to show spatial comparisons.</p>
 <p><img src="includes/Sheet3.png" class="img-fluid"></p>
 <p>To create a filled map, verify that your data source includes the following types of information:</p>
 <ul>
@@ -203,20 +203,21 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="working-with-individual-level-data" class="level3">
 <h3 class="anchored" data-anchor-id="working-with-individual-level-data">7. Working with Individual-level data</h3>
-<p>Next let’s connect to the dataset <code>acs_sample.csv</code>. These data come from the American Community Survey and include all households interviewed from 2017 to 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the <a href="https://www.ipums.org">IPUMS website</a>.</p>
+<p>Next let’s connect to the dataset <code>acs_sample.csv</code>. These data come from the American Community Survey and include all Arizona households interviewed in 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the <a href="https://www.ipums.org">IPUMS website</a>.</p>
 <p>Create a filled map that shows average household income (in colors) by county.</p>
 <p>Let’s add a pie chart that shows the percentage of households that report receiving food stamps in each county.</p>
 <ol type="1">
 <li><p>Drag <code>County Fip</code> over the map and drop it on <code>Add a Marks Layer</code></p></li>
 <li><p>Navigate to the new Marks card for this second graph and select Pie Chart.</p></li>
 <li><p>Drag the <code>County Fip</code> field to the detail card.</p></li>
-<li><p>Drag the <code>Foodstmp</code> field to the color card and change it to a dimension.</p></li>
+<li><p>Drag the <code>Foodstmp</code> (this field is equal to 0 if the household did not receive Food Stamp benefits and is equal to 1 if they did) field to the color card and change it to a dimension.</p></li>
 <li><p>Then drag the <code>Foodstmp</code> field to the angle card and change it to a count.</p></li>
 <li><p>Now create use a quick table calculation to change this to a percent of total, calculated over the Foodstmp field.</p></li>
 </ol>
 <p>What is this figure showing?</p>
 <p>Which county has the highest average income?</p>
 <p>Which county has the highest food stamp usage?</p>
+<p>Using individual-level (or in this case, household-level) data, you might also be interested in comparing outcomes across dimensions other than geography. For example, how might we show how income and rent compare for AZ households participating in Food Stamps versus for those who do not?</p>
 </section>
 </section>
 
