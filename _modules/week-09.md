@@ -11,14 +11,15 @@ title: "Week 9: Intro to Cross-Sectional and Spatial Data"
 <a  href="/materials/unit_02/week_01/lecture_02_week_01.html" target="_blank">Lecture Slides</a> <br> <br>
 
 
+<b>Lab Materials - Friday, March 24:</b> <br>
 
-<!--
-<b>Project Materials - Due Friday, March 10 (presentation) and March 20 (report) by 11:59 PM:</b> <br>
+<a  href="/materials/unit_02/week_01/lab_02_week_01.html" target="_blank">Week 9 Lab Notes</a> <br> 
 
-<a  href="/materials/unit_01/week_03/ps7.html" target="_blank">Project 1 Instructions</a> <br> 
+<a  href="/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv" download>Download arizona_grocery_foot_traffic.csv</a> <br>
 
-<a  href="/materials/unit_01/week_03/project_1_rubric.html" target="_blank">Project 1 Rubric</a> <br> 
--->
+<a  href="/materials/unit_02/inputs/rent_income_county.csv" download>Download rent_income_county.csv</a> <br>
+
+<a  href="/materials/unit_02/inputs/acs_sample.csv" download>Download acs_sample.csv</a> <br>
 
 
 </div>
