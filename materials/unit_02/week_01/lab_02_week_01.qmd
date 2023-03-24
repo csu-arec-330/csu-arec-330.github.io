@@ -158,4 +158,48 @@ Click through some of the map layer options until you find a combination you lik
 
 Now... let's add some of Tableau's more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.
 
+Next let's combine a symbol and filled map:
 
+1. Go back to your Tableau window with the cell phone data analysis.
+
+2. Create a new worksheet with a filled map showing total visit counts by postal code.
+
+3. Command-click (or Control-click on Windows) the latitude measure on the rows shelf and drag it to the right (this copies the value)
+
+4. Navigate to the Marks card for the second pane in your figure. Remove the Postal Code field from this map.
+
+5. Select both the `Latitude` and `Longitude` fields and drag them to the details card.
+
+6. Drag `Top Category` to the colors card. And drag `Distance from Home` (this is the median travel distance for customers in meters) to the Size card.
+
+7. Right click the second `Latitude` field on the Rows shelf and select `Dual Axis`.
+
+Now you can add whatever custom formatting you desire!
+
+What is this combined map showing?
+
+### 7. Working with Individual-level data
+
+Next let's connect to the dataset `acs_sample.csv`. These data come from the American Community Survey and include all households interviewed from 2017 to 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the [IPUMS website](https://www.ipums.org).
+
+Create a filled map that shows average household income (in colors) by county.
+
+Let's add a pie chart that shows the percentage of households that report receiving food stamps in each county.
+
+1. Drag `County Fip` over the map and drop it on `Add a Marks Layer`
+
+2. Navigate to the new Marks card for this second graph and select Pie Chart.
+
+3. Drag the `County Fip` field to the detail card.
+
+4. Drag the `Foodstmp` field to the color card and change it to a dimension. 
+
+5. Then drag the `Foodstmp` field to the angle card and change it to a count.
+
+6. Now create use a quick table calculation to change this to a percent of total, calculated over the Foodstmp field.
+
+What is this figure showing?
+
+Which county has the highest average income?
+
+Which county has the highest food stamp usage?

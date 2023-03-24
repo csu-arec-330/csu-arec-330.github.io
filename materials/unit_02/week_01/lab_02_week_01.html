@@ -51,12 +51,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#tableaus-geocoding" id="toc-tableaus-geocoding" class="nav-link" data-scroll-target="#tableaus-geocoding">1. Tableau’s Geocoding</a></li>
   <li><a href="#tableaus-spatial-data-capabilities" id="toc-tableaus-spatial-data-capabilities" class="nav-link" data-scroll-target="#tableaus-spatial-data-capabilities">2. Tableau’s Spatial Data Capabilities</a></li>
   <li><a href="#symbol-vs.-filled-maps" id="toc-symbol-vs.-filled-maps" class="nav-link" data-scroll-target="#symbol-vs.-filled-maps">3. Symbol vs.&nbsp;Filled Maps</a></li>
-  <li><a href="#use-date-functions-in-calculated-fields" id="toc-use-date-functions-in-calculated-fields" class="nav-link" data-scroll-target="#use-date-functions-in-calculated-fields">2. Use date functions in calculated fields</a></li>
-  <li><a href="#visualize-time-series-data" id="toc-visualize-time-series-data" class="nav-link" data-scroll-target="#visualize-time-series-data">3. Visualize time series data</a></li>
-  <li><a href="#creating-and-interpreting-trend-lines" id="toc-creating-and-interpreting-trend-lines" class="nav-link" data-scroll-target="#creating-and-interpreting-trend-lines">4. Creating and interpreting trend lines</a></li>
-  <li><a href="#visualizing-structural-breaks" id="toc-visualizing-structural-breaks" class="nav-link" data-scroll-target="#visualizing-structural-breaks">5. Visualizing structural breaks</a></li>
-  <li><a href="#creating-panes-to-visualize-mutiple-time-series" id="toc-creating-panes-to-visualize-mutiple-time-series" class="nav-link" data-scroll-target="#creating-panes-to-visualize-mutiple-time-series">6. Creating panes to visualize mutiple time series</a></li>
-  <li><a href="#if-we-have-extra-time-lets-do-some-quick-table-calculations" id="toc-if-we-have-extra-time-lets-do-some-quick-table-calculations" class="nav-link" data-scroll-target="#if-we-have-extra-time-lets-do-some-quick-table-calculations">7. If we have extra time… let’s do some quick table calculations!</a></li>
+  <li><a href="#creating-a-symbol-map" id="toc-creating-a-symbol-map" class="nav-link" data-scroll-target="#creating-a-symbol-map">4. Creating a Symbol Map</a></li>
+  <li><a href="#creating-a-filled-map" id="toc-creating-a-filled-map" class="nav-link" data-scroll-target="#creating-a-filled-map">5. Creating a Filled Map</a></li>
+  <li><a href="#customizing-your-maps" id="toc-customizing-your-maps" class="nav-link" data-scroll-target="#customizing-your-maps">6. Customizing your maps</a></li>
+  <li><a href="#working-with-individual-level-data" id="toc-working-with-individual-level-data" class="nav-link" data-scroll-target="#working-with-individual-level-data">7. Working with Individual-level data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -91,8 +89,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Explain the different use cases of symbol and filled maps</p></li>
 <li><p>Create symbol and filled maps</p></li>
 <li><p>Customize Tableau maps</p></li>
-<li><p>Create visualizations to summarize individual-level data</p></li>
-<li><p>Aggregate individual level-data by geographic region</p></li>
+<li><p>Aggregate individual-level data by geographic region</p></li>
 </ul>
 </section>
 <section id="tableau" class="level1">
@@ -133,138 +130,92 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="symbol-vs.-filled-maps" class="level3">
 <h3 class="anchored" data-anchor-id="symbol-vs.-filled-maps">3. Symbol vs.&nbsp;Filled Maps</h3>
+<section id="symbol-maps" class="level4">
+<h4 class="anchored" data-anchor-id="symbol-maps">Symbol Maps</h4>
 <p>A symbol map is effective for showing quantitative data for individual locations. For example, you can use a symbol map to show individual store locations on a map.</p>
 <p><img src="includes/Sheet1.png" class="img-fluid"></p>
 <p>You might want to highlight which stores have <a href="https://www.safegraph.com/data-examples/ohio-grocery-spend">higher spending</a></p>
+<p>To create a symbol map, be sure your data source includes the following types of information:</p>
 <ul>
-<li><p>DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number.</p>
-<ul>
-<li><p>For example, DATEPART (‘month’, #January 23, 2021#) = 1</p></li>
-<li><p>Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.</p></li>
-</ul></li>
-<li><p>DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.</p>
-<ul>
-<li>For example, DATENAME (‘month’, #January 23, 2021#) = January</li>
-</ul></li>
-<li><p>DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.</p>
-<ul>
-<li>For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021</li>
-</ul></li>
-<li><p>DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part.</p>
-<ul>
-<li>For example, DATEDIFF (‘day’, #January 23, 2021#, #February 24, 2021#) = 32 and DATEDIFF (‘month’, #January 23, 2021#, #February 24, 2021#) = 1</li>
-</ul></li>
-<li><p>DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date.</p>
-<ul>
-<li>For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021.</li>
-</ul></li>
-<li><p>MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record.</p>
-<ul>
-<li>For example, MIN ([Order Date]) returns the earliest date in the Order Date field.</li>
-</ul></li>
-<li><p>MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record.</p>
-<ul>
-<li>For example, MAX ([Order Date]) returns the latest date in the Order Date field.</li>
-</ul></li>
+<li><p>Quantitative values</p></li>
+<li><p>Latitude and longitude coordinates or geographic locations recognized by Tableau</p></li>
 </ul>
-<p>Here are some handy definitions for date_time arguments:</p>
+<p>Symbol maps work best with data containing large variations of values. Without enough variation, the symbols will appear approximately the same size in the view.</p>
 </section>
-<section id="use-date-functions-in-calculated-fields" class="level3">
-<h3 class="anchored" data-anchor-id="use-date-functions-in-calculated-fields">2. Use date functions in calculated fields</h3>
-<p>Connect to the <code>carrots_prices.csv</code> data and use the expressions above to do the following:</p>
-<ol type="1">
-<li><p>Create a calculated field named <code>months_ago</code> that determines the number of months between the commodity price data and today.</p></li>
-<li><p>Create a calculated field named <code>first_date</code> that determines the earliest date in the data.</p></li>
-<li><p>Create a calculated field named <code>last_date</code> that determines the last date that the carrot price index was less than 135.</p></li>
-<li><p>Create a new variable called <code>month</code> that only includes the month.</p></li>
-<li><p>Create a new variable called <code>year</code> that only includes the year.</p></li>
-<li><p>Create a new date variable called <code>my_date</code> that assigns a new date using your <code>month</code> and <code>year</code> variables and sets the day as 15.</p></li>
-</ol>
-</section>
-<section id="visualize-time-series-data" class="level3">
-<h3 class="anchored" data-anchor-id="visualize-time-series-data">3. Visualize time series data</h3>
-<p>What types of visualizations are most appropriate for time series data?</p>
+<section id="filled-maps" class="level4">
+<h4 class="anchored" data-anchor-id="filled-maps">Filled Maps</h4>
+<p>A filled map is ideal when you want to show ratio data. For example, if you wanted to see the percent of total podcast downloads across the United States, you could use a filled map to show trends spatially.</p>
+<p><img src="includes/Sheet3.png" class="img-fluid"></p>
+<p>To create a filled map, verify that your data source includes the following types of information:</p>
 <ul>
-<li><p>Line graphs</p></li>
-<li><p>Bar charts</p></li>
-<li><p>Dot plots</p></li>
-<li><p>Others?</p></li>
+<li><p>Quantitative or qualitative values</p></li>
+<li><p>Geographic locations recognized by Tableau or custom polygons (from a spatial data file)</p></li>
 </ul>
-<p>Let’s experiment with creating these visualizations for time series:</p>
-<ol type="1">
-<li><p>Create a line graph that shows the value of carrots over time (by month)</p></li>
-<li><p>Add markers to your line graph</p></li>
-<li><p>Change your line graph to a bar graph dot chart</p></li>
-<li><p>Change your bar graph to a dot plot</p></li>
-<li><p>Change the size size, colors, and opacity of the dots in your dot plot (use the <code>Size</code> and <code>Color</code> icons)</p></li>
-<li><p>Change the markers in your chart from dots to a different shape (use the dropdown menu on the <code>Marks</code> card, then use the <code>Shape</code> icons)</p></li>
-</ol>
-<p>Now let’s experiment with changing what data is shown in your chart:</p>
-<ol type="1">
-<li><p>Change your x-axis to annual</p></li>
-<li><p>Create one line that shows the average value of the commodity each year, one line that shows the maximum value, and one that shows the minimum value. Can you get all three of these lines in a single pane?</p></li>
-<li><p>Restrict your date ranges so that your visualization only shows the last 20 years of data (use the <code>Filters</code> card)</p></li>
-</ol>
+<p><strong>Knowledge Check 1:</strong> Suppose we have county-level data on average gas prices last year. What type of map would you use to show this information?</p>
+<p><strong>Knowledge Check 2:</strong> Suppose we have gas station-level data on gas prices yesterday. What type of map would you use to show this information?</p>
 </section>
-<section id="creating-and-interpreting-trend-lines" class="level3">
-<h3 class="anchored" data-anchor-id="creating-and-interpreting-trend-lines">4. Creating and interpreting trend lines</h3>
-<p>Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know <em>how</em> they are created? Let’s start with a linear trend line…</p>
-<ul>
-<li><p>What does a linear trend line tell you about your time series data?</p></li>
-<li><p>How is this trend line estimated? (conceptually… we will go through some equations on Wednesday!)</p></li>
-</ul>
-<p>Now, let’s talk some specifics about linear trend lines in Tableau…</p>
-<ol type="1">
-<li><p>Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022</p></li>
-<li><p>Add a trend line to your chart</p></li>
-<li><p>When you click on the trend line, what information does Tableau give you about it? What does this information mean?</p></li>
-<li><p>When you click on <code>describe trend model</code> what information does Tableau give you about it?</p></li>
-<li><p>Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn’t the trend line change when you changed the date aggregation?</p></li>
-</ol>
 </section>
-<section id="visualizing-structural-breaks" class="level3">
-<h3 class="anchored" data-anchor-id="visualizing-structural-breaks">5. Visualizing structural breaks</h3>
-<p>Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to <em>test</em> for structural breaks in your data that we will demonstrate in R, but for now let’s go over a couple ways to visualize structural breaks that we identify with the very sophisticated “eyeball method”.</p>
+<section id="creating-a-symbol-map" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-symbol-map">4. Creating a Symbol Map</h3>
+<p>Connect to the dataset <code>arizona_grocery_foot_traffic.csv</code>. This is a very very VERY small slice of cell phone visit data from the company <a href="https://www.safegraph.com">Safegraph</a>. The slice includes all grocery retail stores in Arizona with a sufficiently large number of visitors in September of 2021. Visitors (including you if you happened to be in Arizona at that time…) are tracked via their cell phones. The data includes information on the store (name, location, NAICS code, etc.), the number of visits, visitors (unique cell phones), the median distance travelled to shop there, and the median amount of time spent there.</p>
+<p>Let’s create a symbol map using the provided latitudes and longitudes of these stores.</p>
 <ol type="1">
-<li><p>Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?</p></li>
-<li><p>Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.</p></li>
-<li><p>Add a <strong>reference line</strong> at this month-year. (Right click on the x-axis and select <code>Reference Line</code>) Does anything happen to your trend line?</p></li>
+<li><p>Drag <code>Longitude</code> to the Columns Shelf and <code>Latitude</code> to the Rows Shelf. (You will likely have to change these fields to <code>Dimensions</code>)</p></li>
+<li><p>Drag <code>Top Category</code> (this is the top sales category/type of each store) to the colors card.</p></li>
 </ol>
-<p>Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let’s go through two methods for doing this:</p>
-<p><strong>Method 1:</strong> Separate your time series by adding color</p>
-<ol type="1">
-<li><p>Create a new calculated field named <code>before_after_break</code>. Use the <code>IF</code> and <code>THEN</code> functions and an appropriate <code>Date</code> function to populate this variable with “after” if the date if after the break you identified in the data and “before” if the date is before the break.</p></li>
-<li><p>Drag this variable to the <code>Color</code> card.</p></li>
-<li><p>Add trend lines to your visualization. What happens?</p></li>
+<p>Which type of store appears to be the most prevalent?</p>
+<ol start="3" type="1">
+<li>Now, let’s drag <code>Raw Visit Counts</code> to the size card.</li>
 </ol>
-<p><strong>Method 2:</strong> Separate your time series by segmenting the x-axis</p>
-<ol type="1">
-<li><p>Drag your new variable from the <code>Marks</code> card to the <code>columns</code> shelf.</p></li>
-<li><p>Sort your variable so that the “after” time period is shown following the “before” time period.</p></li>
-<li><p>In the x-axis Edit Axis menu, select <code>independed axis ranges for each row or column</code> (access this menu by right clicking on the x-axis)</p></li>
-<li><p>Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.</p></li>
+<p>Which type of store appears to have the most visitors?</p>
+<ol start="4" type="1">
+<li>Now, let’s add each store’s name to the tooltip. Drag <code>Location Name</code> to the Tooltip card.</li>
 </ol>
+<p><strong>You Do It:</strong> Make a new symbol map using each store’s latitude and longitude, and choosing what information you want to include as colors, size, and in the tooltip. What did you uncover?</p>
+<p>Now, let’s see what happens if we select a different geographical field to make our map. Select the fields <code>City</code> and <code>Raw Visit Counts</code> and select the Symbol Map in the Show Me Menu. What is this map showing?</p>
+<p>What if we change the aggregation of <code>Raw Visit Counts</code> to average instead of sum?</p>
 </section>
-<section id="creating-panes-to-visualize-mutiple-time-series" class="level3">
-<h3 class="anchored" data-anchor-id="creating-panes-to-visualize-mutiple-time-series">6. Creating panes to visualize mutiple time series</h3>
-<p>Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.</p>
-<p>Let’s start by bringing in some price data for a few new commodities.</p>
-<ol type="1">
-<li><p>On the <code>Data Source</code> page connect to the following data sources <code>corn_prices.csv</code> and <code>tomatoes_prices.csv</code></p></li>
-<li><p>We are going to create a <code>relationship</code> between these data sources and our current working file</p></li>
-<li><p>With the carrot data in the <code>canvas</code>, drag one of the other data sources next to it in the canvas. Do the same with the other data source.</p></li>
-<li><p>Now go to a new worksheet, what do you see? What did we just accomplish?</p></li>
-</ol>
-<p>Now that we have all these data sources in a single file and they are structured in a “wide” format, we are going to construct time series plots that let us compare trends in these commodity prices across time.</p>
-<ol type="1">
-<li><p>Open a new worksheet and create a line plot of the prices over time for each commodity</p></li>
-<li><p>Now try formatting your figure. Change colors, adjust sizes, etc.</p></li>
-<li><p>Now use your <code>before_after_break</code> variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.</p></li>
-</ol>
+<section id="creating-a-filled-map" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-filled-map">5. Creating a Filled Map</h3>
+<p>Let’s start this exercise with using the same cell phone data. Select the fields <code>Postal Code</code> and <code>Raw Visit Counts</code> and go to the Show Me Menu. Now you should see that you can use either a symbol or filled map. Let’s select the filled map.</p>
+<p>What is this showing you? Are you able to map multiple store attributes using this feature? Do you think the filled map or symbol map are better for these data?</p>
+<p>Connect to the dataset <code>rent_income_county.csv</code> and create one filled map that shows the median income in each county and one map that shows the median rent in each county.</p>
+<p>Now, create a new calculated field called <code>income to rent ratio</code> that equal income divided by rent for each county. Plot this new field on a map and filter your data so that your map only includes Arizona (hint: Arizona’s FIPS code is 4). Which Arizona county has the highest income to rent ratio?</p>
 </section>
-<section id="if-we-have-extra-time-lets-do-some-quick-table-calculations" class="level3">
-<h3 class="anchored" data-anchor-id="if-we-have-extra-time-lets-do-some-quick-table-calculations">7. If we have extra time… let’s do some quick table calculations!</h3>
-<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/6oOu5DqtakY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<section id="customizing-your-maps" class="level3">
+<h3 class="anchored" data-anchor-id="customizing-your-maps">6. Customizing your maps</h3>
+<p>Tableau includes a variety of features you can include in your maps if you desire. Right click on your map and select <code>Background Layers...</code></p>
+<p>Click through some of the map layer options until you find a combination you like.</p>
+<p>Now… let’s add some of Tableau’s more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.</p>
+<p>Next let’s combine a symbol and filled map:</p>
+<ol type="1">
+<li><p>Go back to your Tableau window with the cell phone data analysis.</p></li>
+<li><p>Create a new worksheet with a filled map showing total visit counts by postal code.</p></li>
+<li><p>Command-click (or Control-click on Windows) the latitude measure on the rows shelf and drag it to the right (this copies the value)</p></li>
+<li><p>Navigate to the Marks card for the second pane in your figure. Remove the Postal Code field from this map.</p></li>
+<li><p>Select both the <code>Latitude</code> and <code>Longitude</code> fields and drag them to the details card.</p></li>
+<li><p>Drag <code>Top Category</code> to the colors card. And drag <code>Distance from Home</code> (this is the median travel distance for customers in meters) to the Size card.</p></li>
+<li><p>Right click the second <code>Latitude</code> field on the Rows shelf and select <code>Dual Axis</code>.</p></li>
+</ol>
+<p>Now you can add whatever custom formatting you desire!</p>
+<p>What is this combined map showing?</p>
+</section>
+<section id="working-with-individual-level-data" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-individual-level-data">7. Working with Individual-level data</h3>
+<p>Next let’s connect to the dataset <code>acs_sample.csv</code>. These data come from the American Community Survey and include all households interviewed from 2017 to 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the <a href="https://www.ipums.org">IPUMS website</a>.</p>
+<p>Create a filled map that shows average household income (in colors) by county.</p>
+<p>Let’s add a pie chart that shows the percentage of households that report receiving food stamps in each county.</p>
+<ol type="1">
+<li><p>Drag <code>County Fip</code> over the map and drop it on <code>Add a Marks Layer</code></p></li>
+<li><p>Navigate to the new Marks card for this second graph and select Pie Chart.</p></li>
+<li><p>Drag the <code>County Fip</code> field to the detail card.</p></li>
+<li><p>Drag the <code>Foodstmp</code> field to the color card and change it to a dimension.</p></li>
+<li><p>Then drag the <code>Foodstmp</code> field to the angle card and change it to a count.</p></li>
+<li><p>Now create use a quick table calculation to change this to a percent of total, calculated over the Foodstmp field.</p></li>
+</ol>
+<p>What is this figure showing?</p>
+<p>Which county has the highest average income?</p>
+<p>Which county has the highest food stamp usage?</p>
 </section>
 </section>
 
