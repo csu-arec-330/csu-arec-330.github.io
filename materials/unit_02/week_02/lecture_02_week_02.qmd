@@ -1,5 +1,5 @@
 ---
-title: "Week 9: <br>Cross-Sectional Data <br> and Project 2 Overview"
+title: "Week 10: <br>Cross-Sectional Data Analysis"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -34,17 +34,158 @@ Supervised methods: regression, classification
 
 ## Exploratory data analysis
 
+Explore your data to gain familiarity and stimulate questions
 
+Generate summary statistics (average, variance, min, max)
+
+Plot distributions and correlations between variables
 
 ## Methods overview
 
-:::: {.columns style="text-align: center"}
+:::: {.columns style="text-align: left"}
 ::: {.column width="50%"}
-Unsupervised
+**Unsupervised Learning**
 
+To discover hidden patterns and relationships within the data
+
+Identify structure or patterns on its own given an unlabeled dataset
+
+Good for exploring relationships and generating explanatory questions
 :::
 ::: {.column width="50%"}
-Supervised
+**Supervised Learning**
+
+To explain relationships between inputs and outputs
+
+Models are trained on labeled data (outputs and inputs known)
+
+Good for explaining relationships and predicting new outcomes
 
 :::
 ::::
+
+# Unsupervised Learning
+
+## Cluster Analysis
+
+Cluster analysis is a form of unsupervised analysis
+
+A systematic method to look for patterns in data
+
+## Customer segmentation analysis
+
+Use sales data to divide your customers into groups to better target marketing
+
+![](includes/customer_segmentation.png)
+
+## [ESRI Tapestry Segmentation](https://doc.arcgis.com/en/esri-demographics/latest/regional-data/tapestry-segmentation.htm)
+
+Uses cluster analysis on census demographic data (+ others) to define groups
+
+![](includes/esri_tapestry.jpeg)
+
+## How does cluster analysis work? {.scrollable}
+
+[K-means clustering](https://youtu.be/4b5d3muPQmA)
+
+1. Choose the number of clusters (k) that you want to identify in the data.
+
+2. Randomly initialize the k cluster centroids (points in space) within the data range.
+
+3. Assign each data point to the nearest centroid, based on the Euclidean distance between the point and each centroid.
+
+4. Calculate the mean (centroid) of each cluster based on the data points assigned to it.
+
+5. Update the cluster centroids to be the means of the data points assigned to them.
+
+6. Repeat steps 3-5 until convergence (when the cluster assignments no longer change or a maximum number of iterations is reached).
+
+Usually, we repeat this whole process a number of times and choose the group assignment that minimizes the overall variance
+
+## Knowledge check
+
+What is the main goal of the k-means clustering algorithm?
+
+A) To minimize the distance between all data points in the dataset.
+
+B) To minimize the distance between each data point and its assigned centroid.
+
+C) To maximize the distance between each data point and all other data points.
+
+D) To maximize the distance between each data point and its assigned centroid.
+
+# Supervised Learning
+
+## Regression
+
+Used to estimate relationships between inputs (independent, explanatory) and outputs (dependent, outcome)
+
+![](includes/ols.webp)
+
+## Example: Ice Cream Sales and Temperature
+
+![](includes/ice_cream_temp.jpeg)
+
+## Classification
+
+Problem: we need to classify data into discrete units (e.g., images, product types, sentiment)^[Can also be used on continuous data]
+
+We have some units labeled and know information about them
+
+## Wildfire Hazard Potential
+
+![](includes/whp.jpeg)
+
+## Spam email
+
+![](includes/spam.webp)
+
+## Decision Tree Classification
+
+Classification as a sequence of binary decisions
+
+![](includes/decision_tree.png)
+
+## How it works?
+
+1. Identify the variable that provides the most information gain when split on.
+
+2. Split the dataset based on the chosen feature into two or more subsets.
+
+3. Repeat steps 2 and 3 for each subset until a stopping criterion is met, such as reaching a maximum depth or the subsets being too small to split further.
+
+4. At each leaf node, assign a class label based on the majority class of the data points in that node.
+
+## Random Forest
+
+Grow many decision trees using independent subsets of the data
+
+Use the same criteria for constructing each tree
+
+Average the prediction of all trees
+
+This approach avoids over-fitting the data and improves accuracy when used to predict the class of new data
+
+## Knowledge check
+
+What is the main difference between supervised and unsupervised learning?
+
+A. Supervised learning requires labeled data, while unsupervised learning does not.
+
+B. Unsupervised learning requires labeled data, while supervised learning does not.
+
+C. Both supervised and unsupervised learning require labeled data.
+
+D. There is no difference between supervised and unsupervised learning.
+
+## Summary
+
+Explore your data: descriptive statistics, plotting distributions, plotting correlations
+
+Unsupervised learning methods like clustering can help you learn about patterns in your data
+
+Supervised learning methods like regression and classification can help you explain relationships and predict outcomes of new data
+
+
+
+
