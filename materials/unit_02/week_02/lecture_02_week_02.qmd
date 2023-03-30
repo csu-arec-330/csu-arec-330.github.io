@@ -40,6 +40,10 @@ Generate summary statistics (average, variance, min, max)
 
 Plot distributions and correlations between variables
 
+## Grocery visitation data
+
+![](includes/ggpairs.png)
+
 ## Methods overview
 
 :::: {.columns style="text-align: left"}
@@ -102,6 +106,8 @@ Uses cluster analysis on census demographic data (+ others) to define groups
 
 Usually, we repeat this whole process a number of times and choose the group assignment that minimizes the overall variance
 
+After clustering, summarize attributes of the clusters to understand the groups
+
 ## Knowledge check
 
 What is the main goal of the k-means clustering algorithm?
@@ -130,7 +136,9 @@ Used to estimate relationships between inputs (independent, explanatory) and out
 
 Problem: we need to classify data into discrete units (e.g., images, product types, sentiment)^[Can also be used on continuous data]
 
-We have some units labeled and know information about them
+We have some units labeled and know information about them (cats vs dogs)
+
+We want to develop a model to classify new units based on observable attributes
 
 ## Wildfire Hazard Potential
 

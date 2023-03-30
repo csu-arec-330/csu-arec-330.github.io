@@ -7,7 +7,7 @@
 <link href="lecture_02_week_02_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_02_week_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_02_week_02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.2.269">
 
   <title>Week 10:  Cross-Sectional Data Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -351,6 +351,10 @@
 <p>Generate summary statistics (average, variance, min, max)</p>
 <p>Plot distributions and correlations between variables</p>
 </section>
+<section id="grocery-visitation-data" class="slide level2">
+<h2>Grocery visitation data</h2>
+
+<img data-src="includes/ggpairs.png" class="r-stretch"></section>
 <section id="methods-overview" class="slide level2">
 <h2>Methods overview</h2>
 <div class="columns" style="text-align: left">
@@ -399,6 +403,7 @@
 <li><p>Repeat steps 3-5 until convergence (when the cluster assignments no longer change or a maximum number of iterations is reached).</p></li>
 </ol>
 <p>Usually, we repeat this whole process a number of times and choose the group assignment that minimizes the overall variance</p>
+<p>After clustering, summarize attributes of the clusters to understand the groups</p>
 </section>
 <section id="knowledge-check" class="slide level2">
 <h2>Knowledge check</h2>
@@ -427,7 +432,8 @@
 <section id="classification" class="slide level2">
 <h2>Classification</h2>
 <p>Problem: we need to classify data into discrete units (e.g., images, product types, sentiment)<sup>1</sup></p>
-<p>We have some units labeled and know information about them</p>
+<p>We have some units labeled and know information about them (cats vs dogs)</p>
+<p>We want to develop a model to classify new units based on observable attributes</p>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Can also be used on continuous data</p></li></ol></aside></section>
 <section id="wildfire-hazard-potential" class="slide level2">
 <h2>Wildfire Hazard Potential</h2>
