@@ -9,9 +9,10 @@ raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/arizona
 
 location_info <- raw %>%
   select(placekey,location_name,top_category,sub_category,latitude,longitude,city,region)
-############################
-#EDA
 
+###########################
+########### EDA ###########
+###########################
 #Summary statistics
 
 sumstats <- skimr::skim(raw)
@@ -32,6 +33,8 @@ raw %>%
   filter() %>%
   ggpairs()
 
+###########################
+####### Clustering ########
 ###########################
 
 # select relevant columns and scrub outliers
@@ -112,8 +115,8 @@ fitted_data %>%
 write_csv(fitted_data,"fitted_reg.csv")
 
 ##########################
-#Classification
-
+##### Classification #####
+##########################
 
 #Divide data into training and testing sample
 set.seed(123)
