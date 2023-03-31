@@ -86,13 +86,15 @@ summary(m1)
 
 summary(data_clustered)
 
-new_data <- tibble(distance_from_home=seq(5,11,.01),
-                   median_dwell=seq(1,7,.01))
+new_data <- expand_grid(distance_from_home=seq(5,11,.1),
+                        median_dwell=seq(1,7,.1))
 
 fitted_data <- augment(m1,newdata = new_data) %>%
   rename(raw_visitor_counts=.fitted)
 
-ggplot(fitted_data,aes(x=distance_from_home,y=raw_visitor_counts)) +
+fitted_data %>%
+  filter(median_dwell==5) %>%
+  ggplot(aes(x=distance_from_home,y=raw_visitor_counts)) +
   geom_point()
 
 write_csv(fitted_data,"fitted_reg.csv")
