@@ -248,6 +248,9 @@ If you want to show results from your cluster analysis in Tableau, a simple way 
 
 6. Let's add some more detail to the tooltip. I would like to know the location name, top category, and cluster when I hover over each point on the map.
 
+{{< video https://youtu.be/lXloWsi7hZQ aspect-ratio="16x9" >}}
+
+
 ### 2. Plotting Results from a Regression Analysis
 
 We have already discussed how to use Tableau's integrated regression analysis, but a major limitation to this is that Tableau can only perform single variable regressions. Let's look at the difference between the single and multivariate regression results by creating a scatterplot in Tableau:
@@ -278,6 +281,7 @@ Note that another option for accomplishing this is to simply use the fitted regr
 
 **Where did these numbers come from?**
 
+{{< video https://youtu.be/nRJaoNmhCzk aspect-ratio="16x9" >}}
 
 ### 3. Adding Vizzes to Map Tooltips
 
@@ -294,3 +298,5 @@ The last thing I want to cover today is how to add other visualizations to your 
 5. Now what happens when you hover over a point on the map? How did we accomplish this?
 
 6. Let's add a useful title to our scatterplot by typing `Relationship between Visits and Distance from home for stores in this cluster` in the Tooltip above the scatterplot. Then let's adjust the width of the scatterplot to `500`.
+
+{{< video https://youtu.be/y08HjpcHF_4 aspect-ratio="16x9" >}}
