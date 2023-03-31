@@ -14,7 +14,7 @@ location_info <- raw %>%
 
 #Summary statistics
 
-ss <- skimr::skim(raw)
+sumstats <- skimr::skim(raw)
 ss
 
 ggpairs(raw,columns = c("raw_visitor_counts","distance_from_home","median_dwell")) 
@@ -35,7 +35,8 @@ raw %>%
 
 # select relevant columns and scrub outliers
 data <- raw %>% 
-  dplyr::filter(top_category=="Grocery Stores",distance_from_home<48000,median_dwell<90) %>%
+  dplyr::filter(top_category=="Grocery Stores", #focus on those classified as grocery stores
+                distance_from_home<48000,median_dwell<90) %>%
   select(placekey,raw_visitor_counts,distance_from_home,median_dwell) %>%
   mutate(across(c(2:4),log)) %>%
   drop_na()
