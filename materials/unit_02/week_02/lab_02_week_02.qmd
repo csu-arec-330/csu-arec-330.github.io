@@ -297,6 +297,6 @@ The last thing I want to cover today is how to add other visualizations to your 
 
 5. Now what happens when you hover over a point on the map? How did we accomplish this?
 
-6. Let's add a useful title to our scatterplot by typing `Relationship between Visits and Distance from home for stores in this cluster` in the Tooltip above the scatterplot. Then let's adjust the width of the scatterplot to `500`.
+6. Let's add a useful title to our scatterplot by typing `Relationship between Visitors and Distance from home for stores in cluster <Cluster>` in the Tooltip above the scatterplot. Then let's adjust the width of the scatterplot to `500`.
 
 {{< video https://youtu.be/y08HjpcHF_4 aspect-ratio="16x9" >}}
