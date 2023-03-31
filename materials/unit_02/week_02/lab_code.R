@@ -15,7 +15,7 @@ location_info <- raw %>%
 #Summary statistics
 
 sumstats <- skimr::skim(raw)
-ss
+
 
 ggpairs(raw,columns = c("raw_visitor_counts","distance_from_home","median_dwell")) 
 
@@ -77,6 +77,8 @@ ggplot(data_clustered, aes(x = longitude, y = latitude, color = factor(cluster))
 
 ggplot(data_clustered,aes(y=sub_category,x=factor(cluster),fill=factor(sub_category))) +
   geom_col()
+
+write_csv(data_clustered,"clustered_data.csv")
 
 ###########################
 

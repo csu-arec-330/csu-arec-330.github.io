@@ -119,13 +119,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
   <ul class="collapse">
-  <li><a href="#tableaus-geocoding" id="toc-tableaus-geocoding" class="nav-link" data-scroll-target="#tableaus-geocoding">1. Tableau’s Geocoding</a></li>
-  <li><a href="#tableaus-spatial-data-capabilities" id="toc-tableaus-spatial-data-capabilities" class="nav-link" data-scroll-target="#tableaus-spatial-data-capabilities">2. Tableau’s Spatial Data Capabilities</a></li>
-  <li><a href="#symbol-vs.-filled-maps" id="toc-symbol-vs.-filled-maps" class="nav-link" data-scroll-target="#symbol-vs.-filled-maps">3. Symbol vs.&nbsp;Filled Maps</a></li>
-  <li><a href="#creating-a-symbol-map" id="toc-creating-a-symbol-map" class="nav-link" data-scroll-target="#creating-a-symbol-map">4. Creating a Symbol Map</a></li>
-  <li><a href="#creating-a-filled-map" id="toc-creating-a-filled-map" class="nav-link" data-scroll-target="#creating-a-filled-map">5. Creating a Filled Map</a></li>
-  <li><a href="#customizing-your-maps" id="toc-customizing-your-maps" class="nav-link" data-scroll-target="#customizing-your-maps">6. Customizing your maps</a></li>
-  <li><a href="#working-with-individual-level-data" id="toc-working-with-individual-level-data" class="nav-link" data-scroll-target="#working-with-individual-level-data">7. Working with Individual-level data</a></li>
+  <li><a href="#plotting-results-from-a-cluster-analysis" id="toc-plotting-results-from-a-cluster-analysis" class="nav-link" data-scroll-target="#plotting-results-from-a-cluster-analysis">1. Plotting Results from a Cluster Analysis</a></li>
+  <li><a href="#plotting-results-from-a-regression-analysis" id="toc-plotting-results-from-a-regression-analysis" class="nav-link" data-scroll-target="#plotting-results-from-a-regression-analysis">2. Plotting Results from a Regression Analysis</a></li>
+  <li><a href="#adding-vizzes-to-map-tooltips" id="toc-adding-vizzes-to-map-tooltips" class="nav-link" data-scroll-target="#adding-vizzes-to-map-tooltips">3. Adding Vizzes to Map Tooltips</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -163,11 +159,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="learning-objectives-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
 <ul>
-<li><p>Understand Tableau geocoding capabilities</p></li>
-<li><p>Explain the different use cases of symbol and filled maps</p></li>
-<li><p>Create symbol and filled maps</p></li>
-<li><p>Customize Tableau maps</p></li>
-<li><p>Aggregate individual-level data by geographic region</p></li>
+<li><p>Create a map that shows results from cluster analysis</p></li>
+<li><p>Create a scatterplot that shows the fitted line from your regression analysis</p></li>
+<li><p>Customize Tableau maps: Add Vizzes to tooltip</p></li>
 </ul>
 </section>
 <section id="r" class="level1">
@@ -311,130 +305,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="tableau" class="level1">
 <h1>Tableau</h1>
-<p>The defining characteristic of cross-sectional data is that we observe values of variables at a single point in, or cross-section of time. Often, but not always, cross-sectional data have geographic compenents that allows us to use Tableau’s mapping features when creating visualizations. Effective analysis of cross-sectional data begins with estimating and conveying useful summary statistics. Today, we will spend most of our time discussing how to do this with spatial data.</p>
-<section id="tableaus-geocoding" class="level3">
-<h3 class="anchored" data-anchor-id="tableaus-geocoding">1. Tableau’s Geocoding</h3>
-<p>If you want to analyze your data geographically, you can plot your data on a map in Tableau.</p>
-<p>When building map views, Tableau supports any latitude and longitude coordinates, as long as they are in decimal degrees. Tableau can also recognize and geocode the following geographic information types:</p>
-<ul>
-<li><p>Airport Codes</p></li>
-<li><p>Cities</p></li>
-<li><p>Countries</p></li>
-<li><p>Regions</p></li>
-<li><p>Territories</p></li>
-<li><p>States</p></li>
-<li><p>Provinces</p></li>
-<li><p>Postcodes</p></li>
-<li><p>Core Based Statistical Areas (CBSAs)</p></li>
-<li><p>Metropolitan Statistical Areas (MSAs)</p></li>
-<li><p>U.S. Area Codes</p></li>
-<li><p>Congressional Districts</p></li>
-<li><p>Zip Codes</p></li>
-</ul>
-<p>If you have geographic delineations besides these, you will have to use crosswalks or some other means to convert the delineations to one of these forms, or to generate latitudes and longitudes for specific points (e.g., addresses).</p>
-</section>
-<section id="tableaus-spatial-data-capabilities" class="level3">
-<h3 class="anchored" data-anchor-id="tableaus-spatial-data-capabilities">2. Tableau’s Spatial Data Capabilities</h3>
-<p>Tableau can also connect to the following spatial file types:</p>
-<ul>
-<li><p>Shapefiles</p></li>
-<li><p>KML files</p></li>
-<li><p>GeoJSON files</p></li>
-<li><p>TopoJSON files</p></li>
-<li><p>Esri File Geodatabases</p></li>
-</ul>
-<p>These types of files include detailed geographic information that enables us to plot shapes and single points. For example, we can load smoke plume data into Tableau:</p>
-<p><img src="includes/smoke_plume.png" class="img-fluid"></p>
-</section>
-<section id="symbol-vs.-filled-maps" class="level3">
-<h3 class="anchored" data-anchor-id="symbol-vs.-filled-maps">3. Symbol vs.&nbsp;Filled Maps</h3>
-<section id="symbol-maps" class="level4">
-<h4 class="anchored" data-anchor-id="symbol-maps">Symbol Maps</h4>
-<p>A symbol map is effective for showing quantitative data for individual locations. For example, you can use a symbol map to show individual store locations on a map.</p>
-<p><img src="includes/Sheet1.png" class="img-fluid"></p>
-<p>You might want to highlight which stores have <a href="https://www.safegraph.com/data-examples/ohio-grocery-spend">higher spending</a></p>
-<p>To create a symbol map, be sure your data source includes the following types of information:</p>
-<ul>
-<li><p>Quantitative values</p></li>
-<li><p>Latitude and longitude coordinates or geographic locations recognized by Tableau</p></li>
-</ul>
-<p>Symbol maps work best with data containing large variations of values. Without enough variation, the symbols will appear approximately the same size in the view.</p>
-</section>
-<section id="filled-maps" class="level4">
-<h4 class="anchored" data-anchor-id="filled-maps">Filled Maps</h4>
-<p>A filled map is ideal when you want to show ratio data. For example, if you wanted to see relative rental rates across Colorado counties, you could use a filled map to show spatial comparisons.</p>
-<p><img src="includes/Sheet3.png" class="img-fluid"></p>
-<p>To create a filled map, verify that your data source includes the following types of information:</p>
-<ul>
-<li><p>Quantitative or qualitative values</p></li>
-<li><p>Geographic locations recognized by Tableau or custom polygons (from a spatial data file)</p></li>
-</ul>
-<p><strong>Knowledge Check 1:</strong> Suppose we have county-level data on average gas prices last year. What type of map would you use to show this information?</p>
-<p><strong>Knowledge Check 2:</strong> Suppose we have gas station-level data on gas prices yesterday. What type of map would you use to show this information?</p>
-</section>
-</section>
-<section id="creating-a-symbol-map" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-symbol-map">4. Creating a Symbol Map</h3>
-<p>Connect to the dataset <code>arizona_grocery_foot_traffic.csv</code>. This is a very very VERY small slice of cell phone visit data from the company <a href="https://www.safegraph.com">Safegraph</a>. The slice includes all grocery retail stores in Arizona with a sufficiently large number of visitors in September of 2021. Visitors (including you if you happened to be in Arizona at that time…) are tracked via their cell phones. The data includes information on the store (name, location, NAICS code, etc.), the number of visits, visitors (unique cell phones), the median distance travelled to shop there, and the median amount of time spent there.</p>
-<p>Let’s create a symbol map using the provided latitudes and longitudes of these stores.</p>
+<section id="plotting-results-from-a-cluster-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-results-from-a-cluster-analysis">1. Plotting Results from a Cluster Analysis</h3>
+<p>If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let’s do this now.</p>
 <ol type="1">
-<li><p>Drag <code>Longitude</code> to the Columns Shelf and <code>Latitude</code> to the Rows Shelf. (You will likely have to change these fields to <code>Dimensions</code>)</p></li>
-<li><p>Drag <code>Top Category</code> (this is the top sales category/type of each store) to the colors card.</p></li>
+<li><p>Connect to your dataset with the results from your cluster analysis. I called this <code>analyzed_data.csv</code>.</p></li>
+<li><p>Select <code>Latitude</code>, <code>Longitude</code>, and <code>Cluster</code> and select the Symbol Map from <code>Show Me</code>.</p></li>
+<li><p>Recall you will need to change the <code>Latitude</code> and <code>Longitude</code> fields to Dimensions for this to display correctly.</p></li>
+<li><p>Let’s also change <code>Cluster</code> to be associated with a color (rather than size) by dragging it to the <code>Color</code> card.</p></li>
+<li><p>Finally, let’s change <code>Cluster</code> to a Dimension and tell Tableau that it is Discrete.</p></li>
+<li><p>Let’s add some more detail to the tooltip. I would like to know the location name, top category, and cluster when I hover over each point on the map.</p></li>
 </ol>
-<p>Which type of store appears to be the most prevalent?</p>
-<ol start="3" type="1">
-<li>Now, let’s drag <code>Raw Visit Counts</code> to the size card.</li>
-</ol>
-<p>Which type of store appears to have the most visitors?</p>
-<ol start="4" type="1">
-<li>Now, let’s add each store’s name to the tooltip. Drag <code>Location Name</code> to the Tooltip card.</li>
-</ol>
-<p><strong>You Do It:</strong> Make a new symbol map using each store’s latitude and longitude, and choosing what information you want to include as colors, size, and in the tooltip. What did you uncover?</p>
-<p>Now, let’s see what happens if we select a different geographical field to make our map. Select the fields <code>City</code> and <code>Raw Visit Counts</code> and select the Symbol Map in the Show Me Menu. What is this map showing?</p>
-<p>What if we change the aggregation of <code>Raw Visit Counts</code> to average instead of sum?</p>
 </section>
-<section id="creating-a-filled-map" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-filled-map">5. Creating a Filled Map</h3>
-<p>Let’s start this exercise with using the same cell phone data. Select the fields <code>Postal Code</code> and <code>Raw Visit Counts</code> and go to the Show Me Menu. Now you should see that you can use either a symbol or filled map. Let’s select the filled map.</p>
-<p>What is this showing you? Are you able to map multiple store attributes using this feature? Do you think the filled map or symbol map are better for these data?</p>
-<p>Connect to the dataset <code>rent_income_county.csv</code> and create one filled map that shows the median income in each county and one map that shows the median rent in each county.</p>
-<p>Now, create a new calculated field called <code>income to rent ratio</code> that equal income divided by rent for each county. Plot this new field on a map and filter your data so that your map only includes Arizona (hint: Arizona’s FIPS code is 4). Which Arizona county has the highest income to rent ratio?</p>
-</section>
-<section id="customizing-your-maps" class="level3">
-<h3 class="anchored" data-anchor-id="customizing-your-maps">6. Customizing your maps</h3>
-<p>Tableau includes a variety of features you can include in your maps if you desire. Right click on your map and select <code>Background Layers...</code></p>
-<p>Click through some of the map layer options until you find a combination you like.</p>
-<p>Now… let’s add some of Tableau’s more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.</p>
-<p>Next let’s combine a symbol and filled map:</p>
+<section id="plotting-results-from-a-regression-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-results-from-a-regression-analysis">2. Plotting Results from a Regression Analysis</h3>
+<p>We have already discussed how to use Tableau’s integrated regression analysis, but a major limitation to this is that Tableau can only perform single variable regressions. Let’s look at the difference between the single and multivariate regression results by creating a scatterplot in Tableau:</p>
 <ol type="1">
-<li><p>Go back to your Tableau window with the cell phone data analysis.</p></li>
-<li><p>Create a new worksheet with a filled map showing total visit counts by postal code.</p></li>
-<li><p>Command-click (or Control-click on Windows) the latitude measure on the rows shelf and drag it to the right (this copies the value)</p></li>
-<li><p>Navigate to the Marks card for the second pane in your figure. Remove the Postal Code field from this map.</p></li>
-<li><p>Select both the <code>Latitude</code> and <code>Longitude</code> fields and drag them to the details card.</p></li>
-<li><p>Drag <code>Top Category</code> to the colors card. And drag <code>Distance from Home</code> (this is the median travel distance for customers in meters) to the Size card.</p></li>
-<li><p>Right click the second <code>Latitude</code> field on the Rows shelf and select <code>Dual Axis</code>.</p></li>
+<li><p>To compare the single and multivariate regression results we will need to join our <code>analyzed_data</code> and <code>fitted_reg</code> data sources. Join these two datasets on the <code>Raw Visitor Counts</code> field.</p></li>
+<li><p>Open a new sheet and create a scatterplot of <code>Raw Visitor Counts</code> and <code>Distance from Home</code> (note that we want our Y variable – <code>Raw Visitor Counts</code> – on the Y-axis).</p></li>
+<li><p>Add a fitted line to your scatterplot.</p></li>
+<li><p>To plot our multivariate regression results on this 2D plot, we will need to select a fixed value of the second variable (<code>Median Dwell Time</code>). To demonstrate that we need to do this - try plotting the fitted values of <code>Raw Visitor Counts</code> and <code>Distance from Home</code>. What do you see?</p></li>
+<li><p>Create a new calculated field, named <code>Fitted Distance From Home</code> with the following formula: <code>IF [Median Dwell (Fitted Reg.Csv)]==3 THEN [Distance From Home (Fitted Reg.Csv)] ELSE NULL END</code></p></li>
 </ol>
-<p>Now you can add whatever custom formatting you desire!</p>
-<p>What is this combined map showing?</p>
+<p><strong>What is this formula doing?</strong></p>
+<ol start="6" type="1">
+<li><p>Drag <code>Fitted Distance From Home</code> to the columns shelf, and <code>Raw Visitor Counts (Fitted Reg.Csv)</code> to the rows shelf. Change both fields to Dimensions.</p></li>
+<li><p>Change this new plot to a line (instead of scatter).</p></li>
+<li><p>Create X and Y dual axes (by right clicking each axis), then synchronize the axes so that they have the same values. Finally you can hide the seconary axes to reduce the clutter.</p></li>
+<li><p>How do the multivariate regression fitted values compare with the single variate ones?</p></li>
+<li><p>Now, what happens if we look at the fitted values assuming <code>Median Dwell Time</code> is equal to 4? Edit the calculated field to make this change.</p></li>
+</ol>
+<p>Note that another option for accomplishing this is to simply use the fitted regression equation (from R) to create a new calculated field. To see this, create a new calculated field called <code>Fitted Visits 2</code> with the following formula: <code>8.14165 -0.27568*[Distance From Home] -0.36894*4</code>.</p>
+<p><strong>Where did these numbers come from?</strong></p>
 </section>
-<section id="working-with-individual-level-data" class="level3">
-<h3 class="anchored" data-anchor-id="working-with-individual-level-data">7. Working with Individual-level data</h3>
-<p>Next let’s connect to the dataset <code>acs_sample.csv</code>. These data come from the American Community Survey and include all Arizona households interviewed in 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the <a href="https://www.ipums.org">IPUMS website</a>.</p>
-<p>Create a filled map that shows average household income (in colors) by county.</p>
-<p>Let’s add a pie chart that shows the percentage of households that report receiving food stamps in each county.</p>
+<section id="adding-vizzes-to-map-tooltips" class="level3">
+<h3 class="anchored" data-anchor-id="adding-vizzes-to-map-tooltips">3. Adding Vizzes to Map Tooltips</h3>
+<p>The last thing I want to cover today is how to add other visualizations to your map tooltip. To do this, let’s create a simple scatterplot of <code>Raw Visitor Counts</code> and <code>Distance from Home</code> and add a fitted line.</p>
 <ol type="1">
-<li><p>Drag <code>County Fip</code> over the map and drop it on <code>Add a Marks Layer</code></p></li>
-<li><p>Navigate to the new Marks card for this second graph and select Pie Chart.</p></li>
-<li><p>Drag the <code>County Fip</code> field to the detail card.</p></li>
-<li><p>Drag the <code>Foodstmp</code> (this field is equal to 0 if the household did not receive Food Stamp benefits and is equal to 1 if they did) field to the color card and change it to a dimension.</p></li>
-<li><p>Then drag the <code>Foodstmp</code> field to the angle card and change it to a count.</p></li>
-<li><p>Now create use a quick table calculation to change this to a percent of total, calculated over the Foodstmp field.</p></li>
+<li><p>Go back to your sheet with your map, color coded by cluster.</p></li>
+<li><p>Open the Tooltip card and go to <code>Insert</code> -&gt; <code>Sheets</code> and select the sheet with your new scatterplot.</p></li>
+<li><p>When you hover over a point on the map, what is this visualization showing?</p></li>
+<li><p>What if we instead want to show a scatterplot of these two variables only for grocery stores within that cluster? Go back to the Tooltip card and edit the Sheet info from <code>&lt;Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="&lt;All Fields&gt;"&gt;</code> to read <code>&lt;Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="&lt;Cluster&gt;"&gt;</code></p></li>
+<li><p>Now what happens when you hover over a point on the map? How did we accomplish this?</p></li>
+<li><p>Let’s add a useful title to our scatterplot by typing <code>Relationship between Visits and Distance from home for stores in this cluster</code> in the Tooltip above the scatterplot. Then let’s adjust the width of the scatterplot to <code>500</code>.</p></li>
 </ol>
-<p>What is this figure showing?</p>
-<p>Which county has the highest average income?</p>
-<p>Which county has the highest food stamp usage?</p>
-<p>Using individual-level (or in this case, household-level) data, you might also be interested in comparing outcomes across dimensions other than geography. For example, how might we show how income and rent compare for AZ households participating in Food Stamps versus for those who do not?</p>
 </section>
 </section>
 
