@@ -102,6 +102,9 @@ data <- raw %>%
   drop_na() #drop any observations with missing values
 ```
 
+
+{{< video https://youtu.be/Fdbcx02cgFo aspect-ratio="16x9" >}}
+
 ## Clustering Analysis
 
 Our first step will be to standardize the data so the units of the variables do not affect the clustering.  Use the function `scale()` to transform each variable by first subtracting the mean, then dividing by the standard deviation. 
@@ -140,6 +143,8 @@ data_clustered <- data %>%
 
 Now we can investigate attributes of the clusters by visualizing the data.
 
+{{< video https://youtu.be/XpBwDJRhqSg aspect-ratio="16x9" >}}
+
 ## Regression
 
 Suppose you are interested in a specific relationship between variables. Would we expect the relationship between `raw_visitor_counts` and `distance_from_home` to be positive or negative? We can test this hypothesis with a regression controlling for `median_dwell` time.  By "controlling for", we mean that we want to estimate the correlation between `raw_visitor_counts` and `distance_from_home` conditional on the correlation between `raw_visitor_counts` and `median_dwell`. We can estimate an ordinary least squares model in R using the function `lm()` that is built into R.  
@@ -165,6 +170,9 @@ fitted_data <- augment(m1,newdata = new_data) %>%
 ```
 
 **Save `fitted_data` for use in Tableau.** 
+
+{{< video https://youtu.be/ZUvabtmHXbQ aspect-ratio="16x9" >}}
+
 
 ## Classification
 
@@ -217,6 +225,10 @@ output_data <- data_clustered %>%
 
 write_csv(output_data,"analyzed_data.csv")
 ```
+
+{{< video https://youtu.be/QCHKflAMDvc aspect-ratio="16x9" >}}
+
+
 # Tableau
 
 
