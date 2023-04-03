@@ -1,0 +1,31 @@
+---
+title: "Project 2 Problem Set 2: Intro to Cross Sectional Data Analysis"
+format: 
+  html:
+    theme: zephyr
+---
+## Problem Set Overview
+
+This problem set is designed to get you started analyzing the data for your project.
+
+## Exploratory Data Analysis (EDA)
+
+Hopefully, you have found at least some data for your project. The first step is to explore your data.  The purpose of this step is to gain familiarity with your data and identify any issues (e.g., missing data, outliers).  Complete the following steps with your data.
+
+1. Generate a table of summary statistics.  The table should include at least: variable names, mean (average), standard deviation, min, and max.
+
+2. Generate a `ggpairs` plot of your quantitative measures (including density and scatter plots). Note that the visuals may be different for qualitative data.
+
+3. Perform any necessary processing. Write a narrative of your processing steps justifying your decisions. 
+
+4. Write a narrative for your webpage describing your EDA and providing an interpretation of your data.
+
+## Explanatory Data Analysis
+
+5. Choose one supervised learning technique (regression, classification) that you can apply to answer your primary question. Write a narrative of the procedure (what the method is doing) and the results. You should include either a regression table or confusion matrix.
+
+6. Produce an effective visualization of your results.
+
+## How to Submit
+
+You should create a new webpage on your google site titled `Project 2 Problem Set 1`. Submit the link to your google site webpage in Canvas.
