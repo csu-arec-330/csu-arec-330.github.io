@@ -1,5 +1,5 @@
 ---
-title: "Project 2 Problem Set 2: Intro to Cross Sectional Data Analysis"
+title: "Project 2 Problem Set 2: Cross Sectional Data Analysis"
 format: 
   html:
     theme: zephyr
@@ -8,7 +8,9 @@ format:
 
 This problem set is designed to get you started analyzing the data for your project.
 
-## Exploratory Data Analysis (EDA)
+## Part 1: R
+
+### Exploratory Data Analysis (EDA)
 
 Hopefully, you have found at least some data for your project. The first step is to explore your data.  The purpose of this step is to gain familiarity with your data and identify any issues (e.g., missing data, outliers).  Complete the following steps with your data.
 
@@ -20,12 +22,20 @@ Hopefully, you have found at least some data for your project. The first step is
 
 4. Write a narrative for your webpage describing your EDA and providing an interpretation of your data.
 
-## Explanatory Data Analysis
+### Explanatory Data Analysis
 
 5. Choose one supervised learning technique (regression, classification) that you can apply to answer your primary question. Write a narrative of the procedure (what the method is doing) and the results. You should include either a regression table or confusion matrix.
 
-6. Produce an effective visualization of your results.
+## Part 2: Tableau
+
+1. In Tableau, produce an effective visualization of the results from your explanatory data analysis. 
+
+If you performed a classification analysis, this will involve creating a visualization that shows your clusters exploring the underlying meaning of your clusters by seeing how clusters compare across the variables you used to define them (create scatter plots to show this). Your analysis should include a description of the "meaning" of each cluster. For example, does one cluster indicate the areas that are more favorable to locate your store?
+
+If you performed a regression analysis, this will involve creating a visualization that plots the regression line from your (multivariate) R analysis and comparing this with the line from the single-variate regression (the default trend line in Tableau). 
+
+2. In Tableau, demonstrate that you can integrate these analyses into your map tooltip using the map that you submitted for the last problem set and one of your visualizations for the explanatory data analysis.
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Project 2 Problem Set 1`. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your google site titled `Project 2 Problem Set 2`. Submit the link to your google site webpage in Canvas.
