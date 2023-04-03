@@ -5,3 +5,4 @@ _site
 *.Rproj
 .Rhistory
 .DS_Store
+.vscode/launch.json

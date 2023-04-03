@@ -2,19 +2,21 @@
 
 # load packages
 library(pacman)
-p_load(tidyverse,ggplot2,GGally,broom,ranger,rsample,caret)
+p_load(tidyverse,ggplot2,GGally,broom,ranger,rsample,caret,skimr)
 
 # read in dataset
 raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv")
 
 location_info <- raw %>%
   select(placekey,location_name,top_category,sub_category,latitude,longitude,city,region)
-############################
-#EDA
 
+###########################
+########### EDA ###########
+###########################
 #Summary statistics
 
 sumstats <- skimr::skim(raw)
+view(sumstats)
 
 
 ggpairs(raw,columns = c("raw_visitor_counts","distance_from_home","median_dwell")) 
@@ -32,6 +34,8 @@ raw %>%
   ggpairs()
 
 ###########################
+####### Clustering ########
+###########################
 
 # select relevant columns and scrub outliers
 data <- raw %>% 
@@ -41,8 +45,6 @@ data <- raw %>%
   mutate(across(c(2:4),log)) %>%
   drop_na()
 
-
-
 # scale data
 data_scaled <- data %>%
   select(raw_visitor_counts,distance_from_home,median_dwell) %>%
@@ -50,15 +52,22 @@ data_scaled <- data %>%
 
 # perform k-means clustering with k=3
 set.seed(123) # for reproducibility
-kmeans_fit <- kmeans(data_scaled, 3, nstart = 25)
+kmeans_fit <- kmeans(data_scaled, 
+                     centers=3,  #the number of clusters
+                     nstart = 25) #the number of random starts
 
+#create a dataframe with the store level attribute data not included in the clustering
+location_info <- raw %>%
+  select(placekey,location_name,top_category,sub_category,latitude,longitude,city,region)
 
-# add cluster labels to dataset
+# add cluster labels to dataset and join to location info
 data_clustered <- data %>% 
   mutate(cluster = kmeans_fit$cluster) %>%
   inner_join(location_info,by="placekey")
+view(data_clustered)
 
-# visualize clusters on map
+# visualize clusters over relevant/useful varaibles
+
 ggplot(data_clustered, aes(x = raw_visitor_counts, y = median_dwell, color = factor(cluster))) + 
   geom_point(alpha=.3) + 
   theme_minimal()
@@ -78,16 +87,20 @@ ggplot(data_clustered, aes(x = longitude, y = latitude, color = factor(cluster))
 ggplot(data_clustered,aes(y=sub_category,x=factor(cluster),fill=factor(sub_category))) +
   geom_col()
 
-write_csv(data_clustered,"clustered_data.csv")
+############################
+######## Regression ########
+############################
 
-###########################
 
-m1 <- lm(raw_visitor_counts ~ distance_from_home + median_dwell,data = data_clustered)
+m1 <- lm(raw_visitor_counts ~ distance_from_home + median_dwell, #specifying the regression formula
+         data = data_clustered) 
 
+# Look at regression results
 summary(m1)
 
 summary(data_clustered)
 
+# Export fitted data for a range of reasonable values for distance from home and median dwell time
 new_data <- expand_grid(distance_from_home=seq(5,11,.1),
                         median_dwell=seq(1,7,.1))
 
@@ -102,8 +115,8 @@ fitted_data %>%
 write_csv(fitted_data,"fitted_reg.csv")
 
 ##########################
-#Classification
-
+##### Classification #####
+##########################
 
 #Divide data into training and testing sample
 set.seed(123)

@@ -320,6 +320,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Finally, let’s change <code>Cluster</code> to a Dimension and tell Tableau that it is Discrete.</p></li>
 <li><p>Let’s add some more detail to the tooltip. I would like to know the location name, top category, and cluster when I hover over each point on the map.</p></li>
 </ol>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/lXloWsi7hZQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="plotting-results-from-a-regression-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-results-from-a-regression-analysis">2. Plotting Results from a Regression Analysis</h3>
@@ -341,6 +342,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Note that another option for accomplishing this is to simply use the fitted regression equation (from R) to create a new calculated field. To see this, create a new calculated field called <code>Fitted Visits 2</code> with the following formula: <code>8.14165 -0.27568*[Distance From Home] -0.36894*4</code>.</p>
 <p><strong>Where did these numbers come from?</strong></p>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/nRJaoNmhCzk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="adding-vizzes-to-map-tooltips" class="level3">
 <h3 class="anchored" data-anchor-id="adding-vizzes-to-map-tooltips">3. Adding Vizzes to Map Tooltips</h3>
@@ -351,8 +353,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>When you hover over a point on the map, what is this visualization showing?</p></li>
 <li><p>What if we instead want to show a scatterplot of these two variables only for grocery stores within that cluster? Go back to the Tooltip card and edit the Sheet info from <code>&lt;Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="&lt;All Fields&gt;"&gt;</code> to read <code>&lt;Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="&lt;Cluster&gt;"&gt;</code></p></li>
 <li><p>Now what happens when you hover over a point on the map? How did we accomplish this?</p></li>
-<li><p>Let’s add a useful title to our scatterplot by typing <code>Relationship between Visits and Distance from home for stores in this cluster</code> in the Tooltip above the scatterplot. Then let’s adjust the width of the scatterplot to <code>500</code>.</p></li>
+<li><p>Let’s add a useful title to our scatterplot by typing <code>Relationship between Visitors and Distance from home for stores in cluster &lt;Cluster&gt;</code> in the Tooltip above the scatterplot. Then let’s adjust the width of the scatterplot to <code>500</code>.</p></li>
 </ol>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/y08HjpcHF_4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 </section>
 
