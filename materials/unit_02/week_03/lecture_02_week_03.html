@@ -7,7 +7,7 @@
 <link href="lecture_02_week_03_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_02_week_03_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_02_week_03_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.2.269">
 
   <title>Week 11:  Data Analysis in Practice</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -329,9 +329,15 @@
 </div>
 
 </section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<p>Our goal in this course is to teach the tools and the process of analyzing data to inform decisions</p>
+<p>You now have some tools for data analysis</p>
+<p>Today, let’s revisit the process.</p>
+<p>How do we get from question to answer?</p>
+</section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<p>Spatial data</p>
 <p>Patterns in grocery store location (clustering application)</p>
 <p>Where to expand grocery stores (regression application)</p>
 <!-- image -->
@@ -346,13 +352,6 @@
 <!-- ::: {.column width="60%"} -->
 <!-- ::: -->
 <!-- :::: -->
-</section>
-<section id="motivation" class="slide level2">
-<h2>Motivation</h2>
-<p>Our goal in this course is to teach the tools and the process of analyzing data to inform decisions</p>
-<p>You now have some tools for data analysis</p>
-<p>Today, let’s revisit the process.</p>
-<p>How do we get from question to answer?</p>
 </section>
 <section id="where-should-we-open-a-grocery-store-in-az" class="slide level2 scrollable">
 <h2>Where should we open a grocery store in AZ?</h2>
@@ -371,6 +370,17 @@
 <p>Normative. Can we clarify our objective? <!-- Where would opening a grocery store in AZ generate the most profit in 30 years? --></p>
 <p>Spatial scope. Can we clarify the spatial unit of analysis? <!-- In which county would opening a grocery store in AZ generate the most profit in 30 years? --></p>
 </section>
+<section id="refining-the-question-1" class="slide level2">
+<h2>Refining the question</h2>
+<p>Normative. Can we clarify our objective?</p>
+<ul>
+<li>Where would opening a grocery store in AZ generate the most profit in 30 years?</li>
+</ul>
+<p>Spatial scope. Can we clarify the spatial unit of analysis?</p>
+<ul>
+<li>In which county would opening a grocery store in AZ generate the most profit in 30 years?</li>
+</ul>
+</section>
 <section id="conceptual-framework" class="slide level2">
 <h2>Conceptual framework</h2>
 <div>
@@ -385,14 +395,18 @@
 <section id="data" class="slide level2">
 <h2>Data</h2>
 <ul>
-<li><p>Grocery store concentration by county</p></li>
+<li><p>Grocery stores</p></li>
 <li><p>Population</p></li>
 <li><p>Income</p></li>
 <li><p>Unemployment rate</p></li>
+<li><p>Land area</p></li>
 </ul>
 </section>
 <section id="eda-cluster-analysis" class="slide level2">
 <h2>EDA (Cluster Analysis)</h2>
+<p>Let’s explore the data with a cluster analysis</p>
+<p>Also, if your study industry or market is not in (or close) to equilibrium, cluster analysis may help identify areas with opportunities</p>
+<p>3 clusters on: stores, population, income, land area, unemployment</p>
 </section>
 <section id="store-number-and-population" class="slide level2">
 <h2>Store Number and Population</h2>
@@ -412,76 +426,173 @@
 <p>We are assuming that the current markets are near equilibrium - there are currently the <em>right</em> number of stores based on population and income</p>
 <p><span class="math inline">\(GS_i = \beta_1 pop_i + \beta_2 income_i + \beta_3 unemp_i + \beta_4 area_i + \varepsilon_i\)</span></p>
 </section>
-<section id="regression-results" class="slide level2 scrollable">
+<section id="section" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/reg_line.png" class="r-stretch"></section>
+<section id="regression-results" class="slide level2">
 <h2>Regression Results</h2>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: center;">Model 1</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: center;">Estimate</th>
+<th style="text-align: left;">Std. Error</th>
+<th style="text-align: right;">t-statistic</th>
+<th style="text-align: right;">p.value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: center;">74.518</td>
+<td style="text-align: center;">74.515</td>
+<td style="text-align: left;">94.867</td>
+<td style="text-align: right;">0.785</td>
+<td style="text-align: right;">0.450</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: center;">(94.867)</td>
+<td style="text-align: left;">A. Pop 2020 (1000)</td>
+<td style="text-align: center;">0.464</td>
+<td style="text-align: left;">0.011</td>
+<td style="text-align: right;">40.486</td>
+<td style="text-align: right;">&lt;0.001</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Pop 2020 (1000)</td>
-<td style="text-align: center;">0.463***</td>
+<td style="text-align: left;">B. Median HH Inc</td>
+<td style="text-align: center;">-1.067</td>
+<td style="text-align: left;">1.428</td>
+<td style="text-align: right;">-0.747</td>
+<td style="text-align: right;">0.472</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: center;">(0.000)</td>
+<td style="text-align: left;">C. Area (sq mi)</td>
+<td style="text-align: center;">-0.848</td>
+<td style="text-align: left;">2.450</td>
+<td style="text-align: right;">-0.346</td>
+<td style="text-align: right;">0.737</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">D. Unemployment</td>
+<td style="text-align: center;">1.692</td>
+<td style="text-align: left;">4.875</td>
+<td style="text-align: right;">0.347</td>
+<td style="text-align: right;">0.736</td>
+</tr>
+</tbody>
+</table>
+<p>Obs: 15, R2 Adjusted: 0.994</p>
+<p>Which of the covariates is statistically significant at <span class="math inline">\(\alpha=0.05\)</span>?</p>
+</section>
+<section id="interpret-the-coefficient-estimate-on-population" class="slide level2">
+<h2>Interpret the coefficient estimate on population</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: center;">Estimate</th>
+<th style="text-align: left;">Std. Error</th>
+<th style="text-align: right;">t-statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: center;">74.515</td>
+<td style="text-align: left;">94.867</td>
+<td style="text-align: right;">0.785</td>
+<td style="text-align: right;">0.450</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pop 2020 (1000)</td>
+<td style="text-align: center;">0.464</td>
+<td style="text-align: left;">0.011</td>
+<td style="text-align: right;">40.486</td>
+<td style="text-align: right;">&lt;0.001</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Median HH Inc</td>
-<td style="text-align: center;">-0.001</td>
+<td style="text-align: center;">-1.067</td>
+<td style="text-align: left;">1.428</td>
+<td style="text-align: right;">-0.747</td>
+<td style="text-align: right;">0.472</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: center;">(0.001)</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Area (sq mi)</td>
-<td style="text-align: center;">-0.001</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: center;">(0.002)</td>
+<td style="text-align: center;">-0.848</td>
+<td style="text-align: left;">2.450</td>
+<td style="text-align: right;">-0.346</td>
+<td style="text-align: right;">0.737</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Unemployment</td>
 <td style="text-align: center;">1.692</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: center;">(4.875)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Num.Obs.</td>
-<td style="text-align: center;">15</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">R2</td>
-<td style="text-align: center;">0.996</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">R2 Adj.</td>
-<td style="text-align: center;">0.994</td>
+<td style="text-align: left;">4.875</td>
+<td style="text-align: right;">0.347</td>
+<td style="text-align: right;">0.736</td>
 </tr>
 </tbody>
 </table>
+<p>Obs: 15, R2 Adjusted: 0.994</p>
+</section>
+<section id="how-well-does-the-model-fit-the-data-how-do-you-know" class="slide level2">
+<h2>How well does the model fit the data? How do you know?</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: center;">Estimate</th>
+<th style="text-align: left;">Std. Error</th>
+<th style="text-align: right;">t-statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: center;">74.515</td>
+<td style="text-align: left;">94.867</td>
+<td style="text-align: right;">0.785</td>
+<td style="text-align: right;">0.450</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pop 2020 (1000)</td>
+<td style="text-align: center;">0.464</td>
+<td style="text-align: left;">0.011</td>
+<td style="text-align: right;">40.486</td>
+<td style="text-align: right;">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Median HH Inc</td>
+<td style="text-align: center;">-1.067</td>
+<td style="text-align: left;">1.428</td>
+<td style="text-align: right;">-0.747</td>
+<td style="text-align: right;">0.472</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Area (sq mi)</td>
+<td style="text-align: center;">-0.848</td>
+<td style="text-align: left;">2.450</td>
+<td style="text-align: right;">-0.346</td>
+<td style="text-align: right;">0.737</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Unemployment</td>
+<td style="text-align: center;">1.692</td>
+<td style="text-align: left;">4.875</td>
+<td style="text-align: right;">0.347</td>
+<td style="text-align: right;">0.736</td>
+</tr>
+</tbody>
+</table>
+<p>Obs: 15, R2 Adjusted: 0.994</p>
 </section>
 <section id="application" class="slide level2">
 <h2>Application</h2>
 <p>Use population and income projections to estimate opportunities for expansion</p>
-<p>$ forGS_i = forpop_i + income_i + unemp_i + area_i $</p>
+<p><span class="math display">\[ forGS_i = \hat{\beta_1} 2050pop_i + \hat{\beta_2} income_i + \hat{\beta_3} unemp_i + \hat{\beta_4} area_i \]</span></p>
 <p>Identify growth potential as counties where increased population increases equilibrium number of stores</p>
+<p><span class="math display">\[ forGS_i - GS_i \]</span></p>
 </section>
 <section id="expand-stores-where-gap-is-blue" class="slide level2">
 <h2>Expand stores where gap is blue</h2>
@@ -489,6 +600,8 @@
 <img data-src="includes/dumbell.png" class="r-stretch"></section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
+<p>Strive to answer your question with your analysis</p>
+<p>Chat GPT (and similar) can help you think through analyses</p>
 <div class="footer footer-default">
 
 </div>

@@ -9,9 +9,17 @@ format:
     # center: TRUE
 ---
 
-## Agenda 
+## Motivation
 
-Spatial data
+Our goal in this course is to teach the tools and the process of analyzing data to inform decisions
+
+You now have some tools for data analysis
+
+Today, let's revisit the process.
+
+How do we get from question to answer?
+
+## Agenda 
 
 Patterns in grocery store location (clustering application)
 
@@ -35,15 +43,7 @@ Where to expand grocery stores (regression application)
 <!-- ::: -->
 <!-- :::: -->
 
-## Motivation
 
-Our goal in this course is to teach the tools and the process of analyzing data to inform decisions
-
-You now have some tools for data analysis
-
-Today, let's revisit the process.
-
-How do we get from question to answer?
 
 
 ## Where should we open a grocery store in AZ? {.scrollable}
@@ -74,6 +74,15 @@ Normative. Can we clarify our objective?
 Spatial scope. Can we clarify the spatial unit of analysis?
 <!-- In which county would opening a grocery store in AZ generate the most profit in 30 years? -->
 
+## Refining the question
+
+Normative. Can we clarify our objective?
+
+- Where would opening a grocery store in AZ generate the most profit in 30 years?
+
+Spatial scope. Can we clarify the spatial unit of analysis?
+
+- In which county would opening a grocery store in AZ generate the most profit in 30 years?
 
 ## Conceptual framework 
 
@@ -91,7 +100,7 @@ How do the economics work in this context?  What should influence grocery store 
 
 ## Data
 
-- Grocery store concentration by county
+- Grocery stores
 
 - Population 
 
@@ -99,8 +108,15 @@ How do the economics work in this context?  What should influence grocery store 
 
 - Unemployment rate
 
+- Land area
+
 ## EDA (Cluster Analysis)
 
+Let's explore the data with a cluster analysis
+
+Also, if your study industry or market is not in (or close) to equilibrium, cluster analysis may help identify areas with opportunities
+
+3 clusters on: stores, population, income, land area, unemployment
 
 ## Store Number and Population
 
@@ -125,36 +141,60 @@ We are assuming that the current markets are near equilibrium - there are curren
 
 $GS_i = \beta_1 pop_i + \beta_2 income_i + \beta_3 unemp_i + \beta_4 area_i + \varepsilon_i$
 
-
-## Regression Results {.scrollable}
-
-|              | Model 1  |
-|:-------------|:--------:|
-|(Intercept)   |  74.518  |
-|              | (94.867) |
-|Pop 2020 (1000)     |  0.463***   |
-|              | (0.011)  |
-|Median HH Inc |  -1.066  |
-|              | (1.428)  |
-|Area (sq mi)  |  -0.848  |
-|              | (2.450)  |
-|Unemployment  |  1.692   |
-|              | (4.875)  |
-|Num.Obs.      |    15    |
-|R2            |  0.996   |
-|R2 Adj.       |  0.994   |
-
-
 ##
+![](includes/reg_line.png)
 
+
+## Regression Results
+
+Variable                 Estimate    Std. Error    t-statistic     p.value
+----------------------  -----------  -----------  ------------  ----------
+(Intercept)              74.515      94.867       0.785         0.450
+A. Pop 2020 (1000)          0.464       0.011        40.486        <0.001
+B. Median HH Inc           -1.067       1.428        -0.747        0.472
+C. Area (sq mi)            -0.848       2.450        -0.346        0.737
+D. Unemployment               1.692       4.875       0.347        0.736
+
+Obs: 15, R2 Adjusted: 0.994    
+  
+Which of the covariates is statistically significant at $\alpha=0.05$?
+
+## Interpret the coefficient estimate on population
+
+Variable                 Estimate    Std. Error    t-statistic     p.value
+----------------------  -----------  -----------  ------------  ----------
+(Intercept)              74.515      94.867       0.785         0.450
+Pop 2020 (1000)          0.464       0.011        40.486        <0.001
+Median HH Inc           -1.067       1.428        -0.747        0.472
+Area (sq mi)            -0.848       2.450        -0.346        0.737
+Unemployment               1.692       4.875       0.347        0.736
+
+Obs: 15, R2 Adjusted: 0.994    
+  
+
+
+## How well does the model fit the data? How do you know?
+
+Variable                 Estimate    Std. Error    t-statistic     p.value
+----------------------  -----------  -----------  ------------  ----------
+(Intercept)              74.515      94.867       0.785         0.450
+Pop 2020 (1000)          0.464       0.011        40.486        <0.001
+Median HH Inc           -1.067       1.428        -0.747        0.472
+Area (sq mi)            -0.848       2.450        -0.346        0.737
+Unemployment               1.692       4.875       0.347        0.736
+
+Obs: 15, R2 Adjusted: 0.994    
+  
 
 ## Application
 
 Use population and income projections to estimate opportunities for expansion
 
-$ forGS_i = \hat{\beta_1} forpop_i + \hat{\beta_2} income_i + \hat{\beta_3} unemp_i + \hat{\beta_4} area_i $
+$$ forGS_i = \hat{\beta_1} 2050pop_i + \hat{\beta_2} income_i + \hat{\beta_3} unemp_i + \hat{\beta_4} area_i $$
 
 Identify growth potential as counties where increased population increases equilibrium number of stores
+
+$$ forGS_i - GS_i $$
 
 ## Expand stores where gap is blue
 
@@ -163,7 +203,9 @@ Identify growth potential as counties where increased population increases equil
 
 ## Summary
 
+Strive to answer your question with your analysis
 
+Chat GPT (and similar) can help you think through analyses
 
 
 
