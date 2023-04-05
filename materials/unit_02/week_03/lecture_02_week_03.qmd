@@ -13,9 +13,11 @@ format:
 
 Spatial data
 
+Patterns in grocery store location (clustering application)
+
 Where to expand grocery stores (regression application)
 
-Patterns in farm equipment (clustering application)
+
 
 <!-- image -->
 <!-- ![](includes/ggpairs.png) -->
@@ -42,6 +44,7 @@ You now have some tools for data analysis
 Today, let's revisit the process.
 
 How do we get from question to answer?
+
 
 ## Where should we open a grocery store in AZ? {.scrollable}
 
@@ -90,7 +93,28 @@ How do the economics work in this context?  What should influence grocery store 
 
 - Grocery store concentration by county
 
-- population, income, 
+- Population 
+
+- Income
+
+- Unemployment rate
+
+## EDA (Cluster Analysis)
+
+
+## Store Number and Population
+
+![](includes/Store Number x Pop 2020.png)
+
+## Store Number and Unemployment
+
+![](includes/Store Number x Unemployment percent.png)
+
+
+## Store Number and Land Area
+
+![](includes/Store Number x Land Area sq mi.png)
+
 
 
 ## Analysis
@@ -99,15 +123,43 @@ Regression model to establish relationship between an areas population, income, 
 
 We are assuming that the current markets are near equilibrium - there are currently the *right* number of stores based on population and income
 
-$GS/mi_i = \beta_1 pop_i + \beta_2 income_i + \varepsilon_i$
+$GS_i = \beta_1 pop_i + \beta_2 income_i + \beta_3 unemp_i + \beta_4 area_i + \varepsilon_i$
+
+
+## Regression Results {.scrollable}
+
+|              | Model 1  |
+|:-------------|:--------:|
+|(Intercept)   |  74.518  |
+|              | (94.867) |
+|Pop 2020 (1000)     |  0.463***   |
+|              | (0.011)  |
+|Median HH Inc |  -1.066  |
+|              | (1.428)  |
+|Area (sq mi)  |  -0.848  |
+|              | (2.450)  |
+|Unemployment  |  1.692   |
+|              | (4.875)  |
+|Num.Obs.      |    15    |
+|R2            |  0.996   |
+|R2 Adj.       |  0.994   |
+
+
+##
+
 
 ## Application
 
 Use population and income projections to estimate opportunities for expansion
 
-$GS/mi_i = \hat{\beta_1} forpop_i + \hat{\beta_2} forincome_i + \varepsilon_i$
+$ forGS_i = \hat{\beta_1} forpop_i + \hat{\beta_2} income_i + \hat{\beta_3} unemp_i + \hat{\beta_4} area_i $
 
-# Clustering
+Identify growth potential as counties where increased population increases equilibrium number of stores
+
+## Expand stores where gap is blue
+
+![](includes/dumbell.png)
+
 
 ## Summary
 

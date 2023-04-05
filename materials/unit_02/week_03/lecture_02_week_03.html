@@ -7,7 +7,7 @@
 <link href="lecture_02_week_03_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_02_week_03_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_02_week_03_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.2.280">
 
   <title>Week 11:  Data Analysis in Practice</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -332,8 +332,8 @@
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <p>Spatial data</p>
+<p>Patterns in grocery store location (clustering application)</p>
 <p>Where to expand grocery stores (regression application)</p>
-<p>Patterns in farm equipment (clustering application)</p>
 <!-- image -->
 <!-- ![](includes/ggpairs.png) -->
 <!-- example of big text fit to slide width -->
@@ -386,26 +386,113 @@
 <h2>Data</h2>
 <ul>
 <li><p>Grocery store concentration by county</p></li>
-<li><p>population, income,</p></li>
+<li><p>Population</p></li>
+<li><p>Income</p></li>
+<li><p>Unemployment rate</p></li>
 </ul>
 </section>
+<section id="eda-cluster-analysis" class="slide level2">
+<h2>EDA (Cluster Analysis)</h2>
+</section>
+<section id="store-number-and-population" class="slide level2">
+<h2>Store Number and Population</h2>
+
+<img data-src="includes/Store%20Number%20x%20Pop%202020.png" class="r-stretch"></section>
+<section id="store-number-and-unemployment" class="slide level2">
+<h2>Store Number and Unemployment</h2>
+
+<img data-src="includes/Store%20Number%20x%20Unemployment%20percent.png" class="r-stretch"></section>
+<section id="store-number-and-land-area" class="slide level2">
+<h2>Store Number and Land Area</h2>
+
+<img data-src="includes/Store%20Number%20x%20Land%20Area%20sq%20mi.png" class="r-stretch"></section>
 <section id="analysis" class="slide level2">
 <h2>Analysis</h2>
 <p>Regression model to establish relationship between an areas population, income, and grocery stores</p>
 <p>We are assuming that the current markets are near equilibrium - there are currently the <em>right</em> number of stores based on population and income</p>
-<p><span class="math inline">\(GS/mi_i = pop_i + income_i + \varepsilon_i\)</span></p>
+<p><span class="math inline">\(GS_i = \beta_1 pop_i + \beta_2 income_i + \beta_3 unemp_i + \beta_4 area_i + \varepsilon_i\)</span></p>
 </section>
-<section>
-<section id="clustering" class="title-slide slide level1 center">
-<h1>Clustering</h1>
+<section id="regression-results" class="slide level2 scrollable">
+<h2>Regression Results</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Model 1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: center;">74.518</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(94.867)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pop 2020 (1000)</td>
+<td style="text-align: center;">0.463***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.000)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Median HH Inc</td>
+<td style="text-align: center;">-0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.001)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Area (sq mi)</td>
+<td style="text-align: center;">-0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.002)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Unemployment</td>
+<td style="text-align: center;">1.692</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(4.875)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Num.Obs.</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R2</td>
+<td style="text-align: center;">0.996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2 Adj.</td>
+<td style="text-align: center;">0.994</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="application" class="slide level2">
+<h2>Application</h2>
+<p>Use population and income projections to estimate opportunities for expansion</p>
+<p>$ forGS_i = forpop_i + income_i + unemp_i + area_i $</p>
+<p>Identify growth potential as counties where increased population increases equilibrium number of stores</p>
+</section>
+<section id="expand-stores-where-gap-is-blue" class="slide level2">
+<h2>Expand stores where gap is blue</h2>
 
-</section>
+<img data-src="includes/dumbell.png" class="r-stretch"></section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
