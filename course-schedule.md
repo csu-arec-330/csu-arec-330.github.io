@@ -170,7 +170,7 @@ th, td {
 				<td rowspan="2">2</td>
 				<td rowspan="2">11</td>
 				<td style="min-width:50px">Wed, April 05</td>
-				<td style="min-width:50px">Spatial Data Aggregation and Analysis</td>
+				<td style="min-width:50px">Spatial Data and More Analysis</td>
 				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
