@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 11 Lab: Spatial data in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="lab_02_week_03_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab_02_week_03_files/libs/quarto-html/quarto.js"></script>
+<script src="lab_02_week_03_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab_02_week_03_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab_02_week_03_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab_02_week_03_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab_02_week_03_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab_02_week_03_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab_02_week_03_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab_02_week_03_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a>
+  <ul class="collapse">
+  <li><a href="#orientation-and-terms" id="toc-orientation-and-terms" class="nav-link" data-scroll-target="#orientation-and-terms">Orientation and terms</a></li>
+  <li><a href="#task-overview" id="toc-task-overview" class="nav-link" data-scroll-target="#task-overview">Task overview</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#converting-to-a-spatial-format" id="toc-converting-to-a-spatial-format" class="nav-link" data-scroll-target="#converting-to-a-spatial-format">Converting to a spatial format</a></li>
+  <li><a href="#getting-census-boundaries" id="toc-getting-census-boundaries" class="nav-link" data-scroll-target="#getting-census-boundaries">Getting Census boundaries</a></li>
+  <li><a href="#intersecting-points-with-polygons" id="toc-intersecting-points-with-polygons" class="nav-link" data-scroll-target="#intersecting-points-with-polygons">Intersecting points with polygons</a></li>
+  <li><a href="#merging-county-data" id="toc-merging-county-data" class="nav-link" data-scroll-target="#merging-county-data">Merging county data</a></li>
+  </ul></li>
+  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
+  <ul class="collapse">
+  <li><a href="#plotting-results-from-a-cluster-analysis" id="toc-plotting-results-from-a-cluster-analysis" class="nav-link" data-scroll-target="#plotting-results-from-a-cluster-analysis">1. Plotting Results from a Cluster Analysis</a></li>
+  <li><a href="#plotting-results-from-a-regression-analysis" id="toc-plotting-results-from-a-regression-analysis" class="nav-link" data-scroll-target="#plotting-results-from-a-regression-analysis">2. Plotting Results from a Regression Analysis</a></li>
+  <li><a href="#adding-vizzes-to-map-tooltips" id="toc-adding-vizzes-to-map-tooltips" class="nav-link" data-scroll-target="#adding-vizzes-to-map-tooltips">3. Adding Vizzes to Map Tooltips</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 11 Lab: Spatial data in R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><img src="includes/cross-sectional.png" class="img-fluid"></p>
+<div style="font-size: 1.5em">
+<p>This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8</p>
+</div>
+<section id="learning-objectives-r" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
+<ul>
+<li><p>Read and process spatial data</p></li>
+<li><p>Prepare data for mapping in Tableau</p></li>
+</ul>
+</section>
+<section id="learning-objectives-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
+<ul>
+<li></li>
+</ul>
+</section>
+<section id="r" class="level1">
+<h1>R</h1>
+<p>Spatial data is a form of cross-sectional data that contains geographic information.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Examples include the location of a store or park, the boundary of a parcel of land, or the location of a weather measurement. In many cases, we need to process that data in some way or join it to other (potentially spatial) data for analysis.</p>
+<section id="orientation-and-terms" class="level2">
+<h2 class="anchored" data-anchor-id="orientation-and-terms">Orientation and terms</h2>
+<p>Two common types of spatial data in R are <em>vector</em> and <em>raster</em> data. Vector data represent geographic features as points, lines, and polygons, while raster data represent geographic features as a grid of cells with values assigned to each cell. Vector data is often used to represent discrete features such as the boundaries of a city or the location of a specific point of interest. Raster data, on the other hand, is often used to represent phenomena such as elevation or temperature that are continuous across the landscape.</p>
+<p>Working with spatial data in R involves using specialized packages and functions to read, manipulate, and visualize the data. Some popular packages for working with spatial data in R include <code>sf</code> and <code>raster</code>. With these tools, it’s possible to perform a wide range of spatial analyses, such as overlaying different layers of data to find areas of overlap or proximity, extracting data for specific regions of interest, and creating custom maps and visualizations.</p>
+</section>
+<section id="task-overview" class="level2">
+<h2 class="anchored" data-anchor-id="task-overview">Task overview</h2>
+<p>It is common to find data with specific location information (e.g., latitude and longitude coordinates). You may have separate data with other information that you want to associate with your location data. We will develop an example in which you have grocery store location data and county level data on population, unemployment, land area and income. You want to construct a dataset with county as the unit of observation, so you need to associate each grocery store with a county and count the number of occurrences within each county.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Our first step is to start an R script and load packages. We start by reading in the grocery store data set we have been using, along with population data from <a href="https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100/data-download">SEDAC</a> and income data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This script will demonstrate how to work with spatial data and conduct some basic operations (e.g., intersection)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse,janitor,sf,tigris,mapview)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># read in grocery store location dataset</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>gs_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>inc_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/inc.csv"</span>) </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>pop_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/hauer_county_totpop_SSPs.csv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="converting-to-a-spatial-format" class="level2">
+<h2 class="anchored" data-anchor-id="converting-to-a-spatial-format">Converting to a spatial format</h2>
+<p>The field of geography and geographic information systems (GIS) specialize in understanding and working with geospatial data. Locations are known because of a commonly understood reference system called a Coordinate Reference System (CRS). Think about a graph with <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> dimensions. A point on that graph has a set of coordinates that tell you the location. CRS in GIS can be more complicated because we are thinking about points that exist on a globe (this would be easier if the earth were flat).</p>
+<p>The <code>gs_raw</code> dataframe has latitude and longitude coordinates. At this point, R considers these numbers like any other numeric variable. There are packages built to understand and work with geospatial data. <code>sf</code> stands for simple features and is a commonly used package. We will use it to convert the <code>gs_raw</code> data into a spatially aware data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert data frame to a points simple feature object</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gs_geo <span class="ot">&lt;-</span> gs_raw <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(placekey,latitude,longitude) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords=</span><span class="fu">c</span>(<span class="st">"longitude"</span>,<span class="st">"latitude"</span>),<span class="at">crs=</span><span class="dv">4326</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that we first subset the variables <code>placekey</code> and the coordinates. The next line tells R that these are essentially <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates in a certain projection (represented by the code 4326). <code>gs_geo</code> is a different object than we have worked with before but it looks and behaves like a familiar dataframe.</p>
+</section>
+<section id="getting-census-boundaries" class="level2">
+<h2 class="anchored" data-anchor-id="getting-census-boundaries">Getting Census boundaries</h2>
+<p>The dataframe <code>gs_raw</code> contained a lot of meta information but not county. Boundaries for commonly used geometries are available from the US Census and accessible through an API to the census repository of these boundaries (called Tiger). The R package <code>tigris</code> provides a very convenient API to access them.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#need county polygons</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>az_co <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">counties</span>(<span class="at">state =</span> <span class="st">"AZ"</span>,<span class="at">cb=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">aland=</span>aland<span class="sc">/</span><span class="fl">2.59e+6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This command extracts the county boundaries for arizona and reads them into an sf object called <code>az_co</code>. The names are capitalized, so I like to clean them, the land area reported is in square meters so I convert it to square miles, and we want to ensure that it is in the same coordinate reference system as our store locations. Notice that the spatial type of these data are POLYGONs rather than POINTs.</p>
+<p>It is often helpful to look at data especially when mapping. R can leverage very powerful mapping tools, but we will just use them to make sure we are doing what we think we are doing. We can use mapview to look at the data. You can do the same with <code>az_co</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#map the grocery stores</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(gs_geo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="intersecting-points-with-polygons" class="level2">
+<h2 class="anchored" data-anchor-id="intersecting-points-with-polygons">Intersecting points with polygons</h2>
+<p>Spatial data processing tools can understand the shared location of points and polygons to associate data from one dataset with another. Our objective is to associate a county name and identifier with each grocery store so that we can count the number of stores in each county.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#join county to gs</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gs_co_geo <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(gs_geo,az_co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that <code>gs_co_geo</code> has all of the observations from <code>gs_geo</code> and has the corresponding variables from <code>az_co</code> attached to it. Now we have the information to count the number of store in each county. The group_by and summarize combination can also be used to conduct spatial operations like mashing polygons together. Moreover, we don’t need the spatial information anymore since everything will be at the county level. We use <code>st_set_geometry(NULL)</code> to convert an sf object back to a data frame (without spatial information).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make nonspatial object and join with other datasets</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gs_co <span class="ot">&lt;-</span> gs_co_geo <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span> <span class="co">#converts back to dataframe</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">stores=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()  <span class="co">#forgets the grouping information otherwise it can affect future opertations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="merging-county-data" class="level2">
+<h2 class="anchored" data-anchor-id="merging-county-data">Merging county data</h2>
+<p>Now all datasets are aggregated to the county level, so we can merge or join them together. Many counties in the US share the same name even in different states. Federal Information Processing Standard (FIPS) codes are a more reliable key to join on. Before joining the data together, lets process the individual datasets to prepare them for easy merging.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Constructing a name and land area reference to join to analysis dataset</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>co_name_land <span class="ot">&lt;-</span> az_co <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geoid,aland,name)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#process population data (source: https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100/data-download)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> pop_raw <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(statefp10<span class="sc">==</span><span class="st">"04"</span>) <span class="sc">%&gt;%</span> <span class="co">#filter only arizona fips==04</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">geoid=</span>geoid10,ssp22020,ssp22050)  <span class="co">#keep only the middle of the road projection</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>hh_inc <span class="ot">&lt;-</span> inc_raw <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">geoid=</span>FIPS)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#sequence of inner join statements all based on fips or geoid</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>analysis_ds <span class="ot">&lt;-</span> gs_co <span class="sc">%&gt;%</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(co_name_land ,<span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">%&gt;%</span> <span class="co">#converting sq meters to sq miles</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(pop,<span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(hh_inc,<span class="at">by =</span> <span class="st">"geoid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can continue using this dataset to analyze in R or export for use in Tableau.</p>
+</section>
+</section>
+<section id="tableau" class="level1">
+<h1>Tableau</h1>
+<section id="plotting-results-from-a-cluster-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-results-from-a-cluster-analysis">1. Plotting Results from a Cluster Analysis</h3>
+<p>If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let’s do this now.</p>
+<ol type="1">
+<li><p>Connect to your dataset with the results from your cluster analysis. I called this <code>analyzed_data.csv</code>.</p></li>
+<li><p>Select <code>Latitude</code>, <code>Longitude</code>, and <code>Cluster</code> and select the Symbol Map from <code>Show Me</code>.</p></li>
+<li><p>Recall you will need to change the <code>Latitude</code> and <code>Longitude</code> fields to Dimensions for this to display correctly.</p></li>
+<li><p>Let’s also change <code>Cluster</code> to be associated with a color (rather than size) by dragging it to the <code>Color</code> card.</p></li>
+<li><p>Finally, let’s change <code>Cluster</code> to a Dimension and tell Tableau that it is Discrete.</p></li>
+<li><p>Let’s add some more detail to the tooltip. I would like to know the location name, top category, and cluster when I hover over each point on the map.</p></li>
+</ol>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/lXloWsi7hZQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="plotting-results-from-a-regression-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-results-from-a-regression-analysis">2. Plotting Results from a Regression Analysis</h3>
+<p>We have already discussed how to use Tableau’s integrated regression analysis, but a major limitation to this is that Tableau can only perform single variable regressions. Let’s look at the difference between the single and multivariate regression results by creating a scatterplot in Tableau:</p>
+<ol type="1">
+<li><p>To compare the single and multivariate regression results we will need to join our <code>analyzed_data</code> and <code>fitted_reg</code> data sources. Join these two datasets on the <code>Raw Visitor Counts</code> field.</p></li>
+<li><p>Open a new sheet and create a scatterplot of <code>Raw Visitor Counts</code> and <code>Distance from Home</code> (note that we want our Y variable – <code>Raw Visitor Counts</code> – on the Y-axis).</p></li>
+<li><p>Add a fitted line to your scatterplot.</p></li>
+<li><p>To plot our multivariate regression results on this 2D plot, we will need to select a fixed value of the second variable (<code>Median Dwell Time</code>). To demonstrate that we need to do this - try plotting the fitted values of <code>Raw Visitor Counts</code> and <code>Distance from Home</code>. What do you see?</p></li>
+<li><p>Create a new calculated field, named <code>Fitted Distance From Home</code> with the following formula: <code>IF [Median Dwell (Fitted Reg.Csv)]==3 THEN [Distance From Home (Fitted Reg.Csv)] ELSE NULL END</code></p></li>
+</ol>
+<p><strong>What is this formula doing?</strong></p>
+<ol start="6" type="1">
+<li><p>Drag <code>Fitted Distance From Home</code> to the columns shelf, and <code>Raw Visitor Counts (Fitted Reg.Csv)</code> to the rows shelf. Change both fields to Dimensions.</p></li>
+<li><p>Change this new plot to a line (instead of scatter).</p></li>
+<li><p>Create X and Y dual axes (by right clicking each axis), then synchronize the axes so that they have the same values. Finally you can hide the seconary axes to reduce the clutter.</p></li>
+<li><p>How do the multivariate regression fitted values compare with the single variate ones?</p></li>
+<li><p>Now, what happens if we look at the fitted values assuming <code>Median Dwell Time</code> is equal to 4? Edit the calculated field to make this change.</p></li>
+</ol>
+<p>Note that another option for accomplishing this is to simply use the fitted regression equation (from R) to create a new calculated field. To see this, create a new calculated field called <code>Fitted Visits 2</code> with the following formula: <code>8.14165 -0.27568*[Distance From Home] -0.36894*4</code>.</p>
+<p><strong>Where did these numbers come from?</strong></p>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/nRJaoNmhCzk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="adding-vizzes-to-map-tooltips" class="level3">
+<h3 class="anchored" data-anchor-id="adding-vizzes-to-map-tooltips">3. Adding Vizzes to Map Tooltips</h3>
+<p>The last thing I want to cover today is how to add other visualizations to your map tooltip. To do this, let’s create a simple scatterplot of <code>Raw Visitor Counts</code> and <code>Distance from Home</code> and add a fitted line.</p>
+<ol type="1">
+<li><p>Go back to your sheet with your map, color coded by cluster.</p></li>
+<li><p>Open the Tooltip card and go to <code>Insert</code> -&gt; <code>Sheets</code> and select the sheet with your new scatterplot.</p></li>
+<li><p>When you hover over a point on the map, what is this visualization showing?</p></li>
+<li><p>What if we instead want to show a scatterplot of these two variables only for grocery stores within that cluster? Go back to the Tooltip card and edit the Sheet info from <code>&lt;Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="&lt;All Fields&gt;"&gt;</code> to read <code>&lt;Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="&lt;Cluster&gt;"&gt;</code></p></li>
+<li><p>Now what happens when you hover over a point on the map? How did we accomplish this?</p></li>
+<li><p>Let’s add a useful title to our scatterplot by typing <code>Relationship between Visitors and Distance from home for stores in cluster &lt;Cluster&gt;</code> in the Tooltip above the scatterplot. Then let’s adjust the width of the scatterplot to <code>500</code>.</p></li>
+</ol>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/y08HjpcHF_4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Spatial data can also have temporal dimensions, and the concepts we cover here extend to those data too.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -27,16 +27,140 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 
 # R
 
-Spatial data is a form of cross-sectional data that contains geographic information. Examples include the location of a store or park or the boundary of a parcel of land.
+Spatial data is a form of cross-sectional data that contains geographic information.^[Spatial data can also have temporal dimensions, and the concepts we cover here extend to those data too.] Examples include the location of a store or park, the boundary of a parcel of land, or the location of a weather measurement. In many cases, we need to process that data in some way or join it to other (potentially spatial) data for analysis.
 
 ## Orientation and terms
 
-Two forms: vector and raster data
+Two common types of spatial data in R are *vector* and *raster* data. Vector data represent geographic features as points, lines, and polygons, while raster data represent geographic features as a grid of cells with values assigned to each cell. Vector data is often used to represent discrete features such as the boundaries of a city or the location of a specific point of interest. Raster data, on the other hand, is often used to represent phenomena such as elevation or temperature that are continuous across the landscape.
+
+Working with spatial data in R involves using specialized packages and functions to read, manipulate, and visualize the data. Some popular packages for working with spatial data in R include `sf` and `raster`. With these tools, it's possible to perform a wide range of spatial analyses, such as overlaying different layers of data to find areas of overlap or proximity, extracting data for specific regions of interest, and creating custom maps and visualizations.
+
+## Task overview
+
+It is common to find data with specific location information (e.g., latitude and longitude coordinates). You may have separate data with other information that you want to associate with your location data. We will develop an example in which you have grocery store location data and county level data on population, unemployment, land area and income. You want to construct a dataset with county as the unit of observation, so you need to associate each grocery store with a county and count the number of occurrences within each county.
+
+## Setup
+
+Our first step is to start an R script and load packages. We start by reading in the grocery store data set we have been using, along with population data from [SEDAC](https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100/data-download) and income data.
+
+```{r}
+#| eval: false
+
+# This script will demonstrate how to work with spatial data and conduct some basic operations (e.g., intersection)
+
+# load packages
+library(pacman)
+p_load(tidyverse,janitor,sf,tigris,mapview)
+
+# read in grocery store location dataset
+gs_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv")
+
+inc_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/inc.csv") 
+
+pop_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/hauer_county_totpop_SSPs.csv") 
+
+```
+## Converting to a spatial format
+
+The field of geography and geographic information systems (GIS) specialize in understanding and working with geospatial data. Locations are known because of a commonly understood reference system called a Coordinate Reference System (CRS). Think about a graph with $x$ and $y$ dimensions. A point on that graph has a set of coordinates that tell you the location. CRS in GIS can be more complicated because we are thinking about points that exist on a globe (this would be easier if the earth were flat). 
+
+The `gs_raw` dataframe has latitude and longitude coordinates. At this point, R considers these numbers like any other numeric variable. There are packages built to understand and work with geospatial data. `sf` stands for simple features and is a commonly used package. We will use it to convert the `gs_raw` data into a spatially aware data frame.
+
+```{r}
+#| eval: false
+
+# convert data frame to a points simple feature object
+gs_geo <- gs_raw %>%
+  select(placekey,latitude,longitude) %>% 
+  st_as_sf(coords=c("longitude","latitude"),crs=4326)
+
+```
+
+Notice that we first subset the variables `placekey` and the coordinates. The next line tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). `gs_geo` is a different object than we have worked with before but it looks and behaves like a familiar dataframe. 
 
 
-Pop data from
-https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100/data-download
+## Getting Census boundaries
+The dataframe `gs_raw` contained a lot of meta information but not county. Boundaries for commonly used geometries are available from the US Census and accessible through an API to the census repository of these boundaries (called Tiger). The R package `tigris` provides a very convenient API to access them. 
 
+```{r}
+#| eval: false
+
+#need county polygons
+az_co <- tigris::counties(state = "AZ",cb=T) %>%
+  janitor::clean_names() %>%
+  mutate(aland=aland/2.59e+6) %>%
+  st_transform(4326)
+
+```
+
+This command extracts the county boundaries for arizona and reads them into an sf object called `az_co`.  The names are capitalized, so I like to clean them, the land area reported is in square meters so I convert it to square miles, and we want to ensure that it is in the same coordinate reference system as our store locations. Notice that the spatial type of these data are POLYGONs rather than POINTs.
+
+It is often helpful to look at data especially when mapping. R can leverage very powerful mapping tools, but we will just use them to make sure we are doing what we think we are doing. We can use mapview to look at the data. You can do the same with `az_co`.
+
+```{r}
+#| eval: false
+
+#map the grocery stores
+mapview(gs_geo)
+
+```
+
+## Intersecting points with polygons
+
+Spatial data processing tools can understand the shared location of points and polygons to associate data from one dataset with another.  Our objective is to associate a county name and identifier with each grocery store so that we can count the number of stores in each county.
+
+```{r}
+#| eval: false
+
+#join county to gs
+gs_co_geo <- st_intersection(gs_geo,az_co)
+
+```
+
+Notice that `gs_co_geo` has all of the observations from `gs_geo` and has the corresponding variables from `az_co` attached to it. Now we have the information to count the number of store in each county. The group_by and summarize combination can also be used to conduct spatial operations like mashing polygons together.  Moreover, we don't need the spatial information anymore since everything will be at the county level. We use `st_set_geometry(NULL)` to convert an sf object back to a data frame (without spatial information).
+
+```{r}
+#| eval: false
+
+#make nonspatial object and join with other datasets
+gs_co <- gs_co_geo %>%
+  st_set_geometry(NULL) %>% #converts back to dataframe
+  group_by(geoid) %>% 
+  summarize(stores=n()) %>%
+  ungroup()  #forgets the grouping information otherwise it can affect future opertations
+
+```
+
+## Merging county data
+
+Now all datasets are aggregated to the county level, so we can merge or join them together. Many counties in the US share the same name even in different states.  Federal Information Processing Standard (FIPS) codes are a more reliable key to join on. Before joining the data together, lets process the individual datasets to prepare them for easy merging.
+
+```{r}
+#| eval: false
+
+#Constructing a name and land area reference to join to analysis dataset
+co_name_land <- az_co %>% 
+  st_set_geometry(NULL) %>% 
+  select(geoid,aland,name)
+
+#process population data (source: https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100/data-download)
+pop <- pop_raw %>%
+  janitor::clean_names() %>%
+  filter(statefp10=="04") %>% #filter only arizona fips==04
+  select(geoid=geoid10,ssp22020,ssp22050)  #keep only the middle of the road projection
+  
+hh_inc <- inc_raw %>%
+  rename(geoid=FIPS)
+
+#sequence of inner join statements all based on fips or geoid
+analysis_ds <- gs_co %>%
+  inner_join(co_name_land ,by = "geoid") %>% #converting sq meters to sq miles
+  inner_join(pop,by = "geoid") %>%
+  inner_join(hh_inc,by = "geoid")
+
+```
+
+You can continue using this dataset to analyze in R or export for use in Tableau.
 
 
 # Tableau
