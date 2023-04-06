@@ -6,7 +6,7 @@ p_load(tidyverse,conflicted,readxl,tigris,sf,broom,factoextra,GGally)
 conflict_prefer("filter", "dplyr")
 
 #Load population data 
-pop_raw <- read_excel("https://csu-arec-330.github.io/materials/unit_02/inputs/hauer_county_totpop_SSPs.xlsx") 
+pop_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/hauer_county_totpop_SSPs.csv") 
 
 #process population data (source: https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100/data-download)
 pop <- pop_raw %>%
