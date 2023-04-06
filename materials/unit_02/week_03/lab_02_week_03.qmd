@@ -162,6 +162,8 @@ analysis_ds <- gs_co %>%
 
 You can continue using this dataset to analyze in R or export for use in Tableau.
 
+{{< video https://youtu.be/LeZTDS3MDBY aspect-ratio="16x9" >}}
+
 
 # Tableau
 
