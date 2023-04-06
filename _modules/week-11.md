@@ -9,6 +9,12 @@ title: "Week 11: Spatial Data"
 
 <a  href="/materials/unit_02/week_03/lecture_02_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
 
+<a  href="/materials/unit_02/inputs/hauer_county_totpop_SSPs.xlsx" download>Download hauer_county_totpop_SSPs.xlsx</a> <br>
+
+<a  href="/materials/unit_02/inputs/inc.csv" download>Download inc.csv</a> <br>
+
+<a  href="/materials/unit_02/week_03/grocery_store_analysis.R" download>Download grocery_store_analysis.R</a> <br>
+
 
 <b>Lab Materials - Friday, Apr 7:</b> <br>
 <!--
