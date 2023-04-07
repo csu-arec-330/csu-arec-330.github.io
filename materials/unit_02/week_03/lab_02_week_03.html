@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 11 Lab: Spatial data in R</title>
+<title>Week 11 Lab: Spatial data in R and visualizing results in Tableau</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,9 +123,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
   <ul class="collapse">
-  <li><a href="#plotting-results-from-a-cluster-analysis" id="toc-plotting-results-from-a-cluster-analysis" class="nav-link" data-scroll-target="#plotting-results-from-a-cluster-analysis">1. Plotting Results from a Cluster Analysis</a></li>
-  <li><a href="#plotting-results-from-a-regression-analysis" id="toc-plotting-results-from-a-regression-analysis" class="nav-link" data-scroll-target="#plotting-results-from-a-regression-analysis">2. Plotting Results from a Regression Analysis</a></li>
-  <li><a href="#adding-vizzes-to-map-tooltips" id="toc-adding-vizzes-to-map-tooltips" class="nav-link" data-scroll-target="#adding-vizzes-to-map-tooltips">3. Adding Vizzes to Map Tooltips</a></li>
+  <li><a href="#visualizing-regression-results-in-tableau" id="toc-visualizing-regression-results-in-tableau" class="nav-link" data-scroll-target="#visualizing-regression-results-in-tableau">Visualizing Regression Results in Tableau</a></li>
+  <li><a href="#visualizing-clusters-in-tableau" id="toc-visualizing-clusters-in-tableau" class="nav-link" data-scroll-target="#visualizing-clusters-in-tableau">Visualizing Clusters in Tableau</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -134,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 11 Lab: Spatial data in R</h1>
+<h1 class="title">Week 11 Lab: Spatial data in R and visualizing results in Tableau</h1>
 </div>
 
 
@@ -163,7 +162,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="learning-objectives-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
 <ul>
-<li></li>
+<li><p>Create visualizations that highlight outliers in regression results</p></li>
+<li><p>Incorporate other important variables in your visualizations of regression results</p></li>
+<li><p>Create visualizations that effectively highlight differences between future predictions and current values for key outcome variables in regression analysis</p></li>
+<li><p>Apply Tableau’s cluster analysis</p></li>
+<li><p>Describe the model used in Tableau’s cluster analysis</p></li>
+<li><p>Investigate the meaning of clusters from cluster analyses and support your argument using visualizations</p></li>
 </ul>
 </section>
 <section id="r" class="level1">
@@ -272,53 +276,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="tableau" class="level1">
 <h1>Tableau</h1>
-<section id="plotting-results-from-a-cluster-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="plotting-results-from-a-cluster-analysis">1. Plotting Results from a Cluster Analysis</h3>
-<p>If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let’s do this now.</p>
+<section id="visualizing-regression-results-in-tableau" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-regression-results-in-tableau">Visualizing Regression Results in Tableau</h3>
+<p>Last time we discussed how to plot your linear regression output from R. Today we will go into more detail on improving the utility of your regression estimates as well as ideas for plotting predicted versus observed values.</p>
+<section id="annotate-figures-to-highlight-points-that-are-outliers-or-far-from-your-regression-line" class="level4">
+<h4 class="anchored" data-anchor-id="annotate-figures-to-highlight-points-that-are-outliers-or-far-from-your-regression-line">1. Annotate figures to highlight points that are outliers or far from your regression line</h4>
+<p>Let’s connect to the dataset we used in R to conduct a regression analysis (I named this <code>analysis_ds.csv</code>).</p>
 <ol type="1">
-<li><p>Connect to your dataset with the results from your cluster analysis. I called this <code>analyzed_data.csv</code>.</p></li>
-<li><p>Select <code>Latitude</code>, <code>Longitude</code>, and <code>Cluster</code> and select the Symbol Map from <code>Show Me</code>.</p></li>
-<li><p>Recall you will need to change the <code>Latitude</code> and <code>Longitude</code> fields to Dimensions for this to display correctly.</p></li>
-<li><p>Let’s also change <code>Cluster</code> to be associated with a color (rather than size) by dragging it to the <code>Color</code> card.</p></li>
-<li><p>Finally, let’s change <code>Cluster</code> to a Dimension and tell Tableau that it is Discrete.</p></li>
-<li><p>Let’s add some more detail to the tooltip. I would like to know the location name, top category, and cluster when I hover over each point on the map.</p></li>
+<li><p>Create a scatterplot that shows the relationship between the number of stores and the population in 2020 (divided by 1000, <strong>how?</strong>)</p></li>
+<li><p>Create a new calculated field that captures your regression output using <em>reasonable</em> values for median household income, land area, and unemployment. (Hint: what are the summary statistics for these variables?)</p></li>
+<li><p>Add the line that results from this calculated field to your scatterplot.</p></li>
+<li><p>Now let’s add some annotation to highlight Maricopa county to explain to the audience why this is such an outlier. Drag the field <code>Name</code> to the Label card. Deselect the <code>show mark labels</code> option. Right click the outlier point, select <code>Mark Label</code> -&gt; <code>Always Show</code>.</p></li>
+<li><p>You can also add some text to help explain this outlier. Right click the point again and select <code>Annotate</code> -&gt; <code>Point</code>. You might add some text like <code>This county contains Pheonix, which has the highest population and number of stores in Arizona.</code> (Or whatever you want to say.)</p></li>
+<li><p>You can also add some color to highlight this point. Right click on the point and select <code>Create Set</code>. Name this set <code>Outlier</code>. Once this set is created you will see a new field called <code>Outlier</code>. Drag this to the Color card. Change the colors as you desire, and hide the legend.</p></li>
+<li><p>Finally, we can incorporate another dimension in our analysis using the <code>Size</code> card. Choose one of the other variables you used in your regression analysis (I will use land area) and drag it to the Size card. You can then play with opacity, colors, and the relative sizes to make your visualization more effective.</p></li>
 </ol>
-<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/lXloWsi7hZQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
-<section id="plotting-results-from-a-regression-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="plotting-results-from-a-regression-analysis">2. Plotting Results from a Regression Analysis</h3>
-<p>We have already discussed how to use Tableau’s integrated regression analysis, but a major limitation to this is that Tableau can only perform single variable regressions. Let’s look at the difference between the single and multivariate regression results by creating a scatterplot in Tableau:</p>
+<section id="create-visualizations-to-show-differences-between-future-predictions-of-the-number-of-stores-and-current-number-of-stores" class="level4">
+<h4 class="anchored" data-anchor-id="create-visualizations-to-show-differences-between-future-predictions-of-the-number-of-stores-and-current-number-of-stores">2. Create visualizations to show differences between future predictions of the number of stores and current number of stores</h4>
+<p>In R you used projections of population size in 2050 to produce estimates of the number of stores that we expect each county to support in 2050. Let’s explore some different ways of visualizing these data.</p>
 <ol type="1">
-<li><p>To compare the single and multivariate regression results we will need to join our <code>analyzed_data</code> and <code>fitted_reg</code> data sources. Join these two datasets on the <code>Raw Visitor Counts</code> field.</p></li>
-<li><p>Open a new sheet and create a scatterplot of <code>Raw Visitor Counts</code> and <code>Distance from Home</code> (note that we want our Y variable – <code>Raw Visitor Counts</code> – on the Y-axis).</p></li>
-<li><p>Add a fitted line to your scatterplot.</p></li>
-<li><p>To plot our multivariate regression results on this 2D plot, we will need to select a fixed value of the second variable (<code>Median Dwell Time</code>). To demonstrate that we need to do this - try plotting the fitted values of <code>Raw Visitor Counts</code> and <code>Distance from Home</code>. What do you see?</p></li>
-<li><p>Create a new calculated field, named <code>Fitted Distance From Home</code> with the following formula: <code>IF [Median Dwell (Fitted Reg.Csv)]==3 THEN [Distance From Home (Fitted Reg.Csv)] ELSE NULL END</code></p></li>
+<li><p>Connect to the dataset we used in R we created with results from our projections and current store numbesr (I named this <code>gs_all.csv</code>). You can either join this with the dataset used for the regression analysis on the geoid variable (to stay in the same workbook) or open a new workbook.</p></li>
+<li><p>Create a new calculated field equal to the difference between the number of (predicted) stores in 2050 and the number of (observed) stores in 2020. Name this <code>Store Diff</code>.</p></li>
+<li><p>Create one more calculated field that indicates whether there is an increase or decrease in the number of stores. Call this field <code>Change in Stores</code> and use an <code>IF</code> <code>THEN</code> statement to create it.</p></li>
 </ol>
-<p><strong>What is this formula doing?</strong></p>
-<ol start="6" type="1">
-<li><p>Drag <code>Fitted Distance From Home</code> to the columns shelf, and <code>Raw Visitor Counts (Fitted Reg.Csv)</code> to the rows shelf. Change both fields to Dimensions.</p></li>
-<li><p>Change this new plot to a line (instead of scatter).</p></li>
-<li><p>Create X and Y dual axes (by right clicking each axis), then synchronize the axes so that they have the same values. Finally you can hide the seconary axes to reduce the clutter.</p></li>
-<li><p>How do the multivariate regression fitted values compare with the single variate ones?</p></li>
-<li><p>Now, what happens if we look at the fitted values assuming <code>Median Dwell Time</code> is equal to 4? Edit the calculated field to make this change.</p></li>
+<p><strong>Bullet Graphs</strong></p>
+<ol start="4" type="1">
+<li><p>First, let’s create a bullet graph. Select the fields <code>Name</code> <code>Stores 2020</code> and <code>Stores 2050</code> and go to Show Me -&gt; Bullet Graph. By default the bullet graph shades regions associated with different percentiles of the variable on the x-axis (here 60% and 80% values of the Stores in 2020), and adds lines that represent the values of our second variable (here Stores in 2050).</p></li>
+<li><p>Let’s make the bullet graph more useful for our purposes. Click on one of the markers showing the value of Stores in 2050. Click <code>Format</code> and in the left format pane that appears select <code>Fill below</code> and select a shade of gray. Now your figure shows the number of current stores (in blue) and the number of future stores (in gray).</p></li>
+<li><p>Now let’s add some useful color to demonstrate which counties have expected growth in store numbers and which have expected losses. Drag your calculated <code>Change in Stores</code> field to the Colors card. (You will need to assign it as a dimension and discrete) Let’s change the colors so that red is associated with a decrease in the number of stores and green is associated with an increase.</p></li>
+<li><p>Finally, you may want the colored bars to indicate the projected store values rather than current. We can do this quickly by right clicking the x-axis and selecting <code>Swap reference line fields</code>.</p></li>
 </ol>
-<p>Note that another option for accomplishing this is to simply use the fitted regression equation (from R) to create a new calculated field. To see this, create a new calculated field called <code>Fitted Visits 2</code> with the following formula: <code>8.14165 -0.27568*[Distance From Home] -0.36894*4</code>.</p>
-<p><strong>Where did these numbers come from?</strong></p>
-<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/nRJaoNmhCzk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><strong>Dumbbell Charts</strong></p>
+<ol start="8" type="1">
+<li><p>Next let’s create a dumbbell chart (what you created in R). Open a new sheet in your Tableau workbook. Drag <code>Name</code> to the Rows shelf and <code>Measure Values</code> to the Columns shelf. This will add all of our measures to our viz.&nbsp;Let’s delete everything except Stores 2020 and Stores 2050. Note that the level of aggregation doesn’t really matter because there is only one observation per county.</p></li>
+<li><p>Let’s change this fram bars to points my changing the graph type from automatic to circle. Then drag <code>Measure Names</code> to the Color card to change the colors of these points to be associated with the number of stores at the two different time points.</p></li>
+<li><p>Now we need to add lines connecting these points. Drag the <code>Measure Values</code> field to the Columns shelf (next to the current one). Create dual x-axes, synchronize them, and hide the upper x-axis header. Now we have two plots, but both are doing the same thing. Change one of your plots to a line (from circle). By default, Tableau connects all the points across counties, but we can change this behavior by dragging <code>Measure Names</code> to the Path card.</p></li>
+<li><p>Let’s again add some color to indicate increases and decreases. Drag your calculated <code>Change in Stores</code> field to the Color card. (You will need to assign it as a dimension and discrete)</p></li>
+<li><p>We might want this color to apply to both the lines and points instead of just the lines. To do this go to the card for your circle plot. Drag <code>Measure Names</code> to the Detail card. Drag your calculated <code>Change in Stores</code> field to the Color card. (You will need to assign it as a dimension and discrete). Then let’s change this from a circle plot to a Shape plot and drag <code>Measure Names</code> to the Shape card. Choose some shapes that scream to you “beginning” and “end”.</p></li>
+<li><p>Finally, you might want to add the option to hide Maricopa county to make your visualization more readable. Drag the <code>Name</code> field to the Filters card and deselect <code>Maricopa</code></p></li>
+</ol>
+<p><strong>Maps</strong></p>
+<ol start="14" type="1">
+<li><p>Now let’s create a filled map to highlight these changes. Open a new sheet in your workbook, select <code>Geoid</code> and <code>Store Diff</code> (your calculated field) and go to Show Me -&gt; Filled map.</p></li>
+<li><p>Tableau’s default coloring is not incredibly useful here, so let’s edit these. Go to your Color card and Edit Colors. Select the <code>Red-Green Diverging</code> color palette and click ok. This is a bit better, but because of the large change in Maricopa county, it’s a little hard to see the negative changes. Let’s go back to the Color editing window and select <code>Use Full Color Range</code>.</p></li>
+<li><p>Finally, it might be more useful to see the percentage change, rather than numeric change in the number of stores. Create a new calculated field called <code>Percent Change</code> using the equation <code>([Stores 2050]-[Stores 2020])/[Stores 2020]</code>. Create a new filled map following the previous steps to show percentage, rather than level, changes in store counts.</p></li>
+</ol>
 </section>
-<section id="adding-vizzes-to-map-tooltips" class="level3">
-<h3 class="anchored" data-anchor-id="adding-vizzes-to-map-tooltips">3. Adding Vizzes to Map Tooltips</h3>
-<p>The last thing I want to cover today is how to add other visualizations to your map tooltip. To do this, let’s create a simple scatterplot of <code>Raw Visitor Counts</code> and <code>Distance from Home</code> and add a fitted line.</p>
+</section>
+<section id="visualizing-clusters-in-tableau" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-clusters-in-tableau">Visualizing Clusters in Tableau</h3>
+<p>Last time we showed you how to visualize your cluster analysis from R in Tableau. This time, let’s look at Tableau’s clustering capabilities. It turns out that you can apply K-means clustering in Tableau! Unfortunately you cannot apply other clustering techniques, which is a limitation of doing this in Tableau instead of R. But, you can quickly and effectively perform fairly simple clustering analysis within Tableau. Read more about Tableau’s clustering algorithm (and see a tutorial) <a href="https://help.tableau.com/current/pro/desktop/en-us/clustering.htm">here</a>.</p>
 <ol type="1">
-<li><p>Go back to your sheet with your map, color coded by cluster.</p></li>
-<li><p>Open the Tooltip card and go to <code>Insert</code> -&gt; <code>Sheets</code> and select the sheet with your new scatterplot.</p></li>
-<li><p>When you hover over a point on the map, what is this visualization showing?</p></li>
-<li><p>What if we instead want to show a scatterplot of these two variables only for grocery stores within that cluster? Go back to the Tooltip card and edit the Sheet info from <code>&lt;Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="&lt;All Fields&gt;"&gt;</code> to read <code>&lt;Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="&lt;Cluster&gt;"&gt;</code></p></li>
-<li><p>Now what happens when you hover over a point on the map? How did we accomplish this?</p></li>
-<li><p>Let’s add a useful title to our scatterplot by typing <code>Relationship between Visitors and Distance from home for stores in cluster &lt;Cluster&gt;</code> in the Tooltip above the scatterplot. Then let’s adjust the width of the scatterplot to <code>500</code>.</p></li>
+<li><p>Let’s open a new sheet in the workbook connected to your analysis dataset (<code>analysis_ds.csv</code>). Select <code>Geoid</code> and Show Me a Filled Map. Drag all the fields used in your cluster analysis to the Detail card (<code>Aland</code>, <code>Median hh inc</code>, <code>Ssp2020</code>, <code>Stores</code>, and <code>Unemployment</code>).</p></li>
+<li><p>Go to the <code>Analytics</code> tab on the left and drag <code>Cluster</code> onto your map (drop it on the pop-up window that appears). You can let Tableau automatically determine the number of custers, or you can assign a number of clusters. (The link above offers details on how Tableau determines the optimal number of clusters.)</p></li>
+<li><p>By default, Tableau has created 4 clusters, but it is not immediately clear what these clusters represent. One fast way to understand these different clusters is by clicking the dropdown menu for our cluster variable and selecting <code>Describe Clusters</code>. Here you can see summary statistics across all the variables used to create the clusters.</p></li>
+<li><p>We can also investigate the meaning of our clsuters using scatterplots across our relevant variables. First, let’s add our clusters to our fields by dragging it to the data pane. Next, let’s duplicate our first scatterplot showing our regression results. Let’s filter out Maricopa county to make this easier to see. And let’s drag our new <code>Clusters</code> field to the Color card. Here, we are intersted in understanding if any clusters highlight counties that have few stores relative to their population size. Do any colors stand out to you?</p></li>
+<li><p>We can replicate this analysis for each of our variables, but we will have to recreate our regression line so that it changes over the appropriate variable. Duplicate your calculated field <code>Regression Line 1</code> and edit this new field. Let’s name it <code>Regression Line 2</code> and use the equation <code>74.51933 + 0.46365*(100) -1.06666*([Median Hh Inc]/1000) -0.84796*(7577/1000) + 1.69241*(6)</code> to make this line change over median household income, rather than population.</p></li>
+<li><p>Create a scatterplot that shows the relationship between the number of stores and the Median HH income and add this new regression line to your scatterplot. Again, we are interested in identifying counties that have few stores relative to their median household income. Do any clusters stand out to you?</p></li>
+<li><p>If your cluster analysis does not reveal anything useful, you will likely want to adjust the variables included in your cluster analysis or perhaps the number of clusters.</p></li>
 </ol>
-<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/y08HjpcHF_4" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 </section>
 

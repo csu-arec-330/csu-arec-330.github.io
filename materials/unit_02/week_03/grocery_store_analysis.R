@@ -82,15 +82,21 @@ plot_dat(stores,aland,"Store Number","Land Area (sq mi)")
 plot_dat(stores,unemployment,"Store Number","Unemployment (percent)")
 
 ###################################
+# Summary statistics of variables used in regression
+sumstats <- skimr::skim(analysis_ds)
+sumstats #print the summary stats
+
+###################################
 #Regression
 m1 <- lm(stores ~ I(ssp22020/1000) + I(median_hh_inc/1000) + I(aland/1000) + unemployment,
          data = analysis_ds)
 
-
+# Look at regression results
 summary(m1)
 
 tidy(m1) %>% knitr::kable(format = "simple",digits = 3)
 
+write.csv(analysis_ds, "analysis_ds.csv")
 
 #first analysis: plot relationship between population and stores
 analysis_ds %>%
@@ -132,3 +138,9 @@ ggplot() +
   theme_bw(base_size = 15)
 
 ggsave("dumbell.png",height = 5,width = 6,units = "in")
+
+gs_all %>%
+  pivot_wider(names_from = year, values_from = c(stores, pop))
+
+
+write.csv(gs_all, "gs_all.csv")
