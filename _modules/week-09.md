@@ -19,10 +19,10 @@ title: "Week 9: Intro to Cross-Sectional and Spatial Data"
 
 <a  href="/materials/unit_02/inputs/rent_income_county.csv" download>Download rent_income_county.csv</a> <br>
 
-<a  href="/materials/unit_02/inputs/acs_sample.csv" download>Download acs_sample.csv</a> <br>
+<a  href="/materials/unit_02/inputs/acs_sample.csv" download>Download acs_sample.csv</a> <br> <br>
 
 
-<b>Project Materials - Due Friday, March 31 by 11:59 PM:</b> <br>
+<b>Problem Set Materials - Due Friday, March 31 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_02/week_01/ps_02_week_01.html" target="_blank">Project 2 Problem Set 1 Instructions</a> <br> 
 

@@ -9,11 +9,6 @@ title: "Week 11: Spatial Data"
 
 <a  href="/materials/unit_02/week_03/lecture_02_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
 
-<a  href="/materials/unit_02/inputs/hauer_county_totpop_SSPs.csv" download>Download hauer_county_totpop_SSPs.csv</a> <br>
-
-<a  href="/materials/unit_02/inputs/inc.csv" download>Download inc.csv</a> <br>
-
-<a  href="/materials/unit_02/week_03/grocery_store_analysis.R" download>Download grocery_store_analysis.R</a> <br>
 
 
 <b>Lab Materials - Friday, Apr 7:</b> <br>
@@ -22,6 +17,11 @@ title: "Week 11: Spatial Data"
 
 <a  href="/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv" download>Download arizona_grocery_foot_traffic.csv</a> <br>
 
+<a  href="/materials/unit_02/inputs/hauer_county_totpop_SSPs.csv" download>Download hauer_county_totpop_SSPs.csv</a> <br>
+
+<a  href="/materials/unit_02/inputs/inc.csv" download>Download inc.csv</a> <br>
+
+<a  href="/materials/unit_02/week_03/grocery_store_analysis.R" download>Download grocery_store_analysis.R</a> <br>  <br>
 
 <!--
 <b>Project Materials - Due Friday, April 7 by 11:59 PM:</b> <br>
