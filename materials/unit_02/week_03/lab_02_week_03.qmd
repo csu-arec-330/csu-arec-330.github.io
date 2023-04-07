@@ -205,7 +205,7 @@ Let's connect to the dataset we used in R to conduct a regression analysis (I na
 
 In R you used projections of population size in 2050 to produce estimates of the number of stores that we expect each county to support in 2050. Let's explore some different ways of visualizing these data.
 
-1. Connect to the dataset we used in R we created with results from our projections and current store numbesr (I named this `gs_all.csv`). You can either join this with the dataset used for the regression analysis on the geoid variable (to stay in the same workbook) or open a new workbook.
+1. Connect to the dataset we created in R with results from our projections and current store numbers (I named this `gs_all.csv`). You can either join this with the dataset used for the regression analysis on the geoid variable (to stay in the same workbook) or open a new workbook.
 
 2. Create a new calculated field equal to the difference between the number of (predicted) stores in 2050 and the number of (observed) stores in 2020. Name this `Store Diff`.
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -296,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 class="anchored" data-anchor-id="create-visualizations-to-show-differences-between-future-predictions-of-the-number-of-stores-and-current-number-of-stores">2. Create visualizations to show differences between future predictions of the number of stores and current number of stores</h4>
 <p>In R you used projections of population size in 2050 to produce estimates of the number of stores that we expect each county to support in 2050. Let’s explore some different ways of visualizing these data.</p>
 <ol type="1">
-<li><p>Connect to the dataset we used in R we created with results from our projections and current store numbesr (I named this <code>gs_all.csv</code>). You can either join this with the dataset used for the regression analysis on the geoid variable (to stay in the same workbook) or open a new workbook.</p></li>
+<li><p>Connect to the dataset we created in R with results from our projections and current store numbers (I named this <code>gs_all.csv</code>). You can either join this with the dataset used for the regression analysis on the geoid variable (to stay in the same workbook) or open a new workbook.</p></li>
 <li><p>Create a new calculated field equal to the difference between the number of (predicted) stores in 2050 and the number of (observed) stores in 2020. Name this <code>Store Diff</code>.</p></li>
 <li><p>Create one more calculated field that indicates whether there is an increase or decrease in the number of stores. Call this field <code>Change in Stores</code> and use an <code>IF</code> <code>THEN</code> statement to create it.</p></li>
 </ol>
