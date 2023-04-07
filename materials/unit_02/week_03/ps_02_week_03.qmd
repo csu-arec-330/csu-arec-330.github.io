@@ -8,7 +8,7 @@ format:
 
 This problem set introduces you to spatial data in R.
 
-## Part 1: Spatial data in R
+## Part 1: Spatial data in R -- DO NOT DO PART 1!!
 
 1. Use one of your project datasets that contains spatial information (or find a new one). Convert it to a spatially aware `sf` object.
 
