@@ -8,14 +8,38 @@ format:
 
 This problem set introduces you to spatial data in R.
 
-## Spatial data in R
+## Part 1: Spatial data in R
 
 1. Use one of your project datasets that contains spatial information (or find a new one). Convert it to a spatially aware `sf` object.
 
-2. Perform a spatial intersection associating data from another source with your data.
+2. Perform a spatial intersection associating data from another source with your data. 
 
+## Part 2: Project data analysis in R
 
+1. Using your project datasets, perform either a regression or cluster analysis as appropriate for your research question or objective. (This can be the same analysis from last week's problem set.)
+
+**IF using regression analysis** 
+
+2. Perform a multivariate regression, copy and paste your regression output into your google site and briefly describe the results - interpret the coefficients and discuss overall model fit.
+   
+3. Use future predicted values for one of the variables in your regression analysis (e.g., population...) to forecast values of your outcome variable. 
+  
+4. Create and export a dataset that includes the actual and predicted values of this variable.
+
+**IF using cluster analysis** 
+
+2. Summarize the variables you included in your cluster analysis for each cluster. Discuss the results, including any notable differences between the variables across clusters. 
+
+3. Export a dataset that includes all variables you used in your cluster analysis, as well as your clusters.
+
+## Part 3: Analysis and Visualizations in Tableau
+
+1. **IF using regression analysis** Create TWO visualizations that shows the difference between the observed and future values of your outcome variable. 
+
+1. **IF using cluster analysis** Create TWO visualizations that help you assign meaning to your clusters. Note that if the clusters you generated in R turn out to not be useful, you can use Tableau's clustering analysis to change the variables or number of clusters to find more useful groupings. 
+
+2. Discuss take-aways for your research question based on your analysis. What did your analysis uncover?
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Project 2 Problem Set 3`. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your google site titled `Project 2 Problem Set 3`. Parts 1 and 2 should include your annotated code. Part 2 should additionally include your regression output or summary statistics from your cluster analysis and the accompanying discussions. Part 3 should include your two data visualizations and a disucssion of your findings. Submit the link to your google site webpage in Canvas. 
