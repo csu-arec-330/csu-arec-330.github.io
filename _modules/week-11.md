@@ -27,10 +27,10 @@ title: "Week 11: Spatial Data"
 
 <a  href="/materials/unit_02/week_03/grocery_store_analysis.R" download>Download grocery_store_analysis.R</a> <br>  <br>
 
-<!--
-<b>Project Materials - Due Friday, April 7 by 11:59 PM:</b> <br>
 
-<a  href="/materials/unit_02/week_02/ps_02_week_03.html" target="_blank">Project 2 Problem Set 2 Instructions</a> <br> 
+<b>Problem Set Materials - Due Thursday, April 13 by 11:59 PM:</b> <br>
+
+<a  href="/materials/unit_02/week_02/ps_02_week_03.html" target="_blank">Project 2 Problem Set 3 Instructions</a> <br> 
 
 </div>
 
