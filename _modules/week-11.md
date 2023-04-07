@@ -21,9 +21,9 @@ title: "Week 11: Spatial Data"
 
 <a  href="/materials/unit_02/inputs/inc.csv" download>Download inc.csv</a> <br>
 
-<a  href="/materials/unit_02/inputs/inc.csv" download>analysis_ds.csv</a> <br>
+<a  href="/materials/unit_02/inputs/analysis_ds.csv" download>analysis_ds.csv</a> <br>
 
-<a  href="/materials/unit_02/inputs/inc.csv" download>gs_all.csv</a> <br>
+<a  href="/materials/unit_02/inputs/gs_all.csv" download>gs_all.csv</a> <br>
 
 <a  href="/materials/unit_02/week_03/grocery_store_analysis.R" download>Download grocery_store_analysis.R</a> <br>  <br>
 
