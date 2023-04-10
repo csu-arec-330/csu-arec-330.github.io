@@ -139,8 +139,7 @@ ggplot() +
 
 ggsave("dumbell.png",height = 5,width = 6,units = "in")
 
-gs_all %>%
-  pivot_wider(names_from = year, values_from = c(stores, pop))
+gs_all <- pivot_wider(gs_all, names_from = year, values_from = c(stores, pop))
 
 
 write.csv(gs_all, "gs_all.csv")
