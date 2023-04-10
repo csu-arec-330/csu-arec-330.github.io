@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -217,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The dataframe <code>gs_raw</code> contained a lot of meta information but not county. Boundaries for commonly used geometries are available from the US Census and accessible through an API to the census repository of these boundaries (called Tiger). The R package <code>tigris</code> provides a very convenient API to access them.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#need county polygons</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>az_co <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">counties</span>(<span class="at">state =</span> <span class="st">"AZ"</span>,<span class="at">cb=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>az_co <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">counties</span>(<span class="at">state =</span> <span class="st">"AZ"</span>,<span class="at">cb=</span>T,<span class="at">class=</span><span class="st">"sf"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">aland=</span>aland<span class="sc">/</span><span class="fl">2.59e+6</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

@@ -97,7 +97,7 @@ The dataframe `gs_raw` contained a lot of meta information but not county. Bound
 #| eval: false
 
 #need county polygons
-az_co <- tigris::counties(state = "AZ",cb=T) %>%
+az_co <- tigris::counties(state = "AZ",cb=T,class="sf") %>%
   janitor::clean_names() %>%
   mutate(aland=aland/2.59e+6) %>%
   st_transform(4326)
