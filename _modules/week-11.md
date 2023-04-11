@@ -30,7 +30,7 @@ title: "Week 11: Spatial Data"
 
 <b>Problem Set Materials - Due Thursday, April 13 by 11:59 PM:</b> <br>
 
-<a  href="/materials/unit_02/week_02/ps_02_week_03.html" target="_blank">Project 2 Problem Set 3 Instructions</a> <br> 
+<a  href="/materials/unit_02/week_03/ps_02_week_03.html" target="_blank">Project 2 Problem Set 3 Instructions</a> <br> 
 
 </div>
 
