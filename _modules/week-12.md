@@ -3,7 +3,7 @@ title: "Week 12: Project 2"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Apr 12 & Mar 14</u></b> <br> <br>
+<b><u>Apr 12 & Apr 14</u></b> <br> <br>
 
 <b>Lecture Materials - Wed, Apr 12, 2023:</b> <br>
 
