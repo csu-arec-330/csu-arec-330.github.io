@@ -126,7 +126,7 @@ Finally, I will use information on the timing of employment to...
 
   - understand when workers are working within each county 
 
-  - assess whether workers within each cluster find year-round employment.
+  - assess whether workers within each cluster find year-round employment
 
 ## **Assumptions, limitations, and future work**
 
@@ -139,7 +139,7 @@ Finally, I will use information on the timing of employment to...
 
 4. Policy-makers need more refined geographical information than this to know where to locate offices, but this is not feasible with available data
 
-5. Future work should conduct targeted surveys within labor sheds to locate specific agricultural areas and worker needs
+5. Future work should conduct targeted surveys within labor sheds to locate specific agricultural areas and assess worker needs
 :::
 
 ## <span style="color:black;">Results: I Identified 8 Labor Sheds</span>  {background-image="includes/sheds.png" background-size="contain"}
