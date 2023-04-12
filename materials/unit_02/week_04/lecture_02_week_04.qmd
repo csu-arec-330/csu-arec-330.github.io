@@ -83,188 +83,101 @@ Workers are interviewed at their place of employment
 
 **Workers provide their work history, including the county and dates of employment, for all jobs in the past year**
 
-## {background-color="black" background-image="includes/naws_grid.pdf"}
+## {background-image="includes/naws_grid.png"}
 
-<!-- image -->
-<!-- ![](includes/ggpairs.png) -->
+## How will we answer this Q? The Analysis
 
-<!-- example of big text fit to slide width -->
+I will use a <span style="color:green;">**cluster**</span> analysis to answer this question.
 
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
+**Why?** because I want to construct groups of counties that are "related" in terms of where groups of workers choose to work. 
 
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
+I will call these clusters "labor sheds" and they represent geographical areas in which workers are willing to mgirate within to work farm jobs.
+
+## How will we answer this Q? The Analysis
+
+I will use a <span style="color:green;">**cluster**</span> analysis to answer this question.
+
+**How?** first I will create a measure of how related/linked two counties are in terms of the number of workers who have worked in both counties. Geographers typically call this measure "proportional flow":
+
+$$
+\frac{C_{ij}}{\min\left( W_i, W_j \right)}
+$$
+
+Where $C_{ij}$ is the number of workers who worked in both county i and j and $W_i$, $W_j$ are the number of (distinct) workers who worked in county i, j
+
+## {background-image="includes/wi.png" background-size="contain"}
+
+## 
+
+<section data-background-iframe="https://public.tableau.com/views/prop_flow_ex/monterey_full_sample_flow_1?:language=en-US&:showVizHome=no&:embed=true"
+          data-background-interactive>
+</section>
 
 
+## How will we answer this Q? The Analysis
 
+I will then use two variables to create clusters of counties that are "related"
 
-## Where should we open a grocery store in AZ? {.scrollable}
+  - proportional flow (the one I created) 
 
-From Chat GPT
+  - an indicator for whether two counties are adjacent
 
-The ideal location for a grocery store in Arizona depends on various factors such as population density, demographics, competition, accessibility, and local zoning laws. Here are a few things to consider when choosing a location for a grocery store in Arizona:
+Finally, I will use information on the timing of employment to... 
 
-Population density: Look for areas with a high population density, as this is likely to increase foot traffic to the store.
+  - understand when workers are working within each county 
 
-Demographics: Consider the demographics of the area you are targeting, such as age, income, and household size. These factors will affect what types of products will sell well in your store.
+  - assess whether workers within each cluster find year-round employment.
 
-Competition: Analyze the competition in the area, including the number and types of grocery stores, to determine the level of demand for a new store in the area.
+## **Assumptions, limitations, and future work**
 
-Accessibility: Consider the accessibility of the location, such as its proximity to major roads and public transportation. This can affect the convenience of shopping for customers.
+::: {.incremental}
+1. Workers provide accurate information on their employment
 
-Local zoning laws: Check local zoning laws to ensure that the location you choose is zoned for commercial use and that there are no restrictions on operating a grocery store in the area.
+2. Workers are more likely to migrate following a path of adjacent counties
 
-Some potential locations to consider for a grocery store in Arizona could include areas with growing populations, such as Phoenix, Tucson, and Mesa, or areas with a high concentration of college students, such as Tempe. Ultimately, conducting thorough research and analyzing the factors above can help you make an informed decision about the best location for your grocery store in Arizona.
+3. The analysis only includes crop workers
 
-## Refining the question
+4. Policy-makers need more refined geographical information than this to know where to locate offices, but this is not feasible with available data
 
-How can we improve our current question: Where should we open a grocery store in AZ?
-
-Normative. Can we clarify our objective?
-<!-- Where would opening a grocery store in AZ generate the most profit in 30 years? -->
-
-Spatial scope. Can we clarify the spatial unit of analysis?
-<!-- In which county would opening a grocery store in AZ generate the most profit in 30 years? -->
-
-## Refining the question
-
-Normative. Can we clarify our objective?
-
-- Where would opening a grocery store in AZ generate the most profit in 30 years?
-
-Spatial scope. Can we clarify the spatial unit of analysis?
-
-- In which county would opening a grocery store in AZ generate the most profit in 30 years?
-
-## Conceptual framework 
-
-:::{.incremental}
-
-How do the economics work in this context?  What should influence grocery store profitability?
-
-- Profit = Revenue - Costs
-
-- Sales/revenue: people shop for groceries where convenient; they may be willing to travel further or pay more for specialty items; groceries are generally normal goods so more income -> more sales
-
-- Cost: labor costs may be higher in higher income areas; land/building rental rates, taxes and operating expenses (power, water)
-
+5. Future work should conduct targeted surveys within labor sheds to locate specific agricultural areas and worker needs
 :::
 
-## Data
+## <span style="color:black;">Results: I Identified 8 Labor Sheds</span>  {background-image="includes/sheds.png" background-size="contain"}
 
-- Grocery stores
+## 
 
-- Population 
-
-- Income
-
-- Unemployment rate
-
-- Land area
-
-## EDA (Cluster Analysis)
-
-Let's explore the data with a cluster analysis
-
-Also, if your study industry or market is not in (or close) to equilibrium, cluster analysis may help identify areas with opportunities
-
-3 clusters on: stores, population, income, land area, unemployment
-
-## Store Number and Population
-
-![](includes/Store Number x Pop 2020.png)
-
-## Store Number and Unemployment
-
-![](includes/Store Number x Unemployment percent.png)
-
-
-## Store Number and Land Area
-
-![](includes/Store Number x Land Area sq mi.png)
+<section data-background-iframe="https://public.tableau.com/views/FinalLaborSheds/2LaborSheds?:language=en-US&:showVizHome=no&:embed=true"
+          data-background-interactive>
+</section>
 
 
 
-## Analysis
+## 
+::: {.r-fit-text}
+**What to do with this information?** 
 
-Regression model to establish relationship between an areas population, income, and grocery stores
+Policy-makers, non-profit employees, 
 
-We are assuming that the current markets are near equilibrium - there are currently the *right* number of stores based on population and income
+and other stakeholders (YOU!) 
 
-$GS_i = \beta_1 pop_i + \beta_2 income_i + \beta_3 unemp_i + \beta_4 area_i + \varepsilon_i$
+can use my interactive maps to determine 
 
-##
-![](includes/reg_line.png)
-
-
-## Regression Results
-
-Variable                 Estimate    Std. Error    t-statistic     p.value
-----------------------  -----------  -----------  ------------  ----------
-(Intercept)              74.515      94.867       0.785         0.450
-A. Pop 2020 (1000)          0.464       0.011        40.486        <0.001
-B. Median HH Inc           -1.067       1.428        -0.747        0.472
-C. Area (sq mi)            -0.848       2.450        -0.346        0.737
-D. Unemployment               1.692       4.875       0.347        0.736
-
-Obs: 15, R2 Adjusted: 0.994    
-  
-Which of the covariates is statistically significant at $\alpha=0.05$?
-
-## Interpret the coefficient estimate on population
-
-Variable                 Estimate    Std. Error    t-statistic     p.value
-----------------------  -----------  -----------  ------------  ----------
-(Intercept)              74.515      94.867       0.785         0.450
-Pop 2020 (1000)          0.464       0.011        40.486        <0.001
-Median HH Inc           -1.067       1.428        -0.747        0.472
-Area (sq mi)            -0.848       2.450        -0.346        0.737
-Unemployment               1.692       4.875       0.347        0.736
-
-Obs: 15, R2 Adjusted: 0.994    
-  
+<span style="color:green;">*where*</span> to locate offices and <span style="color:green;">*when*</span> to staff them.
+:::
 
 
-## How well does the model fit the data? How do you know?
+## 
+::: {.r-fit-text}
+**How can you use my maps to do this?** 
 
-Variable                 Estimate    Std. Error    t-statistic     p.value
-----------------------  -----------  -----------  ------------  ----------
-(Intercept)              74.515      94.867       0.785         0.450
-Pop 2020 (1000)          0.464       0.011        40.486        <0.001
-Median HH Inc           -1.067       1.428        -0.747        0.472
-Area (sq mi)            -0.848       2.450        -0.346        0.737
-Unemployment               1.692       4.875       0.347        0.736
+Within each labor shed, 
 
-Obs: 15, R2 Adjusted: 0.994    
-  
+identify the counties that 
 
-## Application
+have the most workers each month.
+:::
 
-Use population and income projections to estimate opportunities for expansion
+## {background-image="includes/how_ex.png" background-size="contain"} 
 
-$$ forGS_i = \hat{\beta_1} 2050pop_i + \hat{\beta_2} income_i + \hat{\beta_3} unemp_i + \hat{\beta_4} area_i $$
-
-Identify growth potential as counties where increased population increases equilibrium number of stores
-
-$$ forGS_i - GS_i $$
-
-## Expand stores where gap is blue
-
-![](includes/dumbell.png)
-
-
-## Summary
-
-Strive to answer your question with your analysis
-
-Chat GPT (and similar) can help you think through analyses
-
-
-
+# Thank you! Plz give me an A
 
