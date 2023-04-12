@@ -7,9 +7,9 @@ title: "Week 12: Project 2"
 
 <b>Lecture Materials - Wed, Apr 12, 2023:</b> <br>
 
-<!-- 
-<a  href="/materials/unit_01/week_04/lecture_01_week_04.html" target="_blank">Lecture Slides</a> <br> <br>
--->
+
+<a  href="/materials/unit_02/week_04/lecture_02_week_04.html" target="_blank">Lecture Slides</a> <br> <br>
+
 
 
 
