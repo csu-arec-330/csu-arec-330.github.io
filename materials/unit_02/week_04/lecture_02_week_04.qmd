@@ -62,6 +62,29 @@ But these programs have located offices and staffed according with historic migr
 
 <span style="color:green;">**And now they aren't successfully finding very many migrant workers.**</span>
 
+## 
+::: {.r-fit-text}
+**The Question:** 
+
+*Where* and *when* can we 
+
+find migrant ag workers?
+:::
+
+## How will we answer this Q? The Data.
+
+[The National Agricultural Workers Survey (NAWS)](https://www.dol.gov/agencies/eta/national-agricultural-workers-survey)
+
+The only nationally-representative survey of U.S. agricultural workers
+
+Workers are interviewed at their place of employment
+
+  - This mitigates issues faced by household-based surveys in finding ag workers
+
+**Workers provide their work history, including the county and dates of employment, for all jobs in the past year**
+
+## {background-color="black" background-image="includes/naws_grid.pdf"}
+
 <!-- image -->
 <!-- ![](includes/ggpairs.png) -->
 
