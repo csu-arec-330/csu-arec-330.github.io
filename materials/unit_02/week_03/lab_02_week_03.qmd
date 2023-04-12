@@ -110,6 +110,8 @@ It is often helpful to look at data especially when mapping. R can leverage very
 
 ```{r}
 #| eval: false
+#Set the option to make mapview render the points in preview
+mapviewOptions(fgb = FALSE)
 
 #map the grocery stores
 mapview(gs_geo)
