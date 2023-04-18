@@ -1,0 +1,151 @@
+---
+title: "Week 9: <br>Cross-Sectional Data <br> and Project 2 Overview"
+format: 
+  revealjs:
+    theme: [night, ../../custom.scss]
+    slide-number: c/t
+    width: 1400
+    # logo: path.png
+    # center: TRUE
+---
+
+## Agenda 
+
+What is panel data?
+
+What is the value of panel data for analysis?
+
+Causality
+
+Project 3 overview 
+
+
+<!-- example of big text fit to slide width -->
+
+<!-- ::: {.r-fit-text} -->
+<!-- Big Text -->
+<!-- ::: -->
+
+<!-- :::: {.columns style="text-align: center"} -->
+<!-- ::: {.column width="40%"} -->
+<!-- ::: -->
+<!-- ::: {.column width="60%"} -->
+<!-- ::: -->
+<!-- :::: -->
+
+## What is panel data? {.scrollable}
+::: {.incremental}
+
+- Time series data is collected over time and is used to observe changes or trends in a particular variable or set of variables. It involves the collection of data at regular intervals, such as weekly, monthly, or yearly, and can be used to identify patterns or fluctuations over time.
+
+- Cross-sectional data is collected at a particular point in time and is used to compare different groups or individuals at a specific point in time. It involves the collection of data from multiple sources or individuals at a single point in time and can be used to compare differences or similarities between different groups or individuals.
+
+- Panel data (aka longitudinal) combines both time series and cross-sectional data, as it involves the collection of data over time from the same individuals or groups. Panel data can be used to analyze how individual or group behavior changes over time, and it is particularly useful in studying longitudinal changes or trends.
+
+::: 
+
+<!-- ##  -->
+<!-- <section data-background-image="includes/cross-sectional.png" data-background-size="contain"> -->
+<!-- </section> -->
+
+## Examples of panel data
+
+Individuals' health status over time
+
+Individuals' wages over time
+
+Counties' precipitation over time
+
+
+<!-- show examples -->
+
+## Panel data and the case for causality
+
+Causal inference is the gold standard in economics research
+
+We want to know the causal effect of a policy or intervention on people or some outcome
+
+How does an increase in the minimum wage impact youth employment?
+
+How might you answer that question? 
+
+## Time series: youth employment
+
+<!-- plot of employment over time pre and post policy -->
+
+## Cross section: youth employment
+
+plot of employment for places that got the intervention and those that didn't
+
+
+## Analyzing Panel Data
+
+- Analyzing panel data typically involves comparing a person or unit to themselves at different points in time
+
+- Comparing a unit to themselves removes all characteristics of that unit that may influence the outcome (or mediate it)
+
+- In regression, we remove (or control for) these characteristics with fixed effects
+
+
+
+## Analyzing Panell Data: Examples
+
+- What is the association between average income and household food waste?
+
+- How much do consumers spend on coffee products in a particular area? Does coffee spending differ by age?
+
+- How could I use cross-sectional data to decide where to open a new grocery store? 
+
+## Project 2: Overview
+
+Form groups of 2 (THIS WEEK)
+
+Choose an ag biz or enre management question to answer with publicly available cross-sectional data
+
+Collect cross-sectional data
+
+Perform an exploratory data analysis and assemble summary statistics; analyze spatial patterns, correlations, etc.; and construct visualizations to answer your research question.
+
+Present results in class Fri April 14$^{\text{th}}$.
+
+## Project 2: Example
+
+**Research Objective:**
+
+- I am wanting to open a small independent grocery store, and I will use cross-sectional data to help me choose an appropriate location.
+
+**Important background details:**
+
+- My grocery store will target middle to upper income customers.
+
+- My main grocery retail competitors are Whole Foods and Trader Joes.
+
+- I want to open my store somewhere in Colorado.
+
+## Project 2: Example
+
+**Cross-Sectional Data:**
+
+- I have collected data on all U.S. Trader Joes locations from [Kaggle.com](https://www.kaggle.com/datasets/saejinmahlauheinert/trader-joes-locations)
+
+- I have collected data on all U.S. Whole Foods locations from [POI Factory](http://www.poi-factory.com/node/823)
+
+- I have collected county-level income and rent information from [The Opportunity Atlas](https://www.opportunityatlas.org)
+
+
+##   
+<section data-background-image="includes/Sheet1.png" data-background-size="contain">
+</section>
+
+
+##   
+<section data-background-image="includes/Sheet2.png" data-background-size="contain">
+</section>
+
+
+##   
+<section data-background-image="includes/Sheet3.png" data-background-size="contain">
+</section>
+
+
+# Get Started.
