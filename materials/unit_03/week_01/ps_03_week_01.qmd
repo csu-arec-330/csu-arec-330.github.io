@@ -44,7 +44,7 @@ There are resources on the course website. Reach out to the professors if you ne
 
 ### Building your panel dataset
 
-Once you have the question and data in mind, you need to build the dataset and 
+Once you have the question and data in mind, you need to build the dataset.  Building the dataset may look different depending on your question, the regression model you intend to estimate, and the availability of data. Start by thinking about the ideal dataset to answer your question. How close can you get with the data available to you?
 
 
 
