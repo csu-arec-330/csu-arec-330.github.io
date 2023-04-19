@@ -15,8 +15,6 @@ What is panel data?
 
 What is the value of panel data for analysis?
 
-Causality
-
 Project 3 overview 
 
 
@@ -33,14 +31,14 @@ Project 3 overview
 <!-- ::: -->
 <!-- :::: -->
 
-## What is panel data? {.scrollable}
+## What is panel data? 
 ::: {.incremental}
 
-- Time series data is collected over time and is used to observe changes or trends in a particular variable or set of variables. It involves the collection of data at regular intervals, such as weekly, monthly, or yearly, and can be used to identify patterns or fluctuations over time.
+- Time series data is collected over time and is used to observe changes or trends in a particular variable or set of variables. 
 
-- Cross-sectional data is collected at a particular point in time and is used to compare different groups or individuals at a specific point in time. It involves the collection of data from multiple sources or individuals at a single point in time and can be used to compare differences or similarities between different groups or individuals.
+- Cross-sectional data is collected at a particular point in time and is used to compare different groups or individuals at a specific point in time. 
 
-- Panel data (aka longitudinal) combines both time series and cross-sectional data, as it involves the collection of data over time from the same individuals or groups. Panel data can be used to analyze how individual or group behavior changes over time, and it is particularly useful in studying longitudinal changes or trends.
+- Panel data (aka longitudinal) combines both time series and cross-sectional data and involves the collection of data over time from the same individuals or groups. 
 
 ::: 
 
@@ -48,7 +46,27 @@ Project 3 overview
 <!-- <section data-background-image="includes/cross-sectional.png" data-background-size="contain"> -->
 <!-- </section> -->
 
-## Examples of panel data
+##
+
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+![](includes/panel-data-differencing.png)
+
+::: 
+
+::: {.column width="50%"}
+What is the unit of measurement over time?
+
+How long is each unit measured?
+
+What variables are measured at each point in time?
+:::
+::::
+
+
+## Other examples of panel data
 
 Individuals' health status over time
 
@@ -57,6 +75,19 @@ Individuals' wages over time
 Counties' precipitation over time
 
 Others?
+
+## Clicker question
+
+What is panel data?
+
+A. Data collected on different individuals or units at a single point in time
+
+B. Data collected on the same individuals or units over time
+
+C. Data collected on the same variable over time
+
+D. Data collected on different variables at a single point in time
+
 
 <!-- show examples -->
 
@@ -107,12 +138,31 @@ Can you conclude that an increase in the minimum wage increases employment?
 ::::
 
 
+## Benefits of panel data
+
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+Panel data measures units over time
+
+This allows us to statistically compare those that experience the policy to those that do not
+
+::: 
+
+::: {.column width="50%"}
+
+![](includes/min_wage_data.png)
+
+:::
+::::
+
 
 ## Analyzing Panel Data
 
 Analyzing panel data typically involves comparing a person or unit to themselves at different points in time
 
-Comparing a unit to themselves removes all characteristics of that unit that do not vary over time but may influence the outcome 
+Comparing a unit to themselves removes all characteristics of that unit that do not vary over time but may influence the outcome$^{*}$ 
 
 In regression, we remove (or control for) these characteristics with fixed effects
 
@@ -141,6 +191,29 @@ We can use regression to assess the incremental impact of the exposure
 
 Panel data enables comparison of units with a given exposure to themselves at different levels of exposure controlling for a unit's characteristics 
 
+## Difference in differences
+
+DiD is a popular method for exploiting panel data because it is simple and intuitive
+
+The method compares the difference between the change in some outcome in the treatment and control units
+
+Returning to our min wage example, we want to compare the change in employment (before to after policy) in the treatment unit to the control unit.
+
+[Card and Kruger](https://davidcard.berkeley.edu/papers/njmin-aer.pdf)
+
+## Potential problems with observational data
+
+Observational data is collected on the state of the world that is, and not on what could have been
+
+Our challenge is to estimate what could have been (the counterfactual)
+
+- omitted variables can bias estimates
+
+- measurement error in independent variables can bias estimates
+
+- simultaneity or reverse causality can bias estimates
+
+- selection on unobserved information
 
 ## Summary
 
@@ -148,10 +221,16 @@ Panel data measures units over time
 
 Panel data permits causal research designs
 
+Causal techniques try to get us back to the experimental ideal
+
+Be aware of possiblem problems in the research design
 
 
+## Exercise for Friday
 
+[Listen to podcast on sugar](https://youtu.be/k8T9qXKpoXs)
 
+[If interested, look at the paper](https://www.nber.org/papers/w30799)
 
 ## Project 2: Overview
 
@@ -167,9 +246,21 @@ Perform an exploratory data analysis and assemble summary statistics; analyze sp
 
 Present results in class on final.
 
-## "Treatment" datasets
+## ["Treatment" datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/Ene2gKXT9QBMr5Zb383dEeYBmvLFvFZR6PTwxUcGNza_0g?e=gwtVHm)
 
 - County-level weekly drought (1980-2022)
 
-- 
+- State-level and federal minimum wage (1974-2016)
+
+- County-level daily PM2.5 and smoke presence (2006-2015)
+
+- Affordable Care Act expansion 
+
+## [Other datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EsuPJcqiDPZFu0qJ-JONVLcB1gnp08EAm2LuTPAHVz2yqA?e=IsLJkA)
+
+- County-level weather (1980-2022)
+
+- County-level number of burning wildfires by day (2006-2015)
+
+- State-level medical outcomes
 

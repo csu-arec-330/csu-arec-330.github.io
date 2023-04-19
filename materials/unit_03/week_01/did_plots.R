@@ -19,6 +19,7 @@ ggdid(mw.attgt, ylim = c(-.3,.3))
 mpdta_new <- mpdta %>%
   mutate(treated=ifelse(treat==1,year>=first.treat,0))
 
+write_csv(mpdta_new,"~/min_wage_data.csv")
 #random sample of counties
 samp_co <- sample(unique(mpdta_new$countyreal[mpdta_new$treat==1]),6)
 

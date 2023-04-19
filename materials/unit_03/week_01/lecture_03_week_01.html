@@ -7,7 +7,7 @@
 <link href="lecture_03_week_01_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_03_week_01_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_03_week_01_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.2.269">
 
   <title>Week 13:  Panel Data and   Project 3 Overview</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -333,7 +333,6 @@
 <h2>Agenda</h2>
 <p>What is panel data?</p>
 <p>What is the value of panel data for analysis?</p>
-<p>Causality</p>
 <p>Project 3 overview</p>
 <!-- example of big text fit to slide width -->
 <!-- ::: {.r-fit-text} -->
@@ -346,25 +345,45 @@
 <!-- ::: -->
 <!-- :::: -->
 </section>
-<section id="what-is-panel-data" class="slide level2 scrollable">
+<section id="what-is-panel-data" class="slide level2">
 <h2>What is panel data?</h2>
 <div>
 <ul>
-<li class="fragment"><p>Time series data is collected over time and is used to observe changes or trends in a particular variable or set of variables. It involves the collection of data at regular intervals, such as weekly, monthly, or yearly, and can be used to identify patterns or fluctuations over time.</p></li>
-<li class="fragment"><p>Cross-sectional data is collected at a particular point in time and is used to compare different groups or individuals at a specific point in time. It involves the collection of data from multiple sources or individuals at a single point in time and can be used to compare differences or similarities between different groups or individuals.</p></li>
-<li class="fragment"><p>Panel data (aka longitudinal) combines both time series and cross-sectional data, as it involves the collection of data over time from the same individuals or groups. Panel data can be used to analyze how individual or group behavior changes over time, and it is particularly useful in studying longitudinal changes or trends.</p></li>
+<li class="fragment"><p>Time series data is collected over time and is used to observe changes or trends in a particular variable or set of variables.</p></li>
+<li class="fragment"><p>Cross-sectional data is collected at a particular point in time and is used to compare different groups or individuals at a specific point in time.</p></li>
+<li class="fragment"><p>Panel data (aka longitudinal) combines both time series and cross-sectional data and involves the collection of data over time from the same individuals or groups.</p></li>
 </ul>
 </div>
 <!-- ##  -->
 <!-- <section data-background-image="includes/cross-sectional.png" data-background-size="contain"> -->
 <!-- </section> -->
 </section>
-<section id="examples-of-panel-data" class="slide level2">
-<h2>Examples of panel data</h2>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="columns" style="text-align: left">
+<div class="column" style="width:50%;">
+<p><img data-src="includes/panel-data-differencing.png"></p>
+</div><div class="column" style="width:50%;">
+<p>What is the unit of measurement over time?</p>
+<p>How long is each unit measured?</p>
+<p>What variables are measured at each point in time?</p>
+</div>
+</div>
+</section>
+<section id="other-examples-of-panel-data" class="slide level2">
+<h2>Other examples of panel data</h2>
 <p>Individuals’ health status over time</p>
 <p>Individuals’ wages over time</p>
 <p>Counties’ precipitation over time</p>
 <p>Others?</p>
+</section>
+<section id="clicker-question" class="slide level2">
+<h2>Clicker question</h2>
+<p>What is panel data?</p>
+<p>A. Data collected on different individuals or units at a single point in time</p>
+<p>B. Data collected on the same individuals or units over time</p>
+<p>C. Data collected on the same variable over time</p>
+<p>D. Data collected on different variables at a single point in time</p>
 <!-- show examples -->
 </section>
 <section id="panel-data-and-the-case-for-causality" class="slide level2">
@@ -397,10 +416,21 @@
 </div>
 </div>
 </section>
+<section id="benefits-of-panel-data" class="slide level2">
+<h2>Benefits of panel data</h2>
+<div class="columns" style="text-align: left">
+<div class="column" style="width:50%;">
+<p>Panel data measures units over time</p>
+<p>This allows us to statistically compare those that experience the policy to those that do not</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="includes/min_wage_data.png"></p>
+</div>
+</div>
+</section>
 <section id="analyzing-panel-data" class="slide level2">
 <h2>Analyzing Panel Data</h2>
 <p>Analyzing panel data typically involves comparing a person or unit to themselves at different points in time</p>
-<p>Comparing a unit to themselves removes all characteristics of that unit that do not vary over time but may influence the outcome</p>
+<p>Comparing a unit to themselves removes all characteristics of that unit that do not vary over time but may influence the outcome<span class="math inline">\(^{*}\)</span></p>
 <p>In regression, we remove (or control for) these characteristics with fixed effects</p>
 <p>We can use regression to compare units before and after some change or policy</p>
 </section>
@@ -422,10 +452,35 @@
 <p>We can use regression to assess the incremental impact of the exposure</p>
 <p>Panel data enables comparison of units with a given exposure to themselves at different levels of exposure controlling for a unit’s characteristics</p>
 </section>
+<section id="difference-in-differences" class="slide level2">
+<h2>Difference in differences</h2>
+<p>DiD is a popular method for exploiting panel data because it is simple and intuitive</p>
+<p>The method compares the difference between the change in some outcome in the treatment and control units</p>
+<p>Returning to our min wage example, we want to compare the change in employment (before to after policy) in the treatment unit to the control unit.</p>
+<p><a href="https://davidcard.berkeley.edu/papers/njmin-aer.pdf">Card and Kruger</a></p>
+</section>
+<section id="potential-problems-with-observational-data" class="slide level2">
+<h2>Potential problems with observational data</h2>
+<p>Observational data is collected on the state of the world that is, and not on what could have been</p>
+<p>Our challenge is to estimate what could have been (the counterfactual)</p>
+<ul>
+<li><p>omitted variables can bias estimates</p></li>
+<li><p>measurement error in independent variables can bias estimates</p></li>
+<li><p>simultaneity or reverse causality can bias estimates</p></li>
+<li><p>selection on unobserved information</p></li>
+</ul>
+</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <p>Panel data measures units over time</p>
 <p>Panel data permits causal research designs</p>
+<p>Causal techniques try to get us back to the experimental ideal</p>
+<p>Be aware of possiblem problems in the research design</p>
+</section>
+<section id="exercise-for-friday" class="slide level2">
+<h2>Exercise for Friday</h2>
+<p><a href="https://youtu.be/k8T9qXKpoXs">Listen to podcast on sugar</a></p>
+<p><a href="https://www.nber.org/papers/w30799">If interested, look at the paper</a></p>
 </section>
 <section id="project-2-overview" class="slide level2">
 <h2>Project 2: Overview</h2>
@@ -437,10 +492,20 @@
 <p>Present results in class on final.</p>
 </section>
 <section id="treatment-datasets" class="slide level2">
-<h2>“Treatment” datasets</h2>
+<h2><a href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/Ene2gKXT9QBMr5Zb383dEeYBmvLFvFZR6PTwxUcGNza_0g?e=gwtVHm">“Treatment” datasets</a></h2>
 <ul>
 <li><p>County-level weekly drought (1980-2022)</p></li>
-<li></li>
+<li><p>State-level and federal minimum wage (1974-2016)</p></li>
+<li><p>County-level daily PM2.5 and smoke presence (2006-2015)</p></li>
+<li><p>Affordable Care Act expansion</p></li>
+</ul>
+</section>
+<section id="other-datasets" class="slide level2">
+<h2><a href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EsuPJcqiDPZFu0qJ-JONVLcB1gnp08EAm2LuTPAHVz2yqA?e=IsLJkA">Other datasets</a></h2>
+<ul>
+<li><p>County-level weather (1980-2022)</p></li>
+<li><p>County-level number of burning wildfires by day (2006-2015)</p></li>
+<li><p>State-level medical outcomes</p></li>
 </ul>
 <div class="footer footer-default">
 
