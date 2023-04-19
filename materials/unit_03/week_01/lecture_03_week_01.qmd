@@ -1,5 +1,5 @@
 ---
-title: "Week 9: <br>Cross-Sectional Data <br> and Project 2 Overview"
+title: "Week 13: <br>Panel Data and <br>  Project 3 Overview"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -56,6 +56,7 @@ Individuals' wages over time
 
 Counties' precipitation over time
 
+Others?
 
 <!-- show examples -->
 
@@ -69,83 +70,106 @@ How does an increase in the minimum wage impact youth employment?
 
 How might you answer that question? 
 
-## Time series: youth employment
+What does economic theory say?
 
-<!-- plot of employment over time pre and post policy -->
+## Time series perspective: youth employment in Benton Co, MN
+:::: {.columns style="text-align: left"}
 
-## Cross section: youth employment
+::: {.column width="50%"}
 
-plot of employment for places that got the intervention and those that didn't
+![](includes/did_ts.png)
+
+::: 
+
+::: {.column width="50%"}
+What happens to youth employment after 2006?
+
+Can you conclude that an increase in the minimum wage reduces employment?
+:::
+::::
+
+
+## Cross section perspective : youth employment in 2007
+
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+![](includes/did_cs.png)
+
+::: 
+
+::: {.column width="50%"}
+What happens to youth employment in the treated counties?
+
+Can you conclude that an increase in the minimum wage increases employment?
+:::
+::::
+
 
 
 ## Analyzing Panel Data
 
-- Analyzing panel data typically involves comparing a person or unit to themselves at different points in time
+Analyzing panel data typically involves comparing a person or unit to themselves at different points in time
 
-- Comparing a unit to themselves removes all characteristics of that unit that may influence the outcome (or mediate it)
+Comparing a unit to themselves removes all characteristics of that unit that do not vary over time but may influence the outcome 
 
-- In regression, we remove (or control for) these characteristics with fixed effects
+In regression, we remove (or control for) these characteristics with fixed effects
+
+We can use regression to compare units before and after some change or policy
 
 
 
-## Analyzing Panell Data: Examples
+# The experimental ideal {background-image=includes/ucd_experiment.jpg}
 
-- What is the association between average income and household food waste?
+## Approximating the experimental ideal
 
-- How much do consumers spend on coffee products in a particular area? Does coffee spending differ by age?
+We cannot usually conduct our own experiments (though many in economics are now)
 
-- How could I use cross-sectional data to decide where to open a new grocery store? 
+We can look for opportunities where policy or nature create experiments (sugar rationing)
+
+Where some group of units is exposed to a policy or event (treated)
+
+The key is that treatment assignment is approximately random
+
+
+## Analyzing exposure
+
+In many cases, people or units are exposed to varying levels of something (e.g., pollution, heat)
+
+We can use regression to assess the incremental impact of the exposure
+
+Panel data enables comparison of units with a given exposure to themselves at different levels of exposure controlling for a unit's characteristics 
+
+
+## Summary
+
+Panel data measures units over time
+
+Panel data permits causal research designs
+
+
+
+
+
 
 ## Project 2: Overview
 
 Form groups of 2 (THIS WEEK)
 
-Choose an ag biz or enre management question to answer with publicly available cross-sectional data
+Choose one of the "treatment" datasets and find an outcome to evaluate
 
-Collect cross-sectional data
+What is the impact of $x$ on some outcome $y$
+
+Collect panel data and build dataset (talk to Jude and Ali early if you need help)
 
 Perform an exploratory data analysis and assemble summary statistics; analyze spatial patterns, correlations, etc.; and construct visualizations to answer your research question.
 
-Present results in class Fri April 14$^{\text{th}}$.
+Present results in class on final.
 
-## Project 2: Example
+## "Treatment" datasets
 
-**Research Objective:**
+- County-level weekly drought (1980-2022)
 
-- I am wanting to open a small independent grocery store, and I will use cross-sectional data to help me choose an appropriate location.
+- 
 
-**Important background details:**
-
-- My grocery store will target middle to upper income customers.
-
-- My main grocery retail competitors are Whole Foods and Trader Joes.
-
-- I want to open my store somewhere in Colorado.
-
-## Project 2: Example
-
-**Cross-Sectional Data:**
-
-- I have collected data on all U.S. Trader Joes locations from [Kaggle.com](https://www.kaggle.com/datasets/saejinmahlauheinert/trader-joes-locations)
-
-- I have collected data on all U.S. Whole Foods locations from [POI Factory](http://www.poi-factory.com/node/823)
-
-- I have collected county-level income and rent information from [The Opportunity Atlas](https://www.opportunityatlas.org)
-
-
-##   
-<section data-background-image="includes/Sheet1.png" data-background-size="contain">
-</section>
-
-
-##   
-<section data-background-image="includes/Sheet2.png" data-background-size="contain">
-</section>
-
-
-##   
-<section data-background-image="includes/Sheet3.png" data-background-size="contain">
-</section>
-
-
-# Get Started.

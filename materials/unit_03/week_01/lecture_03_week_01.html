@@ -7,9 +7,9 @@
 <link href="lecture_03_week_01_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_03_week_01_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_03_week_01_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.269">
+  <meta name="generator" content="quarto-1.2.280">
 
-  <title>Week 9:  Cross-Sectional Data   and Project 2 Overview</title>
+  <title>Week 13:  Panel Data and   Project 3 Overview</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -323,7 +323,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 9: <br>Cross-Sectional Data <br> and Project 2 Overview</h1>
+  <h1 class="title">Week 13: <br>Panel Data and <br> Project 3 Overview</h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -364,6 +364,7 @@
 <p>Individuals’ health status over time</p>
 <p>Individuals’ wages over time</p>
 <p>Counties’ precipitation over time</p>
+<p>Others?</p>
 <!-- show examples -->
 </section>
 <section id="panel-data-and-the-case-for-causality" class="slide level2">
@@ -371,156 +372,80 @@
 <p>Causal inference is the gold standard in economics research</p>
 <p>We want to know the causal effect of a policy or intervention on people or some outcome</p>
 <p>How does an increase in the minimum wage impact youth employment?</p>
+<p>How might you answer that question?</p>
+<p>What does economic theory say?</p>
 </section>
-<section id="common-types-of-cross-sectional-data" class="slide level2">
-<h2>Common types of cross-sectional data</h2>
-<ul>
-<li><p>Individual-level data</p></li>
-<li><p>Business or point of interest-level data</p></li>
-</ul>
+<section id="time-series-perspective-youth-employment-in-benton-co-mn" class="slide level2">
+<h2>Time series perspective: youth employment in Benton Co, MN</h2>
+<div class="columns" style="text-align: left">
+<div class="column" style="width:50%;">
+<p><img data-src="includes/did_ts.png"></p>
+</div><div class="column" style="width:50%;">
+<p>What happens to youth employment after 2006?</p>
+<p>Can you conclude that an increase in the minimum wage reduces employment?</p>
+</div>
+</div>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/safegraph.png" data-background-size="contain">
+<section id="cross-section-perspective-youth-employment-in-2007" class="slide level2">
+<h2>Cross section perspective : youth employment in 2007</h2>
+<div class="columns" style="text-align: left">
+<div class="column" style="width:50%;">
+<p><img data-src="includes/did_cs.png"></p>
+</div><div class="column" style="width:50%;">
+<p>What happens to youth employment in the treated counties?</p>
+<p>Can you conclude that an increase in the minimum wage increases employment?</p>
+</div>
+</div>
 </section>
+<section id="analyzing-panel-data" class="slide level2">
+<h2>Analyzing Panel Data</h2>
+<p>Analyzing panel data typically involves comparing a person or unit to themselves at different points in time</p>
+<p>Comparing a unit to themselves removes all characteristics of that unit that do not vary over time but may influence the outcome</p>
+<p>In regression, we remove (or control for) these characteristics with fixed effects</p>
+<p>We can use regression to compare units before and after some change or policy</p>
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/starbucks.png" data-background-size="contain">
-</section>
-</section>
-<section id="common-types-of-cross-sectional-data-1" class="slide level2">
-<h2>Common types of cross-sectional data</h2>
-<ul>
-<li><p>Individual-level data</p></li>
-<li><p>Business or point of interest-level data</p></li>
-<li><p>Country-level data</p></li>
-</ul>
-</section>
-<section id="section-2" class="slide level2">
-<h2></h2>
+<section>
+<section id="the-experimental-ideal" class="title-slide slide level1 center" data-background-image="includes/ucd_experiment.jpg">
+<h1>The experimental ideal</h1>
 
-<section data-background-iframe="https://public.tableau.com/shared/BZH34J4NW?:display_count=n&amp;:showVizHome=no&amp;:embed=true" data-background-interactive="">
 </section>
+<section id="approximating-the-experimental-ideal" class="slide level2">
+<h2>Approximating the experimental ideal</h2>
+<p>We cannot usually conduct our own experiments (though many in economics are now)</p>
+<p>We can look for opportunities where policy or nature create experiments (sugar rationing)</p>
+<p>Where some group of units is exposed to a policy or event (treated)</p>
+<p>The key is that treatment assignment is approximately random</p>
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<section data-background-iframe="https://ourworldindata.org/explorers/coronavirus-data-explorer?tab=map&amp;zoomToSelection=true&amp;facet=none&amp;pickerSort=asc&amp;pickerMetric=location&amp;hideControls=true&amp;Metric=Confirmed+deaths&amp;Interval=7-day+rolling+average&amp;Relative+to+Population=true&amp;Color+by+test+positivity=false&amp;country=IND~USA~GBR~CAN~DEU~FRA" data-background-interactive="">
+<section id="analyzing-exposure" class="slide level2">
+<h2>Analyzing exposure</h2>
+<p>In many cases, people or units are exposed to varying levels of something (e.g., pollution, heat)</p>
+<p>We can use regression to assess the incremental impact of the exposure</p>
+<p>Panel data enables comparison of units with a given exposure to themselves at different levels of exposure controlling for a unit’s characteristics</p>
 </section>
-</section>
-<section id="common-types-of-cross-sectional-data-2" class="slide level2">
-<h2>Common types of cross-sectional data</h2>
-<ul>
-<li><p>Individual-level data</p></li>
-<li><p>Business or point of interest-level data</p></li>
-<li><p>Country-level data</p></li>
-<li><p>Region-level data</p></li>
-</ul>
-</section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/map.png" data-background-size="contain">
-</section>
-</section>
-<section id="section-5" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/map2.png" data-background-size="contain">
-</section>
-</section>
-<section id="common-types-of-cross-sectional-data-3" class="slide level2">
-<h2>Common types of cross-sectional data</h2>
-<ul>
-<li><p>Individual-level data</p></li>
-<li><p>Business or point of interest-level data</p></li>
-<li><p>Country-level data</p></li>
-<li><p>Region-level data</p></li>
-<li><p>Spatial data</p></li>
-</ul>
-</section>
-<section id="section-6" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/smoke_plume.png" data-background-size="contain">
-</section>
-</section>
-<section id="section-7" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/snow.png" data-background-size="contain">
-</section>
-</section>
-<section id="analyzing-cross-sectional-data" class="slide level2">
-<h2>Analyzing Cross-Sectional Data</h2>
-<ul>
-<li><p>Analyzing cross-section data typically consists of studying differences among subjects.</p></li>
-<li><p>We can use cross-sectional data to ask <em>frequency-type</em> questions:</p>
-<ul>
-<li><p>how common is the outcome?</p></li>
-<li><p>how many people are impacted?</p></li>
-</ul></li>
-<li><p>Or <em>association-type</em> questions:</p>
-<ul>
-<li>what factors are associated with the outcome (age, gender, income, pollution, health, etc.)?</li>
-</ul></li>
-</ul>
-</section>
-<section id="analyzing-cross-sectional-data-examples" class="slide level2">
-<h2>Analyzing Cross-Sectional Data: Examples</h2>
-<ul>
-<li><p>What is the association between average income and household food waste?</p></li>
-<li><p>How much do consumers spend on coffee products in a particular area? Does coffee spending differ by age?</p></li>
-<li><p>How could I use cross-sectional data to decide where to open a new grocery store?</p></li>
-</ul>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p>Panel data measures units over time</p>
+<p>Panel data permits causal research designs</p>
 </section>
 <section id="project-2-overview" class="slide level2">
 <h2>Project 2: Overview</h2>
 <p>Form groups of 2 (THIS WEEK)</p>
-<p>Choose an ag biz or enre management question to answer with publicly available cross-sectional data</p>
-<p>Collect cross-sectional data</p>
+<p>Choose one of the “treatment” datasets and find an outcome to evaluate</p>
+<p>What is the impact of <span class="math inline">\(x\)</span> on some outcome <span class="math inline">\(y\)</span></p>
+<p>Collect panel data and build dataset (talk to Jude and Ali early if you need help)</p>
 <p>Perform an exploratory data analysis and assemble summary statistics; analyze spatial patterns, correlations, etc.; and construct visualizations to answer your research question.</p>
-<p>Present results in class Fri April 14<span class="math inline">\(^{\text{th}}\)</span>.</p>
+<p>Present results in class on final.</p>
 </section>
-<section id="project-2-example" class="slide level2">
-<h2>Project 2: Example</h2>
-<p><strong>Research Objective:</strong></p>
+<section id="treatment-datasets" class="slide level2">
+<h2>“Treatment” datasets</h2>
 <ul>
-<li>I am wanting to open a small independent grocery store, and I will use cross-sectional data to help me choose an appropriate location.</li>
+<li><p>County-level weekly drought (1980-2022)</p></li>
+<li></li>
 </ul>
-<p><strong>Important background details:</strong></p>
-<ul>
-<li><p>My grocery store will target middle to upper income customers.</p></li>
-<li><p>My main grocery retail competitors are Whole Foods and Trader Joes.</p></li>
-<li><p>I want to open my store somewhere in Colorado.</p></li>
-</ul>
-</section>
-<section id="project-2-example-1" class="slide level2">
-<h2>Project 2: Example</h2>
-<p><strong>Cross-Sectional Data:</strong></p>
-<ul>
-<li><p>I have collected data on all U.S. Trader Joes locations from <a href="https://www.kaggle.com/datasets/saejinmahlauheinert/trader-joes-locations">Kaggle.com</a></p></li>
-<li><p>I have collected data on all U.S. Whole Foods locations from <a href="http://www.poi-factory.com/node/823">POI Factory</a></p></li>
-<li><p>I have collected county-level income and rent information from <a href="https://www.opportunityatlas.org">The Opportunity Atlas</a></p></li>
-</ul>
-</section>
-<section id="section-8" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/Sheet1.png" data-background-size="contain">
-</section>
-</section>
-<section id="section-9" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/Sheet2.png" data-background-size="contain">
-</section>
-</section>
-<section id="section-10" class="slide level2">
-<h2></h2>
-<section data-background-image="includes/Sheet3.png" data-background-size="contain">
-</section>
-</section>
-<section id="get-started." class="title-slide slide level1 center">
-<h1>Get Started.</h1>
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
