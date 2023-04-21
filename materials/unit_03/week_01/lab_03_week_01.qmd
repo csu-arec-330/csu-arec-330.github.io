@@ -60,7 +60,7 @@ Take a look at the data.  There is no clear binary (1/0) indicator for when the 
 
 # create binary treatment indicator
 mpdta_new <- mpdta %>%
-  mutate(treated=ifelse(treat==1,year>=first.treat,0))
+  mutate(treated=ifelse(treat==1 & year>=first.treat,1,0))
 ```
 
 Look at the data and confirm that you created what you intended to create.
