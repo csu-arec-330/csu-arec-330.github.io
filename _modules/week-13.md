@@ -3,7 +3,7 @@ title: "Week 13: Project 3 Overview and Intro to Panel Data"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Apr 12 & Apr 14</u></b> <br> <br>
+<b><u>Apr 19 & Apr 21</u></b> <br> <br>
 
 <b>Lecture Materials - Wed, Apr 19, 2023:</b> <br>
 
