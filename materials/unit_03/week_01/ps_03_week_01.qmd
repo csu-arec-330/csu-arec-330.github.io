@@ -14,6 +14,7 @@ This problem set is intended to get you started on your third project for the co
 
 3. What other data Project 3 data sources will you use (see course materials page on website)? - List your data sources and describe all the fields (variables) you plan to use in your analysis
 
+4. Show evidence that you have assembled a dataset for analysis
 
 
 ## Project 3 Overview
@@ -50,4 +51,4 @@ Once you have the question and data in mind, you need to build the dataset.  Bui
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Project 2 Problem Set 1`. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your google site titled `Project 3 Problem Set 1`. Submit the link to your google site webpage in Canvas. You should work with your group but submit a link to your own webpage.
