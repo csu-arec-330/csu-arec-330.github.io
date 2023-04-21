@@ -15,6 +15,8 @@ title: "Week 13: Project 3 Overview and Intro to Panel Data"
 <a  href="https://youtu.be/k8T9qXKpoXs" target="_blank">Freakonomics, M.D. - Sugar </a> <br> 
 
  <a  href="/materials/unit_03/week_01/lab_03_week_01.html" target="_blank">Lab Notes</a> <br>  
+ 
+ <a  href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi" target="_blank">Lab Datasets</a> <br> <br>
 
 <b> Problem Set Materials - Due Thursday, April 27 by 11:59 PM:</b> <br>
 
