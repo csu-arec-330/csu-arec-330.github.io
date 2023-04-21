@@ -1,5 +1,5 @@
 ---
-title: "Week 9 Lab: Visualizing and Exploring Cross-Sectional Data in Tableau"
+title: "Week 13 Lab: Introduction to Panel Data Analysis"
 format: 
   html:
     theme: zephyr
@@ -7,7 +7,7 @@ format:
 ---
 
 
-![](includes/cross-sectional.png)
+![](includes/long_ai.jpeg){height=60%, fig-align="center}
 
 ::: {style="font-size: 1.5em"}
 This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
@@ -27,6 +27,53 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 # R
 
 Panel data is a type of longitudinal data that involves the collection of observations on the same individuals or units over time. This makes panel data different from cross-sectional data, which involves the collection of observations on different individuals or units at a single point in time, and time series data, which involves the collection of observations on the same variable over time.
+
+The structure of panel data allows analytical strategies better suited for inferring causality. In cases where some units are exposed to a policy or intervention, regression models can statistically compare exposed units (treated) to unexposed units (control). Regression models can also exploit panel data to control for unobserved differences between units allowing the statistical comparison of a unit to itself at another point in time.
+
+The objective of this lab is to introduce you to managing panel data and analyzing the data.
+
+## Difference in differences
+
+We will use the `did` package in R to illustrate how to use a regression model to estimate the effect of minimum wage increases on youth employment.  We will use the dataset `mpdta` that is included with the package.^[The dataset is a subset of the data used in [Callaway and Sant'Anna (2021)](https://www.sciencedirect.com/science/article/pii/S0304407620303948?via%3Dihub)]  The dataset consists of employment, population, and information about the minimum wage increase by county by year.  All panel data has a unit, usually denote $i$, and a time, usually denoted $t$. In this data, $i$ indexes counties and $t$ indexes years. Let's first set up our script and call in the data.
+
+```{r}
+#| eval: false
+
+# This script demonstrates how to estimate a difference in differences model using the did package
+
+# load packages
+library(pacman)
+p_load(tidyverse,did)
+
+# call in dataset
+mpdta <- data("mpdta")
+```
+
+
+Take a look at the data.  There is no clear
+
+```{r}
+#| eval: false
+
+# This script demonstrates how to estimate a difference in differences model using the did package
+
+# load packages
+library(pacman)
+p_load(tidyverse,did)
+
+# call in dataset
+mpdta <- data("mpdta")
+```
+
+
+## Fixed effects with marginal changes
+
+This section will cover how to estimate marginal changes with fixed effects and panel data. In this case, the goal is to use the fixed effects to control for unmeasured differences between the units that do not change over time (generally called unobserved heterogeneity).
+
+This exercise will use fixed effects models to analyze the impact of fuel moisture on wildfire activity in select counties in the US.^[I removed counties that never experienced any fire between 2006-2015.] You can download the data from [this folder](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi). The folder contains two files: 1) `fires_303.csv.gz` and 2) `weather_303.csv.gz`.  `fires_303.csv.gz` contains three variables: 1) a unique county identifier, `county_fips`, 2) the observation date `measure_date`, and 3) the number of wildfire burning on that date in that county, `fires`.  `weather_303.csv.gz` contains the same county and date information along with 1000-hour fuel moisture measured in percent from 1 to 40.^[1000-Hour Fuel Moisture (1000-hr FM) represents the modeled moisture content in dead fuels in the 3 to 8 inch diameter class and the layer of the forest floor about four inches below the surface. The 1000-hr FM value is based on a running 7-day computed average using length of day, daily temperature and relative humidity extremes (maximum and minimum values) and the 24-hour precipitation duration values. Values can range from 1 to 40 percent ([source](https://gacc.nifc.gov/nrcc/predictive/fuels_fire-danger/psa_component_glossary.htm)).]
+
+### Data processing
+
 
 
 

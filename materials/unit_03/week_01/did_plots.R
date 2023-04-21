@@ -1,6 +1,8 @@
 
 library(pacman)
-p_load(tidyverse,did)
+p_load(tidyverse,did,fixest,modelsummary)
+
+
 
 data(mpdta)
 
@@ -16,10 +18,29 @@ summary(mw.attgt)
 
 ggdid(mw.attgt, ylim = c(-.3,.3))
 
+
+mw.dyn <- aggte(mw.attgt, type = "dynamic")
+summary(mw.dyn)
+
+ggdid(mw.dyn, ylim = c(-.3,.3))
+
+
+
 mpdta_new <- mpdta %>%
   mutate(treated=ifelse(treat==1,year>=first.treat,0))
 
 write_csv(mpdta_new,"~/min_wage_data.csv")
+
+m1 <- feols(lemp ~ treated | countyreal + year,
+            data=mpdta_new)
+
+summary(m1)
+
+mlm <- lm(lemp ~ treated + I(factor(countyreal)) + I(factor(year)),
+            data=mpdta_new)
+
+summary(mlm)
+
 #random sample of counties
 samp_co <- sample(unique(mpdta_new$countyreal[mpdta_new$treat==1]),6)
 
