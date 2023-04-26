@@ -1,0 +1,151 @@
+---
+title: "Week 13 Lab: Introduction to Panel Data Analysis"
+format: 
+  html:
+    theme: zephyr
+    toc: true
+---
+
+
+![](includes/long_ai.jpeg){height=60%, fig-align="center}
+
+::: {style="font-size: 1.5em"}
+This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
+:::
+
+
+
+## Learning Objectives R
+
+- Read in and manipulate panel data
+
+- Estimate the treatment effect using fixed-effects regression
+
+- Estimate the marginal effect of an exposure (pollution) on an outcome using fixed-effects regression
+
+
+# R
+
+Panel data is a type of longitudinal data that involves the collection of observations on the same individuals or units over time. This makes panel data different from cross-sectional data, which involves the collection of observations on different individuals or units at a single point in time, and time series data, which involves the collection of observations on the same variable over time.
+
+The structure of panel data allows analytical strategies better suited for inferring causality. In cases where some units are exposed to a policy or intervention, regression models can statistically compare exposed units (treated) to unexposed units (control). Regression models can also exploit panel data to control for unobserved differences between units allowing the statistical comparison of a unit to itself at another point in time.
+
+The objective of this lab is to introduce you to managing panel data and analyzing the data.
+
+## Difference in differences
+
+We will use the `did` package in R to illustrate how to use a regression model to estimate the effect of minimum wage increases on youth employment.  We will use the dataset `mpdta` that is included with the package.^[The dataset is a subset of the data used in [Callaway and Sant'Anna (2021)](https://www.sciencedirect.com/science/article/pii/S0304407620303948?via%3Dihub)]  The dataset consists of employment, population, and information about the minimum wage increase by county by year.  All panel data has a unit, usually denote $i$, and a time, usually denoted $t$. In this data, $i$ indexes counties and $t$ indexes years. Let's first set up our script and call in the data.
+
+```{r}
+#| eval: false
+
+# This script demonstrates how to estimate a difference in differences model using the did package
+
+# load packages
+library(pacman)
+p_load(tidyverse,did)
+
+# call in dataset
+mpdta <- data("mpdta")
+
+#look at the data
+glimpse(mpdta) #or View(mpdta)
+```
+
+
+Take a look at the data.  There is no clear binary (1/0) indicator for when the treatment turns on. Let's create one.  We want to create a new variable equal to 1 on the year of first treatment and all years following, and 0 otherwise.
+
+```{r}
+#| eval: false
+
+# create binary treatment indicator
+mpdta_new <- mpdta %>%
+  mutate(treated=ifelse(treat==1,year>=first.treat,0))
+```
+
+Look at the data and confirm that you created what you intended to create.
+
+Now we want to estimate the difference in differences regression model using what we call two-way fixed effects. The two-way refers to fixed effects for 1) the units, and 2) for time. The unit fixed effect accounts for unobserved variation between the units (each county has its own intercept). The time fixed effect accounts for unobserved variation common to all units but that varies over time. This leaves the binary treatment indicator we created to account for the treatment effect.
+
+![](includes/did_graph.webp)
+The regression model we want to estimate is:
+$$ Y_{it} = \beta treated_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
+
+where the $i$ and $t$ represent county and year, $\gamma_t$ are the time fixed effects, and $\delta_i$ are the county fixed effects, and $\beta$ is the coefficient of interest - the treatment effect. R will automatically create the dummy variables if the variable is a factor. So, we need to convert the variables `year` and `countyreal` to factors using the function `as.factor()`. This function operates on a vector and does not change the dimension of the vector.  Which `dplyr` function should you use?
+
+Estimate the following model:
+
+```{r}
+#| eval: false
+
+# create binary treatment indicator
+mlm <- lm(lemp ~ treated + countyreal + year,
+            data=mpdta_new)
+```
+
+`mlm` is the regression object that contains information to construct a familiar regression table. Use `summary()` to view the table. 
+
+The table is very long because of all of the dummy variable coefficients. There are many packages in R that produce nicer looking tables. I like `modelsummary`. Our model contains coefficient estimates for all of our dummy variables, but we are mainly concerned with the $\beta$ coefficient on `treated`. We can ask `modelsummary()` to only show us that coefficient. See the documentation for the many other options.
+
+```{r}
+#| eval: false
+
+# generate regression table
+modelsummary(mlm,coef_map = "treated",output = "markdown")
+```
+
+>What is the sign and magnitude of $\beta$? What does this tell us about the effect of a minimum wage increase on youth employment?
+
+**Caveat: This example comes from a research paper showing that this simple two-way fixed-effects model does not estimate the average treatment effect on the treated units when the policy rollout is different for different units (called staggered adoption).  The `did` package provides the appropriate methods for handling cases of staggered adoption.**
+
+
+
+
+
+
+## Fixed effects with marginal changes
+
+This section will cover how to estimate marginal changes with fixed effects and panel data. In this case, the goal is to use the fixed effects to control for unmeasured differences between the units that do not change over time (generally called unobserved heterogeneity).
+
+This exercise will use fixed effects models to analyze the impact of monthly fuel moisture on monthly wildfire activity in select counties in the US.^[I removed counties that never experienced any fire between 2006-2015.] You can download the data from [this folder](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi). The folder contains two files: 1) `fires_303.csv.gz` and 2) `weather_303.csv.gz`.  `fires_303.csv.gz` contains three variables: 1) a unique county identifier, `county_fips`, 2) the observation date `measure_date`, and 3) the number of wildfire burning on that date in that county, `fires`.  `weather_303.csv.gz` contains the same county and date information along with 1000-hour fuel moisture measured in percent from 1 to 40.^[1000-Hour Fuel Moisture (1000-hr FM) represents the modeled moisture content in dead fuels in the 3 to 8 inch diameter class and the layer of the forest floor about four inches below the surface. The 1000-hr FM value is based on a running 7-day computed average using length of day, daily temperature and relative humidity extremes (maximum and minimum values) and the 24-hour precipitation duration values. Values can range from 1 to 40 percent ([source](https://gacc.nifc.gov/nrcc/predictive/fuels_fire-danger/psa_component_glossary.htm)).] 
+
+Start a new script. Download these data and read the datasets into R - call the dataframes `fire` and `weather`.  Note, the datasets for this exercise are fairly large.
+
+### Data processing
+
+The first issue is that the data we want to analyze are in two separate dataframes. We need to join the datasets to construct a single dataframe with both the fire occurrence and fuel moisture. 
+
+The second issue is that the data you are given is at the daily level, but we want to analyze the relationship between fires and fuel moisture at the monthly level. We need to aggregate or summarize the data by month (use the function `yearmonth()` from the package `tsibble`). Let's `sum()` the number of `fires` and calculate the `mean()` of `fm1000`.
+
+
+### Analysis
+
+Our goal is to estimate the relationship between fuel moisture and the number of fire days across counties in the lower 48 states. In this case, the direction of causality is intuitive; dry hot weather dries out fuel and makes wildfire more likely. However, by estimating the model on all (fire prone) counties over time allows us to estimate the average effect over space and time (we also have the ability to estimate the relationship for any single county or point in time).
+
+We will use the function `feols` from the `fixest` package to estimate our fixed-effects regression. When we have a large number of units and time periods, creating a bunch of dummy variables is a lot of work for the computer.  It turns out that subtracting the mean value of all variables along the dimensions of the fixed effects accomplishes the same thing.^[For example, subtracting the average of all variables across time, removes the county dummy variables since they don't vary over time]. This trick saves the computer a lot of work.
+
+We want to estimate the model:
+$$ fires_{it} = \beta fm1000_{it} + \gamma_t + \delta_i +\varepsilon_{it} $$
+where, again, the $i$ and $t$ represent county and time, $\gamma_t$ are the time fixed effects, and $\delta_i$ are the county fixed effects, and $\beta$ is the coefficient of interest. In this project, $t$ represents the year-month. The fixed effects play a similar role in this regression. The county fixed effects control for time-invariant factors of a county like vegetation, elevation, etc. The time fixed effects control for nationwide changes in a given month that may impact fires. For example, an announcement by the USFS that all fires will be contained as quickly as possible. The idea is that we net those factors captured by the fixed effects out of the effect of fuel moisture so that we are left with a more credible estimate.
+
+We enter the formula in `feols` similar to `lm()`, with a notable difference: the variables listed after the vertical pipe, $|$, are considered fixed effects.
+
+```{r}
+#| eval: false
+
+# fixed effect regression model using fixest
+m1 <- feols(fires ~ fm1000 | county_fips + ym,data = analysis_ds )
+```
+
+Use `summary()` to view the results. By default, model objects from `fixest` do not print the values of the fixed effects (though they can be recovered). Also, `fixest` provides its own function to view tables called `etable()`.
+
+>What is the sign and magnitude of $\beta$? What does this tell us about the effect of fuel moisture on the number of fires in a county?
+
+
+## Summary
+
+This lab covered two ways of using fixed-effects regression models to analyze the causal impact of a policy or exposure. The methods are nearly identical in both cases.  The difference in the two examples described is the nature of the variable of interest. In the minimum wage example, the policy is binary, so the treatment effect is a discrete jump. In the case of fuel moisture and fire, fuel moisture is a continuous variable, so the effect is interpreted as a marginal change in fire day due to a one uit (percent) change in fuel moisture.
+
+
+
+
