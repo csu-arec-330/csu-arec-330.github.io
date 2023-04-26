@@ -19,7 +19,7 @@ Differences-in-differences regressions: Intuition.
 
 Differences-in-differences regressions: Assumptions.
 
-Fixed effects regression: Intuition.
+Fixed effects regressions: Intuition.
 
 
 
@@ -36,7 +36,7 @@ Fixed effects regression: Intuition.
 <!-- ::: -->
 <!-- :::: -->
 
-## Knowledge Check 1
+## Knowledge Check 1 {.scrollable}
 
 In lab you used data to estimate the following D-i-D regression:
 $$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
@@ -50,7 +50,7 @@ C.  $\delta_i$
 
 D.  $\varepsilon_{it}$
 
-## Knowledge Check 2
+## Knowledge Check 2 {.scrollable}
 
 In lab you used data to estimate the following D-i-D regression:
 $$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
@@ -64,7 +64,7 @@ C.  $\delta_i$
 
 D.  $\varepsilon_{it}$
 
-## Knowledge Check 3
+## Knowledge Check 3 {.scrollable}
 
 In lab you used data to estimate the following D-i-D regression:
 $$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
