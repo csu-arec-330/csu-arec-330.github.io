@@ -481,4 +481,4 @@ What are the role of the fixed effects $\gamma_t$ and $\delta_i$ in this regress
 
 **Conceptually, what are these parameters doing?**
 
-We are **demeaning** the outcome variable so that we are identifying effects based on variation *within* our units.
+We are **demeaning** the outcome and predictor variables so that we are identifying effects based on variation *within* our units. [Still confused by FEs?](https://ds4ps.org/pe4ps-textbook/docs/p-040-fixed-effects.html)
