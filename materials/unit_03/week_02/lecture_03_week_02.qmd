@@ -1,5 +1,5 @@
 ---
-title: "Week 14: <br>Panel Data Analysis <br>"
+title: "Week 14: <br>Understanding Panel Data Analysis <br>"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -20,8 +20,6 @@ Differences-in-differences regressions: Intuition.
 Differences-in-differences regressions: Assumptions.
 
 Fixed effects regression: Intuition.
-
-Fixed effects regression: Assumptions.
 
 
 
