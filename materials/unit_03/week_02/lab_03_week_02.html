@@ -20,69 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -97,7 +34,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="lab_03_week_02_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="lab_03_week_02_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -112,11 +48,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link active" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
   <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
   <ul class="collapse">
-  <li><a href="#difference-in-differences" id="toc-difference-in-differences" class="nav-link" data-scroll-target="#difference-in-differences">Difference in differences</a></li>
+  <li><a href="#difference-in-differences" id="toc-difference-in-differences" class="nav-link" data-scroll-target="#difference-in-differences">Difference in differences</a>
+  <ul class="collapse">
+  <li><a href="#treatment-and-control-groups" id="toc-treatment-and-control-groups" class="nav-link" data-scroll-target="#treatment-and-control-groups">Treatment and Control Groups</a></li>
+  <li><a href="#staggered-treatment-times" id="toc-staggered-treatment-times" class="nav-link" data-scroll-target="#staggered-treatment-times">Staggered Treatment Times</a></li>
+  </ul></li>
   <li><a href="#fixed-effects-with-marginal-changes" id="toc-fixed-effects-with-marginal-changes" class="nav-link" data-scroll-target="#fixed-effects-with-marginal-changes">Fixed effects with marginal changes</a>
   <ul class="collapse">
-  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data processing</a></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
+  <li><a href="#maps-with-pages-visualizing-spatial-data-over-time" id="toc-maps-with-pages-visualizing-spatial-data-over-time" class="nav-link" data-scroll-target="#maps-with-pages-visualizing-spatial-data-over-time">Maps with Pages (visualizing spatial data over time)</a></li>
+  <li><a href="#lines-with-distributions-visualizing-heterogeneity-over-time" id="toc-lines-with-distributions-visualizing-heterogeneity-over-time" class="nav-link" data-scroll-target="#lines-with-distributions-visualizing-heterogeneity-over-time">Lines with Distributions (visualizing heterogeneity over time)</a></li>
   </ul></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
@@ -153,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="learning-objectives-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
 <ul>
-<li><p>Create visualizations for DiD analyses:</p>
+<li><p>Create visualizations for DiD analyses that account for:</p>
 <ul>
 <li><p>Treatment and control groups</p></li>
 <li><p>Staggered treatment times</p></li>
@@ -179,36 +119,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="includes/did_figex2.png" class="figure-img"></p>
 </figure>
 </div>
+<p>By now you are all well equiped to create these line graphs in Tableau, but there are two nuances to creating these that are worth discussion.</p>
+<section id="treatment-and-control-groups" class="level3">
+<h3 class="anchored" data-anchor-id="treatment-and-control-groups">Treatment and Control Groups</h3>
+<p>Let’s connect to the minimum wage and employment dataset you used in lab last week – <code>min_wage_data.csv</code>. Notice that there is already a variable called <code>treat</code> and recall that this variable is equal to 1 if the county is in a state with a minimum wage increase and 0 otherwise.</p>
+<ol type="1">
+<li><p>Create a line graph that shows logged employment in treated and non-treated states. (Hint: use the <code>treat</code> field to assign colors to your lines.)</p></li>
+<li><p>Are there any meaningful differences in average employment across treated and non-treated areas?</p></li>
+</ol>
+</section>
+<section id="staggered-treatment-times" class="level3">
+<h3 class="anchored" data-anchor-id="staggered-treatment-times">Staggered Treatment Times</h3>
+<ol start="3" type="1">
+<li><p>Now recall that different states implemented minimum wage increases at different points in time. What variable could we use to see if effects of the minimum wage increases are more apparent if we separate treated units by the timing or type of treatment? Create a line graph that shows logged employment by the treatment timing.</p></li>
+<li><p>A downside to line graphs is that they don’t capture variation in employment well. Let’s try creating box and whisker plots so that this variation is more clear. Open a new sheet, select <code>year</code> and <code>Lemp</code> and go to <code>Show Me</code> -&gt; Box and whisker</p></li>
+<li><p>Change <code>Lemp</code> to a <code>Dimension</code>, then drag <code>year</code> to columns shelf and assign it as <code>Discrete</code>.</p></li>
+<li><p>Note that box and whisker plots show the median of the distribution, but we might also be interested in the means. How can you overlay this box and whisker plot with a line that shows the average value of <code>Lemp</code>?</p></li>
+<li><p>Finally, let’s do this separately by treatment year. Drag <code>First.Treat</code> to the <code>Pages</code> card and change it to a dimension. Note that the title of your worksheet can now automatically change as you change pages. Let’s change the title to read <code>Distribution of Annual Employment For States with &lt;Page Name&gt;</code>, then let’s edit the aliases of the First.Treat variable to be more useful for this title. We can change 0 to say <code>No Minimum Wage Increase</code>, 2004 to say <code>Minimum Wage Increase in 2004</code>, etc.</p></li>
+</ol>
+</section>
 </section>
 <section id="fixed-effects-with-marginal-changes" class="level2">
 <h2 class="anchored" data-anchor-id="fixed-effects-with-marginal-changes">Fixed effects with marginal changes</h2>
-<p>This section will cover how to estimate marginal changes with fixed effects and panel data. In this case, the goal is to use the fixed effects to control for unmeasured differences between the units that do not change over time (generally called unobserved heterogeneity).</p>
-<p>This exercise will use fixed effects models to analyze the impact of monthly fuel moisture on monthly wildfire activity in select counties in the US.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> You can download the data from <a href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi">this folder</a>. The folder contains two files: 1) <code>fires_303.csv.gz</code> and 2) <code>weather_303.csv.gz</code>. <code>fires_303.csv.gz</code> contains three variables: 1) a unique county identifier, <code>county_fips</code>, 2) the observation date <code>measure_date</code>, and 3) the number of wildfire burning on that date in that county, <code>fires</code>. <code>weather_303.csv.gz</code> contains the same county and date information along with 1000-hour fuel moisture measured in percent from 1 to 40.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Start a new script. Download these data and read the datasets into R - call the dataframes <code>fire</code> and <code>weather</code>. Note, the datasets for this exercise are fairly large.</p>
-<section id="data-processing" class="level3">
-<h3 class="anchored" data-anchor-id="data-processing">Data processing</h3>
-<p>The first issue is that the data we want to analyze are in two separate dataframes. We need to join the datasets to construct a single dataframe with both the fire occurrence and fuel moisture.</p>
-<p>The second issue is that the data you are given is at the daily level, but we want to analyze the relationship between fires and fuel moisture at the monthly level. We need to aggregate or summarize the data by month (use the function <code>yearmonth()</code> from the package <code>tsibble</code>). Let’s <code>sum()</code> the number of <code>fires</code> and calculate the <code>mean()</code> of <code>fm1000</code>.</p>
+<p>This section will cover how to visualize changes in variables over space and time. We will use the fires and weather data you used in last week’s lab. You can download the data from <a href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi">this folder</a>. The folder contains two files: 1) <code>fires_303.csv.gz</code> and 2) <code>weather_303.csv.gz</code>. <code>fires_303.csv.gz</code> contains three variables: 1) a unique county identifier, <code>county_fips</code>, 2) the observation date <code>measure_date</code>, and 3) the number of wildfire burning on that date in that county, <code>fires</code>. <code>weather_303.csv.gz</code> contains the same county and date information along with 1000-hour fuel moisture measured in percent from 1 to 40.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<section id="maps-with-pages-visualizing-spatial-data-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="maps-with-pages-visualizing-spatial-data-over-time">Maps with Pages (visualizing spatial data over time)</h3>
+<p>Connect to the fires dataset and create a map that shows the total number of fires in each county. Now assign the <code>Year</code> variable as your pages and give your map a useful title (that changes with the year).</p>
+<p>Note that you might want to play with different maximum values of your fires variable so that differences across time are more apparent. Try this now by going to Color -&gt; Edit Colors -&gt; Advanced -&gt; and choose a reasonable top copding value.</p>
 </section>
-<section id="analysis" class="level3">
-<h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
-<p>Our goal is to estimate the relationship between fuel moisture and the number of fire days across counties in the lower 48 states. In this case, the direction of causality is intuitive; dry hot weather dries out fuel and makes wildfire more likely. However, by estimating the model on all (fire prone) counties over time allows us to estimate the average effect over space and time (we also have the ability to estimate the relationship for any single county or point in time).</p>
-<p>We will use the function <code>feols</code> from the <code>fixest</code> package to estimate our fixed-effects regression. When we have a large number of units and time periods, creating a bunch of dummy variables is a lot of work for the computer. It turns out that subtracting the mean value of all variables along the dimensions of the fixed effects accomplishes the same thing.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This trick saves the computer a lot of work.</p>
-<p>We want to estimate the model: <span class="math display">\[ fires_{it} = \beta fm1000_{it} + \gamma_t + \delta_i +\varepsilon_{it} \]</span> where, again, the <span class="math inline">\(i\)</span> and <span class="math inline">\(t\)</span> represent county and time, <span class="math inline">\(\gamma_t\)</span> are the time fixed effects, and <span class="math inline">\(\delta_i\)</span> are the county fixed effects, and <span class="math inline">\(\beta\)</span> is the coefficient of interest. In this project, <span class="math inline">\(t\)</span> represents the year-month. The fixed effects play a similar role in this regression. The county fixed effects control for time-invariant factors of a county like vegetation, elevation, etc. The time fixed effects control for nationwide changes in a given month that may impact fires. For example, an announcement by the USFS that all fires will be contained as quickly as possible. The idea is that we net those factors captured by the fixed effects out of the effect of fuel moisture so that we are left with a more credible estimate.</p>
-<p>We enter the formula in <code>feols</code> similar to <code>lm()</code>, with a notable difference: the variables listed after the vertical pipe, <span class="math inline">\(|\)</span>, are considered fixed effects.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed effect regression model using fixest</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">feols</span>(fires <span class="sc">~</span> fm1000 <span class="sc">|</span> county_fips <span class="sc">+</span> ym,<span class="at">data =</span> analysis_ds )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Use <code>summary()</code> to view the results. By default, model objects from <code>fixest</code> do not print the values of the fixed effects (though they can be recovered). Also, <code>fixest</code> provides its own function to view tables called <code>etable()</code>.</p>
-<blockquote class="blockquote">
-<p>What is the sign and magnitude of <span class="math inline">\(\beta\)</span>? What does this tell us about the effect of fuel moisture on the number of fires in a county?</p>
-</blockquote>
+<section id="lines-with-distributions-visualizing-heterogeneity-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="lines-with-distributions-visualizing-heterogeneity-over-time">Lines with Distributions (visualizing heterogeneity over time)</h3>
+<p>Create a line graph that shows average fires across years in the sample.</p>
+<p>Next, create a new variable that counts the total number of (logged) fires in a county each year by creating a new calculated field called <code>Total Fires</code> using the equation <code>{FIXED [year],[county_fips]: SUM(LN([Fires]))}</code>.</p>
+<p>Create a circle plot of this variable by dragging it to the rows shelf to the right of avg. fires. Drag the total fires varaible again to the <code>Size</code> icon, and change it to <code>count</code>. You should now have circles that reflect the number of counties with the indicated number of fires. You may want to filter on this variable to remove the large number of zeros.</p>
 </section>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>This lab covered two ways of using fixed-effects regression models to analyze the causal impact of a policy or exposure. The methods are nearly identical in both cases. The difference in the two examples described is the nature of the variable of interest. In the minimum wage example, the policy is binary, so the treatment effect is a discrete jump. In the case of fuel moisture and fire, fuel moisture is a continuous variable, so the effect is interpreted as a marginal change in fire day due to a one uit (percent) change in fuel moisture.</p>
+<p>This lab covered different ways of visualizing panel data. There are of course many other avenues you can take to visualize your data and I encourage you to think outside the box for your final project. Dream of your ideal visualization and I can probably help you put it together!</p>
 </section>
 </section>
 
@@ -216,9 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>I removed counties that never experienced any fire between 2006-2015.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>1000-Hour Fuel Moisture (1000-hr FM) represents the modeled moisture content in dead fuels in the 3 to 8 inch diameter class and the layer of the forest floor about four inches below the surface. The 1000-hr FM value is based on a running 7-day computed average using length of day, daily temperature and relative humidity extremes (maximum and minimum values) and the 24-hour precipitation duration values. Values can range from 1 to 40 percent (<a href="https://gacc.nifc.gov/nrcc/predictive/fuels_fire-danger/psa_component_glossary.htm">source</a>).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>For example, subtracting the average of all variables across time, removes the county dummy variables since they don’t vary over time<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>1000-Hour Fuel Moisture (1000-hr FM) represents the modeled moisture content in dead fuels in the 3 to 8 inch diameter class and the layer of the forest floor about four inches below the surface. The 1000-hr FM value is based on a running 7-day computed average using length of day, daily temperature and relative humidity extremes (maximum and minimum values) and the 24-hour precipitation duration values. Values can range from 1 to 40 percent (<a href="https://gacc.nifc.gov/nrcc/predictive/fuels_fire-danger/psa_component_glossary.htm">source</a>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
