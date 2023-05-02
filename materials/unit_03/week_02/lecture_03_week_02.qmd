@@ -1,0 +1,484 @@
+---
+title: "Week 14: <br>Understanding Panel Data Analysis <br>"
+format: 
+  revealjs:
+    theme: [night, ../../custom.scss]
+    slide-number: c/t
+    width: 1400
+    # logo: path.png
+    # center: TRUE
+execute:
+  echo: true
+---
+
+## Agenda 
+
+Knowledge check.
+
+Differences-in-differences regressions: Intuition.
+
+Differences-in-differences regressions: Assumptions.
+
+Fixed effects regressions: Intuition.
+
+
+
+<!-- example of big text fit to slide width -->
+
+<!-- ::: {.r-fit-text} -->
+<!-- Big Text -->
+<!-- ::: -->
+
+<!-- :::: {.columns style="text-align: center"} -->
+<!-- ::: {.column width="40%"} -->
+<!-- ::: -->
+<!-- ::: {.column width="60%"} -->
+<!-- ::: -->
+<!-- :::: -->
+
+## Knowledge Check 1 {.scrollable}
+
+In lab you used data to estimate the following D-i-D regression:
+$$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
+Which parameter gave you the effect of a minimum wage increase on employment?
+
+A.  $\beta$ 
+
+B.  $\gamma_t$ 
+
+C.  $\delta_i$ 
+
+D.  $\varepsilon_{it}$
+
+## Knowledge Check 2 {.scrollable}
+
+In lab you used data to estimate the following D-i-D regression:
+$$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
+Which parameter controlled for factors that may have impacted employment across time?
+
+A.  $\beta$ 
+
+B.  $\gamma_t$ 
+
+C.  $\delta_i$ 
+
+D.  $\varepsilon_{it}$
+
+## Knowledge Check 3 {.scrollable}
+
+In lab you used data to estimate the following D-i-D regression:
+$$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
+Which parameter controlled for factors that may have impacted employment across counties?
+
+A.  $\beta$ 
+
+B.  $\gamma_t$ 
+
+C.  $\delta_i$ 
+
+D.  $\varepsilon_{it}$
+
+## Discussion
+
+In lab you used data to estimate the following D-i-D regression:
+
+$$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
+
+Which parameters controlled for factors that may have impacted employment across time and space?
+
+**How do these parameters "control" for these factors?**
+
+**How does including these parameters change your regression results and interpretation?**
+
+## Differences-in-Differences (DiD): Intuition
+
+The simplest version of the DiD estimator comes from a two-period, two-group analysis.
+
+Consider our previous analysis of the employment effects of minimum wage increases, simplified to fit this context:
+
+- In 2019, Colorado's minimum wage was $11.10 per hour. 
+  
+- In 2020, Colorado's minimum wage increased to $12.00 per hour.
+
+# {background-image="includes/co_emp1.png" background-size="contain"}
+
+
+## DiD: Intuition Knowledge Check 1
+
+Given this information, what effect did the minimum wage increase have on employment?
+
+A.  It increased employment
+
+B.  It decreased employment
+
+C.  It had no effect on employment
+
+D.  Unsure/Unclear effect
+
+## DiD: Intuition Knowledge Check 2
+
+What type of data did I show you in the previous bar graph?
+
+A.  Panel data
+
+B.  Time series data
+
+C.  Cross-sectional data
+
+D.  Repeated cross-sectional data
+
+## DiD: Intuition
+
+Consider our previous analysis of the employment effects of minimum wage increases, simplified to fit this context:
+
+- In 2019, Colorado's minimum wage was $11.10 per hour. 
+  
+- In 2020, Colorado's minimum wage increased to $12.00 per hour.
+
+- In 2019 and 2020, Wyoming's minimum wage was constant at $7.25 per hour.
+
+# {background-image="includes/co_emp2.png" background-size="contain"}
+
+## DiD: Intuition Knowledge Check 3
+
+Given this information, what effect did the minimum wage increase have on employment?
+
+A.  It increased employment
+
+B.  It decreased employment
+
+C.  It had no effect on employment
+
+D.  Unsure/Unclear effect
+
+## DiD: Intuition Knowledge Check 4
+
+What type of data did I show you in the previous bar graph?
+
+A.  Panel data
+
+B.  Time series data
+
+C.  Cross-sectional data
+
+D.  Repeated cross-sectional data
+
+## DiD: Intuition
+
+Consider our previous analysis of the employment effects of minimum wage increases, simplified to fit this context:
+
+- In 2019, Colorado's minimum wage was $11.10 per hour. 
+  
+- In 2020, Colorado's minimum wage increased to $12.00 per hour.
+
+- In 2019 and 2020, Wyoming's minimum wage was constant at $7.25 per hour.
+
+# {background-image="includes/co_emp3.png" background-size="contain"}
+
+## DiD: Intuition Knowledge Check 5
+
+Given this information, what effect did the minimum wage increase have on employment?
+
+A.  It increased employment
+
+B.  It decreased employment
+
+C.  It had no effect on employment
+
+D.  Unsure/Unclear effect
+
+## DiD: Intuition Knowledge Check 6
+
+What type of data did I show you in the previous bar graph?
+
+A.  Panel data
+
+B.  Time series data
+
+C.  Cross-sectional data
+
+D.  Repeated cross-sectional data
+
+## DiD: Intuition
+
+How can we use these numbers to estimate the effect of the minimum wage increase?
+
+![](includes/did1.png)
+
+## DiD: Intuition
+
+How can we use these numbers to estimate the effect of the minimum wage increase?
+
+![](includes/did2.png)
+
+## DiD: Intuition
+
+How can we use these numbers to estimate the effect of the minimum wage increase?
+
+![](includes/did3.png)
+
+## DiD: Intuition
+
+How can we use these numbers to estimate the effect of the minimum wage increase?
+
+![](includes/did4.png)
+
+The minimum wage increase caused employment to decrease by 37,760.
+
+Does this seem right to you?
+
+## DiD: The importance of transforming data
+
+How can we use these numbers to estimate the effect of the minimum wage increase?
+
+![](includes/did5.png)
+
+
+## DiD: The importance of transforming data
+
+How can we use these numbers to estimate the effect of the minimum wage increase?
+
+![](includes/did5.png)
+
+The minimum wage increase caused employment to decrease by 0.7%
+
+## DiD: Comparison to regression results
+
+Consider the following dataset (named df) based on this information:
+
+![](includes/Rdata.png)
+
+## DiD: Comparison to regression results
+
+Then suppose we run the following regression:
+
+```{r}
+#| eval: false
+# regression using binary treatment indicators
+mlm <- lm(employment ~ treated + treat_group + treat_time, data=df)
+```
+
+<style>
+span.small {
+  font-size: smaller;
+}
+</style>
+
+::: {.fragment}
+<p style = "padding: 0px; margin: 0px;"><span class="small"> Note that this is equivalent to our earlier regression equation:</span></p>
+<p style = "padding: 0px; margin: 0px;"><span class="small"> $$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$</span></p>
+:::
+::: {.fragment} 
+<p style = "padding: 0px; margin: 20px;"><span class="small">where $Y_{it}$ is employment in state $i$ and year $t$, </span></p>
+
+<p style = "padding: 0px; margin: 20px;"><span class="small">$\text{treated}_{it}$ is an indicator variable for observations in the treated state (Colorado) in the treatment year (2020),</span></p>
+
+<p style = "padding: 0px; margin: 20px;"><span class="small">and $\gamma_t$ and $\delta_i$ are indicators for each state and year in the sample.</span></p>
+
+:::
+
+
+## DiD: Comparison to regression results
+
+::: columns
+::: {.column width="50%"}
+
+![](includes/did6.jpg)
+
+::: 
+
+::: {.column width="50%"}
+
+|            |   Results   |
+|:-----------|:-----------:|
+|(Intercept) | 282455.000  |
+|treated     | -37760.000  |
+|treat_group | 2740565.000 |
+|treat_time  |  -6067.000  |
+|   |      |
+:::
+::::
+
+What do each of the coefficients correspond with?
+
+**Why?**
+
+## DiD: Comparison to regression results
+
+What if we run the regression using logged employment?
+
+```{r}
+#| eval: false
+# convert to logs
+df$lemp <- log(df$employment)
+
+# run a regression using logged employment
+mlm <- lm(lemp ~ treated + treat_group + treat_time,
+          data=df)
+```
+::: columns
+::: {.column width="50%"}
+
+![](includes/did7.png)
+
+::: 
+
+::: {.column width="50%"}
+
+|            |   Results   |
+|:-----------|:------:|
+|(Intercept) | 12.551 |
+|treated     | 0.007 |
+|treat_group | 2.370  |
+|treat_time  | -0.022 |
+|   |      |
+:::
+::::
+
+#
+
+::: {.r-fit-text}
+What if we have data from... 
+
+more than two time periods?
+
+more than two groups?
+:::
+
+# {background-image="includes/co_emp4.png" background-size="contain"}
+
+## Our DiD table becomes less helpful
+
+![](includes/did_ex.png)
+
+## Our dataset gets larger
+
+![](includes/did_ex3.png)
+
+## But our regression is exactly the same!
+
+```{r}
+#| eval: false
+# convert states and years to factor variables
+df$state <- as.factor(df$state)
+df$year <- as.factor(df$year)
+```
+
+Note that this effectively changes our dataset to this:
+
+![](includes/did_ex2.png)
+
+## But our regression is exactly the same!
+
+```{r}
+#| eval: false
+# convert states and years to factor variables
+df$state <- as.factor(df$state)
+df$year <- as.factor(df$year)
+
+# convert to logs
+df$lemp <- log(df$employment)
+
+# run a regression using logged employment
+mlm <- lm(lemp ~ treated + state + year,
+          data=df)
+
+# generate regression table
+modelsummary(mlm,statistic = "std.error", output = "markdown")
+```
+
+
+## How can we interpret these results? {.smaller}
+
+
+|             |  Results   |
+|:------------|:---------:|
+|(Intercept)  |  14.905   |
+|             |  (0.005)  |
+|treated      |   0.017   |
+|             |  (0.008)  |
+|stateWyoming |  -2.363   |
+|             |  (0.005)  |
+|year2019     |   0.013   |
+|             |  (0.005)  |
+|year2020     |  -0.013   |
+|             |  (0.007)  |
+|year2021     |  -0.013   |
+|             |  (0.007)  |
+|             |  |
+
+# DiD Assumptions for Causality
+
+# {background-image="includes/co_emp4.png" background-size="contain"}
+
+## Assumption 1: Parallel trends
+
+This assumption states that prior to the intervention (treatment or policy), the treatment and control units had similar trends in the outcome unit.
+
+**Why is this important?**
+
+# {background-image="includes/did_ex4.png" background-size="contain"}
+
+## Assumption 1: Parallel trends
+
+This assumption states that prior to the intervention (treatment or policy), the treatment and control units had similar trends in the outcome unit.
+
+**Why is this important?**
+
+Satisfying this assumption indicates that the non-treatment group is a good control for the treatment group.
+
+## Assumption 2: The Intervention
+
+This might seem obvious, but we also need to assume that the intervention we are studying is the **only** thing that changed **for treated units in the post-treatment time period**.
+
+## Opinion Question (Open Ended)
+
+![](includes/co_emp4.png)
+
+**Did anything else change between 2019 and 2020?**
+
+## Opinion Question (Open Ended)
+
+![](includes/co_emp4.png)
+
+**Is this problematic for causally identifying the effect of the minimum wage increase?**
+
+## Fixed Effects (FE) Regressions: Intuition
+
+In lab last week you studied the effect of fuel moisture on the prevalence of wildfires using the following regression:
+
+$$ fires_{it} = \beta \cdot fm_{it} + \gamma_t + \delta_i +\varepsilon_{it} $$
+
+::: {.fragment}
+This equation looks identical to our difference in differences equation. 
+
+The only difference is that here we have a continuous "treatment" (fm) rather than binary.
+:::
+
+## Fixed Effects (FE) Regressions: Intuition
+
+In lab last week you studied the effect of fuel moisture on the prevalence of wildfires using the following regression:
+
+$$ fires_{it} = \beta \cdot fm_{it} + \gamma_t + \delta_i +\varepsilon_{it} $$
+
+What are the role of the fixed effects $\gamma_t$ and $\delta_i$ in this regression?
+
+**Conceptually, what are these parameters doing?**
+
+<section data-background-iframe="https://public.tableau.com/views/fires_fe_ex/county_ttl_fires_year?:language=en-US&:showVizHome=no&:embed=true"
+          data-background-interactive>
+</section>
+
+## 
+
+## Fixed Effects (FE) Regressions: Intuition
+
+In lab last week you studied the effect of fuel moisture on the prevalence of wildfires using the following regression:
+
+$$ fires_{it} = \beta \cdot fm_{it} + \gamma_t + \delta_i +\varepsilon_{it} $$
+
+What are the role of the fixed effects $\gamma_t$ and $\delta_i$ in this regression?
+
+**Conceptually, what are these parameters doing?**
+
+We are **demeaning** the outcome and predictor variables so that we are identifying effects based on variation *within* our units. [Still confused by FEs?](https://ds4ps.org/pe4ps-textbook/docs/p-040-fixed-effects.html)
