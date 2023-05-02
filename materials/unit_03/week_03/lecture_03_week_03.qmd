@@ -1,0 +1,92 @@
+---
+title: "Week 15: <br>Panel Data Analysis and Course Summary <br>"
+format: 
+  revealjs:
+    theme: [night, ../../custom.scss]
+    slide-number: c/t
+    width: 1400
+    # logo: path.png
+    # center: TRUE
+execute:
+  echo: true
+---
+
+## Agenda 
+
+Project overview emphasizing connection between questions and analysis
+
+Expectations for final presentation and report
+
+course recap led by questions that test comprehension
+
+
+
+<!-- example of big text fit to slide width -->
+
+<!-- ::: {.r-fit-text} -->
+<!-- Big Text -->
+<!-- ::: -->
+
+<!-- :::: {.columns style="text-align: center"} -->
+<!-- ::: {.column width="40%"} -->
+<!-- ::: -->
+<!-- ::: {.column width="60%"} -->
+<!-- ::: -->
+<!-- :::: -->
+
+## Project Overview
+
+
+Choose one of the "treatment" datasets and find an outcome to evaluate
+
+What is the impact of $x$ (treatment or exposure) on some outcome $y$?
+
+Collect panel data and build dataset. Aggregate to the lowest communit unit of analysis (e.g., county year). Merge data.
+
+Perform an exploratory data analysis and assemble summary statistics. Analyze spatial patterns, correlations, etc. Estimate the effect of $x$ on $y$. Build visualizations to answer your research question.
+
+Present results in class on final. Report due Thursday.
+
+## Bats and Ag Land Prices (Manning & Ando)
+
+![](includes/09-bats-1024x659.jpeg)
+
+## Research Question
+
+:::{.incremental}
+- What effect do bats have on crop production (e.g., corn and soy beans)?
+
+  - No good measure of bats, but we know white nose syndrome kills bats
+
+- What effect does white nose syndrome have on production, and land values?
+:::
+
+## What data would you collect?
+
+iclicker short answer
+
+:::{.incremental}
+- Outcomes: cash rents, cropland acres
+
+- Treatment: presence of white nose syndrome
+
+- Controls: population, land quality, weather
+
+- Unit of observation: county-year
+:::
+
+## How would you specify the regression model?
+
+Think about it.  I'll pick someone to write it on the board.
+
+:::{.incremental}
+
+- $$ y_{it} = \beta \cdot WNS_{it} + \gamma X_{it} + \delta_t + \alpha_i + \varepsilon_{it} $$
+:::
+
+## Results
+
+![](includes/bats_tab_1.png)
+
+
+
