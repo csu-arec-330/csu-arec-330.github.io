@@ -84,9 +84,102 @@ Think about it.  I'll pick someone to write it on the board.
 - $$ y_{it} = \beta \cdot WNS_{it} + \gamma X_{it} + \delta_t + \alpha_i + \varepsilon_{it} $$
 :::
 
-## Results
+## Which coefficient answers the research question?
+
+$$ y_{it} = \beta \cdot WNS_{it} + \gamma X_{it} + \delta_t + \alpha_i + \varepsilon_{it} $$
+
+A. $\beta$
+
+B. $\gamma$
+
+C. $\delta_t$
+
+D. $\alpha_i$
+
+## What is the role of $\alpha_i$ in the regression?
+
+$$ y_{it} = \beta \cdot WNS_{it} + \gamma X_{it} + \delta_t + \alpha_i + \varepsilon_{it} $$
+
+A. To capture the average treatment effect of white nose syndrome on ag land prices
+
+B. To capture unobserved factors in a county that do not vary over time
+
+C. To capture unobserved factors common to all counties at a given point in time
+
+D. To control for federal agricultural policies that may change over time
+
+# Results
+
+## What is the effect of WNS on land rents?
 
 ![](includes/bats_tab_1.png)
+
+## How might you visualize this result?
+
+## Event study plot
+
+![](includes/bats_event.png)
+
+## Summarize the implications of the analysis?
+
+iclicker
+
+# Course Review
+
+## Topics and themes
+
+- Effective and appropriate data visualizations
+
+- Data storytelling
+
+- Scripted data management and analysis (in R)
+
+
+## Overview
+
+- Time series
+
+- Cross sectional and spatial data
+
+- Panel data
+
+
+## What is the purpose of decomposing a time series into its components?
+
+A. To remove any anomalies or outliers from the data.
+
+B. To prepare the data for regression analysis.
+
+C. To determine the forecast accuracy of the time series.
+
+D. To identify the underlying patterns and relationships within the data.
+
+
+## When is clustering analysis an appropriate technique for data analysis?
+
+A. When the data is unlabeled or unstructured.
+
+B. When the data has a clear target variable or outcome.
+
+C. When the data has a linear relationship between variables.
+
+D. When the data is in a time series format.
+
+
+## How can color be used effectively in a data visualization?
+
+A. To highlight important data points or trends.
+
+B. To make the visualization more visually appealing.
+
+C. To confuse the viewer with too many colors.
+
+D. To distract from the key message of the visualization.
+
+
+
+# What are your takeaways from the course?
+
 
 
 
