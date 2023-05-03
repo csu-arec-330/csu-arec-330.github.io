@@ -34,7 +34,7 @@ Course recap
 <!-- ::: -->
 <!-- :::: -->
 
-## Project Overview {.scrollable}
+## [Project Overview](project_3.html) {.scrollable}
 
 
 Choose one of the "treatment" datasets and find an outcome to evaluate
