@@ -1,5 +1,5 @@
 ---
-title: "Week 15: <br>Panel Data Analysis and Course Summary <br>"
+title: "Week 15: <br>Panel Data Example and Course Summary <br>"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -15,9 +15,9 @@ execute:
 
 Project overview emphasizing connection between questions and analysis
 
-Expectations for final presentation and report
+Economics research example
 
-course recap led by questions that test comprehension
+Course recap 
 
 
 
@@ -34,20 +34,22 @@ course recap led by questions that test comprehension
 <!-- ::: -->
 <!-- :::: -->
 
-## Project Overview
+## [Project Overview](project_3.html) {.scrollable}
 
 
 Choose one of the "treatment" datasets and find an outcome to evaluate
 
 What is the impact of $x$ (treatment or exposure) on some outcome $y$?
 
-Collect panel data and build dataset. Aggregate to the lowest communit unit of analysis (e.g., county year). Merge data.
+Collect panel data and build dataset. Aggregate to the lowest common unit of analysis (e.g., county year). Merge data.
 
 Perform an exploratory data analysis and assemble summary statistics. Analyze spatial patterns, correlations, etc. Estimate the effect of $x$ on $y$. Build visualizations to answer your research question.
 
-Present results in class on final. Report due Thursday.
+Present results in class on final (May 10 9-11 AM). 
 
-## Bats and Ag Land Prices (Manning & Ando)
+Incorporate feedback into report due Thursday May 11.
+
+## Bats and Ag Land Prices ([Manning & Ando](https://www.journals.uchicago.edu/doi/full/10.1086/720303))
 
 ![](includes/09-bats-1024x659.jpeg)
 
@@ -56,7 +58,9 @@ Present results in class on final. Report due Thursday.
 :::{.incremental}
 - What effect do bats have on crop production (e.g., corn and soy beans)?
 
-  - No good measure of bats, but we know white nose syndrome kills bats
+  - No good measure of bats, but we know white nose syndrome (WNS) kills bats
+  
+  - WNS is monitored by county over time
 
 - What effect does white nose syndrome have on production, and land values?
 :::
@@ -126,6 +130,8 @@ iclicker
 
 # Course Review
 
+## What was this course about?
+
 ## Topics and themes
 
 - Effective and appropriate data visualizations
@@ -135,13 +141,16 @@ iclicker
 - Scripted data management and analysis (in R)
 
 
-## Overview
+## Organization
 
 - Time series
 
 - Cross sectional and spatial data
 
 - Panel data
+
+What methods did we cover in these areas?
+
 
 
 ## What is the purpose of decomposing a time series into its components?
@@ -166,6 +175,17 @@ C. When the data has a linear relationship between variables.
 D. When the data is in a time series format.
 
 
+## Which of the following analysis techniques is regression *not* suitable for?
+
+A. Time series analysis
+
+B. Unsupervised learning
+
+C. Supervised learning
+
+D. Difference in differences
+
+
 ## How can color be used effectively in a data visualization?
 
 A. To highlight important data points or trends.
@@ -178,8 +198,16 @@ D. To distract from the key message of the visualization.
 
 
 
-# What are your takeaways from the course?
+## What are your takeaways from the course?
 
+:::{.incremental}
+- Let the business or research question guide your analysis
+
+- Once you have something to say, develop a compelling story
+
+- Support your story with effective and appropriate visualizations 
+
+:::
 
 
 

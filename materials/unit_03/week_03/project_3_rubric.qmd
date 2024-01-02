@@ -1,5 +1,5 @@
 ---
-title: "Project 2 Rubric"
+title: "Project 3 Rubric"
 format: 
   html:
     theme: [zephyr, ../../custom_doc.scss]

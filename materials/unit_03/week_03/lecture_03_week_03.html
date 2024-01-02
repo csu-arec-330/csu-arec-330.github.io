@@ -7,9 +7,9 @@
 <link href="lecture_03_week_03_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lecture_03_week_03_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_03_week_03_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.280">
+  <meta name="generator" content="quarto-1.2.269">
 
-  <title>Week 15:  Panel Data Analysis and Course Summary  </title>
+  <title>Week 15:  Panel Data Example and Course Summary  </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -323,7 +323,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 15: <br>Panel Data Analysis and Course Summary <br></h1>
+  <h1 class="title">Week 15: <br>Panel Data Example and Course Summary <br></h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -332,8 +332,8 @@
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <p>Project overview emphasizing connection between questions and analysis</p>
-<p>Expectations for final presentation and report</p>
-<p>course recap led by questions that test comprehension</p>
+<p>Economics research example</p>
+<p>Course recap</p>
 <!-- example of big text fit to slide width -->
 <!-- ::: {.r-fit-text} -->
 <!-- Big Text -->
@@ -345,16 +345,17 @@
 <!-- ::: -->
 <!-- :::: -->
 </section>
-<section id="project-overview" class="slide level2">
-<h2>Project Overview</h2>
+<section id="project-overview" class="slide level2 scrollable">
+<h2><a href="project_3.html">Project Overview</a></h2>
 <p>Choose one of the “treatment” datasets and find an outcome to evaluate</p>
 <p>What is the impact of <span class="math inline">\(x\)</span> (treatment or exposure) on some outcome <span class="math inline">\(y\)</span>?</p>
-<p>Collect panel data and build dataset. Aggregate to the lowest communit unit of analysis (e.g., county year). Merge data.</p>
+<p>Collect panel data and build dataset. Aggregate to the lowest common unit of analysis (e.g., county year). Merge data.</p>
 <p>Perform an exploratory data analysis and assemble summary statistics. Analyze spatial patterns, correlations, etc. Estimate the effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>. Build visualizations to answer your research question.</p>
-<p>Present results in class on final. Report due Thursday.</p>
+<p>Present results in class on final (May 10 9-11 AM).</p>
+<p>Incorporate feedback into report due Thursday May 11.</p>
 </section>
 <section id="bats-and-ag-land-prices-manning-ando" class="slide level2">
-<h2>Bats and Ag Land Prices (Manning &amp; Ando)</h2>
+<h2>Bats and Ag Land Prices (<a href="https://www.journals.uchicago.edu/doi/full/10.1086/720303">Manning &amp; Ando</a>)</h2>
 
 <img data-src="includes/09-bats-1024x659.jpeg" class="r-stretch"></section>
 <section id="research-question" class="slide level2">
@@ -363,7 +364,8 @@
 <ul>
 <li class="fragment"><p>What effect do bats have on crop production (e.g., corn and soy beans)?</p>
 <ul>
-<li class="fragment">No good measure of bats, but we know white nose syndrome kills bats</li>
+<li class="fragment"><p>No good measure of bats, but we know white nose syndrome (WNS) kills bats</p></li>
+<li class="fragment"><p>WNS is monitored by county over time</p></li>
 </ul></li>
 <li class="fragment"><p>What effect does white nose syndrome have on production, and land values?</p></li>
 </ul>
@@ -431,6 +433,9 @@
 <h1>Course Review</h1>
 
 </section>
+<section id="what-was-this-course-about" class="slide level2">
+<h2>What was this course about?</h2>
+</section>
 <section id="topics-and-themes" class="slide level2">
 <h2>Topics and themes</h2>
 <ul>
@@ -439,13 +444,14 @@
 <li><p>Scripted data management and analysis (in R)</p></li>
 </ul>
 </section>
-<section id="overview" class="slide level2">
-<h2>Overview</h2>
+<section id="organization" class="slide level2">
+<h2>Organization</h2>
 <ul>
 <li><p>Time series</p></li>
 <li><p>Cross sectional and spatial data</p></li>
 <li><p>Panel data</p></li>
 </ul>
+<p>What methods did we cover in these areas?</p>
 </section>
 <section id="what-is-the-purpose-of-decomposing-a-time-series-into-its-components" class="slide level2">
 <h2>What is the purpose of decomposing a time series into its components?</h2>
@@ -461,19 +467,33 @@
 <p>C. When the data has a linear relationship between variables.</p>
 <p>D. When the data is in a time series format.</p>
 </section>
+<section id="which-of-the-following-analysis-techniques-is-regression-not-suitable-for" class="slide level2">
+<h2>Which of the following analysis techniques is regression <em>not</em> suitable for?</h2>
+<p>A. Time series analysis</p>
+<p>B. Unsupervised learning</p>
+<p>C. Supervised learning</p>
+<p>D. Difference in differences</p>
+</section>
 <section id="how-can-color-be-used-effectively-in-a-data-visualization" class="slide level2">
 <h2>How can color be used effectively in a data visualization?</h2>
 <p>A. To highlight important data points or trends.</p>
 <p>B. To make the visualization more visually appealing.</p>
 <p>C. To confuse the viewer with too many colors.</p>
 <p>D. To distract from the key message of the visualization.</p>
-</section></section>
-<section id="what-are-your-takeaways-from-the-course" class="title-slide slide level1 center">
-<h1>What are your takeaways from the course?</h1>
+</section>
+<section id="what-are-your-takeaways-from-the-course" class="slide level2">
+<h2>What are your takeaways from the course?</h2>
+<div>
+<ul>
+<li class="fragment"><p>Let the business or research question guide your analysis</p></li>
+<li class="fragment"><p>Once you have something to say, develop a compelling story</p></li>
+<li class="fragment"><p>Support your story with effective and appropriate visualizations</p></li>
+</ul>
+</div>
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

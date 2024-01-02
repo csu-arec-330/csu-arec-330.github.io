@@ -1,5 +1,5 @@
 ---
-title: "Unit 2: Final Project and Presentations"
+title: "Unit 3: Final Project and Presentations"
 format: 
   html:
     theme: zephyr
@@ -7,43 +7,39 @@ format:
 
 ## Overview
 
-The goal of this project is for you to apply the tools for cross sectional data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
+The goal of this project is for you to apply panel data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytic skills. Create something that you are proud to show others.
 
-[**Rubric**](project_2_rubric.html)
+[**Rubric**](project_3_rubric.html)
 
 
 ### The Question
 
-**The question** should be one related to agriculture, the environment, or natural resources and of interest to a business/company, a marketing board, policy makers, non-governmental organizations (NGO), or other nonprofit organizations. The question must be one that can be answered with cross-sectional data. For example:
+**The question** Choose one of the treatment or exposure datasets and find an outcome to evaluate.  You are posing some form of the question: What is the impact of $x$ (treatment or exposure) on some outcome $y$?
 
-- **Business:** Where should I locate my business?
-
-- **Marketing Board:** What is consumer demand for our products by geographic location? By consumer demogrphic characteristics? Should we run marketing campaigns in areas where demand is low or target consumers in areas where consumption is already high?
-
-- **Policy maker:** Based on current snowpack levels, where should we anticipate fires this coming fire season?
-
-- **NGO/Nonprofit:** What is will demand be for electric cars in 5 years and what can we do to increase it?
+[Treatment or exposure datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/Ene2gKXT9QBMr5Zb383dEeYBmvLFvFZR6PTwxUcGNza_0g?e=gwtVHm)
 
 ### The Data
 
-You will be responsible for collecting your own cross sectional data to answer this question. There are resources on the course website, and you should feel free to follow-up with the professors if you are interested in applying data used in lectures and labs.
+You are given the treatment or exposure dataset. You are responsible for collecting additional data needed to answer this question. First, you need to identify data on the outcome $y$. Second, you need to identify data on any controls that you may need (e.g., weather).  Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation. You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.
+
+[Additional Datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EsuPJcqiDPZFu0qJ-JONVLcB1gnp08EAm2LuTPAHVz2yqA?e=IsLJkA)
 
 
 ### The Analysis
 
-Our expectation is that you will use cross sectional data from any of the sources provided on the course website to answer your proposed question. The only strict requirements are: 
+We expect you to use fixed-effects regression to answer your proposed question. The only strict requirements are: 
 
-1. Present summary statistics of your data. We recommend including: a visual analysis including a regression line, a map that highlights geographical differences in your important variables, and the mean, standard deviation, and range of values for important variables. 
+1. Present summary statistics of your data. Many of the tabular or data visualization techniques covered in previous units apply to panel data.  You should make clear the number of units and time periods in your dataset. 
 
-2. Perform either a regression or cluster analysis.
+2. Perform a fixed-effects regression.
 
-3. Explain your analysis, including justifying your variable choice, justifying your model choice (how did you choose between regression v. cluster analysis), clearly explaining how the analysis should help to answer your research question.
+3. Explain your analysis. Is your analysis designed to estimate a treatment effect (of a policy that is present or not) or the marginal effect of an exposure (a continuous variable). You should clearly explain how the analysis helps to answer your research question.
 
-4. Discuss any assumptions you made in your analysis and identify limitations (e.g., are you using population forecasts that may or may not be accurate? Are you certain your data cover the entire population, or is it a sample?)
+4. Discuss any assumptions you made in your analysis and identify limitations.
 
-5. Present and interpret your results. Use your analysis to clearly answer your research question and tell the audience what to do with the information provided. Provide interpretations of regression results or discuss the meaning of your different clusters. Use appropriate visual tools to accomplish this.
+5. Present and interpret your results. Use your analysis to clearly answer your research question and tell the audience what to do with the information provided. Provide interpretations of regression results (treatment effect or marginal effect). Use appropriate visualizations to communicate results.
 
-### The Presentation - In Class 4/14/2023 (80 points)
+### The Presentation - In Class 5/10/2023 (80 points)
 
 **Overall presentation expectations:** (20 points total)
 
@@ -63,23 +59,21 @@ You should begin your presentation with the following: (5 points)
 
 You should then: 
 
-- Give us any relevant background info that is necessary to understanding your question (as in my example...) (5 points)
+- Give us any relevant background info that is necessary to understanding your question (5 points)
 
-- State your question (5 points - the question should be realistic (i.e., something a real world company would like an answer to), clearly stated, and answerable with a cross sectional analysis)
+- State your question (5 points)
 
 **Presentation Data and Analysis:** (35 points total)
 
 Data: 
 
-- Describe where your data is from (5 points)
+- Describe where your data is from, any modifications to the original data, and how you combined disparate data into a single dataset (10 points)
 
-- Provide summary statistics and visualizations (10 points, see step 1 under `Analysis` above)
+- Provide summary statistics and visualizations (5 points, see step 1 under `Analysis` above)
 
 Analysis:
 
-- What model did you use? (5 points)
-
-- What assumptions did you make in your analysis?  What are limitations to your analysis? (5 points, see step 3 under `Analysis` above)
+- What assumptions did you make in your analysis?  What are limitations to your analysis? (10 points, see step 3 under `Analysis` above)
 
 - Plot AND describe your analysis. (10 points)
 
@@ -90,7 +84,7 @@ Analysis:
 - What are the key take-aways for your intended audience?
 
 
-### The Write-up/Online Submission - Due 11:59 PM 3/20/2023 (40 points)
+### The Write-up/Online Submission - Due 11:59 PM 5/11/2023 (40 points)
 
 You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code. The written portion of the assignment is due later so that you can incorporate feedback that you receive during the oral presentation in class.
 
@@ -100,7 +94,7 @@ Because much of the presentation grade is tied to the content of your report, gr
 
 2. Is your report readable and useful? We will not assess the quality of your research question, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (10 points)
 
-3. Does your report adequately addres the feedback provided after your presentation? We will assess whether and to what extent you incorporated our suggestions. (10 points)
+3. Does your report adequately address the feedback provided after your presentation? We will assess whether and to what extent you incorporated our suggestions. (10 points)
 
 3. Organization, formatting and structure. Is your report organized, presented in a logical order, with appropriate integration of writing, analysis, and code? (5 points)
 
