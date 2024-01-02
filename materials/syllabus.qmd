@@ -2,7 +2,7 @@
 title: "Syllabus AREC 330 Data-Driven Decision Making"
 format: 
   html:
-    theme: zephyr
+    # theme: zephyr
     date-modified: last-modified
   pdf: default
 ---
@@ -25,9 +25,9 @@ Lab: Nutrien 103, Fri 1:00 - 2:40 PM
 
 ## Who
 
-**Alexandra Hill** (Instructor), [alexandra.e.hill\@colostate.edu](mailto:alexandra.e.hill@colostate.edu), 970-491-3577, Nutrien 213
+**Lauren Chenarides** (Instructor), [lauren.chenarides\@colostate.edu](mailto:lauren.chenarides@colostate.edu), 970-491-2480, Nutrien 201
 
-Office Hours: Th 2-3PM & by appt
+<!-- Office Hours: Th 2-3PM & by appt -->
 
 **Jude Bayham** (Instructor), [jbayham\@colostate.edu](mailto:jbayham@colostate.edu), 970-491-2836, Nutrien 203
 
@@ -35,7 +35,7 @@ Office Hours: W 2-3PM & by appt <https://go.oncehub.com/jude_bayham>
 
 **Zarif Rasul** (TA), [Zarif.Rasul\@colostate.edu](mailto:Zarif.Rasul@colostate.edu)
 
-Office Hours: M 2-3PM & Th 3-4PM Nutrien 165
+<!-- Office Hours: M 2-3PM & Th 3-4PM Nutrien 165 -->
 
 
 ## Course Description
@@ -64,17 +64,17 @@ Throughout the semester, course materials will indicate which of these 8 learnin
 
 ## Course Materials
 
-All course materials are freely available on the course website: . There is no single textbook that you need to purchase. Course deliverables will be submitted on Canvas unless otherwise noted.
+All course materials are freely available on the course website. There is no single textbook that you need to purchase. Course deliverables will be submitted on Canvas unless otherwise noted.
 
 The course will require the use of [R (statistical computing software)](https://www.r-project.org/) and [Tableau (business intelligence software)](https://www.tableau.com/). R is an open source platform free to anyone. Tableau is freely available to you while you are a student at CSU. You will need to use these tools outside of class, so we recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
 
-Another option for accessing R is to use the DARE compute server I mentioned in class.  You can access RStudio on the server here: <http://darecompute-01.aggie.colostate.edu:8787/>. This link should simply work while you are **on campus**.  While you are **off campus**, you need to active the virtual private network (VPN).  You can find instructions for setting up the VPN here: <https://it.colostate.edu/cybersecurity/globalprotect-vpn/>.
+Another option for accessing R is to use the DARE compute server.  You can access RStudio on the server here: <http://darecompute-01.aggie.colostate.edu:8787/>. This link should simply work while you are **on campus**.  While you are **off campus**, you need to active the virtual private network (VPN).  You can find instructions for setting up the VPN here: <https://it.colostate.edu/cybersecurity/globalprotect-vpn/>.
 
 We will use iClicker software to take attendance at lecture and assess understanding of the material.  If you have not already joined the course, you can do so using this link: <https://join.iclicker.com/BIDY>
 
 ## Course Structure
 
-**Projects** The course is organized into four projects intended to develop different analytical skills. The projects will be completed in teams.  The project in each unit will be completed in parts.  The parts will be submitted as weekly assignments.  However, the final project deliverable will be worth the majority of points.  
+**Projects** The course is organized into four projects intended to develop different analytical skills. The projects will be completed in teams.  The project in each unit will be completed in parts.  The parts will be submitted as weekly assignments.  However, the final project deliverable will be worth the majority of points. You will present each of your final projects to the class. You will record the group presentation on video for the instructors and classmates to view. You will review each others presentations highlighting strengths and weaknesses. One lab session will be devoted to a question and answer session where the instructors and students will ask questions of the presenters.  
 
 **Teams** Many careers require teamwork in some form. In this course, you will work in teams to complete your assignments and present your work. Team projects will train students to collaborate with peers as they likely will do in the workplace. Group work can also lead to freeriding so, students will evaluate themselves and each other after each project. The evaluation will provide the students the opportunity to explain their contribution and those of their peers. The instructors will be available to resolve disputes within a team. However, the most productive arrangement for this class (and in your future workplace) is to communicate expectations with your colleagues and do your part of the project.
 
@@ -99,15 +99,15 @@ During class, please turn off your cell phones and put them away. Be respectful 
 
     -   What is Data-Driven Decision Making (D$^3$M)?
 
-    -   Introduction to R and Tableau
+    -   Introduction to data processing with R 
 
-    -   Introduction to data processing
+    -   Introduction to data visualization with Tableau
     
     -   Developing a workflow; Breaking a project into parts
 
--   Project 01: Price Forecasting
+-   Project 01: Time Series Data and Forecasting
 
-    -   How can price forecasting can influence business decisions?
+    -   How price forecasting can influence business decisions?
 
     -   Time series analysis
     
@@ -115,23 +115,23 @@ During class, please turn off your cell phones and put them away. Be respectful 
 
     -   Telling a story with your data analysis
 
--   Project 02: Labor Productivity
+-   Project 02: Cross-Sectional and Spatial Data  
 
-    -   How can a firm study labor productivity to be more efficient?
+    -   How does a firm study customers to improve marketing and sales?
     
     -   Exploratory Data Analysis
-
-    -   Basics of causal inference
-
-    -   How to present a statistical model
-
--   Project 03: Predicting Wildfire Severity
-
-    -   How can early indicators influence land management decisions?
 
     -   Introduction to spatial data processing
 
     -   Maps in Tableau
+
+    -   How to present a statistical model
+
+-   Project 03: Panel Data and Causal Inference
+
+    -   How do firms use data to understand whether a policy or intervention worked as intended?
+    
+    -   Basics of causal inference
 
     -   Dynamic plots in Tableau
 
