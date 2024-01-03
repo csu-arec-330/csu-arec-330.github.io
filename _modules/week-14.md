@@ -3,14 +3,15 @@ title: "Week 14: Understanding Panel Data Analysis and Panel Data Visualizations
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Apr 26 & Apr 28</u></b> <br> <br>
+<b><u>Apr 24 & Apr 26</u></b> <br> <br>
 
-<b>Lecture Materials - Wed, Apr 26, 2023:</b> <br>
 
+<b>Lecture Materials:</b> <br>
 
 <a  href="/materials/unit_03/week_02/lecture_03_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
 
-<b>Lab Materials - Fri, Apr 28, 2023:</b> <br>
+
+<b>Lab Materials:</b> <br>
 
 <a  href="/materials/unit_03/week_02/includes/min_wage_data.csv" target="_blank">min_wage_data.csv</a> <br> 
 

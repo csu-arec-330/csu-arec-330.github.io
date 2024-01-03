@@ -3,16 +3,18 @@ title: "Week 15: Panel Data Analysis Project"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Apr 26 & Apr 28</u></b> <br> <br>
+<b><u>May 01 & May 03 28</u></b> <br> <br>
 
-<b>Lecture Materials - Wed, May 3, 2023:</b> <br>
-
+<b>Lecture Materials:</b> <br>
 
 <a  href="/materials/unit_03/week_03/lecture_03_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
 
-<b>Lab Materials - Fri, May 5, 2023:</b> <br>
 
-<b>Project Materials - Due Friday, May 10 (presentation) and May 11 (report) by 11:59 PM:</b> <br>
+<b>Lab Materials:</b> <br>
+
+<br>
+
+<b>Project Materials - Due Sunday, May 05 (video presentation) and May 09 (report) by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_03/week_03/project_3.html" target="_blank">Project 3 Instructions</a> <br> 
 

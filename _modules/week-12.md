@@ -3,9 +3,9 @@ title: "Week 12: Project 2"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Apr 12 & Apr 14</u></b> <br> <br>
+<b><u>Apr 10 & Apr 12</u></b> <br> <br>
 
-<b>Lecture Materials - Wed, Apr 12, 2023:</b> <br>
+<b>Lecture Materials:</b> <br>
 
 
 <a  href="/materials/unit_02/week_04/lecture_02_week_04.html" target="_blank">Lecture Slides</a> <br> <br>
@@ -13,7 +13,7 @@ title: "Week 12: Project 2"
 
 
 
-<b>Project Materials - Due Friday, April 14 (presentation) and April 21 (report) by 11:59 PM:</b> <br>
+<b>Project Materials - Due Thursday, April 11 (presentation) and April 18 (report) by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_02/week_04/project_2.html" target="_blank">Project 2 Instructions</a> <br> 
 

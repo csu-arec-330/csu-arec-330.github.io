@@ -3,15 +3,15 @@ title: "Week 5: Intro to time series"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Feb 15 & Feb 17</u></b> <br> <br>
+<b><u>Feb 14 & Feb 16</u></b> <br> <br>
 
-<b>Lecture Materials - Wed, Feb 15, 2023:</b> <br>
+<b>Lecture Materials:</b> <br>
 
 
 <a  href="/materials/unit_01/week_01/lecture_01_week_01.html" target="_blank">Lecture Slides</a> <br> <br>
 
 
-<b>Lab Materials - Fri, Feb 17, 2023:</b> <br>
+<b>Lab Materials:</b> <br>
 
 <a  href="/materials/unit_01/week_01/lab_01_week_01.html" target="_blank">Week 5 Lab Notes</a> <br> 
 
@@ -24,7 +24,7 @@ title: "Week 5: Intro to time series"
 
 
 
-<b>Problem Set 5 Materials - Due Thursday, Feb 23 by 11:59 PM:</b> <br>
+<b>Problem Set 5 Materials - Due Thursday, Feb 22 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_01/week_01/ps5.html" target="_blank">Problem Set 5 Instructions</a> <br> 
 

@@ -3,14 +3,14 @@ title: "Week 10: Intro to Analyzing Cross-Sectional Data"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Mar 29 & Mar 31</u></b> <br> <br>
+<b><u>Mar 27 & Mar 29</u></b> <br> <br>
 
-<b>Lecture Materials - Wed, Mar 29, 2023:</b> <br>
+<b>Lecture Materials:</b> <br>
 
 <a  href="/materials/unit_02/week_02/lecture_02_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
 
 
-<b>Lab Materials - Friday, March 31:</b> <br>
+<b>Lab Materials:</b> <br>
 
 <a  href="/materials/unit_02/week_02/lab_02_week_02.html" target="_blank">Week 10 Lab Notes</a> <br> 
 
@@ -18,7 +18,7 @@ title: "Week 10: Intro to Analyzing Cross-Sectional Data"
 
 
 
-<b>Problem Set Materials - Due Friday, April 7 by 11:59 PM:</b> <br>
+<b>Problem Set Materials - Due Thursday, April 4 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_02/week_02/ps_02_week_02.html" target="_blank">Project 2 Problem Set 2 Instructions</a> <br> 
 
