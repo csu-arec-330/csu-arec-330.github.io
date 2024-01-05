@@ -10,14 +10,13 @@ githubdir: "csu-arec-330/csu-arec-330.github.io"
 
 # Author/user information
 email: |
-  lauren.chenarides@colostate.edu
-  jbayham@colostate.edu
+  - lauren.chenarides@colostate.edu
+  - jbayham@colostate.edu
 #twitter_username: stevenvmiller
 #github_username:  svmiller
 #authorurl: "https://alexandraehill.github.io"
 address: |
-    Department of Agricultural and Resource Economics
-    Colorado State University
+    Department of Agricultural and Resource Economics Colorado State University
 
 
 # Build settings
