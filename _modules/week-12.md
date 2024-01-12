@@ -13,7 +13,7 @@ title: "Week 12: Project 2"
 
 
 
-<b>Project Materials - Due Thursday, April 11 (presentation) and April 18 (report) by 11:59 PM:</b> <br>
+<b>Project Materials - Due Thursday, April 11 (presentation) and Thursday, April 18 (report) by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_02/week_04/project_2.html" target="_blank">Project 2 Instructions</a> <br> 
 

@@ -3,7 +3,7 @@ title: "Week 15: Panel Data Analysis Project"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>May 01 & May 03 28</u></b> <br> <br>
+<b><u>May 01 & May 03</u></b> <br> <br>
 
 <b>Lecture Materials:</b> <br>
 
