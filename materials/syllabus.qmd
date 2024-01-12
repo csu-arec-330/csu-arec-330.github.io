@@ -9,7 +9,6 @@ format:
 
 <!-- lumen, materia, minty, sandstone, simplex, superhero, yeti -->
 
-
 ## When and Where
 
 Lecture: Nutrien 135, Wed 1:00 - 1:50 PM
@@ -21,7 +20,6 @@ Lab: Nutrien 103, Fri 1:00 - 2:40 PM
 [Course Website](https://csu-arec-330.github.io/)
 
 [Course Canvas](https://colostate.instructure.com/courses/162079)
-
 
 ## Who
 
@@ -37,7 +35,6 @@ Office Hours: W 2-3PM & by appt <https://go.oncehub.com/jude_bayham>
 
 <!-- Office Hours: M 2-3PM & Th 3-4PM Nutrien 165 -->
 
-
 ## Course Description
 
 The world generates [2.5 quintillion bytes](https://financesonline.com/how-much-data-is-created-every-day/#:~:text=Every%20day%20Big%20Data%20statistics,(2021%2C%20February%209).) of data each day. One of the key modern business challenges is transforming that data into actionable insights that improve decision making (i.e., data-driven decision making). Transforming data into information is not magic. It requires understanding the decision problem, organizing and processing data, analyzing data, and finally presenting information. This course will introduce you to this process of transforming data into actionable insights and build a core set of competencies with two commonly used software: R and Tableau. Since we only have 16 weeks, the most important lesson you will learn in this class is how to teach yourself what you need to know in the future. You will learn these skills by completing the three group projects over the semester.
@@ -50,17 +47,31 @@ The world generates [2.5 quintillion bytes](https://financesonline.com/how-much-
 
 3.  Demonstrate data literacy
 
-4.  Use R and Tableau to read, manipulate,  and organize data in a variety of structures and formats
+4.  Use R and Tableau to read, manipulate, and organize data in a variety of structures and formats
 
 5.  Examine real-world business and policy questions using appropriate data, analytical techniques, and visualizations
 
 6.  Support business and policy recommendations by conveying findings as a comprehensive story in a manner appropriate for business settings and policy makers
 
-7.  Construct appropriate summary statistics and analyses to inform business and policy decisions	
+7.  Construct appropriate summary statistics and analyses to inform business and policy decisions
 
 8.  Design interactive data visualizations to inform business and policy decisions
 
-Throughout the semester, course materials will indicate which of these 8 learning objectives the materials are contributing to by referencing the course objective (CO)number.
+Throughout the semester, course materials will indicate which of these 8 learning objectives the materials are contributing to by referencing the course objective (CO) number.
+
+## DARE Learning Outcomes
+Successful graduates from undergraduate programs in Agricultural and Resource Economics will exhibit the following characteristics:
+
+*Professional Development*: Graduates will embody a general awareness of issues in agricultural and natural resource and education issues and their implications in a larger societal context. Students will begin to develop a network of personal and professional connections, which will foster an understanding of the culture surrounding professional expectations and conduct. 
+
+*Technical Competence*: Graduates will demonstrate technical competency including the ability to use theory in formulating analytical problems, identifying and gathering appropriate data, employing appropriate analysis of those problems, utilizing appropriate available technology, and educating others. 
+
+*Problem-solving Skills*: Graduates will demonstrate the ability to solve real-world problems beyond the context of the classroom. Students will be able to identify a problem and its scope, evaluate resources available to address the problem, formulate alternative solutions, and select the solution(s) most consistent with a stated objective. 
+
+*Communication Skills*: Graduates will demonstrate proficiency in oral and written communication in terms of substance, organization, mechanics, documentation, and synthesis. Proficient students will have the ability to communicate material and findings at a professional level within their chosen career. 
+
+*Leadership*: Graduates will have developed leadership qualities that they will use in their professional, personal and community interactions leveraging the other competencies acquired in the program. These leadership qualities include vision, initiative, personal responsibility, team building, and motivating collective action.
+
 
 ## Course Materials
 
@@ -68,20 +79,19 @@ All course materials are freely available on the course website. There is no sin
 
 The course will require the use of [R (statistical computing software)](https://www.r-project.org/) and [Tableau (business intelligence software)](https://www.tableau.com/). R is an open source platform free to anyone. Tableau is freely available to you while you are a student at CSU. You will need to use these tools outside of class, so we recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
 
-Another option for accessing R is to use the DARE compute server.  You can access RStudio on the server here: <http://darecompute-01.aggie.colostate.edu:8787/>. This link should simply work while you are **on campus**.  While you are **off campus**, you need to active the virtual private network (VPN).  You can find instructions for setting up the VPN here: <https://it.colostate.edu/cybersecurity/globalprotect-vpn/>.
+Another option for accessing R is to use the DARE compute server. You can access RStudio on the server here: <http://darecompute-01.aggie.colostate.edu:8787/>. This link should simply work while you are **on campus**. While you are **off campus**, you need to active the virtual private network (VPN). You can find instructions for setting up the VPN here: <https://it.colostate.edu/cybersecurity/globalprotect-vpn/>.
 
-We will use iClicker software to take attendance at lecture and assess understanding of the material.  If you have not already joined the course, you can do so using this link: <https://join.iclicker.com/BIDY>
+We will use iClicker software to take attendance at lecture and assess understanding of the material. If you have not already joined the course, you can do so using this link: <https://join.iclicker.com/BIDY>
 
 ## Course Structure
 
-**Projects** The course is organized into four projects intended to develop different analytical skills. The projects will be completed in teams.  The project in each unit will be completed in parts.  The parts will be submitted as weekly assignments.  However, the final project deliverable will be worth the majority of points. You will present each of your final projects to the class. You will record the group presentation on video for the instructors and classmates to view. You will review each others presentations highlighting strengths and weaknesses. One lab session will be devoted to a question and answer session where the instructors and students will ask questions of the presenters.  
+**Projects** The course is organized into four projects intended to develop different analytical skills. The projects will be completed in teams. The project in each unit will be completed in parts. The parts will be submitted as weekly assignments. However, the final project deliverable will be worth the majority of points. You will present each of your final projects to the class. You will record the group presentation on video for the instructors and classmates to view. You will review each others presentations highlighting strengths and weaknesses. One lab session will be devoted to a question and answer session where the instructors and students will ask questions of the presenters.
 
 **Teams** Many careers require teamwork in some form. In this course, you will work in teams to complete your assignments and present your work. Team projects will train students to collaborate with peers as they likely will do in the workplace. Group work can also lead to freeriding so, students will evaluate themselves and each other after each project. The evaluation will provide the students the opportunity to explain their contribution and those of their peers. The instructors will be available to resolve disputes within a team. However, the most productive arrangement for this class (and in your future workplace) is to communicate expectations with your colleagues and do your part of the project.
 
-**Website** Students will create a website that will serve as a repository for projects/assignments. If this is your first time creating a website, we recommend [google sites](https://sites.google.com) - a free and easy to use website editing and hosting tool.   It will also serve as a record of their work in a presentable format that can be shared within or outside of CSU. *There are many other tools for building and hosting websites.  Please come talk to us if you have another option in mind or would like learn a more advanced option.*
+**Website** Students will create a website that will serve as a repository for projects/assignments. If this is your first time creating a website, we recommend [google sites](https://sites.google.com) - a free and easy to use website editing and hosting tool. It will also serve as a record of their work in a presentable format that can be shared within or outside of CSU. *There are many other tools for building and hosting websites. Please come talk to us if you have another option in mind or would like learn a more advanced option.*
 
-
-**Quizzes** There will be quizzes approximately every two weeks.  The quizzes will be administered on Canvas and must be taken in class on the indicated lab day. Quizzes will cover topics ranging from data processing to graphical presentation of information.
+**Quizzes** There will be quizzes approximately every two weeks. The quizzes will be administered on Canvas and must be taken in class on the indicated lab day. Quizzes will cover topics ranging from data processing to graphical presentation of information.
 
 **Attendance and Participation** There will be iClicker questions incorporated into most lecture materials. These questions are intended to test understanding of lecture materials and provide the instructors with real-time feedback on comprehension. Responses will account for a small portion of the overall course grade.
 
@@ -91,18 +101,16 @@ We will communicate with you through your CSU email (@rams.colostate.edu) and th
 
 During class, please turn off your cell phones and put them away. Be respectful of each other and your instructors/TA. Much of the course content will require the use of computers. Please use laptops and lab computers appropriately (do not watch media in class).
 
-
-
 ## Course Outline
 
 -   Project 00
 
     -   What is Data-Driven Decision Making (D$^3$M)?
 
-    -   Introduction to data processing with R 
+    -   Introduction to data processing with R
 
     -   Introduction to data visualization with Tableau
-    
+
     -   Developing a workflow; Breaking a project into parts
 
 -   Project 01: Time Series Data and Forecasting
@@ -110,15 +118,15 @@ During class, please turn off your cell phones and put them away. Be respectful 
     -   How price forecasting can influence business decisions?
 
     -   Time series analysis
-    
+
     -   Forecasting
 
     -   Telling a story with your data analysis
 
--   Project 02: Cross-Sectional and Spatial Data  
+-   Project 02: Cross-Sectional and Spatial Data
 
     -   How does a firm study customers to improve marketing and sales?
-    
+
     -   Exploratory Data Analysis
 
     -   Introduction to spatial data processing
@@ -130,7 +138,7 @@ During class, please turn off your cell phones and put them away. Be respectful 
 -   Project 03: Panel Data and Causal Inference
 
     -   How do firms use data to understand whether a policy or intervention worked as intended?
-    
+
     -   Basics of causal inference
 
     -   Dynamic plots in Tableau
@@ -183,7 +191,7 @@ Students are encouraged to positively impact the academic integrity culture of C
 
 Examples of academic misconduct include (but are not limited to):
 
-1.  Cheating -- Cheating includes using unauthorized sources of information and providing or receiving unauthorized assistance on any form of academic work or engaging in any behavior specifically prohibited by the instructor in the course syllabus or class presentation.  **Do not use generative AI (e.g., Chat GPT) to generate content that you represent as your own.  You may use the tool as a coding assistant to solve problems and help you understand the software used in the course**
+1.  Cheating -- Cheating includes using unauthorized sources of information and providing or receiving unauthorized assistance on any form of academic work or engaging in any behavior specifically prohibited by the instructor in the course syllabus or class presentation. **Do not use generative AI (e.g., Chat GPT) to generate content that you represent as your own. You may use the tool as a coding assistant to solve problems and help you understand the software used in the course**
 
 2.  Plagiarism -- Plagiarism includes the copying of language, structure, images, ideas, or thoughts of another, and representing them as one's own without proper acknowledgment, and is related only to work submitted for credit. Also included is the failure to cite sources properly; sources must always be appropriately referenced, whether the source is printed, electronic or spoken.
 
@@ -193,5 +201,4 @@ Examples of academic misconduct include (but are not limited to):
 
 5.  Facilitation of any act of Academic Misconduct -- Facilitation of any act of academic misconduct includes knowingly assisting another to commit an act of misconduct.
 
-
-![Classroom Agreement](extra_files/classroom_agreement.pdf){width=100% height="1040" }
+![Classroom Agreement](extra_files/classroom_agreement.pdf){width="100%" height="1040"}
