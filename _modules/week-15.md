@@ -14,7 +14,7 @@ title: "Week 15: Panel Data Analysis Project"
 
 <br>
 
-<b>Project Materials - Due Sunday, May 05 (video presentation) and May 09 (report) by 11:59 PM:</b> <br>
+<b>Project Materials - Due Sunday, May 05 (video presentation) and Thursday, May 09 (report) by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_03/week_03/project_3.html" target="_blank">Project 3 Instructions</a> <br> 
 
