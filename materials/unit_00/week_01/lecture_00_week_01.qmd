@@ -4,10 +4,77 @@ format:
   revealjs:
     theme: night
 ---
-
 <!-- Syllabus, overview of course, give examples of data-driven decision-making (d3m) in sports (moneyball), in government, in business, in agriculture. -->
+# Meet your instructors*
 
-{{< video https://youtu.be/vQbUZZVv4Rg width="100%" height="100%" >}}
+*That's right -- you have two!
+
+&nbsp; 
+
+#
+**To get to know you better, we have a few questions for you . . .**
+
+#
+**Would you choose to watch a documentary about the mysteries of the universe or the depths of the ocean over a popular TV series?**
+
+(1) Definitely yes
+
+&nbsp; 
+
+(2) Neutral
+
+&nbsp; 
+
+(3) Definitely not
+
+
+#
+**Do you prefer watching live sports events, such as basketball or football games, over educational programs about nature or history?**
+
+(1) Definitely yes
+
+&nbsp; 
+
+(2) Neutral
+
+&nbsp; 
+
+(3) Definitely not
+
+#
+**If you come across a news article about a new scientific discovery or technology, are you likely to read it immediately?**
+
+(1) Definitely yes
+
+&nbsp; 
+
+(2) Neutral
+
+&nbsp; 
+
+(3) Definitely not
+
+# 
+**Would you rather watch reality TV shows or celebrity gossip programs instead of documentaries on nature or scientific topics?**
+
+(1) Definitely yes
+
+&nbsp; 
+
+(2) Neutral
+
+&nbsp; 
+
+(3) Definitely not
+
+
+# Thank you. Now onto the lecture.
+
+## Data IRL
+
+<!-- Oakland A video -->
+
+{{< video https://youtu.be/vQbUZZVv4Rg width="90%" height="90%" >}}
 
 
 <!-- 
@@ -15,13 +82,14 @@ The A's win the American league west with one of the lowest payrolls in baseball
 Sabermetrics is use of in game data to drive team management decisions (sign these players because they will produce numbers for good value)
 -->
 
+--- 
 ## The Oakland A's
 
-The A's win the American league west with one of the lowest payrolls in baseball.
+The A's go on to *win* the American League West with one of the lowest payrolls in baseball.
 
 How? *Data*! 
 
-The team uses in-game data to drive team management decisions 
+The team uses in-game data to drive team management decisions: 
 
   - sign players because they have high stats (e.g., on base percentage) for a good value
   
@@ -29,15 +97,39 @@ The team uses in-game data to drive team management decisions
   
 ## Data-driven decision making is a process in which decisions are based on data and analysis rather than on intuition or personal experience.
 
-## The objective of this course is to introduce this process of transforming data into actionable insights
+## The objective of this course is to introduce this process of transforming data into actionable insights.
 
-<!-- Data-driven decision making is a process in which decisions are based on data and analysis rather than on intuition or personal experience. It involves collecting data, analyzing it, and using the insights gained from the analysis to inform the decision-making process. The goal of data-driven decision making is to use data to make more informed, objective decisions that are likely to lead to better outcomes. This approach is based on the idea that data can provide a more accurate and complete picture of a situation than personal experience or intuition alone. Data-driven decision making is often used in business and government to improve efficiency, reduce costs, and make more effective decisions. -->
+## This process requires understanding how to *read* figures (e.g., graphs, charts, and maps), *discern* between "good" figures and "bad" figures, and *tell effective stories* using data-derived figures. 
+
+## Let's start with a few examples
+(1) What does the figure tell you?
+
+(2) Is it clear what the author's did to produce the figure?
+
+(3) Was the research a shock or exactly as you expected?
+
+&nbsp; 
+
+Example 1: [Good Data Project](https://pbs.twimg.com/media/FcOPgDLX0AEDQj-?format=png&name=small)
+
+Example 2: [Sustainable Happiness](https://informationisbeautiful.net/wp-content/uploads/2023/02/WDVP-winner-poster-4th-happy-people.png)
+
+Example 3: [Mapping Segregation](https://www.nytimes.com/interactive/2015/07/08/us/census-race-map.html)
+
+## Sharpening your data visualization tools
+By the end of this course, you might not be producing interactive maps for the NY Times (although we would fully endorse this)...
+
+But, you will learn the tools to produce high-quality figures.
+
+Example 1: [Student 1](https://sites.google.com/view/csudarecourserepository-dodd/home)
+
+Example 2: [Student 2](https://sites.google.com/view/codyarec330/unit-0-mini-project?authuser=0)
 
 ## Agenda
 
 &nbsp; 
 
-[Syllabus](../../syllabus.html) and orientation
+[Syllabus](../../syllabus.html) and course orientation
 
 &nbsp; 
 
@@ -51,10 +143,25 @@ Introduction to R
 
 Introduction to Tableau
 
+## How to succeed in this course
+
+(1) Attend class lectures (W) and labs (F) (5% of grade).
+(2) Don't miss the quizzes (20% of grade).
+(3) Review project assignments in advance. There are four projects (75% of grade).
+
+&nbsp; 
+
+Dr. Bayham's Office Hours: Wednesday 2-3 pm, Rm 201
+
+Dr. Chenarides' Office Hours: Friday 3-4 pm, Rm 203
+
+Zarif's Office Hours: Thursday 12-1 pm, Rm 165
 
 ## D$^3$M {.smaller}
 
 &nbsp; 
+
+<!-- Data-driven decision making is a process in which decisions are based on data and analysis rather than on intuition or personal experience. It involves collecting data, analyzing it, and using the insights gained from the analysis to inform the decision-making process. The goal of data-driven decision making is to use data to make more informed, objective decisions that are likely to lead to better outcomes. This approach is based on the idea that data can provide a more accurate and complete picture of a situation than personal experience or intuition alone. Data-driven decision making is often used in business and government to improve efficiency, reduce costs, and make more effective decisions. -->
 
 > Data-driven decision making is a process in which decisions are based on data and analysis rather than on intuition or personal experience. It involves collecting data, analyzing it, and using the insights gained from the analysis to inform the decision-making process. The goal of data-driven decision making is to use data to make more informed, objective decisions that are likely to lead to better outcomes. This approach is based on the idea that data can provide a more accurate and complete picture of a situation than personal experience or intuition alone. Data-driven decision making is often used in business and government to improve efficiency, reduce costs, and make more effective decisions.
 
@@ -173,5 +280,14 @@ Up Next: What is R? What is Tableau?
 
 Bring computers on Friday -->
 
+## What is R?
+{{< video https://www.youtube.com/watch?v=XcBLEVknqvY width="90%" height="90%" >}}
+
+
+<!--
+&nbsp; 
+
+Bring computers on Friday -->
+
 ## What is Tableau?
-{{< video https://youtu.be/gAruNQGxYMA width="100%" height="100%" >}}
+{{< video https://youtu.be/gAruNQGxYMA width="90%" height="90%" >}}
