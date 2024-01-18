@@ -212,7 +212,7 @@ What information does Amazon use to collect data on users?
 
 ## Amazon Poll 1
 
-What information does Amazon use to collect data?
+What information does Amazon collect from users?
 
 - Purchases
 
@@ -281,7 +281,7 @@ Up Next: What is R? What is Tableau?
 Bring computers on Friday -->
 
 ## What is R?
-{{< video https://youtu.be/XcBLEVknqvY width="90%" height="90%" >}}
+{{< video https://www.youtube.com/watch?v=XcBLEVknqvY width="90%" height="90%" >}}
 
 
 <!--
