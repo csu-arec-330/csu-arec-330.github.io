@@ -281,7 +281,7 @@ Up Next: What is R? What is Tableau?
 Bring computers on Friday -->
 
 ## What is R?
-{{< video https://www.youtube.com/watch?v=XcBLEVknqvY width="90%" height="90%" >}}
+{{< video https://youtu.be/XcBLEVknqvY width="90%" height="90%" >}}
 
 
 <!--
