@@ -269,12 +269,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The response to this command will depend on the directory structure on <em>your machine</em>. You can navigate your directory structure using the command <code>setwd()</code>. When you have multiple projects with multiple files on your machine, it will be important that you understand R’s working directory and how to change it. The syntax will depend on whether you are on a windows or mac. First, locate the data file that you downloaded for this exercise. You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the <code>setwd("directory/subdirectory1")</code> command. The path needs to be in quotes to tell R that you are inputing characters and not variables.</p>
-<p>See this video tutorial for additional help: <a href="https://youtu.be/dFSPmjSynCs" class="uri">https://youtu.be/dFSPmjSynCs</a></p>
+<p>This video describes a computer’s file system and organization: <a href="https://www.youtube.com/watch?v=hUW5MEKDtMM" class="uri">https://www.youtube.com/watch?v=hUW5MEKDtMM</a></p>
 <p>To read data into R, we will use another function built into R. We will be reading a file type called <em>comma-separated values</em> denoted by the file extension <em>.csv</em>. The commas separate the variables, so R knows where a new variable starts. We will read the file into a data.frame called <code>super_sales</code>. You can download the file <a href="../inputs/supermarket_sales.csv">here</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>super_sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../inputs/supermarket_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>See this video tutorial for additional help: <a href="https://youtu.be/ULjXUW5yeDM" class="uri">https://youtu.be/ULjXUW5yeDM</a></p>
 </section>
 <section id="naming-objects" class="level3">
 <h3 class="anchored" data-anchor-id="naming-objects">Naming Objects</h3>
@@ -303,7 +302,6 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 <p>Here, we have installed and loaded the “dplyr” package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the <code>library()</code> command each session. If you are working on the server, the packages you need will be installed; you just need to load them.</p>
-<p>See this video tutorial for additional help: <a href="https://youtu.be/l5bmDv98zX4" class="uri">https://youtu.be/l5bmDv98zX4</a></p>
 </section>
 <section id="running-scripts-and-saving-output" class="level3">
 <h3 class="anchored" data-anchor-id="running-scripts-and-saving-output">Running scripts and saving output</h3>
@@ -319,6 +317,12 @@ Attaching package: 'dplyr'</code></pre>
 <section id="documentation" class="level3">
 <h3 class="anchored" data-anchor-id="documentation">Documentation</h3>
 <p>Documentation is critical to understanding how functions and packages work in R. There is a help tab in the lower right panel in RStudio. You can also place your cursor in the function name in your code and press F1 to bring up the help for that function. R documentation always provides a brief description, information about arguments (or inputs), information about outputs, and some examples of how you would use it. Learning to read the documentation is critical for learning new packages.</p>
+<p>Here are some additional resources to help you get started with R:</p>
+<ul>
+<li><p>Introduction and RStudio setup: <a href="https://youtu.be/dFSPmjSynCs" class="uri">https://youtu.be/dFSPmjSynCs</a></p></li>
+<li><p>data.frames: <a href="https://youtu.be/ULjXUW5yeDM" class="uri">https://youtu.be/ULjXUW5yeDM</a></p></li>
+<li><p>packages and libraries: <a href="https://youtu.be/l5bmDv98zX4" class="uri">https://youtu.be/l5bmDv98zX4</a></p></li>
+</ul>
 </section>
 </section>
 <section id="google-site" class="level2">

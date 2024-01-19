@@ -166,14 +166,12 @@ getwd()
 
 The response to this command will depend on the directory structure on *your machine*.  You can navigate your directory structure using the command `setwd()`. When you have multiple projects with multiple files on your machine, it will be important that you understand R's working directory and how to change it.  The syntax will depend on whether you are on a windows or mac.  First, locate the data file that you downloaded for this exercise.  You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the `setwd("directory/subdirectory1")` command.  The path needs to be in quotes to tell R that you are inputing characters and not variables.
 
-See this video tutorial for additional help: <https://youtu.be/dFSPmjSynCs>
+This video describes a computer's file system and organization: <https://www.youtube.com/watch?v=hUW5MEKDtMM>
 
 To read data into R, we will use another function built into R.  We will be reading a file type called *comma-separated values* denoted by the file extension *.csv*.  The commas separate the variables, so R knows where a new variable starts.  We will read the file into a data.frame called `super_sales`.  You can download the file [here](../inputs/supermarket_sales.csv).
 ```{r}
 super_sales <- read.csv("../inputs/supermarket_sales.csv")
 ```
-
-See this video tutorial for additional help: <https://youtu.be/ULjXUW5yeDM>
 
 ### Naming Objects
 
@@ -191,8 +189,6 @@ library(dplyr)
 
 
 Here, we have installed and loaded the "dplyr" package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session. If you are working on the server, the packages you need will be installed; you just need to load them.
-
-See this video tutorial for additional help: <https://youtu.be/l5bmDv98zX4>
 
 ### Running scripts and saving output
 
@@ -212,6 +208,13 @@ The `sink()` command is strange - it opens an active connection to a blank text 
 
 Documentation is critical to understanding how functions and packages work in R.  There is a help tab in the lower right panel in RStudio.  You can also place your cursor in the function name in your code and press F1 to bring up the help for that function.  R documentation always provides a brief description, information about arguments (or inputs), information about outputs, and some examples of how you would use it.  Learning to read the documentation is critical for learning new packages.
 
+Here are some additional resources to help you get started with R:
+
+- Introduction and RStudio setup: <https://youtu.be/dFSPmjSynCs>
+
+- data.frames: <https://youtu.be/ULjXUW5yeDM>
+
+- packages and libraries: <https://youtu.be/l5bmDv98zX4>
 
 ## Google Site
 
