@@ -32,17 +32,15 @@ knitr::kable(data.frame(
 
 7. Install and load the package `readr`.
 
-8. Write a brief explanation of what you did in steps 1-7 and how it relates to the tutorial.
+8. Write a brief explanation of what you did in steps 1-7 and how it relates to the tutorial we did in class.
 
 ## Part 2: Getting Started with Tableau
 
 We will be using two Tableau products in this course (although there are many more - see handout): Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free. Your assignment for this week is to be fully prepared to use these two Tableau products on your personal computer. 
 
-1.  Visit [Tableau for students](https://www.tableau.com/academic/students) and apply for your 1-year academic license. **Take a screenshot of the start of your confirmation email (up until Welcome to Tableau for Students.). DO NOT include the Product Key.**
+1.  Visit [Tableau Desktop](https://www.tableau.com/products/desktop) and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license. **Take a screenshot of Tableau Desktop open on your computer.** 
 
-2.  Visit [Tableau Desktop](https://www.tableau.com/products/desktop) and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license. **Take a screenshot of Tableau Desktop open on your computer.** 
-
-3.  Visit [Tableau Public](https://public.tableau.com/app/discover) and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.
+2.  Visit [Tableau Public](https://public.tableau.com/app/discover) and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.
 
 <!--
 Connect to the `supermarket_sales.csv` and answer the following questions using information on the `Start Page`, `Data Source Page`, and by opening a new `Worksheet`.
@@ -68,4 +66,4 @@ Connect to the `supermarket_sales.csv` and answer the following questions using 
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 1`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions and your answer to question 8 in paragraph form. Part 2 should contain your evidence of completing steps 1 & 2 and a link to your Tableau Public site.<!-- answers to each question 1-8 and a link to your workbook on your Tableau Public site.--> Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your google site titled `Problem Set 1`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should display the contents of your log file generated when you source your R script and your answer to question 8 in paragraph form. Review the instructions in the lab to see how to generate the log file. Part 2 should contain your evidence of completing steps 1 & 2 and a link to your Tableau Public site.<!-- answers to each question 1-8 and a link to your workbook on your Tableau Public site.--> Submit the link to your google site webpage in Canvas.

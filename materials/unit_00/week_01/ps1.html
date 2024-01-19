@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -111,14 +111,13 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Download the <a href="../inputs/supermarket_sales.csv">Supermarket Sales data</a> in csv format to a known location on your machine. The dataset should be called <code>supermarket_sales.csv</code>. Using the <code>setwd()</code> function, set your working directory to the location where you have a file called <code>supermarket_sales.csv</code></p></li>
 <li><p>Using the <code>read.csv()</code> function, read in the file <code>supermarket_sales.csv</code> and assign it to an object called <code>mydata</code>.</p></li>
 <li><p>Install and load the package <code>readr</code>.</p></li>
-<li><p>Write a brief explanation of what you did in steps 1-7 and how it relates to the tutorial.</p></li>
+<li><p>Write a brief explanation of what you did in steps 1-7 and how it relates to the tutorial we did in class.</p></li>
 </ol>
 </section>
 <section id="part-2-getting-started-with-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-getting-started-with-tableau">Part 2: Getting Started with Tableau</h2>
 <p>We will be using two Tableau products in this course (although there are many more - see handout): Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free. Your assignment for this week is to be fully prepared to use these two Tableau products on your personal computer.</p>
 <ol type="1">
-<li><p>Visit <a href="https://www.tableau.com/academic/students">Tableau for students</a> and apply for your 1-year academic license. <strong>Take a screenshot of the start of your confirmation email (up until Welcome to Tableau for Students.). DO NOT include the Product Key.</strong></p></li>
 <li><p>Visit <a href="https://www.tableau.com/products/desktop">Tableau Desktop</a> and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license. <strong>Take a screenshot of Tableau Desktop open on your computer.</strong></p></li>
 <li><p>Visit <a href="https://public.tableau.com/app/discover">Tableau Public</a> and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.</p></li>
 </ol>
@@ -147,7 +146,7 @@ Connect to the `supermarket_sales.csv` and answer the following questions using 
 </section>
 <section id="how-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
-<p>You should create a new webpage on your google site titled <code>Problem Set 1</code>. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions and your answer to question 8 in paragraph form. Part 2 should contain your evidence of completing steps 1 &amp; 2 and a link to your Tableau Public site.<!-- answers to each question 1-8 and a link to your workbook on your Tableau Public site.--> Submit the link to your google site webpage in Canvas.</p>
+<p>You should create a new webpage on your google site titled <code>Problem Set 1</code>. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should display the contents of your log file generated when you source your R script and your answer to question 8 in paragraph form. Review the instructions in the lab to see how to generate the log file. Part 2 should contain your evidence of completing steps 1 &amp; 2 and a link to your Tableau Public site.<!-- answers to each question 1-8 and a link to your workbook on your Tableau Public site.--> Submit the link to your google site webpage in Canvas.</p>
 </section>
 
 </main>
@@ -179,9 +178,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -246,6 +259,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

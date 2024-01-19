@@ -159,12 +159,12 @@ print(df)
 
 ### Reading data
 
-Creating data.frames by hand is tedious.  Fortunately, R has some utilities to read data stored in certain files types.  Before we explore R's ability to read data, we must understand how R interacts with the rest of the computer's operating system.  At any point in time, you are in an active directory (similar to windows explorer or macos finder).  You can ask R to tell you the current working directory.
+Creating data.frames by hand is tedious.  Fortunately, R has some utilities to read data stored in certain files types.  Before we explore R's ability to read data, we must understand how R interacts with the computer's file system.  At any point in time, you are in an active directory (similar to windows explorer or macos finder).  You can ask R to tell you the current working directory (where R is looking at the moment).
 ```{r}
 getwd()
 ```
 
-The response to this command will depend on the directory structure on your machine.  You can navigate your directory structure using the command `setwd()`. When you have multiple projects with multiple files on your machine, it will be important that you understand R's working directory and how to change it.  The syntax will depend on whether you are on a windows or mac.  First, locate the data file that you downloaded for this exercise.  You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the `setwd()` command.  The structure of this command is `directory/subdirectory1/subdirectory2/etc`.  The path needs to be in quotes to tell R that you are inputing characters and not variables.
+The response to this command will depend on the directory structure on *your machine*.  You can navigate your directory structure using the command `setwd()`. When you have multiple projects with multiple files on your machine, it will be important that you understand R's working directory and how to change it.  The syntax will depend on whether you are on a windows or mac.  First, locate the data file that you downloaded for this exercise.  You will treat this like the project directory and instruct R to navigate your directory structure by typing the path to the directory in the `setwd("directory/subdirectory1")` command.  The path needs to be in quotes to tell R that you are inputing characters and not variables.
 
 See this video tutorial for additional help: <https://youtu.be/dFSPmjSynCs>
 
@@ -177,11 +177,11 @@ See this video tutorial for additional help: <https://youtu.be/ULjXUW5yeDM>
 
 ### Naming Objects
 
-You can give objects almost any name as long as it does not start with a number.  However, you want to choose descriptive names so that your future self and others will find it easier to read.  I prefer what is called [snake_case](https://en.wikipedia.org/wiki/Snake_case) where words are separated by an underscore and all lower case.  There are other options and it is a matter of opinion.  I suggest choosing one and sticking with it.
+You can give objects almost any name as long as it does not start with a number and it cannot contain a space.  However, you want to choose descriptive names so that your future self and others will find it easier to read.  I prefer what is called [snake_case](https://en.wikipedia.org/wiki/Snake_case) where words are separated by an underscore and all lower case.  There are other options and it is a matter of opinion.  I suggest choosing one and sticking with it.
 
 ### Packages or Libraries
 
-Finally, R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.^[If you like this concept, you might explore the linux operating system. I prefer [Ubuntu](https://ubuntu.com/download).] You can install and load a package using the "install.packages()" and "library()" functions:
+Finally, R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.^[If you like this concept, you might explore the linux operating system. I use [Ubuntu](https://ubuntu.com/download).] You can install and load a package using the "install.packages()" and "library()" functions:
 
 ```{r}
 #Run only once 
@@ -190,9 +190,23 @@ library(dplyr)
 ```
 
 
-Here, we have installed and loaded the "dplyr" package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session.
+Here, we have installed and loaded the "dplyr" package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session. If you are working on the server, the packages you need will be installed; you just need to load them.
 
 See this video tutorial for additional help: <https://youtu.be/l5bmDv98zX4>
+
+### Running scripts and saving output
+
+We have been building a script (a text file with a series of commands in R - like a recipe). Suppose that script analyzed some data and produced some outputs. You may want to have R run all of the commands in your script. The command to run a script in R is:  `source()`. There is also a button called source in the upper right corner of the source panel. You can call that command directly in the R console. Suppose you have an R script called `lab_01_example.R` in your current working directory. You can run it by typing the following in the console: `source("lab_01_example.R",echo=TRUE)`. The `echo` argument set to `TRUE` tells R to print the output of each command. 
+
+Assignments in this class will require you to demonstrate that your code runs without errors. You can use `source()` along with another function called `sink()` to generate a log file that you can use to show evidence that your R code runs. To create a log file that demonstrates the script, `lab_01_example.R`, runs, open a new script and type the following three commands (lines) into the new script (or directly into the R console):
+```{r}
+#| eval: false
+sink(file = "lab_01_example.log")
+source("lab_01_example.R",echo = TRUE)
+sink()
+```
+
+The `sink()` command is strange - it opens an active connection to a blank text file called `lab_01_example.log`, then writes the output of any following commands (i.e., `source("lab_01_example.R",echo = TRUE)`) into that file. The last `sink()` command simply closes the connection, so you can keep using R without writing everything to your log file. 
 
 ### Documentation
 
@@ -218,4 +232,4 @@ If you are ever feeling lost in this class, I recommend checking out some of Tab
 
 -----------
 
-Get started on the problem set here: <https://csu-arec-330.github.io/course-materials/> 
+Get started on the problem set here: <https://csu-arec-330.github.io/materials/unit_00/week_01/ps1.html> 

@@ -1,0 +1,56 @@
+
+> x <- 5
+
+> y <- 3
+
+> z <- x + y
+
+> print(z)
+[1] 8
+
+> numbers <- c(1, 2, 3, 4, 5)
+
+> characters <- c("a", "b", "c")
+
+> logical <- c(TRUE, FALSE, TRUE)
+
+> print(numbers[1])
+[1] 1
+
+> print(characters[2:3])
+[1] "b" "c"
+
+> print(characters[c(1,3)])
+[1] "a" "c"
+
+> print(numbers+5)
+[1]  6  7  8  9 10
+
+> print(data.frame(a=c(1:3),
++                  b=c(4:6),
++                  d=c(7:9)))
+  a b d
+1 1 4 7
+2 2 5 8
+3 3 6 9
+
+> getwd()
+[1] "/Users/judebayham/Documents/git_projects/csu-arec-330.github.io/materials/unit_00/week_01"
+
+> super_sales <- read.csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales.csv")
+
+> head(super_sales)
+   Invoice.ID Branch      City Customer.type Gender           Product.line Unit.price Quantity  Tax.5.    Total      Date  Time
+1 750-67-8428      A    Yangon        Member Female      Health and beauty      74.69        7 26.1415 548.9715  1/5/2019 13:08
+2 226-31-3081      C Naypyitaw        Normal Female Electronic accessories      15.28        5  3.8200  80.2200  3/8/2019 10:29
+3 631-41-3108      A    Yangon        Normal   Male     Home and lifestyle      46.33        7 16.2155 340.5255  3/3/2019 13:23
+4 123-19-1176      A    Yangon        Member   Male      Health and beauty      58.22        8 23.2880 489.0480 1/27/2019 20:33
+5 373-73-7910      A    Yangon        Normal   Male      Sports and travel      86.31        7 30.2085 634.3785  2/8/2019 10:37
+6 699-14-3026      C Naypyitaw        Normal   Male Electronic accessories      85.39        7 29.8865 627.6165 3/25/2019 18:30
+      Payment   cogs gross.margin.percentage gross.income Rating
+1     Ewallet 522.83                4.761905      26.1415    9.1
+2        Cash  76.40                4.761905       3.8200    9.6
+3 Credit card 324.31                4.761905      16.2155    7.4
+4     Ewallet 465.76                4.761905      23.2880    8.4
+5     Ewallet 604.17                4.761905      30.2085    5.3
+6     Ewallet 597.73                4.761905      29.8865    4.1
