@@ -2,7 +2,7 @@
 title: "Week 2: Data Driven Decision Making and Data Story Telling"
 format: 
   revealjs:
-    theme: night
+    theme: [night, ../../custom.scss]
     slide-number: c/t
     # logo: path.png
     # center: TRUE
@@ -10,15 +10,11 @@ format:
 
 ## Agenda
 
-&nbsp; 
-
 D^3^M 
 
 - Why? cognitive biases
 
 - How? develop a process
-
-&nbsp; 
 
 Data storytelling
 
@@ -39,17 +35,11 @@ People that run businesses, government, or other organizations are striving to r
 
 ## Data analysis as part of the solution
 
-&nbsp; 
-
 Instead of relying on experience or gut instinct alone, they can use careful data analysis to help guide their decisions (e.g., google, amazon)
-
-&nbsp; 
 
 Objective data analysis is less susceptible to psychological biases
 
-&nbsp; 
-
-Data analysis alone is rarely the solution
+However, data analysis alone is rarely the solution
 
 
 ## Cogitive or psychological biases
@@ -111,101 +101,110 @@ Adapted from <https://www.smartsheet.com/data-driven-decision-making-management>
 
 What is the business or operational question you are trying to answer?
 
-- Do we sell now or hold?
+- Do we sell our product now or hold out for a higher price?
 
-- Do we contract for feed?
+- Do we contract for feed or buy on the spot market?
 
 What resources do you need?
 
-## You Do It: 1. Define question or objective  {.smaller}
+::: {.notes}
+The USFS spends a lot of money on wildfire suppression. Their objective is to spend as little as possible while protecting life and property. They want to identify which fires are the most expensive and understand why in hope that they can spend less in the future.
 
-&nbsp; 
+USFS is interested in suppression expenditures after a large fire occurs. 
+
+They use a regression model to study what factors explain variation in the suppression costs of past fires, then use that model to predict the suppression cost of a single fire. The predicted cost is compared to the actual cost.
+
+:::
+
+## You Do It: 1. Define question or objective  {.smaller}
 
 **In Pairs**: Identify a business that you might be interested in starting some day or any organization that you might want to work for. The business/organization should be related to agrulture and/or natural resources.
 
-&nbsp; 
 
 1.  Briefly describe this business (give the name if it already exists)
 
-2.  Define a question or objective that business might face.
+2.  Define a question or objective that business might face. Try to be specific.
 
-&nbsp; 
 
 Include responses to both 1 and 2 in your iclicker response (140 characters).
 
+
+
 ## 2. Establish hypothesis
 
-&nbsp; 
 
 What do you think the answer is and why?
 
-&nbsp; 
 
-You should be able to describe the mechanics of the system  and explain your hypothesis
+You should be able to describe the mechanics of the system and explain your hypothesis
+
+::: {.notes}
+Wildfire management is complex. Some factors that drive resource use (and cost) are determined by human decisions while others are biophysical. Some factors can be anticipated while others cannot. Hypothesis: there are decisions about resource use that lead to higher-cost fires.
+
+:::
 
 ## You Do It: 2. Establish hypothesis
 
-&nbsp; 
-
 **In Your Same Pairs**: What do you think the answer is and **why**?
 
-&nbsp; 
-
-&nbsp; 
 
 Write a short response in the iclicker field (140 characters).
 
 ## 3. Data
 
-&nbsp; 
 
 What data do you need to answer your question?
 
-&nbsp; 
 
 How will you assemble the data? Do you need equipment?  Will the data be reliable?
 
-&nbsp; 
 
 Collect data in a way that it can be analyzed - not sticky notes.
 
-## You Do It: 3. Data
+::: {.notes}
 
-&nbsp; 
+The USFS collects data on expenditures. Expenditures tend to be tracked well because someone has to pay those bills. It also collects data on factors that are expected to influence fire behavior and management strategy: 
+
+- vegetation, topography, weather
+- values at risk like homes
+
+:::
+
+## You Do It: 3. Data
 
 **In Your Same Pairs**: What data do you need to answer your question?  
 
-&nbsp; 
 
 List the data sources that come to mind in the iclicker field.
-
-&nbsp; 
 
 **Think about**: How will you collect and assemble these data? Do they already exist?
 
 ## 4. Analyze data
 
-&nbsp; 
 
 Design an analysis strategy to answer your question
 
-&nbsp; 
 
 Model different scenarios?
 
-&nbsp; 
-
 What can be changed to better achieve your objective?
+
+::: {.notes}
+
+They use a regression model to study what factors explain variation in the suppression costs of past fires, then use that model to predict the suppression cost of a single fire. The predicted cost is compared to the actual cost. Fires that exceed their expected costs can be interogated more closely.
+
+:::
 
 ## 5. Communicate insights
 
-&nbsp; 
-
-Use the data to tell a story
-
-&nbsp; 
+Use the data to tell a story - develop visuals that show the audience the consequence of the current decision and how a different one could change the outcome
 
 Articulate the benefits of the change
+
+::: {.notes}
+Develop a graphic to show which fires lie above the regression line of cost on X. Then, look for patterns across the fires that cost more than expected. Find what they have in common.
+
+:::
 
 ## You Do It: Analyze and Communicate
 
