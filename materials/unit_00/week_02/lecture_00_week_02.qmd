@@ -253,6 +253,17 @@ Statistics provide evidence but we need stories to truly communicate the insight
 
 Our brains are predisposed to remember stories
 
+
+## Let's look at an example: The minimalist version
+
+![source: <https://medium.com/@ccr20/post-9-the-functional-art-1f0ee13b225e>](figs/diamonds-1.jpg)
+
+
+## Let's look at an example: With pizzazz
+
+![source: <https://timharford.com/books/datadetective/>](figs/diamonds-2.jpg)
+
+
 ## 3 elements of a data story
 
 ![Source: Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.](figs/data_storytelling.png)
@@ -328,10 +339,8 @@ D.  Annecdotal evidence is more convincing when communicating insights
 
 ## References {.scrollable}
 
-&nbsp; 
-
 Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
 
-&nbsp; 
-
 Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.
+
+Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin.
