@@ -1,5 +1,5 @@
 ---
-title: "Week 2: Data Driven Decision Making and Data Story Telling"
+title: "Week 2: Data Driven Decision Making and Data Storytelling"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -35,7 +35,7 @@ People that run businesses, government, or other organizations are striving to r
 
 ## Data analysis as part of the solution
 
-Instead of relying on experience or gut instinct alone, they can use careful data analysis to help guide their decisions (e.g., google, amazon)
+Instead of relying on experience or gut instinct alone, businesses can use careful data analysis to help guide their decisions (e.g., google, amazon)
 
 Objective data analysis is less susceptible to psychological biases
 
@@ -80,13 +80,13 @@ First, moods and emotions are interfering with managers’ ability to process in
 
 ## D^3^M process overview
 
-1. Define objective
+1. Define an objective
 
-2. Establish hypothesis
+2. Establish a hypothesis
 
 3. Identify data need, build data process, collect data
 
-4. Analyze data
+4. Analyze the data
 
 5. Communicate insights
 
@@ -105,7 +105,6 @@ What is the business or operational question you are trying to answer?
 
 - Do we contract for feed or buy on the spot market?
 
-What resources do you need?
 
 ::: {.notes}
 The USFS spends a lot of money on wildfire suppression. Their objective is to spend as little as possible while protecting life and property. They want to identify which fires are the most expensive and understand why in hope that they can spend less in the future.
@@ -116,9 +115,11 @@ They use a regression model to study what factors explain variation in the suppr
 
 :::
 
-## You Do It: 1. Define question or objective  {.smaller}
+## You Do It: Define question or objective  {.smaller}
 
-**In Pairs**: Identify a business that you might be interested in starting some day or any organization that you might want to work for. The business/organization should be related to agrulture and/or natural resources.
+**In Pairs**: 
+
+Identify a business that you might be interested in starting some day or any organization that you might want to work for. The business should be related to agriculture and/or natural resources.
 
 
 1.  Briefly describe this business (give the name if it already exists)
@@ -126,8 +127,7 @@ They use a regression model to study what factors explain variation in the suppr
 2.  Define a question or objective that business might face. Try to be specific.
 
 
-Include responses to both 1 and 2 in your iclicker response (140 characters).
-
+Include responses to both 1 and 2 in your iClicker response (140 characters).
 
 
 ## 2. Establish hypothesis
@@ -143,12 +143,14 @@ Wildfire management is complex. Some factors that drive resource use (and cost) 
 
 :::
 
-## You Do It: 2. Establish hypothesis
+## You Do It: Establish hypothesis
 
-**In Your Same Pairs**: What do you think the answer is and **why**?
+**In Your Same Pairs**: 
+
+Based on your business question or objective, what do you think the business would need to do to achieve this goal, and **why**?
 
 
-Write a short response in the iclicker field (140 characters).
+Write a short response in the iClicker field (140 characters).
 
 ## 3. Data
 
@@ -156,7 +158,13 @@ Write a short response in the iclicker field (140 characters).
 What data do you need to answer your question?
 
 
-How will you assemble the data? Do you need equipment?  Will the data be reliable?
+How will you assemble the data? Do you need equipment?
+
+
+What resources do you need?
+
+
+Will the data be reliable?
 
 
 Collect data in a way that it can be analyzed - not sticky notes.
@@ -170,12 +178,13 @@ The USFS collects data on expenditures. Expenditures tend to be tracked well bec
 
 :::
 
-## You Do It: 3. Data
+## You Do It: Data
 
-**In Your Same Pairs**: What data do you need to answer your question?  
+**In Your Same Pairs**: 
 
+What data do you need to answer your question?  
 
-List the data sources that come to mind in the iclicker field.
+List the data sources that come to mind in the iClicker field.
 
 **Think about**: How will you collect and assemble these data? Do they already exist?
 
@@ -184,14 +193,13 @@ List the data sources that come to mind in the iclicker field.
 
 Design an analysis strategy to answer your question
 
-
-Model different scenarios?
+Model different scenarios
 
 What can be changed to better achieve your objective?
 
 ::: {.notes}
 
-They use a regression model to study what factors explain variation in the suppression costs of past fires, then use that model to predict the suppression cost of a single fire. The predicted cost is compared to the actual cost. Fires that exceed their expected costs can be interogated more closely.
+They use a regression model to study what factors explain variation in the suppression costs of past fires, then use that model to predict the suppression cost of a single fire. The predicted cost is compared to the actual cost. Fires that exceed their expected costs can be interrogated more closely.
 
 :::
 
@@ -208,7 +216,7 @@ Develop a graphic to show which fires lie above the regression line of cost on X
 
 ## You Do It: Analyze and Communicate
 
-**In Your Same Pairs Discuss**: 
+**In Your Same Pairs**: 
 
 1.  How would you analyze these data to answer your question? What software would you use? What statistics would you construct?
 
@@ -239,15 +247,9 @@ How about a thermostat at home or cruise control in your car
 
 ## Importance of storytelling
 
-&nbsp; 
-
 Storytelling is fundamental to human existence.  We connect, share, teach and learn through stories.
 
-&nbsp; 
-
 Statistics provide evidence but we need stories to truly communicate the insights to the audience
-
-&nbsp; 
 
 Our brains are predisposed to remember stories
 
@@ -265,11 +267,7 @@ Our brains are predisposed to remember stories
 
 ## Data story ≠ data visualization
 
-&nbsp; 
-
 While clear and appealing data visualizations are part of a data story, they are not data stories by themselves.
-
-&nbsp; 
 
 Data stories bring your analytical insights to life
 
