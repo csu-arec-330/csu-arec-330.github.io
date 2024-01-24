@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 3 Lab: R and Tableau Intro II</title>
+<title>Week 3 Lab: Data Processing with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -108,28 +79,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link active" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
-  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
-  <li><a href="#tableau-lab-overview" id="toc-tableau-lab-overview" class="nav-link" data-scroll-target="#tableau-lab-overview">Tableau Lab Overview</a>
+  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#data-processing-with-r" id="toc-data-processing-with-r" class="nav-link" data-scroll-target="#data-processing-with-r">Data processing with R</a>
   <ul class="collapse">
-  <li><a href="#create-calculated-fields" id="toc-create-calculated-fields" class="nav-link" data-scroll-target="#create-calculated-fields">1. Create calculated fields</a></li>
-  <li><a href="#organize-your-data-into-folders" id="toc-organize-your-data-into-folders" class="nav-link" data-scroll-target="#organize-your-data-into-folders">2. Organize your data into folders</a></li>
-  <li><a href="#sorting-bar-charts" id="toc-sorting-bar-charts" class="nav-link" data-scroll-target="#sorting-bar-charts">3. Sorting bar charts</a></li>
-  <li><a href="#using-the-marks-card-and-creating-groups" id="toc-using-the-marks-card-and-creating-groups" class="nav-link" data-scroll-target="#using-the-marks-card-and-creating-groups">4. Using the marks card and creating groups</a></li>
-  <li><a href="#formatting-titles-axes-legends-etc." id="toc-formatting-titles-axes-legends-etc." class="nav-link" data-scroll-target="#formatting-titles-axes-legends-etc.">5. Formatting titles, axes, legends, etc.</a></li>
-  <li><a href="#other-features-in-the-toolbar" id="toc-other-features-in-the-toolbar" class="nav-link" data-scroll-target="#other-features-in-the-toolbar">6. Other features in the toolbar</a></li>
-  <li><a href="#using-the-filters-card" id="toc-using-the-filters-card" class="nav-link" data-scroll-target="#using-the-filters-card">7. Using the filters card</a></li>
-  <li><a href="#stacking-bar-charts" id="toc-stacking-bar-charts" class="nav-link" data-scroll-target="#stacking-bar-charts">8. Stacking bar charts</a></li>
-  <li><a href="#creating-bar-in-bar-charts" id="toc-creating-bar-in-bar-charts" class="nav-link" data-scroll-target="#creating-bar-in-bar-charts">9. Creating bar in bar charts</a></li>
-  <li><a href="#basic-line-charts-and-datetime" id="toc-basic-line-charts-and-datetime" class="nav-link" data-scroll-target="#basic-line-charts-and-datetime">10. Basic line charts and datetime</a></li>
-  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">11. Review</a></li>
-  </ul></li>
-  <li><a href="#r-dplyr-continued" id="toc-r-dplyr-continued" class="nav-link" data-scroll-target="#r-dplyr-continued">R: <code>dplyr</code> continued</a>
-  <ul class="collapse">
-  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">4. Summarize</a></li>
-  <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">Group by</a></li>
+  <li><a href="#starting-a-task-or-project-in-r" id="toc-starting-a-task-or-project-in-r" class="nav-link" data-scroll-target="#starting-a-task-or-project-in-r">Starting a task or project in R</a></li>
+  <li><a href="#read-the-data-into-r" id="toc-read-the-data-into-r" class="nav-link" data-scroll-target="#read-the-data-into-r">Read the data into R</a></li>
+  <li><a href="#modifying-the-dataframe" id="toc-modifying-the-dataframe" class="nav-link" data-scroll-target="#modifying-the-dataframe">Modifying the dataframe</a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">1. Mutate</a></li>
+  <li><a href="#select-and-rename" id="toc-select-and-rename" class="nav-link" data-scroll-target="#select-and-rename">2. Select (and rename)</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter">3. Filter</a></li>
+  <li><a href="#arrange-or-sort" id="toc-arrange-or-sort" class="nav-link" data-scroll-target="#arrange-or-sort">4. Arrange (or sort)</a></li>
+  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">5. Summarize</a></li>
+  <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">6. Group by</a></li>
   <li><a href="#chaining-commands" id="toc-chaining-commands" class="nav-link" data-scroll-target="#chaining-commands">Chaining commands</a></li>
   <li><a href="#appending-data" id="toc-appending-data" class="nav-link" data-scroll-target="#appending-data">Appending data</a></li>
+  <li><a href="#log-file" id="toc-log-file" class="nav-link" data-scroll-target="#log-file">Log file</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -138,7 +102,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 3 Lab: R and Tableau Intro II</h1>
+<h1 class="title">Week 3 Lab: Data Processing with R</h1>
 </div>
 
 
@@ -155,19 +119,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img src="includes/shopping.webp" class="img-fluid"></p>
 <p>This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8</p>
-<section id="learning-objectives-tableau" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
-<ul>
-<li><p>Identify the function of items on the Tableau Toolbar</p></li>
-<li><p>Create sorted, stacked, and bar in bar charts</p></li>
-<li><p>Understand the functions of the <code>Marks</code> and <code>Filters</code> cards</p></li>
-<li><p>Create calculated fields</p></li>
-<li><p>Explain what it means to group your data</p></li>
-<li><p>Apply formatting features to make your visualization more effective</p></li>
-<li><p>Create line charts</p></li>
-<li><p>Manipulate date-time fields</p></li>
-</ul>
-</section>
 <section id="learning-objectives-r" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
 <ul>
@@ -175,213 +126,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Use the <code>summarize</code> and <code>group_by</code> functions</p></li>
 <li><p>Understand how to chain commands</p></li>
 <li><p>Bind dataframes together</p></li>
+<li><p>Read in data and evaluate datatypes</p></li>
+<li><p>Calculate new columns based on existing columns</p></li>
+<li><p>Subset or filter rows of the data</p></li>
+<li><p>Subset or select columns of the data</p></li>
 </ul>
 </section>
-<section id="tableau-lab-overview" class="level2">
-<h2 class="anchored" data-anchor-id="tableau-lab-overview">Tableau Lab Overview</h2>
-<p>In week 2 of the course we covered the basic Tableau flow of analysis: Connect -&gt; Analyze -&gt; Share. Each of you followed this flow in problem set 2 to produce a simple data visualization using the grocery store spending dataset.</p>
-<p>Today we are going to go in more detail in the analyze step of the process. We will learn to make a few new figures, we will learn more of the features of the Tableau analysis page, and we will discuss a few ways to change the formatting of your visualizations to make them more effective.</p>
-<p>We will be using the same Supermarket Sales dataset, picking up where we left off with our analysis of product line ratings. We will be covering the following:</p>
+<section id="data-processing-with-r" class="level2">
+<h2 class="anchored" data-anchor-id="data-processing-with-r">Data processing with R</h2>
+<p>Data processing is an important step in analysis. It can be complicated depending on the number of data sources, quality of the data, and structure of the data. We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.</p>
+<section id="starting-a-task-or-project-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="starting-a-task-or-project-in-r">Starting a task or project in R</h3>
 <ol type="1">
-<li><p>Creating calculated fields</p></li>
-<li><p>Organizing fields in folders</p></li>
-<li><p>More advanced bar charts: Sorting</p></li>
-<li><p>Using the <code>Marks</code> card and creating groups</p></li>
-<li><p>Formatting titles, axes, legends, etc.</p></li>
-<li><p>Exploring the Tableau toolbar</p></li>
-<li><p>Using the <code>Filters</code> card</p></li>
-<li><p>More advanced bar charts: Stacking</p></li>
-<li><p>More advanced bar charts: Bar in bar</p></li>
-<li><p>Intro to line charts and manipulating dates</p></li>
+<li><p>Open RStudio either on your own computer or access it via the DARE server: <a href="http://darecompute-01.aggie.colostate.edu:8787/" class="uri">http://darecompute-01.aggie.colostate.edu:8787/</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p></li>
+<li><p>Open up a new script.</p></li>
+<li><p>Write a brief comment in the first line describing what the script will do.</p></li>
 </ol>
-<section id="create-calculated-fields" class="level3">
-<h3 class="anchored" data-anchor-id="create-calculated-fields">1. Create calculated fields</h3>
-<p>In your last assignment you were asked to use R to calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns. (And name the new column <code>subtotal</code>.)</p>
-<p>We can do this sort of calculation in Tableau too!</p>
-<p><img src="includes/newvar.png" class="img-fluid" style="width:60.0%"></p>
-<p>Then select <code>Create Calculated Field...</code></p>
-<p>Give your field a useful name (let’s use <code>subtotal</code>).</p>
-<p>Drag the relevant variables into the box. Type the appropriate function (multiply). Click OK. And Voila.</p>
-<p><strong>You do it:</strong> Validate that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>.</p>
-<p><strong>You do it:</strong> Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.</p>
-</section>
-<section id="organize-your-data-into-folders" class="level3">
-<h3 class="anchored" data-anchor-id="organize-your-data-into-folders">2. Organize your data into folders</h3>
-<p>In your last assignment you were asked to use R to create a dataframe containing only a subset of your data, with the columns <code>city, product_line, unit_price, quantity, total, rating</code></p>
-<p>In Tableau, one way to reduce the number of fields you see if by organizing your data into folders.</p>
-<p>Try organizing your data into folders by:</p>
-<ul>
-<li><p>Selecting <code>Group by folder</code></p></li>
-<li><p>Right click a field you want in the new folder</p></li>
-<li><p>Click Folders -&gt; Create Folder…</p></li>
-<li><p>Give your folder a useful name</p></li>
-<li><p>Note that you can still combine data across different folders in your visualizations, you have just created a more organized data pane.</p></li>
-</ul>
-</section>
-<section id="sorting-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="sorting-bar-charts">3. Sorting bar charts</h3>
-<p>Let’s start off with our bar chart from last class where we looked at customer ratings by product line…</p>
-<p>From our lecture on Wednesday, what are some ways we could improve this visualization to answer the question “Which product line has the lowest average customer rating?”</p>
-<div class="notes">
-<p>Title, adding color to highlight the top category, making font larger and easier to read, maybe changing axis range</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This script will process a sample dataset for problem set 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>What about <strong>sorting</strong>?</p>
-<p>There are a two ways to sort bars on our chart:</p>
-<ul>
-<li><p>use the toolbar</p></li>
-<li><p>use the icon next to the y-axis label</p></li>
-</ul>
-<p><strong>You do it:</strong> Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.</p>
-</section>
-<section id="using-the-marks-card-and-creating-groups" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-marks-card-and-creating-groups">4. Using the marks card and creating groups</h3>
-<p>What if we want to <strong>use color</strong> to highlight the top category?</p>
-<p>There are a few ways to do this:</p>
-<ul>
-<li><p>Drag product line to <code>color</code> on the Marks card (then edit colors)</p></li>
-<li><p>Right click the bar you want to stand out and click <code>Group</code> (then edit colors)</p></li>
-</ul>
-<p>What if we want to add <strong>labels</strong> with the value of the rating?</p>
-<ul>
-<li>Label -&gt; check <code>show mark labels</code></li>
-</ul>
-<p><strong>You do it:</strong> Show mark labels and click around with the other options on the label card. What formatting do you like best?</p>
-<p>What if we want to change the <strong>width of our bars</strong>?</p>
-<ul>
-<li>Size -&gt; adjust!</li>
-</ul>
-<p>What if we want to add some extra info on the box that appears when we hover over a bar?</p>
-<ul>
-<li>Tooltip</li>
-</ul>
-<p><strong>You do it:</strong> Try adding some text to the tooltip. Click on Insert -&gt; what else can you add to the tooltip?</p>
-</section>
-<section id="formatting-titles-axes-legends-etc." class="level3">
-<h3 class="anchored" data-anchor-id="formatting-titles-axes-legends-etc.">5. Formatting titles, axes, legends, etc.</h3>
-<p>What if we want to <strong>adjust the scale</strong> of the y-axis so that differences across the bars are easier to see?</p>
-<ul>
-<li><p>Right click the y-axis</p></li>
-<li><p>Click edit axis</p></li>
-<li><p>Choose an appropriate range</p></li>
-</ul>
-<p>Now what happens if we compare these customer ratings across branches? Does the product line with the top ratings vary by store?</p>
-<p><strong>You do it:</strong> Highlight the product line with the top rating at branch A - how does this rank in the other branches?</p>
-<p><strong>You do it:</strong> Click on the different options in the legend - what happens?</p>
-<p>What if we want to <strong>change the font size</strong> (or color, etc.) of the axis labels?</p>
-<ul>
-<li>Right click the axis you want to edit -&gt; click Format</li>
-</ul>
-<p>What if instead of having Branch/Product line at the top, we just rename A as Branch A, B as Branch B, etc.</p>
-<ul>
-<li><p>Right click Branch / Product line -&gt; Hide field labels</p></li>
-<li><p>Right click branch -&gt; Edit Aliases…</p></li>
-</ul>
-<p><strong>You do it:</strong> Play with the formatting of your visualization until you are satisfied with its appearance.</p>
-<p>What if we want to <strong>remove the legend</strong>?</p>
-<p><strong>Adding a caption</strong> that describes details about your visualization. -&gt; Right click the visualization.</p>
-<p><strong>Marking</strong> or <strong>annotating</strong> a single point. -&gt; Right click -&gt; Mark Label or Annotate</p>
-</section>
-<section id="other-features-in-the-toolbar" class="level3">
-<h3 class="anchored" data-anchor-id="other-features-in-the-toolbar">6. Other features in the toolbar</h3>
-<p>Let’s explore the Tableau toolbar… Hover over each icon in the toolbar… Click each icon in the toolbar!</p>
-</section>
-<section id="using-the-filters-card" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-filters-card">7. Using the filters card</h3>
-<p>What if we want to recreate our analysis of ratings for female customers only?</p>
-<p>Let’s use the toolbar to <strong>duplicate</strong> our worksheet.</p>
-<p>Next, let’s add a filter for females:</p>
-<ul>
-<li><p>Drag the field <code>gender</code> to the <code>Filters</code> card</p></li>
-<li><p>Select <code>Female</code></p></li>
-</ul>
-</section>
-<section id="stacking-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="stacking-bar-charts">8. Stacking bar charts</h3>
-<p>What if you want to see total sales split by gender and purchase category?</p>
-<p><strong>You do it:</strong> Create a visualization (in a new sheet) that shows total sales by gender and product line.</p>
-<p>Great, now what if we instead want to see this in terms of what percent of total sales within each category are from females vs.&nbsp;males?</p>
-<p>Let’s try <strong>stacking</strong> our bars instead:</p>
-<ul>
-<li>Move gender from the rows shelf and drag it to the <code>Color</code> icon on the <code>Marks</code> card.</li>
-</ul>
-<p>What if we want to see the value of total sales for males and females?</p>
-<ul>
-<li>Label -&gt; Show Mark Labels</li>
-</ul>
-<p>What if we instead want to see the percent of total sales that are from males and females?</p>
-<ul>
-<li><p>Click the dropdown menu on SUM(Total)</p></li>
-<li><p>Quick Table Calculation -&gt; Percent of Total</p></li>
-</ul>
-<p>Now what if we want to see the percent of total sales within each category that are from males and females?</p>
-<ul>
-<li><p>Create a 100% stacked bar chart</p></li>
-<li><p>Click the dropdown menu on SUM(Total)</p></li>
-<li><p>Compute Using -&gt; Gender</p></li>
-</ul>
-<p><strong>You do it:</strong> What do the other compute using options do?</p>
-</section>
-<section id="creating-bar-in-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="creating-bar-in-bar-charts">9. Creating bar in bar charts</h3>
-<p>Another way to compare sales for males and females is to use a bar in bar chart. This will allow you to easily see whether total sales are higher for males or females.</p>
-<ul>
-<li><p>Let’s duplicate our 100% stacked bar chart</p></li>
-<li><p>Drag gender to the <code>Size</code> icon in the <code>Marks</code> card</p></li>
-<li><p>From the top menu, click Analysis -&gt; Stack Marks -&gt; Off</p></li>
-</ul>
-<p>What if we want to swap which gender is the wide bar?</p>
-</section>
-<section id="basic-line-charts-and-datetime" class="level3">
-<h3 class="anchored" data-anchor-id="basic-line-charts-and-datetime">10. Basic line charts and datetime</h3>
-<p>The second type of chart we will learn to create is a line chart.</p>
-<p>Suppose we want to see trends in sales over time:</p>
-<ul>
-<li><p>Open a new worksheet</p></li>
-<li><p>Drag <code>Total</code> to the rows shelf and <code>Date</code> to the columns shelf</p></li>
-<li><p>Click the dropdown menu next to <code>Date</code></p></li>
-<li><p>Click Week Number</p></li>
-</ul>
-<p><strong>You do it:</strong> Explore the other date display options. Which do you like best for this analysis?</p>
-<p>What if we want to see trends in sales across months?</p>
-<p>Let’s look at two options for doing this:</p>
-<ol type="1">
-<li><p>Side-by-side lines:</p>
-<ul>
-<li><p>With the <code>Date</code> aggregation set to MONTH in the columns shelf, double click the <code>Date</code> field.</p></li>
-<li><p>Click the dropdown menu on the YEAR(Date) field on the columns shelf</p></li>
-<li><p>Select Day</p></li>
-</ul></li>
-<li><p>Combined lines:</p>
-<ul>
-<li>Drag MONTH(Date) to the colors card</li>
-</ul></li>
-</ol>
-<p>Let’s look at different line types. Click the new <code>Path</code> icon on the Marks card</p>
-<p>Let’s add some trend lines. Analysis -&gt; Trend lines -&gt; Show Trend Lines</p>
-<p>What are trend lines??</p>
-</section>
-<section id="review" class="level3">
-<h3 class="anchored" data-anchor-id="review">11. Review</h3>
-<ol type="1">
-<li><p>Which payment type has the highest total spending?</p></li>
-<li><p>Do more females or more males use this payment type?</p></li>
-<li><p>Which payment type has seen the greatest increase in total spending over time?</p></li>
-<li><p>For a challenge: Which payment type has seen the greatest increase in the <strong>number of customers using it</strong> over time?</p></li>
+<ol start="4" type="1">
+<li><p>Load any libraries/packages used in the script.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In this lab, we will use 3 packages: <code>readr,dplyr,janitor</code>.</p></li>
+<li><p>Set the working directory to a known location. This may be a new directory where you will store any external data and save the code file.</p></li>
 </ol>
 </section>
+<section id="read-the-data-into-r" class="level3">
+<h3 class="anchored" data-anchor-id="read-the-data-into-r">Read the data into R</h3>
+<ol type="1">
+<li><p>Download <code>supermarket_sales.csv</code> to the project directory.</p></li>
+<li><p>Use the function <code>read_csv()</code> to read <code>supermarket_sales.csv</code> into a dataframe called <code>supermarket_raw</code>.</p></li>
+<li><p>Take a look at the dataframe. There are a few ways to look at the dataframe:</p></li>
+</ol>
+<ul>
+<li><p>Type the name of the dataframe in the console. This shows the data in the first several rows of the first several columns.</p></li>
+<li><p>Use the function <code>View()</code> with the dataframe name as the argument. Alternatively, you can click on the name of the object in the environment pane.</p></li>
+<li><p>Use the function <code>glimpse()</code> with the dataframe name as the argument.</p></li>
+</ul>
+<p><strong>Variable names</strong>: You’ll notice that some of the variable names have spaces. This is allowed in R, but they are awkward because you will be using these names in your code. We will cover renaming variables later today, but there is a function to <em>clean</em> (i.e., modify) the names. The function called <code>clean_names()</code> is part of the <code>janitor</code> package.</p>
+<blockquote class="blockquote">
+<p>Try it on your own: use the <code>clean_names()</code> function to convert all of the column names to snake_case. Reference the documentation in the help tab of the lower right panel.</p>
+</blockquote>
+<p>Check the datatypes of the variables in the dataframe. Do they make sense?</p>
+<p>A quick note about a symbol in R code called the “pipe” <code>%&gt;%</code> or <code>|&gt;</code>. The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe. You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). Video tutorial here: <a href="https://youtu.be/e_SQnJpS5fA" class="uri">https://youtu.be/e_SQnJpS5fA</a></p>
 </section>
-<section id="r-dplyr-continued" class="level2">
-<h2 class="anchored" data-anchor-id="r-dplyr-continued">R: <code>dplyr</code> continued</h2>
-<p>Last week we introduced the five <code>dplyr</code> verbs generally used to manipulate data. We covered <code>mutate, filter, select,</code> and <code>arrange</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> We skipped over <code>summarize</code>. Today we will introduce <code>summarize</code> and a helpful companion function <code>group_by</code>. The <code>summarize</code> function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data.</p>
-<p>Let’s return to our dataset <code>supermarket_sales.csv</code>. Use the function <code>read_csv()</code> to read <code>supermarket_sales.csv</code> into a dataframe called <code>supermarket_raw</code> (see <a href="../week_02/lab_00_week_02.html#read-the-data-into-r">lab 2</a>).</p>
+<section id="modifying-the-dataframe" class="level3">
+<h3 class="anchored" data-anchor-id="modifying-the-dataframe">Modifying the dataframe</h3>
+<p>You will often need to modify the data you read in. The package <code>dplyr</code> contains a set of utilities that help you modify dataframes.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <code>dplyr</code> argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a>):</p>
+<ol type="1">
+<li><p><code>mutate()</code> adds new variables that are functions of existing variables</p></li>
+<li><p><code>select()</code> picks variables based on their names.</p></li>
+<li><p><code>filter()</code> picks cases based on their values.</p></li>
+<li><p><code>arrange()</code> changes the ordering of the rows.</p></li>
+<li><p><code>summarise()</code> reduces multiple values down to a single summary.</p></li>
+<li><p><code>group_by()</code> reduces multiple values down to a single summary.</p></li>
+</ol>
+<p>The following exercises will introduce you to these core functions while exploring the supermarket_sales data. These functions will all return a dataframe as the output.</p>
+</section>
+<section id="mutate" class="level3">
+<h3 class="anchored" data-anchor-id="mutate">1. Mutate</h3>
+<p><code>mutate()</code> is the function to create or add new variables. Let’s recreate the column <code>total</code> by multiplying the columns <code>unit_price</code> and <code>quantity</code>. Note that we create a new variable called <code>total_calc</code> and assign this dataframe to a new object called <code>my_super_sales</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw,<span class="at">total_calc=</span>unit_price<span class="sc">*</span>quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Is the result <code>total_calc</code> equal to the existing column <code>total</code>? Why or why not?</p>
+</blockquote>
+<p>You can perform most mathematical operations on numeric columns and other types of operations on string or character data types. The key point to remember is that mutate operations must output a vector that is the same length as the dataframe.</p>
+</section>
+<section id="select-and-rename" class="level3">
+<h3 class="anchored" data-anchor-id="select-and-rename">2. Select (and rename)</h3>
+<p><code>select()</code> is a function to subset columns from the dataframe. Suppose you want to create a new dataframe with only the invoice id, the city, the reported total, and the calculated total.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales,invoice_id,city,total,total_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>rename()</code> is a related function used to rename columns rather than subset them. Suppose that you didn’t like the name <code>city</code> and wanted to call it <code>market</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">rename</span>(select_super_sales,<span class="at">market=</span>city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can combine the operations using the rename syntax to rename a column inside of a select statement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales,invoice_id,<span class="at">market=</span>city,total,total_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filter" class="level3">
+<h3 class="anchored" data-anchor-id="filter">3. Filter</h3>
+<p><code>filter()</code> is a function to subset the rows of a dataframe based on a condition that returns a <code>TRUE</code> or <code>FALSE</code>. This is a very general concept used in all sorts of programming applications. In this context, we will write a statement that is true for some elements of the vector <code>city</code> (renamed to market). To filter the dataframe to only data from the market “Yangon”, we write</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales,market<span class="sc">==</span><span class="st">"Yangon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The statement <code>market=="Yangon"</code> can be evaluated on every row as either <code>TRUE</code> or <code>FALSE</code>. This command keeps only the rows where the market name equals the exact word “Yangon.” This is case sensitive because the statement is comparing the market name in each row. You can also create statements using the greater than <code>&gt;</code> or less than <code>&lt;</code> comparing numeric values. You can find more information on logical operators here: <a href="https://www.statmethods.net/management/operators.html" class="uri">https://www.statmethods.net/management/operators.html</a></p>
+</section>
+<section id="arrange-or-sort" class="level3">
+<h3 class="anchored" data-anchor-id="arrange-or-sort">4. Arrange (or sort)</h3>
+<p><code>arrange()</code> is a function that modifies the order of the rows in the dataframe based on the values of a column or set of columns. R can sort numeric and character strings (alphabetical). Let’s start by sorting the dataframe in ascending order based on the column <code>total</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(yangon_super_sales,total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can sort on multiple columns. The order determines how the data are sorted. Let’s use the dataset with all of the markets (<code>select_super_sales</code>) and sort based on market, then by total in descending order to see the top sales in each market.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>super_sales_top <span class="ot">&lt;-</span> <span class="fu">arrange</span>(select_super_sales,market,<span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function <code>desc()</code> is short for descending and indicates that the total should be sorted in descending order.</p>
+<p><strong>Remember to comment in your code so you can refer back to see what you did.</strong></p>
+<!---## R: `dplyr` continued  --->
+<p>Now you know the five <code>dplyr</code> verbs generally used to manipulate data. We covered <code>mutate, filter, select,</code> and <code>arrange</code>. Next, we will introduce <code>summarize</code> and a helpful companion function <code>group_by</code>.</p>
+<!-- Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). -->
 <blockquote class="blockquote">
 <p>Note that you can read in data and files from directories other than your working directory. You can include the directory in the file path.</p>
 </blockquote>
+</section>
 <section id="summarize" class="level3">
-<h3 class="anchored" data-anchor-id="summarize">4. Summarize</h3>
+<h3 class="anchored" data-anchor-id="summarize">5. Summarize</h3>
+<p>The <code>summarize</code> function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data.</p>
 <p>We can use <code>summarize()</code> to calculate the total number of units sold in the dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_summed=</span><span class="fu">sum</span>(quantity)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_summed=</span><span class="fu">sum</span>(quantity)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>Notice that the command above does not assign the output to an object. It can be useful to quickly check the output of a command before assigning an object. Is the variable <code>quantity_summed</code> accessible to you? In other words, could you call that value within R and perform other operations on it? Can you modify that command to assign the output to an object called <code>total_sold</code>?</p>
@@ -389,70 +248,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>total_sold <span class="ot">&lt;-</span> <span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_summed=</span><span class="fu">sum</span>(quantity)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>total_sold <span class="ot">&lt;-</span> <span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_summed=</span><span class="fu">sum</span>(quantity)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><strong>You do it</strong>: Try calculating the average of the <code>quantity</code> variable. In R, the function to calculate average is <code>mean()</code>. Now calculate the maximum <code>unit_price</code>. The function to calculate the maximum is <code>max()</code>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mean quantity</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_mean=</span><span class="fu">mean</span>(quantity)) </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Max price</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">max_price=</span><span class="fu">max</span>(unit_price)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mean quantity</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_mean=</span><span class="fu">mean</span>(quantity)) </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Max price</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">max_price=</span><span class="fu">max</span>(unit_price)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 <section id="group-by" class="level3">
-<h3 class="anchored" data-anchor-id="group-by">Group by</h3>
+<h3 class="anchored" data-anchor-id="group-by">6. Group by</h3>
 <p>Often times, you need to perform some operation on a group of data. You can think about this as a sequence of operations: part 1) subset the group that you want to focus on, and part 2) perform the operation. For example, you might want to know the quantity of goods sold by branch.</p>
 <p>Step 1: Filter the data in each branch (let’s just do branch A for example)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You should see a new dataframe called <code>branch_A_sales</code> with 340 observations. All of the variables from <code>supermarket_raw</code> are there including <code>quantity</code>.</p>
 <p>Step 2: sum the quantity of goods sold</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>branch_A_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_A_sales,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>branch_A_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_A_sales,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>You try it</strong>: do the same thing for branch B and C.</p>
 <p>This is pretty tedious. If operations in R or other programming languages seems tedious or repetitive, there are probably much better ways to do it. In this case, we can use a function <code>group_by()</code>. <code>group_by()</code> tells R to perform some operation like <code>sum</code> on each of the subgroups defined by another variable. Let’s sum the quantity by branch using <code>group_by()</code> and <code>summarize()</code>. We will do this in two steps:</p>
 <p>Step 1: use <code>group_by()</code> to group the data by <code>branch</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create a signal for summarize but not perform any calculation.  </span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>super_sales_grouped_branch <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create a signal for summarize but not perform any calculation.  </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>super_sales_grouped_branch <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Step 2: use <code>summarize()</code> to calculate the total quantity (by branch)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create a signal for summarize but not perform any calculation.  </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch <span class="ot">&lt;-</span> <span class="fu">summarize</span>(super_sales_grouped_branch,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create a signal for summarize but not perform any calculation.  </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch <span class="ot">&lt;-</span> <span class="fu">summarize</span>(super_sales_grouped_branch,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that the result has the quantity sum for each branch. Do they match your manual calculations?</p>
 <p><strong>You try it</strong>: Calculate the average <code>unit_price</code> for each <code>product_line</code> in the data.</p>
 </section>
 <section id="chaining-commands" class="level3">
 <h3 class="anchored" data-anchor-id="chaining-commands">Chaining commands</h3>
-<p>The script is a set of instructions for R that get executed in order. In some cases, you do not care about or need to save the intermediate output. The <code>group_by</code> and summarize sequence is a good example; you don’t need to store the dataframe <code>super_sales_grouped_branch</code> unless there is a clear use for it later. The symbol known as the pipe, <code>%&gt;%</code>, means take the output of the function on the left and use it as an input for the function on the right.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Let’s return to our <code>group_by()</code> and <code>summarize()</code> sequence and use the pipe technique rather than assign the intermediate step to a dataframe.</p>
+<p>The script is a set of instructions for R that get executed in order. In some cases, you do not care about or need to save the intermediate output. The <code>group_by</code> and summarize sequence is a good example; you don’t need to store the dataframe <code>super_sales_grouped_branch</code> unless there is a clear use for it later. The symbol known as the pipe, <code>%&gt;%</code>, means take the output of the function on the left and use it as an input for the function on the right.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Let’s return to our <code>group_by()</code> and <code>summarize()</code> sequence and use the pipe technique rather than assign the intermediate step to a dataframe.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the pipe to chain two statements </span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch) <span class="sc">%&gt;%</span> <span class="co">#group by branch and pass the output to summarize</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(.,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity)) <span class="co">#Sum the quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the pipe to chain two statements </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch) <span class="sc">%&gt;%</span> <span class="co">#group by branch and pass the output to summarize</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(.,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity)) <span class="co">#Sum the quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="appending-data" class="level3">
 <h3 class="anchored" data-anchor-id="appending-data">Appending data</h3>
 <p>In many cases, you will need to combine parts of datasets into a single larger dataset. Let’s return to the example of breaking up the dataset by branch. If you have not created dataframes for each branch above, do it using these commands:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name. Suppose you were given the data as three separate files and you read them into these dataframes. However, you want to profile company sales across the branches. You need to append them together. The <code>dplyr</code> function to append rows is <code>bind_rows()</code>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name. Suppose you were given the data as three separate files and you read them into these dataframes. However, you want to profile company sales across the branches. You need to append them together. The <code>dplyr</code> function to append rows is <code>bind_rows()</code>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales,branch_B_sales,branch_C_sales) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales,branch_B_sales,branch_C_sales) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that <code>bind_rows()</code> looks for shared column names in each dataframe. If one dataframe is missing a column, it will be filled with <code>NA</code>. <code>NA</code> in R stands for “Not Available” or “Not Applicable.” It is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an “NA” value, it treats it differently from other values, and special functions are often used to handle missing data.</p>
+</section>
+<section id="log-file" class="level3">
+<h3 class="anchored" data-anchor-id="log-file">Log file</h3>
+<p>To output the log from sourcing an R script to a text file, you can use the <code>sink()</code> function. The <code>sink()</code> function redirects R output to a file or connection.</p>
+<p>For example, to redirect the output to a file named “log.txt”, you can use the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"log.txt"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will run the script “script.R” and redirect all the output to the file “log.txt”. <code>echo=TRUE</code> ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the <code>sink()</code> function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of “script.R” because the command <code>source()</code> is equivalent to running every line of “script.R.”</p>
 </section>
 </section>
 
@@ -460,9 +330,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p> See <a href="../week_02/lab_00_week_02.html#modifying-the-dataframe">lab 2</a> for reference.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>The pipe was originally introduced in the package <a href="https://magrittr.tidyverse.org/reference/pipe.html"><code>magrittr</code></a> and is represented by the symbol <code>%&gt;%</code>. The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol <code>|&gt;</code>. They are not equivalent. I will use the <code>magrittr</code> pipe in this class.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> is a more efficient version of a function in base R called <code>rbind()</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Install if necessary.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The package <code>dplyr</code> is part of a larger set of packages known as the <code>tidyverse</code> <a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>. The term <em>tidy</em> refers to a structure of data. There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available. Most of what I teach in this class will be part of the tidyverse or adherant to its principles. Video tutorial here: <a href="https://youtu.be/bUM3wX4YZDc" class="uri">https://youtu.be/bUM3wX4YZDc</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The pipe was originally introduced in the package <a href="https://magrittr.tidyverse.org/reference/pipe.html"><code>magrittr</code></a> and is represented by the symbol <code>%&gt;%</code>. The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol <code>|&gt;</code>. They are not equivalent. I will use the <code>magrittr</code> pipe in this class.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> is a more efficient version of a function in base R called <code>rbind()</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
@@ -493,9 +365,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -560,6 +446,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
