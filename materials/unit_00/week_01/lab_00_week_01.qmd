@@ -220,6 +220,8 @@ Here are some additional resources to help you get started with R:
 
 [Google sites](https://sites.google.com/) is an easy-to-use website editing and hosting service.  You will create a website as a portfolio for your work in the course.  **You will complete your assignments by building webpages in your website**.  We encourage you to develop this website to showcase your work and market yourself to future employers.
 
+{{< video https://youtu.be/Ub9P2Z0cqAE aspect-ratio="16x9" >}}
+
 
 ## Tableau Setup
 
