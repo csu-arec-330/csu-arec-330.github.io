@@ -63,7 +63,7 @@ Gambler's fallacy, the tendency to think that future probabilities are altered b
 
 
 Empirical evidence: 
-First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart. 
+<!-- First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart.  -->
 
 
 :::
@@ -73,10 +73,25 @@ First, moods and emotions are interfering with managers’ ability to process in
 
 ![source: <https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/>](figs/Intuition-vs-Data-Driven-Decision-1.webp)
 
+::: {.notes}
+
+D3M relies on facts in the data: Need to ensure quality and fidelity of the data
+
+Choice are tested: The decision to go with a certain marketing strategy, color scheme, or phrase is based on data analysis demonstrating that the choice is better than the alternatives at achieving the objective
+
+Inspired by experience but not completely reliant on it. There is context and information not always measured in data
+
+D3m is risk aversing because decisions are made based on evidence and not emotions or gut feeling
+
+Directive vs corrective because the organization is being proactive and making informed decisions rather than reacting to negative outcomes. This ad campaign didn't work so we should scrap it and start another one.
+
+:::
+
 ## D^3^M is expanding rapidly
 
 ![Figure 1. Adoption of Data-Driven Decision-Making in US Manufacturing (Brynjolfsson & McElheran, 2016, AER)](figs/AER_fig.png)
 
+# D^3^M is a process
 
 ## D^3^M process overview
 
@@ -203,11 +218,13 @@ They use a regression model to study what factors explain variation in the suppr
 
 :::
 
-## 5. Communicate insights
+## 5. Communicate insight, implement, restart
 
 Use the data to tell a story - develop visuals that show the audience the consequence of the current decision and how a different one could change the outcome
 
 Articulate the benefits of the change
+
+Implement the change and restart the process
 
 ::: {.notes}
 Develop a graphic to show which fires lie above the regression line of cost on X. Then, look for patterns across the fires that cost more than expected. Find what they have in common.
