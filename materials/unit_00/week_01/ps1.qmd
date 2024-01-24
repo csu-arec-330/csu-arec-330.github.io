@@ -14,7 +14,7 @@ format:
 
 3. Using indexing, print the third element of the `grades` vector to the console.
 
-4. Create a data frame called `student_info` containing the following columns: Name, Age, Gender, Grade. The data should be as follows:
+4. Create a data frame called `student_info` containing the following columns: Name, Age, Major, Absent. The data should be as follows:
 
 ```{r,echo=FALSE,results='asis'}
 knitr::kable(data.frame(
