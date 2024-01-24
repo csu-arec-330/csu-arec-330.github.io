@@ -1,5 +1,5 @@
 ---
-title: "Week 2 Lab: R and Tableau Intro I"
+title: "Week 2 Lab: Introduction to Tableau"
 format: 
   html:
     theme: zephyr
@@ -28,16 +28,8 @@ supermarket_raw <- read_csv("../inputs/supermarket_sales.csv") %>%
 This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 :::
 
-## Learning Objectives R
-- Read in data and evaluate datatypes
-
-- Calculate new columns based on existing columns
-
-- Subset or filter rows of the data
-
-- Subset or select columns of the data
-
 ## Learning Objectives Tableau
+
 - Describe the flow of analysis in Tableau Desktop
 
 - Identify key areas of the Tableau Desktop workspace
@@ -52,142 +44,22 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 
 - Demonstrate how to share your data visualization
 
+- Identify the function of items on the Tableau Toolbar
 
+- Create sorted, stacked, and bar in bar charts
 
-## Data processing with R
+- Understand the functions of the `Marks` and `Filters` cards
 
-Data processing is an important step in analysis.  It can be complicated depending on the number of data sources, quality of the data, and structure of the data.  We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.
+- Create calculated fields
 
+- Explain what it means to group your data 
 
-### Starting a task or project in R
+- Apply formatting features to make your visualization more effective
 
-1. Open RStudio either on your own computer or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus.  If you are on campus, the link should take you to the RStudio sign on page.]. 
+- Create line charts
 
-2. Open up a new script.  
+- Manipulate date-time fields
 
-3. Write a brief comment in the first line describing what the script will do.  
-```{r}
-#This script will process a sample dataset for problem set 2
-```
-
-4. Load any libraries/packages used in the script.^[Install if necessary.]  In this lab, we will use 3 packages: `readr,dplyr,janitor`.  
-
-5. Set the working directory to a known location.  This may be a new directory where you will store any external data and save the code file.
-
-### Read the data into R
-
-1. Download `supermarket_sales.csv` to the project directory.
-
-2. Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw`.
-
-3. Take a look at the dataframe.  There are a few ways to look at the dataframe:
-
-  - Type the name of the dataframe in the console.  This shows the data in the first several rows of the first several columns.
-  
-  - Use the function `View()` with the dataframe name as the argument.  Alternatively, you can click on the name of the object in the environment pane. 
-  
-  - Use the function `glimpse()` with the dataframe name as the argument.
-
-**Variable names**: You'll notice that some of the variable names have spaces.  This is allowed in R, but they are awkward because you will be using these names in your code.  We will cover renaming variables later today, but there is a function to *clean* (i.e., modify) the names.  The function called `clean_names()` is part of the `janitor` package.
-
-> Try it on your own: use the `clean_names()` function to convert all of the column names to snake_case.  Reference the documentation in the help tab of the lower right panel.
-
-Check the datatypes of the variables in the dataframe.  Do they make sense?
-
-A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). Video tutorial here: <https://youtu.be/e_SQnJpS5fA>
-
-### Modifying the dataframe
-
-You will often need to modify the data you read in.  The package `dplyr` contains a set of utilities that help you modify dataframes.^[The package `dplyr` is part of a larger set of packages known as the `tidyverse` <https://www.tidyverse.org/>.  The term *tidy* refers to a structure of data.  There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available.  Most of what I teach in this class will be part of the tidyverse or adherant to its principles.  Video tutorial here: <https://youtu.be/bUM3wX4YZDc>] `dplyr` argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<https://dplyr.tidyverse.org/>):
-
-1. `mutate()` adds new variables that are functions of existing variables
-
-2.  `select()` picks variables based on their names.
-
-3.  `filter()` picks cases based on their values.
-
-4. `summarise()` reduces multiple values down to a single summary.
-
-5.  `arrange()` changes the ordering of the rows.
-
-The following exercises will introduce you to these core functions while exploring the supermarket_sales data.  These functions will all return a dataframe as the output.
-
-#### 1. Mutate
-
-`mutate()` is the function to create or add new variables.  Let's recreate the column `total` by multiplying the columns `unit_price` and `quantity`.  Note that we create a new variable called `total_calc` and assign this dataframe to a new object called `my_super_sales`.
-
-```{r}
-my_super_sales <- mutate(supermarket_raw,total_calc=unit_price*quantity)
-```
-
-> Is the result `total_calc` equal to the existing column `total`?  Why or why not?
-
-You can perform most mathematical operations on numeric columns and other types of operations on string or character data types.  The key point to remember is that mutate operations must output a vector that is the same length as the dataframe.
-
-### 2. Select (and rename)
-
-`select()` is a function to subset columns from the dataframe. Suppose you want to create a new dataframe with only the invoice id, the city, the reported total, and the calculated total.
-
-```{r}
-select_super_sales <- select(my_super_sales,invoice_id,city,total,total_calc)
-```
-
-`rename()` is a related function used to rename columns rather than subset them.  Suppose that you didn't like the name `city` and wanted to call it `market`.
-
-```{r}
-select_super_sales <- rename(select_super_sales,market=city)
-```
-
-You can combine the operations using the rename syntax to rename a column inside of a select statement.
-
-```{r}
-select_super_sales <- select(my_super_sales,invoice_id,market=city,total,total_calc)
-```
-
-### 3. Filter
-
-`filter()` is a function to subset the rows of a dataframe based on a condition that returns a `TRUE` or `FALSE`. This is a very general concept used in all sorts of programming applications.  In this context, we will write a statement that is true for some elements of the vector `city` (renamed to market).  To filter the dataframe to only data from the market "Yangon", we write
-
-```{r}
-yangon_super_sales <- filter(select_super_sales,market=="Yangon")
-```
-
-The statement `market=="Yangon"` can be evaluated on every row as either `TRUE` or `FALSE`.  This command keeps only the rows where the market name equals the exact word "Yangon."  This is case sensitive because the statement is comparing the market name in each row.  You can also create statements using the greater than `>` or less than `<` comparing numeric values.  You can find more information on logical operators here: <https://www.statmethods.net/management/operators.html>
-
-### 5. Arrange (or sort)
-
-`arrange()` is a function that modifies the order of the rows in the dataframe based on the values of a column or set of columns.  R can sort numeric and character strings (alphabetical).  Let's start by sorting the dataframe in ascending order based on the column `total`.
-
-```{r}
-yangon_super_sales_sorted <- arrange(yangon_super_sales,total)
-```
-
-You can sort on multiple columns.  The order determines how the data are sorted.  Let's use the dataset with all of the markets (`select_super_sales`) and sort based on market, then by total in descending order to see the top sales in each market.
-
-```{r}
-super_sales_top <- arrange(select_super_sales,market,desc(total))
-```
-
-The function `desc()` is short for descending and indicates that the total should be sorted in descending order.
-
-**Remember to comment in your code so you can refer back to see what you did.**
-
-
-### Log file
-
-To output the log from sourcing an R script to a text file, you can use the `sink()` function. The `sink()` function redirects R output to a file or connection.
-
-For example, to redirect the output to a file named "log.txt", you can use the following command:
-
-```{r}
-#| eval: false
-sink("log.txt")
-source("script.R",echo = TRUE)
-sink()
-
-```
-
-This will run the script "script.R" and redirect all the output to the file "log.txt". `echo=TRUE` ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of "script.R" because the command `source()` is equivalent to running every line of "script.R."
 
 
 ## Tableau Setup
@@ -202,7 +74,7 @@ Visit [Tableau Public](https://public.tableau.com/app/discover) and create an ac
 
 If you are ever feeling lost in this class, I recommend checking out some of Tableau's free [eLearning resources](https://elearning.tableau.com). We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.
 
-## Introduction to Tableau: The Tableau Workflow 
+## The Tableau Workflow 
 
 Connect -> Analyze -> Share 
 
@@ -269,3 +141,255 @@ Using the Supermarket Sales data, contruct data visualizations that answer the f
 5.  Does this differ by store branch?
 
 6.  What actionable insights does this analysis reveal for the stores?
+
+In problem set 2, you will flow this workflow to produce a simple data visualization using the grocery store spending dataset. 
+
+## Analyzing data in Tableau
+
+Next, we are going to go in more detail in the analyze step of the process. We will learn to make a few new figures, we will learn more of the features of the Tableau analysis page, and we will discuss a few ways to change the formatting of your visualizations to make them more effective.
+
+We will be using the same Supermarket Sales dataset, picking up where we left off with our analysis of product line ratings. We will be covering the following:  
+
+1.  Creating calculated fields
+
+2.  Organizing fields in folders
+
+3.  More advanced bar charts: Sorting
+
+4.  Using the `Marks` card and creating groups
+
+5.  Formatting titles, axes, legends, etc.
+
+6.  Exploring the Tableau toolbar
+
+7.  Using the `Filters` card
+
+8.  More advanced bar charts: Stacking
+
+9.  More advanced bar charts: Bar in bar
+
+10.  Intro to line charts and manipulating dates
+
+### 1. Create calculated fields
+
+In your last assignment you were asked to use R to calculate the total value of the sale using the `unit_price` and `quantity` columns. (And name the new column `subtotal`.)
+
+We can do this sort of calculation in Tableau too!
+
+![](includes/newvar.png){width="60%"}
+
+Then select  `Create Calculated Field...`
+
+Give your field a useful name (let's use `subtotal`).
+
+Drag the relevant variables into the box. Type the appropriate function (multiply). Click OK. And Voila.
+
+**You do it:** Validate that the value labeled `tax_5_percent` is indeed 5% of the `subtotal` by creating a new variable called `tax_verify`. 
+
+**You do it:** Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.
+
+### 2. Organize your data into folders
+
+In your last assignment you were asked to use R to create a dataframe containing only a subset of your data, with the columns `city, product_line, unit_price, quantity, total, rating`
+
+In Tableau, one way to reduce the number of fields you see if by organizing your data into folders.
+
+Try organizing your data into folders by:
+
+-  Selecting `Group by folder`
+
+-  Right click a field you want in the new folder
+
+-  Click Folders -> Create Folder...
+
+-  Give your folder a useful name
+
+-  Note that you can still combine data across different folders in your visualizations, you have just created a more organized data pane.
+
+### 3. Sorting bar charts
+
+Let's start off with our bar chart from last class where we looked at customer ratings by product line...
+
+From our lecture on Wednesday, what are some ways we could improve this visualization to answer the question "Which product line has the lowest average customer rating?"
+
+::: notes
+Title, adding color to highlight the top category, making font larger and easier to read, maybe changing axis range
+:::
+
+What about **sorting**?
+
+There are a two ways to sort bars on our chart:
+
+-  use the toolbar
+
+-  use the icon next to the y-axis label  
+
+**You do it:** Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.
+
+### 4. Using the marks card and creating groups
+
+What if we want to **use color** to highlight the top category? 
+
+There are a few ways to do this:
+
+-  Drag product line to `color` on the Marks card (then edit colors)
+
+-  Right click the bar you want to stand out and click `Group` (then edit colors)  
+
+What if we want to add **labels** with the value of the rating?
+
+-  Label -> check `show mark labels`  
+
+**You do it:** Show mark labels and click around with the other options on the label card. What formatting do you like best?
+
+What if we want to change the **width of our bars**?
+
+-  Size -> adjust!  
+
+What if we want to add some extra info on the box that appears when we hover over a bar?
+
+-  Tooltip  
+
+**You do it:** Try adding some text to the tooltip. Click on Insert -> what else can you add to the tooltip?
+
+### 5. Formatting titles, axes, legends, etc.
+
+What if we want to **adjust the scale** of the y-axis so that differences across the bars are easier to see?
+
+-  Right click the y-axis
+
+-  Click edit axis
+
+-  Choose an appropriate range  
+
+Now what happens if we compare these customer ratings across branches? Does the product line with the top ratings vary by store?
+
+**You do it:** Highlight the product line with the top rating at branch A - how does this rank in the other branches?
+
+**You do it:** Click on the different options in the legend - what happens?
+
+What if we want to **change the font size** (or color, etc.) of the axis labels?
+
+-  Right click the axis you want to edit -> click Format  
+
+What if instead of having Branch/Product line at the top, we just rename A as Branch A, B as Branch B, etc.
+
+-  Right click Branch / Product line -> Hide field labels
+
+-  Right click branch -> Edit Aliases...  
+
+**You do it:** Play with the formatting of your visualization until you are satisfied with its appearance.
+
+What if we want to **remove the legend**?
+
+**Adding a caption** that describes details about your visualization. -> Right click the visualization.
+
+**Marking** or **annotating** a single point. -> Right click -> Mark Label or Annotate
+
+### 6. Other features in the toolbar
+
+Let's explore the Tableau toolbar... Hover over each icon in the toolbar... Click each icon in the toolbar!
+
+### 7. Using the filters card
+
+What if we want to recreate our analysis of ratings for female customers only?
+
+Let's use the toolbar to **duplicate** our worksheet.
+
+Next, let's add a filter for females:
+
+-  Drag the field `gender` to the `Filters` card
+
+-  Select `Female`
+
+### 8. Stacking bar charts
+
+What if you want to see total sales split by gender and purchase category? 
+
+**You do it:** Create a visualization (in a new sheet) that shows total sales by gender and product line.
+
+Great, now what if we instead want to see this in terms of what percent of total sales within each category are from females vs. males?
+
+Let's try **stacking** our bars instead:
+
+-  Move gender from the rows shelf and drag it to the `Color` icon on the `Marks` card.  
+
+What if we want to see the value of total sales for males and females?
+
+-  Label -> Show Mark Labels  
+
+What if we instead want to see the percent of total sales that are from males and females?
+
+-  Click the dropdown menu on SUM(Total)
+
+-  Quick Table Calculation -> Percent of Total  
+
+Now what if we want to see the percent of total sales within each category that are from males and females?
+
+-  Create a 100% stacked bar chart
+
+-  Click the dropdown menu on SUM(Total)
+
+-  Compute Using -> Gender  
+
+**You do it:** What do the other compute using options do?
+
+### 9. Creating bar in bar charts
+
+Another way to compare sales for males and females is to use a bar in bar chart. This will allow you to easily see whether total sales are higher for males or females.
+
+-  Let's duplicate our 100% stacked bar chart
+
+-  Drag gender to the `Size` icon in the `Marks` card
+
+-  From the top menu, click Analysis -> Stack Marks -> Off  
+
+What if we want to swap which gender is the wide bar?  
+
+### 10. Basic line charts and datetime
+
+The second type of chart we will learn to create is a line chart.  
+
+Suppose we want to see trends in sales over time:
+
+-  Open a new worksheet
+
+-  Drag `Total` to the rows shelf and `Date` to the columns shelf
+
+-  Click the dropdown menu next to `Date`
+
+-  Click Week Number  
+
+**You do it:** Explore the other date display options. Which do you like best for this analysis?
+
+What if we want to see trends in sales across months?  
+
+Let's look at two options for doing this:
+
+1.  Side-by-side lines:
+
+    -  With the `Date` aggregation set to MONTH in the columns shelf, double click the `Date` field.
+
+    -  Click the dropdown menu on the YEAR(Date) field on the columns shelf
+
+    -  Select Day
+
+2.  Combined lines:
+
+    -  Drag MONTH(Date) to the colors card  
+
+Let's look at different line types. Click the new `Path` icon on the Marks card
+
+Let's add some trend lines. Analysis -> Trend lines -> Show Trend Lines
+
+What are trend lines??
+
+### 11. Review
+
+1.  Which payment type has the highest total spending?
+
+2.  Do more females or more males use this payment type?
+
+3.  Which payment type has seen the greatest increase in total spending over time?
+
+4.  For a challenge: Which payment type has seen the greatest increase in the **number of customers using it** over time?

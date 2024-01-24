@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 2 Lab: R and Tableau Intro I</title>
+<title>Week 2 Lab: Introduction to Tableau</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,72 +17,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -108,26 +45,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
-  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
-  <li><a href="#data-processing-with-r" id="toc-data-processing-with-r" class="nav-link" data-scroll-target="#data-processing-with-r">Data processing with R</a>
-  <ul class="collapse">
-  <li><a href="#starting-a-task-or-project-in-r" id="toc-starting-a-task-or-project-in-r" class="nav-link" data-scroll-target="#starting-a-task-or-project-in-r">Starting a task or project in R</a></li>
-  <li><a href="#read-the-data-into-r" id="toc-read-the-data-into-r" class="nav-link" data-scroll-target="#read-the-data-into-r">Read the data into R</a></li>
-  <li><a href="#modifying-the-dataframe" id="toc-modifying-the-dataframe" class="nav-link" data-scroll-target="#modifying-the-dataframe">Modifying the dataframe</a></li>
-  <li><a href="#select-and-rename" id="toc-select-and-rename" class="nav-link" data-scroll-target="#select-and-rename">2. Select (and rename)</a></li>
-  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter">3. Filter</a></li>
-  <li><a href="#arrange-or-sort" id="toc-arrange-or-sort" class="nav-link" data-scroll-target="#arrange-or-sort">5. Arrange (or sort)</a></li>
-  <li><a href="#log-file" id="toc-log-file" class="nav-link" data-scroll-target="#log-file">Log file</a></li>
-  </ul></li>
+  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link active" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
   <li><a href="#tableau-setup" id="toc-tableau-setup" class="nav-link" data-scroll-target="#tableau-setup">Tableau Setup</a></li>
-  <li><a href="#introduction-to-tableau-the-tableau-workflow" id="toc-introduction-to-tableau-the-tableau-workflow" class="nav-link" data-scroll-target="#introduction-to-tableau-the-tableau-workflow">Introduction to Tableau: The Tableau Workflow</a>
+  <li><a href="#the-tableau-workflow" id="toc-the-tableau-workflow" class="nav-link" data-scroll-target="#the-tableau-workflow">The Tableau Workflow</a>
   <ul class="collapse">
   <li><a href="#connect" id="toc-connect" class="nav-link" data-scroll-target="#connect">Connect</a></li>
   <li><a href="#analyze" id="toc-analyze" class="nav-link" data-scroll-target="#analyze">Analyze</a></li>
   <li><a href="#share" id="toc-share" class="nav-link" data-scroll-target="#share">Share</a></li>
   </ul></li>
   <li><a href="#applying-the-tableau-workflow" id="toc-applying-the-tableau-workflow" class="nav-link" data-scroll-target="#applying-the-tableau-workflow">Applying The Tableau Workflow</a></li>
+  <li><a href="#analyzing-data-in-tableau" id="toc-analyzing-data-in-tableau" class="nav-link" data-scroll-target="#analyzing-data-in-tableau">Analyzing data in Tableau</a>
+  <ul class="collapse">
+  <li><a href="#create-calculated-fields" id="toc-create-calculated-fields" class="nav-link" data-scroll-target="#create-calculated-fields">1. Create calculated fields</a></li>
+  <li><a href="#organize-your-data-into-folders" id="toc-organize-your-data-into-folders" class="nav-link" data-scroll-target="#organize-your-data-into-folders">2. Organize your data into folders</a></li>
+  <li><a href="#sorting-bar-charts" id="toc-sorting-bar-charts" class="nav-link" data-scroll-target="#sorting-bar-charts">3. Sorting bar charts</a></li>
+  <li><a href="#using-the-marks-card-and-creating-groups" id="toc-using-the-marks-card-and-creating-groups" class="nav-link" data-scroll-target="#using-the-marks-card-and-creating-groups">4. Using the marks card and creating groups</a></li>
+  <li><a href="#formatting-titles-axes-legends-etc." id="toc-formatting-titles-axes-legends-etc." class="nav-link" data-scroll-target="#formatting-titles-axes-legends-etc.">5. Formatting titles, axes, legends, etc.</a></li>
+  <li><a href="#other-features-in-the-toolbar" id="toc-other-features-in-the-toolbar" class="nav-link" data-scroll-target="#other-features-in-the-toolbar">6. Other features in the toolbar</a></li>
+  <li><a href="#using-the-filters-card" id="toc-using-the-filters-card" class="nav-link" data-scroll-target="#using-the-filters-card">7. Using the filters card</a></li>
+  <li><a href="#stacking-bar-charts" id="toc-stacking-bar-charts" class="nav-link" data-scroll-target="#stacking-bar-charts">8. Stacking bar charts</a></li>
+  <li><a href="#creating-bar-in-bar-charts" id="toc-creating-bar-in-bar-charts" class="nav-link" data-scroll-target="#creating-bar-in-bar-charts">9. Creating bar in bar charts</a></li>
+  <li><a href="#basic-line-charts-and-datetime" id="toc-basic-line-charts-and-datetime" class="nav-link" data-scroll-target="#basic-line-charts-and-datetime">10. Basic line charts and datetime</a></li>
+  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">11. Review</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -135,7 +75,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 2 Lab: R and Tableau Intro I</h1>
+<h1 class="title">Week 2 Lab: Introduction to Tableau</h1>
 </div>
 
 
@@ -154,15 +94,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="font-size: 1.5em">
 <p>This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8</p>
 </div>
-<section id="learning-objectives-r" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
-<ul>
-<li><p>Read in data and evaluate datatypes</p></li>
-<li><p>Calculate new columns based on existing columns</p></li>
-<li><p>Subset or filter rows of the data</p></li>
-<li><p>Subset or select columns of the data</p></li>
-</ul>
-</section>
 <section id="learning-objectives-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
 <ul>
@@ -173,115 +104,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Choose an appropriate data visualization based on a business scenario and audience.</p></li>
 <li><p>Build a simple data visualization</p></li>
 <li><p>Demonstrate how to share your data visualization</p></li>
+<li><p>Identify the function of items on the Tableau Toolbar</p></li>
+<li><p>Create sorted, stacked, and bar in bar charts</p></li>
+<li><p>Understand the functions of the <code>Marks</code> and <code>Filters</code> cards</p></li>
+<li><p>Create calculated fields</p></li>
+<li><p>Explain what it means to group your data</p></li>
+<li><p>Apply formatting features to make your visualization more effective</p></li>
+<li><p>Create line charts</p></li>
+<li><p>Manipulate date-time fields</p></li>
 </ul>
-</section>
-<section id="data-processing-with-r" class="level2">
-<h2 class="anchored" data-anchor-id="data-processing-with-r">Data processing with R</h2>
-<p>Data processing is an important step in analysis. It can be complicated depending on the number of data sources, quality of the data, and structure of the data. We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.</p>
-<section id="starting-a-task-or-project-in-r" class="level3">
-<h3 class="anchored" data-anchor-id="starting-a-task-or-project-in-r">Starting a task or project in R</h3>
-<ol type="1">
-<li><p>Open RStudio either on your own computer or access it via the DARE server: <a href="http://darecompute-01.aggie.colostate.edu:8787/" class="uri">http://darecompute-01.aggie.colostate.edu:8787/</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p></li>
-<li><p>Open up a new script.</p></li>
-<li><p>Write a brief comment in the first line describing what the script will do.</p></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This script will process a sample dataset for problem set 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="4" type="1">
-<li><p>Load any libraries/packages used in the script.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In this lab, we will use 3 packages: <code>readr,dplyr,janitor</code>.</p></li>
-<li><p>Set the working directory to a known location. This may be a new directory where you will store any external data and save the code file.</p></li>
-</ol>
-</section>
-<section id="read-the-data-into-r" class="level3">
-<h3 class="anchored" data-anchor-id="read-the-data-into-r">Read the data into R</h3>
-<ol type="1">
-<li><p>Download <code>supermarket_sales.csv</code> to the project directory.</p></li>
-<li><p>Use the function <code>read_csv()</code> to read <code>supermarket_sales.csv</code> into a dataframe called <code>supermarket_raw</code>.</p></li>
-<li><p>Take a look at the dataframe. There are a few ways to look at the dataframe:</p></li>
-</ol>
-<ul>
-<li><p>Type the name of the dataframe in the console. This shows the data in the first several rows of the first several columns.</p></li>
-<li><p>Use the function <code>View()</code> with the dataframe name as the argument. Alternatively, you can click on the name of the object in the environment pane.</p></li>
-<li><p>Use the function <code>glimpse()</code> with the dataframe name as the argument.</p></li>
-</ul>
-<p><strong>Variable names</strong>: You’ll notice that some of the variable names have spaces. This is allowed in R, but they are awkward because you will be using these names in your code. We will cover renaming variables later today, but there is a function to <em>clean</em> (i.e., modify) the names. The function called <code>clean_names()</code> is part of the <code>janitor</code> package.</p>
-<blockquote class="blockquote">
-<p>Try it on your own: use the <code>clean_names()</code> function to convert all of the column names to snake_case. Reference the documentation in the help tab of the lower right panel.</p>
-</blockquote>
-<p>Check the datatypes of the variables in the dataframe. Do they make sense?</p>
-<p>A quick note about a symbol in R code called the “pipe” <code>%&gt;%</code> or <code>|&gt;</code>. The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe. You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). Video tutorial here: <a href="https://youtu.be/e_SQnJpS5fA" class="uri">https://youtu.be/e_SQnJpS5fA</a></p>
-</section>
-<section id="modifying-the-dataframe" class="level3">
-<h3 class="anchored" data-anchor-id="modifying-the-dataframe">Modifying the dataframe</h3>
-<p>You will often need to modify the data you read in. The package <code>dplyr</code> contains a set of utilities that help you modify dataframes.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <code>dplyr</code> argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a>):</p>
-<ol type="1">
-<li><p><code>mutate()</code> adds new variables that are functions of existing variables</p></li>
-<li><p><code>select()</code> picks variables based on their names.</p></li>
-<li><p><code>filter()</code> picks cases based on their values.</p></li>
-<li><p><code>summarise()</code> reduces multiple values down to a single summary.</p></li>
-<li><p><code>arrange()</code> changes the ordering of the rows.</p></li>
-</ol>
-<p>The following exercises will introduce you to these core functions while exploring the supermarket_sales data. These functions will all return a dataframe as the output.</p>
-<section id="mutate" class="level4">
-<h4 class="anchored" data-anchor-id="mutate">1. Mutate</h4>
-<p><code>mutate()</code> is the function to create or add new variables. Let’s recreate the column <code>total</code> by multiplying the columns <code>unit_price</code> and <code>quantity</code>. Note that we create a new variable called <code>total_calc</code> and assign this dataframe to a new object called <code>my_super_sales</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw,<span class="at">total_calc=</span>unit_price<span class="sc">*</span>quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>Is the result <code>total_calc</code> equal to the existing column <code>total</code>? Why or why not?</p>
-</blockquote>
-<p>You can perform most mathematical operations on numeric columns and other types of operations on string or character data types. The key point to remember is that mutate operations must output a vector that is the same length as the dataframe.</p>
-</section>
-</section>
-<section id="select-and-rename" class="level3">
-<h3 class="anchored" data-anchor-id="select-and-rename">2. Select (and rename)</h3>
-<p><code>select()</code> is a function to subset columns from the dataframe. Suppose you want to create a new dataframe with only the invoice id, the city, the reported total, and the calculated total.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales,invoice_id,city,total,total_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>rename()</code> is a related function used to rename columns rather than subset them. Suppose that you didn’t like the name <code>city</code> and wanted to call it <code>market</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">rename</span>(select_super_sales,<span class="at">market=</span>city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You can combine the operations using the rename syntax to rename a column inside of a select statement.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales,invoice_id,<span class="at">market=</span>city,total,total_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="filter" class="level3">
-<h3 class="anchored" data-anchor-id="filter">3. Filter</h3>
-<p><code>filter()</code> is a function to subset the rows of a dataframe based on a condition that returns a <code>TRUE</code> or <code>FALSE</code>. This is a very general concept used in all sorts of programming applications. In this context, we will write a statement that is true for some elements of the vector <code>city</code> (renamed to market). To filter the dataframe to only data from the market “Yangon”, we write</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales,market<span class="sc">==</span><span class="st">"Yangon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The statement <code>market=="Yangon"</code> can be evaluated on every row as either <code>TRUE</code> or <code>FALSE</code>. This command keeps only the rows where the market name equals the exact word “Yangon.” This is case sensitive because the statement is comparing the market name in each row. You can also create statements using the greater than <code>&gt;</code> or less than <code>&lt;</code> comparing numeric values. You can find more information on logical operators here: <a href="https://www.statmethods.net/management/operators.html" class="uri">https://www.statmethods.net/management/operators.html</a></p>
-</section>
-<section id="arrange-or-sort" class="level3">
-<h3 class="anchored" data-anchor-id="arrange-or-sort">5. Arrange (or sort)</h3>
-<p><code>arrange()</code> is a function that modifies the order of the rows in the dataframe based on the values of a column or set of columns. R can sort numeric and character strings (alphabetical). Let’s start by sorting the dataframe in ascending order based on the column <code>total</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(yangon_super_sales,total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You can sort on multiple columns. The order determines how the data are sorted. Let’s use the dataset with all of the markets (<code>select_super_sales</code>) and sort based on market, then by total in descending order to see the top sales in each market.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>super_sales_top <span class="ot">&lt;-</span> <span class="fu">arrange</span>(select_super_sales,market,<span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The function <code>desc()</code> is short for descending and indicates that the total should be sorted in descending order.</p>
-<p><strong>Remember to comment in your code so you can refer back to see what you did.</strong></p>
-</section>
-<section id="log-file" class="level3">
-<h3 class="anchored" data-anchor-id="log-file">Log file</h3>
-<p>To output the log from sourcing an R script to a text file, you can use the <code>sink()</code> function. The <code>sink()</code> function redirects R output to a file or connection.</p>
-<p>For example, to redirect the output to a file named “log.txt”, you can use the following command:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"log.txt"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This will run the script “script.R” and redirect all the output to the file “log.txt”. <code>echo=TRUE</code> ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the <code>sink()</code> function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of “script.R” because the command <code>source()</code> is equivalent to running every line of “script.R.”</p>
-</section>
 </section>
 <section id="tableau-setup" class="level2">
 <h2 class="anchored" data-anchor-id="tableau-setup">Tableau Setup</h2>
@@ -291,8 +122,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Visit <a href="https://public.tableau.com/app/discover">Tableau Public</a> and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.</p>
 <p>If you are ever feeling lost in this class, I recommend checking out some of Tableau’s free <a href="https://elearning.tableau.com">eLearning resources</a>. We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.</p>
 </section>
-<section id="introduction-to-tableau-the-tableau-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-tableau-the-tableau-workflow">Introduction to Tableau: The Tableau Workflow</h2>
+<section id="the-tableau-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="the-tableau-workflow">The Tableau Workflow</h2>
 <p>Connect -&gt; Analyze -&gt; Share</p>
 <p><a href="https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr">Video: The Tableau Desktop Workflow</a></p>
 <section id="connect" class="level3">
@@ -344,17 +175,202 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Does this differ by store branch?</p></li>
 <li><p>What actionable insights does this analysis reveal for the stores?</p></li>
 </ol>
+<p>In problem set 2, you will flow this workflow to produce a simple data visualization using the grocery store spending dataset.</p>
+</section>
+<section id="analyzing-data-in-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="analyzing-data-in-tableau">Analyzing data in Tableau</h2>
+<p>Next, we are going to go in more detail in the analyze step of the process. We will learn to make a few new figures, we will learn more of the features of the Tableau analysis page, and we will discuss a few ways to change the formatting of your visualizations to make them more effective.</p>
+<p>We will be using the same Supermarket Sales dataset, picking up where we left off with our analysis of product line ratings. We will be covering the following:</p>
+<ol type="1">
+<li><p>Creating calculated fields</p></li>
+<li><p>Organizing fields in folders</p></li>
+<li><p>More advanced bar charts: Sorting</p></li>
+<li><p>Using the <code>Marks</code> card and creating groups</p></li>
+<li><p>Formatting titles, axes, legends, etc.</p></li>
+<li><p>Exploring the Tableau toolbar</p></li>
+<li><p>Using the <code>Filters</code> card</p></li>
+<li><p>More advanced bar charts: Stacking</p></li>
+<li><p>More advanced bar charts: Bar in bar</p></li>
+<li><p>Intro to line charts and manipulating dates</p></li>
+</ol>
+<section id="create-calculated-fields" class="level3">
+<h3 class="anchored" data-anchor-id="create-calculated-fields">1. Create calculated fields</h3>
+<p>In your last assignment you were asked to use R to calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns. (And name the new column <code>subtotal</code>.)</p>
+<p>We can do this sort of calculation in Tableau too!</p>
+<p><img src="includes/newvar.png" class="img-fluid" style="width:60.0%"></p>
+<p>Then select <code>Create Calculated Field...</code></p>
+<p>Give your field a useful name (let’s use <code>subtotal</code>).</p>
+<p>Drag the relevant variables into the box. Type the appropriate function (multiply). Click OK. And Voila.</p>
+<p><strong>You do it:</strong> Validate that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>.</p>
+<p><strong>You do it:</strong> Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.</p>
+</section>
+<section id="organize-your-data-into-folders" class="level3">
+<h3 class="anchored" data-anchor-id="organize-your-data-into-folders">2. Organize your data into folders</h3>
+<p>In your last assignment you were asked to use R to create a dataframe containing only a subset of your data, with the columns <code>city, product_line, unit_price, quantity, total, rating</code></p>
+<p>In Tableau, one way to reduce the number of fields you see if by organizing your data into folders.</p>
+<p>Try organizing your data into folders by:</p>
+<ul>
+<li><p>Selecting <code>Group by folder</code></p></li>
+<li><p>Right click a field you want in the new folder</p></li>
+<li><p>Click Folders -&gt; Create Folder…</p></li>
+<li><p>Give your folder a useful name</p></li>
+<li><p>Note that you can still combine data across different folders in your visualizations, you have just created a more organized data pane.</p></li>
+</ul>
+</section>
+<section id="sorting-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="sorting-bar-charts">3. Sorting bar charts</h3>
+<p>Let’s start off with our bar chart from last class where we looked at customer ratings by product line…</p>
+<p>From our lecture on Wednesday, what are some ways we could improve this visualization to answer the question “Which product line has the lowest average customer rating?”</p>
+<div class="notes">
+<p>Title, adding color to highlight the top category, making font larger and easier to read, maybe changing axis range</p>
+</div>
+<p>What about <strong>sorting</strong>?</p>
+<p>There are a two ways to sort bars on our chart:</p>
+<ul>
+<li><p>use the toolbar</p></li>
+<li><p>use the icon next to the y-axis label</p></li>
+</ul>
+<p><strong>You do it:</strong> Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.</p>
+</section>
+<section id="using-the-marks-card-and-creating-groups" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-marks-card-and-creating-groups">4. Using the marks card and creating groups</h3>
+<p>What if we want to <strong>use color</strong> to highlight the top category?</p>
+<p>There are a few ways to do this:</p>
+<ul>
+<li><p>Drag product line to <code>color</code> on the Marks card (then edit colors)</p></li>
+<li><p>Right click the bar you want to stand out and click <code>Group</code> (then edit colors)</p></li>
+</ul>
+<p>What if we want to add <strong>labels</strong> with the value of the rating?</p>
+<ul>
+<li>Label -&gt; check <code>show mark labels</code></li>
+</ul>
+<p><strong>You do it:</strong> Show mark labels and click around with the other options on the label card. What formatting do you like best?</p>
+<p>What if we want to change the <strong>width of our bars</strong>?</p>
+<ul>
+<li>Size -&gt; adjust!</li>
+</ul>
+<p>What if we want to add some extra info on the box that appears when we hover over a bar?</p>
+<ul>
+<li>Tooltip</li>
+</ul>
+<p><strong>You do it:</strong> Try adding some text to the tooltip. Click on Insert -&gt; what else can you add to the tooltip?</p>
+</section>
+<section id="formatting-titles-axes-legends-etc." class="level3">
+<h3 class="anchored" data-anchor-id="formatting-titles-axes-legends-etc.">5. Formatting titles, axes, legends, etc.</h3>
+<p>What if we want to <strong>adjust the scale</strong> of the y-axis so that differences across the bars are easier to see?</p>
+<ul>
+<li><p>Right click the y-axis</p></li>
+<li><p>Click edit axis</p></li>
+<li><p>Choose an appropriate range</p></li>
+</ul>
+<p>Now what happens if we compare these customer ratings across branches? Does the product line with the top ratings vary by store?</p>
+<p><strong>You do it:</strong> Highlight the product line with the top rating at branch A - how does this rank in the other branches?</p>
+<p><strong>You do it:</strong> Click on the different options in the legend - what happens?</p>
+<p>What if we want to <strong>change the font size</strong> (or color, etc.) of the axis labels?</p>
+<ul>
+<li>Right click the axis you want to edit -&gt; click Format</li>
+</ul>
+<p>What if instead of having Branch/Product line at the top, we just rename A as Branch A, B as Branch B, etc.</p>
+<ul>
+<li><p>Right click Branch / Product line -&gt; Hide field labels</p></li>
+<li><p>Right click branch -&gt; Edit Aliases…</p></li>
+</ul>
+<p><strong>You do it:</strong> Play with the formatting of your visualization until you are satisfied with its appearance.</p>
+<p>What if we want to <strong>remove the legend</strong>?</p>
+<p><strong>Adding a caption</strong> that describes details about your visualization. -&gt; Right click the visualization.</p>
+<p><strong>Marking</strong> or <strong>annotating</strong> a single point. -&gt; Right click -&gt; Mark Label or Annotate</p>
+</section>
+<section id="other-features-in-the-toolbar" class="level3">
+<h3 class="anchored" data-anchor-id="other-features-in-the-toolbar">6. Other features in the toolbar</h3>
+<p>Let’s explore the Tableau toolbar… Hover over each icon in the toolbar… Click each icon in the toolbar!</p>
+</section>
+<section id="using-the-filters-card" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-filters-card">7. Using the filters card</h3>
+<p>What if we want to recreate our analysis of ratings for female customers only?</p>
+<p>Let’s use the toolbar to <strong>duplicate</strong> our worksheet.</p>
+<p>Next, let’s add a filter for females:</p>
+<ul>
+<li><p>Drag the field <code>gender</code> to the <code>Filters</code> card</p></li>
+<li><p>Select <code>Female</code></p></li>
+</ul>
+</section>
+<section id="stacking-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="stacking-bar-charts">8. Stacking bar charts</h3>
+<p>What if you want to see total sales split by gender and purchase category?</p>
+<p><strong>You do it:</strong> Create a visualization (in a new sheet) that shows total sales by gender and product line.</p>
+<p>Great, now what if we instead want to see this in terms of what percent of total sales within each category are from females vs.&nbsp;males?</p>
+<p>Let’s try <strong>stacking</strong> our bars instead:</p>
+<ul>
+<li>Move gender from the rows shelf and drag it to the <code>Color</code> icon on the <code>Marks</code> card.</li>
+</ul>
+<p>What if we want to see the value of total sales for males and females?</p>
+<ul>
+<li>Label -&gt; Show Mark Labels</li>
+</ul>
+<p>What if we instead want to see the percent of total sales that are from males and females?</p>
+<ul>
+<li><p>Click the dropdown menu on SUM(Total)</p></li>
+<li><p>Quick Table Calculation -&gt; Percent of Total</p></li>
+</ul>
+<p>Now what if we want to see the percent of total sales within each category that are from males and females?</p>
+<ul>
+<li><p>Create a 100% stacked bar chart</p></li>
+<li><p>Click the dropdown menu on SUM(Total)</p></li>
+<li><p>Compute Using -&gt; Gender</p></li>
+</ul>
+<p><strong>You do it:</strong> What do the other compute using options do?</p>
+</section>
+<section id="creating-bar-in-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="creating-bar-in-bar-charts">9. Creating bar in bar charts</h3>
+<p>Another way to compare sales for males and females is to use a bar in bar chart. This will allow you to easily see whether total sales are higher for males or females.</p>
+<ul>
+<li><p>Let’s duplicate our 100% stacked bar chart</p></li>
+<li><p>Drag gender to the <code>Size</code> icon in the <code>Marks</code> card</p></li>
+<li><p>From the top menu, click Analysis -&gt; Stack Marks -&gt; Off</p></li>
+</ul>
+<p>What if we want to swap which gender is the wide bar?</p>
+</section>
+<section id="basic-line-charts-and-datetime" class="level3">
+<h3 class="anchored" data-anchor-id="basic-line-charts-and-datetime">10. Basic line charts and datetime</h3>
+<p>The second type of chart we will learn to create is a line chart.</p>
+<p>Suppose we want to see trends in sales over time:</p>
+<ul>
+<li><p>Open a new worksheet</p></li>
+<li><p>Drag <code>Total</code> to the rows shelf and <code>Date</code> to the columns shelf</p></li>
+<li><p>Click the dropdown menu next to <code>Date</code></p></li>
+<li><p>Click Week Number</p></li>
+</ul>
+<p><strong>You do it:</strong> Explore the other date display options. Which do you like best for this analysis?</p>
+<p>What if we want to see trends in sales across months?</p>
+<p>Let’s look at two options for doing this:</p>
+<ol type="1">
+<li><p>Side-by-side lines:</p>
+<ul>
+<li><p>With the <code>Date</code> aggregation set to MONTH in the columns shelf, double click the <code>Date</code> field.</p></li>
+<li><p>Click the dropdown menu on the YEAR(Date) field on the columns shelf</p></li>
+<li><p>Select Day</p></li>
+</ul></li>
+<li><p>Combined lines:</p>
+<ul>
+<li>Drag MONTH(Date) to the colors card</li>
+</ul></li>
+</ol>
+<p>Let’s look at different line types. Click the new <code>Path</code> icon on the Marks card</p>
+<p>Let’s add some trend lines. Analysis -&gt; Trend lines -&gt; Show Trend Lines</p>
+<p>What are trend lines??</p>
+</section>
+<section id="review" class="level3">
+<h3 class="anchored" data-anchor-id="review">11. Review</h3>
+<ol type="1">
+<li><p>Which payment type has the highest total spending?</p></li>
+<li><p>Do more females or more males use this payment type?</p></li>
+<li><p>Which payment type has seen the greatest increase in total spending over time?</p></li>
+<li><p>For a challenge: Which payment type has seen the greatest increase in the <strong>number of customers using it</strong> over time?</p></li>
+</ol>
+</section>
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Install if necessary.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>The package <code>dplyr</code> is part of a larger set of packages known as the <code>tidyverse</code> <a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>. The term <em>tidy</em> refers to a structure of data. There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available. Most of what I teach in this class will be part of the tidyverse or adherant to its principles. Video tutorial here: <a href="https://youtu.be/bUM3wX4YZDc" class="uri">https://youtu.be/bUM3wX4YZDc</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main>
+</main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -383,9 +399,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -450,6 +480,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
