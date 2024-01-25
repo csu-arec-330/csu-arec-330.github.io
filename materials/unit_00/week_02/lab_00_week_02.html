@@ -53,21 +53,21 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#analyze" id="toc-analyze" class="nav-link" data-scroll-target="#analyze">Analyze</a></li>
   <li><a href="#share" id="toc-share" class="nav-link" data-scroll-target="#share">Share</a></li>
   </ul></li>
-  <li><a href="#applying-the-tableau-workflow" id="toc-applying-the-tableau-workflow" class="nav-link" data-scroll-target="#applying-the-tableau-workflow">Applying The Tableau Workflow</a></li>
+  <li><a href="#applying-the-tableau-workflow" id="toc-applying-the-tableau-workflow" class="nav-link" data-scroll-target="#applying-the-tableau-workflow">Applying the Tableau Workflow</a></li>
   <li><a href="#analyzing-data-in-tableau" id="toc-analyzing-data-in-tableau" class="nav-link" data-scroll-target="#analyzing-data-in-tableau">Analyzing data in Tableau</a>
   <ul class="collapse">
   <li><a href="#create-calculated-fields" id="toc-create-calculated-fields" class="nav-link" data-scroll-target="#create-calculated-fields">1. Create calculated fields</a></li>
   <li><a href="#organize-your-data-into-folders" id="toc-organize-your-data-into-folders" class="nav-link" data-scroll-target="#organize-your-data-into-folders">2. Organize your data into folders</a></li>
-  <li><a href="#sorting-bar-charts" id="toc-sorting-bar-charts" class="nav-link" data-scroll-target="#sorting-bar-charts">3. Sorting bar charts</a></li>
-  <li><a href="#using-the-marks-card-and-creating-groups" id="toc-using-the-marks-card-and-creating-groups" class="nav-link" data-scroll-target="#using-the-marks-card-and-creating-groups">4. Using the marks card and creating groups</a></li>
-  <li><a href="#formatting-titles-axes-legends-etc." id="toc-formatting-titles-axes-legends-etc." class="nav-link" data-scroll-target="#formatting-titles-axes-legends-etc.">5. Formatting titles, axes, legends, etc.</a></li>
-  <li><a href="#other-features-in-the-toolbar" id="toc-other-features-in-the-toolbar" class="nav-link" data-scroll-target="#other-features-in-the-toolbar">6. Other features in the toolbar</a></li>
-  <li><a href="#using-the-filters-card" id="toc-using-the-filters-card" class="nav-link" data-scroll-target="#using-the-filters-card">7. Using the filters card</a></li>
-  <li><a href="#stacking-bar-charts" id="toc-stacking-bar-charts" class="nav-link" data-scroll-target="#stacking-bar-charts">8. Stacking bar charts</a></li>
-  <li><a href="#creating-bar-in-bar-charts" id="toc-creating-bar-in-bar-charts" class="nav-link" data-scroll-target="#creating-bar-in-bar-charts">9. Creating bar in bar charts</a></li>
-  <li><a href="#basic-line-charts-and-datetime" id="toc-basic-line-charts-and-datetime" class="nav-link" data-scroll-target="#basic-line-charts-and-datetime">10. Basic line charts and datetime</a></li>
-  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">11. Review</a></li>
+  <li><a href="#visualizing-data-with-bar-charts" id="toc-visualizing-data-with-bar-charts" class="nav-link" data-scroll-target="#visualizing-data-with-bar-charts">3. Visualizing data with bar charts</a></li>
+  <li><a href="#sorting-bar-charts" id="toc-sorting-bar-charts" class="nav-link" data-scroll-target="#sorting-bar-charts">4. Sorting bar charts</a></li>
+  <li><a href="#using-the-marks-card" id="toc-using-the-marks-card" class="nav-link" data-scroll-target="#using-the-marks-card">5. Using the marks card</a></li>
+  <li><a href="#formatting-titles-axes-legends-etc." id="toc-formatting-titles-axes-legends-etc." class="nav-link" data-scroll-target="#formatting-titles-axes-legends-etc.">6. Formatting titles, axes, legends, etc.</a></li>
+  <li><a href="#using-the-filters-card" id="toc-using-the-filters-card" class="nav-link" data-scroll-target="#using-the-filters-card">8. Using the filters card</a></li>
+  <li><a href="#stacking-bar-charts" id="toc-stacking-bar-charts" class="nav-link" data-scroll-target="#stacking-bar-charts">9. Stacking bar charts</a></li>
+  <li><a href="#creating-bar-in-bar-charts" id="toc-creating-bar-in-bar-charts" class="nav-link" data-scroll-target="#creating-bar-in-bar-charts">10. Creating bar in bar charts</a></li>
+  <li><a href="#basic-line-charts-and-datetime" id="toc-basic-line-charts-and-datetime" class="nav-link" data-scroll-target="#basic-line-charts-and-datetime">11. Basic line charts and datetime</a></li>
   </ul></li>
+  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a></li>
   </ul>
 </nav>
 </div>
@@ -176,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Use the <code>Data Pane</code> to view the data source and explore data fields within a worksheet.</li>
 </ol>
 <p><img src="figs/tdatapane.png" class="img-fluid"></p>
-<p>Within the Data Pane view, we can determine the <strong>role</strong> of each data field. Because we have not calculated any variables yet, the two role options are <strong>dimensions</strong> or <strong>measures</strong>. <em>Dimensions</em> are qualitative fields (like names, dates, or geographic data) that are typically used to categorize, segment, and reveal the details in your data. They usually appear as rows, columns, or in filters. <em>Measures</em> are quantitative fields (like sales, profits, or counts) that can be aggregated (summed, averaged, etc.). They often provide the numerical values that you analyze.</p>
+<p>Within the Data pane view, we can determine the <strong>role</strong> of each data field. Because we have not calculated any variables yet, the two role options are <strong>dimensions</strong> or <strong>measures</strong>. <em>Dimensions</em> are qualitative fields (like names, dates, or geographic data) that are typically used to categorize, segment, and reveal the details in your data. They usually appear as rows, columns, or in filters. <em>Measures</em> are quantitative fields (like sales, profits, or counts) that can be aggregated (summed, averaged, etc.). They often provide the numerical values that you analyze.</p>
 <p><strong>You do it:</strong> What is the role of the variable <code>Gender</code>?</p>
 <ol start="3" type="1">
 <li>Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.</li>
@@ -204,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 </section>
 <section id="applying-the-tableau-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="applying-the-tableau-workflow">Applying The Tableau Workflow</h2>
+<h2 class="anchored" data-anchor-id="applying-the-tableau-workflow">Applying the Tableau Workflow</h2>
 <p>Using the Supermarket Sales data, construct data visualizations that answer the following questions:</p>
 <ol type="1">
 <li><p>Which product line has the lowest average customer rating?</p></li>
@@ -240,13 +240,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="create-calculated-fields" class="level3">
 <h3 class="anchored" data-anchor-id="create-calculated-fields">1. Create calculated fields</h3>
 <p>We will calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns, and name the new column <code>subtotal</code>.</p>
-<p>Select the icon in the data pane.</p>
+<p>Select the icon in the Data pane.</p>
 <p><img src="figs/newvar.png" class="img-fluid" style="width:60.0%"></p>
 <p>Then select <code>Create Calculated Field...</code></p>
 <p><img src="figs/tsubtotal.png" class="img-fluid"></p>
 <p>Give your field a useful name (let’s use <code>subtotal</code>).</p>
 <p><img src="figs/tsubtotal2.png" class="img-fluid"></p>
-<p>Drag the relevant variables into the box. Type the appropriate function (what symbol do you use to multiply two values?). Click OK. And Voila – the new variable will appear as a new data field in your data pane.</p>
+<p>Drag the relevant variables into the box. Type the appropriate function (what symbol do you use to multiply two values?). Click OK. And Voila – the new variable will appear as a new data field in your Data pane.</p>
 <p><strong>You do it:</strong> Validate that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>.</p>
 <p><strong>You do it:</strong> Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.</p>
 </section>
@@ -254,84 +254,180 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="organize-your-data-into-folders">2. Organize your data into folders</h3>
 <!---In your last assignment you were asked to use R to create a dataframe containing only a subset of your data, with the columns `city, product_line, unit_price, quantity, total, rating`--->
 <p>In Tableau, one way to reduce the number of fields you see if by organizing your data into folders.</p>
-<p>Try organizing your data into folders by:</p>
-<ul>
-<li><p>Selecting <code>Group by folder</code></p></li>
-<li><p>Right click a field you want in the new folder</p></li>
-<li><p>Click Folders -&gt; Create Folder…</p></li>
-<li><p>Give your folder a useful name</p></li>
-<li><p>Note that you can still combine data across different folders in your visualizations, you have just created a more organized data pane.</p></li>
-</ul>
+<p>Let’s try organizing a few of our data fields into folders.</p>
+<p><strong>Step 1:</strong> Right-Click a Field.</p>
+<p>Start by right-clicking on a field (dimension or measure) in the Data pane that you want to organize into a folder. Let’s pick <code>Product line</code>.</p>
+<p><strong>Step 2:</strong> Create a New Folder.</p>
+<p>After right-clicking, navigate to <code>Folders</code> in the context menu. Select <code>Create Folder...</code> from the submenu.</p>
+<p>Note: If you cannot select <code>Folders</code>, you need to first select <code>Group by</code> in the context menu. Then select <code>Folders</code>. The default view in Tableau is <code>Data Source Table</code>.</p>
+<p><strong>Step 3:</strong> Name Your Folder.</p>
+<p>In the dialog that appears, give your new folder a meaningful name that reflects the fields you plan to organize within it. Let’s name the folder <code>Product_Ratings</code>.</p>
+<p><strong>Step 4:</strong> Add Fields to the Folder.</p>
+<p>After creating the folder, you can add other fields to it by right-clicking them, selecting <code>Folders,</code> and then choosing the name of the folder you created.</p>
+<p><strong>You do it:</strong> Locate the data field <code>Rating</code> and add it to the <code>Product_Rating</code> folder.</p>
+<p><strong>Step 5:</strong> Select Group by Folder.</p>
+<p>To view your fields organized by the folders you’ve created, go to the drop-down menu at the top of the Data pane. Select <code>Group by Folder</code> from this menu. This will organize all fields in the Data pane into their respective folders.</p>
+<p><img src="figs/tgroupby.png" class="img-fluid"></p>
+<p>Note: Remember that organizing fields into folders is just for convenience and does not affect how you can combine data in your visualizations. You can still use fields from different folders together in your visualizations.</p>
+<!---
+-  Selecting `Group by folder`
+
+-  Right click a field you want in the new folder
+
+-  Click Folders -> Create Folder...
+
+-  Give your folder a useful name
+
+Note that you can still combine data across different folders in your visualizations, you have just created a more organized data pane.
+--->
+</section>
+<section id="visualizing-data-with-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-data-with-bar-charts">3. Visualizing data with bar charts</h3>
+<!---Let's start off with our bar chart from last class where we looked at customer ratings by product line...--->
+<p>Suppose we want to look at average customer ratings by product line.</p>
+<p>What are some ways we could visualize this to answer the question “Which product line has the lowest average customer rating?”</p>
+<p>Locate the <strong>Columns and Rows Shelves</strong> in workspace. The Columns and Rows Shelves are used to create a structure for your visualization.</p>
+<p>Suppose we want to create a vertical bar chart. Simply drag <code>Product line</code> into the Columns shelf and <code>Rating</code> into the Rows shelf.</p>
+<p>What did you notice? Aside from a vertical bar chart appearing, the Measure of Rating defaulted to <code>SUM</code>. If we want the average, we need to change the measure by clicking on the dropdown menu next to <code>SUM(Rating)</code>, select <code>Measure (Sum)</code>, and change this to <code>Average</code>.</p>
+<p><strong>You do it:</strong> Suppose now that we wanted to display this in a horizontal bar chart. What would you need to alter?</p>
 </section>
 <section id="sorting-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="sorting-bar-charts">3. Sorting bar charts</h3>
-<p>Let’s start off with our bar chart from last class where we looked at customer ratings by product line…</p>
-<p>From our lecture on Wednesday, what are some ways we could improve this visualization to answer the question “Which product line has the lowest average customer rating?”</p>
+<h3 class="anchored" data-anchor-id="sorting-bar-charts">4. Sorting bar charts</h3>
 <div class="notes">
 <p>Title, adding color to highlight the top category, making font larger and easier to read, maybe changing axis range</p>
 </div>
-<p>What about <strong>sorting</strong>?</p>
-<p>There are a two ways to sort bars on our chart:</p>
+<p>You can <strong>sort</strong> the data so that the category with the highest rating is first, and the category with the lowest rating is last, using either the toolbar or the icon next to the y-axis label.</p>
+<section id="option-1-using-the-toolbar" class="level4">
+<h4 class="anchored" data-anchor-id="option-1-using-the-toolbar">Option 1: Using the Toolbar</h4>
 <ul>
-<li><p>use the toolbar</p></li>
-<li><p>use the icon next to the y-axis label</p></li>
+<li>Click on the bar chart you want to sort.</li>
+<li>Look for the toolbar at the top of the Tableau workspace.</li>
+<li>In the toolbar, find the sort button, which typically looks like a pair of bars with an arrow pointing either up or down.</li>
+<li>Click the sort button to sort the data. Clicking once will sort it in one direction (e.g., lowest to highest), and clicking again will reverse the sort order (e.g., highest to lowest).</li>
+</ul>
+</section>
+<section id="option-2-using-the-icon-next-to-the-y-axis-label" class="level4">
+<h4 class="anchored" data-anchor-id="option-2-using-the-icon-next-to-the-y-axis-label">Option 2: Using the Icon Next to the Y-Axis Label</h4>
+<ul>
+<li>Click on your bar chart.</li>
+<li>Find the y-axis (vertical axis) label. This is usually where your categories or group names are listed.</li>
+<li>Next to the axis label, there should be a small sort icon. This icon is usually an arrow or a pair of arrows pointing up and down.</li>
+<li>Click on this icon to sort the bars. The first click sorts in ascending order (lowest to highest), the second click sorts in descending order (highest to lowest), and the third click restores it to its default ordering.</li>
 </ul>
 <p><strong>You do it:</strong> Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.</p>
 </section>
-<section id="using-the-marks-card-and-creating-groups" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-marks-card-and-creating-groups">4. Using the marks card and creating groups</h3>
-<p>What if we want to <strong>use color</strong> to highlight the top category?</p>
+</section>
+<section id="using-the-marks-card" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-marks-card">5. Using the marks card</h3>
+<section id="using-colors" class="level4">
+<h4 class="anchored" data-anchor-id="using-colors">Using colors</h4>
+<p>What if we want to use <strong>color</strong> to highlight the top category?</p>
 <p>There are a few ways to do this:</p>
 <ul>
-<li><p>Drag product line to <code>color</code> on the Marks card (then edit colors)</p></li>
+<li><p>Drag <code>Product line</code> to <code>Color</code> on the <strong>Marks</strong> card (then edit colors)</p></li>
 <li><p>Right click the bar you want to stand out and click <code>Group</code> (then edit colors)</p></li>
 </ul>
+<p><strong>You do it:</strong> Locate the product line with the highest rating and highlight the category with a different color.</p>
+</section>
+<section id="adding-labels" class="level4">
+<h4 class="anchored" data-anchor-id="adding-labels">Adding labels</h4>
 <p>What if we want to add <strong>labels</strong> with the value of the rating?</p>
 <ul>
-<li>Label -&gt; check <code>show mark labels</code></li>
+<li>Select <code>Label</code> in the Marks card -&gt; check <code>Show mark labels</code></li>
 </ul>
 <p><strong>You do it:</strong> Show mark labels and click around with the other options on the label card. What formatting do you like best?</p>
+</section>
+<section id="formatting-the-bars" class="level4">
+<h4 class="anchored" data-anchor-id="formatting-the-bars">Formatting the bars</h4>
 <p>What if we want to change the <strong>width of our bars</strong>?</p>
 <ul>
-<li>Size -&gt; adjust!</li>
+<li>Select <code>Size</code> in the Marks card -&gt; Adjust (moving cursor to the right widens the bars)</li>
 </ul>
-<p>What if we want to add some extra info on the box that appears when we hover over a bar?</p>
+</section>
+<section id="displaying-additional-information" class="level4">
+<h4 class="anchored" data-anchor-id="displaying-additional-information">Displaying additional information</h4>
+<p>By default, hovering your cursor over the bars will display information. What if we want to add <strong>extra info</strong> on the box that appears when we hover over a bar?</p>
 <ul>
-<li>Tooltip</li>
+<li>Select <code>Tooltip</code> in the Marks card -&gt; Click on <code>Insert</code></li>
 </ul>
-<p><strong>You do it:</strong> Try adding some text to the tooltip. Click on Insert -&gt; what else can you add to the tooltip?</p>
+<p><strong>You do it:</strong> Try adding some text to the tooltip. What else can you add to the tooltip?</p>
+<!---
+### Creating groups
+
+**Step 1:** Identify the dimension for grouping. 
+
+Locate the dimension that represents the `Product line` in the Data pane. This is usually a field that categorizes your products into different lines.
+
+**Step 2:** Create a group.
+
+Right-click on the product line dimension in the Data pane. Choose `Create`... `Group` from the context menu. This action opens a dialog box for group creation.
+
+**Step 3:** Select members for the group.
+
+In the dialog box, you'll see a list of all the members (individual product lines) in that dimension. Select the product lines you want to include in your group. You can select multiple lines by holding down the Ctrl key (Cmd on Mac).
+
+**Step 4:** Name the group.
+
+After selecting the members, click on the `Group` button. Give your group a meaningful name, something that represents the collective product lines you've grouped. Then press OK.
+
+**Step 5:** Using the group in visualizations.
+
+The new group will appear in the Data pane, typically named as per your input. You can now use this group in your visualizations. Drag and drop the group field into your worksheet to use it in rows, columns, filters, etc.
+
+**Step 6:** Editing the group.
+
+If you need to make changes to the group later, right-click on the group field in the Data pane and select `Edit Group`. In the edit dialog, you can add or remove product lines, or make other adjustments to the group.
+--->
+</section>
 </section>
 <section id="formatting-titles-axes-legends-etc." class="level3">
-<h3 class="anchored" data-anchor-id="formatting-titles-axes-legends-etc.">5. Formatting titles, axes, legends, etc.</h3>
+<h3 class="anchored" data-anchor-id="formatting-titles-axes-legends-etc.">6. Formatting titles, axes, legends, etc.</h3>
+<section id="adjusting-the-scale-of-the-y-axis" class="level4">
+<h4 class="anchored" data-anchor-id="adjusting-the-scale-of-the-y-axis">Adjusting the scale of the y-axis</h4>
 <p>What if we want to <strong>adjust the scale</strong> of the y-axis so that differences across the bars are easier to see?</p>
 <ul>
 <li><p>Right click the y-axis</p></li>
-<li><p>Click edit axis</p></li>
-<li><p>Choose an appropriate range</p></li>
+<li><p>Click <code>Edit Axis</code></p></li>
+<li><p>Under <code>Range</code> select <code>Custom</code>. Set an appropriate range by selecting appropriate values for <code>Fixed start</code> and <code>Fixed end</code>.</p></li>
 </ul>
-<p>Now what happens if we compare these customer ratings across branches? Does the product line with the top ratings vary by store?</p>
-<p><strong>You do it:</strong> Highlight the product line with the top rating at branch A - how does this rank in the other branches?</p>
+<p><em>Challenge question: What if we want to compare customer ratings across <strong>branches</strong>? Does the product line with the top ratings vary by store?</em></p>
+<p><strong>You do it:</strong> Highlight the product line with the top rating at branch A. How does this rank in the other branches?</p>
 <p><strong>You do it:</strong> Click on the different options in the legend - what happens?</p>
+</section>
+<section id="changing-the-formatting-of-the-axis-labels" class="level4">
+<h4 class="anchored" data-anchor-id="changing-the-formatting-of-the-axis-labels">Changing the formatting of the axis labels</h4>
 <p>What if we want to <strong>change the font size</strong> (or color, etc.) of the axis labels?</p>
 <ul>
-<li>Right click the axis you want to edit -&gt; click Format</li>
+<li><p>Right click the axis you want to edit</p></li>
+<li><p>click <code>Format</code></p></li>
 </ul>
-<p>What if instead of having Branch/Product line at the top, we just rename A as Branch A, B as Branch B, etc.</p>
-<ul>
-<li><p>Right click Branch / Product line -&gt; Hide field labels</p></li>
-<li><p>Right click branch -&gt; Edit Aliases…</p></li>
-</ul>
-<p><strong>You do it:</strong> Play with the formatting of your visualization until you are satisfied with its appearance.</p>
-<p>What if we want to <strong>remove the legend</strong>?</p>
-<p><strong>Adding a caption</strong> that describes details about your visualization. -&gt; Right click the visualization.</p>
-<p><strong>Marking</strong> or <strong>annotating</strong> a single point. -&gt; Right click -&gt; Mark Label or Annotate</p>
 </section>
-<section id="other-features-in-the-toolbar" class="level3">
-<h3 class="anchored" data-anchor-id="other-features-in-the-toolbar">6. Other features in the toolbar</h3>
-<p>Let’s explore the Tableau toolbar… Hover over each icon in the toolbar… Click each icon in the toolbar!</p>
+<section id="renaming-fields" class="level4">
+<h4 class="anchored" data-anchor-id="renaming-fields">Renaming fields</h4>
+<p>What if instead of having Branch / Product line at the top of the bar chart, we want to rename A as Branch A, B as Branch B, and C as Branch C?</p>
+<ul>
+<li><p>Right click <strong>Branch / Product line</strong> -&gt; Select <code>Hide Field Labels for Columns</code></p></li>
+<li><p>Right click <code>Branch</code> in the Columns shelf -&gt; Select <code>Edit Aliases...</code></p></li>
+<li><p>Rename each branch under the column titled <code>Value (Alias)</code></p></li>
+</ul>
+</section>
+<section id="changing-or-hiding-legends" class="level4">
+<h4 class="anchored" data-anchor-id="changing-or-hiding-legends">Changing or hiding legends</h4>
+<p>What if we want to <strong>remove the legend</strong>?</p>
+</section>
+<section id="annotating-the-bar-chart" class="level4">
+<h4 class="anchored" data-anchor-id="annotating-the-bar-chart">Annotating the bar chart</h4>
+<p><strong>Adding a caption</strong> that describes details about your visualization.</p>
+<ul>
+<li><p>Right click the blank area of the visualization</p></li>
+<li><p>Select <code>Annotate</code> -&gt; Select either <code>Point</code> or <code>Area</code>. By selecting <code>Area</code> you can add text to comment about a specific region of a visualization.</p></li>
+</ul>
+<p><strong>Marking</strong> or <strong>annotating</strong> a single point. -&gt; Right click -&gt; Mark Label or Annotate</p>
+<p>Note: There are <strong>many</strong> other features to explore in the Tableau toolbar. Hover over each icon in the toolbar and click to explore.</p>
+</section>
 </section>
 <section id="using-the-filters-card" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-filters-card">7. Using the filters card</h3>
+<h3 class="anchored" data-anchor-id="using-the-filters-card">8. Using the filters card</h3>
 <p>What if we want to recreate our analysis of ratings for female customers only?</p>
 <p>Let’s use the toolbar to <strong>duplicate</strong> our worksheet.</p>
 <p>Next, let’s add a filter for females:</p>
@@ -341,7 +437,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 <section id="stacking-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="stacking-bar-charts">8. Stacking bar charts</h3>
+<h3 class="anchored" data-anchor-id="stacking-bar-charts">9. Stacking bar charts</h3>
 <p>What if you want to see total sales split by gender and purchase category?</p>
 <p><strong>You do it:</strong> Create a visualization (in a new sheet) that shows total sales by gender and product line.</p>
 <p>Great, now what if we instead want to see this in terms of what percent of total sales within each category are from females vs.&nbsp;males?</p>
@@ -367,7 +463,7 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>You do it:</strong> What do the other compute using options do?</p>
 </section>
 <section id="creating-bar-in-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="creating-bar-in-bar-charts">9. Creating bar in bar charts</h3>
+<h3 class="anchored" data-anchor-id="creating-bar-in-bar-charts">10. Creating bar in bar charts</h3>
 <p>Another way to compare sales for males and females is to use a bar in bar chart. This will allow you to easily see whether total sales are higher for males or females.</p>
 <ul>
 <li><p>Let’s duplicate our 100% stacked bar chart</p></li>
@@ -377,7 +473,7 @@ ul.task-list li input[type="checkbox"] {
 <p>What if we want to swap which gender is the wide bar?</p>
 </section>
 <section id="basic-line-charts-and-datetime" class="level3">
-<h3 class="anchored" data-anchor-id="basic-line-charts-and-datetime">10. Basic line charts and datetime</h3>
+<h3 class="anchored" data-anchor-id="basic-line-charts-and-datetime">11. Basic line charts and datetime</h3>
 <p>The second type of chart we will learn to create is a line chart.</p>
 <p>Suppose we want to see trends in sales over time:</p>
 <ul>
@@ -405,15 +501,15 @@ ul.task-list li input[type="checkbox"] {
 <p>Let’s add some trend lines. Analysis -&gt; Trend lines -&gt; Show Trend Lines</p>
 <p>What are trend lines??</p>
 </section>
-<section id="review" class="level3">
-<h3 class="anchored" data-anchor-id="review">11. Review</h3>
+</section>
+<section id="review" class="level2">
+<h2 class="anchored" data-anchor-id="review">Review</h2>
 <ol type="1">
 <li><p>Which payment type has the highest total spending?</p></li>
 <li><p>Do more females or more males use this payment type?</p></li>
 <li><p>Which payment type has seen the greatest increase in total spending over time?</p></li>
 <li><p>For a challenge: Which payment type has seen the greatest increase in the <strong>number of customers using it</strong> over time?</p></li>
 </ol>
-</section>
 </section>
 
 </main>
