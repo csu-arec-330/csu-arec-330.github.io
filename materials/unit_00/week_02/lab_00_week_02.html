@@ -125,10 +125,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="the-tableau-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="the-tableau-workflow">The Tableau Workflow</h2>
 <p>Connect -&gt; Analyze -&gt; Share</p>
-<p><a href="https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr">Video: The Tableau Desktop Workflow</a></p>
+<p><a href="https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr">Video: The Tableau Desktop Workflow</a> [Est. Time: 4 hours]</p>
 <section id="connect" class="level3">
 <h3 class="anchored" data-anchor-id="connect">Connect</h3>
-<p>You will <strong>connect</strong> to your data on the <strong>data source page</strong> following these steps:</p>
+<p>You will <strong>connect</strong> to your data on the <strong>Data Source Page</strong> following these steps:</p>
 <ol type="1">
 <li><p>Establish a connection</p></li>
 <li><p>View available sheets</p></li>
@@ -136,14 +136,53 @@ ul.task-list li input[type="checkbox"] {
 <li><p>View and edit sheet metadata</p></li>
 <li><p>Connect additional sheets (optional)</p></li>
 </ol>
+<section id="establish-a-connection" class="level4">
+<h4 class="anchored" data-anchor-id="establish-a-connection">1. Establish a connection</h4>
+<p>Download <code>supermarket_sales.csv</code> and save it to a new folder in your working directory called <code>arec330_lab_02</code>.</p>
+<p>Locate <strong>To a File</strong> under the Connect toolbar and select <code>Text file</code>.</p>
+<p>Note: Files that end in <code>.csv</code> are considered text files. The extension <code>.csv</code> stands for comma-separated values which allows data to be saved in a table structured format, even though it can easily be read in by Microsoft Excel and look very similar to files ending in <code>.xls</code> or <code>.xlsx</code>.</p>
+<p><img src="figs/tconnect.png" class="img-fluid"> After the data is connected, it’s time to save your work. Save the Tableau workbook as <code>arec330_lab_02.twb</code> in the same working directory (Note: You might have to navigate to the appropriate folder in your Windows Explorer or Finder). The default extension will be <code>.twb</code> so there shouldn’t be a need to change the extension.</p>
+</section>
+<section id="view-available-sheets" class="level4">
+<h4 class="anchored" data-anchor-id="view-available-sheets">2. View available sheets</h4>
+<p>Once the data is connected, you will auto-magically be taken to the Data Source Page, where you can view the available sheets. In <code>supermarket_sales.csv</code> there is one sheet.</p>
+<p><img src="figs/tsheets.png" class="img-fluid"></p>
+</section>
+<section id="select-the-first-sheet-you-want-to-work-with" class="level4">
+<h4 class="anchored" data-anchor-id="select-the-first-sheet-you-want-to-work-with">3. Select the first sheet you want to work with</h4>
+<p>At the bottom of the Data Source Page is where you can toggle between the Data Source Page and the available sheets within the connected data.</p>
+<p><img src="figs/tsheets2.png" class="img-fluid"> For now, we will remain on the Data Source Page.</p>
+</section>
+<section id="view-and-edit-sheet-metadata" class="level4">
+<h4 class="anchored" data-anchor-id="view-and-edit-sheet-metadata">4. View and edit sheet metadata</h4>
+<p>The metadata shows information about the data, such as the field name and data type. You can edit the metadata on this page.</p>
+<p><img src="figs/tmetadata.png" class="img-fluid"> To the left of the metadata and data preview, you will find additional metadata about the data fields. Here you can determine the data <strong>type</strong>.</p>
+<p><strong>You do it:</strong> What is the type of the variable <code>Gender</code>?</p>
+</section>
+<section id="connect-additional-sheets-optional" class="level4">
+<h4 class="anchored" data-anchor-id="connect-additional-sheets-optional">5. Connect additional sheets (optional)</h4>
+<p>Later, we will add additional sheets by connecting to new data sets.</p>
+<p><img src="figs/taddconnect.png" class="img-fluid"></p>
+</section>
 </section>
 <section id="analyze" class="level3">
 <h3 class="anchored" data-anchor-id="analyze">Analyze</h3>
 <p>You will <strong>analyze</strong> your data in a <strong>worksheet</strong>/<strong>workspace</strong> following these steps:</p>
 <ol type="1">
-<li><p>Click on <code>Sheet 1</code> at the bottom of the Tableau Desktop window.</p></li>
-<li><p>Use the <code>Data Pane</code> to view the data source and explore data fields within a worksheet</p></li>
-<li><p>Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.</p></li>
+<li>Click on <code>Sheet 1</code> at the bottom of the Data Source Page. This action brings you to the <strong>Worksheets/Workspaces Page</strong>.</li>
+</ol>
+<p><img src="figs/tworkspaces.png" class="img-fluid"></p>
+<ol start="2" type="1">
+<li>Use the <code>Data Pane</code> to view the data source and explore data fields within a worksheet.</li>
+</ol>
+<p><img src="figs/tdatapane.png" class="img-fluid"></p>
+<p>Within the Data Pane view, we can determine the <strong>role</strong> of each data field. Because we have not calculated any variables yet, the two role options are <strong>dimensions</strong> or <strong>measures</strong>. <em>Dimensions</em> are qualitative fields (like names, dates, or geographic data) that are typically used to categorize, segment, and reveal the details in your data. They usually appear as rows, columns, or in filters. <em>Measures</em> are quantitative fields (like sales, profits, or counts) that can be aggregated (summed, averaged, etc.). They often provide the numerical values that you analyze.</p>
+<p><strong>You do it:</strong> What is the role of the variable <code>Gender</code>?</p>
+<ol start="3" type="1">
+<li>Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.</li>
+</ol>
+<p>We will go into steps 3–7 of the analyze step of the process later in this lab.</p>
+<ol start="4" type="1">
 <li><p>View your visualization in the <code>View Pane</code>.</p></li>
 <li><p>Change aggregations</p></li>
 <li><p>Use <code>Show Me</code></p></li>
@@ -160,13 +199,13 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>You should also save a local copy of your work as a Tableau Workbook. File -&gt; Save. OR click the floppy disk icon (<img src="figs/save.png" class="img-fluid" style="width:5.0%">) at the top of the page.</p>
 <ol start="3" type="1">
-<li>Embed your visualization in your google website.</li>
+<li>Embed your visualization in your Google website.</li>
 </ol>
 </section>
 </section>
 <section id="applying-the-tableau-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="applying-the-tableau-workflow">Applying The Tableau Workflow</h2>
-<p>Using the Supermarket Sales data, contruct data visualizations that answer the following questions:</p>
+<p>Using the Supermarket Sales data, construct data visualizations that answer the following questions:</p>
 <ol type="1">
 <li><p>Which product line has the lowest average customer rating?</p></li>
 <li><p>Does this differ by store branch?</p></li>
@@ -175,12 +214,17 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Does this differ by store branch?</p></li>
 <li><p>What actionable insights does this analysis reveal for the stores?</p></li>
 </ol>
-<p>In problem set 2, you will flow this workflow to produce a simple data visualization using the grocery store spending dataset.</p>
+<p>In problem set 2, you will follow this workflow to produce a simple data visualization using the grocery store spending dataset.</p>
 </section>
 <section id="analyzing-data-in-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="analyzing-data-in-tableau">Analyzing data in Tableau</h2>
-<p>Next, we are going to go in more detail in the analyze step of the process. We will learn to make a few new figures, we will learn more of the features of the Tableau analysis page, and we will discuss a few ways to change the formatting of your visualizations to make them more effective.</p>
-<p>We will be using the same Supermarket Sales dataset, picking up where we left off with our analysis of product line ratings. We will be covering the following:</p>
+<p>Now, we are going to go in more detail in the analyze step of the process. We will learn the following:</p>
+<ul>
+<li>Make a few new figures</li>
+<li>Additional features of the Tableau analysis page</li>
+<li>Ways to change the formatting of your visualizations to make them more effective</li>
+</ul>
+<p>We will use the same Supermarket Sales dataset. We will be covering the following:</p>
 <ol type="1">
 <li><p>Creating calculated fields</p></li>
 <li><p>Organizing fields in folders</p></li>
@@ -195,18 +239,20 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <section id="create-calculated-fields" class="level3">
 <h3 class="anchored" data-anchor-id="create-calculated-fields">1. Create calculated fields</h3>
-<p>In your last assignment you were asked to use R to calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns. (And name the new column <code>subtotal</code>.)</p>
-<p>We can do this sort of calculation in Tableau too!</p>
-<p><img src="includes/newvar.png" class="img-fluid" style="width:60.0%"></p>
+<p>We will calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns, and name the new column <code>subtotal</code>.</p>
+<p>Select the icon in the data pane.</p>
+<p><img src="figs/newvar.png" class="img-fluid" style="width:60.0%"></p>
 <p>Then select <code>Create Calculated Field...</code></p>
+<p><img src="figs/tsubtotal.png" class="img-fluid"></p>
 <p>Give your field a useful name (let’s use <code>subtotal</code>).</p>
-<p>Drag the relevant variables into the box. Type the appropriate function (multiply). Click OK. And Voila.</p>
+<p><img src="figs/tsubtotal2.png" class="img-fluid"></p>
+<p>Drag the relevant variables into the box. Type the appropriate function (what symbol do you use to multiply two values?). Click OK. And Voila – the new variable will appear as a new data field in your data pane.</p>
 <p><strong>You do it:</strong> Validate that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>.</p>
 <p><strong>You do it:</strong> Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.</p>
 </section>
 <section id="organize-your-data-into-folders" class="level3">
 <h3 class="anchored" data-anchor-id="organize-your-data-into-folders">2. Organize your data into folders</h3>
-<p>In your last assignment you were asked to use R to create a dataframe containing only a subset of your data, with the columns <code>city, product_line, unit_price, quantity, total, rating</code></p>
+<!---In your last assignment you were asked to use R to create a dataframe containing only a subset of your data, with the columns `city, product_line, unit_price, quantity, total, rating`--->
 <p>In Tableau, one way to reduce the number of fields you see if by organizing your data into folders.</p>
 <p>Try organizing your data into folders by:</p>
 <ul>
