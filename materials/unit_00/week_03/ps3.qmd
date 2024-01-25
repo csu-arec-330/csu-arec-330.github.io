@@ -31,7 +31,7 @@ Read in the dataset `supermarket_sales.csv`.
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 3`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. 
+You should create a new webpage on your Google site titled `Problem Set 3`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. 
 
 Parts 1 & 2 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas.
  
