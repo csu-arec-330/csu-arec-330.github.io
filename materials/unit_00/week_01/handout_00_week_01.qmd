@@ -1,5 +1,5 @@
 ---
-title: "Week 1 Handout: Tableau Terminology"
+title: "Handout: Tableau Terminology"
 format: 
   html:
     theme: zephyr
