@@ -66,7 +66,7 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 
 We will be using two Tableau products in this course (although there are many more - [see handout](https://csu-arec-330.github.io/materials/unit_00/week_01/handout_00_week_01.html)): Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free. 
 
-Visit [Tableau for students](https://www.tableau.com/academic/students) and apply for your 1-year academic license.
+<!-- Visit [Tableau for students](https://www.tableau.com/academic/students) and apply for your 1-year academic license. -->
 
 Visit [Tableau Desktop](https://www.tableau.com/products/desktop) and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license.
 
