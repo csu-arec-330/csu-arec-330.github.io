@@ -66,8 +66,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#stacking-bar-charts" id="toc-stacking-bar-charts" class="nav-link" data-scroll-target="#stacking-bar-charts">9. Stacking bar charts</a></li>
   <li><a href="#creating-bar-in-bar-charts" id="toc-creating-bar-in-bar-charts" class="nav-link" data-scroll-target="#creating-bar-in-bar-charts">10. Creating bar in bar charts</a></li>
   <li><a href="#basic-line-charts-and-datetime" id="toc-basic-line-charts-and-datetime" class="nav-link" data-scroll-target="#basic-line-charts-and-datetime">11. Basic line charts and datetime</a></li>
+  <li><a href="#adding-trend-lines" id="toc-adding-trend-lines" class="nav-link" data-scroll-target="#adding-trend-lines">12. Adding trend lines</a></li>
   </ul></li>
-  <li><a href="#review" id="toc-review" class="nav-link" data-scroll-target="#review">Review</a></li>
+  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions">Review Questions</a></li>
   </ul>
 </nav>
 </div>
@@ -392,7 +393,7 @@ If you need to make changes to the group later, right-click on the group field i
 </ul>
 <p><em>Challenge question: What if we want to compare customer ratings across <strong>branches</strong>? Does the product line with the top ratings vary by store?</em></p>
 <p><strong>You do it:</strong> Highlight the product line with the top rating at branch A. How does this rank in the other branches?</p>
-<p><strong>You do it:</strong> Click on the different options in the legend - what happens?</p>
+<!---**You do it:** Click on the different options in the legend.--->
 </section>
 <section id="changing-the-formatting-of-the-axis-labels" class="level4">
 <h4 class="anchored" data-anchor-id="changing-the-formatting-of-the-axis-labels">Changing the formatting of the axis labels</h4>
@@ -420,57 +421,61 @@ If you need to make changes to the group later, right-click on the group field i
 <p><strong>Adding a caption</strong> that describes details about your visualization.</p>
 <ul>
 <li><p>Right click the blank area of the visualization</p></li>
-<li><p>Select <code>Annotate</code> -&gt; Select either <code>Point</code> or <code>Area</code>. By selecting <code>Area</code> you can add text to comment about a specific region of a visualization.</p></li>
+<li><p>Select <code>Annotate</code> -&gt; Select either <code>Point</code> or <code>Area</code></p></li>
 </ul>
-<p><strong>Marking</strong> or <strong>annotating</strong> a single point. -&gt; Right click -&gt; Mark Label or Annotate</p>
+<p>– By selecting <code>Area</code> you can add text to comment about a specific region of a visualization.</p>
+<p>– By selecting <code>Point</code> you can call out a specific data point in the visualization.</p>
 <p>Note: There are <strong>many</strong> other features to explore in the Tableau toolbar. Hover over each icon in the toolbar and click to explore.</p>
 </section>
 </section>
 <section id="using-the-filters-card" class="level3">
 <h3 class="anchored" data-anchor-id="using-the-filters-card">8. Using the filters card</h3>
 <p>What if we want to recreate our analysis of ratings for female customers only?</p>
-<p>Let’s use the toolbar to <strong>duplicate</strong> our worksheet.</p>
-<p>Next, let’s add a filter for females:</p>
+<p>First, navigate to the toolbar and <strong>duplicate</strong> the existing worksheet.</p>
 <ul>
-<li><p>Drag the field <code>gender</code> to the <code>Filters</code> card</p></li>
+<li><p>Select <code>Data</code> and find the data source name <code>supermarket_sales</code></p></li>
+<li><p>Select <code>Duplicate</code></p></li>
+</ul>
+<p>Then, add a filter for females:</p>
+<ul>
+<li><p>Drag the field <code>Gender</code> to the <code>Filters</code> card</p></li>
 <li><p>Select <code>Female</code></p></li>
 </ul>
 </section>
 <section id="stacking-bar-charts" class="level3">
 <h3 class="anchored" data-anchor-id="stacking-bar-charts">9. Stacking bar charts</h3>
 <p>What if you want to see total sales split by gender and purchase category?</p>
-<p><strong>You do it:</strong> Create a visualization (in a new sheet) that shows total sales by gender and product line.</p>
-<p>Great, now what if we instead want to see this in terms of what percent of total sales within each category are from females vs.&nbsp;males?</p>
-<p>Let’s try <strong>stacking</strong> our bars instead:</p>
+<p><strong>You do it:</strong> Create a visualization (in a new sheet) that shows total sales (<code>Total</code>) by <code>Gender</code> and <code>Product line</code>.</p>
+<p>What if, instead, we want to see this in terms of the percent of total sales within each category are from females vs.&nbsp;males?</p>
+<p>First, let’s try <strong>stacking</strong> our bars and adding labels:</p>
 <ul>
-<li>Move gender from the rows shelf and drag it to the <code>Color</code> icon on the <code>Marks</code> card.</li>
+<li><p>Move <code>Gender</code> from the Columns shelf and drag it to the <code>Color</code> icon on the <code>Marks</code> card</p></li>
+<li><p>Select <code>Label</code> from the <code>Marks</code> card -&gt; Check <code>Show mark labels</code> to display the value of total sales for males and females</p></li>
 </ul>
-<p>What if we want to see the value of total sales for males and females?</p>
+<p>Next, convert this display to see the percent of total sales that are from males and females:</p>
 <ul>
-<li>Label -&gt; Show Mark Labels</li>
+<li><p>Click the drop down menu next to SUM(Total) on the Rows shelf</p></li>
+<li><p>Select <code>Quick Table Calculation</code> -&gt; <code>Percent of Total</code></p></li>
 </ul>
-<p>What if we instead want to see the percent of total sales that are from males and females?</p>
+<p>This gives us the percentage of total sales that are from males and females, but as a percent of <em>all</em> sales.</p>
+<p>What if we want to see the percent of total sales <em>within each category</em> that are from males and females?</p>
+<p>We need to create a <em>100% stacked bar chart</em>.</p>
 <ul>
-<li><p>Click the dropdown menu on SUM(Total)</p></li>
-<li><p>Quick Table Calculation -&gt; Percent of Total</p></li>
+<li><p>Click the drop down menu next to SUM(Total) on the Rows shelf</p></li>
+<li><p>Select <code>Compute Using</code> -&gt; <code>Gender</code></p></li>
 </ul>
-<p>Now what if we want to see the percent of total sales within each category that are from males and females?</p>
-<ul>
-<li><p>Create a 100% stacked bar chart</p></li>
-<li><p>Click the dropdown menu on SUM(Total)</p></li>
-<li><p>Compute Using -&gt; Gender</p></li>
-</ul>
-<p><strong>You do it:</strong> What do the other compute using options do?</p>
+<p>Note: The default is <code>Table (across)</code>.</p>
+<!---**You do it:** What do the other compute using options do?--->
 </section>
 <section id="creating-bar-in-bar-charts" class="level3">
 <h3 class="anchored" data-anchor-id="creating-bar-in-bar-charts">10. Creating bar in bar charts</h3>
 <p>Another way to compare sales for males and females is to use a bar in bar chart. This will allow you to easily see whether total sales are higher for males or females.</p>
 <ul>
-<li><p>Let’s duplicate our 100% stacked bar chart</p></li>
-<li><p>Drag gender to the <code>Size</code> icon in the <code>Marks</code> card</p></li>
-<li><p>From the top menu, click Analysis -&gt; Stack Marks -&gt; Off</p></li>
+<li><p>Duplicate the 100% stacked bar chart by right-clicking on Sheet 2 and selecting <code>Duplicate</code></p></li>
+<li><p>Drag <code>Gender</code> to the <code>Size</code> icon in the <code>Marks</code> card</p></li>
+<li><p>From the toolbar, click <code>Analysis</code> -&gt; <code>Stack Marks</code> -&gt; and select <code>Off</code></p></li>
 </ul>
-<p>What if we want to swap which gender is the wide bar?</p>
+<p><em>Challenge question: What if we want to swap which gender is the wide bar and which is the narrow bar?</em></p>
 </section>
 <section id="basic-line-charts-and-datetime" class="level3">
 <h3 class="anchored" data-anchor-id="basic-line-charts-and-datetime">11. Basic line charts and datetime</h3>
@@ -478,32 +483,37 @@ If you need to make changes to the group later, right-click on the group field i
 <p>Suppose we want to see trends in sales over time:</p>
 <ul>
 <li><p>Open a new worksheet</p></li>
-<li><p>Drag <code>Total</code> to the rows shelf and <code>Date</code> to the columns shelf</p></li>
-<li><p>Click the dropdown menu next to <code>Date</code></p></li>
-<li><p>Click Week Number</p></li>
+<li><p>Drag <code>Total</code> to the Rows shelf and <code>Date</code> to the Columns shelf</p></li>
+<li><p>Click the drop down menu next to <code>Date</code></p></li>
+<li><p>Select <code>Week Number</code></p></li>
 </ul>
+<p><em>Challenge question: There are two options for each date display option. What is the difference between these fields?</em></p>
 <p><strong>You do it:</strong> Explore the other date display options. Which do you like best for this analysis?</p>
 <p>What if we want to see trends in sales across months?</p>
-<p>Let’s look at two options for doing this:</p>
+<p>Let’s look at two options for doing this.</p>
 <ol type="1">
 <li><p>Side-by-side lines:</p>
 <ul>
-<li><p>With the <code>Date</code> aggregation set to MONTH in the columns shelf, double click the <code>Date</code> field.</p></li>
-<li><p>Click the dropdown menu on the YEAR(Date) field on the columns shelf</p></li>
-<li><p>Select Day</p></li>
+<li><p>Double click <code>Date</code> to add to to the Columns shelf, and drag <code>Total</code> to the Rows shelf.</p></li>
+<li><p>Set the aggregation to <code>MONTH(Date)</code> in the Columns shelf and <code>SUM(Total)</code> in the Rows shelf.</p></li>
+<li><p>Double click the <code>Date</code> field (again) in the Data pane. This will add it to the Columns shelf.</p></li>
+<li><p>Click the drop down menu on the <code>YEAR(Date)</code> field on the Columns shelf and select <code>Day</code></p></li>
 </ul></li>
 <li><p>Combined lines:</p>
 <ul>
-<li>Drag MONTH(Date) to the colors card</li>
+<li>Drag <code>MONTH(Date)</code> to the colors card</li>
 </ul></li>
 </ol>
-<p>Let’s look at different line types. Click the new <code>Path</code> icon on the Marks card</p>
-<p>Let’s add some trend lines. Analysis -&gt; Trend lines -&gt; Show Trend Lines</p>
-<p>What are trend lines??</p>
+<p><strong>You do it:</strong> You will notice that a new <code>Path</code> icon now appears on the <code>Marks</code> card. Experiment with different line types.</p>
+</section>
+<section id="adding-trend-lines" class="level3">
+<h3 class="anchored" data-anchor-id="adding-trend-lines">12. Adding trend lines</h3>
+<p>To add trend lines, from the toolbar select <code>Analysis</code> -&gt; <code>Trend Lines</code> -&gt; <code>Show Trend Lines</code></p>
+<p>For next time: What are trend lines?</p>
 </section>
 </section>
-<section id="review" class="level2">
-<h2 class="anchored" data-anchor-id="review">Review</h2>
+<section id="review-questions" class="level2">
+<h2 class="anchored" data-anchor-id="review-questions">Review Questions</h2>
 <ol type="1">
 <li><p>Which payment type has the highest total spending?</p></li>
 <li><p>Do more females or more males use this payment type?</p></li>

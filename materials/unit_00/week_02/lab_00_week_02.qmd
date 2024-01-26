@@ -423,7 +423,7 @@ What if we want to **adjust the scale** of the y-axis so that differences across
 
 **You do it:** Highlight the product line with the top rating at branch A. How does this rank in the other branches?
 
-**You do it:** Click on the different options in the legend - what happens?
+<!---**You do it:** Click on the different options in the legend.--->
 
 #### Changing the formatting of the axis labels
 
@@ -453,9 +453,11 @@ What if we want to **remove the legend**?
 
 - Right click the blank area of the visualization
 
-- Select `Annotate` -> Select either `Point` or `Area`. By selecting `Area` you can add text to comment about a specific region of a visualization.
+- Select `Annotate` -> Select either `Point` or `Area`
 
-**Marking** or **annotating** a single point. -> Right click -> Mark Label or Annotate
+-- By selecting `Area` you can add text to comment about a specific region of a visualization.
+
+-- By selecting `Point` you can call out a specific data point in the visualization.
 
 Note: There are **many** other features to explore in the Tableau toolbar. Hover over each icon in the toolbar and click to explore.
 
@@ -463,11 +465,16 @@ Note: There are **many** other features to explore in the Tableau toolbar. Hover
 
 What if we want to recreate our analysis of ratings for female customers only?
 
-Let's use the toolbar to **duplicate** our worksheet.
+First, navigate to the toolbar and **duplicate** the existing worksheet.
 
-Next, let's add a filter for females:
+- Select `Data` and find the data source name `supermarket_sales`
 
--  Drag the field `gender` to the `Filters` card
+- Select `Duplicate`
+
+
+Then, add a filter for females:
+
+-  Drag the field `Gender` to the `Filters` card
 
 -  Select `Female`
 
@@ -475,45 +482,47 @@ Next, let's add a filter for females:
 
 What if you want to see total sales split by gender and purchase category? 
 
-**You do it:** Create a visualization (in a new sheet) that shows total sales by gender and product line.
+**You do it:** Create a visualization (in a new sheet) that shows total sales (`Total`) by `Gender` and `Product line`.
 
-Great, now what if we instead want to see this in terms of what percent of total sales within each category are from females vs. males?
+What if, instead, we want to see this in terms of the percent of total sales within each category are from females vs. males?
 
-Let's try **stacking** our bars instead:
+First, let's try **stacking** our bars and adding labels:
 
--  Move gender from the rows shelf and drag it to the `Color` icon on the `Marks` card.  
+-  Move `Gender` from the Columns shelf and drag it to the `Color` icon on the `Marks` card
 
-What if we want to see the value of total sales for males and females?
+-  Select `Label` from the `Marks` card -> Check `Show mark labels` to display the value of total sales for males and females
 
--  Label -> Show Mark Labels  
+Next, convert this display to see the percent of total sales that are from males and females:
 
-What if we instead want to see the percent of total sales that are from males and females?
+-  Click the drop down menu next to SUM(Total) on the Rows shelf
 
--  Click the dropdown menu on SUM(Total)
+-  Select `Quick Table Calculation` -> `Percent of Total`
 
--  Quick Table Calculation -> Percent of Total  
+This gives us the percentage of total sales that are from males and females, but as a percent of *all* sales.
 
-Now what if we want to see the percent of total sales within each category that are from males and females?
+What if we want to see the percent of total sales *within each category* that are from males and females?
 
--  Create a 100% stacked bar chart
+We need to create a *100% stacked bar chart*.
 
--  Click the dropdown menu on SUM(Total)
+-  Click the drop down menu next to SUM(Total) on the Rows shelf
 
--  Compute Using -> Gender  
+-  Select `Compute Using` -> `Gender`
 
-**You do it:** What do the other compute using options do?
+Note: The default is `Table (across)`.
+
+<!---**You do it:** What do the other compute using options do?--->
 
 ### 10. Creating bar in bar charts
 
 Another way to compare sales for males and females is to use a bar in bar chart. This will allow you to easily see whether total sales are higher for males or females.
 
--  Let's duplicate our 100% stacked bar chart
+-  Duplicate the 100% stacked bar chart by right-clicking on Sheet 2 and selecting `Duplicate`
 
--  Drag gender to the `Size` icon in the `Marks` card
+-  Drag `Gender` to the `Size` icon in the `Marks` card
 
--  From the top menu, click Analysis -> Stack Marks -> Off  
+-  From the toolbar, click `Analysis` -> `Stack Marks` -> and select `Off`  
 
-What if we want to swap which gender is the wide bar?  
+*Challenge question: What if we want to swap which gender is the wide bar and which is the narrow bar?*  
 
 ### 11. Basic line charts and datetime
 
@@ -523,37 +532,43 @@ Suppose we want to see trends in sales over time:
 
 -  Open a new worksheet
 
--  Drag `Total` to the rows shelf and `Date` to the columns shelf
+-  Drag `Total` to the Rows shelf and `Date` to the Columns shelf
 
--  Click the dropdown menu next to `Date`
+-  Click the drop down menu next to `Date`
 
--  Click Week Number  
+-  Select `Week Number`  
+
+*Challenge question: There are two options for each date display option. What is the difference between these fields?*
 
 **You do it:** Explore the other date display options. Which do you like best for this analysis?
 
 What if we want to see trends in sales across months?  
 
-Let's look at two options for doing this:
+Let's look at two options for doing this.
 
 1.  Side-by-side lines:
 
-    -  With the `Date` aggregation set to MONTH in the columns shelf, double click the `Date` field.
+    -  Double click `Date` to add to to the Columns shelf, and drag `Total` to the Rows shelf.
+    
+    -  Set the aggregation to `MONTH(Date)` in the Columns shelf and `SUM(Total)` in the Rows shelf.
 
-    -  Click the dropdown menu on the YEAR(Date) field on the columns shelf
+    -  Double click the `Date` field (again) in the Data pane. This will add it to the Columns shelf.
 
-    -  Select Day
+    -  Click the drop down menu on the `YEAR(Date)` field on the Columns shelf and select `Day`
 
 2.  Combined lines:
 
-    -  Drag MONTH(Date) to the colors card  
+    -  Drag `MONTH(Date)` to the colors card  
 
-Let's look at different line types. Click the new `Path` icon on the Marks card
+**You do it:** You will notice that a new `Path` icon now appears on the `Marks` card. Experiment with different line types. 
 
-Let's add some trend lines. Analysis -> Trend lines -> Show Trend Lines
+### 12. Adding trend lines
 
-What are trend lines??
+To add trend lines, from the toolbar select `Analysis` -> `Trend Lines` -> `Show Trend Lines`
 
-## Review
+For next time: What are trend lines?
+
+## Review Questions
 
 1.  Which payment type has the highest total spending?
 
