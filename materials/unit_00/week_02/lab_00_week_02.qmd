@@ -80,7 +80,7 @@ Connect -> Analyze -> Share
 
 [Video: The Tableau Desktop Workflow](https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr) [Est. Time: 4 hours]
 
-### Connect
+### Part 1: Connect
 
 You will **connect** to your data on the **Data Source Page** following these steps:
 
@@ -105,6 +105,9 @@ Note: Files that end in `.csv` are considered text files. The extension `.csv` s
 ![](figs/tconnect.png)
 After the data is connected, it's time to save your work. Save the Tableau workbook as `arec330_lab_02.twb` in the same working directory (Note: You might have to navigate to the appropriate folder in your Windows Explorer or Finder). The default extension will be `.twb` so there shouldn't be a need to change the extension.
 
+Tip: Make sure you select **Extract** (located in the upper right corner). In Tableau, live connections are dynamic and provide real-time updates, while extracts are snapshots of data that need to be refreshed. If your data file is not expected to change, then extracting will be preferred.
+
+Note: When extracting data, you will be prompted to save a file ending in `.hyper`. Save this file to the same folder where you saved your data (in this case, `arec330_lab_02`).
 
 #### 2. View available sheets
 
@@ -136,16 +139,16 @@ Later, we will add additional sheets by connecting to new data sets.
 
 
 
-### Analyze
+### Part 2: Analyze
 
-You will **analyze** your data in a **worksheet**/**workspace** following these steps:
+**Analyzing** your data in Tableau happens in the **worksheet**/**workspace**.
 
-1.  Click on `Sheet 1` at the bottom of the Data Source Page. This action brings you to the **Worksheets/Workspaces Page**. 
+Click on `Sheet 1` at the bottom of the Data Source Page. This action brings you to the **Worksheets/Workspaces Page**. 
 
 ![](figs/tworkspaces.png)
 
 
-2.  Use the `Data Pane` to view the data source and explore data fields within a worksheet. 
+Use the `Data Pane` to view the data source and explore data fields within a worksheet. 
 
 ![](figs/tdatapane.png)
 
@@ -153,6 +156,7 @@ Within the Data pane view, we can determine the **role** of each data field. Bec
 
 **You do it:** What is the role of the variable `Gender`?
 
+<!---
 3.  Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.
 
 We will go into steps 3--7 of the analyze step of the process later in this lab.
@@ -166,46 +170,34 @@ We will go into steps 3--7 of the analyze step of the process later in this lab.
 7.  Use the `Marks Card`
 
 Throughout the course you will continue to learn new features of the analysis capabilities of Tableau, but for now this is what you need to know.
+--->
 
-### Share
+### Applying D^3^M to analyze data in Tableau
 
-You will **share** your **worksheet** on Tableau Public by following these steps:
-
-1.  Connect Tableau Desktop to your Tableau Public account. Server -> Tableau Public
-
-2.  Publish. Server -> Publish Workbook. OR Server -> Tableau Public -> Save to Tableau Public
-
-You should also save a local copy of your work as a Tableau Workbook. File -> Save. OR click the floppy disk icon (![](figs/save.png){width=5%}) at the top of the page.
-
-3.  Embed your visualization in your Google website.
-
-## Applying the Tableau Workflow
-
-Using the Supermarket Sales data, construct data visualizations that answer the following questions:
+Using the Supermarket Sales data, we will construct data visualizations that answer the following questions:
 
 1.  Which product line has the lowest average customer rating?
 
 2.  Does this differ by store branch?
 
-3.  What actionable insights does this analysis reveal for the stores?
+    -> What actionable insights does this analysis reveal for the stores?
 
 4.  How have average customer ratings changed over time?
 
 5.  Does this differ by store branch?
 
-6.  What actionable insights does this analysis reveal for the stores?
+    -> What actionable insights does this analysis reveal for the stores?
 
-In problem set 2, you will follow this workflow to produce a simple data visualization using the grocery store spending dataset. 
+<!---
+Now, we are going to go in more detail in the analyze step of the process. 
 
-## Analyzing data in Tableau
-
-Now, we are going to go in more detail in the analyze step of the process. We will learn the following:
+We will learn the following:
 
 - Make a few new figures
 - Additional features of the Tableau analysis page
 - Ways to change the formatting of your visualizations to make them more effective
-
-We will use the same Supermarket Sales dataset. We will be covering the following:  
+--->
+We will be covering the following:  
 
 1.  Creating calculated fields
 
@@ -226,6 +218,7 @@ We will use the same Supermarket Sales dataset. We will be covering the followin
 9.  More advanced bar charts: Bar in bar
 
 10.  Intro to line charts and manipulating dates
+
 
 ### 1. Create calculated fields
 
@@ -431,7 +424,7 @@ What if we want to **change the font size** (or color, etc.) of the axis labels?
 
 -  Right click the axis you want to edit 
 
--  click `Format`  
+-  Click `Format`  
 
 #### Renaming fields
 
@@ -465,14 +458,15 @@ Note: There are **many** other features to explore in the Tableau toolbar. Hover
 
 What if we want to recreate our analysis of ratings for female customers only?
 
-First, navigate to the toolbar and **duplicate** the existing worksheet.
+First, let's  **duplicate** the existing worksheet.
 
-- Select `Data` and find the data source name `supermarket_sales`
+- Locate your active sheet (this should be called **Sheet 1**)
 
-- Select `Duplicate`
+- Right click and select `Duplicate`
 
+Your new active worksheet will be **Sheet 1 (2)**.
 
-Then, add a filter for females:
+Now, let's add a filter for females:
 
 -  Drag the field `Gender` to the `Filters` card
 
@@ -560,6 +554,8 @@ Let's look at two options for doing this.
 
     -  Drag `MONTH(Date)` to the colors card  
 
+Note: Both date values need to be *dimensions*.
+
 **You do it:** You will notice that a new `Path` icon now appears on the `Marks` card. Experiment with different line types. 
 
 ### 12. Adding trend lines
@@ -567,6 +563,48 @@ Let's look at two options for doing this.
 To add trend lines, from the toolbar select `Analysis` -> `Trend Lines` -> `Show Trend Lines`
 
 For next time: What are trend lines?
+
+### Part 3: Share
+
+You will **share** your **worksheet** on Tableau Public by following these steps:
+
+1.  Connect Tableau Desktop to your Tableau Public account. 
+
+- On the toolbar, locate `Server` -> click `Tableau Public`
+
+2.  Publish your work to your account. There are two ways to do this:
+
+- `Server` -> `Publish Workbook`
+
+- `Server -> `Tableau Public` -> `Save to Tableau Public`
+
+You should also save a local copy of your work as a Tableau Workbook. There are two ways to do this:
+
+- On the toolbar, locate `File` -> click `Save` 
+
+- Click the floppy disk icon (![](figs/save.png){width=5%}) at the top of the page
+
+3.  Embed your visualization in your Google website.
+
+<!---
+## Applying the Tableau Workflow
+
+Using the Supermarket Sales data, construct data visualizations that answer the following questions:
+
+1.  Which product line has the lowest average customer rating?
+
+2.  Does this differ by store branch?
+
+3.  What actionable insights does this analysis reveal for the stores?
+
+4.  How have average customer ratings changed over time?
+
+5.  Does this differ by store branch?
+
+6.  What actionable insights does this analysis reveal for the stores?
+
+In problem set 2, you will follow this workflow to produce a simple data visualization using the grocery store spending dataset. 
+--->
 
 ## Review Questions
 
