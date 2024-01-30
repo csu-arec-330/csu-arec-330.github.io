@@ -42,7 +42,7 @@ B.  Data analysis is less susceptible to biases
 
 C.  Data analysis is more susceptible to biases
 
-D.  Annecdotal evidence is more convincing when communicating insights
+D.  Anecdotal evidence is more convincing when communicating insights
 
 
 ## Agenda
@@ -51,9 +51,7 @@ Data Storytelling
 
 Why use data visualizations?
 
-Five guidelines for effective data visualizations.
-
-
+Five guidelines for effective data visualizations
 
 
 # Data storytelling
@@ -63,19 +61,9 @@ Five guidelines for effective data visualizations.
 
 Storytelling is fundamental to human existence.  We connect, share, teach and learn through stories.
 
-Statistics provide evidence but we need stories to truly communicate the insights to the audience
+Statistics provide evidence but we need stories to truly communicate the insights to the audience.
 
-Our brains are predisposed to remember stories
-
-
-## Let's look at an example: The minimalist version
-
-![source: <https://medium.com/@ccr20/post-9-the-functional-art-1f0ee13b225e>](figs/diamonds-1.jpg)
-
-
-## Let's look at an example: With pizzazz
-
-![source: <https://timharford.com/books/datadetective/>](figs/diamonds-2.jpg)
+Our brains are predisposed to remember stories.
 
 
 ## 3 elements of a data story
@@ -94,7 +82,20 @@ Our brains are predisposed to remember stories
 
 While clear and appealing data visualizations are part of a data story, they are not data stories by themselves.
 
-Data stories bring your analytical insights to life
+Data stories bring your analytical insights to life.
+
+
+<!---
+## Let's look at an example: The minimalist version
+
+![Source: <https://medium.com/@ccr20/post-9-the-functional-art-1f0ee13b225e>](figs/diamonds-1.jpg)
+
+
+## Let's look at an example: With pizzazz
+
+![Source: <https://timharford.com/books/datadetective/>](figs/diamonds-2.jpg)
+--->
+
 
 ## Six elements of a data story
 
@@ -126,28 +127,14 @@ Data stories bring your analytical insights to life
 :::
 
 
-
-
-## References {.scrollable}
-
-Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
-
-Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.
-
-Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin.
-
 <!-- ----------------------- -->
 ## Why use data visualizations?
 
 Suppose I do some research on US government spending on a variety of public programs, including health care, Social Security, and others.
 
-&nbsp; 
-
 . . . 
 
-I find that Federal spending on health care and Social Security programs increased dramitically, but this was not the case for other programs.
-
-&nbsp; 
+I find that Federal spending on health care and Social Security programs **increased**, but this was **not** the case for other programs.
 
 . . . 
 
@@ -182,13 +169,9 @@ C. ![](includes/fed_spending.png){width="25%"}  &nbsp; &nbsp;D.  ![](includes/fe
 
 Which of the slides best tells this story?
 
-&nbsp; 
-
 . . . 
 
 **Why?**
-
-&nbsp; 
 
 . . . 
 
@@ -199,34 +182,28 @@ Which of the slides best tells this story?
 
 What is the most important consideration when showcasing your work?
 
-&nbsp; 
-
 . . . 
 
 *People* will read, listen to, or see your findings. 
 
-&nbsp; 
+. . . 
 
 Yet most of us spend very little time thinking about how to communicate our findings.
 
 
 ## What are *effective* data visualizations?
-&nbsp; 
 
 We often spend days, weeks, months, or (sadly) years compiling and analyzing information for reports.
 
-&nbsp; 
-
 But most people spend minutes or hours designing the figures to showcase the data.
-
-&nbsp; 
 
 We might think people will just "get it" or that "the numbers will speak for themselves"
 
 ## What are *effective* data visualizations?
-&nbsp; 
 
 Which of the visualizations best tells our story about federal spending?
+
+Recall: Federal spending on health care and Social Security **increased**, but this was **not** the case for other programs.
 
 ##
 ![](includes/fig3.png){width="120%"}
@@ -247,25 +224,18 @@ Which of the visualizations best tells our story about federal spending?
  &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/fig4_2.png){width="30%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D.  ![](includes/fig1.png){width="30%"} 
 
 ## What is an *effective* data vis?
-&nbsp; 
 
 Which vis best tells this story?
-
-&nbsp; 
 
 . . . 
 
 **Why?**
 
-&nbsp; 
-
 . . . 
 
 **How else could you improve these visualizations?**
 
-## 5 guidelines for a better data vis
-
-&nbsp; 
+## 5 guidelines for a better data vis {.smaller}
 
 0.  Identify your objective 
 
@@ -285,17 +255,11 @@ Adapted from *Better Data Visualizations* by Jonathan Schwabish
 
 ## 0. Identify your objective
 
-&nbsp; 
-
 Before designing your visualization, answer these questions: 
 
-&nbsp; 
+- **What do I want my figure to convey?**
 
-**What do I want my figure to convey?**
-
-&nbsp; 
-
-**What do I want my audience to do with this message?**
+- **What do I want my audience to do with this message?**
 
 ##
 ![](includes/fig4_2.png){width="120%"}
@@ -312,29 +276,24 @@ What if we retitled it - The Federal Government is over-spending on Health Care?
 
 ## 1. Show (me!) the Data
 
-&nbsp; 
-
 Your audience will only grasp your point, argument, or story if they can *see* the data supporting it.
-
-&nbsp; 
 
 As visualization creators, our first challenge is deciding how much data to show and the best way to show it.
 
 ##  1. Show (me!) the Data
-
 &nbsp; 
 
 ![](includes/guide1.png){width="120%"}
 
 ## 2.  Reduce the clutter
 
-The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
+The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
 . . . 
 
 Some examples?
 
--  Heavy tick marks and gridlines 
+-  Heavy tick marks and grid lines 
 
 ## To Grid or Not to Grid
 
@@ -347,11 +306,11 @@ Source: <https://medium.com/biovinci/good-chart-bad-chart-b6a6725f8795>
 :::
 ## 2.  Reduce the clutter
 
-The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
+The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
 Some examples?
 
--  Heavy tick marks and gridlines 
+-  Heavy tick marks and grid lines 
 
 -  Overlapping and overwhelming data markers
 
@@ -365,11 +324,11 @@ Source: <https://dvia.samizdat.cc/2017/line-graph/>
 
 ## 2.  Reduce the clutter
 
-The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
+The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
 Some examples?
 
--  Heavy tick marks and gridlines 
+-  Heavy tick marks and grid lines 
 
 -  Overlapping and overwhelming data markers
 
@@ -381,11 +340,11 @@ Some examples?
 
 ## 2.  Reduce the clutter
 
-The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
+The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
 Some examples?
 
--  Heavy tick marks and gridlines 
+-  Heavy tick marks and grid lines 
 
 -  Overlapping and overwhelming data markers
 
@@ -395,7 +354,10 @@ Some examples?
 
 ## Too Much.
 
-![](includes/line1.png){width="90%"}
+<img src="includes/line1.png" style="width: 80%;">
+
+<!---![](includes/line1.png){width="50%"}--->
+
 
 ::: aside
 Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
@@ -403,11 +365,11 @@ Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
 
 ## 2.  Reduce the clutter
 
-The use of unneccessary visual elements distracts your audience from the central data and clutters the page.
+The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
 Some examples?
 
--  Heavy tick marks and gridlines 
+-  Heavy tick marks and grid lines 
 
 -  Overlapping and overwhelming data markers
 
@@ -415,7 +377,6 @@ Some examples?
 
 -  Too much text, too many labels, overkill!
 
-Simpler = Better
 
 ## No thanks, Excel.
 
@@ -427,23 +388,27 @@ Simpler = Better
 
 ## What changes would you make?
 
-![](includes/line1.png){width="90%"}
+<img src="includes/line1.png" style="width: 80%;">
+
+<!---![](includes/line1.png){width="50%"}--->
 
 ::: aside
 Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
 :::
 
-## 3. Integrate graphics and text
+## 3. Integrate graphics and text {.smaller}
 
 Our main focus when creating a visualization is on the graphical elements - bars, points, lines, etc.
 
-&nbsp; 
-
 But the text we include is often just as important. In fact, the included annotations are vitally important to audience comprehension.
 
-&nbsp; 
+3 ways to integrate text into graphs and visuals:
 
-3 ways to integrate graphs and visuals: (1) Remove legends; (2) Create active titles; (3) Add detail
+(1) Remove legends
+
+(2) Create active titles
+
+(3) Add detail
 
 ::: notes
 Recall the exercise on slide titles from earlier.
@@ -467,30 +432,21 @@ Recall the exercise on slide titles from earlier.
  &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/legend3.png){width="35%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D.  ![](includes/legend4.png){width="35%"} 
 
 ## Removing legends
-
 &nbsp; 
 
 Legends take up valuable space.
 
-&nbsp; 
-
 When possible, remove them.
-
-&nbsp; 
 
 Adding data labels directly on the chart makes it faster and easier to interpret and gives our data more space.
 
 ## Active titles
-
 &nbsp; 
 
 Write your vis titles like a newspaper headline. 
 
-&nbsp; 
-
 Your title should tell the audience *what they should learn from your data*.
 
-&nbsp; 
 
 ## Which title is more useful?
 
@@ -502,11 +458,9 @@ Your title should tell the audience *what they should learn from your data*.
 
 &nbsp; 
 
-Annotations allows audience members - esp. those with less data vis experience - to grasp and understand the content quickly.
+Annotations allows audience members - especially those with less data vis experience - to grasp and understand the content quickly.
 
-&nbsp; 
-
-Colors draw the readers' attention to key points and can differentiate between "good" and "bad".
+Colors draw the readers' attention to key points and can differentiate between "good" and "bad."
 
 ##
 
@@ -524,11 +478,7 @@ Colors draw the readers' attention to key points and can differentiate between "
 
 1.  Remove legends
 
-&nbsp; 
-
 2.  Create active titles 
-
-&nbsp; 
 
 3.  Add detail - annotations and color
 
@@ -539,11 +489,7 @@ Colors draw the readers' attention to key points and can differentiate between "
 
 Avoid figures that contain too much information - line charts that look like spaghetti.
 
-&nbsp; 
-
 One solution is to convey less information - what is vital?
-
-&nbsp; 
 
 Another is to break one chart into smaller parts, ideally with identical formatting.
 
@@ -562,11 +508,7 @@ Another is to break one chart into smaller parts, ideally with identical formatt
 
 One last piece of advice - whenever you make your graph, start with all gray data elements. 
 
-&nbsp; 
-
 This will force you to be **purposeful** and **strategic** in your use of color, labels, and other elements.
-
-&nbsp; 
 
 When using R, Tableau, Excel, or really any program literally starting in gray would take some effort. But consider this a mental process... 
 
@@ -604,10 +546,6 @@ Here you might have chosen to highlight the top two lines. Once you do that, you
 
 &nbsp; 
 
-&nbsp; 
-
-&nbsp; 
-
 Why use data visualizations instead of text?
 
 ## Objective 2 Review Question
@@ -633,11 +571,7 @@ Which vis?
 
 ## Objective 3 Review Question
 
-&nbsp; 
-
 Which of the following steps should you accomplish before even starting your data vis?
-
-&nbsp; 
 
 A.  Start with gray
 
@@ -650,8 +584,13 @@ D.  Construct an active title
 
 
 ## References {.scrollable}
-Schwabish, J. (2016). *Better Presentations: A Guide for Scholars, Researchers, and Wonks*. Columbia University Press. <https://policyviz.com/pv_books/better-presentations-a-guide-for-scholars-researchers-and-wonks/>
 
-&nbsp; 
+Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
+
+Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.
+
+Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin.
+
+Schwabish, J. (2016). *Better Presentations: A Guide for Scholars, Researchers, and Wonks*. Columbia University Press. <https://policyviz.com/pv_books/better-presentations-a-guide-for-scholars-researchers-and-wonks/>
 
 Schwabish, J. (2021). *Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks*. Columbia University Press. <https://policyviz.com/pv_books/better-data-visualizations-a-guide-for-scholars-researchers-and-wonks/>
