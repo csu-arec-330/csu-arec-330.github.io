@@ -2,7 +2,7 @@
 title: "Week 3: Effective Data Visualizations"
 format: 
   revealjs:
-    theme: night
+    theme: [night,../../custom.scss]
     slide-number: c/t
     # logo: path.png
     # center: TRUE
@@ -19,21 +19,124 @@ format:
 4.  Next time... Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]
 
 
+## Review Question 1
+
+Which of the following is NOT one of the 5 steps in the D^3^M process?
+
+A.  Define objective
+
+B.  Analyze data
+
+C.  Apply intuition
+
+D.  Communicate insights
+
+
+## Review Question 2
+
+Which of the following is one of the reasons it is important to use data when making (important) decisions? 
+
+A.  Gut instincts are often correct
+
+B.  Data analysis is less susceptible to biases
+
+C.  Data analysis is more susceptible to biases
+
+D.  Annecdotal evidence is more convincing when communicating insights
+
+
 ## Agenda
 
-&nbsp; 
+Data Storytelling
 
 Why use data visualizations?
-
-&nbsp; 
-
-Comparing data visualizations - consensus or differing opinions?
-
-&nbsp; 
 
 Five guidelines for effective data visualizations.
 
 
+
+
+# Data storytelling
+
+
+## Importance of storytelling
+
+Storytelling is fundamental to human existence.  We connect, share, teach and learn through stories.
+
+Statistics provide evidence but we need stories to truly communicate the insights to the audience
+
+Our brains are predisposed to remember stories
+
+
+## Let's look at an example: The minimalist version
+
+![source: <https://medium.com/@ccr20/post-9-the-functional-art-1f0ee13b225e>](figs/diamonds-1.jpg)
+
+
+## Let's look at an example: With pizzazz
+
+![source: <https://timharford.com/books/datadetective/>](figs/diamonds-2.jpg)
+
+
+## 3 elements of a data story
+
+![Source: Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.](figs/data_storytelling.png)
+
+::: {.notes}
+- Explain: narrative and data help explain what is happening.  Context and commentary guide the audience through the meaning of what is being shared.
+
+- Enlighten: a picture is worth a thousand words or numbers.  Graphs and charts help you see trends and patterns.  We will discuss some of the theory and best practices for making effective graphics.  You want to make it as simple as possible for the audience to see your insight.
+
+- Engage: narrative and visuals help engage the audience.  We spend billions on visual media entertainment.  The best movies may have good effects but definitely have a good story.
+:::
+
+## Data story ≠ data visualization
+
+While clear and appealing data visualizations are part of a data story, they are not data stories by themselves.
+
+Data stories bring your analytical insights to life
+
+## Six elements of a data story
+
+1. Data foundation
+
+2. Main point
+
+3. Explanatory focus (vs exploratory)
+
+4. Linear sequence
+
+5. Dramatic elements
+
+6. Visual anchors
+
+::: {.notes}
+1. Story is grounded in data - something real that is observable
+
+2. The story needs to have a main point.  Have something to say.
+
+3. Your goal is to explain some insight.  What is going on?  Who are the actors?  What are the mechanisms?  This relates to what we will discuss about causal inference.
+
+4. Your story will consist of a series of supporting points or information that are tied together to build to some larger point.  The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.
+
+5. Dramatic elements include characters, setting, plots.  These elements help humanize the data story and make it relatable.  Set some context: sales are $200k.  Is that good or bad?  It depends on previous sales.  Be selective about the information - only include information that helps to advance the narrative.
+
+6. Visual anchors are the charts and graphs or other visuals you rely on to tell the story.  We will spend considerable time on developing effective visuals to help tell your story.
+
+:::
+
+
+
+
+## References {.scrollable}
+
+Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
+
+Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.
+
+Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin.
+
+<!-- ----------------------- -->
 ## Why use data visualizations?
 
 Suppose I do some research on US government spending on a variety of public programs, including health care, Social Security, and others.
