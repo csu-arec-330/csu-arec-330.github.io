@@ -66,7 +66,7 @@ Statistics provide evidence but we need stories to truly communicate the insight
 Our brains are predisposed to remember stories.
 
 
-## 3 elements of a data story
+## 3 aspects of a data story
 
 ![Source: Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.](figs/data_storytelling.png)
 
@@ -127,7 +127,14 @@ Data stories bring your analytical insights to life.
 :::
 
 
+## Example
+
+<https://pudding.cool/2020/07/gendered-descriptions/>
+
+
 <!-- ----------------------- -->
+# Data Visualizations
+
 ## Why use data visualizations?
 
 Suppose I do some research on US government spending on a variety of public programs, including health care, Social Security, and others.
