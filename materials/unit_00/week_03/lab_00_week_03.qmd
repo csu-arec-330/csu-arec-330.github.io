@@ -30,17 +30,17 @@ This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 
 ## Data processing with R
 
-Data processing is an important step in analysis.  It can be complicated depending on the number of data sources, quality of the data, and structure of the data.  We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.
+Data processing is an important step in analysis. It can be complicated depending on the number of data sources, quality of the data, and structure of the data. We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.
 
 ### Starting a task or project in R
 
-1. Open RStudio either on your own computer or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus.  If you are on campus, the link should take you to the RStudio sign on page.]. 
+1. Open RStudio either on your own computer or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.] 
 
 2. Open up a new script.  
 
 3. Write a brief comment in the first line describing what the script will do.  
 ```{r}
-#This script will process a sample dataset for problem set 2
+#This script corresponds to the lab notes for week 3.
 ```
 
 4. Load any libraries/packages used in the script.^[Install if necessary.]  In this lab, we will use 3 packages: `readr,dplyr,janitor`.  
@@ -63,11 +63,40 @@ Data processing is an important step in analysis.  It can be complicated dependi
 
 **Variable names**: You'll notice that some of the variable names have spaces.  This is allowed in R, but they are awkward because you will be using these names in your code.  We will cover renaming variables later today, but there is a function to *clean* (i.e., modify) the names.  The function called `clean_names()` is part of the `janitor` package.
 
-> Try it on your own: use the `clean_names()` function to convert all of the column names to snake_case.  Reference the documentation in the help tab of the lower right panel.
+> Try it on your own: Use the `clean_names()` function to convert all of the column names to snake_case. Reference the documentation in the help tab of the lower right panel.
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+supermarket_raw <- supermarket_raw %>% clean_names(.,"snake")
+```
 
 Check the datatypes of the variables in the dataframe.  Do they make sense?
 
-A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). Video tutorial here: <https://youtu.be/e_SQnJpS5fA>
+### Understanding the pipe symbol in R (`%>%` and `|>`)
+In R, the pipe symbol, represented as `%>%` or `|>`, plays a crucial role in streamlining code. It allows for a more readable way of writing sequences of operations. 
+
+**What It Does:** The pipe symbol takes the result of the expression on its left and passes it as the first argument to the function on its right. In simpler terms, it "pipes" the output of one function directly into the next function.
+
+**How to Read It:** When you see `x %>% f()`, interpret it as "take x and then apply f() to it."
+
+**Code Structure:** Often, you'll find the pipe at the end of a line, with the next operation starting on a new, often indented, line. This format enhances readability, especially in complex sequences of data manipulation steps.
+
+Here is a brief example:
+```{r}
+#| eval: false
+data %>%
+  arrange(condition) %>%
+  summarize(result = mean(column))
+```
+
+This code snippet takes called `data`, arranges it according to some condition, and then calculates the mean of column, summarizing the result. Each step is clearly separated by the pipe symbol, making the sequence of operations easy to follow.
+
+<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
+
+Video tutorial here: <https://youtu.be/e_SQnJpS5fA>
 
 ### Modifying the dataframe
 
@@ -143,7 +172,9 @@ The statement `market=="Yangon"` can be evaluated on every row as either `TRUE` 
 yangon_super_sales_sorted <- arrange(yangon_super_sales,total)
 ```
 
-You can sort on multiple columns.  The order determines how the data are sorted.  Let's use the dataset with all of the markets (`select_super_sales`) and sort based on market, then by total in descending order to see the top sales in each market.
+You can sort on multiple columns.  The order determines how the data are sorted.  
+
+Let's try something more complex. Use the dataset with all of the markets (`select_super_sales`) and sort based on market, then by total in descending order to see the top sales in each market.
 
 ```{r}
 #| eval: false
@@ -157,7 +188,7 @@ The function `desc()` is short for descending and indicates that the total shoul
 
 <!---## R: `dplyr` continued  --->
 
-Now you know the five `dplyr` verbs generally used to manipulate data.  We covered `mutate, filter, select,` and `arrange`.  Next, we will introduce `summarize` and a helpful companion function `group_by`.
+Now you know the four `dplyr` verbs generally used to manipulate data.  We covered `mutate, filter, select,` and `arrange`.  Next, we will introduce `summarize` and a helpful companion function `group_by`.
 
 <!-- Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). -->
 
@@ -166,18 +197,16 @@ Now you know the five `dplyr` verbs generally used to manipulate data.  We cover
 ### 5. Summarize
 The `summarize` function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data. 
 
-We can use `summarize()` to calculate the total number of units sold in the dataset.   
-
+We can use `summarize()` to calculate the total number of units sold in the dataset.
 
 ```{r}
 #| eval: false
 summarize(supermarket_raw,quantity_summed=sum(quantity)) 
-
 ```
 
+Notice that the command above does not assign the output to an object. It can be useful to quickly check the output of a command before assigning an object. Is the variable `quantity_summed` accessible to you? In other words, could you call that value within R and perform other operations on it?  
 
-
->Notice that the command above does not assign the output to an object.  It can be useful to quickly check the output of a command before assigning an object.  Is the variable `quantity_summed` accessible to you? In other words, could you call that value within R and perform other operations on it?  Can you modify that command to assign the output to an object called `total_sold`?
+> Try it on your own: Modify the previous command to assign the output to an object called `total_sold`.
 
 ```{r}
 #| eval: false
@@ -187,7 +216,7 @@ summarize(supermarket_raw,quantity_summed=sum(quantity))
 total_sold <- summarize(supermarket_raw,quantity_summed=sum(quantity)) 
 ```
 
-**You do it**: Try calculating the average of the `quantity` variable.  In R, the function to calculate average is `mean()`.  Now calculate the maximum `unit_price`.  The function to calculate the maximum is `max()`.
+> Next, calculate the following: (1) Calculate the average of the `quantity` variable.  In R, the function to calculate average is `mean()`.  (2) Calculate the maximum `unit_price`.  The function to calculate the maximum is `max()`.
 
 ```{r}
 #| eval: false
@@ -213,17 +242,30 @@ branch_A_sales <- filter(supermarket_raw,branch=="A")
 ```
 You should see a new dataframe called `branch_A_sales` with 340 observations.  All of the variables from `supermarket_raw` are there including `quantity`.
 
-Step 2: sum the quantity of goods sold
+Step 2: Sum the quantity of goods sold
 ```{r}
 #| eval: false
 branch_A_total_quantity <- summarize(branch_A_sales,total_quantity=sum(quantity))
 ```
 
-**You try it**: do the same thing for branch B and C.  
+> Try it on your own: Do the same thing for branch B and C.  
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+branch_B_sales <- filter(supermarket_raw,branch=="B")
+branch_B_total_quantity <- summarize(branch_B_sales,total_quantity=sum(quantity))
+
+branch_C_sales <- filter(supermarket_raw,branch=="C")
+branch_C_total_quantity <- summarize(branch_C_sales,total_quantity=sum(quantity))
+```
+
 
 This is pretty tedious.  If operations in R or other programming languages seems tedious or repetitive, there are probably much better ways to do it.  In this case, we can use a function `group_by()`.  `group_by()` tells R to perform some operation like `sum` on each of the subgroups defined by another variable.  Let's sum the quantity by branch using `group_by()` and `summarize()`.  We will do this in two steps:
 
-Step 1: use `group_by()` to group the data by `branch`
+Step 1: Use `group_by()` to group the data by `branch`
 ```{r}
 #| eval: false
 
@@ -231,7 +273,7 @@ Step 1: use `group_by()` to group the data by `branch`
 super_sales_grouped_branch <- group_by(supermarket_raw,branch)
 ```
 
-Step 2: use `summarize()` to calculate the total quantity (by branch)
+Step 2: Use `summarize()` to calculate the total quantity (by branch)
 ```{r}
 #| eval: false
 
@@ -241,11 +283,18 @@ total_quantity_by_branch <- summarize(super_sales_grouped_branch,total_quantity=
 
 Notice that the result has the quantity sum for each branch.  Do they match your manual calculations?
 
-**You try it**: Calculate the average `unit_price` for each `product_line` in the data. 
+> Try it on your own: Calculate the average `unit_price` for each `product_line` in the data. 
+
 
 ### Chaining commands
 
-The script is a set of instructions for R that get executed in order.  In some cases, you do not care about or need to save the intermediate output.  The `group_by` and summarize sequence is a good example; you don't need to store the dataframe `super_sales_grouped_branch` unless there is a clear use for it later.  The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]  Let's return to our `group_by()` and `summarize()` sequence and use the pipe technique rather than assign the intermediate step to a dataframe.
+A **script** is a set of instructions for R that get executed in order.  In some cases, you do not care about or need to save the intermediate output.  
+
+The `group_by` and summarize sequence is a good example; you don't need to store the dataframe `super_sales_grouped_branch` unless there is a clear use for it later.  
+
+The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]  
+
+Let's return to our `group_by()` and `summarize()` sequence and use the pipe technique rather than assign the intermediate step to a dataframe.
 
 ```{r}
 #| eval: false
@@ -257,7 +306,9 @@ total_quantity_by_branch_pipe <- group_by(supermarket_raw,branch) %>% #group by 
 
 ### Appending data
 
-In many cases, you will need to combine parts of datasets into a single larger dataset.  Let's return to the example of breaking up the dataset by branch.  If you have not created dataframes for each branch above, do it using these commands:
+In many cases, you will need to combine parts of datasets into a single larger dataset.  
+
+Let's return to the example of breaking up the dataset by branch.  If you have not created dataframes for each branch above, do it using these commands:
 
 ```{r}
 #| eval: false
@@ -266,14 +317,16 @@ branch_B_sales <- filter(supermarket_raw,branch=="B")
 branch_C_sales <- filter(supermarket_raw,branch=="C")
 ```
 
-Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name.  Suppose you were given the data as three separate files and you read them into these dataframes.  However, you want to profile company sales across the branches.  You need to append them together.  The `dplyr` function to append rows is `bind_rows()`.^[[`bind_rows()`](https://dplyr.tidyverse.org/reference/bind.html) is a more efficient version of a function in base R called `rbind()`.]  
+Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name.  
+
+Suppose you were given the data as three separate files and you read them into these dataframes.  However, you want to profile company sales across the branches.  You need to **append** them together.  The `dplyr` function to append rows is `bind_rows()`.^[[`bind_rows()`](https://dplyr.tidyverse.org/reference/bind.html) is a more efficient version of a function in base R called `rbind()`.]  
 
 ```{r}
 #| eval: false
 super_reconstruct <- bind_rows(branch_A_sales,branch_B_sales,branch_C_sales) 
 ```
 
-Note that `bind_rows()` looks for shared column names in each dataframe.  If one dataframe is missing a column, it will be filled with `NA`. `NA` in R stands for "Not Available" or "Not Applicable." It is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an "NA" value, it treats it differently from other values, and special functions are often used to handle missing data. 
+Note that `bind_rows()` looks for shared column names in each dataframe.  If one dataframe is missing a column, it will be filled with `NA`. `NA` in R stands for "Not Available" or "Not Applicable." `NA' is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an "NA" value, it treats it differently from other values, and special functions are often used to handle missing data. 
 
 
 ### Log file
@@ -291,3 +344,15 @@ sink()
 ```
 
 This will run the script "script.R" and redirect all the output to the file "log.txt". `echo=TRUE` ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of "script.R" because the command `source()` is equivalent to running every line of "script.R."
+
+> Try it on your own: Open a new script and call it `lab_03_log.R`. Update the code above so it will run the script `lab_03_script.R`. Note: You will have to comment out any places where you installed packages, and used the commands `setwd()`, `getwd()`, and `dir()`. 
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+sink("lab_03_log.txt")
+source("lab_03_script.R",echo = TRUE)
+sink()
+```
