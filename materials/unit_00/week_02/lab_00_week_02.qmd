@@ -586,6 +586,8 @@ You should also save a local copy of your work as a Tableau Workbook. There are 
 
 3.  Embed your visualization in your Google website.
 
+{{< video https://youtu.be/uPdIgUIRnyo aspect-ratio="16x9" >}}
+
 <!---
 ## Applying the Tableau Workflow
 
