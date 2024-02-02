@@ -70,7 +70,7 @@ print(.packages())
 
 **Variable names**: You'll notice that some of the variable names have spaces.  This is allowed in R, but they are awkward because you will be using these names in your code.  We will cover renaming variables later today, but there is a function to *clean* (i.e., modify) the names.  The function called `clean_names()` is part of the `janitor` package.
 
-> Try it on your own: Use the `clean_names()` function to convert all of the column names to snake_case. Reference the documentation in the help tab of the lower right panel.
+> Try it on your own: Use the `clean_names()` function to convert all of the column names to snake case. Reference the documentation in the help tab of the lower right panel. The default conversion case is "snake" but you can also specify it in the function explicitly. 
 
 ```{r}
 #| eval: false
