@@ -236,7 +236,7 @@ th, td {
 		</tbody>
         <tfoot> 
             <tr> 
-                <td colspan="5">All problem sets are due the following Thursday by 11:59pm unless otherwise discussed. All quizzes will be taken during lab on the indicated day.</td> 
+                <td colspan="5">All problem sets are due the following Friday by 11:59pm unless otherwise discussed. All quizzes will be taken during lab on the indicated day.</td> 
             </tr> 
         </tfoot>
 	</table>
