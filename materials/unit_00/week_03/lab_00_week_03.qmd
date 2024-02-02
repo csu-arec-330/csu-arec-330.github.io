@@ -109,10 +109,6 @@ The following exercises will introduce you to these core functions while explori
 #| eval: false
 my_super_sales <- mutate(supermarket_raw,total_calc=unit_price*quantity)
 
-#Alternatively, using the pipe
-my_super_sales <- supermarket_raw %>%
-  mutate(total_calc=unit_price*quantity)
-
 ```
 
 > Is the result `total_calc` equal to the existing column `total`?  Why or why not?
