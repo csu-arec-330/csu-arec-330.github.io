@@ -13,7 +13,7 @@ Read in the dataset `supermarket_sales.csv`.
 
 2. Create a dataframe containing only the subset of sales from the product line `Food and beverages`.
 
-3. Create a dataframe containing only the columns `city, product_line, unit_price, quantity, total, rating` from the product line `Food and beverages`. 
+3. Create a dataframe containing only the columns `city, product_line, unit_price, quantity, total, rating` where the product line is `Food and beverages`. 
 
 4. Sort the dataframe by `quantity` in descending order. 
 
@@ -23,16 +23,21 @@ Read in the dataset `supermarket_sales.csv`.
 
 6. Use `dplyr` commands to calculate the median sales by payment type
 
-7. You are asked to develop a new performance indicator for the company.  You wonder if the transaction rating per unit price might provide insights into consumer preferences for different product lines.  Calculate the rating per unit price for each transaction and call this new variable `rup`.
+7. You are asked to develop a new performance indicator for the company.  You wonder if the transaction `rating` per `unit price` might provide insights into consumer preferences for different product lines.  Calculate the rating per unit price for each transaction and call this new variable `rup`. Explain what this performance indicator might tell decision-makers at the company.
 
-8. Then calculate the mean `rup` and unit price by product line across the dataset.  Print the contents of this dataframe into the console using the `print()` function.
+8. Then calculate the mean `rup` and `unit price` by product line across the dataset.  Print the contents of this dataframe into the console using the `print()` function. What conclusions do you draw from your analysis? Explain.
 
 *Use the sink command to generate a text file that indicates your script ran in R.*
 
 ## How to Submit
 
-You should create a new webpage on your Google site titled `Problem Set 3`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. 
+You should create a new webpage on your Google site titled `Problem Set 3`. This webpage should include your responses to Part 2 of the problem set. 
 
-Parts 1 & 2 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas.
+Parts 1 & 2 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas. Please include the following lines in your R script:
+```{r}
+#| eval: false
+version
+print(.packages())
+```
  
 Submit the link to your Google site webpage in Canvas.

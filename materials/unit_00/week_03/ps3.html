@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -66,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li><p>Calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns. Name the new column <code>subtotal</code>. Then verify that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>. Assign the object to a new dataframe.</p></li>
 <li><p>Create a dataframe containing only the subset of sales from the product line <code>Food and beverages</code>.</p></li>
-<li><p>Create a dataframe containing only the columns <code>city, product_line, unit_price, quantity, total, rating</code> from the product line <code>Food and beverages</code>.</p></li>
+<li><p>Create a dataframe containing only the columns <code>city, product_line, unit_price, quantity, total, rating</code> where the product line is <code>Food and beverages</code>.</p></li>
 <li><p>Sort the dataframe by <code>quantity</code> in descending order.</p></li>
 <li><p>Generate a log file from your script. See the section in the lab file for reference.</p></li>
 </ol>
@@ -75,15 +109,19 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
 <ol start="6" type="1">
 <li><p>Use <code>dplyr</code> commands to calculate the median sales by payment type</p></li>
-<li><p>You are asked to develop a new performance indicator for the company. You wonder if the transaction rating per unit price might provide insights into consumer preferences for different product lines. Calculate the rating per unit price for each transaction and call this new variable <code>rup</code>.</p></li>
-<li><p>Then calculate the mean <code>rup</code> and unit price by product line across the dataset. Print the contents of this dataframe into the console using the <code>print()</code> function.</p></li>
+<li><p>You are asked to develop a new performance indicator for the company. You wonder if the transaction <code>rating</code> per <code>unit price</code> might provide insights into consumer preferences for different product lines. Calculate the rating per unit price for each transaction and call this new variable <code>rup</code>. Explain what this performance indicator might tell decision-makers at the company.</p></li>
+<li><p>Then calculate the mean <code>rup</code> and <code>unit price</code> by product line across the dataset. Print the contents of this dataframe into the console using the <code>print()</code> function. What conclusions do you draw from your analysis? Explain.</p></li>
 </ol>
 <p><em>Use the sink command to generate a text file that indicates your script ran in R.</em></p>
 </section>
 <section id="how-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
-<p>You should create a new webpage on your Google site titled <code>Problem Set 3</code>. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set.</p>
-<p>Parts 1 &amp; 2 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas.</p>
+<p>You should create a new webpage on your Google site titled <code>Problem Set 3</code>. This webpage should include your responses to Part 2 of the problem set.</p>
+<p>Parts 1 &amp; 2 should contain an R script with the code used to answer the questions. Generate a log file and submit that to Canvas. Please include the following lines in your R script:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>version</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">.packages</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Submit the link to your Google site webpage in Canvas.</p>
 </section>
 
