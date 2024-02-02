@@ -84,7 +84,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#starting-a-task-or-project-in-r" id="toc-starting-a-task-or-project-in-r" class="nav-link" data-scroll-target="#starting-a-task-or-project-in-r">Starting a task or project in R</a></li>
   <li><a href="#read-the-data-into-r" id="toc-read-the-data-into-r" class="nav-link" data-scroll-target="#read-the-data-into-r">Read the data into R</a></li>
-  <li><a href="#understanding-the-pipe-symbol-in-r-and" id="toc-understanding-the-pipe-symbol-in-r-and" class="nav-link" data-scroll-target="#understanding-the-pipe-symbol-in-r-and">Understanding the pipe symbol in R (<code>%&gt;%</code> and <code>|&gt;</code>)</a></li>
   <li><a href="#modifying-the-dataframe" id="toc-modifying-the-dataframe" class="nav-link" data-scroll-target="#modifying-the-dataframe">Modifying the dataframe</a></li>
   <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">1. Mutate</a></li>
   <li><a href="#select-and-rename" id="toc-select-and-rename" class="nav-link" data-scroll-target="#select-and-rename">2. Select (and rename)</a></li>
@@ -92,9 +91,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#arrange-or-sort" id="toc-arrange-or-sort" class="nav-link" data-scroll-target="#arrange-or-sort">4. Arrange (or sort)</a></li>
   <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">5. Summarize</a></li>
   <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">6. Group by</a></li>
-  <li><a href="#chaining-commands" id="toc-chaining-commands" class="nav-link" data-scroll-target="#chaining-commands">Chaining commands</a></li>
+  <li><a href="#chaining-commands-or-piping-or" id="toc-chaining-commands-or-piping-or" class="nav-link" data-scroll-target="#chaining-commands-or-piping-or">Chaining commands (or piping <code>%&gt;%</code> or <code>|&gt;</code>)</a></li>
   <li><a href="#appending-data" id="toc-appending-data" class="nav-link" data-scroll-target="#appending-data">Appending data</a></li>
-  <li><a href="#log-file" id="toc-log-file" class="nav-link" data-scroll-target="#log-file">Log file</a></li>
+  <li><a href="#log-file-revisited" id="toc-log-file-revisited" class="nav-link" data-scroll-target="#log-file-revisited">Log file (revisited)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -149,7 +148,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="4" type="1">
 <li><p>Load any libraries/packages used in the script.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In this lab, we will use 3 packages: <code>readr,dplyr,janitor</code>.</p></li>
 <li><p>Set the working directory to a known location. This may be a new directory where you will store any external data and save the code file.</p></li>
+<li><p>Insert the following code below where you load packages. These commands print information about the system and version of R you are running. The information will be displayed when you source the script and is for your instructors.</p></li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>version</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">.packages</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="read-the-data-into-r" class="level3">
 <h3 class="anchored" data-anchor-id="read-the-data-into-r">Read the data into R</h3>
@@ -170,37 +174,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> supermarket_raw <span class="sc">%&gt;%</span> <span class="fu">clean_names</span>(.,<span class="st">"snake"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(supermarket_raw,<span class="st">"snake"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Check the datatypes of the variables in the dataframe. Do they make sense?</p>
-</section>
-<section id="understanding-the-pipe-symbol-in-r-and" class="level3">
-<h3 class="anchored" data-anchor-id="understanding-the-pipe-symbol-in-r-and">Understanding the pipe symbol in R (<code>%&gt;%</code> and <code>|&gt;</code>)</h3>
-<p>In R, the pipe symbol, represented as <code>%&gt;%</code> or <code>|&gt;</code>, plays a crucial role in streamlining code. It allows for a more readable way of writing sequences of operations.</p>
-<p><strong>What It Does:</strong> The pipe symbol takes the result of the expression on its left and passes it as the first argument to the function on its right. In simpler terms, it “pipes” the output of one function directly into the next function.</p>
-<p><strong>How to Read It:</strong> When you see <code>x %&gt;% f()</code>, interpret it as “take x and then apply f() to it.”</p>
-<p><strong>Code Structure:</strong> Often, you’ll find the pipe at the end of a line, with the next operation starting on a new, often indented, line. This format enhances readability, especially in complex sequences of data manipulation steps.</p>
-<p>Here is a brief example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(condition) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">result =</span> <span class="fu">mean</span>(column))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This code snippet takes called <code>data</code>, arranges it according to some condition, and then calculates the mean of column, summarizing the result. Each step is clearly separated by the pipe symbol, making the sequence of operations easy to follow.</p>
-<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
-<p>Video tutorial here: <a href="https://youtu.be/e_SQnJpS5fA" class="uri">https://youtu.be/e_SQnJpS5fA</a></p>
 </section>
 <section id="modifying-the-dataframe" class="level3">
 <h3 class="anchored" data-anchor-id="modifying-the-dataframe">Modifying the dataframe</h3>
 <p>You will often need to modify the data you read in. The package <code>dplyr</code> contains a set of utilities that help you modify dataframes.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <code>dplyr</code> argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a>):</p>
 <ol type="1">
-<li><p><code>mutate()</code> adds new variables that are functions of existing variables</p></li>
+<li><p><code>mutate()</code> creates new variables (vector) by transforming or operating on one or more other variables</p></li>
 <li><p><code>select()</code> picks variables based on their names.</p></li>
 <li><p><code>filter()</code> picks cases based on their values.</p></li>
 <li><p><code>arrange()</code> changes the ordering of the rows.</p></li>
-<li><p><code>summarise()</code> reduces multiple values down to a single summary.</p></li>
-<li><p><code>group_by()</code> reduces multiple values down to a single summary.</p></li>
+<li><p><code>summarise()</code> creates a new variable of different dimension by performing an operation that summarizes another variable(s)</p></li>
+<li><p><code>group_by()</code> an intermediate function that can alter how <code>mutate</code> and <code>summarize</code> behave.</p></li>
 </ol>
 <p>The following exercises will introduce you to these core functions while exploring the supermarket_sales data. These functions will all return a dataframe as the output.</p>
 </section>
@@ -208,7 +196,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="mutate">1. Mutate</h3>
 <p><code>mutate()</code> is the function to create or add new variables. Let’s recreate the column <code>total</code> by multiplying the columns <code>unit_price</code> and <code>quantity</code>. Note that we create a new variable called <code>total_calc</code> and assign this dataframe to a new object called <code>my_super_sales</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw,<span class="at">total_calc=</span>unit_price<span class="sc">*</span>quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw,<span class="at">total_calc=</span>unit_price<span class="sc">*</span>quantity)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Alternatively, using the pipe</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> supermarket_raw <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_calc=</span>unit_price<span class="sc">*</span>quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>Is the result <code>total_calc</code> equal to the existing column <code>total</code>? Why or why not?</p>
@@ -254,9 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!---## R: `dplyr` continued  --->
 <p>Now you know the four <code>dplyr</code> verbs generally used to manipulate data. We covered <code>mutate, filter, select,</code> and <code>arrange</code>. Next, we will introduce <code>summarize</code> and a helpful companion function <code>group_by</code>.</p>
 <!-- Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). -->
-<blockquote class="blockquote">
-<p>Note that you can read in data and files from directories other than your working directory. You can include the directory in the file path.</p>
-</blockquote>
+<!-- >Note that you can read in data and files from directories other than your working directory.  You can include the directory in the file path. -->
 </section>
 <section id="summarize" class="level3">
 <h3 class="anchored" data-anchor-id="summarize">5. Summarize</h3>
@@ -330,16 +320,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Try it on your own: Calculate the average <code>unit_price</code> for each <code>product_line</code> in the data.</p>
 </blockquote>
 </section>
-<section id="chaining-commands" class="level3">
-<h3 class="anchored" data-anchor-id="chaining-commands">Chaining commands</h3>
-<p>A <strong>script</strong> is a set of instructions for R that get executed in order. In some cases, you do not care about or need to save the intermediate output.</p>
-<p>The <code>group_by</code> and summarize sequence is a good example; you don’t need to store the dataframe <code>super_sales_grouped_branch</code> unless there is a clear use for it later.</p>
-<p>The symbol known as the pipe, <code>%&gt;%</code>, means take the output of the function on the left and use it as an input for the function on the right.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<p>Let’s return to our <code>group_by()</code> and <code>summarize()</code> sequence and use the pipe technique rather than assign the intermediate step to a dataframe.</p>
+<section id="chaining-commands-or-piping-or" class="level3">
+<h3 class="anchored" data-anchor-id="chaining-commands-or-piping-or">Chaining commands (or piping <code>%&gt;%</code> or <code>|&gt;</code>)</h3>
+<p>A <strong>script</strong> is a set of instructions for R that get executed in order. In some cases, you do not care about or need to save the intermediate output. The <code>group_by</code> and <code>summarize</code> sequence is a good example; you don’t need to store the dataframe <code>super_sales_grouped_branch</code> unless there is a clear use for it later.</p>
+<p>The pipe symbol, represented as <code>%&gt;%</code> or <code>|&gt;</code>, plays a crucial role in streamlining code. It allows for a more readable way of writing sequences of operations.</p>
+<p><strong>What It Does:</strong> The pipe symbol takes the result of the expression on its left and passes it as the first argument to the function on its right. In simpler terms, it “pipes” the output of one function directly into the next function.</p>
+<p><strong>How to Read It:</strong> When you see <code>x %&gt;% f()</code>, interpret it as “take x and then apply f() to it.”</p>
+<p><strong>Code Structure:</strong> Often, you’ll find the pipe at the end of a line, with the next operation starting on a new, often indented, line. This format enhances readability, especially in complex sequences of data manipulation steps.</p>
+<p>Here is a brief example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the pipe to chain two statements </span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch) <span class="sc">%&gt;%</span> <span class="co">#group by branch and pass the output to summarize</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(.,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity)) <span class="co">#Sum the quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(condition) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">result =</span> <span class="fu">mean</span>(column))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code snippet takes called <code>data</code>, arranges it according to some condition, and then calculates the mean of column, summarizing the result. Each step is clearly separated by the pipe symbol, making the sequence of operations easy to follow.</p>
+<!-- The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]   -->
+<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
+<p>Video tutorial here: <a href="https://youtu.be/e_SQnJpS5fA" class="uri">https://youtu.be/e_SQnJpS5fA</a></p>
+<p>Let’s return to our <code>group_by()</code> and <code>summarize()</code> sequence and use the pipe technique rather than assign the intermediate step to a dataframe. Try it!</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the pipe to chain two statements </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch) <span class="sc">%&gt;%</span> <span class="co">#group by branch and pass the output to summarize</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(.,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity)) <span class="co">#Sum the quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="appending-data" class="level3">
@@ -347,25 +352,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In many cases, you will need to combine parts of datasets into a single larger dataset.</p>
 <p>Let’s return to the example of breaking up the dataset by branch. If you have not created dataframes for each branch above, do it using these commands:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name.</p>
-<p>Suppose you were given the data as three separate files and you read them into these dataframes. However, you want to profile company sales across the branches. You need to <strong>append</strong> them together. The <code>dplyr</code> function to append rows is <code>bind_rows()</code>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>Suppose you were given the data as three separate files and you read them into these dataframes. However, you want to profile company sales across the branches. You need to <strong>append</strong> them together. The <code>dplyr</code> function to append rows is <code>bind_rows()</code>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales,branch_B_sales,branch_C_sales) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales,branch_B_sales,branch_C_sales) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that <code>bind_rows()</code> looks for shared column names in each dataframe. If one dataframe is missing a column, it will be filled with <code>NA</code>. <code>NA</code> in R stands for “Not Available” or “Not Applicable.” `NA’ is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an “NA” value, it treats it differently from other values, and special functions are often used to handle missing data.</p>
 </section>
-<section id="log-file" class="level3">
-<h3 class="anchored" data-anchor-id="log-file">Log file</h3>
+<section id="log-file-revisited" class="level3">
+<h3 class="anchored" data-anchor-id="log-file-revisited">Log file (revisited)</h3>
 <p>To output the log from sourcing an R script to a text file, you can use the <code>sink()</code> function. The <code>sink()</code> function redirects R output to a file or connection.</p>
-<p>For example, to redirect the output to a file named “log.txt”, you can use the following command:</p>
+<p>For example, to redirect the output of <code>source("script.R",echo = TRUE)</code> to a file named “log.txt”, you can use the following command. Remember to run this set of commands from another script or directly in the console. Do not include it in the script you are sourcing (i.e., <code>script.R</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"log.txt"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"log.txt"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will run the script “script.R” and redirect all the output to the file “log.txt”. <code>echo=TRUE</code> ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the <code>sink()</code> function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of “script.R” because the command <code>source()</code> is equivalent to running every line of “script.R.”</p>
 <blockquote class="blockquote">
@@ -374,9 +379,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03_script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03_script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -389,8 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li id="fn1"><p>Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Install if necessary.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>The package <code>dplyr</code> is part of a larger set of packages known as the <code>tidyverse</code> <a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>. The term <em>tidy</em> refers to a structure of data. There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available. Most of what I teach in this class will be part of the tidyverse or adherant to its principles. Video tutorial here: <a href="https://youtu.be/bUM3wX4YZDc" class="uri">https://youtu.be/bUM3wX4YZDc</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>The pipe was originally introduced in the package <a href="https://magrittr.tidyverse.org/reference/pipe.html"><code>magrittr</code></a> and is represented by the symbol <code>%&gt;%</code>. The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol <code>|&gt;</code>. They are not equivalent. I will use the <code>magrittr</code> pipe in this class.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> is a more efficient version of a function in base R called <code>rbind()</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> is a more efficient version of a function in base R called <code>rbind()</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

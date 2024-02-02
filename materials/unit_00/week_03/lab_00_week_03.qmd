@@ -47,6 +47,13 @@ Data processing is an important step in analysis. It can be complicated dependin
 
 5. Set the working directory to a known location.  This may be a new directory where you will store any external data and save the code file.
 
+6. Insert the following code below where you load packages. These commands print information about the system and version of R you are running. The information will be displayed when you source the script and is for your instructors.
+```{r}
+#| eval: false
+version
+print(.packages())
+```
+
 ### Read the data into R
 
 1. Download `supermarket_sales.csv` to the project directory.
@@ -70,39 +77,17 @@ Data processing is an important step in analysis. It can be complicated dependin
 #| include: true
 #| code-fold: true
 
-supermarket_raw <- supermarket_raw %>% clean_names(.,"snake")
+supermarket_raw <- clean_names(supermarket_raw,"snake")
 ```
 
 Check the datatypes of the variables in the dataframe.  Do they make sense?
 
-### Understanding the pipe symbol in R (`%>%` and `|>`)
-In R, the pipe symbol, represented as `%>%` or `|>`, plays a crucial role in streamlining code. It allows for a more readable way of writing sequences of operations. 
-
-**What It Does:** The pipe symbol takes the result of the expression on its left and passes it as the first argument to the function on its right. In simpler terms, it "pipes" the output of one function directly into the next function.
-
-**How to Read It:** When you see `x %>% f()`, interpret it as "take x and then apply f() to it."
-
-**Code Structure:** Often, you'll find the pipe at the end of a line, with the next operation starting on a new, often indented, line. This format enhances readability, especially in complex sequences of data manipulation steps.
-
-Here is a brief example:
-```{r}
-#| eval: false
-data %>%
-  arrange(condition) %>%
-  summarize(result = mean(column))
-```
-
-This code snippet takes called `data`, arranges it according to some condition, and then calculates the mean of column, summarizing the result. Each step is clearly separated by the pipe symbol, making the sequence of operations easy to follow.
-
-<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
-
-Video tutorial here: <https://youtu.be/e_SQnJpS5fA>
 
 ### Modifying the dataframe
 
 You will often need to modify the data you read in.  The package `dplyr` contains a set of utilities that help you modify dataframes.^[The package `dplyr` is part of a larger set of packages known as the `tidyverse` <https://www.tidyverse.org/>.  The term *tidy* refers to a structure of data.  There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available.  Most of what I teach in this class will be part of the tidyverse or adherant to its principles.  Video tutorial here: <https://youtu.be/bUM3wX4YZDc>] `dplyr` argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<https://dplyr.tidyverse.org/>):
 
-1. `mutate()` adds new variables that are functions of existing variables
+1. `mutate()` creates new variables (vector) by transforming or operating on one or more other variables
 
 2.  `select()` picks variables based on their names.
 
@@ -110,9 +95,9 @@ You will often need to modify the data you read in.  The package `dplyr` contain
 
 4.  `arrange()` changes the ordering of the rows.
 
-5.  `summarise()` reduces multiple values down to a single summary.
+5.  `summarise()` creates a new variable of different dimension by performing an operation that summarizes another variable(s)
 
-6.  `group_by()` reduces multiple values down to a single summary.
+6.  `group_by()` an intermediate function that can alter how `mutate` and `summarize` behave.
 
 The following exercises will introduce you to these core functions while exploring the supermarket_sales data.  These functions will all return a dataframe as the output.
 
@@ -123,6 +108,11 @@ The following exercises will introduce you to these core functions while explori
 ```{r}
 #| eval: false
 my_super_sales <- mutate(supermarket_raw,total_calc=unit_price*quantity)
+
+#Alternatively, using the pipe
+my_super_sales <- supermarket_raw %>%
+  mutate(total_calc=unit_price*quantity)
+
 ```
 
 > Is the result `total_calc` equal to the existing column `total`?  Why or why not?
@@ -192,7 +182,7 @@ Now you know the four `dplyr` verbs generally used to manipulate data.  We cover
 
 <!-- Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). -->
 
->Note that you can read in data and files from directories other than your working directory.  You can include the directory in the file path.
+<!-- >Note that you can read in data and files from directories other than your working directory.  You can include the directory in the file path. -->
 
 ### 5. Summarize
 The `summarize` function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data. 
@@ -286,19 +276,39 @@ Notice that the result has the quantity sum for each branch.  Do they match your
 > Try it on your own: Calculate the average `unit_price` for each `product_line` in the data. 
 
 
-### Chaining commands
+### Chaining commands (or piping `%>%` or `|>`)
 
-A **script** is a set of instructions for R that get executed in order.  In some cases, you do not care about or need to save the intermediate output.  
+A **script** is a set of instructions for R that get executed in order.  In some cases, you do not care about or need to save the intermediate output. The `group_by` and `summarize` sequence is a good example; you don't need to store the dataframe `super_sales_grouped_branch` unless there is a clear use for it later.  
 
-The `group_by` and summarize sequence is a good example; you don't need to store the dataframe `super_sales_grouped_branch` unless there is a clear use for it later.  
+The pipe symbol, represented as `%>%` or `|>`, plays a crucial role in streamlining code. It allows for a more readable way of writing sequences of operations. 
 
-The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]  
+**What It Does:** The pipe symbol takes the result of the expression on its left and passes it as the first argument to the function on its right. In simpler terms, it "pipes" the output of one function directly into the next function.
 
-Let's return to our `group_by()` and `summarize()` sequence and use the pipe technique rather than assign the intermediate step to a dataframe.
+**How to Read It:** When you see `x %>% f()`, interpret it as "take x and then apply f() to it."
+
+**Code Structure:** Often, you'll find the pipe at the end of a line, with the next operation starting on a new, often indented, line. This format enhances readability, especially in complex sequences of data manipulation steps.
+
+Here is a brief example:
+```{r}
+#| eval: false
+data %>%
+  arrange(condition) %>%
+  summarize(result = mean(column))
+```
+
+This code snippet takes called `data`, arranges it according to some condition, and then calculates the mean of column, summarizing the result. Each step is clearly separated by the pipe symbol, making the sequence of operations easy to follow.
+
+<!-- The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]   -->
+
+<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
+
+Video tutorial here: <https://youtu.be/e_SQnJpS5fA>
+
+Let's return to our `group_by()` and `summarize()` sequence and use the pipe technique rather than assign the intermediate step to a dataframe. Try it!
 
 ```{r}
 #| eval: false
-
+#| code-fold: true
 #Using the pipe to chain two statements 
 total_quantity_by_branch_pipe <- group_by(supermarket_raw,branch) %>% #group by branch and pass the output to summarize
   summarize(.,total_quantity=sum(quantity)) #Sum the quantity by branch
@@ -329,11 +339,11 @@ super_reconstruct <- bind_rows(branch_A_sales,branch_B_sales,branch_C_sales)
 Note that `bind_rows()` looks for shared column names in each dataframe.  If one dataframe is missing a column, it will be filled with `NA`. `NA` in R stands for "Not Available" or "Not Applicable." `NA' is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an "NA" value, it treats it differently from other values, and special functions are often used to handle missing data. 
 
 
-### Log file
+### Log file (revisited)
 
 To output the log from sourcing an R script to a text file, you can use the `sink()` function. The `sink()` function redirects R output to a file or connection.
 
-For example, to redirect the output to a file named "log.txt", you can use the following command:
+For example, to redirect the output of `source("script.R",echo = TRUE)` to a file named "log.txt", you can use the following command. Remember to run this set of commands from another script or directly in the console. Do not include it in the script you are sourcing (i.e., `script.R`).
 
 ```{r}
 #| eval: false
