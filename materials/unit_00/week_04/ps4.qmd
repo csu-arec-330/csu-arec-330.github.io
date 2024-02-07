@@ -20,12 +20,11 @@ You are the analysts tapped to investigate trends in sales data from three branc
 
 ## R: Data Processing
 
-1. There was a problem integrating the Ewallet payment system data with the rest of the dataset.  The `gross_income` and `gross_margin_percentage` values are missing for transactions with Ewallet payments.  Use other information in the dataset to fill in the missing values.  *You can check your work by comparing your calculated values with those present in the dataset.*
+1. You are given the data in three separate files (one for each year). You need to append the datasets (or bind them together) to produce a single dataset that you can output for Tableau to read.
 
-2. You are given the data in three separate files (one for each year). You need to append the datasets (or bind them together) to produce a single dataset that you can output for Tableau to read.
+2. There was a problem integrating the E-wallet payment system data with the rest of the dataset.  The `gross_income` and `gross_margin_percentage` values are missing for transactions with E-wallet payments.  Use other information in the dataset to fill in the missing values (labeled as "NA") by calculating these fields.  *You can check your work by comparing your calculated values with those present in the dataset.*
 
 3. Use R to write a csv file that your can read into Tableau.
-
 
 
 ## Tableau: Data Visualization
@@ -36,11 +35,11 @@ Use Tableau to produce **at least three visualizations** that help you tell your
 
 ## Google sites: Webpage
 
-You will present your analysis in a webpage report. The webpage should contain a written narrative and data visualizations that support your narrative. We expect the written narrative to be 500 to 750 words.  
+You will present your analysis in a webpage report. The webpage should contain a written narrative and data visualizations that support your narrative. We expect the written narrative to be **500 to 750 words**.  
 
 
 
-Here are some questions to consider as you engage in your analysis  
+Here are some questions to consider as you engage in your analysis:  
 
 - What are the sales trends over time? Are the patterns stable across branches/years?
 
@@ -69,4 +68,4 @@ Preliminaries, Answer (or insight), Next steps
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Unit 0 Mini Project`. This webpage should include a write up of your analysis including a brief description of any data processing steps. Generate a log file from your R code and submit that to Canvas. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your Google site titled `Unit 0 Mini Project`. This webpage should include a write up of your analysis including a brief description of any data processing steps. Generate a log file from your R code and submit that to Canvas. Submit the link to your Google site webpage in Canvas.
