@@ -13,7 +13,7 @@ title: "Week 8: Project 1"
 
 
 
-<b>Project Materials - Due Thursday, Mar 07 (video presentation) and Thursday, Mar 21 (report) by 11:59 PM:</b> <br>
+<b>Project Materials - Due Friday, Mar 08 (video presentation) and Friday, Mar 21 (report) by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_01/week_03/ps7.html" target="_blank">Project 1 Instructions</a> <br> 
 

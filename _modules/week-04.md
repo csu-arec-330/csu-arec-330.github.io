@@ -16,7 +16,7 @@ title: "Week 4: Mini Project"
 <a  href="/materials/unit_00/week_04/lab_00_week_04.html" target="_blank">Week 4 Lab Notes</a> <br> <br> 
 
 
-<b>Project Materials - Due Thursday, Feb 15 by 11:59 PM:</b> <br>
+<b>Project Materials - Due Friday, Feb 16 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_00/week_04/ps4.html" target="_blank">Problem Set 4 Instructions</a> <br> 
 

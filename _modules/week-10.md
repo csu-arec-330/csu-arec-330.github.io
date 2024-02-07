@@ -18,7 +18,7 @@ title: "Week 10: Intro to Analyzing Cross-Sectional Data"
 
 
 
-<b>Problem Set Materials - Due Thursday, April 4 by 11:59 PM:</b> <br>
+<b>Problem Set Materials - Due Friday, April 5 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_02/week_02/ps_02_week_02.html" target="_blank">Project 2 Problem Set 2 Instructions</a> <br> 
 

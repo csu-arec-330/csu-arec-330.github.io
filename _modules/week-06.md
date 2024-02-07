@@ -20,7 +20,7 @@ title: "Week 6: Intro to Linear Regression and Forecasting"
 
 
 
-<b>Problem Set 6 Materials - Due Thursday, Feb 29 by 11:59 PM:</b> <br>
+<b>Problem Set 6 Materials - Due Friday, Mar 01 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_01/week_02/ps6.html" target="_blank">Problem Set 6 Instructions</a> <br> 
 

@@ -24,7 +24,7 @@ title: "Week 5: Intro to time series"
 
 
 
-<b>Problem Set 5 Materials - Due Thursday, Feb 22 by 11:59 PM:</b> <br>
+<b>Problem Set 5 Materials - Due Friday, Feb 23 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_01/week_01/ps5.html" target="_blank">Problem Set 5 Instructions</a> <br> 
 
