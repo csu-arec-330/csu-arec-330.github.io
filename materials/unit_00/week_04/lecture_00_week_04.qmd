@@ -116,7 +116,7 @@ Does this vary by city/branch?
 
 ## Keep a record of your exploration
 
-Keep a notebook as you explore your dataset.  
+Keep a notebook as you explore your dataset  
 
 How did you find your insight?  *Especially important for Tableau*
 
@@ -198,9 +198,9 @@ How would you drill deeper?
 
 ## Key insight or answer {.scrollable}
 
-The most important part of your story
+Your key insights is the most important part of your story
 
-Make sure the visual is effective - clearly illustrates the point
+Make sure the visual is effective (i.e., does it clearly illustrate the point?)
 
 ::: {style="font-size: .7em;color:coral;text-align: center;background-color: white;opacity:0.9"}
 
@@ -218,9 +218,9 @@ Make sure the visual is effective - clearly illustrates the point
 
 ## Next steps {.scrollable}
 
-Recommendations (if appropriate)^[It may not be appropriate for you to make direct recommendations. Try to frame the discussion.]
+Make recommendations (if appropriate)^[It may not be appropriate for you to make direct recommendations. Try to frame the discussion.]
 
-Any additional analysis needed?  Briefly describe
+Is any additional analysis needed?  Briefly describe
 
 Example analysis: 
 
