@@ -42,6 +42,14 @@ Is the question specific enough?
 
 Will the answer explain a phenomenon?
 
+::: {.notes}
+1. Can we answer the question with the available data? If not, can we adjust the question or do we need to collect more data
+
+2. specific enough? Is climate change impacting the agricultural sector? More specific: How are CO corn growers adapting to water shortages, which are expected to increase because of climate change?
+
+3. explain phenomenon? Does the question lend itself to explanations that help form testable hypotheses? In the previous question, are growers adopting more efficient irrigation technologies? Are they selling farm land and exiting agriculture?
+
+:::
 
 ## Exercise
 
@@ -121,6 +129,11 @@ Keep a notebook as you explore your dataset
 How did you find your insight?  *Especially important for Tableau*
 
 Your process may help you tell your story
+
+::: {.notes}
+Walking the audience through your thought process can help them understand your analysis. Here is my question... Then I thought, what does the data look like over time or across cities... Then, I noticed this pattern on Wednesdays...
+
+:::
 
 ## Know when to quit
 
