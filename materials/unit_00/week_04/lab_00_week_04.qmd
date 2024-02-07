@@ -30,7 +30,13 @@ The objective of the project is to integrate the R and Tableau skills that you h
 
 ## R 
 
-You now have 3 years worth of data (2017 - 2019). The data are hosted on the course materials webpage here: <https://csu-arec-330.github.io/course-materials/>.  The structure of the data is the same in each year, but you need to combine them into a single dataframe.  Inspect the data - there are some slight problems that need fixing.  Then you need to export the data to be used in Tableau.
+### Reading data from a file path
+
+**Download the data:** You now have 3 years worth of data (2017 - 2019). The data are hosted on the course materials webpage here: <https://csu-arec-330.github.io/course-materials/>.  
+
+**Import the data:** The structure of the data is the same in each year, but you need to combine them into a single dataframe.  
+
+**Inspect the data:** There are some slight problems that need fixing.  Then you need to export the data to be used in Tableau.
 
 Start a new R script and get set up:
 
@@ -60,6 +66,8 @@ Now you have three dataframes with the same columns. You need to append 2018 and
 
 Once you have a single dataframe with all of the years, inspect the dataframe for missing data.  Use the appropriate `dplyr` functions to fill in the missing data.
 
+*Note: Gross margin is calculated as the proportion of revenue that exceeds the cost of goods sold (COGS).*
+
 ### Exporting dataframes
 
 So far, you have read in data and processed it all within R. For this project, you will need to export the cleaned data from R in a format that can be read into Tableau.  The `readr` package contains `write_*()` functions that are analogous to the `read_*()` functions.  
@@ -70,18 +78,24 @@ So far, you have read in data and processed it all within R. For this project, y
 write_csv(your_dataframe,"filename.csv")
 ```
 
-Read through the documentation. Since `write_csv()` is writing data, you need to tell R what dataframe (e.g., `super_2017`) you want to write and the name of the file you intend to create `filename.csv`. Note that you can also write to another directory just as you read from another directory in week 03.
+Read through the documentation. Since `write_csv()` is writing data, you need to tell R what dataframe (e.g., `super_2017`) you want to write and the name of the file you intend to create `filename.csv`. Note that you can also write to another directory just as you read from another directory.
 
 {{< video https://youtu.be/uy_XIVghxWw aspect-ratio="16x9" >}}
 
 
 ## Tableau
 
-So far, we have focused on making single graphics.  One strength of Tableau is the ability to create interactive dashboards with interconnected elements.  Follow the steps from previous labs to connect to the dataset and create two graphics:
+So far, we have focused on making single graphics.  One strength of Tableau is the ability to create interactive dashboards with interconnected elements.  
+
+### Part 1: Create your visualizations
+
+Follow the steps from previous labs to connect to the dataset and create two graphics:
 
 1. A line graph plotting total sales by date
 
 2. A bar chart plotting the count of transactions by payment type
+
+### Part 2: Build your dashboard
 
 Now create a dashboard with these two visualizations by following these steps:
 
@@ -91,35 +105,37 @@ Now create a dashboard with these two visualizations by following these steps:
 
 3.  Experiment with moving these visualizations around, resizing them, and editing their titles. 
 
-4.  Add interactivity 1: Create a filter based on payment type by:
+4.  **Add interactivity 1:** Create a filter based on payment type:
 
--  selecting the bar chart, 
+-  Select the bar chart
 
--  clicking 'More Options' (the little down arrow on the toolbar next to the graph), 
+-  Click 'More Options' (the little down arrow on the toolbar next to the graph) 
 
--  and selecting 'Use as filter'. 
+-  Select 'Use as filter'
 
--  What did this do?
+What did this do?
 
-5.  Add interactivity 2: Create a filter based on city that applied to both visualizations by:
+5.  Add **interactivity 2:** Create a filter based on city that applied to both visualizations:
 
--  Go back to the worksheet with your line graph, 
+-  Go back to the worksheet with your line graph 
 
--  drag the field 'City' to the filters card (and select all).
+-  Drag the field 'City' to the filters card (and select all)
 
--  Go back to your dashboard,
+-  Return to your dashboard
 
--  select the line chart,
+-  Select the line chart
 
--  click `More Options' -> `Filter' -> `City'
+-  Click 'More Options' -> 'Filter' -> 'City'
 
--  Change the city filters, what happens?
+-  Change the city filters
+
+What happens?
 
 -  Select the new pane with your city filter, 
 
--  click 'More Options' -> 'Apply to Worksheets' -> 'Selected Worksheets'
+-  Click 'More Options' -> 'Apply to Worksheets' -> 'Selected Worksheets'
 
--  What did this do?
+What did this do?
 
 6.  Play around with formatting:
 

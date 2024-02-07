@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -113,11 +84,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a></li>
   <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a>
   <ul class="collapse">
+  <li><a href="#reading-data-from-a-file-path" id="toc-reading-data-from-a-file-path" class="nav-link" data-scroll-target="#reading-data-from-a-file-path">Reading data from a file path</a></li>
   <li><a href="#reading-data-from-a-url" id="toc-reading-data-from-a-url" class="nav-link" data-scroll-target="#reading-data-from-a-url">Reading data from a URL</a></li>
   <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data processing</a></li>
   <li><a href="#exporting-dataframes" id="toc-exporting-dataframes" class="nav-link" data-scroll-target="#exporting-dataframes">Exporting dataframes</a></li>
   </ul></li>
-  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a></li>
+  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
+  <ul class="collapse">
+  <li><a href="#part-1-create-your-visualizations" id="toc-part-1-create-your-visualizations" class="nav-link" data-scroll-target="#part-1-create-your-visualizations">Part 1: Create your visualizations</a></li>
+  <li><a href="#part-2-build-your-dashboard" id="toc-part-2-build-your-dashboard" class="nav-link" data-scroll-target="#part-2-build-your-dashboard">Part 2: Build your dashboard</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -161,13 +137,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="r" class="level2">
 <h2 class="anchored" data-anchor-id="r">R</h2>
-<p>You now have 3 years worth of data (2017 - 2019). The data are hosted on the course materials webpage here: <a href="https://csu-arec-330.github.io/course-materials/" class="uri">https://csu-arec-330.github.io/course-materials/</a>. The structure of the data is the same in each year, but you need to combine them into a single dataframe. Inspect the data - there are some slight problems that need fixing. Then you need to export the data to be used in Tableau.</p>
+<section id="reading-data-from-a-file-path" class="level3">
+<h3 class="anchored" data-anchor-id="reading-data-from-a-file-path">Reading data from a file path</h3>
+<p><strong>Download the data:</strong> You now have 3 years worth of data (2017 - 2019). The data are hosted on the course materials webpage here: <a href="https://csu-arec-330.github.io/course-materials/" class="uri">https://csu-arec-330.github.io/course-materials/</a>.</p>
+<p><strong>Import the data:</strong> The structure of the data is the same in each year, but you need to combine them into a single dataframe.</p>
+<p><strong>Inspect the data:</strong> There are some slight problems that need fixing. Then you need to export the data to be used in Tableau.</p>
 <p>Start a new R script and get set up:</p>
 <ul>
 <li><p>write a brief description of the script</p></li>
 <li><p>set working directory</p></li>
 <li><p>load required packages</p></li>
 </ul>
+</section>
 <section id="reading-data-from-a-url" class="level3">
 <h3 class="anchored" data-anchor-id="reading-data-from-a-url">Reading data from a URL</h3>
 <p>Up until now, we have downloaded data and read it into R or Tableau. We want you to understand the process of reading data from your file system and understand the structure of your file system. However, R is capable of downloading and reading files directly from web addresses. Using the <code>read_csv()</code> function from the <code>readr</code> package, you will read in the data and assign the output to a new dataframe.</p>
@@ -181,6 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="data-processing">Data processing</h3>
 <p>Now you have three dataframes with the same columns. You need to append 2018 and 2019 onto 2017 (i.e., bind the dataframes together).</p>
 <p>Once you have a single dataframe with all of the years, inspect the dataframe for missing data. Use the appropriate <code>dplyr</code> functions to fill in the missing data.</p>
+<p><em>Note: Gross margin is calculated as the proportion of revenue that exceeds the cost of goods sold (COGS).</em></p>
 </section>
 <section id="exporting-dataframes" class="level3">
 <h3 class="anchored" data-anchor-id="exporting-dataframes">Exporting dataframes</h3>
@@ -188,44 +170,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(your_dataframe,<span class="st">"filename.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Read through the documentation. Since <code>write_csv()</code> is writing data, you need to tell R what dataframe (e.g., <code>super_2017</code>) you want to write and the name of the file you intend to create <code>filename.csv</code>. Note that you can also write to another directory just as you read from another directory in week 03.</p>
-<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/uy_XIVghxWw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Read through the documentation. Since <code>write_csv()</code> is writing data, you need to tell R what dataframe (e.g., <code>super_2017</code>) you want to write and the name of the file you intend to create <code>filename.csv</code>. Note that you can also write to another directory just as you read from another directory.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/uy_XIVghxWw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 </section>
 <section id="tableau" class="level2">
 <h2 class="anchored" data-anchor-id="tableau">Tableau</h2>
-<p>So far, we have focused on making single graphics. One strength of Tableau is the ability to create interactive dashboards with interconnected elements. Follow the steps from previous labs to connect to the dataset and create two graphics:</p>
+<p>So far, we have focused on making single graphics. One strength of Tableau is the ability to create interactive dashboards with interconnected elements.</p>
+<section id="part-1-create-your-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-create-your-visualizations">Part 1: Create your visualizations</h3>
+<p>Follow the steps from previous labs to connect to the dataset and create two graphics:</p>
 <ol type="1">
 <li><p>A line graph plotting total sales by date</p></li>
 <li><p>A bar chart plotting the count of transactions by payment type</p></li>
 </ol>
+</section>
+<section id="part-2-build-your-dashboard" class="level3">
+<h3 class="anchored" data-anchor-id="part-2-build-your-dashboard">Part 2: Build your dashboard</h3>
 <p>Now create a dashboard with these two visualizations by following these steps:</p>
 <ol type="1">
 <li><p>Click the ‘New Dashboard’ icon at the bottom of Tableau Desktop.</p></li>
 <li><p>Drag each of your visualizations (one at a time) to the dashboard window.</p></li>
 <li><p>Experiment with moving these visualizations around, resizing them, and editing their titles.</p></li>
-<li><p>Add interactivity 1: Create a filter based on payment type by:</p></li>
+<li><p><strong>Add interactivity 1:</strong> Create a filter based on payment type:</p></li>
 </ol>
 <ul>
-<li><p>selecting the bar chart,</p></li>
-<li><p>clicking ‘More Options’ (the little down arrow on the toolbar next to the graph),</p></li>
-<li><p>and selecting ‘Use as filter’.</p></li>
-<li><p>What did this do?</p></li>
+<li><p>Select the bar chart</p></li>
+<li><p>Click ‘More Options’ (the little down arrow on the toolbar next to the graph)</p></li>
+<li><p>Select ‘Use as filter’</p></li>
 </ul>
+<p>What did this do?</p>
 <ol start="5" type="1">
-<li>Add interactivity 2: Create a filter based on city that applied to both visualizations by:</li>
+<li>Add <strong>interactivity 2:</strong> Create a filter based on city that applied to both visualizations:</li>
 </ol>
 <ul>
-<li><p>Go back to the worksheet with your line graph,</p></li>
-<li><p>drag the field ‘City’ to the filters card (and select all).</p></li>
-<li><p>Go back to your dashboard,</p></li>
-<li><p>select the line chart,</p></li>
-<li><p>click <code>More Options' -&gt;</code>Filter’ -&gt; `City’</p></li>
-<li><p>Change the city filters, what happens?</p></li>
-<li><p>Select the new pane with your city filter,</p></li>
-<li><p>click ‘More Options’ -&gt; ‘Apply to Worksheets’ -&gt; ‘Selected Worksheets’</p></li>
-<li><p>What did this do?</p></li>
+<li><p>Go back to the worksheet with your line graph</p></li>
+<li><p>Drag the field ‘City’ to the filters card (and select all)</p></li>
+<li><p>Return to your dashboard</p></li>
+<li><p>Select the line chart</p></li>
+<li><p>Click ‘More Options’ -&gt; ‘Filter’ -&gt; ‘City’</p></li>
+<li><p>Change the city filters</p></li>
 </ul>
+<p>What happens?</p>
+<ul>
+<li><p>Select the new pane with your city filter,</p></li>
+<li><p>Click ‘More Options’ -&gt; ‘Apply to Worksheets’ -&gt; ‘Selected Worksheets’</p></li>
+</ul>
+<p>What did this do?</p>
 <ol start="6" type="1">
 <li>Play around with formatting:</li>
 </ol>
@@ -234,7 +225,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Try adding an image from the web.</p></li>
 <li><p>Try adding an extension (just pick one that sounds cool)</p></li>
 </ul>
-<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/9XsVbQAfoOE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/9XsVbQAfoOE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
 </section>
 
 </main>
@@ -266,9 +258,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -333,6 +339,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
