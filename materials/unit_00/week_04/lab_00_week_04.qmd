@@ -136,9 +136,9 @@ What did this do?
 
 What happens?
 
--  Select the new pane with your city filter, 
+-  Select the new pane with your city filter
 
--  Click 'More Options' -> 'Apply to Worksheets' -> 'Selected Worksheets'
+-  Click 'More Options' -> 'Apply to Worksheets' -> 'Selected Worksheets' (this dropdown appears next to the city filter)
 
 What did this do?
 
