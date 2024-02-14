@@ -59,18 +59,30 @@ The world generates [2.5 quintillion bytes](https://financesonline.com/how-much-
 
 Throughout the semester, course materials will indicate which of these 8 learning objectives the materials are contributing to by referencing the course objective (CO) number.
 
+## Course Learning Outcomes
+
+::: {.callout-note appearance="minimal" collapse="true"}
 ## DARE Learning Outcomes
 Successful graduates from undergraduate programs in Agricultural and Resource Economics will exhibit the following characteristics:
 
-*Professional Development*: Graduates will embody a general awareness of issues in agricultural and natural resource and education issues and their implications in a larger societal context. Students will begin to develop a network of personal and professional connections, which will foster an understanding of the culture surrounding professional expectations and conduct. 
 
-*Technical Competence*: Graduates will demonstrate technical competency including the ability to use theory in formulating analytical problems, identifying and gathering appropriate data, employing appropriate analysis of those problems, utilizing appropriate available technology, and educating others. 
+**Professional Development**: Graduates will embody a general awareness of issues in agricultural and natural resource and education issues and their implications in a larger societal context. Students will begin to develop a network of personal and professional connections, which will foster an understanding of the culture surrounding professional expectations and conduct. 
 
-*Problem-solving Skills*: Graduates will demonstrate the ability to solve real-world problems beyond the context of the classroom. Students will be able to identify a problem and its scope, evaluate resources available to address the problem, formulate alternative solutions, and select the solution(s) most consistent with a stated objective. 
+**Technical Competence**: Graduates will demonstrate technical competency including the ability to use theory in formulating analytical problems, identifying and gathering appropriate data, employing appropriate analysis of those problems, utilizing appropriate available technology, and educating others. 
 
-*Communication Skills*: Graduates will demonstrate proficiency in oral and written communication in terms of substance, organization, mechanics, documentation, and synthesis. Proficient students will have the ability to communicate material and findings at a professional level within their chosen career. 
+**Problem-solving Skills**: Graduates will demonstrate the ability to solve real-world problems beyond the context of the classroom. Students will be able to identify a problem and its scope, evaluate resources available to address the problem, formulate alternative solutions, and select the solution(s) most consistent with a stated objective. 
 
-*Leadership*: Graduates will have developed leadership qualities that they will use in their professional, personal and community interactions leveraging the other competencies acquired in the program. These leadership qualities include vision, initiative, personal responsibility, team building, and motivating collective action.
+**Communication Skills**: Graduates will demonstrate proficiency in oral and written communication in terms of substance, organization, mechanics, documentation, and synthesis. Proficient students will have the ability to communicate material and findings at a professional level within their chosen career. 
+
+**Leadership**: Graduates will have developed leadership qualities that they will use in their professional, personal and community interactions leveraging the other competencies acquired in the program. These leadership qualities include vision, initiative, personal responsibility, team building, and motivating collective action.
+:::
+
+This course will contribute to several DARE Learning Outcomes:
+
+- You will develop **Technical Competence** and **Problem-solving Skills** while studying *Ag Business* and *Environmental and Resource Economics* issues, not to mention, learning to code in R and developing visualizations in Tableau.
+
+- You will develop **Communication Skills** and **Leadership** skills as you work in teams on problem-driven projects and communicate the results of your analyses to the instructors and your peers.
+
 
 
 ## Course Materials
