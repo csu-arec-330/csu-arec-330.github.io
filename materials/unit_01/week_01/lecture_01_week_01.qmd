@@ -187,7 +187,7 @@ Analyze trends
 
 Generate a forecast 
 
-Present results in class Fri March 10
+Present results in a recorded video
 
 
 ## Example: Corn and Combines {.scrollable}
@@ -209,11 +209,11 @@ Present: Provide context (plot raw data) and describe decision. Explain your ins
 
 ## Finding data
 
-Many sources of public data (e.g., [St Louis FED](https://fred.stlouisfed.org/categories/33528), [tidyquant](https://business-science.github.io/tidyquant/))
+Many sources of public data (e.g., [St Louis FED](https://fred.stlouisfed.org/categories/33528), [tidyquant](https://business-science.github.io/tidyquant/), and more on [course website](https://csu-arec-330.github.io/course-materials/))
 
 Choose data appropriate to answer the question 
 
-Ali and Jude can help
+Instructors and TA can help
 
 
 
