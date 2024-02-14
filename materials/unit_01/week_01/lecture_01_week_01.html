@@ -353,7 +353,7 @@
 <ul>
 <li class="fragment"><p>We will teach you enough to be dangerous</p></li>
 <li class="fragment"><p>We are introducing you to the tip of the analytical iceberg. Learn more before you put this into practice.</p></li>
-<li class="fragment"><p>Incorrect analysis can lead to worse conclusions than no analysis</p></li>
+<li class="fragment"><p>Incorrect analysis can lead to worse conclusions than no analysis.</p></li>
 </ul>
 </div>
 </section>
@@ -380,6 +380,7 @@
 <h2>What is time series data?</h2>
 <p>Time series data is a sequence of data points collected over time.</p>
 <p>It typically consists of observations taken at regular intervals (e.g.&nbsp;every hour, every day, every week, etc.) and can be used to study trends and patterns over time.</p>
+<p>Example: Store sales volume over time.</p>
 <div style="text-align: center">
 <p><img data-src="includes/grocery_sales.jpg" style="width:80.0%"></p>
 </div>
@@ -393,19 +394,46 @@
 </ul>
 <p>Forecasting</p>
 <ul>
-<li><p>educated guess about future values</p></li>
+<li><p>make an educated guess about future values</p></li>
 <li><p>develop business strategy around forecasts</p></li>
 </ul>
 </section>
 <section id="time-series-decomposition" class="slide level2">
 <h2>Time series decomposition</h2>
+<p>The statistical method often used with time series data is called <strong>time series decomposition</strong>.</p>
+<p>This method breaks down time series data into several components, each representing an underlying pattern within the data.</p>
+<p>Isolating these components and analyzing them separately is important for the following reasons:</p>
+<ul>
+<li>to understand what contributes to the observed trends</li>
+<li>to make better forecasts</li>
+</ul>
+</section>
+<section id="time-series-decomposition-1" class="slide level2">
+<h2>Time series decomposition</h2>
 <p>Decomposition statistically deconstructs a time series into several components:</p>
 <ol type="1">
 <li><p>seasonality</p></li>
 <li><p>trend</p></li>
-<li><p>residuals or “noise”</p></li>
+<li><p>cyclical</p></li>
+<li><p>residual or “noise”</p></li>
 </ol>
 <p><a href="https://otexts.com/fpp3/decomposition.html">Hyndman &amp; Athanasopoulos (2021)</a></p>
+<aside class="notes">
+<p>Seasonality: This reflects the regular, predictable patterns within a fixed period, such as a year, month, or day. Seasonal effects are patterns that repeat at known intervals and are attributed to seasonal factors like time of year, holidays, or days of the week.</p>
+<p>Trend: This represents the long-term progression of the series, showing how the data moves up and down over a long period. The trend is the slowest changing component and reflects the underlying growth or decline in the dataset.</p>
+<p>Cyclical: These are fluctuations that occur in a non-fixed, irregular pattern, often influenced by economic and business cycles. These cycles are longer than a year, and are not predictable in a seasonal sense. Not all time series decomposition methods explicitly separate out cyclical from the trend.</p>
+<p>Residual or Noise: This consists of random, unpredictable variations in the time series. They results from short-term, unanticipated and non-recurring factors that cannot be classified as seasonal or cyclical.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="example" class="slide level2 scrollable">
 <h2>Example</h2>
@@ -416,8 +444,11 @@
 </section>
 <section id="structural-breaks" class="slide level2 scrollable">
 <h2>Structural breaks</h2>
-<p>Analysts may want to identify changes in the time series that are not just noise</p>
-<p>Statistically identifying these changes can be the goal of the analysis or an exploratory exercise</p>
+<p>Analysts may want to identify changes in the time series that are not just noise.</p>
+<p>Structural breaks refer to points in time when there is a <em>sudden and lasting</em> change in the behavior of the time series data.</p>
+<p>We refer to the “behavior” of any dataset as the “data generating mechanism” (or data generating process).</p>
+<p>Statistically identifying these changes can be the goal of the analysis or an exploratory exercise.</p>
+<p>Examples of structural breaks: Economic policy changes, technological innovations, natural disasters, or shifts in consumer behavior.</p>
 <div style="text-align: center">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -432,18 +463,22 @@
 <p>Briefly describe one reason for a structural break in a time series.</p>
 </section>
 <section id="forecasting-examples" class="slide level2">
-<h2>Forecasting Examples</h2>
-<p>Forecasting power demand to decide whether to build new power plant</p>
-<p>Forecasting call volumes to schedule staff in call center</p>
-<p>Forecasting inventory requirements meet demands</p>
+<h2>Forecasting examples</h2>
+<p>We might want to forecast. . .</p>
+<ul>
+<li><p>power demand to decide whether to build new power plant</p></li>
+<li><p>call volumes to schedule staff in call center</p></li>
+<li><p>inventory requirements to meet demands</p></li>
+</ul>
 </section>
 <section id="exercise-1" class="slide level2">
 <h2>Exercise</h2>
-<p>How could you use forecasting to improve decision-making in ag business or environmental and natural resource management? Provide an example</p>
+<p>How could you use forecasting to improve decision-making in ag business or environmental and natural resource management?</p>
+<p>Provide an example.</p>
 </section>
 <section id="forecasting-overview" class="slide level2 scrollable">
 <h2>Forecasting overview</h2>
-<p>Using historical data to develop a model, then using the model to predict the future</p>
+<p>Use historical data to develop a model, then use the model to predict the future</p>
 <p>Model quality depends on past data and assumptions</p>
 <p>Forecasts are uncertain; we can quantify some of that uncertainty</p>
 <div style="text-align: center">

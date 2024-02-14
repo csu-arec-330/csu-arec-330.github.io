@@ -40,7 +40,7 @@ Project 1 overview
 
 - We are introducing you to the tip of the analytical iceberg.  Learn more before you put this into practice.
 
-- Incorrect analysis can lead to worse conclusions than no analysis
+- Incorrect analysis can lead to worse conclusions than no analysis.
 
 :::
 
@@ -65,6 +65,8 @@ Time series data is a sequence of data points collected over time.
 
 It typically consists of observations taken at regular intervals (e.g. every hour, every day, every week, etc.) and can be used to study trends and patterns over time.
 
+Example: Store sales volume over time.
+
 ::: {style="text-align: center"}
 ![](includes/grocery_sales.jpg){width="80%"}
 :::
@@ -79,9 +81,20 @@ Time Series Analysis
 
 Forecasting 
 
-- educated guess about future values
+- make an educated guess about future values
 
 - develop business strategy around forecasts
+
+## Time series decomposition
+
+The statistical method often used with time series data is called **time series decomposition**.
+
+This method breaks down time series data into several components, each representing an underlying pattern within the data.
+
+Isolating these components and analyzing them separately is important for the following reasons: 
+
+- to understand what contributes to the observed trends 
+- to make better forecasts
 
 ## Time series decomposition
 
@@ -91,9 +104,21 @@ Decomposition statistically deconstructs a time series into several components:
 
 2. trend
 
-3. residuals or "noise"
+3. cyclical
+
+4. residual or "noise"
 
 [Hyndman & Athanasopoulos (2021)](https://otexts.com/fpp3/decomposition.html)
+
+::: {.notes}
+Seasonality: This reflects the regular, predictable patterns within a fixed period, such as a year, month, or day. Seasonal effects are patterns that repeat at known intervals and are attributed to seasonal factors like time of year, holidays, or days of the week.
+
+Trend: This represents the long-term progression of the series, showing how the data moves up and down over a long period. The trend is the slowest changing component and reflects the underlying growth or decline in the dataset.
+
+Cyclical: These are fluctuations that occur in a non-fixed, irregular pattern, often influenced by economic and business cycles. These cycles are longer than a year, and are not predictable in a seasonal sense. Not all time series decomposition methods explicitly separate out cyclical from the trend.
+
+Residual or Noise: This consists of random, unpredictable variations in the time series. They results from short-term, unanticipated and non-recurring factors that cannot be classified as seasonal or cyclical.
+:::
 
 ## Example {.scrollable}
 
@@ -107,9 +132,15 @@ Decomposition statistically deconstructs a time series into several components:
 
 ## Structural breaks {.scrollable}
 
-Analysts may want to identify changes in the time series that are not just noise
+Analysts may want to identify changes in the time series that are not just noise.
 
-Statistically identifying these changes can be the goal of the analysis or an exploratory exercise
+Structural breaks refer to points in time when there is a *sudden and lasting* change in the behavior of the time series data.
+
+We refer to the "behavior" of any dataset as the "data generating mechanism" (or data generating process).
+
+Statistically identifying these changes can be the goal of the analysis or an exploratory exercise.
+
+Examples of structural breaks: Economic policy changes, technological innovations, natural disasters, or shifts in consumer behavior.
 
 ::: {style="text-align: center"}
 ![Synthetic time series with three data generating mechanisms](includes/structural_break.png){width="70%"}
@@ -121,23 +152,27 @@ Statistically identifying these changes can be the goal of the analysis or an ex
 Briefly describe one reason for a structural break in a time series.
 
 
-## Forecasting Examples
+## Forecasting examples
 
-Forecasting power demand to decide whether to build new power plant
+We might want to forecast. . . 
 
-Forecasting call volumes to schedule staff in call center
+- power demand to decide whether to build new power plant
 
-Forecasting inventory requirements meet demands
+- call volumes to schedule staff in call center
+
+- inventory requirements to meet demands
 
 ## Exercise
 
-How could you use forecasting to improve decision-making in ag business or environmental and natural resource management? Provide an example
+How could you use forecasting to improve decision-making in ag business or environmental and natural resource management? 
+
+Provide an example.
 
 
 
 ## Forecasting overview {.scrollable}
 
-Using historical data to develop a model, then using the model to predict the future
+Use historical data to develop a model, then use the model to predict the future
 
 Model quality depends on past data and assumptions
 
