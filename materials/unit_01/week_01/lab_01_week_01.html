@@ -285,6 +285,7 @@ APU0000708111     WPU017107
 <p>A key attribute of time series data is that we observe values of variables across <strong>time</strong>. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.</p>
 <section id="date-functions" class="level3">
 <h3 class="anchored" data-anchor-id="date-functions">1. Date functions</h3>
+<p>Connect to the <code>eggs_out.csv</code> data.</p>
 <p>Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.</p>
 <p>You can explore these functions by going to <code>Create calculated field</code> (drop down menu in the data field pane). You can filter on date functions by choosing <code>Date</code> from the library of functions. This will list only the functions that are classified as Date functions.</p>
 <p>You can look through these on your own, but I will highlight a few here.</p>
@@ -299,7 +300,7 @@ APU0000708111     WPU017107
 </blockquote></li>
 <li><p>DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.</p>
 <blockquote class="blockquote">
-<p>For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021</p>
+<p>For example, DATEADD (‘day’, 7, #January 23, 2021#) = January 30, 2021</p>
 </blockquote></li>
 <li><p>DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part.</p>
 <blockquote class="blockquote">

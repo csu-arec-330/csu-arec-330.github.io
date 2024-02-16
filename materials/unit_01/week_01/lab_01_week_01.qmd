@@ -191,6 +191,8 @@ A key attribute of time series data is that we observe values of variables acros
 
 ### 1. Date functions
 
+Connect to the `eggs_out.csv` data.
+
 Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.
 
 You can explore these functions by going to `Create calculated field` (drop down menu in the data field pane). You can filter on date functions by choosing `Date` from the library of functions. This will list only the functions that are classified as Date functions.
@@ -207,7 +209,7 @@ You can look through these on your own, but I will highlight a few here.
 
 - DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.
 
-    > For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021
+    > For example, DATEADD (‘day’, 7, #January 23, 2021#) = January 30, 2021
 
 - DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part. 
 
