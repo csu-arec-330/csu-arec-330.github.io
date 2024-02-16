@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -60,10 +60,13 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data.</p>
+<p>Treat this assignment as the first part of your project. Choose time series that you find interesting and would like to study.</p>
 <section id="part-1-r" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-r">Part 1: R</h2>
+<p>The objective of this portion of the problem set is to acquire and modify your data, so that it is ready for visualization in Tableau.</p>
 <ol type="1">
-<li><p>All computer programs track time numerically relative to an epoch. What is the numeric value of the assignment due date 02/23/2023?</p></li>
+<li><p>All computer programs track time numerically relative to an epoch. What is the numeric value of the assignment due date?</p></li>
 <li><p>Use the <code>tidyquant</code> package to access the FRED API and download 3 time series datasets.</p></li>
 <li><p>Use <code>case_when()</code> to change the name of the series to something more descriptive.</p></li>
 <li><p>Export the data in .csv format for Tableau</p></li>
@@ -71,19 +74,18 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="part-2-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-tableau">Part 2: Tableau</h2>
+<p>The objective of this section is to explore the data and think about something that influenced the price of the commodity you are studying. You may need to do some research and investigation to see what events influenced your price series.</p>
 <ol type="1">
-<li><p>In Tableau, connect to all 3 of the time series datasets you downloaded in part 1. Create a relationship between the three datasets by setting the Date variables equal to one another.</p></li>
-<li><p>Create a new field called <code>months_around_financial_crisis</code> that calculates the number of months between the indicated month and the month the 2008 financial crisis was first reflected in U.S. stock markets (August 2007).</p></li>
-<li><p>Create a visualization that shows monthly prices for your three commodities, using your new <code>months_around_financial_crisis</code> variable as the time dimension (x-axis).</p></li>
-<li><p>Create a structural break in your time series at the time of the financial crisis. Add trend lines for each series leading up to and following the financial crisis.</p></li>
-<li><p>In the caption of your figure, explain whether or not these three commodities appeared to be influence by the financial crisis. Does any difference across commodities make sense?</p></li>
-<li><p>Finally, format your visualization by limiting the time window (to something that helps the audience see differences before and after the crisis), adding color, a useful title, appropriate marker labels, text annotations, etc.</p></li>
-<li><p>Choose one of your commodities to focus on. Create a new visualization that shows <strong>annual</strong> trends in maximum, minimum, and average prices for this commodity before and after the financial crisis (note you will not be able to do this with the monthly variable you created…). Does this annual analysis change your results or conclusions about the impacts of the financial crisis for this commoditiy? Discuss any differences, similarities, or additional insights from this analysis in the figure caption.</p></li>
+<li><p>In Tableau, connect to the time series dataset you downloaded in part 1 (it should include 3 series).</p></li>
+<li><p>Create a visualization that shows monthly prices for your three commodities.</p></li>
+<li><p>Include a reference band highlighting a relevant window of time (e.g., financial crisis, COVID). This can be a time period relevant to a single series or all of your price series.</p></li>
+<li><p>Format your visualization by limiting the time window (to something that helps the audience see differences before and after the event you are highlighting), adding color, a useful title, appropriate marker labels, text annotations, etc.</p></li>
+<li><p>Finally, write a narrative on a new webpage on your google site. The narrative should include your time series visual from Tableau along with a description of what you are highlighting and why.</p></li>
 </ol>
 </section>
 <section id="how-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
-<p>You should create a new webpage on your google site titled <code>Problem Set 5</code>. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Part 2 should contain your evidence of completing steps 1 &amp; 2 and a link to your Tableau Public site. Submit the link to your google site webpage in Canvas.</p>
+<p>You should create a new webpage on your google site titled <code>Problem Set 5</code>. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions (place below Part 2). Part 2 should contain your evidence of completing steps 1 &amp; 2 and a link to your Tableau Public site. Submit the link to your google site webpage in Canvas.</p>
 </section>
 
 </main>
@@ -115,9 +117,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -182,6 +198,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

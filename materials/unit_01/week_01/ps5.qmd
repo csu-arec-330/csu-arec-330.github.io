@@ -5,9 +5,15 @@ format:
     theme: zephyr
 ---
 
+The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data.
+
+Treat this assignment as the first part of your project. Choose time series that you find interesting and would like to study. 
+
 ## Part 1: R
 
-1. All computer programs track time numerically relative to an epoch.  What is the numeric value of the assignment due date 02/23/2023?
+The objective of this portion of the problem set is to acquire and modify your data, so that it is ready for visualization in Tableau.
+
+1. All computer programs track time numerically relative to an epoch.  What is the numeric value of the assignment due date?
 
 2. Use the `tidyquant` package to access the FRED API and download 3 time series datasets.  
 
@@ -18,21 +24,18 @@ format:
 
 ## Part 2: Tableau
 
-1. In Tableau, connect to all 3 of the time series datasets you downloaded in part 1. Create a relationship between the three datasets by setting the Date variables equal to one another.
+The objective of this section is to explore the data and think about something that influenced the price of the commodity you are studying. You may need to do some research and investigation to see what events influenced your price series.
 
-2. Create a new field called `months_around_financial_crisis` that calculates the number of months between the indicated month and the month the 2008 financial crisis was first reflected in U.S. stock markets (August 2007). 
+1. In Tableau, connect to the time series dataset you downloaded in part 1 (it should include 3 series). 
 
-3. Create a visualization that shows monthly prices for your three commodities, using your new `months_around_financial_crisis` variable as the time dimension (x-axis).
+2. Create a visualization that shows monthly prices for your three commodities.
 
-4. Create a structural break in your time series at the time of the financial crisis. Add trend lines for each series leading up to and following the financial crisis.
+3. Include a reference band highlighting a relevant window of time (e.g., financial crisis, COVID). This can be a time period relevant to a single series or all of your price series.
 
-5. In the caption of your figure, explain whether or not these three commodities appeared to be influence by the financial crisis. Does any difference across commodities make sense? 
+4. Format your visualization by limiting the time window (to something that helps the audience see differences before and after the event you are highlighting), adding color, a useful title, appropriate marker labels, text annotations, etc. 
 
-6. Finally, format your visualization by limiting the time window (to something that helps the audience see differences before and after the crisis), adding color, a useful title, appropriate marker labels, text annotations, etc. 
-
-7. Choose one of your commodities to focus on. Create a new visualization that shows **annual** trends in maximum, minimum, and average prices for this commodity before and after the financial crisis (note you will not be able to do this with the monthly variable you created...). Does this annual analysis change your results or conclusions about the impacts of the financial crisis for this commoditiy? Discuss any differences, similarities, or additional insights from this analysis in the figure caption.
-
+5. Finally, write a narrative on a new webpage on your google site. The narrative should include your time series visual from Tableau along with a description of what you are highlighting and why.
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 5`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Part 2 should contain your evidence of completing steps 1 & 2 and a link to your Tableau Public site. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your google site titled `Problem Set 5`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions (place below Part 2). Part 2 should contain your evidence of completing steps 1 & 2 and a link to your Tableau Public site. Submit the link to your google site webpage in Canvas.
