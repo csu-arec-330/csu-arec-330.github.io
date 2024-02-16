@@ -51,7 +51,7 @@ as.numeric(as.Date("1970-01-02"))
 
 ## Importing time series data
 
-Importing time series data is similar to other types of data.  However, one needs to be aware of the date (or date and time). We have collected egg price data from the [St. Louis FED](https://fred.stlouisfed.org/series/APU0000708111) database called the Federal Reserve Economic Database (FRED).  You can download the data [here](../inputs/APU0000708111.csv), save it to your machine (and upload it to the server), and read it into R. Or, you can put the hyperlink directly into the `read_csv()` function.  Don't forget the steps to starting an R script: description of the script (comment), load (install if necessary) needed packages, set working directory.
+Importing time series data is similar to other types of data.  However, one needs to be aware of the date (or date and time). We have collected retail egg price data from the [St. Louis FED](https://fred.stlouisfed.org/series/APU0000708111) database called the Federal Reserve Economic Database (FRED).  You can download the data [here](../inputs/APU0000708111.csv), save it to your machine (and upload it to the server), and read it into R. Or, you can put the hyperlink directly into the `read_csv()` function.  Don't forget the steps to starting an R script: description of the script (comment), load (install if necessary) needed packages, set working directory.
 
 ```{r}
 #| eval: false
@@ -99,10 +99,19 @@ glimpse(egg_raw_c)
 ```
 
 We need to tell R how to interpret that date. `lubridate` contains many functions to help with this.  See the [documentation](https://lubridate.tidyverse.org/index.html) for more information and examples. 
+
+```{r}
+
+egg_raw_c <- mutate(egg_raw_c,measure_date=mdy(CHAR_DATE))
+
+```
+
+Alternatively, you can chain commands:
+
 ```{r}
 
 egg_raw_c %>%
-  mutate(DATE=mdy(CHAR_DATE)) %>%
+  mutate(measure_date=mdy(CHAR_DATE)) %>%
   glimpse()
 ```
 
@@ -124,7 +133,7 @@ We can use APIs to query data. FRED maintains an API that can be accessed using 
 
 ```{r}
 
-#install.packages("tidquant")
+#install.packages("tidyquant")
 library(tidyquant,quietly = T)
 ```
 
@@ -247,7 +256,7 @@ Let's experiment with creating these visualizations for time series:
 
 5.  Change the size, colors, and opacity of the dots in your dot plot (use the `Size` and `Color` icons)
 
-6.  Change the markers in your chart from dots to a different shape (use the dropdown menu on the `Marks` card, then use the `Shape` icons)
+6.  Change the markers in your chart from dots to a different shape (use the drop down menu on the `Marks` card, then use the `Shape` icons)
 
 Now let's experiment with changing what data is shown in your chart:  
 
