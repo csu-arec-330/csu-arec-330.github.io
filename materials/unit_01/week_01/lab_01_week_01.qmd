@@ -167,8 +167,8 @@ The time series are currently identified by the variable `symbol`.  These codes 
 
 egg_out <- egg_raw_tq %>%
   mutate(description=case_when(
-    symbol == "APU0000708111" ~ "Retail Price", #if symbol equals APU0000708111, then replace value with Retail Price
-    symbol == "WPU017107" ~ "Producer Price"
+    symbol == "APU0000708111" ~ "Egg Retail Price", #if symbol equals APU0000708111, then replace value with Retail Price
+    symbol == "WPU017107" ~ "Egg Producer Price"
   ))
 ```
 
@@ -188,56 +188,40 @@ You can explore these functions by going to `create calculated field` and choosi
 
 -  DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number. 
 
-    - For example, DATEPART (‘month’, #January 23, 2021#) = 1
-
-    - Note that when you are using a literal date in date functions, surround it in pound signs, for example: #January 23, 2021#.
+    > For example, DATEPART (‘month’, #January 23, 2021#) = 1. Note the hashtags
 
 - DATENAME (date_part, date, [start_of_week]) is similar to DATEPART, but it returns part of a given date as a string.
 
-    - For example, DATENAME (‘month’, #January 23, 2021#) = January
+    > For example, DATENAME (‘month’, #January 23, 2021#) = January
 
 - DATEADD (date_part, increment, date) returns a date in which the specified increment has been added to the given date.
 
-    - For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021
+    > For example, DATEADD (‘day’, 7, #January 23, 2021) = January 30, 2021
 
 - DATEDIFF (date_part, start_date, end_date, [start_of_week]) returns the difference between the two dates using the specified date part. 
 
-    - For example, DATEDIFF ('day', #January 23, 2021#, #February 24, 2021#) = 32              and DATEDIFF ('month', #January 23, 2021#, #February 24, 2021#) = 1
+    > For example, DATEDIFF ('day', #January 23, 2021#, #February 24, 2021#) = 32              and DATEDIFF ('month', #January 23, 2021#, #February 24, 2021#) = 1
 
 - DATETRUNC (date_part, date, [start_of_week]) truncates or “rounds down” the given date to the level of the specified date_part. This function returns a new date. 
 
-    - For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021. 
+    > For example, when you truncate a date that is in the middle of the month at the month level, this function returns the first day of the month. So DATETRUNC (‘month’, #January 23, 2021#) returns January 1, 2021. 
                 
 - MIN (expression) returns the earliest date across all records, and MIN (expression 1, expression 2) returns the earlier of the two dates for each record. 
 
-    - For example, MIN ([Order Date]) returns the earliest date in the Order Date field.
+    > For example, MIN ([Order Date]) returns the earliest date in the Order Date field.
 
 - MAX (expression) returns the latest date across all records, and MAX (expression 1, expression 2) returns the earlier of the two dates for each record. 
 
-    - For example, MAX ([Order Date]) returns the latest date in the Order Date field.
+    > For example, MAX ([Order Date]) returns the latest date in the Order Date field.
 
 Here are some handy definitions for date_time arguments:
 
 ![](includes/date_args.png)
 
-### 2. Use date functions in calculated fields
+
+### 2. Visualize time series data
 
 Connect to the `carrots_prices.csv` data and use the expressions above to do the following:
-
-1. Create a calculated field named `months_ago` that determines the number of months between the commodity price data and today.
-
-2.  Create a calculated field named `first_date` that determines the earliest date in the data.
-
-3.  Create a calculated field named `last_date` that determines the last date that the carrot price index was less than 135.
-
-4.  Create a new variable called `month` that only includes the month.
-
-5.  Create a new variable called `year` that only includes the year.
-
-6.  Create a new date variable called `my_date` that assigns a new date using your `month` and `year` variables and sets the day as 15.
-
-
-### 3. Visualize time series data
 
 What types of visualizations are most appropriate for time series data?  
 
@@ -259,7 +243,7 @@ Let's experiment with creating these visualizations for time series:
 
 4.  Change your bar graph to a dot plot
 
-5.  Change the size size, colors, and opacity of the dots in your dot plot (use the `Size` and `Color` icons)
+5.  Change the size, colors, and opacity of the dots in your dot plot (use the `Size` and `Color` icons)
 
 6.  Change the markers in your chart from dots to a different shape (use the dropdown menu on the `Marks` card, then use the `Shape` icons)
 
@@ -272,61 +256,9 @@ Now let's experiment with changing what data is shown in your chart:
 3.  Restrict your date ranges so that your visualization only shows the last 20 years of data (use the `Filters` card)
 
 
-### 4. Creating and interpreting trend lines
+### 4. Creating panes to visualize mutiple time series
 
-Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know *how* they are created? Let's start with a linear trend line... 
-
--  What does a linear trend line tell you about your time series data?  
-
--  How is this trend line estimated? (conceptually... we will go through some equations on Wednesday!)
-
-Now, let's talk some specifics about linear trend lines in Tableau... 
-
-1.  Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022
-
-2.  Add a trend line to your chart
-
-3.  When you click on the trend line, what information does Tableau give you about it? What does this information mean? 
-
-4.  When you click on `describe trend model` what information does Tableau give you about it?
-
-5.  Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn't the trend line change when you changed the date aggregation?
-
-
-### 5. Visualizing structural breaks
-
-Usually in long time series data we can see distinct points at which the trends in our data change. We typically refer to these as structural breaks. There are a variety of ways to *test* for structural breaks in your data that we will demonstrate in R, but for now let's go over a couple ways to visualize structural breaks that we identify with the very sophisticated "eyeball method". 
-
-1.  Looking at your visualization of monthly carrot prices and linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?  
-
-2.  Identify a month-year where it appears that trends in your data changed, in other words - where there appears to be a break in the structure (or trend) of the data.  
-
-3.  Add a **reference line** at this month-year. (Right click on the x-axis and select `Reference Line`) Does anything happen to your trend line? 
-
-Reference lines are useful annotations on figures showing raw data, but they do not inform Tableau that you want to estimate different trends before and after the line. Let's go through two methods for doing this:
-
-**Method 1:** Separate your time series by adding color
-
-1.  Create a new calculated field named `before_after_break`. Use the `IF` and `THEN` functions and an appropriate `Date` function to populate this variable with "after" if the date if after the break you identified in the data and "before" if the date is before the break.  
-
-2.  Drag this variable to the `Color` card.
-
-3.  Add trend lines to your visualization. What happens?
-
-**Method 2:** Separate your time series by segmenting the x-axis
-
-1.  Drag your new variable from the `Marks` card to the `columns` shelf.
-
-2.  Sort your variable so that the "after" time period is shown following the "before" time period.
-
-3.  In the x-axis Edit Axis menu, select `independed axis ranges for each row or column` (access this menu by right clicking on the x-axis)
-
-4.  Note: Typically Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.
-
-
-### 6. Creating panes to visualize mutiple time series
-
-Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.
+Sometimes we might want to view multiple time series in separate figures. There are two ways to do this depending on the structure of your data. Let's consider **wide** data first:
 
 Let's start by bringing in some price data for a few new commodities.
 
@@ -340,12 +272,17 @@ Let's start by bringing in some price data for a few new commodities.
 
 Now that we have all these data sources in a single file and they are structured in a "wide" format, we are going to construct time series plots that let us compare trends in these commodity prices across time.
 
-1.  Open a new worksheet and create a line plot of the prices over time for each commodity
+ > Open a new worksheet and create a line plot of the prices over time for each commodity
 
-2.  Now try formatting your figure. Change colors, adjust sizes, etc.
+Many functions and tools in Tableau and R are both designed to work with **long** data, where each row specifies the most granular unit in the data and the variables or fields describe the data elements (e.g., price). 
 
-3.  Now use your `before_after_break` variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.
+1. Connect to the egg data that we assembled in R. 
 
-### 7. If we have extra time... let's do some quick table calculations!
+2. Create a time series of the price. How many lines are there? What is the default calculation doing?
 
-{{< video https://youtu.be/6oOu5DqtakY aspect-ratio="16x9" >}}
+3. Differentiate the price series by dragging `Description` (a dimension) to the color under Marks. You should see two lines but the scales are off. What's wrong?
+
+4. Rescale one of the series to match the other. You can go back to R to do this or do it in Tableau. In either case, you will want to use if/then logic.
+
+
+<!-- {{< video https://youtu.be/6oOu5DqtakY aspect-ratio="16x9" >}} -->
