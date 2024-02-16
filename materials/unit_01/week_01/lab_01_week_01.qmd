@@ -184,7 +184,9 @@ A key attribute of time series data is that we observe values of variables acros
 
 Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.
 
-You can explore these functions by going to `create calculated field` and choosing `Date`. You can look through these on your own, but I will highlight a few here.
+You can explore these functions by going to `Create calculated field` (drop down menu in the data field pane). You can filter on date functions by choosing `Date` from the library of functions. This will list only the functions that are classified as Date functions.
+
+You can look through these on your own, but I will highlight a few here.
 
 -  DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number. 
 
@@ -256,7 +258,7 @@ Now let's experiment with changing what data is shown in your chart:
 3.  Restrict your date ranges so that your visualization only shows the last 20 years of data (use the `Filters` card)
 
 
-### 4. Creating panes to visualize mutiple time series
+### 3. Creating panes to visualize mutiple time series
 
 Sometimes we might want to view multiple time series in separate figures. There are two ways to do this depending on the structure of your data. Let's consider **wide** data first:
 

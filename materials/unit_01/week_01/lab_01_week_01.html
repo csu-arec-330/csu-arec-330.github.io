@@ -92,7 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#date-functions" id="toc-date-functions" class="nav-link" data-scroll-target="#date-functions">1. Date functions</a></li>
   <li><a href="#visualize-time-series-data" id="toc-visualize-time-series-data" class="nav-link" data-scroll-target="#visualize-time-series-data">2. Visualize time series data</a></li>
-  <li><a href="#creating-panes-to-visualize-mutiple-time-series" id="toc-creating-panes-to-visualize-mutiple-time-series" class="nav-link" data-scroll-target="#creating-panes-to-visualize-mutiple-time-series">4. Creating panes to visualize mutiple time series</a></li>
+  <li><a href="#creating-panes-to-visualize-mutiple-time-series" id="toc-creating-panes-to-visualize-mutiple-time-series" class="nav-link" data-scroll-target="#creating-panes-to-visualize-mutiple-time-series">3. Creating panes to visualize mutiple time series</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -282,7 +282,8 @@ APU0000708111     WPU017107
 <section id="date-functions" class="level3">
 <h3 class="anchored" data-anchor-id="date-functions">1. Date functions</h3>
 <p>Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.</p>
-<p>You can explore these functions by going to <code>create calculated field</code> and choosing <code>Date</code>. You can look through these on your own, but I will highlight a few here.</p>
+<p>You can explore these functions by going to <code>Create calculated field</code> (drop down menu in the data field pane). You can filter on date functions by choosing <code>Date</code> from the library of functions. This will list only the functions that are classified as Date functions.</p>
+<p>You can look through these on your own, but I will highlight a few here.</p>
 <ul>
 <li><p>DATEPART (date_part, date, [start_of_week]) returns part of a given date as a number.</p>
 <blockquote class="blockquote">
@@ -343,7 +344,7 @@ APU0000708111     WPU017107
 </ol>
 </section>
 <section id="creating-panes-to-visualize-mutiple-time-series" class="level3">
-<h3 class="anchored" data-anchor-id="creating-panes-to-visualize-mutiple-time-series">4. Creating panes to visualize mutiple time series</h3>
+<h3 class="anchored" data-anchor-id="creating-panes-to-visualize-mutiple-time-series">3. Creating panes to visualize mutiple time series</h3>
 <p>Sometimes we might want to view multiple time series in separate figures. There are two ways to do this depending on the structure of your data. Let’s consider <strong>wide</strong> data first:</p>
 <p>Let’s start by bringing in some price data for a few new commodities.</p>
 <ol type="1">
