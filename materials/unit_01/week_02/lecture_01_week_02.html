@@ -481,11 +481,12 @@
 Why?<br> 
 :::
 --->
-</section>
-<section id="regression-analysis-1" class="slide level2 scrollable">
-<h2>Regression analysis</h2>
+<!---
+## Regression analysis {.scrollable}
 
-<img data-src="includes/carrot_ols1.png" style="width:80.0%" class="r-stretch"></section>
+![](includes/carrot_ols1.png){width="80%"}
+--->
+</section>
 <section id="regression-analysis-applied-1" class="slide level2 scrollable">
 <h2>Regression analysis, applied</h2>
 <p>We use can use linear regression, along with our data, to answer:</p>
@@ -662,11 +663,12 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="section-2" class="slide level2">
-<h2></h2>
+<!---
+## 
 
-<img data-src="includes/r_sq.png" style="width:100.0%" class="r-stretch"></section>
+![](includes/r_sq.png){width="100%"}
+--->
+</section>
 <section id="regression-analysis-applied-2" class="slide level2 scrollable">
 <h2>Regression analysis, applied</h2>
 <p>We use can use linear regression, along with our data, to answer:</p>
@@ -734,7 +736,7 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 \hat{Y} = 189.513 + 0.0728323*(250) = 207.721
 \]</span></p>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <div style="text-align: center">
 <p><img data-src="includes/linear_forecast.png" style="width:75.0%"></p>
@@ -757,51 +759,46 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 <li><strong>BEST estimate: 207</strong></li>
 </ul></li>
 </ol>
-</section>
-<section id="considerations-when-using-ols-to-forecast" class="slide level2">
-<h2>Considerations when using OLS to forecast</h2>
-<ol type="1">
-<li>Is your relationship linear?</li>
-</ol>
-</section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-<div style="text-align: center">
-<p><img data-src="includes/nonlinear_trend.webp" style="width:80.0%"></p>
-</div>
-</section>
-<section id="considerations-when-using-ols-to-forecast-1" class="slide level2">
-<h2>Considerations when using OLS to forecast</h2>
-<ol type="1">
-<li><p>Is your relationship linear?</p>
-<ul>
-<li>Consider including a non-linear transformation of your X variable, e.g., <span class="math inline">\(Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i\)</span></li>
-</ul></li>
-<li><p>What time period should you use to estimate the trend?</p></li>
-</ol>
-</section>
-<section id="section-5" class="slide level2">
-<h2></h2>
-<div style="text-align: center">
-<p><img data-src="includes/carrot_longtrend.png" style="width:70.0%"></p>
-</div>
-</section>
-<section id="considerations-when-using-ols-to-forecast-2" class="slide level2">
-<h2>Considerations when using OLS to forecast</h2>
-<ol type="1">
-<li>Is your relationship linear?</li>
-</ol>
-<ul>
-<li>Consider including a non-linear transformation of your X variable, e.g., <span class="math inline">\(Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i\)</span></li>
-</ul>
-<ol start="2" type="1">
-<li>What time period should you use to estimate the trend?</li>
-</ol>
-<ul>
-<li><p>Choose a window of time relevant to the time you are predicting</p></li>
-<li><p>Long run trends are slow moving so longer time window</p></li>
-<li><p>Short run trends might vary by season</p></li>
-</ul>
+<!---
+## Considerations when using OLS to forecast
+
+1. Is your relationship linear?
+
+## 
+::: {style="text-align: center"}
+![](includes/nonlinear_trend.webp){width="80%"}
+
+::: 
+
+## Considerations when using OLS to forecast
+
+1. Is your relationship linear?
+
+    - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
+
+2. What time period should you use to estimate the trend?
+
+## 
+::: {style="text-align: center"}
+![](includes/carrot_longtrend.png){width="70%"}
+
+::: 
+--->
+<!---
+## Considerations when using OLS to forecast
+
+1. Is your relationship linear?
+
+  - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
+
+2. What time period should you use to estimate the trend?
+
+  - Choose a window of time relevant to the time you are predicting
+  
+  - Long run trends are slow moving so longer time window
+  
+  - Short run trends might vary by season
+
 <!--     - Test for structural breaks -->
 <!--     - Decide how to account for structural breaks -->
 <!--     - E.g., Are structural breaks regularly occuring? (perhaps prices jump every 20 years) -->
@@ -818,15 +815,18 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 <li class="fragment">Be wary of causal conclusions!</li>
 </ul>
 </div>
-</section>
-<section id="the-effect-of-education-on-income" class="slide level2">
-<h2>The “effect” of education on income?</h2>
-<div style="text-align: center">
-<p><img data-src="includes/income_educ.png" style="width:60.0%"></p>
-</div>
+<!---
+## The "effect" of education on income?
+
+::: {style="text-align: center"}
+![](includes/income_educ.png){width="60%"}
+
+:::
+
+--->
 </section></section>
 <section>
-<section id="section-6" class="title-slide slide level1 center">
+<section id="section-3" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
 <p>CORRELATION <span class="math inline">\(\neq\)</span> CAUSATION</p>

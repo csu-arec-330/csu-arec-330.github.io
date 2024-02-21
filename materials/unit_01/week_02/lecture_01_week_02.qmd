@@ -174,10 +174,11 @@ Why?<br>
 :::
 --->
 
+<!---
 ## Regression analysis {.scrollable}
 
 ![](includes/carrot_ols1.png){width="80%"}
-
+--->
 
 ## Regression analysis, applied {.scrollable}
 
@@ -377,9 +378,11 @@ Why is this important?
 A low $R^2$ means there's a lot happening with the prices that our model (based on months elapsed alone) can't capture. The higher $R^2$, the more it explains the variation.
 :::
 
+<!---
 ## 
 
 ![](includes/r_sq.png){width="100%"}
+--->
 
 ## Regression analysis, applied {.scrollable}
 
@@ -487,7 +490,7 @@ How could we use these data to answer:
 
     - **BEST estimate: 207**
 
-
+<!---
 ## Considerations when using OLS to forecast
 
 1. Is your relationship linear?
@@ -511,7 +514,8 @@ How could we use these data to answer:
 ![](includes/carrot_longtrend.png){width="70%"}
 
 ::: 
-
+--->
+<!---
 ## Considerations when using OLS to forecast
 
 1. Is your relationship linear?
@@ -546,6 +550,7 @@ How could we use these data to answer:
 
 :::
 
+<!---
 ## The "effect" of education on income?
 
 ::: {style="text-align: center"}
@@ -553,6 +558,7 @@ How could we use these data to answer:
 
 :::
 
+--->
 
 # 
 ::: {.r-fit-text }
