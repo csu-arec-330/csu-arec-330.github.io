@@ -30,11 +30,11 @@ The objective of this section is to explore the data and think about something t
 
 2. Create a visualization that shows monthly prices for your three commodities.
 
-3. Include a reference band highlighting a relevant window of time (e.g., financial crisis, COVID). This can be a time period relevant to a single series or all of your price series.
+<!-- 3. Include a reference band highlighting a relevant window of time (e.g., financial crisis, COVID). This can be a time period relevant to a single series or all of your price series. -->
 
-4. Format your visualization by limiting the time window (to something that helps the audience see differences before and after the event you are highlighting), adding color, a useful title, appropriate marker labels, text annotations, etc. 
+3. Format your visualization by limiting the time window (to something that helps the audience see differences before and after the event you are highlighting), adding color, a useful title, appropriate marker labels, text annotations, etc. 
 
-5. Finally, write a narrative on a new webpage on your google site. The narrative should include your time series visual from Tableau along with a description of what you are highlighting and why.
+4. Finally, write a narrative on a new webpage on your google site. The narrative should include your time series visual from Tableau along with a description of what you are highlighting and why.
 
 ## How to Submit
 
