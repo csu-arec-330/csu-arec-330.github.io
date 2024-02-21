@@ -13,7 +13,7 @@ format:
 
 Linear regression/trend analysis
 
-Interpretting trend analysis
+Interpreting trend analysis
 
 Forecasting using trends
 
@@ -53,36 +53,94 @@ and estimate the "average" trend
 :::
 
 
-## Linear regression: The intuition
+## Linear regression: The intuition {.scrollable}
+
+Imagine you have been tracking carrot prices for several years and you want to make a prediction about what carrot prices will look like in the future.
+
+You plotted your data on carrot prices, and you want to know: Does the price of carrots relate to how many months have passed since the financial crisis?
+
+::: {.notes}
+The financial crisis was a major event that we can expect had a significant effect on food prices. We want to understand if carrot prices increase (or decrease) as more time passes, as this can indicate changes in the cost of production.
+
+:::
 
 ::: {style="text-align: center"}
 ![](includes/carrot_scatter.png){width="80%"}
-
 ::: 
 
 ## Linear regression: The intuition {.scrollable}
 
-How could we use these data to answer:
+We can use statistical tools to determine the relationship between "Months since financial crisis" and "Carrot price" to answer questions that cannot always be determined by simply looking at a data plot.
 
-1.  Are carrot prices, on average, increasing or decreasing?
+The tool is linear regression, or *regression analysis*.
 
-2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
+::: {.notes}
+
+:::
+
+::: {style="text-align: center"}
+![](includes/carrot_scatter.png){width="80%"}
+::: 
+
+## Regression analysis {.scrollable}
+
+**Regression analysis** is a tool that examines the average relationship between two (or more) variables.
+
+It helps us understand:
+
+- How an outcome, or the "dependent" variable, (carrot price) changes when one or more "independent" variables (months since the financial crisis) change.
+
+- What factors predict a change in an outcome, given a change in an independent variable.
+
+We use regression analysis to:
+
+- Forecast future values of the dependent variable (e.g., what carrot prices might be in the future, given past responses to economic events).
+
+- Evaluate the strength of each predictor, i.e., which independent variables are most strongly correlated with changes in carrot prices.
+
+
+## Regression analysis, applied {.scrollable}
+
+We use can use linear regression, along with our data, to answer:
+
+1.  Are carrot prices, *on average*, increasing or decreasing?
+
+2.  How much of the observed variation in carrot prices can be explained by a simple time-trend line?
 
 3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
 
-## Exercise 1: Which trend line is best?
+## Exercise 1: Which trend line fits the data best? {.scrollable}
 ![](includes/carrot_trend2.png){width="45%"}![](includes/carrot_trend3.png){width="45%"}
 ![](includes/carrot_trend1.png){width="45%"}![](includes/carrot_trend4.png){width="45%"}
 
+
+## Exercise 1: Which trend line fits the data best? {.scrollable}
+
+It is not easy to eyeball a trend line. 
+
+Regression analysis is useful to determine the best-fitting line.
+
+In simple terms, a "best-fitting" line is one that goes through, or is closest to, most of the data points in the chart.
+
+![](includes/carrot_trend2.png){width="45%"}![](includes/carrot_trend3.png){width="45%"}
+![](includes/carrot_trend1.png){width="45%"}![](includes/carrot_trend4.png){width="45%"}
+
+<!---
 #
 ::: {.r-fit-text }
-**Which trend line is best?** <br> 
+**Which trend line fits the data best?** <br> 
 Why?<br> 
 :::
+--->
 
-## Linear regression: The intuition {.scrollable}
+## Regression analysis {.scrollable}
 
-How could we use these data to answer:
+![](includes/carrot_ols1.png){width="80%"}
+
+
+## Regression analysis, applied {.scrollable}
+
+We use can use linear regression, along with our data, to answer:
 
 1.  **Are carrot prices, on average, increasing or decreasing?**
 
@@ -92,22 +150,19 @@ How could we use these data to answer:
 
 3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
 
-## Linear regression: The intuition {.scrollable}
-
-![](includes/carrot_ols1.png){width="80%"}
-
 ## The Ordinary Least Squares Regression 
 
 Ordinary Least Squares (OLS) is the most common estimation method for linear models.
 
-For a good reason: 
+For a good reason: As long as your model satisfies the certain assumptions, you're getting the BEST possible estimates.
 
-As long as your model satisfies the OLS assumptions you're getting the BEST possible estimates.
-
+<!---
 BEST = accurate (unbiased) + most precise (best)
+--->
 
 Tableau, Excel, and other programs use OLS to estimate trend lines.
 
+<!---
 ## OLS: Unbiased {.scrollable}
 
 What do we mean by "unbiased"?
@@ -140,12 +195,37 @@ What do we mean by "best"?
 
 :::
 
+--->
 
-## OLS: Equation
+## The OLS regression equation {.scrollable}
 
-![](includes/reg_eq.png){width="100%"}
+The following equation represents the mathematical relationship between an independent variable and a dependent variable. 
 
-## OLS: Estimation {.scrollable}
+![](includes/reg_eq.png){width="80%"}
+The $\beta_1$ coefficient:
+
+- Acts as the "weight" that the independent variable has in predicting the dependent variable.
+
+- Tells you how much the dependent variable is expected to increase (or decrease) when the independent variable increases by one unit.
+
+The $\beta_0$ coefficient:
+
+- This is our intercept term.
+
+- It is the value of the dependent variable when all the independent variables are zero.
+
+- It represents the expected value of the outcome you're interested in predicting when all of your predictor variables are zero.
+
+::: {.notes}
+Beta 1: If you're looking at the relationship between hours studied (independent variable) and exam score (dependent variable), the coefficient of the hours studied tells you how many points you'd expect the exam score to increase for every additional hour studied. If the coefficient is 2, it means that for each additional hour studied, the exam score is expected to increase by 2 points, holding all else constant.
+
+The coefficient essentially acts as a weight that quantifies the impact of one unit change in the independent variable on the dependent variable.
+
+Beta 0: In the same study examining the relationship between hours studied and test scores, the intercept would indicate the predicted test score for a student who did not study at all (zero hours). If the intercept is 50, it suggests that a student is expected to score 50 on the test without studying, assuming the model holds true and all other factors are constant.
+:::
+
+<!---
+## OLS Estimation {.scrollable}
 
 **Problem:** 
 
@@ -160,12 +240,13 @@ $$
 $$
 \widehat{\beta}_1 = \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}
 $$
+--->
 
-## OLS: Interpretting Tableau output
+## Interpretting Tableau regression output
 
 ![](includes/carrot_trend_desc.png){width="100%"}
 
-## Q: What is our "Y" variable?
+## Q: What is the dependent ("Y") variable?
 
 ![](includes/tableau_reg.png){width="100%"}
 
@@ -178,7 +259,7 @@ C. `Avg. Carrot price`
 
 D. `189.513`
 
-## Q: What is our "X" variable?
+## Q: What is the independent ("X") variable?
 
 ![](includes/tableau_reg.png){width="100%"}
 
@@ -237,23 +318,31 @@ $$
 What is does $\beta_1$ represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?
 
 
-## Interpretting Tableau output: What is $R^2$?
+## Interpretting Tableau output: What is $R^2$? {.scrollable}
 
-![](includes/tableau_reg.png){width="100%"}
-
-- A statistical measure of "fit"
+- A statistical measure of how well the model "fits" the data.
 
 - It tells us how much variation of the $Y$ variable is explained by the $X$ variable(s)
 
-- Higher $R^2$ =  better fit; $R^2$ = 1 $\Rightarrow$ all variation is explained; [More info](https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/statistics/regression-and-correlation/coefficient-of-determination-r-squared.html)
+- Higher $R^2$ =  better fit; $R^2$ = 1 $\Rightarrow$ all variation is explained. [(More info)](https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/statistics/regression-and-correlation/coefficient-of-determination-r-squared.html)
+![](includes/tableau_reg.png){width="100%"}
+Why is this important?
+
+- If you are trying to predict carrot prices based on the number of months since the financial crisis, the $R^2$ will tell us how well our predictions match up with the actual prices.
+
+- If the $R^2$ is 2%, it means that 2% of the reasons why carrot prices change can be figured out just by looking at how many months have passed since the financial crisis. 
+
+::: {.notes}
+A low $R^2$ means there's a lot happening with the prices that our model (based on months elapsed alone) can't capture. The higher $R^2$, the more it explains the variation.
+:::
 
 ## 
 
 ![](includes/r_sq.png){width="100%"}
 
-## Linear regression: The intuition {.scrollable}
+## Regression analysis, applied {.scrollable}
 
-How could we use these data to answer:
+We use can use linear regression, along with our data, to answer:
 
 1.  Are carrot prices, on average, increasing or decreasing?
 
@@ -265,16 +354,18 @@ How could we use these data to answer:
 
 3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
 
-
-## Interpretting output: What is P-value?
-
-![](includes/tableau_reg.png){width="100%"}
+## Interpretting output: What is P-value? {.scrollable}
 
 - Tableau's default P-value is a measure of the significance for slope parameter $\beta_1$
 
-- smaller p-value = better 
+- A p-value measures how surprising your data is under the assumption that there is no effect or no relationship. 
 
-- A p-value of 0.05 or less is often considered statistically significant $\Rightarrow$ statistically significantly different from 0; [More info](https://www.w3schools.com/datascience/ds_linear_regression_pvalue.asp)
+- Smaller p-value = better 
+
+- A p-value of 0.05 or less is often considered statistically significant $\Rightarrow$ statistically significantly different from 0. [(More info)](https://www.w3schools.com/datascience/ds_linear_regression_pvalue.asp)
+![](includes/tableau_reg.png){width="100%"}
+
+- In this example, a p-value of 0.02 means that there is a 2% chance of observing these data. We have strong evidence *against* the assumption that there is no relationship.
 
 ## Interpretting: What is P-value?
 
@@ -333,13 +424,13 @@ $$
 $$
 
 
-## 
+##
 ::: {style="text-align: center"}
-![](includes/linear_forecast.png){width="80%"}
+![](includes/linear_forecast.png){width="75%"}
 
 ::: 
 
-## Linear regression: The intuition {.scrollable}
+## Regression analysis, applied {.scrollable}
 
 How could we use these data to answer:
 
@@ -376,7 +467,7 @@ How could we use these data to answer:
 
 ## 
 ::: {style="text-align: center"}
-![](includes/carrot_longtrend.png){width="80%"}
+![](includes/carrot_longtrend.png){width="70%"}
 
 ::: 
 
@@ -392,15 +483,15 @@ How could we use these data to answer:
 
     - Decide how to account for structural breaks
 
-    - E.G., are structural breaks regularly occuring? (perhaps prices jump every 20 years)
+    - E.g., Are structural breaks regularly occuring? (perhaps prices jump every 20 years)
 
 ## Cautionary note 
 
-- We will teach you enough to be dangerous
+- We will teach you enough to be dangerous.
 
 - We are introducing you to the tip of the analytical iceberg.  Learn more before you put this into practice.
 
-- Incorrect analysis can lead to worse conclusions than no analysis
+- Incorrect analysis can lead to worse conclusions than no analysis.
 
 ::: {.incremental}
 
@@ -411,7 +502,7 @@ How could we use these data to answer:
 ## The "effect" of education on income?
 
 ::: {style="text-align: center"}
-![](includes/income_educ.png){width="70%"}
+![](includes/income_educ.png){width="60%"}
 
 :::
 
@@ -436,4 +527,4 @@ Analyze trends
 
 Generate a forecast 
 
-Present results in class Fri March 10
+Present results in a recorded video
