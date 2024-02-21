@@ -15,7 +15,7 @@ title: "Week 6: Intro to Linear Regression and Forecasting"
 
 <a  href="/materials/unit_01/week_02/lab_01_week_02.html" target="_blank">Week 6 Lab Notes</a> <br> 
 
-<a  href="/materials/unit_01/inputs/carrots_prices.csv" download>Download Carrot Price Data</a> 
+<a  href="/materials/unit_01/inputs/carrots_prices.csv" download>Download Carrot Price Data</a> <br> <br>
 
 
 
