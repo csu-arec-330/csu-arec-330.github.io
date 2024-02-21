@@ -409,23 +409,55 @@
 <p><img data-src="includes/carrot_scatter.png" style="width:80.0%"></p>
 </div>
 </section>
+<section id="equation-of-a-line" class="slide level2 scrollable">
+<h2>Equation of a line</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Quick review: The equation of a line plotting the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> is, <span class="math display">\[y=mx+b \]</span></p>
+<p>Which variable represents the slope?</p>
+<p>Which variable represents the intercept?</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lecture_01_week_02_files/figure-revealjs/unnamed-chunk-1-1.png" width="480"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="shiny-app" class="slide level2">
+<h2>Shiny App</h2>
+</section>
 <section id="regression-analysis" class="slide level2 scrollable">
 <h2>Regression analysis</h2>
 <p><strong>Regression analysis</strong> is a tool that examines the average relationship between two (or more) variables.</p>
 <p>It helps us understand:</p>
 <ul>
-<li><p>How an outcome, or the “dependent” variable, (carrot price) changes when one or more “independent” variables (months since the financial crisis) change.</p></li>
-<li><p>What factors predict a change in an outcome, given a change in an independent variable.</p></li>
+<li>How an outcome, or the “dependent” variable, (carrot price) changes when one or more “independent” variables (months since the financial crisis) change.</li>
 </ul>
+<!-- - What factors predict a change in an outcome, given a change in an independent variable. -->
 <p>We use regression analysis to:</p>
 <ul>
 <li><p>Forecast future values of the dependent variable (e.g., what carrot prices might be in the future, given past responses to economic events).</p></li>
 <li><p>Evaluate the strength of each predictor, i.e., which independent variables are most strongly correlated with changes in carrot prices.</p></li>
 </ul>
+<aside class="notes">
+<p>How an outcome changes in response to an ind. var change: Since the model is specifying the relationship between independent (RHS vars) and an outcome (y or dependent vars), new observed independent vars + the model can predict new outcomes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="regression-analysis-applied" class="slide level2 scrollable">
 <h2>Regression analysis, applied</h2>
-<p>We use can use linear regression, along with our data, to answer:</p>
+<p>We use linear regression, along with our data, to answer:</p>
 <ol type="1">
 <li><p>Are carrot prices, <em>on average</em>, increasing or decreasing?</p></li>
 <li><p>How much of the observed variation in carrot prices can be explained by a simple time-trend line?</p></li>
@@ -511,8 +543,8 @@ What do we mean by "best"?
 </section>
 <section id="the-ols-regression-equation" class="slide level2 scrollable">
 <h2>The OLS regression equation</h2>
-<p>The following equation represents the mathematical relationship between an independent variable and a dependent variable.</p>
-<p><img data-src="includes/reg_eq.png" style="width:80.0%"> The <span class="math inline">\(\beta_1\)</span> coefficient:</p>
+<p>The following equation represents the mathematical relationship between an independent variable and a dependent variable. <img data-src="includes/reg_eq.png" style="width:80.0%"></p>
+<p>The <span class="math inline">\(\beta_1\)</span> coefficient:</p>
 <ul>
 <li><p>Acts as the “weight” that the independent variable has in predicting the dependent variable.</p></li>
 <li><p>Tells you how much the dependent variable is expected to increase (or decrease) when the independent variable increases by one unit.</p></li>
@@ -657,7 +689,7 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 <li><p>A p-value measures how surprising your data is under the assumption that there is no effect or no relationship.</p></li>
 <li><p>Smaller p-value = better</p></li>
 <li><p>A p-value of 0.05 or less is often considered statistically significant <span class="math inline">\(\Rightarrow\)</span> statistically significantly different from 0. <a href="https://www.w3schools.com/datascience/ds_linear_regression_pvalue.asp">(More info)</a> <img data-src="includes/tableau_reg.png" style="width:100.0%"></p></li>
-<li><p>In this example, a p-value of 0.02 means that there is a 2% chance of observing these data. We have strong evidence <em>against</em> the assumption that there is no relationship.</p></li>
+<li><p>In this example, a p-value of 0.02 means that there is a 2% chance of observing these data simply by chance. We have strong evidence <em>against</em> the assumption that there is no relationship.</p></li>
 </ul>
 </section>
 <section id="interpretting-what-is-p-value" class="slide level2">
@@ -757,17 +789,22 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
 <section id="considerations-when-using-ols-to-forecast-2" class="slide level2">
 <h2>Considerations when using OLS to forecast</h2>
 <ol type="1">
-<li><p>Is your relationship linear?</p>
+<li>Is your relationship linear?</li>
+</ol>
 <ul>
 <li>Consider including a non-linear transformation of your X variable, e.g., <span class="math inline">\(Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i\)</span></li>
-</ul></li>
-<li><p>What time period should you use to estimate the trend?</p>
-<ul>
-<li><p>Test for structural breaks</p></li>
-<li><p>Decide how to account for structural breaks</p></li>
-<li><p>E.g., Are structural breaks regularly occuring? (perhaps prices jump every 20 years)</p></li>
-</ul></li>
+</ul>
+<ol start="2" type="1">
+<li>What time period should you use to estimate the trend?</li>
 </ol>
+<ul>
+<li><p>Choose a window of time relevant to the time you are predicting</p></li>
+<li><p>Long run trends are slow moving so longer time window</p></li>
+<li><p>Short run trends might vary by season</p></li>
+</ul>
+<!--     - Test for structural breaks -->
+<!--     - Decide how to account for structural breaks -->
+<!--     - E.g., Are structural breaks regularly occuring? (perhaps prices jump every 20 years) -->
 </section>
 <section id="cautionary-note" class="slide level2">
 <h2>Cautionary note</h2>
@@ -1018,6 +1055,44 @@ Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

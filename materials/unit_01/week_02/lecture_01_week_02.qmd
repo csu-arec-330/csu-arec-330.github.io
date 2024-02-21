@@ -82,6 +82,42 @@ The tool is linear regression, or *regression analysis*.
 ![](includes/carrot_scatter.png){width="80%"}
 ::: 
 
+## Equation of a line {.scrollable}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Quick review: The equation of a line plotting the relationship between $y$ and $x$ is,
+$$y=mx+b $$
+
+Which variable represents the slope?
+
+Which variable represents the intercept?
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-width: 5
+
+library(ggplot2,quietly = T)
+data.frame(x=seq.int(0,10,1),
+           y=seq(3,23,length.out=11)) |>
+  ggplot(aes(x,y)) + 
+    geom_line() +
+    scale_y_continuous(breaks = seq.int(0,24,2),limits = c(0,24)) +
+    scale_x_continuous(breaks = seq.int(0,10,2)) 
+```
+:::
+
+::::
+
+## Shiny App
+
+
+
 ## Regression analysis {.scrollable}
 
 **Regression analysis** is a tool that examines the average relationship between two (or more) variables.
@@ -90,7 +126,7 @@ It helps us understand:
 
 - How an outcome, or the "dependent" variable, (carrot price) changes when one or more "independent" variables (months since the financial crisis) change.
 
-- What factors predict a change in an outcome, given a change in an independent variable.
+<!-- - What factors predict a change in an outcome, given a change in an independent variable. -->
 
 We use regression analysis to:
 
@@ -98,10 +134,15 @@ We use regression analysis to:
 
 - Evaluate the strength of each predictor, i.e., which independent variables are most strongly correlated with changes in carrot prices.
 
+::: {.notes}
+
+How an outcome changes in response to an ind. var change: Since the model is specifying the relationship between independent (RHS vars) and an outcome (y or dependent vars), new observed independent vars + the model can predict new outcomes.
+
+:::
 
 ## Regression analysis, applied {.scrollable}
 
-We use can use linear regression, along with our data, to answer:
+We use linear regression, along with our data, to answer:
 
 1.  Are carrot prices, *on average*, increasing or decreasing?
 
@@ -200,8 +241,8 @@ What do we mean by "best"?
 ## The OLS regression equation {.scrollable}
 
 The following equation represents the mathematical relationship between an independent variable and a dependent variable. 
-
 ![](includes/reg_eq.png){width="80%"}
+
 The $\beta_1$ coefficient:
 
 - Acts as the "weight" that the independent variable has in predicting the dependent variable.
@@ -365,7 +406,7 @@ We use can use linear regression, along with our data, to answer:
 - A p-value of 0.05 or less is often considered statistically significant $\Rightarrow$ statistically significantly different from 0. [(More info)](https://www.w3schools.com/datascience/ds_linear_regression_pvalue.asp)
 ![](includes/tableau_reg.png){width="100%"}
 
-- In this example, a p-value of 0.02 means that there is a 2% chance of observing these data. We have strong evidence *against* the assumption that there is no relationship.
+- In this example, a p-value of 0.02 means that there is a 2% chance of observing these data simply by chance. We have strong evidence *against* the assumption that there is no relationship.
 
 ## Interpretting: What is P-value?
 
@@ -475,15 +516,21 @@ How could we use these data to answer:
 
 1. Is your relationship linear?
 
-    - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
+  - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
 
 2. What time period should you use to estimate the trend?
 
-    - Test for structural breaks
+  - Choose a window of time relevant to the time you are predicting
+  
+  - Long run trends are slow moving so longer time window
+  
+  - Short run trends might vary by season
 
-    - Decide how to account for structural breaks
+<!--     - Test for structural breaks -->
 
-    - E.g., Are structural breaks regularly occuring? (perhaps prices jump every 20 years)
+<!--     - Decide how to account for structural breaks -->
+
+<!--     - E.g., Are structural breaks regularly occuring? (perhaps prices jump every 20 years) -->
 
 ## Cautionary note 
 
