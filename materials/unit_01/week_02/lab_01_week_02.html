@@ -96,9 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
   <ul class="collapse">
-  <li><a href="#tableaus-forecasting" id="toc-tableaus-forecasting" class="nav-link" data-scroll-target="#tableaus-forecasting">1. Tableau’s Forecasting</a></li>
-  <li><a href="#visualizing-r-forecasts-in-tableau" id="toc-visualizing-r-forecasts-in-tableau" class="nav-link" data-scroll-target="#visualizing-r-forecasts-in-tableau">2. Visualizing R Forecasts in Tableau</a></li>
-  <li><a href="#additional-visualizations-for-understanding-seasonality" id="toc-additional-visualizations-for-understanding-seasonality" class="nav-link" data-scroll-target="#additional-visualizations-for-understanding-seasonality">3. Additional Visualizations for Understanding Seasonality</a></li>
+  <li><a href="#visualizing-r-forecasts-in-tableau" id="toc-visualizing-r-forecasts-in-tableau" class="nav-link" data-scroll-target="#visualizing-r-forecasts-in-tableau">1. Visualizing R Forecasts in Tableau</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -135,12 +133,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="learning-objectives-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
+
+<!-- - Apply Tableau's default forecasting -->
+<!-- - Customize Tableau's forecasting -->
 <ul>
-<li><p>Apply Tableau’s default forecasting</p></li>
-<li><p>Customize Tableau’s forecasting</p></li>
-<li><p>Visualize decompositions and forecasts created in R</p></li>
-<li><p>Create advanced visualizations to demonstrate seasonality and overall trends in time series data</p></li>
+<li>Visualize decompositions and forecasts created in R</li>
 </ul>
+<!-- - Create advanced visualizations to demonstrate seasonality and overall trends in time series data -->
 <!---
 ## Unit 1 Project Overview
 --->
@@ -155,10 +154,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),<span class="at">get =</span> <span class="st">"economic.data"</span>,<span class="at">from=</span><span class="st">"2007-08-01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),<span class="at">get =</span> <span class="st">"economic.data"</span>,<span class="at">from=</span><span class="st">"2007-08-01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2-convert-your-data-into-a-time-series-object" class="level3">
@@ -194,9 +194,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>carrot_decomp_out <span class="ot">&lt;-</span> carrot_decomp[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">price=</span>x) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span>carrot<span class="sc">$</span>date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span>carrot<span class="sc">$</span>date,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">forecast=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<blockquote class="blockquote">
 <p><em>Check your understanding:</em> What data type is the variable `measure_date’ in the new data frame? What is the function you would need to execute if you need to convert a character (chr) to a date?</p>
+</blockquote>
 </section>
 </section>
 <section id="r-forecasting" class="level1">
@@ -207,9 +211,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Next, we’ll extract the estimated trend, seasonal, and residual components from the decompose object using the <code>$</code> operator:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the trend, seasonal, and residual components</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>carrot_trend <span class="ot">&lt;-</span> carrot_decomp<span class="sc">$</span>trend</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>carrot_seasonal <span class="ot">&lt;-</span> carrot_decomp<span class="sc">$</span>seasonal</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>carrot_residuals <span class="ot">&lt;-</span> carrot_decomp<span class="sc">$</span>random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>carrot_trend <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>trend)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>carrot_seasonal <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>seasonal)[<span class="dv">6</span><span class="sc">:</span>(<span class="fu">length</span>(carrot_ts)<span class="sc">-</span><span class="dv">7</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(.,<span class="at">start=</span><span class="fu">c</span>(<span class="dv">2008</span>,<span class="dv">2</span>),<span class="at">frequency =</span> <span class="dv">12</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>carrot_residuals <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2-forecast-the-trend-seasonal-and-residual-components" class="level3">
@@ -217,15 +222,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To forecast each component, we’ll use the <code>forecast()</code> function from the <code>forecast</code> package in R. For the trend and seasonal components, we can simply use the <code>forecast()</code> function on the corresponding time series objects:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the trend component for the next 12 months</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>carrot_trend_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_trend, <span class="at">h=</span><span class="dv">60</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>carrot_trend_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_trend,<span class="at">level =</span> <span class="dv">95</span>, <span class="at">h=</span><span class="dv">60</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_trend_forecast)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the seasonal component for the next 12 months</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>carrot_seasonal_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_seasonal, <span class="at">h=</span><span class="dv">60</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>carrot_seasonal_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_seasonal,<span class="at">level =</span> <span class="dv">95</span>, <span class="at">h=</span><span class="dv">60</span>)</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_seasonal_forecast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<blockquote class="blockquote">
+<p>Did you get a warning? What does the warning message tell you? Because the decomposition</p>
+</blockquote>
 <p>For the residual component, we’ll need to create a model to forecast the residuals. There are many possible approaches to modeling the residuals, but a simple one is to use a moving average model (MA model). Here’s an example of how to create a simple MA(1) model for the residuals:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series object for the residuals</span></span>
@@ -235,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>carrot_residuals_model <span class="ot">&lt;-</span> <span class="fu">arima</span>(carrot_residuals_ts, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the residuals for the next 12 months</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>carrot_residuals_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_residuals_model, <span class="at">h=</span><span class="dv">60</span>)<span class="sc">$</span>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>carrot_residuals_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_residuals_model,<span class="at">level =</span> <span class="dv">95</span>, <span class="at">h=</span><span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-3-combine-the-forecasted-components-to-obtain-the-final-forecast" class="level3">
@@ -243,12 +251,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Finally, we can combine the forecasted trend, seasonal, and residual components to obtain the final forecast for the time series:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the forecasted components to obtain the final forecast</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>mean <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>mean <span class="sc">+</span> carrot_residuals_forecast</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>mean <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>mean <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>mean</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>carrot_forecast_upper <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>upper <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>upper <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>upper</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>carrot_forecast_lower <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>lower <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>lower <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>lower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This creates the forecast, which is just the future values. We want to append this to the existing time series. First, we will convert this vector into a data frame (a special one called a tibble).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">price=</span>carrot_forecast) <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">seq</span>(<span class="fu">as_date</span>(<span class="st">"2022-08-01"</span>), <span class="at">by=</span><span class="st">"months"</span>, <span class="at">length.out=</span><span class="fu">nrow</span>(.))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">price=</span>carrot_forecast,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">upper=</span>carrot_forecast_upper[,<span class="dv">1</span>],</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">lower=</span>carrot_forecast_lower[,<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">seq</span>(<span class="fu">as_date</span>(<span class="st">"2023-08-01"</span>), <span class="at">by=</span><span class="st">"months"</span>, <span class="at">length.out=</span><span class="fu">nrow</span>(.))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we need to append it to our current data. However, there is some overlap with the actual observed data because some data was lost in the moving average calculation in the decomposition. For the overlapping data, we could either keep both, just the forecast, or just the observed. Let’s just keep the observed and append the remainder of the forecast to <code>carrot_decomp_out</code>.</p>
 <div class="cell">
@@ -266,48 +280,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="tableau" class="level1">
 <h1>Tableau</h1>
-<p>Tableau has its own forecasting features, but these are much less informative and flexible than what you ca do in R. Today we will show you how to use and customize Tableau’s forecasting features, how to create visualizations using your (improved) R forecasts, and we will show you how to create visualizations that show trends and cyclicality in your data — key components of your forecast!</p>
-<section id="tableaus-forecasting" class="level2">
-<h2 class="anchored" data-anchor-id="tableaus-forecasting">1. Tableau’s Forecasting</h2>
-<p>Let’s load your carrot price data you exported from R into Tableau and check out Tableau’s forecasting features.</p>
-<ol type="1">
-<li><p>Once you are connected to the carrot price data, let’s create a filter for our entire workbook so that we only use more recent data (after our structural break) in the forecasting exercise.</p>
-<ul>
-<li><p>On the Data Source page, click <code>filter</code> in the top right.</p></li>
-<li><p>Filter Date to begin August 1, 2007</p></li>
-</ul></li>
-<li><p>Open a new worksheet and plot the monthly carrot price data over time.</p></li>
-<li><p>Two ways to add a forecast - Right click or go to the <code>Analytics</code> tab on the left pane.</p></li>
-</ol>
-<p>Now you have added a forecast line that Tableau has decided is a good fit of your data. (Along with 95% confidence bands) Let’s explore this forecast.</p>
-<ol type="1">
-<li><p>Right click on your visualization and select <code>Forecast</code> -&gt; <code>Describe Forecast...</code></p>
-<ul>
-<li><p>Did Tableau use the entire time period when constructing the forecast?</p>
-<ul>
-<li>What time period is Tableau forecasting for?</li>
-</ul></li>
-<li><p>Does Tableau think this forecast is accurate?</p></li>
-<li><p>If you want to learn more about this description, click the link at the bottom of the window.</p></li>
-</ul></li>
-<li><p>Click on <code>Models</code> at the top of the window.</p>
-<ul>
-<li><p>This gives you information about the forecasting model Tableau has applied, including how it is weighting values (past vs.&nbsp;more recent), and measures of “fit”.</p></li>
-<li><p>If you want to learn more about the Tableau forecasting models, click the link at the bottom of the window.</p></li>
-</ul></li>
-</ol>
-<p>Now, let’s adjust Tableau’s recommended forecast as we see fit.</p>
-<ol type="1">
-<li><p>Right click on your visualization and select <code>Forecast</code> -&gt; <code>Forecast Options...</code></p></li>
-<li><p>Adjust the forecast length by selecting <code>Exactly</code> or <code>Until</code></p></li>
-<li><p>Adjust the ignored periods (this is useful if your data only include part of a year, or if you have reason to believe the more recent data are not as useful) - what happens to the forecast as you adjust this?</p></li>
-<li><p>Change the forecast model from <code>Automatic</code> to <code>Custom</code> and adjust the model parameters. Which do you like best?</p></li>
-<li><p>Once you have created a forecast you are satisfied with, exit the popup window. Right click your worksheet tab and select <code>Duplicate as Crosstab</code>. Now you can easily see the values of your forecast.</p></li>
-</ol>
-<p>Note that the initial forecast you saw was the one that Tableau determined to yield the highest quality prediction given your data, but it really was not a great prediction. R has much better forecasting capabilities, including more flexibility in the models you can apply, and more transparent algorithms. Best practice is to forecast in R, then visualize your forecast and its decomposition in Tableau.</p>
-</section>
+<p>We will use Tableau to visualize your R forecasts.</p>
+
+<!-- ## Tableau’s Forecasting -->
+<!-- Let’s load your carrot price data you exported from R into Tableau and check out Tableau’s forecasting features. -->
+<!-- 1. Once you are connected to the carrot price data, let’s create a filter for our entire workbook so that we only use more recent data (after our structural break) in the forecasting exercise.   -->
+<!--     - On the Data Source page, click `filter` in the top right. -->
+<!--    - Filter Date to begin August 1, 2007 -->
+<!-- 2. Open a new worksheet and plot the monthly carrot price data over time.   -->
+<!-- 3. Two ways to add a forecast - Right click or go to the `Analytics` tab on the left pane.   -->
+
+<!-- Now you have added a forecast line that Tableau has decided is a good fit of your data. (Along with 95% confidence bands) Let’s explore this forecast. -->
+<!-- 1. Right click on your visualization and select `Forecast` -> `Describe Forecast...`   -->
+
+<!--    - Did Tableau use the entire time period when constructing the forecast? -->
+<!--        - What time period is Tableau forecasting for? -->
+<!--    - Does Tableau think this forecast is accurate? -->
+<!--    - If you want to learn more about this description, click the link at the bottom of the window. -->
+<!-- 2. Click on `Models` at the top of the window. -->
+
+<!--    - This gives you information about the forecasting model Tableau has applied, including how it is weighting values (past vs. more recent), and measures of “fit”. -->
+<!--    - If you want to learn more about the Tableau forecasting models, click the link at the bottom of the window. -->
+<!-- Now, let’s adjust Tableau’s recommended forecast as we see fit. -->
+<!-- 1. Right click on your visualization and select `Forecast` -> `Forecast Options...` -->
+<!-- 2. Adjust the forecast length by selecting `Exactly` or `Until` -->
+<!-- 3. Adjust the ignored periods (this is useful if your data only include part of a year, or if you have reason to believe the more recent data are not as useful) - what happens to the forecast as you adjust this? -->
+<!-- 4. Change the forecast model from `Automatic` to `Custom` and adjust the model parameters. Which do you like best? -->
+<!-- 5. Once you have created a forecast you are satisfied with, exit the popup window. Right click your worksheet tab and select `Duplicate as Crosstab`. Now you can easily see the values of your forecast. -->
+
+<!-- Note that the initial forecast you saw was the one that Tableau determined to yield the highest quality prediction given your data, but it really was not a great prediction. R has much better forecasting capabilities, including more flexibility in the models you can apply, and more transparent algorithms. Best practice is to forecast in R, then visualize your forecast and its decomposition in Tableau. -->
 <section id="visualizing-r-forecasts-in-tableau" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-r-forecasts-in-tableau">2. Visualizing R Forecasts in Tableau</h2>
+<h2 class="anchored" data-anchor-id="visualizing-r-forecasts-in-tableau">1. Visualizing R Forecasts in Tableau</h2>
 <p>First, let’s visualize our decomposition:</p>
 <ol type="1">
 <li><p>Connect to the carrot price forecast data you exported in R. To keep everything in the same workbook, create a connection between these data and your original carrot price data (using the Date) variable</p></li>
@@ -318,35 +321,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>You can also play with combining these figures as you see appropriate (e.g., I like to look at the trend line in the same pane as the actual data)</p></li>
 <li><p>As an aside - let’s change the raw price data to a “moving average” using Tableau’s quick table calculation. Why is this moving average different from the one you calculated in R?</p></li>
 </ol>
-<p>Next, let’s visualize our forecast:</p>
-<ol type="1">
-<li><p>Open a new worksheet and plot your carrot price data.</p></li>
-<li><p>Add your forecasted data from R. Change the color of the forecasted data to clarify which is forecasted and which is observed.</p></li>
-</ol>
-<p>And voila! You have both created a good forecast and visualized its components along with the forecast.</p>
-</section>
-<section id="additional-visualizations-for-understanding-seasonality" class="level2">
-<h2 class="anchored" data-anchor-id="additional-visualizations-for-understanding-seasonality">3. Additional Visualizations for Understanding Seasonality</h2>
-<p>I will now quickly walk you through some ideas for showing and identifying seasonality in your data, as well as separating seasonality from overall trends.</p>
-<ol type="1">
-<li><p>Line graph over month</p>
-<ul>
-<li>Gives you some idea of average trends month to month</li>
-</ul></li>
-<li><p>Lines for each year over month</p>
-<ul>
-<li>Gives you some idea of month to month trends across years</li>
-</ul></li>
-<li><p>Heat map</p>
-<ul>
-<li><p>Gives you some idea of months with larger and smaller prices across years</p></li>
-<li><p>Gives you some idea of months with larger changes in prices across years</p></li>
-</ul></li>
-<li><p>Cycle map</p>
-<ul>
-<li>This is the best way of visualizing (within year) seasonality and larger trends (across years)</li>
-</ul></li>
-</ol>
+<!-- Next, let’s visualize our forecast: -->
+<!-- 1. Open a new worksheet and plot your carrot price data. -->
+<!-- 2. Add your forecasted data from R. Change the color of the forecasted data to clarify which is forecasted and which is observed. -->
+<!-- And voila! You have both created a good forecast and visualized its components along with the forecast. -->
+<!-- ## 2. Additional Visualizations for Understanding Seasonality -->
+<!-- I will now quickly walk you through some ideas for showing and identifying seasonality in your data, as well as separating seasonality from overall trends. -->
+<!-- 1. Line graph over month -->
+<!--    - Gives you some idea of average trends month to month -->
+<!-- 2. Lines for each year over month -->
+<!--    - Gives you some idea of month to month trends across years -->
+<!-- 3. Heat map -->
+<!--    - Gives you some idea of months with larger and smaller prices across years -->
+<!--    - Gives you some idea of months with larger changes in prices across years -->
+<!-- 4. Cycle map -->
+<!--    - This is the best way of visualizing (within year) seasonality and larger trends (across years) -->
 </section>
 </section>
 

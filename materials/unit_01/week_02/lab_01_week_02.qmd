@@ -22,13 +22,13 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 ## Learning Objectives Tableau
 
-- Apply Tableau's default forecasting
+<!-- - Apply Tableau's default forecasting -->
 
-- Customize Tableau's forecasting
+<!-- - Customize Tableau's forecasting -->
 
 - Visualize decompositions and forecasts created in R
 
-- Create advanced visualizations to demonstrate seasonality and overall trends in time series data
+<!-- - Create advanced visualizations to demonstrate seasonality and overall trends in time series data -->
 
 <!---
 ## Unit 1 Project Overview
@@ -46,6 +46,7 @@ First, you need to load your time series data into R and set up your script (des
 
 library(tidyquant)
 library(dplyr)
+library(tidyr)
 library(readr)
 library(forecast)
 
@@ -101,10 +102,12 @@ Let's store this all in a dataframe. For this operation, you will need to load t
 carrot_decomp_out <- carrot_decomp[1:4] %>%
   as_tibble() %>%
   rename(price=x) %>%
-  mutate(measure_date=carrot$date)
+  mutate(measure_date=carrot$date,
+         forecast=F) %>%
+  drop_na()
 ```
 
-*Check your understanding:* What data type is the variable `measure_date' in the new data frame? What is the function you would need to execute if you need to convert a character (chr) to a date?
+  > *Check your understanding:* What data type is the variable `measure_date' in the new data frame? What is the function you would need to execute if you need to convert a character (chr) to a date?
 
 # R: Forecasting
 
@@ -117,9 +120,10 @@ Next, we'll extract the estimated trend, seasonal, and residual components from 
 ```{r}
 #| eval: false
 # Extract the trend, seasonal, and residual components
-carrot_trend <- carrot_decomp$trend
-carrot_seasonal <- carrot_decomp$seasonal
-carrot_residuals <- carrot_decomp$random
+carrot_trend <- na.omit(carrot_decomp$trend)
+carrot_seasonal <- na.omit(carrot_decomp$seasonal)[6:(length(carrot_ts)-7)] %>%
+  ts(.,start=c(2008,2),frequency = 12)
+carrot_residuals <- na.omit(carrot_decomp$random)
 ```
 
 ### Step 2: Forecast the trend, seasonal, and residual components
@@ -129,15 +133,17 @@ To forecast each component, we'll use the `forecast()` function from the `foreca
 ```{r}
 #| eval: false
 # Forecast the trend component for the next 12 months
-carrot_trend_forecast <- forecast(carrot_trend, h=60)
+carrot_trend_forecast <- forecast(carrot_trend,level = 95, h=60)
 
 plot(carrot_trend_forecast)
 
 # Forecast the seasonal component for the next 12 months
-carrot_seasonal_forecast <- forecast(carrot_seasonal, h=60)
+carrot_seasonal_forecast <- forecast(carrot_seasonal,level = 95, h=60)
 
 plot(carrot_seasonal_forecast)
 ```
+
+  > Did you get a warning? What does the warning message tell you? Because the decomposition 
 
 For the residual component, we'll need to create a model to forecast the residuals. There are many possible approaches to modeling the residuals, but a simple one is to use a moving average model (MA model). Here's an example of how to create a simple MA(1) model for the residuals:
 
@@ -150,7 +156,7 @@ carrot_residuals_ts <- ts(carrot_residuals, frequency=12, start=c(2007, 8))
 carrot_residuals_model <- arima(carrot_residuals_ts, order=c(0,0,1))
 
 # Forecast the residuals for the next 12 months
-carrot_residuals_forecast <- forecast(carrot_residuals_model, h=60)$mean
+carrot_residuals_forecast <- forecast(carrot_residuals_model,level = 95, h=60)
 ```
 
 ### Step 3: Combine the forecasted components to obtain the final forecast
@@ -160,16 +166,21 @@ Finally, we can combine the forecasted trend, seasonal, and residual components 
 ```{r}
 #| eval: false
 # Combine the forecasted components to obtain the final forecast
-carrot_forecast <- carrot_trend_forecast$mean + carrot_seasonal_forecast$mean + carrot_residuals_forecast
+carrot_forecast <- carrot_trend_forecast$mean + carrot_seasonal_forecast$mean + carrot_residuals_forecast$mean
 
+carrot_forecast_upper <- carrot_trend_forecast$upper + carrot_seasonal_forecast$upper + carrot_residuals_forecast$upper
+
+carrot_forecast_lower <- carrot_trend_forecast$lower + carrot_seasonal_forecast$lower + carrot_residuals_forecast$lower
 ```
 
 This creates the forecast, which is just the future values.  We want to append this to the existing time series.  First, we will convert this vector into a data frame (a special one called a tibble).
 
 ```{r}
 #| eval: false
-carrot_forecast_df <- tibble(price=carrot_forecast) %>%
-  mutate(measure_date=seq(as_date("2022-08-01"), by="months", length.out=nrow(.))) 
+carrot_forecast_df <- tibble(price=carrot_forecast,
+                             upper=carrot_forecast_upper[,1],
+                             lower=carrot_forecast_lower[,1]) %>%
+  mutate(measure_date=seq(as_date("2023-08-01"), by="months", length.out=nrow(.))) 
 ```
 
 Now, we need to append it to our current data.  However, there is some overlap with the actual observed data because some data was lost in the moving average calculation in the decomposition. For the overlapping data, we could either keep both, just the forecast, or just the observed.  Let's just keep the observed and append the remainder of the forecast to `carrot_decomp_out`.
@@ -197,56 +208,56 @@ write_csv(final_out,"carrot_forecast.csv")
 
 # Tableau
 
-Tableau has its own forecasting features, but these are much less informative and flexible than what you ca do in R. Today we will show you how to use and customize Tableau’s forecasting features, how to create visualizations using your (improved) R forecasts, and we will show you how to create visualizations that show trends and cyclicality in your data — key components of your forecast!
+We will use Tableau to visualize your R forecasts.
 
-## 1. Tableau’s Forecasting
+<!-- ## Tableau’s Forecasting -->
 
-Let’s load your carrot price data you exported from R into Tableau and check out Tableau’s forecasting features.
+<!-- Let’s load your carrot price data you exported from R into Tableau and check out Tableau’s forecasting features. -->
 
-1. Once you are connected to the carrot price data, let’s create a filter for our entire workbook so that we only use more recent data (after our structural break) in the forecasting exercise.  
+<!-- 1. Once you are connected to the carrot price data, let’s create a filter for our entire workbook so that we only use more recent data (after our structural break) in the forecasting exercise.   -->
 
-    - On the Data Source page, click `filter` in the top right.
+<!--     - On the Data Source page, click `filter` in the top right. -->
 
-  	- Filter Date to begin August 1, 2007
+<!--   	- Filter Date to begin August 1, 2007 -->
 
-2. Open a new worksheet and plot the monthly carrot price data over time.  
+<!-- 2. Open a new worksheet and plot the monthly carrot price data over time.   -->
 
-3. Two ways to add a forecast - Right click or go to the `Analytics` tab on the left pane.  
+<!-- 3. Two ways to add a forecast - Right click or go to the `Analytics` tab on the left pane.   -->
 
-Now you have added a forecast line that Tableau has decided is a good fit of your data. (Along with 95% confidence bands) Let’s explore this forecast.
+<!-- Now you have added a forecast line that Tableau has decided is a good fit of your data. (Along with 95% confidence bands) Let’s explore this forecast. -->
 
-1. Right click on your visualization and select `Forecast` -> `Describe Forecast...`  
+<!-- 1. Right click on your visualization and select `Forecast` -> `Describe Forecast...`   -->
 
-  	- Did Tableau use the entire time period when constructing the forecast?
+<!--   	- Did Tableau use the entire time period when constructing the forecast? -->
 
-    	- What time period is Tableau forecasting for?
+<!--     	- What time period is Tableau forecasting for? -->
 
-	- Does Tableau think this forecast is accurate?
+<!-- 	- Does Tableau think this forecast is accurate? -->
 
-  	- If you want to learn more about this description, click the link at the bottom of the window.
+<!--   	- If you want to learn more about this description, click the link at the bottom of the window. -->
 
-2. Click on `Models` at the top of the window.
+<!-- 2. Click on `Models` at the top of the window. -->
 
-  	- This gives you information about the forecasting model Tableau has applied, including how it is weighting values (past vs. more recent), and measures of “fit”.
+<!--   	- This gives you information about the forecasting model Tableau has applied, including how it is weighting values (past vs. more recent), and measures of “fit”. -->
 
-  	- If you want to learn more about the Tableau forecasting models, click the link at the bottom of the window.
+<!--   	- If you want to learn more about the Tableau forecasting models, click the link at the bottom of the window. -->
 
-Now, let’s adjust Tableau’s recommended forecast as we see fit.
+<!-- Now, let’s adjust Tableau’s recommended forecast as we see fit. -->
 
-1. Right click on your visualization and select `Forecast` -> `Forecast Options...`
+<!-- 1. Right click on your visualization and select `Forecast` -> `Forecast Options...` -->
 
-2. Adjust the forecast length by selecting `Exactly` or `Until`
+<!-- 2. Adjust the forecast length by selecting `Exactly` or `Until` -->
 
-3. Adjust the ignored periods (this is useful if your data only include part of a year, or if you have reason to believe the more recent data are not as useful) - what happens to the forecast as you adjust this?
+<!-- 3. Adjust the ignored periods (this is useful if your data only include part of a year, or if you have reason to believe the more recent data are not as useful) - what happens to the forecast as you adjust this? -->
 
-4. Change the forecast model from `Automatic` to `Custom` and adjust the model parameters. Which do you like best?
+<!-- 4. Change the forecast model from `Automatic` to `Custom` and adjust the model parameters. Which do you like best? -->
 
-5. Once you have created a forecast you are satisfied with, exit the popup window. Right click your worksheet tab and select `Duplicate as Crosstab`. Now you can easily see the values of your forecast.
+<!-- 5. Once you have created a forecast you are satisfied with, exit the popup window. Right click your worksheet tab and select `Duplicate as Crosstab`. Now you can easily see the values of your forecast. -->
 
 
-Note that the initial forecast you saw was the one that Tableau determined to yield the highest quality prediction given your data, but it really was not a great prediction. R has much better forecasting capabilities, including more flexibility in the models you can apply, and more transparent algorithms. Best practice is to forecast in R, then visualize your forecast and its decomposition in Tableau.
+<!-- Note that the initial forecast you saw was the one that Tableau determined to yield the highest quality prediction given your data, but it really was not a great prediction. R has much better forecasting capabilities, including more flexibility in the models you can apply, and more transparent algorithms. Best practice is to forecast in R, then visualize your forecast and its decomposition in Tableau. -->
 
-## 2. Visualizing R Forecasts in Tableau
+## 1. Visualizing R Forecasts in Tableau
 
 First, let’s visualize our decomposition:
 
@@ -265,32 +276,32 @@ First, let’s visualize our decomposition:
 7. As an aside - let’s change the raw price data to a “moving average” using Tableau’s quick table calculation. Why is this moving average different from the one you calculated in R?
 
 
-Next, let’s visualize our forecast:
+<!-- Next, let’s visualize our forecast: -->
 
-1. Open a new worksheet and plot your carrot price data.
+<!-- 1. Open a new worksheet and plot your carrot price data. -->
 
-2. Add your forecasted data from R. Change the color of the forecasted data to clarify which is forecasted and which is observed.
+<!-- 2. Add your forecasted data from R. Change the color of the forecasted data to clarify which is forecasted and which is observed. -->
 
-And voila! You have both created a good forecast and visualized its components along with the forecast.
+<!-- And voila! You have both created a good forecast and visualized its components along with the forecast. -->
 
-## 3. Additional Visualizations for Understanding Seasonality
+<!-- ## 2. Additional Visualizations for Understanding Seasonality -->
 
-I will now quickly walk you through some ideas for showing and identifying seasonality in your data, as well as separating seasonality from overall trends.
+<!-- I will now quickly walk you through some ideas for showing and identifying seasonality in your data, as well as separating seasonality from overall trends. -->
 
-1. Line graph over month
+<!-- 1. Line graph over month -->
 
-  	- Gives you some idea of average trends month to month
+<!--   	- Gives you some idea of average trends month to month -->
 
-2. Lines for each year over month
+<!-- 2. Lines for each year over month -->
 
-  	- Gives you some idea of month to month trends across years
+<!--   	- Gives you some idea of month to month trends across years -->
 
-3. Heat map
+<!-- 3. Heat map -->
 
-  	- Gives you some idea of months with larger and smaller prices across years
+<!--   	- Gives you some idea of months with larger and smaller prices across years -->
 
-  	- Gives you some idea of months with larger changes in prices across years
+<!--   	- Gives you some idea of months with larger changes in prices across years -->
 
-4. Cycle map
+<!-- 4. Cycle map -->
 
-  	- This is the best way of visualizing (within year) seasonality and larger trends (across years)
+<!--   	- This is the best way of visualizing (within year) seasonality and larger trends (across years) -->
