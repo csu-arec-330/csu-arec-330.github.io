@@ -30,7 +30,9 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 - Create advanced visualizations to demonstrate seasonality and overall trends in time series data
 
+<!---
 ## Unit 1 Project Overview
+--->
 
 # R: Time Series Decomposition
 
@@ -61,7 +63,7 @@ To convert the `carrot` dataset into a time series object, run the following com
 carrot_ts <- ts(carrot$price,frequency = 12,start=c(2007,8))
 ```
 
-This will create a new time series object called `ts_data.`
+This will create a new time series object called `carrot_ts.`
 
 ### Step 3: Decompose your time series data
 
@@ -102,8 +104,9 @@ carrot_decomp_out <- carrot_decomp[1:4] %>%
   mutate(measure_date=carrot$date)
 ```
 
+*Check your understanding:* What data type is the variable `measure_date' in the new data frame? What is the function you would need to execute if you need to convert a character (chr) to a date?
 
-## R: Forecasting
+# R: Forecasting
 
 Make sure to add the library `forecast` where you load packages.
 
@@ -182,7 +185,7 @@ final_out <- bind_rows(carrot_decomp_out,carrot_forecast_df)
   
 ```
 
-Now you can export this data for Tableau
+Now you can export this data for Tableau:
 
 ```{r}
 #| eval: false
