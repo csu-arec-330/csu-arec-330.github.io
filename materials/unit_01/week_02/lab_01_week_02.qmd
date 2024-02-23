@@ -103,7 +103,7 @@ carrot_decomp_out <- carrot_decomp[1:4] %>%
   as_tibble() %>%
   rename(price=x) %>%
   mutate(measure_date=carrot$date,
-         forecast=F) %>%
+         forecast=FALSE) %>%
   drop_na()
 ```
 
@@ -121,7 +121,7 @@ Next, we'll extract the estimated trend, seasonal, and residual components from 
 #| eval: false
 # Extract the trend, seasonal, and residual components
 carrot_trend <- na.omit(carrot_decomp$trend)
-carrot_seasonal <- na.omit(carrot_decomp$seasonal)[6:(length(carrot_ts)-7)] %>%
+carrot_seasonal <- na.omit(carrot_decomp$seasonal)[7:(length(carrot_ts)-6)] %>%
   ts(.,start=c(2008,2),frequency = 12)
 carrot_residuals <- na.omit(carrot_decomp$random)
 ```
@@ -143,8 +143,10 @@ carrot_seasonal_forecast <- forecast(carrot_seasonal,level = 95, h=60)
 plot(carrot_seasonal_forecast)
 ```
 
-  > Did you get a warning? What does the warning message tell you? Because the decomposition 
-
+  > Did you get a warning? What does the warning message tell you? 
+  <!---
+  Because the decomposition 
+--->
 For the residual component, we'll need to create a model to forecast the residuals. There are many possible approaches to modeling the residuals, but a simple one is to use a moving average model (MA model). Here's an example of how to create a simple MA(1) model for the residuals:
 
 ```{r}

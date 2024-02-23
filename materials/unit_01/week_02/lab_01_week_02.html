@@ -195,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">price=</span>x) <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span>carrot<span class="sc">$</span>date,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">forecast=</span>F) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">forecast=</span><span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
@@ -212,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the trend, seasonal, and residual components</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>carrot_trend <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>trend)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>carrot_seasonal <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>seasonal)[<span class="dv">6</span><span class="sc">:</span>(<span class="fu">length</span>(carrot_ts)<span class="sc">-</span><span class="dv">7</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>carrot_seasonal <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>seasonal)[<span class="dv">7</span><span class="sc">:</span>(<span class="fu">length</span>(carrot_ts)<span class="sc">-</span><span class="dv">6</span>)] <span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(.,<span class="at">start=</span><span class="fu">c</span>(<span class="dv">2008</span>,<span class="dv">2</span>),<span class="at">frequency =</span> <span class="dv">12</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>carrot_residuals <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -232,9 +232,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_seasonal_forecast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Did you get a warning? What does the warning message tell you? Because the decomposition</p>
+<p>Did you get a warning? What does the warning message tell you? <!---
+Because the decomposition 
+---> For the residual component, we’ll need to create a model to forecast the residuals. There are many possible approaches to modeling the residuals, but a simple one is to use a moving average model (MA model). Here’s an example of how to create a simple MA(1) model for the residuals:</p>
 </blockquote>
-<p>For the residual component, we’ll need to create a model to forecast the residuals. There are many possible approaches to modeling the residuals, but a simple one is to use a moving average model (MA model). Here’s an example of how to create a simple MA(1) model for the residuals:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series object for the residuals</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>carrot_residuals_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot_residuals, <span class="at">frequency=</span><span class="dv">12</span>, <span class="at">start=</span><span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">8</span>))</span>
