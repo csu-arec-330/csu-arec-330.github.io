@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -115,16 +86,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#step-1-load-your-data" id="toc-step-1-load-your-data" class="nav-link" data-scroll-target="#step-1-load-your-data">Step 1: Load your data</a></li>
   <li><a href="#step-2-convert-your-data-into-a-time-series-object" id="toc-step-2-convert-your-data-into-a-time-series-object" class="nav-link" data-scroll-target="#step-2-convert-your-data-into-a-time-series-object">Step 2: Convert your data into a time series object</a></li>
   <li><a href="#step-3-tidy-forecast-workflow" id="toc-step-3-tidy-forecast-workflow" class="nav-link" data-scroll-target="#step-3-tidy-forecast-workflow">Step 3: Tidy forecast workflow</a></li>
-  <li><a href="#prediction-intervals" id="toc-prediction-intervals" class="nav-link" data-scroll-target="#prediction-intervals">Prediction intervals</a></li>
-  <li><a href="#preparing-to-export" id="toc-preparing-to-export" class="nav-link" data-scroll-target="#preparing-to-export">Preparing to export</a></li>
+  <li><a href="#step-4-generating-prediction-intervals" id="toc-step-4-generating-prediction-intervals" class="nav-link" data-scroll-target="#step-4-generating-prediction-intervals">Step 4: Generating prediction intervals</a></li>
+  <li><a href="#step-5-preparing-to-export" id="toc-step-5-preparing-to-export" class="nav-link" data-scroll-target="#step-5-preparing-to-export">Step 5: Preparing to export</a></li>
   </ul></li>
-  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
-  <ul class="collapse">
-  <li><a href="#plotting-prediction-intervals-in-tableau" id="toc-plotting-prediction-intervals-in-tableau" class="nav-link" data-scroll-target="#plotting-prediction-intervals-in-tableau">Plotting prediction intervals in Tableau</a>
+  <li><a href="#tableau-plotting-prediction-intervals" id="toc-tableau-plotting-prediction-intervals" class="nav-link" data-scroll-target="#tableau-plotting-prediction-intervals">Tableau: Plotting prediction intervals</a>
   <ul class="collapse">
   <li><a href="#option-1-dont-worry-about-shading" id="toc-option-1-dont-worry-about-shading" class="nav-link" data-scroll-target="#option-1-dont-worry-about-shading">Option 1: Don’t worry about shading</a></li>
   <li><a href="#option-2-lets-jump-through-some-hoops-to-add-shading" id="toc-option-2-lets-jump-through-some-hoops-to-add-shading" class="nav-link" data-scroll-target="#option-2-lets-jump-through-some-hoops-to-add-shading">Option 2: Let’s jump through some hoops to add shading</a></li>
-  </ul></li>
   <li><a href="#presenting-tableau-option-1-stories" id="toc-presenting-tableau-option-1-stories" class="nav-link" data-scroll-target="#presenting-tableau-option-1-stories">Presenting Tableau Option 1: Stories</a></li>
   <li><a href="#presenting-tableau-option-2-embed-in-powerpoint" id="toc-presenting-tableau-option-2-embed-in-powerpoint" class="nav-link" data-scroll-target="#presenting-tableau-option-2-embed-in-powerpoint">Presenting Tableau Option 2: Embed in Powerpoint</a></li>
   <li><a href="#now-get-together-with-your-teammate-and-spend-some-time-on-your-project" id="toc-now-get-together-with-your-teammate-and-spend-some-time-on-your-project" class="nav-link" data-scroll-target="#now-get-together-with-your-teammate-and-spend-some-time-on-your-project">Now get together with your teammate and spend some time on your project!</a></li>
@@ -172,7 +140,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="r-time-series-forecast-and-prediction-interval" class="level1">
 <h1>R: Time Series Forecast and Prediction Interval</h1>
-<p>Last week we learned how to build a forecast from the components of the time series decomposition (Trend, Seasonality, and Residual). We made some relatively simple assumptions about how these components would behave in the future. R has many time series analysis and forecasting tools. Because the libraries containing the tools are open source and written by R users, the structure of the functions and object created by them may vary. We are going to start using a new library called <code>fpp3</code> that you will need to install if it isn’t already installed. <code>fpp3</code> is a meta-library that loads a series of time series forecasting libraries that make time series analysis and forecasting much easier. The library <code>fpp3</code> was created as the companion to the textbook <a href="https://otexts.com/fpp3/">Forecasting: Principles and Practice (3rd ed)</a>]. The main libraries we will be using are <code>fable</code> and <code>feasts</code>. <code>fable</code> contains many time series models that you might want to use to understand and forecast data. <code>feasts</code> contains a set of <code>dplyr</code>-like tools to work with time series data. This set of packages makes it <em>very easy</em> to run models and extract the information you want.</p>
+<p><strong>Last week:</strong></p>
+<ul>
+<li><p>We learned how to build a forecast from the components of the time series decomposition (Trend, Seasonality, and Residual).</p></li>
+<li><p>We made some relatively simple assumptions about how these components would behave in the future.</p></li>
+</ul>
+<p>R has many time series analysis and forecasting tools. Because the libraries containing the tools are open source and written by R users, the structure of the functions and object created by them may vary.</p>
+<p><strong>This week:</strong></p>
+<p>We are going to start using a new library called <code>fpp3</code> that you will need to install if it isn’t already installed.</p>
+<ul>
+<li><code>fpp3</code> is a meta-library that loads a series of time series forecasting libraries that make time series analysis and forecasting much easier. The library <code>fpp3</code> was created as the companion to the textbook <a href="https://otexts.com/fpp3/">Forecasting: Principles and Practice (3rd ed)</a>.</li>
+</ul>
+<p>The main libraries we will be using are <code>fable</code> and <code>feasts</code>:</p>
+<ul>
+<li><p><code>fable</code> contains many time series models that you might want to use to understand and forecast data.</p></li>
+<li><p><code>feasts</code> contains a set of <code>dplyr</code>-like tools to work with time series data. This set of packages makes it <em>very easy</em> to run models and extract the information you want.</p></li>
+</ul>
 <p>The goal today is to look at prediction intervals, which are related to confidence intervals but pertain to your forecast.</p>
 <section id="step-1-load-your-data" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-load-your-data">Step 1: Load your data</h3>
@@ -200,21 +183,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="step-3-tidy-forecast-workflow" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-tidy-forecast-workflow">Step 3: Tidy forecast workflow</h3>
-<p>Again, our objective is to build a forecast model and extract the key pieces of information, so that we can send them to Tableau. One of the benefits of the <code>fpp3</code> package is that it simplifies model building process in a structure that is compatible with the pipe, <code>%&gt;%</code>. We will recreate the forecasting model that we built in parts last week. Recall that we first decomposed the carrot price time series into <code>trend</code>, <code>seasonal</code>, and <code>random</code> components, and built a forecasting model based on each component, then put it all back together.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> That process can be called a workflow - a set of steps for completing a task. We will translate the workflow we built into the structure of the new package.</p>
+<p>Our objective is to build a forecast model and extract the key pieces of information, so that we can send them to Tableau.</p>
+<p>One of the benefits of the <code>fpp3</code> package is that it simplifies model building process in a structure that is compatible with the pipe, <code>%&gt;%</code>.</p>
+<p>We will recreate the forecasting model that we built in parts last week:</p>
+<ol type="1">
+<li><p>Recall that we first decomposed the carrot price time series into <code>trend</code>, <code>seasonal</code>, and <code>random</code> components, and built a forecasting model based on each component.</p></li>
+<li><p>Then we put it all back together.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
+</ol>
+<p>This process is called a <em>workflow</em>: a set of steps for completing a task. We will translate the workflow we built into the structure of the new package.</p>
 <section id="a-define-the-model" class="level4">
 <h4 class="anchored" data-anchor-id="a-define-the-model">3a: Define the model</h4>
-<p>We have the time series data prepared for modeling. Now, we need to define the model. We defined individual forecasts for each of the three components in week 2. We used the function, <code>forecast</code>, which uses an <code>exponential smoothing</code> method by default. We can be more explicit in defining an exponential smoothing model of each component.</p>
+<p>We have the time series data, <code>carrot_ts</code>, prepared for modeling. Now, we need to define the model.</p>
+<p>We defined individual forecasts for each of the three components in week 2. We used the function, <code>forecast</code>, which uses an <strong>exponential smoothing</strong> method by default. We can be more explicit in defining an exponential smoothing model of each component.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Fit the model</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> carrot_ts <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">my_ets=</span><span class="fu">ETS</span>(price <span class="sc">~</span> <span class="fu">trend</span>(<span class="at">method=</span><span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="at">method=</span><span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">error</span>(<span class="at">method=</span><span class="st">"A"</span>))) <span class="co">#fit model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The function model is used to define the forecasting model. In this case, we define an exponential smoothing model, <code>ETS()</code>, based on three components: <code>trend</code>, <code>season</code>, and <code>error</code>. The argument <code>method="A"</code> in each component tells the model that we want those components to be <em>additive</em> rather than multiplicative. Finally, we define the model as <code>my_ets</code>. In short, this defines the model that we built in parts in week 2. Inspecting <code>fit</code> shows that this just defines the model but doesn’t do anything with it.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Note that <code>model</code> is a powerful function capable of specifying many models at once. You may want to compare model fits or estimate models on several price series simultaneously. See more information <a href="https://fable.tidyverts.org/articles/fable.html">here</a>.</p>
+<p>The function <code>model()</code> is used to define the forecasting model. In this code, we have done the following:</p>
+<ul>
+<li><p>Defined an exponential smoothing model, <code>ETS()</code>, based on three components: <code>trend</code>, <code>season</code>, and <code>error</code>.</p></li>
+<li><p>Told the model that we want those components to be <em>additive</em> rather than multiplicative. (The argument <code>method="A"</code> represents additive.)</p></li>
+<li><p>We have defined the model as <code>my_ets</code>.</p></li>
+</ul>
+<p>In short, this defines the model that we built in parts in week 2. Inspecting the data frame <code>fit</code> shows us that this simply defines the model but doesn’t do anything with it.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Note that <code>model()</code> is a powerful function capable of specifying many models at once. You may want to compare model fits or estimate models on several price series simultaneously. See more information <a href="https://fable.tidyverts.org/articles/fable.html">here</a>.</p>
 </section>
 <section id="b-forecast-the-model" class="level4">
 <h4 class="anchored" data-anchor-id="b-forecast-the-model">3b: Forecast the model</h4>
-<p>Now that we have specified the model, we need to actually run the forecast. We will use a function called <code>forecast()</code> from the <code>fabletools</code> library (related to <code>fable</code>). However, this function is different from the previously used forecast function. When there are potential conflicts between functions with the same name from different libraries, you can specify the library, so R does not try to use the wrong one. We specify that we want to forecast our <code>ETS</code> model for 5 years. The function understands that you want 5 years worth of monthly forecasts (remember the data is stored as monthly data); this is equivalent to <code>h=60</code> because 60 months is 5 years.</p>
+<p>Now that we have specified the model, we need to actually run the forecast.</p>
+<p>We will use a function called <code>forecast()</code> from the <code>fabletools</code> library (related to <code>fable</code>). However, this function is different from the previously used forecast function. When there are potential conflicts between functions with the same name from different libraries, you can specify the library, so R does not try to use the wrong one.</p>
+<p>We will specify that we want to forecast our <code>ETS</code> model for 5 years. The function understands that you want 5 years worth of monthly forecasts (remember the data is stored as monthly data); this is equivalent to <code>h=60</code> because 60 months is 5 years.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Forecast the model</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> fit <span class="sc">%&gt;%</span></span>
@@ -224,7 +223,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="c-plot-the-forecast" class="level4">
 <h4 class="anchored" data-anchor-id="c-plot-the-forecast">3c: Plot the forecast</h4>
-<p>Finally, you want to visualize your forecast. You can pass <code>carrot_forecast</code> into the function <code>autoplot()</code> that understands how to read forecast output. Note that <code>autoplot()</code> plots only the forecast by default. Adding the observed data <code>carrot_ts</code> tells the function to include the observed data in the plot.</p>
+<p>Finally, you want to visualize your forecast.</p>
+<p>You can pass <code>carrot_forecast</code> into the function <code>autoplot()</code> which understands how to read forecast output. Note that <code>autoplot()</code> plots only the forecast by default. Adding the observed data <code>carrot_ts</code> tells the function to include the observed data in the plot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the forecast</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(carrot_forecast,carrot_ts) <span class="co">#forecast model for 5 years</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -233,38 +233,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>See <a href="https://otexts.com/fpp3/a-tidy-forecasting-workflow.html">Hyndman and Athanasopoulos</a> for more information on developing a workflow with these time series tools.</p>
 </section>
 </section>
-<section id="prediction-intervals" class="level3">
-<h3 class="anchored" data-anchor-id="prediction-intervals">Prediction intervals</h3>
-<p>The plot generated by <code>autoplot()</code> indicates that the model is estimating prediction intervals. There is a function <code>hilo()</code> from the <code>fable</code> library to extract them. However, this function creates a column with both upper and lower prediction intervals packed into a single variable. Fortunately, there is a function for separating the values into their own variables called <code>unpack_hilo()</code>. You need to specify the name of the variable; in this case <code>95%</code>.</p>
+<section id="step-4-generating-prediction-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-generating-prediction-intervals">Step 4: Generating prediction intervals</h3>
+<p>The plot generated by <code>autoplot()</code> indicates that the model is estimating prediction intervals. There is a function <code>hilo()</code> from the <code>fable</code> library to extract them. However, this function creates a column with both upper and lower prediction intervals packed into a single variable. There are two options to separate the min and max of the 95% confidence interval:</p>
+<p>The first option is to use the <code>mutate()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract prediction interval</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract prediction interval using mutate()</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_out <span class="ot">&lt;-</span> carrot_forecast <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co">#extract 95% prediction interval</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span><span class="sc">$</span>lower,</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span><span class="sc">$</span>upper</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co">#unpack into own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co">#generate own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="preparing-to-export" class="level3">
-<h3 class="anchored" data-anchor-id="preparing-to-export">Preparing to export</h3>
-<p>Finally, we want to prepare the data for export to Tableau. Recall that our original data had two variables: <code>date</code> and <code>price</code>. Our tsibble <code>carrot_forecast_out</code> has <code>date</code> and <code>price</code>, but the <code>price</code> variable is a distribution rather than a value. However, the variable <code>.mean</code> contains the forecast mean, so we can remove <code>price</code> and rename <code>.mean</code>. Remember that you can rename and select variables in the same command.</p>
+<p>The second option is to use a function called <code>unpack_hilo()</code> to separate the values into their own variables. You need to specify the name of the variable; in this case <code>"95%"</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Prepare data for export</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>part2 <span class="ot">&lt;-</span> carrot_forecast_out <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date,<span class="at">price=</span>.mean,<span class="st">`</span><span class="at">lower</span><span class="st">`</span>,<span class="st">`</span><span class="at">upper</span><span class="st">`</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>to_export <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_ts,part2)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(to_export,<span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract prediction interval using unpack_hilo()</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_out <span class="ot">&lt;-</span> carrot_forecast <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co">#extract 95% prediction interval</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unpack_hilo</span>(<span class="at">cols =</span> <span class="dv">95</span>%) <span class="co">#unpack into own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/KMrGAUcnM00" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="step-5-preparing-to-export" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-preparing-to-export">Step 5: Preparing to export</h3>
+<p>Finally, we want to prepare the data for export to Tableau.</p>
+<p>Recall that our original time series data, <code>carrot_ts</code>, has two variables: <code>date</code> and <code>price</code>.</p>
+<p>Our tsibble <code>carrot_forecast_out</code> has <code>date</code> and <code>price</code>, but the <code>price</code> variable is a distribution rather than a value. The variable <code>.mean</code> contains the forecast mean, so we can remove <code>price</code> and rename <code>.mean</code>. Remember that you can rename and select variables in the same command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Prepare data for export</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>part2 <span class="ot">&lt;-</span> carrot_forecast_out <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date,<span class="at">price=</span>.mean,<span class="st">`</span><span class="at">lower</span><span class="st">`</span><span class="ot">=</span><span class="st">"95%_lower"</span>,<span class="st">`</span><span class="at">upper</span><span class="st">`</span><span class="ot">=</span><span class="st">"95%_upper"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>to_export <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_ts,part2)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(to_export,<span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/KMrGAUcnM00" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 </section>
-<section id="tableau" class="level1">
-<h1>Tableau</h1>
-<section id="plotting-prediction-intervals-in-tableau" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-prediction-intervals-in-tableau">Plotting prediction intervals in Tableau</h2>
+<section id="tableau-plotting-prediction-intervals" class="level1">
+<h1>Tableau: Plotting prediction intervals</h1>
 <p>Last time we showed that if you apply Tableau’s forecasting features, Tableau will automatically plot prediction intervals for you. But what if you want to plot the prediction intervals you created in R instead?</p>
 <section id="option-1-dont-worry-about-shading" class="level3">
 <h3 class="anchored" data-anchor-id="option-1-dont-worry-about-shading">Option 1: Don’t worry about shading</h3>
@@ -292,7 +300,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Finally, go back to your last sheet. Notice that the colors between your sheets are linked. Tableau does this to ensure your sheets are cohesive, but sometimes we want different colors for the same variable. The workaround for this is to duplicate each of the variables you want to assign a different color and use those in this sheet instead of the original variables.</p></li>
 </ol>
 </section>
-</section>
 <section id="presenting-tableau-option-1-stories" class="level2">
 <h2 class="anchored" data-anchor-id="presenting-tableau-option-1-stories">Presenting Tableau Option 1: Stories</h2>
 <p>Tableau Desktop includes its own method for presenting your analyses. These are called stories. This tutorial will show you how to put together a simple story.</p>
@@ -308,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="presenting-tableau-option-2-embed-in-powerpoint" class="level2">
 <h2 class="anchored" data-anchor-id="presenting-tableau-option-2-embed-in-powerpoint">Presenting Tableau Option 2: Embed in Powerpoint</h2>
 <p>You can also embed interactive Tableau dashboards from your Tableau Public account directly into powerpoint. This will require you to install the Web Viewer Add-in. I won’t walk you through how to do this right now, but you can follow these instructions to set this up: <a href="https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp" class="uri">https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp</a></p>
-<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/U2oDUOeDHI8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/U2oDUOeDHI8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="now-get-together-with-your-teammate-and-spend-some-time-on-your-project" class="level2">
 <h2 class="anchored" data-anchor-id="now-get-together-with-your-teammate-and-spend-some-time-on-your-project">Now get together with your teammate and spend some time on your project!</h2>
@@ -351,9 +358,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -418,6 +439,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

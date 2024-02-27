@@ -32,10 +32,27 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 # R: Time Series Forecast and Prediction Interval
 
-Last week we learned how to build a forecast from the components of the time series decomposition (Trend, Seasonality, and Residual). We made some relatively simple assumptions about how these components would behave in the future. R has many time series analysis and forecasting tools. Because the libraries containing the tools are open source and written by R users, the structure of the functions and object created by them may vary. We are going to start using a new library called `fpp3` that you will need to install if it isn't already installed. `fpp3` is a meta-library that loads a series of time series forecasting libraries that make time series analysis and forecasting much easier. The library `fpp3` was created as the companion to the textbook [Forecasting: Principles and Practice (3rd ed)](https://otexts.com/fpp3/)]. The main libraries we will be using are `fable` and `feasts`.  `fable` contains many time series models that you might want to use to understand and forecast data. `feasts` contains a set of `dplyr`-like tools to work with time series data. This set of packages makes it *very easy* to run models and extract the information you want.
+**Last week:** 
+
+- We learned how to build a forecast from the components of the time series decomposition (Trend, Seasonality, and Residual). 
+
+- We made some relatively simple assumptions about how these components would behave in the future. 
+
+R has many time series analysis and forecasting tools. Because the libraries containing the tools are open source and written by R users, the structure of the functions and object created by them may vary. 
+
+**This week:**
+
+We are going to start using a new library called `fpp3` that you will need to install if it isn't already installed. 
+
+- `fpp3` is a meta-library that loads a series of time series forecasting libraries that make time series analysis and forecasting much easier. The library `fpp3` was created as the companion to the textbook [Forecasting: Principles and Practice (3rd ed)](https://otexts.com/fpp3/). 
+
+The main libraries we will be using are `fable` and `feasts`: 
+
+- `fable` contains many time series models that you might want to use to understand and forecast data. 
+
+- `feasts` contains a set of `dplyr`-like tools to work with time series data. This set of packages makes it *very easy* to run models and extract the information you want.
 
 The goal today is to look at prediction intervals, which are related to confidence intervals but pertain to your forecast.  
-
 
 
 ### Step 1: Load your data
@@ -70,11 +87,23 @@ This will create a new time series `tibble` object called `carrot_ts.`
 
 ### Step 3: Tidy forecast workflow
 
-Again, our objective is to build a forecast model and extract the key pieces of information, so that we can send them to Tableau.  One of the benefits of the `fpp3` package is that it simplifies model building process in a structure that is compatible with the pipe, `%>%`. We will recreate the forecasting model that we built in parts last week. Recall that we first decomposed the carrot price time series into `trend`, `seasonal`, and `random` components, and built a forecasting model based on each component, then put it all back together.^[I've included more information about the model in [week 2](../week_02/lab_01_week_02.html) of this unit lab notes.] That process can be called a workflow - a set of steps for completing a task. We will translate the workflow we built into the structure of the new package.
+Our objective is to build a forecast model and extract the key pieces of information, so that we can send them to Tableau.  
+
+One of the benefits of the `fpp3` package is that it simplifies model building process in a structure that is compatible with the pipe, `%>%`. 
+
+We will recreate the forecasting model that we built in parts last week: 
+
+1. Recall that we first decomposed the carrot price time series into `trend`, `seasonal`, and `random` components, and built a forecasting model based on each component. 
+
+2. Then we put it all back together.^[I've included more information about the model in [week 2](../week_02/lab_01_week_02.html) of this unit lab notes.] 
+
+This process is called a *workflow*: a set of steps for completing a task. We will translate the workflow we built into the structure of the new package.
 
 #### 3a: Define the model
 
-We have the time series data prepared for modeling. Now, we need to define the model. We defined individual forecasts for each of the three components in week 2. We used the function, `forecast`, which uses an `exponential smoothing` method by default. We can be more explicit in defining an exponential smoothing model of each component.
+We have the time series data, `carrot_ts`, prepared for modeling. Now, we need to define the model. 
+
+We defined individual forecasts for each of the three components in week 2. We used the function, `forecast`, which uses an **exponential smoothing** method by default. We can be more explicit in defining an exponential smoothing model of each component.
 
 ```{r}
 #| eval: false
@@ -83,13 +112,25 @@ fit <- carrot_ts %>%
   model(my_ets=ETS(price ~ trend(method="A") + season(method="A") + error(method="A"))) #fit model
 ```
 
-The function model is used to define the forecasting model.  In this case, we define an exponential smoothing model, `ETS()`, based on three components: `trend`, `season`, and `error`. The argument `method="A"` in each component tells the model that we want those components to be *additive* rather than multiplicative. Finally, we define the model as `my_ets`. In short, this defines the model that we built in parts in week 2. Inspecting `fit` shows that this just defines the model but doesn't do anything with it.^[You can extract model coefficient estimates using the command `tidy(fit)` if you need to extract them.] 
+The function `model()` is used to define the forecasting model. In this code, we have done the following:
 
-Note that `model` is a powerful function capable of specifying many models at once.  You may want to compare model fits or estimate models on several price series simultaneously.  See more information [here](https://fable.tidyverts.org/articles/fable.html).
+- Defined an exponential smoothing model, `ETS()`, based on three components: `trend`, `season`, and `error`. 
+
+- Told the model that we want those components to be *additive* rather than multiplicative. (The argument `method="A"` represents additive.)
+
+- We have defined the model as `my_ets`. 
+
+In short, this defines the model that we built in parts in week 2. Inspecting the data frame `fit` shows us that this simply defines the model but doesn't do anything with it.^[You can extract model coefficient estimates using the command `tidy(fit)` if you need to extract them.] 
+
+Note that `model()` is a powerful function capable of specifying many models at once.  You may want to compare model fits or estimate models on several price series simultaneously.  See more information [here](https://fable.tidyverts.org/articles/fable.html).
 
 #### 3b: Forecast the model
 
-Now that we have specified the model, we need to actually run the forecast. We will use a function called `forecast()` from the `fabletools` library (related to `fable`).  However, this function is different from the previously used forecast function. When there are potential conflicts between functions with the same name from different libraries, you can specify the library, so R does not try to use the wrong one. We specify that we want to forecast our `ETS` model for 5 years. The function understands that you want 5 years worth of monthly forecasts (remember the data is stored as monthly data); this is equivalent to `h=60` because 60 months is 5 years.
+Now that we have specified the model, we need to actually run the forecast. 
+
+We will use a function called `forecast()` from the `fabletools` library (related to `fable`). However, this function is different from the previously used forecast function. When there are potential conflicts between functions with the same name from different libraries, you can specify the library, so R does not try to use the wrong one. 
+
+We will specify that we want to forecast our `ETS` model for 5 years. The function understands that you want 5 years worth of monthly forecasts (remember the data is stored as monthly data); this is equivalent to `h=60` because 60 months is 5 years.
 
 ```{r}
 #| eval: false
@@ -98,11 +139,13 @@ carrot_forecast <- fit %>%
   fabletools::forecast(h="5 years") #forecast model for 5 years
 ```
 
-Inspect `carrot_forecast` and you will see that it contains mean and variance information for each month of the 5 year forecast.  
+Inspect `carrot_forecast` and you will see that it contains mean and variance information for each month of the 5 year forecast.
 
 #### 3c: Plot the forecast
 
-Finally, you want to visualize your forecast. You can pass `carrot_forecast` into the function `autoplot()` that understands how to read forecast output. Note that `autoplot()` plots only the forecast by default. Adding the observed data `carrot_ts` tells the function to include the observed data in the plot.
+Finally, you want to visualize your forecast. 
+
+You can pass `carrot_forecast` into the function `autoplot()` which understands how to read forecast output. Note that `autoplot()` plots only the forecast by default. Adding the observed data `carrot_ts` tells the function to include the observed data in the plot.
 
 ```{r}
 #| eval: false
@@ -113,30 +156,47 @@ You can see that the mean, the 80%, and the 90% prediction intervals are include
 
 See [Hyndman and Athanasopoulos](https://otexts.com/fpp3/a-tidy-forecasting-workflow.html) for more information on developing a workflow with these time series tools.
 
-### Prediction intervals
+### Step 4: Generating prediction intervals
 
-The plot generated by `autoplot()` indicates that the model is estimating prediction intervals. There is a function `hilo()` from the `fable` library to extract them. However, this function creates a column with both upper and lower prediction intervals packed into a single variable. Fortunately, there is a function for separating the values into their own variables called `unpack_hilo()`. You need to specify the name of the variable; in this case `95%`.
+The plot generated by `autoplot()` indicates that the model is estimating prediction intervals. There is a function `hilo()` from the `fable` library to extract them. However, this function creates a column with both upper and lower prediction intervals packed into a single variable. There are two options to separate the min and max of the 95% confidence interval: 
+
+The first option is to use the `mutate()` function: 
 
 ```{r}
 #| eval: false
-#Extract prediction interval
+#Extract prediction interval using mutate()
 carrot_forecast_out <- carrot_forecast %>%
   hilo(level = 95) %>% #extract 95% prediction interval
   mutate(
     lower = `95%`$lower,
     upper = `95%`$upper
-  ) #unpack into own columns named lower and upper
+  ) #generate own columns named lower and upper
 ```
 
-### Preparing to export
 
-Finally, we want to prepare the data for export to Tableau.  Recall that our original data had two variables: `date` and `price`.  Our tsibble `carrot_forecast_out` has `date` and `price`, but the `price` variable is a distribution rather than a value.  However, the variable `.mean` contains the forecast mean, so we can remove `price` and rename `.mean`. Remember that you can rename and select variables in the same command.
+The second option is to use a function called `unpack_hilo()` to separate the values into their own variables. You need to specify the name of the variable; in this case `"95%"`.
+
+```{r}
+#| eval: false
+#Extract prediction interval using unpack_hilo()
+carrot_forecast_out <- carrot_forecast %>%
+  hilo(level = 95) %>% #extract 95% prediction interval
+  unpack_hilo(cols = 95%) #unpack into own columns named lower and upper
+```
+
+### Step 5: Preparing to export
+
+Finally, we want to prepare the data for export to Tableau.  
+
+Recall that our original time series data, `carrot_ts`, has two variables: `date` and `price`.  
+
+Our tsibble `carrot_forecast_out` has `date` and `price`, but the `price` variable is a distribution rather than a value.  The variable `.mean` contains the forecast mean, so we can remove `price` and rename `.mean`. Remember that you can rename and select variables in the same command.
 
 ```{r}
 #| eval: false
 #Prepare data for export
 part2 <- carrot_forecast_out %>%
-  select(date,price=.mean,`lower`,`upper`)
+  select(date,price=.mean,`lower`="95%_lower",`upper`="95%_upper")
 
 to_export <- bind_rows(carrot_ts,part2)
 
@@ -146,9 +206,7 @@ write_csv(to_export,"carrot_forecast.csv")
 
 {{< video https://youtu.be/KMrGAUcnM00 aspect-ratio="16x9" >}}
 
-# Tableau 
-
-## Plotting prediction intervals in Tableau
+# Tableau: Plotting prediction intervals
 
 Last time we showed that if you apply Tableau's forecasting features, Tableau will automatically plot prediction intervals for you. But what if you want to plot the prediction intervals you created in R instead?
 
