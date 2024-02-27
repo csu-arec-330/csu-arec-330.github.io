@@ -11,6 +11,8 @@ format:
 
 ## Agenda 
 
+Review regression analysis
+
 Forecast prediction intervals
 
 Advanced forecasting I: Additive vs. Multiplicative models
@@ -34,9 +36,8 @@ Project 1 reminder and details
 <!-- :::: -->
 
 
-# Intro to Prediction Intervals
 
-## But first... A review question {.scrollable .smaller}
+# A review question {.scrollable .smaller}
 
 ![](includes/tableau_reg.png){width="100%"}
 
@@ -51,23 +52,25 @@ C. 0.0288396
 
 D. 0.0204868  
 
+# Intro to Prediction Intervals
+
 # 
 ::: {.r-fit-text }
 **What are *prediction intervals*?** <br> <br>
 The interval within which we expect  <br> 
 values of our $y$ variable to lie at <br> 
-a given point in time
+a given point in time.
 :::
 
-## Prediction intervals: An Example 
+## Prediction intervals: An example 
 
-- Our forecast from last time predicted that carrot prices will be 275.91 on January 1, 2025.
+- Our forecast from last week predicted that carrot prices will be 207.721 *250 months* after the financial crisis.
 
-- We recognize that it is incredibly unlikely for us to perfectly predict carrot prices in two years...
+- We recognize that it is incredibly unlikely for us to perfectly predict carrot prices in twenty years...
 
-- Instead, what if we construct a *range* of estimates that we are pretty confident encompasses the true value of carrot prices in two years?
+- Instead, what if we construct a *range* of estimates that we are pretty confident encompasses the true value of carrot prices?
 
-- Perhaps we are reasonably sure the true price will be between 200 and 350...
+- Perhaps we are reasonably sure the true price will be between 160 and 280...
 
 ## Prediction intervals: The intuition {.scrollable}
 
@@ -75,17 +78,17 @@ The intuition for prediction intervals begins with understanding *confidence int
 
 1. What are confidence intervals (CIs)?
 
-    - A range of values that describe the uncertainty of an estimate.
+    - A range of values that describe the uncertainty of an estimate of a parameter ($\beta_1$). Recall the regression equation: $Y_i = \beta_0 + \beta_1X_i + \varepsilon_i$
 
-    - Similarly to p-values, CIs give us information on whether estimates are statistically significantly different from zero - does the interval include 0?
+    - Similarly to p-values, CIs give us information on whether estimates are statistically significantly different from zero: Does the interval include 0?
 
-    - CIs go beyond p-values and give us the range of possible effects or correlations.
+    - CIs go beyond p-values and give us the range of possible values representing the correlation between $X$ and $Y$.
 
 ## Prediction intervals: The intuition 
 
 2. How are confidence intervals calculated?
 
-    - Using the estimate, its standard error, the sample size, critical values, and an assumption on the distribution of your data.
+    - Using the estimate, its standard error, the sample size, critical values, and an assumption about the distribution of your data.
 
 ![](includes/tableau_describe.png){width="100%"}
 
@@ -108,7 +111,7 @@ The intuition for prediction intervals begins with understanding *confidence int
 
 The most frequently used prediction (and confidence) interval is 95%.
 
-**The intuitive interpretation**: we are 95% confident that our prediction interval contains/encompasses the value of our outcome variable that will be realized.
+**The intuitive interpretation**: We are 95% confident that our prediction interval contains/encompasses the value of our outcome variable that will be realized.
 
 In Tableau (and most other software) prediction intervals are shown with shaded regions around the prediction.
 
@@ -117,28 +120,36 @@ In Tableau (and most other software) prediction intervals are shown with shaded 
 ![](includes/Tableau_forecast.png){width="80%"}
 :::
 
+
+
+<!---
 # 
 ::: {style="text-align: center"}
 ![100 possible future paths of 5 year forecast with 95% prediction intervals](includes/carrot_price_spaghetti.png){width="100%"}
 :::
+--->
 
 ## Review Question 1 
 
 **Which of the following best defines confidence intervals?**
 
-A. A range of values used to estimate a population parameter with a specified level of confidence.
+A. A range of values that is likely to contain an unknown population parameter with a specified level of confidence.
 
 B. A range of values that represents the mean of a sample.
 
 C. A range of values used to estimate a future value of a variable with a specified level of confidence.
 
 D. A range of values that is used to test a hypothesis about a population parameter.
+
+::: {.notes}
+Answer: A. CIs are a statistical technique used to infer the possible range of values an unknown population parameter (like the mean or proportion) is likely to fall within, based on sample data. The "specified level of confidence" is a pre-chosen probability, often expressed as a percentage (e.g., 95% or 99%), which indicates how confident we are that the parameter lies within this range. If we were to repeat the sampling process numerous times, we expect that the confidence interval would contain the true parameter value in the percentage of times indicated by the confidence level.
+:::
 
 ## Review Question 2 
 
 **Which of the following best defines prediction intervals?**
 
-A. A range of values used to estimate a population parameter with a specified level of confidence.
+A. A range of values that is likely to contain an unknown population parameter with a specified level of confidence.
 
 B. A range of values that represents the mean of a sample.
 
@@ -146,6 +157,9 @@ C. A range of values used to estimate a future value of a variable with a specif
 
 D. A range of values that is used to test a hypothesis about a population parameter.
 
+::: {.notes}
+Answer: C. Unlike a confidence interval, which is used to estimate a range within which an unknown population parameter is expected to lie, a prediction interval provides a range within which we expect a future observation or value of a variable to fall, given a specified level of confidence. This is particularly useful in forecasting where we're interested in predicting individual outcomes rather than estimating population parameters.
+:::
 
 ## Review Question 3 {.smaller}
 
@@ -161,26 +175,32 @@ D. Confidence intervals are used for large sample sizes, while prediction interv
 
 E. Confidence intervals and prediction intervals are the same thing.
 
-## Prediction intervals: Estimation
+::: {.notes}
+Answer: B. Confidence intervals are used to estimate the range within which a population parameter (such as the mean or proportion) is likely to lie with a specified level of confidence. On the other hand, prediction intervals provide a range within which we expect future observations of a variable to fall, also with a specified level of confidence.
+:::
 
-Like CIs, prediction intervals require a few inputs and assumptions.
+## Prediction intervals: Estimation {.scrollable}
 
-The formula for the standard 95% prediction interval for the $h$-step forecast is:
+Prediction intervals require a few inputs and assumptions.
 
-$$
-\widehat{y}_{T+h|T} \pm 1.96 \cdot \widehat{\sigma}_h
-$$
+The formula for a 95% prediction interval for the $h$-step forecast is:
 
-where,
-$\widehat{y}_{T+h|T}$ is our prediction of $y$ $h$ periods from the end of our data,
 
-1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal...,
+$$\text{Prediction Interval for }{y}_{T+h|T} = \widehat{y}_{T+h|T} \pm 1.96 \cdot \widehat{\sigma}_h$$
+
+where 
+
+$\widehat{y}_{T+h|T}$ is our prediction of $y$ $h$ periods into the future
+
+$h$ represents the forecast horizon, or the specific number of intervals (e.g., days, months, years) from the last observed data point 
+
+1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal
 
 $\widehat{\sigma}_h$ is an estimate of the standard deviation for the $h$-step forecast
 
 ## Prediction intervals: The multiplier {.scrollable}
 
-This equation can be written more generally as:
+The equation for a prediction interval can be written more generally as:
 $$
 \widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
 $$
@@ -209,9 +229,9 @@ $$
 
 where,
 
-$K$ is the number of parameters estimated in the forecasting method,
+$K$ is the number of parameters estimated in the forecasting method
 
-$M$ is the number of missing values in the residuals,
+$M$ is the number of missing values in the residuals
 
 $e_t$ is the residual at time $t$ (recall your decomposition...) 
 
@@ -228,19 +248,13 @@ Note that there are many other methods for estimating the standard deviation of 
 This formula is for the Na&iuml;ve method, and is among the simplest.
 
 
-# 
-::: {.r-fit-text }
-**Prediction intervals: Application** <br> <br>
+## Prediction intervals: Application
 
-In lab this week, <br>
-we will show you how to <br>
-estimate prediction intervals in R <br>
-and plot them in Tableau. 
-:::
+In lab this week, we will show you how to estimate prediction intervals in R and plot them in Tableau. 
 
 # Additive vs. Multiplicative Models
 
-## Additive vs. Multiplicative Decompositions
+## Additive vs. Multiplicative Decompositions {.scrollable}
 There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative.
 
 These are known as classical decomposition methods, and are estimated according to:
@@ -269,7 +283,7 @@ that they should trust our predictions.
 #
 ::: {.r-fit-text }
 **The solution:** <br> 
-time series cross-validation 
+Time series cross-validation 
 :::
 
 
@@ -301,7 +315,7 @@ Test data =  orange
 ![](includes/train_test2.png){width="75%"}
 :::
 
-## Time series cross-validation: Evaluating?
+## Time series cross-validation: Evaluating? {.scrollable}
 
 Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:
 
@@ -320,7 +334,9 @@ This is a useful resource for these evaluation methods: <https://medium.com/anal
 :::
 
 
-## REMINDER: Project 1
+## REMINDER: Project 1 {.scrollable}
+
+Groups of 2
 
 Choose an ag biz or enre management question to answer with time series data
 
@@ -330,9 +346,9 @@ Analyze trends
 
 Generate a forecast 
 
-Generate prediction intervals
+$\rightarrow$ Generate prediction intervals
 
-Present results and conclusions in class Fri March 10
+Present results in a recorded video
 
 ## EXAMPLE: The Question
 
@@ -344,7 +360,7 @@ I am currently growing almonds and walnuts, and in the coming season I will plan
 
 - Both trees will continue producing for roughly 25 years.
 
-How can I decide which trees to plant?
+How will I decide which trees to plant?
 
 ## EXAMPLE: The Data and Analysis
 
@@ -352,21 +368,21 @@ How can I decide which trees to plant?
 
 **ANALYSIS:** Forecast prices for the next 10 years (really 25 would better answer your Q, but is probably too long of a prediction period)
 
-**ANSWER:** I will plant walnuts because over a 10 year horizon they would yield higher revenues than almond trees, despite that I would have to wait longer before selling them.
+**ANSWER:** I will plant walnuts because over a 10 year horizon they would yield higher revenues than almond trees, even though I would have to wait longer before selling them.
 
 ## Presentation Overview {.scrollable}
 
-Your presentations should be roughly 8 minutes. (let's say 6-9 minutes)
+Your presentation videos should be roughly 8 minutes. (Minimum: 6 min, Maximum 9 min)
 
 You should begin your presentation with the following: 
 
-- Who are you? (what business, organization, etc. wants an answer to your question)
+- Who are you? (what business, organization, etc. wants an answer to your question?)
 
 - Who is your audience? (business executive team, policy makers, consumers?)
 
 You should then:
 
-- Give us any relevant background info that is necessary to understanding your question (as in my example...)
+- Give us any relevant background info that is necessary to understanding your question
 
 - State your question
 
@@ -394,9 +410,11 @@ Discussion/Conclusion:
 
 ## Final Project Submission {.scrollable}
 
-Each group member will be responsible for providing this information in a report on their google site. You can both have an identical report, but must post it to your personal webpage.
+The video presentation is part 1 of the project.
 
-Your report should summarize the same information as your presentation, and can include additional information and visualizations if they are helpful for answering your question.
+A report summarizing the presentation content is part 2 of the project. Your report should summarize the same information as your presentation, and can include additional information and visualizations if they are helpful for answering your question.
+
+Each group member will be responsible for uploading the report onto their Google site. You can both have an identical report, but must post it to your personal webpage.
 
 ## References {.scrollable .smaller}
 
