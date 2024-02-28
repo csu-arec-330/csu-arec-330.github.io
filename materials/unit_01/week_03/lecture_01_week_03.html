@@ -367,7 +367,7 @@
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p><strong>What are <em>prediction intervals</em>?</strong> <br> <br> The interval within which we expect <br> values of our <span class="math inline">\(y\)</span> variable to lie at <br> a given point in time.</p>
+<p><strong>What are <em>prediction intervals</em>?</strong> <br> <br> The interval within which we expect <br> values of our <span class="math inline">\(y\)</span> variable to lie at <br> a future point in time.</p>
 </div>
 </section>
 <section id="prediction-intervals-an-example" class="slide level2">
@@ -418,7 +418,7 @@
 <section id="prediction-intervals-the-intuition-3" class="slide level2">
 <h2>Prediction intervals: The intuition</h2>
 <p>The most frequently used prediction (and confidence) interval is 95%.</p>
-<p><strong>The intuitive interpretation</strong>: We are 95% confident that our prediction interval contains/encompasses the value of our outcome variable that will be realized.</p>
+<p><strong>The intuitive interpretation</strong>: We are 95% confident that our prediction interval contains the value of our outcome variable that will be realized.</p>
 <p>In Tableau (and most other software) prediction intervals are shown with shaded regions around the prediction.</p>
 </section></section>
 <section>
@@ -475,28 +475,16 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="review-question-3" class="slide level2 smaller">
-<h2>Review Question 3</h2>
-<p><strong>Which of the following best describes the difference between prediction and confidence intervals?</strong></p>
-<p>A. Confidence intervals estimate future values of a variable, while prediction intervals estimate population parameters.</p>
-<p>B. Confidence intervals estimate population parameters, while prediction intervals estimate future values of a variable.</p>
-<p>C. Confidence intervals are used for small sample sizes, while prediction intervals are used for large sample sizes.</p>
-<p>D. Confidence intervals are used for large sample sizes, while prediction intervals are used for small sample sizes.</p>
-<p>E. Confidence intervals and prediction intervals are the same thing.</p>
-<aside class="notes">
-<p>Answer: B. Confidence intervals are used to estimate the range within which a population parameter (such as the mean or proportion) is likely to lie with a specified level of confidence. On the other hand, prediction intervals provide a range within which we expect future observations of a variable to fall, also with a specified level of confidence.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<!-- ## Review Question 3 {.smaller} -->
+<!-- **Which of the following best describes the difference between prediction and confidence intervals?** -->
+<!-- A. Confidence intervals estimate future values of a variable, while prediction intervals estimate population parameters. -->
+<!-- B. Confidence intervals estimate population parameters, while prediction intervals estimate future values of a variable. -->
+<!-- C. Confidence intervals are used for small sample sizes, while prediction intervals are used for large sample sizes. -->
+<!-- D. Confidence intervals are used for large sample sizes, while prediction intervals are used for small sample sizes. -->
+<!-- E. Confidence intervals and prediction intervals are the same thing. -->
+<!-- ::: {.notes} -->
+<!-- Answer: B. Confidence intervals are used to estimate the range within which a population parameter (such as the mean or proportion) is likely to lie with a specified level of confidence. On the other hand, prediction intervals provide a range within which we expect future observations of a variable to fall, also with a specified level of confidence. -->
+<!-- ::: -->
 </section>
 <section id="prediction-intervals-estimation" class="slide level2 scrollable">
 <h2>Prediction intervals: Estimation</h2>
@@ -504,7 +492,7 @@
 <p>The formula for a 95% prediction interval for the <span class="math inline">\(h\)</span>-step forecast is:</p>
 <p><span class="math display">\[\text{Prediction Interval for }{y}_{T+h|T} = \widehat{y}_{T+h|T} \pm 1.96 \cdot \widehat{\sigma}_h\]</span></p>
 <p>where</p>
-<p><span class="math inline">\(\widehat{y}_{T+h|T}\)</span> is our prediction of <span class="math inline">\(y\)</span> <span class="math inline">\(h\)</span> periods into the future</p>
+<p><span class="math inline">\(\widehat{y}_{T+h|T}\)</span> is our prediction of <span class="math inline">\(y\)</span>, <span class="math inline">\(h\)</span> periods into the future</p>
 <p><span class="math inline">\(h\)</span> represents the forecast horizon, or the specific number of intervals (e.g., days, months, years) from the last observed data point</p>
 <p>1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal</p>
 <p><span class="math inline">\(\widehat{\sigma}_h\)</span> is an estimate of the standard deviation for the <span class="math inline">\(h\)</span>-step forecast</p>
@@ -553,43 +541,36 @@
 <h2>Prediction intervals: Standard deviation</h2>
 <p>When forecasting 1 step ahead (<span class="math inline">\(h=1\)</span>), we will estimate the standard deviation of the forecast distribution according to:</p>
 <p><span class="math display">\[
-\widehat{\sigma} = \sqrt{\frac{1}{T-K-M}\sum^T_{t=1}e^2_t}
+\widehat{\sigma} = \sqrt{\frac{1}{T-K}\sum^T_{t=1}e^2_t}
 \]</span></p>
 <p>where,</p>
+<p><span class="math inline">\(T\)</span> is the number of data points in the time series</p>
 <p><span class="math inline">\(K\)</span> is the number of parameters estimated in the forecasting method</p>
-<p><span class="math inline">\(M\)</span> is the number of missing values in the residuals</p>
 <p><span class="math inline">\(e_t\)</span> is the residual at time <span class="math inline">\(t\)</span> (recall your decomposition…)</p>
 </section>
-<section id="prediction-intervals-standard-deviation-1" class="slide level2">
+<section id="prediction-intervals-standard-deviation-1" class="slide level2 scrollable">
 <h2>Prediction intervals: Standard deviation</h2>
 <p>When forecasting <span class="math inline">\(h\)</span> steps ahead (<span class="math inline">\(h\geq 1\)</span>), we can estimate the standard deviation of the forecast distribution according to:</p>
 <p><span class="math display">\[
 \widehat{\sigma}_h = \widehat{\sigma}\sqrt{h}
 \]</span></p>
 <p>Note that there are many other methods for estimating the standard deviation of the forecasting distribution.</p>
-<p>This formula is for the Naïve method, and is among the simplest.</p>
-</section>
+<p>This formula is for the Naïve method, and is among the simplest.<sup>1</sup></p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>This is a useful resource for more information on these methods and others: <a href="https://otexts.com/fpp3/classical-decomposition.html" class="uri">https://otexts.com/fpp3/classical-decomposition.html</a></p></li></ol></aside></section>
 <section id="prediction-intervals-application" class="slide level2">
 <h2>Prediction intervals: Application</h2>
 <p>In lab this week, we will show you how to estimate prediction intervals in R and plot them in Tableau.</p>
-</section></section>
-<section>
-<section id="additive-vs.-multiplicative-models" class="title-slide slide level1 center">
-<h1>Additive vs.&nbsp;Multiplicative Models</h1>
+<!-- # Additive vs. Multiplicative Models -->
+<!-- ## Additive vs. Multiplicative Decompositions {.scrollable} -->
 
-</section>
-<section id="additive-vs.-multiplicative-decompositions" class="slide level2 scrollable">
-<h2>Additive vs.&nbsp;Multiplicative Decompositions</h2>
-<p>There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative.</p>
-<p>These are known as classical decomposition methods, and are estimated according to:</p>
-<ol type="1">
-<li><p>Additive: <span class="math inline">\(y_t = T_t + S_t + R_t\)</span></p></li>
-<li><p>Multiplicative: <span class="math inline">\(y_t = T_t \times S_t \times R_t\)</span></p></li>
-</ol>
-<div style="font-size: 80%;">
-<p>Note there are a few other options for forecasting using decompositions, but we won’t cover them in this class.</p>
-<p>This is a useful resource for more information on these methods and others: <a href="https://otexts.com/fpp3/classical-decomposition.html" class="uri">https://otexts.com/fpp3/classical-decomposition.html</a></p>
-</div>
+<!-- There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative. -->
+<!-- These are known as classical decomposition methods, and are estimated according to: -->
+<!-- 1. Additive: $y_t = T_t + S_t + R_t$ -->
+<!-- 2. Multiplicative: $y_t = T_t \times S_t \times R_t$ -->
+<!-- ::: {style="font-size: 80%;"} -->
+<!-- Note there are a few other options for forecasting using decompositions, but we won't cover them in this class. -->
+<!-- This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html> -->
+<!-- ::: -->
 </section></section>
 <section id="validating-predictions" class="title-slide slide level1 center">
 <h1>Validating Predictions</h1>
@@ -636,10 +617,10 @@
 <h2>Time series cross-validation: Evaluating?</h2>
 <p>Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:</p>
 <ul>
-<li><p>Mean Forecast Error (MFE)</p></li>
-<li><p>Mean Absolute Error (MAE)</p></li>
-<li><p>Root Mean Square Error (RMSE)</p></li>
-<li><p>Mean Absolute Percentage Error (MAPE)</p></li>
+<li><p>Mean Forecast Error (MFE): average difference between prediction and observed <span class="math inline">\(\sum_{t=1}^{H} \frac{\hat{y}_t - y_t}{H}\)</span></p></li>
+<li><p>Mean Absolute Error (MAE): average absolute value of the difference between the prediction and observed <span class="math inline">\(\sum_{t=1}^{H} \frac{| \hat{y}_t - y_t | }{H}\)</span></p></li>
+<li><p>Root Mean Square Error (RMSE): square root of the average of the squared difference between the prediction and observed <span class="math inline">\(\sqrt{\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )^2 }{H}}\)</span></p></li>
+<li><p>Mean Absolute Percentage Error (MAPE): average of the difference between prediction and observed as a fraction of observed <span class="math inline">\(\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )/y_t }{H}\)</span></p></li>
 </ul>
 <p>Choose the forecasting model that minimizes prediction error according to these measures.</p>
 <div style="font-size: 80%;">
@@ -720,6 +701,7 @@
 
 </div>
 </section></section>
+
     </div>
   </div>
 

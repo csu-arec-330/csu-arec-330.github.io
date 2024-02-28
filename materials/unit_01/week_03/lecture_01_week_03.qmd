@@ -59,7 +59,7 @@ D. 0.0204868
 **What are *prediction intervals*?** <br> <br>
 The interval within which we expect  <br> 
 values of our $y$ variable to lie at <br> 
-a given point in time.
+a future point in time.
 :::
 
 ## Prediction intervals: An example 
@@ -111,7 +111,7 @@ The intuition for prediction intervals begins with understanding *confidence int
 
 The most frequently used prediction (and confidence) interval is 95%.
 
-**The intuitive interpretation**: We are 95% confident that our prediction interval contains/encompasses the value of our outcome variable that will be realized.
+**The intuitive interpretation**: We are 95% confident that our prediction interval contains the value of our outcome variable that will be realized.
 
 In Tableau (and most other software) prediction intervals are shown with shaded regions around the prediction.
 
@@ -161,23 +161,23 @@ D. A range of values that is used to test a hypothesis about a population parame
 Answer: C. Unlike a confidence interval, which is used to estimate a range within which an unknown population parameter is expected to lie, a prediction interval provides a range within which we expect a future observation or value of a variable to fall, given a specified level of confidence. This is particularly useful in forecasting where we're interested in predicting individual outcomes rather than estimating population parameters.
 :::
 
-## Review Question 3 {.smaller}
+<!-- ## Review Question 3 {.smaller} -->
 
-**Which of the following best describes the difference between prediction and confidence intervals?**
+<!-- **Which of the following best describes the difference between prediction and confidence intervals?** -->
 
-A. Confidence intervals estimate future values of a variable, while prediction intervals estimate population parameters.
+<!-- A. Confidence intervals estimate future values of a variable, while prediction intervals estimate population parameters. -->
 
-B. Confidence intervals estimate population parameters, while prediction intervals estimate future values of a variable.
+<!-- B. Confidence intervals estimate population parameters, while prediction intervals estimate future values of a variable. -->
 
-C. Confidence intervals are used for small sample sizes, while prediction intervals are used for large sample sizes.
+<!-- C. Confidence intervals are used for small sample sizes, while prediction intervals are used for large sample sizes. -->
 
-D. Confidence intervals are used for large sample sizes, while prediction intervals are used for small sample sizes.
+<!-- D. Confidence intervals are used for large sample sizes, while prediction intervals are used for small sample sizes. -->
 
-E. Confidence intervals and prediction intervals are the same thing.
+<!-- E. Confidence intervals and prediction intervals are the same thing. -->
 
-::: {.notes}
-Answer: B. Confidence intervals are used to estimate the range within which a population parameter (such as the mean or proportion) is likely to lie with a specified level of confidence. On the other hand, prediction intervals provide a range within which we expect future observations of a variable to fall, also with a specified level of confidence.
-:::
+<!-- ::: {.notes} -->
+<!-- Answer: B. Confidence intervals are used to estimate the range within which a population parameter (such as the mean or proportion) is likely to lie with a specified level of confidence. On the other hand, prediction intervals provide a range within which we expect future observations of a variable to fall, also with a specified level of confidence. -->
+<!-- ::: -->
 
 ## Prediction intervals: Estimation {.scrollable}
 
@@ -190,13 +190,15 @@ $$\text{Prediction Interval for }{y}_{T+h|T} = \widehat{y}_{T+h|T} \pm 1.96 \cdo
 
 where 
 
-$\widehat{y}_{T+h|T}$ is our prediction of $y$ $h$ periods into the future
+$\widehat{y}_{T+h|T}$ is our prediction of $y$, $h$ periods into the future
 
 $h$ represents the forecast horizon, or the specific number of intervals (e.g., days, months, years) from the last observed data point 
 
 1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal
 
 $\widehat{\sigma}_h$ is an estimate of the standard deviation for the $h$-step forecast
+
+
 
 ## Prediction intervals: The multiplier {.scrollable}
 
@@ -224,18 +226,18 @@ Note that these all assume a normal distribution of future observations.
 When forecasting 1 step ahead ($h=1$), we will estimate the standard deviation of the forecast distribution according to:
 
 $$
-\widehat{\sigma} = \sqrt{\frac{1}{T-K-M}\sum^T_{t=1}e^2_t}
+\widehat{\sigma} = \sqrt{\frac{1}{T-K}\sum^T_{t=1}e^2_t}
 $$
 
 where,
 
-$K$ is the number of parameters estimated in the forecasting method
+$T$ is the number of data points in the time series
 
-$M$ is the number of missing values in the residuals
+$K$ is the number of parameters estimated in the forecasting method
 
 $e_t$ is the residual at time $t$ (recall your decomposition...) 
 
-## Prediction intervals: Standard deviation
+## Prediction intervals: Standard deviation {.scrollable}
 
 When forecasting $h$ steps ahead ($h\geq 1$), we can estimate the standard deviation of the forecast distribution according to:
 
@@ -245,29 +247,31 @@ $$
 
 Note that there are many other methods for estimating the standard deviation of the forecasting distribution.
 
-This formula is for the Na&iuml;ve method, and is among the simplest.
+This formula is for the Na&iuml;ve method, and is among the simplest.[^1]
+
+[^1]: This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html>
 
 
 ## Prediction intervals: Application
 
 In lab this week, we will show you how to estimate prediction intervals in R and plot them in Tableau. 
 
-# Additive vs. Multiplicative Models
+<!-- # Additive vs. Multiplicative Models -->
 
-## Additive vs. Multiplicative Decompositions {.scrollable}
-There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative.
+<!-- ## Additive vs. Multiplicative Decompositions {.scrollable} -->
+<!-- There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative. -->
 
-These are known as classical decomposition methods, and are estimated according to:
+<!-- These are known as classical decomposition methods, and are estimated according to: -->
 
-1. Additive: $y_t = T_t + S_t + R_t$
+<!-- 1. Additive: $y_t = T_t + S_t + R_t$ -->
 
-2. Multiplicative: $y_t = T_t \times S_t \times R_t$
+<!-- 2. Multiplicative: $y_t = T_t \times S_t \times R_t$ -->
 
-::: {style="font-size: 80%;"}
-Note there are a few other options for forecasting using decompositions, but we won't cover them in this class.
+<!-- ::: {style="font-size: 80%;"} -->
+<!-- Note there are a few other options for forecasting using decompositions, but we won't cover them in this class. -->
 
-This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html>
-:::
+<!-- This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html> -->
+<!-- ::: -->
 
 
 # Validating Predictions
@@ -319,13 +323,14 @@ Test data =  orange
 
 Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:
 
-- Mean Forecast Error (MFE)
+- Mean Forecast Error (MFE): average difference between prediction and observed $\sum_{t=1}^{H} \frac{\hat{y}_t - y_t}{H}$
 
-- Mean Absolute Error (MAE)
+- Mean Absolute Error (MAE): average absolute value of the difference between the prediction and observed $\sum_{t=1}^{H} \frac{| \hat{y}_t - y_t | }{H}$
 
-- Root Mean Square Error (RMSE)
+- Root Mean Square Error (RMSE): square root of the average of the squared difference between the prediction and observed $\sqrt{\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )^2 }{H}}$
 
-- Mean Absolute Percentage Error (MAPE)
+- Mean Absolute Percentage Error (MAPE): average of the difference between prediction and observed as a fraction of observed
+$\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )/y_t }{H}$
 
 Choose the forecasting model that minimizes prediction error according to these measures.
 
