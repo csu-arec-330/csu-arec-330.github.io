@@ -91,11 +91,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#tableau-plotting-prediction-intervals" id="toc-tableau-plotting-prediction-intervals" class="nav-link" data-scroll-target="#tableau-plotting-prediction-intervals">Tableau: Plotting prediction intervals</a>
   <ul class="collapse">
-  <li><a href="#option-1-dont-worry-about-shading" id="toc-option-1-dont-worry-about-shading" class="nav-link" data-scroll-target="#option-1-dont-worry-about-shading">Option 1: Don’t worry about shading</a></li>
-  <li><a href="#option-2-lets-jump-through-some-hoops-to-add-shading" id="toc-option-2-lets-jump-through-some-hoops-to-add-shading" class="nav-link" data-scroll-target="#option-2-lets-jump-through-some-hoops-to-add-shading">Option 2: Let’s jump through some hoops to add shading</a></li>
-  <li><a href="#presenting-tableau-option-1-stories" id="toc-presenting-tableau-option-1-stories" class="nav-link" data-scroll-target="#presenting-tableau-option-1-stories">Presenting Tableau Option 1: Stories</a></li>
-  <li><a href="#presenting-tableau-option-2-embed-in-powerpoint" id="toc-presenting-tableau-option-2-embed-in-powerpoint" class="nav-link" data-scroll-target="#presenting-tableau-option-2-embed-in-powerpoint">Presenting Tableau Option 2: Embed in Powerpoint</a></li>
-  <li><a href="#now-get-together-with-your-teammate-and-spend-some-time-on-your-project" id="toc-now-get-together-with-your-teammate-and-spend-some-time-on-your-project" class="nav-link" data-scroll-target="#now-get-together-with-your-teammate-and-spend-some-time-on-your-project">Now get together with your teammate and spend some time on your project!</a></li>
+  <li><a href="#option-1-simple-line-graphs-no-shading" id="toc-option-1-simple-line-graphs-no-shading" class="nav-link" data-scroll-target="#option-1-simple-line-graphs-no-shading">Option 1: Simple line graphs, no shading</a></li>
+  <li><a href="#option-2-adding-shading" id="toc-option-2-adding-shading" class="nav-link" data-scroll-target="#option-2-adding-shading">Option 2: Adding shading</a></li>
+  <li><a href="#presenting-in-tableau" id="toc-presenting-in-tableau" class="nav-link" data-scroll-target="#presenting-in-tableau">Presenting in Tableau</a>
+  <ul class="collapse">
+  <li><a href="#option-1-stories" id="toc-option-1-stories" class="nav-link" data-scroll-target="#option-1-stories">Option 1: Stories</a></li>
+  <li><a href="#option-2-embed-in-powerpoint" id="toc-option-2-embed-in-powerpoint" class="nav-link" data-scroll-target="#option-2-embed-in-powerpoint">Option 2: Embed in Powerpoint</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -273,52 +275,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="tableau-plotting-prediction-intervals" class="level1">
 <h1>Tableau: Plotting prediction intervals</h1>
-<p>Last time we showed that if you apply Tableau’s forecasting features, Tableau will automatically plot prediction intervals for you. But what if you want to plot the prediction intervals you created in R instead?</p>
-<section id="option-1-dont-worry-about-shading" class="level3">
-<h3 class="anchored" data-anchor-id="option-1-dont-worry-about-shading">Option 1: Don’t worry about shading</h3>
+
+<!---
+Last time we showed that if you apply Tableau's forecasting features, Tableau will automatically plot prediction intervals for you. But what if you want to plot the prediction intervals you created in R instead?
+--->
+<p>Using the data we exported from R, we will plot the prediction intervals.</p>
+<section id="option-1-simple-line-graphs-no-shading" class="level3">
+<h3 class="anchored" data-anchor-id="option-1-simple-line-graphs-no-shading">Option 1: Simple line graphs, no shading</h3>
 <ol type="1">
 <li><p>Connect to the <code>carrot_forecast</code> dataset you just exported from R.</p></li>
-<li><p>Create two new calculated fields. One called <code>Observed Price</code> and one called <code>Forecasted Price</code>. You can create both of these using an IF THEN statement, for <code>Observed Price</code> we want all prices through the end of our data (January 1, 2023): <code>IF [Date] &lt;= #January 1, 2023# THEN [Price] ELSE NULL END</code>. You should write a similar statement to get <code>Forecasted Price</code> after this date…</p></li>
-<li><p>Create a line chart that includes <code>Observed Price</code>, <code>Forecasted Price</code>, <code>Upper</code>, and <code>Lower</code>.</p></li>
-<li><p>Change the colors to something useful. Let’s do the same gray shade for both upper and lower.</p></li>
+<li><p>Create two new calculated fields. One called <code>Observed Price</code> and one called <code>Forecasted Price</code>. You can create both of these using an IF THEN ELSE statement:</p></li>
+</ol>
+<ul>
+<li><code>Observed Price</code>: We want all prices through the end of our observed data (January 1, 2023)</li>
+</ul>
+<p><code>IF [Date] &lt;= #January 1, 2024# THEN [Price] ELSE NULL END</code></p>
+<ul>
+<li><code>Forecasted Price</code>: We want all forecasted prices (after and including February 1, 2023)</li>
+</ul>
+<p><code>IF [Date] &gt; #January 1, 2024# THEN [Price] ELSE NULL END</code></p>
+<blockquote class="blockquote">
+<p>Note: What error message are you seeing when you try to create the two new calculated fields? What do you need to do to fix the error?</p>
+</blockquote>
+<ol start="3" type="1">
+<li>Create a line chart that includes <code>Observed Price</code>, <code>Forecasted Price</code>, <code>Upper</code>, and <code>Lower</code>.</li>
+</ol>
+<blockquote class="blockquote">
+<p>Note: There are two more modifications you need to do before you can plot Upper and Lower. What modifications do you need to do?</p>
+</blockquote>
+<ol start="4" type="1">
+<li>Change the colors to something useful. Use the same gray shade for both upper and lower.</li>
 </ol>
 </section>
-<section id="option-2-lets-jump-through-some-hoops-to-add-shading" class="level3">
-<h3 class="anchored" data-anchor-id="option-2-lets-jump-through-some-hoops-to-add-shading">Option 2: Let’s jump through some hoops to add shading</h3>
+<section id="option-2-adding-shading" class="level3">
+<h3 class="anchored" data-anchor-id="option-2-adding-shading">Option 2: Adding shading</h3>
 <ol type="1">
 <li><p>Duplicate your previous worksheet.</p></li>
-<li><p>Change your chart to an Area Chart.</p></li>
-<li><p>“unstack” your lines by going to <code>Analysis</code> -&gt; <code>Stack Marks</code> -&gt; <code>Off</code></p></li>
-<li><p>Rearrange the order of your forecast and prediction intervals: Lower, Forecast, Upper.</p></li>
-<li><p>Change your colors - white for <code>Observed Price</code> and <code>Lower</code>, gray for <code>Upper</code> and <code>Forecasted Price</code>.</p></li>
+<li><p>In the Marks card, change your chart to an Area Chart.</p></li>
+<li><p>Unstack your lines by going to <code>Analysis</code> -&gt; <code>Stack Marks</code> -&gt; <code>Off</code></p></li>
+<li><p>Rearrange the order of your forecast and prediction intervals in the Measure card: Lower, Forecasted, Observed, Upper.</p></li>
+<li><p>Change your colors: White for <code>Observed Price</code> and <code>Lower</code>, Gray for <code>Upper</code> and <code>Forecasted Price</code>.</p></li>
 <li><p>Create a new line graph by dragging the original <code>Price</code> field to the Rows Shelf.</p></li>
 <li><p>Change this new pane to a line chart.</p></li>
 <li><p>Change the colors to reflect forecasted and original prices by creating a new calculated field that equals “Forecasted Price” after January 1, 2023, and that equals “Observed Price” before then. Drag this calculated field to the Colors Card.</p></li>
-<li><p>Combine your charts by creating a dual axis. Right click the Y-axis -&gt; Select <code>Dual Axis</code></p></li>
-<li><p>Sychronize your axes. Right click the second Y-axis -&gt; Select <code>Synchronize Axis</code>. You can then hide this axis. Right click -&gt; Click <code>Show Header</code> to de-select it.</p></li>
-<li><p>Notice that the area under the lines no longer has your y-axis gridlines. Let’s just get rid of all the gridlines to make this look a bit nicer. Right click on your chart -&gt; select <code>Format</code>. In the format pane, naviage to the lines icon, change Grid Lines to <code>None</code>.</p></li>
+</ol>
+<p><code>IF [Date] &lt;= #January 1, 2024# THEN "Observed Price" ELSE "Forecasted Price" END</code></p>
+<ol start="9" type="1">
+<li><p>Combine your charts by creating a dual axis. Right click the Y-axis of the Price line graph -&gt; Select <code>Dual Axis</code></p></li>
+<li><p>Synchronize your axes. Right click the second Y-axis -&gt; Select <code>Synchronize Axis</code>. You can then hide this axis. Right click -&gt; Click <code>Show Header</code> to de-select it.</p></li>
+<li><p>Notice that the area under the Price line no longer has your y-axis gridlines. Let’s just get rid of all the gridlines to make this look a bit nicer. Right click on your chart -&gt; select <code>Format</code>. In the format pane, navigate to the lines icon, change Grid Lines to <code>None</code>.</p></li>
 <li><p>Finally, go back to your last sheet. Notice that the colors between your sheets are linked. Tableau does this to ensure your sheets are cohesive, but sometimes we want different colors for the same variable. The workaround for this is to duplicate each of the variables you want to assign a different color and use those in this sheet instead of the original variables.</p></li>
 </ol>
 </section>
-<section id="presenting-tableau-option-1-stories" class="level2">
-<h2 class="anchored" data-anchor-id="presenting-tableau-option-1-stories">Presenting Tableau Option 1: Stories</h2>
+<section id="presenting-in-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="presenting-in-tableau">Presenting in Tableau</h2>
+<section id="option-1-stories" class="level3">
+<h3 class="anchored" data-anchor-id="option-1-stories">Option 1: Stories</h3>
 <p>Tableau Desktop includes its own method for presenting your analyses. These are called stories. This tutorial will show you how to put together a simple story.</p>
 <ol type="1">
-<li><p>Create a new story by clicking the <code>New Story</code> tab at the bottom of the window. Change the size to Powerpoint.</p></li>
-<li><p>Let’s create an intro slide by creating a new Dashboard. Add a background image and a text box.</p></li>
-<li><p>Add your intro slide to your story.</p></li>
+<li><p>Create a new story by clicking the <code>New Story</code> tab at the bottom of the window. Change the size to PowerPoint.</p></li>
+<li><p>Let’s create an Intro slide with text by creating a new Dashboard. Add a background image and a text box.</p></li>
+<li><p>Add your Intro slide to your story.</p></li>
 <li><p>Add a new (blank) story point and bring in one of your worksheets. Give this story point a useful title.</p></li>
 <li><p>See what your story looks like in presentation mode. Note that you can hide the story title to make this look a bit nicer.</p></li>
-<li><p>Note that if you like the formatting features of Powerpoint for text slides, you can also create these slides in powerpoint, export them as images and then add those images to Dashboards.</p></li>
+<li><p>Note that if you like the formatting features of PowerPoint for text slides, you can also create these slides in power point, export them as images and then add those images to Dashboards.</p></li>
 </ol>
 </section>
-<section id="presenting-tableau-option-2-embed-in-powerpoint" class="level2">
-<h2 class="anchored" data-anchor-id="presenting-tableau-option-2-embed-in-powerpoint">Presenting Tableau Option 2: Embed in Powerpoint</h2>
-<p>You can also embed interactive Tableau dashboards from your Tableau Public account directly into powerpoint. This will require you to install the Web Viewer Add-in. I won’t walk you through how to do this right now, but you can follow these instructions to set this up: <a href="https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp" class="uri">https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp</a></p>
+<section id="option-2-embed-in-powerpoint" class="level3">
+<h3 class="anchored" data-anchor-id="option-2-embed-in-powerpoint">Option 2: Embed in Powerpoint</h3>
+<p>You can also embed interactive Tableau dashboards from your Tableau Public account directly into PowerPoint. This will require you to install the Web Viewer Add-in. Follow these instructions to set this up: <a href="https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp">Instructions</a></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/U2oDUOeDHI8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Now get together with your teammate and spend some time on your project!</p>
 </section>
-<section id="now-get-together-with-your-teammate-and-spend-some-time-on-your-project" class="level2">
-<h2 class="anchored" data-anchor-id="now-get-together-with-your-teammate-and-spend-some-time-on-your-project">Now get together with your teammate and spend some time on your project!</h2>
 </section>
 </section>
 

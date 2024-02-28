@@ -208,29 +208,45 @@ write_csv(to_export,"carrot_forecast.csv")
 
 # Tableau: Plotting prediction intervals
 
+<!---
 Last time we showed that if you apply Tableau's forecasting features, Tableau will automatically plot prediction intervals for you. But what if you want to plot the prediction intervals you created in R instead?
+--->
 
-### Option 1: Don't worry about shading
+Using the data we exported from R, we will plot the prediction intervals.
+
+### Option 1: Simple line graphs, no shading
 
 1. Connect to the `carrot_forecast` dataset you just exported from R.
 
-2. Create two new calculated fields. One called `Observed Price` and one called `Forecasted Price`. You can create both of these using an IF THEN statement, for `Observed Price` we want all prices through the end of our data (January 1, 2023): `IF [Date] <= #January 1, 2023# THEN [Price] ELSE NULL END`. You should write a similar statement to get `Forecasted Price` after this date...
+2. Create two new calculated fields. One called `Observed Price` and one called `Forecasted Price`. You can create both of these using an IF THEN ELSE statement: 
+
+- `Observed Price`: We want all prices through the end of our observed data (January 1, 2023)
+
+`IF [Date] <= #January 1, 2024# THEN [Price] ELSE NULL END`
+
+- `Forecasted Price`: We want all forecasted prices (after and including February 1, 2023)  
+
+`IF [Date] > #January 1, 2024# THEN [Price] ELSE NULL END`
+
+> Note: What error message are you seeing when you try to create the two new calculated fields? What do you need to do to fix the error?
 
 3. Create a line chart that includes `Observed Price`, `Forecasted Price`, `Upper`, and `Lower`.
 
-4. Change the colors to something useful. Let's do the same gray shade for both upper and lower. 
+> Note: There are two more modifications you need to do before you can plot Upper and Lower. What modifications do you need to do?
 
-### Option 2: Let's jump through some hoops to add shading
+4. Change the colors to something useful. Use the same gray shade for both upper and lower. 
+
+### Option 2: Adding shading
 
 1. Duplicate your previous worksheet.
 
-2. Change your chart to an Area Chart.
+2. In the Marks card, change your chart to an Area Chart.
 
-3. "unstack" your lines by going to `Analysis` -> `Stack Marks` -> `Off`
+3. Unstack your lines by going to `Analysis` -> `Stack Marks` -> `Off`
 
-4. Rearrange the order of your forecast and prediction intervals: Lower, Forecast, Upper. 
+4. Rearrange the order of your forecast and prediction intervals in the Measure card: Lower, Forecasted, Observed, Upper. 
 
-5. Change your colors - white for `Observed Price` and `Lower`, gray for `Upper` and `Forecasted Price`.
+5. Change your colors: White for `Observed Price` and `Lower`, Gray for `Upper` and `Forecasted Price`.
 
 6. Create a new line graph by dragging the original `Price` field to the Rows Shelf.
 
@@ -238,36 +254,39 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 
 8. Change the colors to reflect forecasted and original prices by creating a new calculated field that equals "Forecasted Price" after January 1, 2023, and that equals "Observed Price" before then. Drag this calculated field to the Colors Card.
 
-9. Combine your charts by creating a dual axis. Right click the Y-axis -> Select `Dual Axis`
+`IF [Date] <= #January 1, 2024# THEN "Observed Price" ELSE "Forecasted Price" END`
 
-10. Sychronize your axes. Right click the second Y-axis -> Select `Synchronize Axis`. You can then hide this axis. Right click -> Click `Show Header` to de-select it.
+9. Combine your charts by creating a dual axis. Right click the Y-axis of the Price line graph -> Select `Dual Axis`
 
-11. Notice that the area under the lines no longer has your y-axis gridlines. Let's just get rid of all the gridlines to make this look a bit nicer. Right click on your chart -> select `Format`. In the format pane, naviage to the lines icon, change Grid Lines to `None`.
+10. Synchronize your axes. Right click the second Y-axis -> Select `Synchronize Axis`. You can then hide this axis. Right click -> Click `Show Header` to de-select it.
+
+11. Notice that the area under the Price line no longer has your y-axis gridlines. Let's just get rid of all the gridlines to make this look a bit nicer. Right click on your chart -> select `Format`. In the format pane, navigate to the lines icon, change Grid Lines to `None`.
 
 12. Finally, go back to your last sheet. Notice that the colors between your sheets are linked. Tableau does this to ensure your sheets are cohesive, but sometimes we want different colors for the same variable. The workaround for this is to duplicate each of the variables you want to assign a different color and use those in this sheet instead of the original variables. 
 
-## Presenting Tableau Option 1: Stories
+## Presenting in Tableau 
+
+### Option 1: Stories
 
 Tableau Desktop includes its own method for presenting your analyses. These are called stories. This tutorial will show you how to put together a simple story.
 
-1. Create a new story by clicking the `New Story` tab at the bottom of the window. Change the size to Powerpoint.
+1. Create a new story by clicking the `New Story` tab at the bottom of the window. Change the size to PowerPoint.
 
-2. Let's create an intro slide by creating a new Dashboard. Add a background image and a text box.
+2. Let's create an Intro slide with text by creating a new Dashboard. Add a background image and a text box.
 
-3. Add your intro slide to your story.
+3. Add your Intro slide to your story.
 
 4. Add a new (blank) story point and bring in one of your worksheets. Give this story point a useful title.
 
 5. See what your story looks like in presentation mode. Note that you can hide the story title to make this look a bit nicer.
 
-6. Note that if you like the formatting features of Powerpoint for text slides, you can also create these slides in powerpoint, export them as images and then add those images to Dashboards. 
+6. Note that if you like the formatting features of PowerPoint for text slides, you can also create these slides in power point, export them as images and then add those images to Dashboards. 
 
-## Presenting Tableau Option 2: Embed in Powerpoint
+### Option 2: Embed in Powerpoint
 
-You can also embed interactive Tableau dashboards from your Tableau Public account directly into powerpoint. This will require you to install the Web Viewer Add-in. I won't walk you through how to do this right now, but you can follow these instructions to set this up: <https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp>
+You can also embed interactive Tableau dashboards from your Tableau Public account directly into PowerPoint. This will require you to install the Web Viewer Add-in. Follow these instructions to set this up: [Instructions](<https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp>)
 
 {{< video https://youtu.be/U2oDUOeDHI8 aspect-ratio="16x9" >}}
 
 
-
-## Now get together with your teammate and spend some time on your project!
+Now get together with your teammate and spend some time on your project!
