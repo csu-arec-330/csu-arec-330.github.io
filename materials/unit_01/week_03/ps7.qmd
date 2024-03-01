@@ -57,7 +57,7 @@ Our expectation is that you will use time series data from any of the above sour
 
 5. Use the forecast to answer your research question
 
-### The Presentation - In Class 3/10/2023 (80 points)
+### The Presentation (80 points)
 
 **Overall presentation expectations:** (20 points total)
 
@@ -87,13 +87,13 @@ Data:
 
 - Describe where your data is from (5 points)
 
-- Provide summary statistics and visualizations (10 points, see step 0 under `Analysis` above)
+- Provide summary statistics and visualizations (10 points, see step 0 under [**Analysis**](https://csu-arec-330.github.io/materials/unit_01/week_03/ps7.html#the-analysis) above)
 
 Analysis:
 
 - What forecasting model did you use? (5 points)
 
-- What assumptions did you make in your analysis?  What are limitations to your analysis? (5 points, see steps 3 and 4 under `Analysis` above)
+- What assumptions did you make in your analysis?  What are limitations to your analysis? (5 points, see steps 3 and 4 under [**Analysis**](https://csu-arec-330.github.io/materials/unit_01/week_03/ps7.html#the-analysis) above)
 
 - Plot and describe your decomposition, forecast, and prediction intervals in Tableau. (10 points)
 
@@ -104,13 +104,13 @@ Analysis:
 - What are the key take-aways for your intended audience?
 
 
-### The Write-up/Online Submission - Due 11:59 PM 3/20/2023 (40 points)
+### The Write-up/Online Submission (40 points)
 
 You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code. The written portion of the assignment is due later so that you can incorporate feedback that you receive during the oral presentation in class.
 
 Because much of the presentation grade is tied to the content of your report, grading for the report will be based on: 
 
-1. Is your code correct and well-explained (use comments to explain what you do at each step!)? Produce an R log.txt file using the `sink()` command and include it as an appendix to your write up. (15 points)
+1. Is your code correct and well-explained? Use comments to explain what you do at each step! Produce an R log.txt file using the `sink()` command and include it as an appendix to your write up. (15 points)
 
 2. Is your report readable and useful? We will not assess the quality of your research question, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (15 points)
 
