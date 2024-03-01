@@ -181,7 +181,7 @@ The second option is to use a function called `unpack_hilo()` to separate the va
 #Extract prediction interval using unpack_hilo()
 carrot_forecast_out <- carrot_forecast %>%
   hilo(level = 95) %>% #extract 95% prediction interval
-  unpack_hilo(cols = 95%) #unpack into own columns named lower and upper
+  unpack_hilo(cols = "95%") #unpack into own columns named lower and upper
 ```
 
 ### Step 5: Preparing to export
@@ -203,6 +203,8 @@ to_export <- bind_rows(carrot_ts,part2)
 write_csv(to_export,"carrot_forecast.csv")
 
 ```
+
+>Note: If you used the code with `mutate` then you do not need to rename "95%_lower" and "95%_upper" in this code block.
 
 {{< video https://youtu.be/KMrGAUcnM00 aspect-ratio="16x9" >}}
 
@@ -246,7 +248,7 @@ Using the data we exported from R, we will plot the prediction intervals.
 
 4. Rearrange the order of your forecast and prediction intervals in the Measure card: Lower, Forecasted, Observed, Upper. 
 
-5. Change your colors: White for `Observed Price` and `Lower`, Gray for `Upper` and `Forecasted Price`.
+5. Change your colors: White for `Observed Price` and `Lower`, Gray for `Upper` and `Forecasted Price`. Make sure the opacity is set to 100%.
 
 6. Create a new line graph by dragging the original `Price` field to the Rows Shelf.
 

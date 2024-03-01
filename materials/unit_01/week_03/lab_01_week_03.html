@@ -253,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract prediction interval using unpack_hilo()</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_out <span class="ot">&lt;-</span> carrot_forecast <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co">#extract 95% prediction interval</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unpack_hilo</span>(<span class="at">cols =</span> <span class="dv">95</span>%) <span class="co">#unpack into own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unpack_hilo</span>(<span class="at">cols =</span> <span class="st">"95%"</span>) <span class="co">#unpack into own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-5-preparing-to-export" class="level3">
@@ -270,6 +270,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(to_export,<span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<blockquote class="blockquote">
+<p>Note: If you used the code with <code>mutate</code> then you do not need to rename “95%_lower” and “95%_upper” in this code block.</p>
+</blockquote>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/KMrGAUcnM00" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 </section>
@@ -314,7 +317,7 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 <li><p>In the Marks card, change your chart to an Area Chart.</p></li>
 <li><p>Unstack your lines by going to <code>Analysis</code> -&gt; <code>Stack Marks</code> -&gt; <code>Off</code></p></li>
 <li><p>Rearrange the order of your forecast and prediction intervals in the Measure card: Lower, Forecasted, Observed, Upper.</p></li>
-<li><p>Change your colors: White for <code>Observed Price</code> and <code>Lower</code>, Gray for <code>Upper</code> and <code>Forecasted Price</code>.</p></li>
+<li><p>Change your colors: White for <code>Observed Price</code> and <code>Lower</code>, Gray for <code>Upper</code> and <code>Forecasted Price</code>. Make sure the opacity is set to 100%.</p></li>
 <li><p>Create a new line graph by dragging the original <code>Price</code> field to the Rows Shelf.</p></li>
 <li><p>Change this new pane to a line chart.</p></li>
 <li><p>Change the colors to reflect forecasted and original prices by creating a new calculated field that equals “Forecasted Price” after January 1, 2023, and that equals “Observed Price” before then. Drag this calculated field to the Colors Card.</p></li>
