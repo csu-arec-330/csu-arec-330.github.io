@@ -12,7 +12,10 @@ title: "Week 12: Project 2"
 Each student pair will be asked questions about their presentation during class. <br>
 
 
-<b>Project Materials - Due Thursday, April 11 (presentation) and Thursday, April 18 (report) by 11:59 PM:</b> <br>
+<b>Project Materials:</b> <br>
+
+<b>Video Presentation - Due Thursday, April 11 (10:00 am)</b> <br>
+<b>Report - Due Thursday, April 18 (11:59 pm)</b> <br>
 
 <a  href="/materials/unit_02/week_04/project_2.html" target="_blank">Project 2 Instructions</a> <br> 
 
