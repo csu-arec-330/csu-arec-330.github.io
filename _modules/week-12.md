@@ -6,11 +6,10 @@ title: "Week 12: Project 2"
 <b><u>Apr 10 & Apr 12</u></b> <br> <br>
 
 <b>Lecture Materials:</b> <br>
-
-
 <a  href="/materials/unit_02/week_04/lecture_02_week_04.html" target="_blank">Lecture Slides</a> <br> <br>
 
-
+<b>Lab Materials:</b> <br>
+Each student pair will be asked questions about their presentation during class. <br>
 
 
 <b>Project Materials - Due Thursday, April 11 (presentation) and Thursday, April 18 (report) by 11:59 PM:</b> <br>

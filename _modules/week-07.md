@@ -7,7 +7,6 @@ title: "Week 7: Prediction Intervals, Forecasting Options, and Presenting in Tab
 
 <b>Lecture Materials:</b> <br>
 
-
 <a  href="/materials/unit_01/week_03/lecture_01_week_03.html" target="_blank">Lecture Slides</a> <br> <br><br>
 
 
