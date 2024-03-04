@@ -16,7 +16,7 @@ Each student pair will present one visualization from their presentation. <br>
 <b>Project Materials:</b> <br>
 
 <b>Video Presentation - Due Friday, Mar 08 (11:59 pm)</b> <br>
-<b>Report - Due Friday, Mar 21 (11:59 pm)</b> <br>
+<b>Report - Due Friday, Mar 22 (11:59 pm)</b> <br>
 <a  href="/materials/unit_01/week_03/ps7.html" target="_blank">Project 1 Instructions</a> <br> 
 <a  href="/materials/unit_01/week_03/project_1_rubric.html" target="_blank">Project 1 Rubric</a> <br> 
 
