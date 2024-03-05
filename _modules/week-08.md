@@ -6,7 +6,7 @@ title: "Week 8: Project 1"
 <b><u>Mar 06 & Mar 08</u></b> <br> <br>
 
 <b>Lecture Materials:</b> <br>
-<a  href="/materials/unit_01/week_04/lecture_01_week_04.html" target="_blank">Lecture Slides</a> <br> 
+<a  href="/materials/unit_01/week_04/lecture_01_week_04.html" target="_blank">Lecture Slides</a> <br> <br> 
 
 
 
@@ -16,7 +16,7 @@ title: "Week 8: Project 1"
 <b>Video Presentation - Due Friday, Mar 08 (11:59 pm)</b> <br>
 <b>Report - Due Friday, Mar 22 (11:59 pm)</b> <br>
 <a  href="/materials/unit_01/week_03/ps7.html" target="_blank">Project 1 Instructions</a> <br> 
-<a  href="/materials/unit_01/week_03/project_1_rubric.html" target="_blank">Project 1 Rubric</a> <br> 
+<a  href="/materials/unit_01/week_03/project_1_rubric.html" target="_blank">Project 1 Rubric</a> <br> <br> 
 
 <b>Peer Evaluation - Due Friday, Mar 22 (11:59 pm)</b> <br>
 <a  href="https://forms.gle/BqjeSfgTfs9K9xg17" target="_blank">Peer Evaluation Form</a> <br> 
