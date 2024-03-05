@@ -45,7 +45,7 @@ snames <- tibble(symbol=c("WPU01130212","WPU0652"),
                  name=c("Carrot PPI 1982=100","Fertilizer PPI 1982=100"))
 ```
 
-# Project Overview {.scrollable}
+## Project Overview {.scrollable}
 
 Three parts:
 
@@ -61,6 +61,13 @@ Have a hook to grab the audience attention, give your audience context, pose you
 
 [Project Instructions](../week_03/ps7.html)
 
+## Context {.scrollable}
+
+We are analysts at The Carrot Project; you are growers attending a workshop
+
+```{=html}
+<iframe width="80%" height="500" src="https://www.thecarrotproject.org/"></iframe>
+```
 
 
 # Will carrot prices continue to rise?
@@ -91,7 +98,7 @@ Objective: forecast carrot prices in 5 years
 #| echo: false
 #| fig-width: 15
 #| fig-align: center
-#| fig-cap: "Trend calculated from STL decomposition using LOESS"
+#| fig-cap: "Trend (orange) calculated from STL decomposition using LOESS. The Producer Price Index (PPI) program measures the average change over time in the selling prices received by domestic producers for their output."
 carrot_ts %>%
   model(stl=STL(price)) %>%
   components() %>%
@@ -102,6 +109,7 @@ carrot_ts %>%
   labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
   theme_bw(base_size = 15)
 ```
+
 
 
 ## Is it just seasonality?
@@ -161,22 +169,22 @@ carrot_ts %>%
 ```
 
 
-## Forecast Scenario: high prices subside
+## Forecast from Jan 2023 (for Bekzat)
 
 ```{r}
 #| echo: false
 #| fig-width: 10
 #| fig-align: center
-#| fig-cap: "Same ETS forecast based on data truncated at January 2021"
+#| fig-cap: "Same ETS forecast based on data truncated at January 2023"
 
 #Forecast
 carrot_ts %>%
-  filter(date<yearmonth("2021 Jan")) %>%
+  filter(date<yearmonth("2023 Jan")) %>%
   model(
     additive = ETS(price ~ error("A") + trend("A") + season("A"))
   ) %>%
   forecast(h = "5 years") %>%
-  mutate(date=date+24) %>%
+  mutate(date=date) %>%
   autoplot(carrot_ts %>% filter(date>yearmonth("2000 Jan")),level=80) +
   labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
   theme_bw(base_size = 13)
@@ -184,7 +192,17 @@ carrot_ts %>%
 ```
 
 
-## Conclusion
+## Conclusion 
+
+Carrot prices are near all time highs
+
+If current prices remain high, the price index is expected to reach nearly 350
+
+Our guess: Carrot prices continue to grow but at a slower rate
+
+# Questions
+
+## Conclusion (from last year)
 
 Carrot prices are near all time highs
 
@@ -194,4 +212,29 @@ If current prices subside, the price index is expected to remain below 250
 
 Our guess: Carrot prices subside then gradually increase because of declining trend in fertilizer 
 
-# Questions
+
+
+
+<!-- ## Other forecasts -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 10 -->
+<!-- #| fig-align: center -->
+<!-- #| fig-cap: "Same ETS forecast based on data truncated at January 2023" -->
+
+<!-- #Forecast -->
+<!-- carrot_ts %>% -->
+<!--   filter(date>yearmonth("2010 Jan")) %>% -->
+<!--   model( -->
+<!--     #additive = ETS(price ~ error("A") + trend("A") + season("A")), -->
+<!--     NN = NNETAR(price,n_networks = 5) -->
+<!--   ) %>% -->
+<!--   forecast(h = "1 years") %>% -->
+<!--   mutate(date=date) %>% -->
+<!--   autoplot(carrot_ts %>% filter(date>yearmonth("2000 Jan")),level=80) + -->
+<!--   labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") + -->
+<!--   theme_bw(base_size = 13) -->
+
+<!-- ``` -->
+

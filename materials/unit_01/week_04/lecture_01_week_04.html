@@ -335,8 +335,8 @@
 <p>Project 1 reminder and details</p>
 <p>Example project</p>
 </section>
-<section id="project-overview" class="title-slide slide level1 scrollable center">
-<h1>Project Overview</h1>
+<section id="project-overview" class="slide level2 scrollable">
+<h2>Project Overview</h2>
 <p>Three parts:</p>
 <ol type="1">
 <li><p>Presentation video</p></li>
@@ -347,7 +347,11 @@
 <p>Have a hook to grab the audience attention, give your audience context, pose your question, then answer it</p>
 <p><a href="../week_03/ps7.html">Project Instructions</a></p>
 </section>
-
+<section id="context" class="slide level2 scrollable">
+<h2>Context</h2>
+<p>We are analysts at The Carrot Project; you are growers attending a workshop</p>
+<iframe width="80%" height="500" src="https://www.thecarrotproject.org/"></iframe>
+</section>
 <section>
 <section id="will-carrot-prices-continue-to-rise" class="title-slide slide level1 center">
 <h1>Will carrot prices continue to rise?</h1>
@@ -369,7 +373,7 @@
 <section id="current-state-of-carrot-prices" class="slide level2">
 <h2>Current State of Carrot Prices</h2>
 
-<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-2-1.png" width="1440" class="r-stretch quarto-figure-center"><p class="caption">Trend calculated from STL decomposition using LOESS</p></section>
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-2-1.png" width="1440" class="r-stretch quarto-figure-center"><p class="caption">Trend (orange) calculated from STL decomposition using LOESS. The Producer Price Index (PPI) program measures the average change over time in the selling prices received by domestic producers for their output.</p></section>
 <section id="is-it-just-seasonality" class="slide level2">
 <h2>Is it just seasonality?</h2>
 
@@ -387,23 +391,50 @@
 <h2>Forecast Scenario: high prices persist</h2>
 
 <img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-5-1.png" width="1248" class="r-stretch quarto-figure-center"><p class="caption">Forecast based on exponential smoothing of components</p></section>
-<section id="forecast-scenario-high-prices-subside" class="slide level2">
-<h2>Forecast Scenario: high prices subside</h2>
+<section id="forecast-from-jan-2023-for-bekzat" class="slide level2">
+<h2>Forecast from Jan 2023 (for Bekzat)</h2>
 
-<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Same ETS forecast based on data truncated at January 2021</p></section>
+<img data-src="lecture_01_week_04_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Same ETS forecast based on data truncated at January 2023</p></section>
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
+<p>Carrot prices are near all time highs</p>
+<p>If current prices remain high, the price index is expected to reach nearly 350</p>
+<p>Our guess: Carrot prices continue to grow but at a slower rate</p>
+</section></section>
+<section>
+<section id="questions" class="title-slide slide level1 center">
+<h1>Questions</h1>
+
+</section>
+<section id="conclusion-from-last-year" class="slide level2">
+<h2>Conclusion (from last year)</h2>
 <p>Carrot prices are near all time highs</p>
 <p>If current prices remain high, the price index is expected to reach nearly 300</p>
 <p>If current prices subside, the price index is expected to remain below 250</p>
 <p>Our guess: Carrot prices subside then gradually increase because of declining trend in fertilizer</p>
-</section></section>
-<section id="questions" class="title-slide slide level1 center">
-<h1>Questions</h1>
+<!-- ## Other forecasts -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 10 -->
+<!-- #| fig-align: center -->
+<!-- #| fig-cap: "Same ETS forecast based on data truncated at January 2023" -->
+<!-- #Forecast -->
+<!-- carrot_ts %>% -->
+<!--   filter(date>yearmonth("2010 Jan")) %>% -->
+<!--   model( -->
+<!--     #additive = ETS(price ~ error("A") + trend("A") + season("A")), -->
+<!--     NN = NNETAR(price,n_networks = 5) -->
+<!--   ) %>% -->
+<!--   forecast(h = "1 years") %>% -->
+<!--   mutate(date=date) %>% -->
+<!--   autoplot(carrot_ts %>% filter(date>yearmonth("2000 Jan")),level=80) + -->
+<!--   labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") + -->
+<!--   theme_bw(base_size = 13) -->
+<!-- ``` -->
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
