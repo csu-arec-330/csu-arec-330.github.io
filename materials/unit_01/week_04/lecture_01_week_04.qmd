@@ -45,9 +45,15 @@ snames <- tibble(symbol=c("WPU01130212","WPU0652"),
                  name=c("Carrot PPI 1982=100","Fertilizer PPI 1982=100"))
 ```
 
-# Project Overview
+# Project Overview {.scrollable}
 
-Presentation on Friday; Written report (webpage) Monday March 20
+Three parts:
+
+1. Presentation video
+
+2. Written report (added to your website)
+
+3. Peer evaluation
 
 Make sure you tell a story with your data
 
@@ -58,12 +64,6 @@ Have a hook to grab the audience attention, give your audience context, pose you
 
 
 # Will carrot prices continue to rise?
-
-Jude and Ali
-
-March 8, 2023
-
-AREC 330
 
 ## Introduction
 
@@ -192,6 +192,6 @@ If current prices remain high, the price index is expected to reach nearly 300
 
 If current prices subside, the price index is expected to remain below 250
 
-My guess: carrot prices subside then gradually increase because of declining trend in fertilizer 
+Our guess: Carrot prices subside then gradually increase because of declining trend in fertilizer 
 
 # Questions
