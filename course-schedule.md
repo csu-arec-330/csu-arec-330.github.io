@@ -152,7 +152,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Mar 22</td>
 				<td style="min-width:50px">Cross-Sectional and Spatial Data Visualizations in Tableau</td>
-				<td style="min-width:50px">PS8</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
@@ -164,7 +164,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Mar 29</td>
 				<td style="min-width:50px">Cross-Sectional EDA and Regression Analysis</td>
-				<td style="min-width:50px">Quiz 5, PS9</td>
+				<td style="min-width:50px">Quiz 5, PS8</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
@@ -176,7 +176,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Apr 05</td>
 				<td style="min-width:50px">Spatial Data Packages, Aggregation, Analysis, and Visualizations</td>
-				<td style="min-width:50px">PS10</td>
+				<td style="min-width:50px">PS9</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
@@ -188,7 +188,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Apr 12</td>
 				<td style="min-width:50px">Presentations</td>
-				<td style="min-width:50px">Quiz 6, PS11: Project 2</td>
+				<td style="min-width:50px">Quiz 6, PS10, PS11: Project 2</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
@@ -200,7 +200,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Apr 19</td>
 				<td style="min-width:50px">Panel Data Packages, EDA, and Visualizations</td>
-				<td style="min-width:50px">PS12</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
@@ -212,7 +212,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Apr 26</td>
 				<td style="min-width:50px">Applications of Causal Analysis - R Packages, Choosing Controls, and Assessing Model Assumptions</td>
-				<td style="min-width:50px">Quiz 7, PS13</td>
+				<td style="min-width:50px">Quiz 7, PS12</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
@@ -224,7 +224,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, May 03</td>
 				<td style="min-width:50px">Fixed Effects Regressions and Distributional Visualizations</td>
-				<td style="min-width:50px">Quiz 8, PS14: Project 3</td>
+				<td style="min-width:50px">Quiz 8, PS13, PS14: Project 3</td>
 			</tr>
 			<tr>
 				<td style="min-width:50px"></td>
