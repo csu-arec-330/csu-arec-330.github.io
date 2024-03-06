@@ -1,5 +1,5 @@
 ---
-title: "Project 2 Problem Set 2: Intro to Cross Sectional Data Analysis"
+title: "Project 2 -- Problem Set 3: Intro to Cross Sectional Data Analysis"
 format: 
   html:
     theme: zephyr

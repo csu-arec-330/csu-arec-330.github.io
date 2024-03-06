@@ -1,5 +1,5 @@
 ---
-title: "Project 2 Problem Set 1: Starting Project 2 and Mapping your data"
+title: "Project 2 -- Problem Set 1: Starting Project 2 and Mapping your data"
 format: 
   html:
     theme: zephyr
