@@ -70,28 +70,29 @@ We are analysts at The Carrot Project; you are growers attending a workshop
 ```
 
 
-# Will carrot prices continue to rise?
+# Example project: Will carrot prices continue to rise?
 
-## Introduction
+## Carrots are delicious and people buy them (you should provide more context)
 
 <!-- Briefly introduce the recent rise in food prices and its impact on carrot prices -->
 :::: {.columns}
 
-::: {.column width="50%"}
-Carrots are delicious and people buy them
+::: {.column width="50%" style='justify-content:center'}
 
-Growers want to know what the price will be in the future
+![](https://inetsgi.com/images/668/images/bf892084.PNG)
 
-Objective: forecast carrot prices in 5 years
 :::
 
-::: {.column width="50%"}
-![](https://www.almanac.com/sites/default/files/styles/or/public/image_nodes/carrots-table_popidar-ss.jpg?itok=-6KDefXK)
+::: {.column width="50%" style='justify-content:center'}
+
+![](https://calcarrots.com/wp-content/uploads/2018/05/primary-carrot-producing-counties-267x300.jpg)
 :::
 
 ::::
 
-## Current State of Carrot Prices
+
+
+## Carrot prices have been growing
 
 
 ```{r}
@@ -110,6 +111,15 @@ carrot_ts %>%
   theme_bw(base_size = 15)
 ```
 
+
+# Will prices continue to rise or will they return to past trends?
+
+
+## Analysis plan
+
+Decompose carrot prices to understand fundamentals
+
+Forecast carrot prices over the next 5 years
 
 
 ## Is it just seasonality?
