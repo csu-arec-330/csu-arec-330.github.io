@@ -42,7 +42,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Jan 19</td>
 				<td style="min-width:50px">R and Tableau Interface Overview</td>
-				<td style="min-width:50px">PS1</td>
+				<td style="min-width:50px"></td>
 			</tr>
 			<tr>
 				<td rowspan="2">0</td>
@@ -54,7 +54,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Jan 26</td>
 				<td style="min-width:50px">R and Tableau Intro I</td>
-				<td style="min-width:50px">Quiz 1, PS2</td>
+				<td style="min-width:50px">Quiz 1, PS1</td>
 			</tr>
 			<tr>
 				<td rowspan="2">0</td>
@@ -66,7 +66,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Feb 02</td>
 				<td style="min-width:50px">R and Tableau Intro II</td>
-				<td style="min-width:50px">PS3</td>
+				<td style="min-width:50px">PS2</td>
 			</tr>
 			<tr>
 				<td rowspan="2">0</td>
@@ -78,7 +78,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Feb 09</td>
 				<td style="min-width:50px">Complete Workflow</td>
-				<td style="min-width:50px">Quiz 2, PS4: Project 0</td>
+				<td style="min-width:50px">Quiz 2, PS3</td>
 			</tr>
 			<tr>
 				<td rowspan="2">1</td>
@@ -90,7 +90,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Feb 16</td>
 				<td style="min-width:50px">Exploratory Data Analysis</td>
-				<td style="min-width:50px">PS5</td>
+				<td style="min-width:50px">PS4: Mini-Project</td>
 			</tr>
 			<tr>
 				<td rowspan="2">1</td>
@@ -102,7 +102,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Feb 23</td>
 				<td style="min-width:50px">Time Series Visualizations</td>
-				<td style="min-width:50px">Quiz 3, PS6</td>
+				<td style="min-width:50px">Quiz 3, PS5</td>
 			</tr>
 			<tr>
 				<td rowspan="2">1</td>
@@ -114,7 +114,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Mar 01</td>
 				<td style="min-width:50px">Time Series Forecasting and Visualizations</td>
-				<td style="min-width:50px">PS7</td>
+				<td style="min-width:50px">PS6</td>
 			</tr>
 			<tr>
 				<td rowspan="2">1</td>
@@ -126,7 +126,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Mar 08</td>
 				<td style="min-width:50px">Student Presentations</td>
-				<td style="min-width:50px">Quiz 4, PS8: Project 1</td>
+				<td style="min-width:50px">Quiz 4, PS7: Project 1</td>
 			</tr>
 			<tr>
 				<td style="min-width:50px"></td>
@@ -152,7 +152,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Mar 22</td>
 				<td style="min-width:50px">Cross-Sectional and Spatial Data Visualizations in Tableau</td>
-				<td style="min-width:50px">PS9</td>
+				<td style="min-width:50px">PS8</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
@@ -164,7 +164,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Mar 29</td>
 				<td style="min-width:50px">Cross-Sectional EDA and Regression Analysis</td>
-				<td style="min-width:50px">Quiz 5, PS10</td>
+				<td style="min-width:50px">Quiz 5, PS9</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
@@ -176,7 +176,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Apr 05</td>
 				<td style="min-width:50px">Spatial Data Packages, Aggregation, Analysis, and Visualizations</td>
-				<td style="min-width:50px">PS11</td>
+				<td style="min-width:50px">PS10</td>
 			</tr>
 			<tr>
 				<td rowspan="2">2</td>
@@ -188,7 +188,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Apr 12</td>
 				<td style="min-width:50px">Presentations</td>
-				<td style="min-width:50px">Quiz 6, PS12: Project 2</td>
+				<td style="min-width:50px">Quiz 6, PS11: Project 2</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
@@ -200,7 +200,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Apr 19</td>
 				<td style="min-width:50px">Panel Data Packages, EDA, and Visualizations</td>
-				<td style="min-width:50px">PS13</td>
+				<td style="min-width:50px">PS12</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
@@ -212,7 +212,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, Apr 26</td>
 				<td style="min-width:50px">Applications of Causal Analysis - R Packages, Choosing Controls, and Assessing Model Assumptions</td>
-				<td style="min-width:50px">Quiz 7, PS14</td>
+				<td style="min-width:50px">Quiz 7, PS13</td>
 			</tr>
 			<tr>
 				<td rowspan="2">3</td>
@@ -224,7 +224,7 @@ th, td {
 			<tr>
 				<td style="min-width:50px">Fri, May 03</td>
 				<td style="min-width:50px">Fixed Effects Regressions and Distributional Visualizations</td>
-				<td style="min-width:50px">Quiz 8, PS15: Project 3</td>
+				<td style="min-width:50px">Quiz 8, PS14: Project 3</td>
 			</tr>
 			<tr>
 				<td style="min-width:50px"></td>

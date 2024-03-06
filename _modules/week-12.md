@@ -9,7 +9,7 @@ title: "Week 12: Project 2"
 <a  href="/materials/unit_02/week_04/lecture_02_week_04.html" target="_blank">Lecture Slides</a> <br> <br>
 
 <b>Lab Materials:</b> <br>
-Each student pair will be asked questions about their presentation during class. <br>
+Each student pair will be asked questions about their presentation during class. <br> <br>
 
 
 <b>Project Materials:</b> <br>
@@ -19,7 +19,11 @@ Each student pair will be asked questions about their presentation during class.
 
 <a  href="/materials/unit_02/week_04/project_2.html" target="_blank">Project 2 Instructions</a> <br> 
 
-<a  href="/materials/unit_02/week_04/project_2_rubric.html" target="_blank">Project 2 Rubric</a> <br> 
+<a  href="/materials/unit_02/week_04/project_2_rubric.html" target="_blank">Project 2 Rubric</a> <br> <br> 
+
+<b>Peer Evaluation - Due Thursday, April 18 (11:59 pm)</b> <br>
+
+
 
 
 

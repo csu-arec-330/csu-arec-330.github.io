@@ -1,5 +1,5 @@
 ---
-title: "Problem Set 6: Creating and Visualizing Forecasts"
+title: "Project 1 -- Problem Set 2: Creating and Visualizing Forecasts"
 format: 
   html:
     theme: zephyr

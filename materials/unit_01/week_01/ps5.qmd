@@ -1,5 +1,5 @@
 ---
-title: "Problem Set 5: Working with time series data"
+title: "Project 1 -- Problem Set 1: Starting Project 1 and Working with time series data"
 format: 
   html:
     theme: zephyr

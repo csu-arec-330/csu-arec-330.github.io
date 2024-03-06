@@ -1,5 +1,5 @@
 ---
-title: "Unit 1: Final Project and Presentations"
+title: "Project 1 -- Final Project and Presentations: Bringing it all together"
 format: 
   html:
     theme: zephyr

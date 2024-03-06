@@ -11,7 +11,7 @@ title: "Week 15: Panel Data Analysis Project"
 
 
 <b>Lab Materials:</b> <br>
-Each student pair will be asked questions about their presentation during class. <br>
+Each student pair will be asked questions about their presentation during class. <br> <br>
 
 
 <b>Project Materials:</b> <br>
@@ -21,7 +21,12 @@ Each student pair will be asked questions about their presentation during class.
 
 <a  href="/materials/unit_03/week_03/project_3.html" target="_blank">Project 3 Instructions</a> <br> 
 
-<a  href="/materials/unit_03/week_03/project_3_rubric.html" target="_blank">Project 3 Rubric</a> <br> 
+<a  href="/materials/unit_03/week_03/project_3_rubric.html" target="_blank">Project 3 Rubric</a> <br> <br> 
+
+<b>Peer Evaluation - Due Thursday, May 09 (11:59 pm)</b> <br>
+
+
+
 
  <!--
 <a  href="/materials/unit_03/week_02/includes/min_wage_data.csv" target="_blank">min_wage_data.csv</a> <br> 
