@@ -20,8 +20,8 @@ title: "Week 7: Prediction Intervals, Forecasting Options, and Presenting in Tab
 <b>Project Materials:</b> <br>
 
 <b>Video Presentation - Due Friday, Mar 08 (11:59 pm)</b> <br>
-<a  href="/materials/unit_01/week_03/ps7.html" target="_blank">Project 1 Instructions</a> <br> 
-<a  href="/materials/unit_01/week_03/project_1_rubric.html" target="_blank">Project 1 Rubric</a> <br> <br> 
+<a  href="/materials/unit_01/project/project_1_instructions.html" target="_blank">Project 1 Instructions</a> <br> 
+<a  href="/materials/unit_01/project/project_1_rubric.html" target="_blank">Project 1 Rubric</a> <br> <br> 
 
 
 </div>

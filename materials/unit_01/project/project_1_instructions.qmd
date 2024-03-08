@@ -41,7 +41,7 @@ You will be responsible for collecting your own time series data to answer this 
 
 - [Kaggle](https://www.kaggle.com)
 
-### The Analysis
+### The Analysis {#sec-analysis}
 
 Our expectation is that you will use time series data from any of the above sources in a forecasting exercise. The length of your forecast and the specific forecasting model you apply will depend on your research question and the underlying data. The only strict requirements are: 
 
@@ -87,13 +87,13 @@ Data:
 
 - Describe where your data is from (5 points)
 
-- Provide summary statistics and visualizations (10 points, see step 0 under [**Analysis**](https://csu-arec-330.github.io/materials/unit_01/week_03/ps7.html#the-analysis) above)
+- Provide summary statistics and visualizations (10 points, see step 0 under [**Analysis**](#sec-analysis) above)
 
 Analysis:
 
 - What forecasting model did you use? (5 points)
 
-- What assumptions did you make in your analysis?  What are limitations to your analysis? (5 points, see steps 3 and 4 under [**Analysis**](https://csu-arec-330.github.io/materials/unit_01/week_03/ps7.html#the-analysis) above)
+- What assumptions did you make in your analysis?  What are limitations to your analysis? (5 points, see steps 3 and 4 under [**Analysis**](#sec-analysis) above)
 
 - Plot and describe your decomposition, forecast, and prediction intervals in Tableau. (10 points)
 
@@ -116,10 +116,12 @@ Because much of the presentation grade is tied to the content of your report, gr
 
 3. Organization, formatting and structure. Is your report organized, presented in a logical order, with appropriate integration of writing, analysis, and code? (10 points)
 
+This is a good example of data storytelling from the [NY Times](https://www.nytimes.com/interactive/2024/03/08/business/economy/remote-work-home.html?smid=url-share). 
+
 
 ### Peer Evaluaion (15 points)
 
-Each group will be required to provide feedback for three other groups in the class. This feedback process is an essential component of the project, as it encourages constructive criticism and fosters a collaborative learning environment. To facilitate this, each group will complete a Google Form designed specifically for peer evaluations.
+Each group will be required to provide feedback for three other groups in the class. This feedback process is an essential component of the project, as it encourages constructive criticism and fosters a collaborative learning environment. To facilitate this, each group will complete a [Google Form](https://forms.gle/BqjeSfgTfs9K9xg17) designed specifically for peer evaluations.
 
 Instructions:
 
@@ -131,7 +133,7 @@ Instructions:
 
 4. **Impact on Grades:** The peer feedback you provide will not be factored into the group's final grade on the presentation. The purpose of this exercise is to give you an opportunity to critically engage with your peers' work and to offer them valuable insights from an outsider's perspective.
 
-The Google Form will be shared with you on Canvas must be completed by the due date. Please ensure that you dedicate enough time to watch each assigned presentation thoroughly before completing the evaluation form.
+A link to the [Google Form](https://forms.gle/BqjeSfgTfs9K9xg17) is also available on Canvas and must be completed by the due date. Please ensure that you dedicate enough time to watch each assigned presentation thoroughly before completing the evaluation form.
 
 Your participation in the peer evaluation process is highly valued and contributes significantly to the learning experience in this course.
 
