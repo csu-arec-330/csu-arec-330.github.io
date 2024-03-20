@@ -186,7 +186,6 @@ After clustering, summarize attributes of the clusters to understand the groups
 
 
 <!-- Make these clicker questions -->
-<!-- ## Analyzing Cross-Sectional Data: Examples -->
 
 <!-- - What is the association between average income and household food waste? -->
 
@@ -194,7 +193,14 @@ After clustering, summarize attributes of the clusters to understand the groups
 
 <!-- - How could I use cross-sectional data to decide where to open a new grocery store?  -->
 
-## Project 2: Overview
+## Analyzing Cross-Sectional Data
+
+How might you use cross-sectional data to decide where to open a new grocery store?
+
+*Take a minute to write out what information you would need in a dataset to apply cluster analysis.*
+
+
+## Project 2: Overview {.scrollable}
 
 Form groups of 2 (THIS WEEK)
 
@@ -220,10 +226,11 @@ Develop simple marketing strategy to target clusters
 
 - Some communities already do wildfire risk mitigation. Does one size fit all, or are there certain strategies that work better in certain communities?
 
-
+<!--
 ## Example: ESRI Tapestry
 
 ![](includes/esri_tapestry.jpeg)
+--!>
 
 ## Project 2: Example
 
