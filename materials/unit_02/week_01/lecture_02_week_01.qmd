@@ -230,7 +230,7 @@ Develop simple marketing strategy to target clusters
 ## Example: ESRI Tapestry
 
 ![](includes/esri_tapestry.jpeg)
---!>
+-->
 
 ## Project 2: Example
 
