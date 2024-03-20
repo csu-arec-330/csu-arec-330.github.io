@@ -1,5 +1,5 @@
 ---
-title: "Week 9: <br>Cross-Sectional Data <br> and Project 2 Overview"
+title: "Week 9: <br>Cross-Sectional Data"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -32,6 +32,10 @@ Project 2 overview and example
 <!-- ::: {.column width="60%"} -->
 <!-- ::: -->
 <!-- :::: -->
+
+## Data Types
+
+![](https://static.vecteezy.com/system/resources/previews/031/089/964/non_2x/the-relational-model-usually-operates-on-cross-sectional-or-time-series-data-while-the-sequential-model-works-with-more-complex-panel-data-which-combines-bot-vector.jpg)
 
 ## What is cross sectional data?
 ::: {.incremental}
@@ -81,40 +85,13 @@ Project 2 overview and example
 
 ## Common types of cross-sectional data
 
-- Individual-level data
+- Individual-level data 
 
 - Business or point of interest-level data
 
 - Country-level data
 
-## 
-<section data-background-iframe="https://public.tableau.com/shared/BZH34J4NW?:display_count=n&:showVizHome=no&:embed=true"
-          data-background-interactive>
-</section>
 
-## 
-<section data-background-iframe="https://ourworldindata.org/explorers/coronavirus-data-explorer?tab=map&zoomToSelection=true&facet=none&pickerSort=asc&pickerMetric=location&hideControls=true&Metric=Confirmed+deaths&Interval=7-day+rolling+average&Relative+to+Population=true&Color+by+test+positivity=false&country=IND~USA~GBR~CAN~DEU~FRA"
-          data-background-interactive>
-</section>
-
-## Common types of cross-sectional data
-
-- Individual-level data
-
-- Business or point of interest-level data
-
-- Country-level data
-
-- Region-level data
-
-
-## 
-<section data-background-image="includes/map.png" data-background-size="contain">
-</section>
-
-## 
-<section data-background-image="includes/map2.png" data-background-size="contain">
-</section>
 
 ## Common types of cross-sectional data
 
@@ -129,85 +106,137 @@ Project 2 overview and example
 - Spatial data
 
 ## 
-<section data-background-image="includes/smoke_plume.png" data-background-size="contain">
+<section data-background-image="includes/map.png" data-background-size="contain">
 </section>
 
 ## 
-<section data-background-image="includes/snow.png" data-background-size="contain">
+<section data-background-image="includes/map2.png" data-background-size="contain">
 </section>
+
+
 
 ## Analyzing Cross-Sectional Data
 
-- Analyzing cross-section data typically consists of studying differences among subjects.
+- Cross-section data analysis typically involves studying: 
+  
+  - similarities or differences among subjects
+  
+  - trends and associations in the population
 
-- We can use cross-sectional data to ask *frequency-type* questions: 
+
+![](https://media.istockphoto.com/id/1128971953/vector/modern-multicultural-society-concept-with-crowd-of-people.jpg?s=612x612&w=0&k=20&c=OiUCmzDfI6C9MbEO-D9tOSUL2OOcMFofJXsiLka7Jic=)
+
+
+    
+
+## Analyzing Cross-Sectional Data cont.
+
+
+- Questions about frequency: 
 
     - how common is the outcome? 
 
     - how many people are impacted? 
+<br>
+![](https://media.istockphoto.com/id/1128971953/vector/modern-multicultural-society-concept-with-crowd-of-people.jpg?s=612x612&w=0&k=20&c=OiUCmzDfI6C9MbEO-D9tOSUL2OOcMFofJXsiLka7Jic=)
+    
 
-- Or *association-type* questions:
+## Analyzing Cross-Sectional Data cont.
+
+
+- Questions about associations:
 
     - what factors are associated with the outcome (age, gender, income, pollution, health, etc.)?
+    
+![](https://media.istockphoto.com/id/1128971953/vector/modern-multicultural-society-concept-with-crowd-of-people.jpg?s=612x612&w=0&k=20&c=OiUCmzDfI6C9MbEO-D9tOSUL2OOcMFofJXsiLka7Jic=)
 
-## Analyzing Cross-Sectional Data: Examples
+## Analyzing Cross-Sectional Data cont.
 
-- What is the association between average income and household food waste?
 
-- How much do consumers spend on coffee products in a particular area? Does coffee spending differ by age?
+- Questions about similarity or dissimilarity among units
 
-- How could I use cross-sectional data to decide where to open a new grocery store? 
+  - Cluster Analysis - a systematic method to look for patterns in data
+
+## Customer segmentation analysis
+
+Use sales data to divide your customers into groups to better target marketing
+
+![](includes/customer_segmentation.png)
+
+
+## How does cluster analysis work? {.scrollable}
+
+[K-means clustering](https://youtu.be/4b5d3muPQmA)
+
+1. Choose the number of clusters (k) that you want to identify in the data.
+
+2. Randomly initialize the k cluster centroids (points in space) within the data range.
+
+3. Assign each data point to the nearest centroid, based on the Euclidean distance between the point and each centroid.
+
+4. Calculate the mean (centroid) of each cluster based on the data points assigned to it.
+
+5. Update the cluster centroids to be the means of the data points assigned to them.
+
+6. Repeat steps 3-5 until convergence (when the cluster assignments no longer change or a maximum number of iterations is reached).
+
+Usually, we repeat this whole process a number of times and choose the group assignment that minimizes the overall variance
+
+After clustering, summarize attributes of the clusters to understand the groups
+
+
+<!-- Make these clicker questions -->
+<!-- ## Analyzing Cross-Sectional Data: Examples -->
+
+<!-- - What is the association between average income and household food waste? -->
+
+<!-- - How much do consumers spend on coffee products in a particular area? Does coffee spending differ by age? -->
+
+<!-- - How could I use cross-sectional data to decide where to open a new grocery store?  -->
 
 ## Project 2: Overview
 
 Form groups of 2 (THIS WEEK)
 
-Choose an ag biz or enre management question to answer with publicly available cross-sectional data
-
-Collect cross-sectional data
+We will provide convenience store data on shoppers, stores, and purchases
 
 Perform an exploratory data analysis and assemble summary statistics; analyze spatial patterns, correlations, etc.; and construct visualizations to answer your research question.
 
-Present results in class Fri April 14$^{\text{th}}$.
+Conduct market segmentation analysis via clustering
+
+Label clusters based on characteristics
+
+Develop simple marketing strategy to target clusters
 
 ## Project 2: Example
 
 **Research Objective:**
 
-- I am wanting to open a small independent grocery store, and I will use cross-sectional data to help me choose an appropriate location.
+- Develop wildfire mitigation recommendations for at-risk communities
 
 **Important background details:**
 
-- My grocery store will target middle to upper income customers.
+- Wildfire mitigation: community fuel treatments, grant programs to help offset costs, regulations and enforcement
 
-- My main grocery retail competitors are Whole Foods and Trader Joes.
+- Some communities already do wildfire risk mitigation. Does one size fit all, or are there certain strategies that work better in certain communities?
 
-- I want to open my store somewhere in Colorado.
+
+## Example: ESRI Tapestry
+
+![](includes/esri_tapestry.jpeg)
 
 ## Project 2: Example
 
-**Cross-Sectional Data:**
+- Collect data on community characteristics (socioeconomic and demographics from census) and wildfire risk 
 
-- I have collected data on all U.S. Trader Joes locations from [Kaggle.com](https://www.kaggle.com/datasets/saejinmahlauheinert/trader-joes-locations)
+- Use clustering to identify which communities are similar to each other
 
-- I have collected data on all U.S. Whole Foods locations from [POI Factory](http://www.poi-factory.com/node/823)
+- Name the clusters
 
-- I have collected county-level income and rent information from [The Opportunity Atlas](https://www.opportunityatlas.org)
+- Characterize the wildfire risk mitigation approaches that worked within clusters
 
+## Project 2: Example
 
-##   
-<section data-background-image="includes/Sheet1.png" data-background-size="contain">
-</section>
-
-
-##   
-<section data-background-image="includes/Sheet2.png" data-background-size="contain">
-</section>
-
-
-##   
-<section data-background-image="includes/Sheet3.png" data-background-size="contain">
-</section>
-
-
-# Get Started.
+```{=html}
+<iframe width="100%" height="100%" src="includes/WiRe_meeting.html"></iframe>
+```
