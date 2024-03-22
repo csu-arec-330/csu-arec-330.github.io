@@ -1,59 +1,38 @@
 ---
-title: "Project 2 -- Problem Set 1: Starting Project 2 and Mapping your data"
+title: "Project 2 -- Problem Set 1: Cross Sectional Data Analysis"
 format: 
   html:
     theme: zephyr
 ---
 ## Problem Set Overview
 
-This problem set is intended to get you started on your second project for the course. You should make a new page on your google site that includes the following:
-
-1. Project 2 Team Members
-
-2. Project 2 Question (see below for suggestions on the questions)
-
-3. Project 2 Data Sources (see course materials page on website) - List your data sources and describe all the fields (variables) you plan to use in your analysis
-
-4. Two Maps (see below for Tableau instructions) - You are required to create two maps that will be useful for your analysis
-
-5. Discussion of maps and next steps (see steps 3 & 4 in the Tableau instructions below) - you should explain how your maps will be used in your project 2 analysis and identify any analytical tools you need to answer your question.
-
-## Project 2 Overview
-
-The goal of this project is for you to apply the tools for cross sectional data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
+This problem set is designed to get you started analyzing the data for your project.
 
 
-### The Question
+## Exploratory Data Analysis (EDA)
 
-**The question** should be one related to agriculture, the environment, or natural resources and of interest to a business/company, a marketing board, policy makers, non-governmental organizations (NGO), or other nonprofit organizations. The question must be one that can be answered with cross-sectional data. For example:
+Explore the data from lab, [Arizona Grocery Store](https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv). The purpose of this step is to gain familiarity with your data and identify any issues (e.g., missing data, outliers).  Complete the following steps with your data.
 
-- **Business:** Where should I locate my business?
+1. Generate a table of summary statistics.  The table should include at least: variable names, mean (average), standard deviation, min, and max.
 
-- **Marketing Board:** What is consumer demand for our products by geographic location? By consumer demogrphic characteristics? Should we run marketing campaigns in areas where demand is low or target consumers in areas where consumption is already high?
+2. Perform any necessary processing (e.g., removing outliers). Write a narrative of your processing steps justifying your decisions. 
 
-- **Policy maker:** Based on current snowpack levels, where should we anticipate fires this coming fire season?
+3. Write a narrative for your webpage describing your EDA and providing an interpretation of your data. Describe your data so that readers understand what is measured. See the Canvas assignment for a codebook describing the data. Here are some prompt questions for your narrative:
 
-- **NGO/Nonprofit:** What is will demand be for electric cars in 5 years and what can we do to increase it?
+    - Which grocery store has the most foot traffic in AZ? Is it the same with the most unique visitors?
+  
+    - What is the most common store type (in your data) in AZ?
+  
+    - Which city has the most stores?
+  
+    - Which store do people travel the farthest to visit?
+  
+  
 
-### The Data
+## Cluster Analysis
 
-You will be responsible for collecting your own cross sectional data to answer this question. There are resources on the course website, and you should feel free to follow-up with the professors if you are interested in applying data used in lectures and labs.
+4. Use K-means clustering to cluster on multiple numeric dimensions in your data. Note that this does not mean run the clustering algorithm multiple times. Explain why you clustered on the dimensions you chose and what the clusters tell you. Try a few different cluster sizes and choose one that makes sense. Write a narrative in your webpage explaining your cluster analysis and what you learned.
 
-### Summary Visualizations in Tableau -- Mapping your data
-
-You are expected to use at least one data source that has a geographical component for this project. 
-
-In lab, we went over how to create symbol and filled maps, how to map Tableau's integrated data sources, as well as how to combine symbol and filled maps, or combine another chart type with a map.
-
-In this problem set, you should connect to one or more of your proposed data sources for project 2 and produce the following:
-
-1. One symbol or filled map (whatever is more appropriate for your data and question)
-
-2. One combination map. This can be either a symbol + filled map or overlaying another chart type on a filled map. You can use Tableau's integrated data sources to create the base filled map if that is appropriate for your analysis.
-
-3. Explain how these visualizations will be used to answer your project question or as part of the data story you tell to answer your question.
-
-4. Identify missing pieces in your analysis - what analytical tools do you need to answer your question. For example, your analysis might require comparing two geographic locations in terms of multiple criteria in order to identify the best one for a new store location and you might be unsure of how to implement this. If you think you already have these tools, tell us your planned approach for answering your question with the data you identified. 
 
 ## How to Submit
 
