@@ -17,10 +17,11 @@ title: "Week 9: Intro to Cross-Sectional and Spatial Data"
 
 <a  href="/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv" download>Download arizona_grocery_foot_traffic.csv</a> <br>
 
+<!--
 <a  href="/materials/unit_02/inputs/rent_income_county.csv" download>Download rent_income_county.csv</a> <br>
 
 <a  href="/materials/unit_02/inputs/acs_sample.csv" download>Download acs_sample.csv</a> <br> <br>
-
+-->
 
 <b>Problem Set Materials - Due Friday, March 29 by 11:59 PM:</b> <br>
 
