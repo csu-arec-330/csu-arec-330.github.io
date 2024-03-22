@@ -1,5 +1,5 @@
 ---
-title: "Week 10 Lab: Intro to Analyzing Cross-Sectional Data"
+title: "Week 09 Lab: Intro to Analyzing Cross-Sectional Data"
 format: 
   html:
     theme: zephyr
