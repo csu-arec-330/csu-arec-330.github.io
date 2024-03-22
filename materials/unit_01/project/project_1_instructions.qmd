@@ -119,7 +119,7 @@ Because much of the presentation grade is tied to the content of your report, gr
 This is a good example of data storytelling from the [NY Times](https://www.nytimes.com/interactive/2024/03/08/business/economy/remote-work-home.html?smid=url-share). 
 
 
-### Peer Evaluaion (15 points)
+### Peer Evaluation (15 points)
 
 Each group will be required to provide feedback for three other groups in the class. This feedback process is an essential component of the project, as it encourages constructive criticism and fosters a collaborative learning environment. To facilitate this, each group will complete a [Google Form](https://forms.gle/BqjeSfgTfs9K9xg17) designed specifically for peer evaluations.
 
