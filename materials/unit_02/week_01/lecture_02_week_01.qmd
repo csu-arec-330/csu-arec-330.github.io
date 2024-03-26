@@ -180,9 +180,9 @@ Use sales data to divide your customers into groups to better target marketing
 
 6. Repeat steps 3-5 until convergence (when the cluster assignments no longer change or a maximum number of iterations is reached).
 
-Usually, we repeat this whole process a number of times and choose the group assignment that minimizes the overall variance
+Usually, we repeat this whole process a number of times and choose the group assignment that minimizes the overall variance.
 
-After clustering, summarize attributes of the clusters to understand the groups
+After clustering, summarize attributes of the clusters to understand the groups.
 
 
 <!-- Make these clicker questions -->
