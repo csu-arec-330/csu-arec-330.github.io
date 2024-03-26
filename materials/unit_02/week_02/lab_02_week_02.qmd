@@ -1,5 +1,5 @@
 ---
-title: "Week 10 Lab: Intro to Analyzing Cross-Sectional Data"
+title: "Week 10 Lab: Visualizing and Exploring Cross-Sectional Data in Tableau"
 format: 
   html:
     theme: zephyr
@@ -14,225 +14,204 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 :::
 
 
-## Learning Objectives R
-
-- Conduct exploratory data analysis 
-
-- Conduct cluster analysis
-
 
 ## Learning Objectives Tableau
 
-- Create a map that shows results from cluster analysis
+- Understand Tableau geocoding capabilities
 
-- Create a scatterplot that shows the fitted line from your regression analysis
+- Explain the different use cases of symbol and filled maps
 
-- Customize Tableau maps: Add Vizzes to tooltip
+- Create symbol and filled maps
 
-# R
+- Customize Tableau maps
 
-This lab will use the Arizona Grocery Store visitation data to introduce *cluster analysis*, *regression*, and *classification trees/random forests* using R.  First, we will explore these data to become familiar with the data and remove outliers.
-
-## Exploratory Data Analysis
-
-We will use a dataset of grocery store locations in the United States that contains information about the number of visitors, the distance (meters) from visitors' home, and the median time (minutes) visitors spend in the store. The dataset is provided at <https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv>.  First, set your directory and load the following packages: `tidyverse,ggplot2,skimr,GGally,broom,ranger,rsample,caret`
-
-```{r}
-#| eval: false
-
-# This script 
-
-# load packages
-library(pacman)
-p_load(tidyverse,ggplot2,skimr,GGally,broom,ranger,rsample,caret)
-
-# read in dataset
-raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv")
-```
-
-The package `skimr` provides some handy utilities for easily generating summary statistics. We will use `skim()` to get a quick overview of the data.  What do you notice?
-
-```{r}
-#| eval: false
-
-sumstats <- skimr::skim(raw)
-sumstats #print the summary stats
-```
-
-The package `GGally` provides helpful EDA visualizations using `ggplot2`.  Use `ggpairs` to visualize density plots and scatter plots to better understand correlation. What do you notice?
-
-```{r}
-#| eval: false
-
-ggpairs(raw,columns = c("raw_visitor_counts","distance_from_home","median_dwell")) 
-```
-
-The data are heavily skewed and all of the variables have very few observations of very high values (called fat tails). This suggests that we may want to log the data. Let's take a peak at what the pairs plot would look like if the data were logged. Note that we can use a utility called `across()` from dplyr to perform the same operation on multiple columns at once.
-
-```{r}
-#| eval: false
-raw %>%
-  select(raw_visitor_counts,distance_from_home,median_dwell) %>% #subset only our variables of interest
-  mutate(across(everything(),log)) %>% #log transform each of the variables. 
-  ggpairs() #plot the tranformed variables
-```
-
-The log transform helped correct the skew but not the fat tails in `distance_from_home` and `median_dwell`. The very large values in `distance_from_home` may be visitors to the area with low visitation rate, and the very long dwell times may be employees. Let's simply remove these very large values for this analysis.  
-
-```{r}
-#| eval: false
-raw %>%
-  filter(distance_from_home<48000,median_dwell<90) %>% #keep only stores with median distance from home <48km and median dwell less than 90 minutes
-  select(raw_visitor_counts,distance_from_home,median_dwell) %>% #subset only our variables of interest
-  mutate(across(everything(),log)) %>% #log transform each of the variables. 
-  ggpairs() #plot the tranformed variables
-```
-
-This looks better. Let's keep only those stores labeled as grocery stores, and apply the filter criteria from above.
-
-```{r}
-#| eval: false
-
-# select relevant columns and scrub outliers
-data <- raw %>% 
-  dplyr::filter(top_category=="Grocery Stores", #focus on those classified as grocery stores
-                distance_from_home<48000,median_dwell<90) %>% #apply outlier filter
-  select(placekey,raw_visitor_counts,distance_from_home,median_dwell) %>%
-  mutate(across(c(2:4),log)) %>% #log transform
-  drop_na() #drop any observations with missing values
-```
-
-
-{{< video https://youtu.be/Fdbcx02cgFo aspect-ratio="16x9" >}}
-
-## Clustering Analysis
-
-Our first step will be to standardize the data so the units of the variables do not affect the clustering.  Use the function `scale()` to transform each variable by first subtracting the mean, then dividing by the standard deviation. 
-
-```{r}
-#| eval: false
-
-# scale data
-data_scaled <- data %>%
-  select(raw_visitor_counts,distance_from_home,median_dwell) %>% #subsetting only the quantitative data
-  scale()
-```
-
-Now, we can estimate the kmeans clustering algorithm with 3 clusters.
-```{r}
-#| eval: false
-# perform k-means clustering with k=3
-set.seed(123) # for reproducibility
-kmeans_fit <- kmeans(data_scaled, 
-                     centers=3,  #the number of clusters
-                     nstart = 25) #the number of random starts
-```
-
-Assign the clusters back to the data and merge (join) the data back with other store level attributes.
-```{r}
-#| eval: false
-#create a dataframe with the store level attribute data not included in the clustering
-location_info <- raw %>%
-  select(placekey,location_name,top_category,sub_category,latitude,longitude,city,region)
-
-# add cluster labels to dataset and join to location info
-data_clustered <- data %>% 
-  mutate(cluster = kmeans_fit$cluster) %>%
-  inner_join(location_info,by="placekey")
-```
-
-Now we can investigate attributes of the clusters by visualizing the data.
-
-{{< video https://youtu.be/XpBwDJRhqSg aspect-ratio="16x9" >}}
-
-## Regression
-
-Suppose you are interested in a specific relationship between variables. Would we expect the relationship between `raw_visitor_counts` and `distance_from_home` to be positive or negative? We can test this hypothesis with a regression controlling for `median_dwell` time.  By "controlling for", we mean that we want to estimate the correlation between `raw_visitor_counts` and `distance_from_home` conditional on the correlation between `raw_visitor_counts` and `median_dwell`. We can estimate an ordinary least squares model in R using the function `lm()` that is built into R.  
-
-```{r}
-#| eval: false
-m1 <- lm(raw_visitor_counts ~ distance_from_home + median_dwell, #specifying the regression formula
-         data = data_clustered) 
-
-```
-
-The coefficient estimates and many other pieces of information are stored in the object `m1`. We can view a regression table using the function `summary(m1)`.
-
-We my want to visualize our regression lines in Tableau, so we can generate fitted values of `raw_visitor_counts` based on data we create to feed our function. We can easily produce a data frame with all combinations of `distance_from_home` and `median_dwell` using the function `expand_grid()`. Then we use the function `augment()` to generate fitted values for `raw_visitor_counts` based on our regression model.
-
-```{r}
-#| eval: false
-new_data <- expand_grid(distance_from_home=seq(5,11,.1),
-                        median_dwell=seq(1,7,.1))
-
-fitted_data <- augment(m1,newdata = new_data) %>%
-  rename(raw_visitor_counts=.fitted)
-```
-
-**Save `fitted_data` for use in Tableau.** 
-
-{{< video https://youtu.be/ZUvabtmHXbQ aspect-ratio="16x9" >}}
-
-
-## Classification
-
-Our second supervised learning technique is classification using random forests.  Our goal is to classify the stores as convenience stores or supermarkets based on our quantitative measures: `raw_visitor_counts, distance_from_home, median_dwell`. First, we can divide the dataset into training and testing samples.  We will use the training set of data to *train* or estimate model parameters, then use the *testing* set to check the accuracy of the model classification
-
-
-```{r}
-#| eval: false
-#Divide data into training and testing sample
-set.seed(123)
-data_split <- initial_split(data_clustered,prop=.7)
-train_data <- training(data_split)
-test_data <- testing(data_split)
-```
-
-We use the function `ranger()` to fit the random forest of 500 trees using `train_data`. In this case, we specify the possible variables the model can use.  The model will determine the best variable to split on at each branch.
-```{r}
-#| eval: false
-#Fit the random forest model
-rf_model <- ranger(factor(sub_category) ~ raw_visitor_counts + distance_from_home + median_dwell, #specify the model like a regression
-                   data = train_data,
-                   num.trees = 500)
-```
-
-One useful way to measure the classification accuracy is via a confusion matrix. A confusion matrix shows the number of correct and incorrect classifications using the testing data.  Remember, the model was not trained on the testing data, so this is our best guess at how the model will perform on new unlabeled data.
-
-```{r}
-#| eval: false
-#Predict classification of test data
-rf_predict <- predict(rf_model,data = test_data)
-
-#
-cm <- confusionMatrix(rf_predict$predictions, #calling our predictions from the previous command
-                      factor(test_data$sub_category)) #comparing our modeled classification against the true data
-#print the output
-cm
-
-```
-
-How well does our model perform?
-
-We can use the model to predict all of the data and merge it with the 
-
-```{r}
-#| eval: false
-all_predict <- predict(rf_model,data = data_clustered)
-
-output_data <- data_clustered %>%
-  mutate(pred_sub_category = all_predict$predictions)
-
-write_csv(output_data,"analyzed_data.csv")
-```
-
-{{< video https://youtu.be/QCHKflAMDvc aspect-ratio="16x9" >}}
+- Aggregate individual-level data by geographic region
 
 
 # Tableau
 
+The defining characteristic of cross-sectional data is that we observe values of variables at a single point in, or cross-section of time. Often, but not always, cross-sectional data have geographic components that allows us to use Tableau's mapping features when creating visualizations. Effective analysis of cross-sectional data begins with estimating and conveying useful summary statistics. Today, we will spend most of our time discussing how to do this with spatial data.
 
-### 1. Plotting Results from a Cluster Analysis
+## 1. Tableau's Geocoding
+
+If you want to analyze your data geographically, you can plot your data on a map in Tableau.
+
+When building map views, Tableau supports any latitude and longitude coordinates, as long as they are in decimal degrees. Tableau can also recognize and geocode the following geographic information types:
+
+- Airport Codes
+
+- Cities
+
+- Countries
+
+- Regions
+
+- Territories
+
+- States
+
+- Provinces
+
+- Postcodes
+
+- Core Based Statistical Areas (CBSAs)
+
+- Metropolitan Statistical Areas (MSAs)
+
+- U.S. Area Codes
+
+- Congressional Districts
+
+- Zip Codes
+
+If you have geographic delineations besides these, you will have to use crosswalks or some other means to convert the delineations to one of these forms, or to generate latitudes and longitudes for specific points (e.g., addresses).
+
+## 2. Tableau's Spatial Data Capabilities
+
+Tableau can also connect to the following spatial file types:
+
+- Shapefiles
+
+- KML files
+
+- GeoJSON files
+
+- TopoJSON files
+
+- Esri File Geodatabases
+
+These types of files include detailed geographic information that enables us to plot shapes and single points. 
+
+
+## 3. Symbol vs. Filled Maps
+
+### Symbol Maps
+
+A symbol map is effective for showing quantitative data for individual locations. For example, you can use a symbol map to show individual store locations on a map.
+
+![](includes/Sheet1.png)
+
+You might want to highlight which stores have [higher spending](https://www.safegraph.com/data-examples/ohio-grocery-spend)
+
+To create a symbol map, be sure your data source includes the following types of information:
+
+- Quantitative values
+
+- Latitude and longitude coordinates or geographic locations recognized by Tableau
+
+Symbol maps work best with data containing large variations of values. Without enough variation, the symbols will appear approximately the same size in the view.
+
+### Filled Maps
+
+A filled map (or choropleth) can be effective when you want to compare values across space. For example, if you wanted to see relative rental rates across Colorado counties, you could use a filled map to show spatial comparisons.
+
+![](includes/Sheet3.png)
+
+To create a filled map, verify that your data source includes the following types of information:
+
+- Quantitative or qualitative values
+
+- Geographic locations recognized by Tableau or custom polygons (from a spatial data file)
+
+**Knowledge Check 1:** Suppose we have county-level data on average gas prices last year. What type of map would you use to show this information?
+
+**Knowledge Check 2:** Suppose we have gas station-level data on gas prices yesterday. What type of map would you use to show this information?
+
+
+
+## 4. Creating a Symbol Map
+
+Connect to the dataset `arizona_grocery_foot_traffic.csv`. This is a very very VERY small slice of cell phone visit data from the company [Safegraph](https://www.safegraph.com). The slice includes all grocery retail stores in Arizona with a sufficiently large number of visitors in September of 2021. Visitors (including you if you happened to be in Arizona at that time...) are tracked via their cell phones. The data includes information on the store (name, location, NAICS code, etc.), the number of visits, visitors (unique cell phones), the median distance travelled to shop there, and the median amount of time spent there.
+
+Let's create a symbol map using the provided latitudes and longitudes of these stores.
+
+1. Drag `Longitude` to the Columns Shelf and `Latitude` to the Rows Shelf. (You will likely have to change these fields to `Dimensions`)
+
+2. Drag `Top Category` (this is the top sales category/type of each store) to the colors card.
+
+Which type of store appears to be the most prevalent?
+
+3. Now, let's drag `Raw Visit Counts` to the size card.
+
+Which type of store appears to have the most visitors?
+
+4. Now, let's add each store's name to the tooltip. Drag `Location Name` to the Tooltip card.
+
+**You Do It:** Make a new symbol map using each store's latitude and longitude, and choosing what information you want to include as colors, size, and in the tooltip. What did you uncover?
+
+Now, let's see what happens if we select a different geographical field to make our map. Select the fields `City` and `Raw Visit Counts` and select the Symbol Map in the Show Me Menu. What is this map showing?
+
+What if we change the aggregation of `Raw Visit Counts` to average instead of sum?
+
+### 5. Creating a Filled Map
+
+Let's start this exercise with using the same cell phone data. Select the fields `Postal Code` and `Raw Visit Counts` and go to the Show Me Menu. Now you should see that you can use either a symbol or filled map. Let's select the filled map.
+
+What is this showing you? Are you able to map multiple store attributes using this feature? Do you think the filled map or symbol map are better for these data?
+
+Connect to the dataset `rent_income_county.csv` and create one filled map that shows the median income in each county and one map that shows the median rent in each county.
+
+Now, create a new calculated field called `income to rent ratio` that equal income divided by rent for each county. Plot this new field on a map and filter your data so that your map only includes Arizona (hint: Arizona's FIPS code is 4). Which Arizona county has the highest income to rent ratio?
+
+## 6. Customizing your maps
+
+Tableau includes a variety of features you can include in your maps if you desire. Right click on your map and select `Background Layers...`
+
+Click through some of the map layer options until you find a combination you like.
+
+Now... let's add some of Tableau's more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.
+
+Next let's combine a symbol and filled map:
+
+1. Go back to your Tableau window with the cell phone data analysis.
+
+2. Create a new worksheet with a filled map showing total visit counts by postal code.
+
+3. Command-click (or Control-click on Windows) the latitude measure on the rows shelf and drag it to the right (this copies the value)
+
+4. Navigate to the Marks card for the second pane in your figure. Remove the Postal Code field from this map.
+
+5. Select both the `Latitude` and `Longitude` fields and drag them to the details card.
+
+6. Drag `Top Category` to the colors card. And drag `Distance from Home` (this is the median travel distance for customers in meters) to the Size card.
+
+7. Right click the second `Latitude` field on the Rows shelf and select `Dual Axis`.
+
+Now you can add whatever custom formatting you desire!
+
+What is this combined map showing?
+
+<!-- ### 7. Working with Individual-level data -->
+
+<!-- Next let's connect to the dataset `acs_sample.csv`. These data come from the American Community Survey and include all Arizona households interviewed in 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the [IPUMS website](https://www.ipums.org). -->
+
+<!-- Create a filled map that shows average household income (in colors) by county. -->
+
+<!-- Let's add a pie chart that shows the percentage of households that report receiving food stamps in each county. -->
+
+<!-- 1. Drag `County Fip` over the map and drop it on `Add a Marks Layer` -->
+
+<!-- 2. Navigate to the new Marks card for this second graph and select Pie Chart. -->
+
+<!-- 3. Drag the `County Fip` field to the detail card. -->
+
+<!-- 4. Drag the `Foodstmp` (this field is equal to 0 if the household did not receive Food Stamp benefits and is equal to 1 if they did) field to the color card and change it to a dimension.  -->
+
+<!-- 5. Then drag the `Foodstmp` field to the angle card and change it to a count. -->
+
+<!-- 6. Now create use a quick table calculation to change this to a percent of total, calculated over the Foodstmp field. -->
+
+<!-- What is this figure showing? -->
+
+<!-- Which county has the highest average income? -->
+
+<!-- Which county has the highest food stamp usage? -->
+
+<!-- Using individual-level (or in this case, household-level) data, you might also be interested in comparing outcomes across dimensions other than geography. For example, how might we show how income and rent compare for AZ households participating in Food Stamps versus for those who do not? -->
+
+
+
+## 7. Plotting Results from a Cluster Analysis
 
 If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let's do this now.
 
@@ -249,54 +228,3 @@ If you want to show results from your cluster analysis in Tableau, a simple way 
 6. Let's add some more detail to the tooltip. I would like to know the location name, top category, and cluster when I hover over each point on the map.
 
 {{< video https://youtu.be/lXloWsi7hZQ aspect-ratio="16x9" >}}
-
-
-### 2. Plotting Results from a Regression Analysis
-
-We have already discussed how to use Tableau's integrated regression analysis, but a major limitation to this is that Tableau can only perform single variable regressions. Let's look at the difference between the single and multivariate regression results by creating a scatterplot in Tableau:
-
-1. To compare the single and multivariate regression results we will need to join our `analyzed_data` and `fitted_reg` data sources. Join these two datasets on the `Raw Visitor Counts` field.
-
-2. Open a new sheet and create a scatterplot of `Raw Visitor Counts` and `Distance from Home` (note that we want our Y variable -- `Raw Visitor Counts` -- on the Y-axis).
-
-3. Add a fitted line to your scatterplot.
-
-4. To plot our multivariate regression results on this 2D plot, we will need to select a fixed value of the second variable (`Median Dwell Time`). To demonstrate that we need to do this - try plotting the fitted values of `Raw Visitor Counts` and `Distance from Home`. What do you see?
-
-5. Create a new calculated field, named `Fitted Distance From Home` with the following formula: `IF [Median Dwell (Fitted Reg.Csv)]==3 THEN [Distance From Home (Fitted Reg.Csv)] ELSE NULL END` 
-   
-**What is this formula doing?**
-
-6. Drag `Fitted Distance From Home` to the columns shelf, and `Raw Visitor Counts (Fitted Reg.Csv)` to the rows shelf. Change both fields to Dimensions.
-
-7. Change this new plot to a line (instead of scatter).
-
-8. Create X and Y dual axes (by right clicking each axis), then synchronize the axes so that they have the same values. Finally you can hide the seconary axes to reduce the clutter.
-
-5. How do the multivariate regression fitted values compare with the single variate ones?
-
-9. Now, what happens if we look at the fitted values assuming `Median Dwell Time` is equal to 4? Edit the calculated field to make this change.
-
-Note that another option for accomplishing this is to simply use the fitted regression equation (from R) to create a new calculated field. To see this, create a new calculated field called `Fitted Visits 2` with the following formula: `8.14165 -0.27568*[Distance From Home] -0.36894*4`.
-
-**Where did these numbers come from?**
-
-{{< video https://youtu.be/nRJaoNmhCzk aspect-ratio="16x9" >}}
-
-### 3. Adding Vizzes to Map Tooltips
-
-The last thing I want to cover today is how to add other visualizations to your map tooltip. To do this, let's create a simple scatterplot of `Raw Visitor Counts` and `Distance from Home` and add a fitted line.
-
-1. Go back to your sheet with your map, color coded by cluster.
-
-2. Open the Tooltip card and go to `Insert` -> `Sheets` and select the sheet with your new scatterplot.
-
-3. When you hover over a point on the map, what is this visualization showing?
-
-4. What if we instead want to show a scatterplot of these two variables only for grocery stores within that cluster? Go back to the Tooltip card and edit the Sheet info from `<Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="<All Fields>">` to read `<Sheet name="Sheet 2" maxwidth="300" maxheight="300" filter="<Cluster>">`
-
-5. Now what happens when you hover over a point on the map? How did we accomplish this?
-
-6. Let's add a useful title to our scatterplot by typing `Relationship between Visitors and Distance from home for stores in cluster <Cluster>` in the Tooltip above the scatterplot. Then let's adjust the width of the scatterplot to `500`.
-
-{{< video https://youtu.be/y08HjpcHF_4 aspect-ratio="16x9" >}}
