@@ -46,21 +46,22 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link active" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
-  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
+  <li><a href="#geocoding-overview" id="toc-geocoding-overview" class="nav-link" data-scroll-target="#geocoding-overview">Geocoding Overview</a>
   <ul class="collapse">
-  <li><a href="#tableaus-geocoding" id="toc-tableaus-geocoding" class="nav-link" data-scroll-target="#tableaus-geocoding">1. Tableau’s Geocoding</a></li>
-  <li><a href="#tableaus-spatial-data-capabilities" id="toc-tableaus-spatial-data-capabilities" class="nav-link" data-scroll-target="#tableaus-spatial-data-capabilities">2. Tableau’s Spatial Data Capabilities</a></li>
-  <li><a href="#symbol-vs.-filled-maps" id="toc-symbol-vs.-filled-maps" class="nav-link" data-scroll-target="#symbol-vs.-filled-maps">3. Symbol vs.&nbsp;Filled Maps</a>
+  <li><a href="#tableaus-geocoding" id="toc-tableaus-geocoding" class="nav-link" data-scroll-target="#tableaus-geocoding">Tableau’s Geocoding</a></li>
+  <li><a href="#tableaus-spatial-data-capabilities" id="toc-tableaus-spatial-data-capabilities" class="nav-link" data-scroll-target="#tableaus-spatial-data-capabilities">Tableau’s Spatial Data Capabilities</a></li>
+  <li><a href="#symbol-vs.-filled-maps" id="toc-symbol-vs.-filled-maps" class="nav-link" data-scroll-target="#symbol-vs.-filled-maps">Symbol vs.&nbsp;Filled Maps</a>
   <ul class="collapse">
   <li><a href="#symbol-maps" id="toc-symbol-maps" class="nav-link" data-scroll-target="#symbol-maps">Symbol Maps</a></li>
   <li><a href="#filled-maps" id="toc-filled-maps" class="nav-link" data-scroll-target="#filled-maps">Filled Maps</a></li>
   </ul></li>
-  <li><a href="#creating-a-symbol-map" id="toc-creating-a-symbol-map" class="nav-link" data-scroll-target="#creating-a-symbol-map">4. Creating a Symbol Map</a>
-  <ul class="collapse">
-  <li><a href="#creating-a-filled-map" id="toc-creating-a-filled-map" class="nav-link" data-scroll-target="#creating-a-filled-map">5. Creating a Filled Map</a></li>
   </ul></li>
-  <li><a href="#customizing-your-maps" id="toc-customizing-your-maps" class="nav-link" data-scroll-target="#customizing-your-maps">6. Customizing your maps</a></li>
-  <li><a href="#plotting-results-from-a-cluster-analysis" id="toc-plotting-results-from-a-cluster-analysis" class="nav-link" data-scroll-target="#plotting-results-from-a-cluster-analysis">7. Plotting Results from a Cluster Analysis</a></li>
+  <li><a href="#geocoding-application" id="toc-geocoding-application" class="nav-link" data-scroll-target="#geocoding-application">Geocoding Application</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-symbol-map" id="toc-creating-a-symbol-map" class="nav-link" data-scroll-target="#creating-a-symbol-map">1. Creating a Symbol Map</a></li>
+  <li><a href="#creating-a-filled-map" id="toc-creating-a-filled-map" class="nav-link" data-scroll-target="#creating-a-filled-map">2. Creating a Filled Map</a></li>
+  <li><a href="#customizing-your-map" id="toc-customizing-your-map" class="nav-link" data-scroll-target="#customizing-your-map">3. Customizing Your Map</a></li>
+  <li><a href="#plotting-results-from-a-cluster-analysis" id="toc-plotting-results-from-a-cluster-analysis" class="nav-link" data-scroll-target="#plotting-results-from-a-cluster-analysis">4. Plotting Results from a Cluster Analysis</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -98,11 +99,11 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Aggregate individual-level data by geographic region</p></li>
 </ul>
 </section>
-<section id="tableau" class="level1">
-<h1>Tableau</h1>
+<section id="geocoding-overview" class="level1">
+<h1>Geocoding Overview</h1>
 <p>The defining characteristic of cross-sectional data is that we observe values of variables at a single point in, or cross-section of time. Often, but not always, cross-sectional data have geographic components that allows us to use Tableau’s mapping features when creating visualizations. Effective analysis of cross-sectional data begins with estimating and conveying useful summary statistics. Today, we will spend most of our time discussing how to do this with spatial data.</p>
 <section id="tableaus-geocoding" class="level2">
-<h2 class="anchored" data-anchor-id="tableaus-geocoding">1. Tableau’s Geocoding</h2>
+<h2 class="anchored" data-anchor-id="tableaus-geocoding">Tableau’s Geocoding</h2>
 <p>If you want to analyze your data geographically, you can plot your data on a map in Tableau.</p>
 <p>When building map views, Tableau supports any latitude and longitude coordinates, as long as they are in decimal degrees. Tableau can also recognize and geocode the following geographic information types:</p>
 <ul>
@@ -123,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
 <p>If you have geographic delineations besides these, you will have to use crosswalks or some other means to convert the delineations to one of these forms, or to generate latitudes and longitudes for specific points (e.g., addresses).</p>
 </section>
 <section id="tableaus-spatial-data-capabilities" class="level2">
-<h2 class="anchored" data-anchor-id="tableaus-spatial-data-capabilities">2. Tableau’s Spatial Data Capabilities</h2>
+<h2 class="anchored" data-anchor-id="tableaus-spatial-data-capabilities">Tableau’s Spatial Data Capabilities</h2>
 <p>Tableau can also connect to the following spatial file types:</p>
 <ul>
 <li><p>Shapefiles</p></li>
@@ -135,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
 <p>These types of files include detailed geographic information that enables us to plot shapes and single points.</p>
 </section>
 <section id="symbol-vs.-filled-maps" class="level2">
-<h2 class="anchored" data-anchor-id="symbol-vs.-filled-maps">3. Symbol vs.&nbsp;Filled Maps</h2>
+<h2 class="anchored" data-anchor-id="symbol-vs.-filled-maps">Symbol vs.&nbsp;Filled Maps</h2>
 <section id="symbol-maps" class="level3">
 <h3 class="anchored" data-anchor-id="symbol-maps">Symbol Maps</h3>
 <p>A symbol map is effective for showing quantitative data for individual locations. For example, you can use a symbol map to show individual store locations on a map.</p>
@@ -161,8 +162,11 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Knowledge Check 2:</strong> Suppose we have gas station-level data on gas prices yesterday. What type of map would you use to show this information?</p>
 </section>
 </section>
+</section>
+<section id="geocoding-application" class="level1">
+<h1>Geocoding Application</h1>
 <section id="creating-a-symbol-map" class="level2">
-<h2 class="anchored" data-anchor-id="creating-a-symbol-map">4. Creating a Symbol Map</h2>
+<h2 class="anchored" data-anchor-id="creating-a-symbol-map">1. Creating a Symbol Map</h2>
 <p>Connect to the dataset <code>arizona_grocery_foot_traffic.csv</code>. This is a very very VERY small slice of cell phone visit data from the company <a href="https://www.safegraph.com">Safegraph</a>. The slice includes all grocery retail stores in Arizona with a sufficiently large number of visitors in September of 2021. Visitors (including you if you happened to be in Arizona at that time…) are tracked via their cell phones. The data includes information on the store (name, location, NAICS code, etc.), the number of visits, visitors (unique cell phones), the median distance travelled to shop there, and the median amount of time spent there.</p>
 <p>Let’s create a symbol map using the provided latitudes and longitudes of these stores.</p>
 <ol type="1">
@@ -180,16 +184,16 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>You Do It:</strong> Make a new symbol map using each store’s latitude and longitude, and choosing what information you want to include as colors, size, and in the tooltip. What did you uncover?</p>
 <p>Now, let’s see what happens if we select a different geographical field to make our map. Select the fields <code>City</code> and <code>Raw Visit Counts</code> and select the Symbol Map in the Show Me Menu. What is this map showing?</p>
 <p>What if we change the aggregation of <code>Raw Visit Counts</code> to average instead of sum?</p>
-<section id="creating-a-filled-map" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-filled-map">5. Creating a Filled Map</h3>
+</section>
+<section id="creating-a-filled-map" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-filled-map">2. Creating a Filled Map</h2>
 <p>Let’s start this exercise with using the same cell phone data. Select the fields <code>Postal Code</code> and <code>Raw Visit Counts</code> and go to the Show Me Menu. Now you should see that you can use either a symbol or filled map. Let’s select the filled map.</p>
 <p>What is this showing you? Are you able to map multiple store attributes using this feature? Do you think the filled map or symbol map are better for these data?</p>
 <p>Connect to the dataset <code>rent_income_county.csv</code> and create one filled map that shows the median income in each county and one map that shows the median rent in each county.</p>
 <p>Now, create a new calculated field called <code>income to rent ratio</code> that equal income divided by rent for each county. Plot this new field on a map and filter your data so that your map only includes Arizona (hint: Arizona’s FIPS code is 4). Which Arizona county has the highest income to rent ratio?</p>
 </section>
-</section>
-<section id="customizing-your-maps" class="level2">
-<h2 class="anchored" data-anchor-id="customizing-your-maps">6. Customizing your maps</h2>
+<section id="customizing-your-map" class="level2">
+<h2 class="anchored" data-anchor-id="customizing-your-map">3. Customizing Your Map</h2>
 <p>Tableau includes a variety of features you can include in your maps if you desire. Right click on your map and select <code>Background Layers...</code></p>
 <p>Click through some of the map layer options until you find a combination you like.</p>
 <p>Now… let’s add some of Tableau’s more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.</p>
@@ -222,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- Using individual-level (or in this case, household-level) data, you might also be interested in comparing outcomes across dimensions other than geography. For example, how might we show how income and rent compare for AZ households participating in Food Stamps versus for those who do not? -->
 </section>
 <section id="plotting-results-from-a-cluster-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-results-from-a-cluster-analysis">7. Plotting Results from a Cluster Analysis</h2>
+<h2 class="anchored" data-anchor-id="plotting-results-from-a-cluster-analysis">4. Plotting Results from a Cluster Analysis</h2>
 <p>If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let’s do this now.</p>
 <ol type="1">
 <li><p>Connect to your dataset with the results from your cluster analysis. I called this <code>analyzed_data.csv</code>.</p></li>

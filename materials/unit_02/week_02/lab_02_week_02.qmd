@@ -14,7 +14,6 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 :::
 
 
-
 ## Learning Objectives Tableau
 
 - Understand Tableau geocoding capabilities
@@ -27,12 +26,11 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 
 - Aggregate individual-level data by geographic region
 
-
-# Tableau
+# Geocoding Overview
 
 The defining characteristic of cross-sectional data is that we observe values of variables at a single point in, or cross-section of time. Often, but not always, cross-sectional data have geographic components that allows us to use Tableau's mapping features when creating visualizations. Effective analysis of cross-sectional data begins with estimating and conveying useful summary statistics. Today, we will spend most of our time discussing how to do this with spatial data.
 
-## 1. Tableau's Geocoding
+## Tableau's Geocoding
 
 If you want to analyze your data geographically, you can plot your data on a map in Tableau.
 
@@ -66,7 +64,7 @@ When building map views, Tableau supports any latitude and longitude coordinates
 
 If you have geographic delineations besides these, you will have to use crosswalks or some other means to convert the delineations to one of these forms, or to generate latitudes and longitudes for specific points (e.g., addresses).
 
-## 2. Tableau's Spatial Data Capabilities
+## Tableau's Spatial Data Capabilities
 
 Tableau can also connect to the following spatial file types:
 
@@ -83,7 +81,7 @@ Tableau can also connect to the following spatial file types:
 These types of files include detailed geographic information that enables us to plot shapes and single points. 
 
 
-## 3. Symbol vs. Filled Maps
+## Symbol vs. Filled Maps
 
 ### Symbol Maps
 
@@ -118,8 +116,9 @@ To create a filled map, verify that your data source includes the following type
 **Knowledge Check 2:** Suppose we have gas station-level data on gas prices yesterday. What type of map would you use to show this information?
 
 
+# Geocoding Application
 
-## 4. Creating a Symbol Map
+## 1. Creating a Symbol Map
 
 Connect to the dataset `arizona_grocery_foot_traffic.csv`. This is a very very VERY small slice of cell phone visit data from the company [Safegraph](https://www.safegraph.com). The slice includes all grocery retail stores in Arizona with a sufficiently large number of visitors in September of 2021. Visitors (including you if you happened to be in Arizona at that time...) are tracked via their cell phones. The data includes information on the store (name, location, NAICS code, etc.), the number of visits, visitors (unique cell phones), the median distance travelled to shop there, and the median amount of time spent there.
 
@@ -143,7 +142,7 @@ Now, let's see what happens if we select a different geographical field to make 
 
 What if we change the aggregation of `Raw Visit Counts` to average instead of sum?
 
-### 5. Creating a Filled Map
+## 2. Creating a Filled Map
 
 Let's start this exercise with using the same cell phone data. Select the fields `Postal Code` and `Raw Visit Counts` and go to the Show Me Menu. Now you should see that you can use either a symbol or filled map. Let's select the filled map.
 
@@ -153,7 +152,7 @@ Connect to the dataset `rent_income_county.csv` and create one filled map that s
 
 Now, create a new calculated field called `income to rent ratio` that equal income divided by rent for each county. Plot this new field on a map and filter your data so that your map only includes Arizona (hint: Arizona's FIPS code is 4). Which Arizona county has the highest income to rent ratio?
 
-## 6. Customizing your maps
+## 3. Customizing Your Map
 
 Tableau includes a variety of features you can include in your maps if you desire. Right click on your map and select `Background Layers...`
 
@@ -210,8 +209,7 @@ What is this combined map showing?
 <!-- Using individual-level (or in this case, household-level) data, you might also be interested in comparing outcomes across dimensions other than geography. For example, how might we show how income and rent compare for AZ households participating in Food Stamps versus for those who do not? -->
 
 
-
-## 7. Plotting Results from a Cluster Analysis
+## 4. Plotting Results from a Cluster Analysis
 
 If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let's do this now.
 
