@@ -13,10 +13,9 @@ format:
 
 Exploring your data
 
-Unsupervised methods: cluster analysis
+A deeper dive into customer segmentation
 
-Supervised methods: regression, classification
-
+Review Project 2 datasets
 
 
 <!-- example of big text fit to slide width -->
@@ -32,18 +31,96 @@ Supervised methods: regression, classification
 <!-- ::: -->
 <!-- :::: -->
 
+# Exploring your data
+
 ## Exploratory data analysis
 
-Explore your data to gain familiarity and stimulate questions
+What do we mean when we say *explore your data*?
 
-Generate summary statistics (average, variance, min, max)
+$\rightarrow$ Gain familiarity with the contents of the data
 
-Plot distributions and correlations between variables
+$\rightarrow$ Identify questions that can be answered with the data
 
-## Grocery visitation data
+$\rightarrow$ Generate summary statistics (average, variance, min, max)
+
+$\rightarrow$ Plot distributions and correlations between variables
+
+# Let's look at an example: Grocery visitation data
+
+## Gain familiarity with your data {.scrollable}
+
+A good data source will provide information about a dataset in the form of a data dictionary.
+
+A data dictionary is a comprehensive guide that provides detailed information to the data analyst about the dataset being analyzed.
+
+Can include:
+
+- Variable names
+
+- Data types
+
+- Descriptions
+
+- Possible values
+
+- Missing value indication
+
+- Source
+
+## 
+
+<section>
+<embed src="includes/Advan Weekly Patterns.pdf" width="900" height="700">
+</section>
+
+## Identify questions that could be asked
+
+- Which stores have the greatest number of unique shoppers?
+
+- What is the average length of time a shopper remains in a store?
+
+- How far do shoppers travel to a store during a weekday?
+
+- What time of day is the busiest time to shop on a Saturday and a Sunday?  
+
+
+## Summary statistics {.scrollable}
+
+Summary statistics provide an overview of the data's main characteristics.
+
+They are important for understanding the data's scope and identifying possible outliers.
+
+What summary statistics would we want to report if we were to answer the following question: **How far do shoppers travel to a store during a weekday?**
+
+1. **Average distance (mean)**: Calculate the average distance traveled by all shoppers, conditioning on weekdays.
+
+2. **Range of distances (min and max)**: Find the shortest and longest distances traveled by shoppers, conditioning on weekdays.
+
+3. **Variation of distance traveled (standard deviation)**: This measures the amount of dispersion in the distances. A high standard deviation means that the distances vary widely from the mean, while low standard deviation means that the distances traveled are clustered closely around the mean.
+
+
+## Plotting distributions and correlations
 
 ![](includes/ggpairs.png)
 
+## Plotting distributions and correlations {.scrollable}
+
+Plotting data allows you to see relationships in the data that cannot be easily identified with summary statistics.
+
+We plot *distributions* for a single variable:
+
+- Allows you to see patterns, anomalies, and spot outliers in the data
+
+- The shape of the distribution informs whether you will need to transform the data (e.g., take the log)
+
+We plot *correlations* between two variables:
+
+- Discover relationships between two variables and use this to inform a hypothesis
+
+- Highly correlated data can be problematic and plotting correlations can detect these relationships
+
+
+<!--
 ## Methods overview
 
 :::: {.columns style="text-align: left"}
@@ -68,25 +145,63 @@ Good for explaining relationships and predicting new outcomes
 :::
 ::::
 
-# Unsupervised Learning
+# Cross-Sectional Data Analysis
 
-## Cluster Analysis
+## Cluster analysis
 
-Cluster analysis is a form of unsupervised analysis
+Last week, we discussed **cluster analysis** 
 
-A systematic method to look for patterns in data
+Cluster analysis is a form of *unsupervised learning* 
 
-## Customer segmentation analysis
+It provides a systematic method to look for patterns in data.
 
-Use sales data to divide your customers into groups to better target marketing
+## Knowledge check
 
-![](includes/customer_segmentation.png)
+We discussed k-means clustering in class, and in lab. What is the main goal of the k-means clustering algorithm?
+
+A) To minimize the distance between all data points in the dataset.
+
+B) To minimize the distance between each data point and its assigned centroid.
+
+C) To maximize the distance between each data point and all other data points.
+
+D) To maximize the distance between each data point and its assigned centroid.
+
+-->
+
+# Customer segmentation
 
 ## [ESRI Tapestry Segmentation](https://doc.arcgis.com/en/esri-demographics/latest/regional-data/tapestry-segmentation.htm)
 
 Uses cluster analysis on census demographic data (+ others) to define groups
 
 ![](includes/esri_tapestry.jpeg)
+
+
+## **INSERT JUDE'S SLIDES**
+
+## Customer segmentation analysis
+
+A common application of cluster analysis is to use sales data to divide customers into groups to better target marketing
+
+
+
+# Project 2 Datasets
+
+## **LAUREN WORKING ON THESE NOW**
+
+
+## Summary
+
+Explore your data: descriptive statistics, plotting distributions, plotting correlations
+
+Unsupervised learning methods like clustering can help you learn about patterns in your data
+
+Supervised learning methods like regression and classification can help you explain relationships and predict outcomes of new data
+
+
+<!-- OLD SLIDES THAT HAVE BEEN COMMENTED OUT OR MOVED TO UNIT 02 WEEK 01
+![](includes/customer_segmentation.png)
 
 ## How does cluster analysis work? {.scrollable}
 
@@ -108,17 +223,7 @@ Usually, we repeat this whole process a number of times and choose the group ass
 
 After clustering, summarize attributes of the clusters to understand the groups
 
-## Knowledge check
 
-What is the main goal of the k-means clustering algorithm?
-
-A) To minimize the distance between all data points in the dataset.
-
-B) To minimize the distance between each data point and its assigned centroid.
-
-C) To maximize the distance between each data point and all other data points.
-
-D) To maximize the distance between each data point and its assigned centroid.
 
 # Supervised Learning
 
@@ -185,14 +290,7 @@ B. Unsupervised learning requires labeled data, while supervised learning does n
 C. Both supervised and unsupervised learning require labeled data.
 
 D. There is no difference between supervised and unsupervised learning.
-
-## Summary
-
-Explore your data: descriptive statistics, plotting distributions, plotting correlations
-
-Unsupervised learning methods like clustering can help you learn about patterns in your data
-
-Supervised learning methods like regression and classification can help you explain relationships and predict outcomes of new data
+-->
 
 
 
