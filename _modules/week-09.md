@@ -1,5 +1,5 @@
 ---
-title: "Week 9: Intro to Cross-Sectional and Spatial Data"
+title: "Week 9: Intro to Cross-Sectional and Clustering"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">

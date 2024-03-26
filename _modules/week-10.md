@@ -1,5 +1,5 @@
 ---
-title: "Week 10: Intro to Analyzing Cross-Sectional Data"
+title: "Week 10: Intro to Mapping and Visualizing Cross-Sectional Data"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
