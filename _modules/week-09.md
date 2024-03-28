@@ -15,7 +15,7 @@ title: "Week 9: Intro to Cross-Sectional and Clustering"
 
 <a  href="/materials/unit_02/week_01/lab_02_week_01.html" target="_blank">Week 9 Lab Notes</a> <br> 
 
-<a  href="/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv" download>Download arizona_grocery_foot_traffic.csv</a> <br>
+<a  href="/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv" download>Download arizona_grocery_foot_traffic.csv</a> <br><br>
 
 <!--
 <a  href="/materials/unit_02/inputs/rent_income_county.csv" download>Download rent_income_county.csv</a> <br>
