@@ -441,7 +441,7 @@ write_csv(shopper_store_join, "shopper_store_join.csv")
 
 ### Step 3: Plot the Store Locations
 
-Using the same steps as Part 1 of lab, connect to `shopper_store_join.csv` and created a symbol map plotting the locations of the convenience stores.
+Using the same steps as Part 1 of lab, connect to `shopper_store_join.csv` and create a symbol map plotting the locations of the convenience stores.
 
 You will continue to explore this data in your next problem set.
 
