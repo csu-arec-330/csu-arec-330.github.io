@@ -283,7 +283,7 @@ Transaction-level data includes information about the store where they made the 
 
 "store_info.csv"
 
-- This file contains the store details and can be linked with the "shopper_info" using the variable store_id
+- This file contains the store details and can be linked with the "shopper_info" using the variable store_id.
 
 ## Project 2: Types of segmentations
 ::: .columns
