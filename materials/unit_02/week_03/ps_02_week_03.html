@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project 2 Problem Set 2: Intro to Cross Sectional Data Analysis</title>
+<title>Project 2 – Problem Set 3: Cross Sectional Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project 2 Problem Set 2: Intro to Cross Sectional Data Analysis</h1>
+<h1 class="title">Project 2 – Problem Set 3: Cross Sectional Data Analysis</h1>
 </div>
 
 
@@ -62,43 +62,54 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="problem-set-overview" class="level2">
 <h2 class="anchored" data-anchor-id="problem-set-overview">Problem Set Overview</h2>
-<p>This problem set introduces you to spatial data in R.</p>
+<p>This problem set is designed to apply both clustering and spatial data analysis. <!--
+## Part 1: Spatial data in R -- DO NOT DO PART 1!!
+
+1. Use one of your project datasets that contains spatial information (or find a new one). Convert it to a spatially aware `sf` object.
+
+2. Perform a spatial intersection associating data from another source with your data. 
+--></p>
 </section>
-<section id="part-1-spatial-data-in-r-do-not-do-part-1" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-spatial-data-in-r-do-not-do-part-1">Part 1: Spatial data in R – DO NOT DO PART 1!!</h2>
+<section id="part-1-r" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-r">Part 1: R</h2>
 <ol type="1">
-<li><p>Use one of your project datasets that contains spatial information (or find a new one). Convert it to a spatially aware <code>sf</code> object.</p></li>
-<li><p>Perform a spatial intersection associating data from another source with your data.</p></li>
-</ol>
-</section>
-<section id="part-2-project-data-analysis-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-project-data-analysis-in-r">Part 2: Project data analysis in R</h2>
-<ol type="1">
-<li>Using your project datasets, perform either a regression or cluster analysis as appropriate for your research question or objective. (This can be the same analysis from last week’s problem set.)</li>
-</ol>
-<p><strong>IF using regression analysis</strong></p>
-<ol start="2" type="1">
-<li><p>Perform a multivariate regression, copy and paste your regression output into your google site and briefly describe the results - interpret the coefficients and discuss overall model fit.</p></li>
-<li><p>Use future predicted values for one of the variables in your regression analysis (e.g., population…) to forecast values of your outcome variable.</p></li>
-<li><p>Create and export a dataset that includes the actual and predicted values of this variable.</p></li>
-</ol>
-<p><strong>IF using cluster analysis</strong></p>
-<ol start="2" type="1">
+<li><p>Using your project datasets, perform a K-means cluster analysis as appropriate for your research question or objective. Explain why you clustered on the dimensions you chose and what the clusters tell you.</p></li>
 <li><p>Summarize the variables you included in your cluster analysis for each cluster. Discuss the results, including any notable differences between the variables across clusters.</p></li>
-<li><p>Export a dataset that includes all variables you used in your cluster analysis, as well as your clusters.</p></li>
+<li><p>Export a dataset that includes all variables you used in your cluster analysis, as well as your clusters. Write a narrative in your webpage explaining your cluster analysis and what you learned.</p></li>
 </ol>
+<!--
+**IF using regression analysis** 
+
+2. Perform a multivariate regression, copy and paste your regression output into your google site and briefly describe the results - interpret the coefficients and discuss overall model fit.
+   
+3. Use future predicted values for one of the variables in your regression analysis (e.g., population...) to forecast values of your outcome variable. 
+  
+4. Create and export a dataset that includes the actual and predicted values of this variable.
+
+**IF using cluster analysis** 
+-->
 </section>
-<section id="part-3-analysis-and-visualizations-in-tableau" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-analysis-and-visualizations-in-tableau">Part 3: Analysis and Visualizations in Tableau</h2>
+<section id="part-2-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-tableau">Part 2: Tableau</h2>
+<!--
+1. **IF using regression analysis** Create TWO visualizations that shows the difference between the observed and future values of your outcome variable. 
+
+1. **IF using cluster analysis** 
+Create TWO visualizations that help you assign meaning to your clusters. 
+-->
 <ol type="1">
-<li><p><strong>IF using regression analysis</strong> Create TWO visualizations that shows the difference between the observed and future values of your outcome variable.</p></li>
-<li><p><strong>IF using cluster analysis</strong> Create TWO visualizations that help you assign meaning to your clusters. Note that if the clusters you generated in R turn out to not be useful, you can use Tableau’s clustering analysis to change the variables or number of clusters to find more useful groupings.</p></li>
-<li><p>Discuss take-aways for your research question based on your analysis. What did your analysis uncover?</p></li>
+<li>Create TWO visualizations that show your clusters, exploring the underlying meaning of your clusters by seeing how clusters compare across the variables you used to define them (create scatter plots to show this). Your analysis should include a description of the “meaning” of each cluster. For example, does one cluster indicate the areas that are more favorable to locate your store?</li>
+</ol>
+<blockquote class="blockquote">
+<p>Note: If the clusters you generated in R turn out to not be useful, you can use Tableau’s clustering analysis to change the variables or number of clusters to find more useful groupings.</p>
+</blockquote>
+<ol start="2" type="1">
+<li>Discuss take-aways for your research question based on your analysis. What did your analysis uncover?</li>
 </ol>
 </section>
 <section id="how-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
-<p>You should create a new webpage on your google site titled <code>Project 2 Problem Set 3</code>. Parts 1 and 2 should include your annotated code. Part 2 should additionally include your regression output or summary statistics from your cluster analysis and the accompanying discussions. Part 3 should include your two data visualizations and a disucssion of your findings. Submit the link to your google site webpage in Canvas.</p>
+<p>You should create a new webpage on your Google site titled <code>Project 2 Problem Set 3</code>. Parts 1 should include your annotated code, summary statistics from your cluster analysis, and the accompanying discussions. Part 2 should include your two data visualizations and a discussion of your findings. Submit the link to your Google site webpage in Canvas.</p>
 </section>
 
 </main>
@@ -130,9 +141,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -197,6 +222,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
