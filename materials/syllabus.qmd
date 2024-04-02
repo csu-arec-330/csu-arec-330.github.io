@@ -4,7 +4,7 @@ format:
   html:
     # theme: zephyr
     date-modified: last-modified
-  pdf: default
+  #pdf: default
 ---
 
 <!-- lumen, materia, minty, sandstone, simplex, superhero, yeti -->
@@ -19,7 +19,7 @@ Lab: Nutrien 103, Fri 1:00 - 2:40 PM
 
 [Course Website](https://csu-arec-330.github.io/)
 
-[Course Canvas](https://colostate.instructure.com/courses/162079)
+[Course Canvas](https://colostate.instructure.com/courses/179150)
 
 ## Who
 
