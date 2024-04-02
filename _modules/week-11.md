@@ -34,10 +34,6 @@ title: "Week 11: Spatial Data"
 
 <a  href="/materials/unit_02/inputs/store_info.csv" download>Download store_info.csv</a> <br><br>
 
-<b>Problem Set Materials - Due Friday, April 12 by 11:59 PM:</b> <br>
-
-<a  href="/materials/unit_02/week_03/ps_02_week_03.html" target="_blank">Project 2 Problem Set 3 Instructions</a> <br> <br>
-
 <b>Project Materials:</b> <br>
 
 <b>Video Presentation - Due Thursday, April 11 (10:00 am)</b> <br>
@@ -45,6 +41,9 @@ title: "Week 11: Spatial Data"
 
 <a  href="/materials/unit_02/week_04/project_2_rubric.html" target="_blank">Project 2 Rubric</a> <br> <br> 
 
+<b>Problem Set Materials - Due Friday, April 12 by 11:59 PM:</b> <br>
+
+<a  href="/materials/unit_02/week_03/ps_02_week_03.html" target="_blank">Project 2 Problem Set 3 Instructions</a> <br> <br>
 
 </div>
 
