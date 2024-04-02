@@ -504,30 +504,91 @@ D) To maximize the distance between each data point and its assigned centroid.
 <h2>Dimensions of customer segmentation</h2>
 <p>Identify customer personas</p>
 <p>Customer stage - leads, prospects, existing customers</p>
-<p>Customer demographics - age, gender, income, location, occupation,</p>
+<p>Customer demographics - age, gender, income, location, occupation</p>
 <p>Customer behaviors - purchase history, web browsing activity</p>
-</section>
-<section id="met-life-case-study" class="slide level2">
-<h2>Met life case study</h2>
-<iframe width="100%" height="500" src="https://d3.harvard.edu/platform-rctom/submission/metlife-a-case-study-in-customer-segmentation/"></iframe>
 </section>
 <section id="customer-segmentation-analysis" class="slide level2">
 <h2>Customer segmentation analysis</h2>
-<p>A common application of cluster analysis is to use sales data to divide customers into groups to better target marketing</p>
+<p>A common application of cluster analysis is to use sales data to divide customers into groups to improve target marketing.</p>
+<p>Let’s look at a case study. . .</p>
+</section>
+<section id="metlife-case-study" class="slide level2">
+<h2>MetLife case study</h2>
+<iframe width="100%" height="500" src="https://d3.harvard.edu/platform-rctom/submission/metlife-a-case-study-in-customer-segmentation/"></iframe>
 </section></section>
 <section>
-<section id="project-2-datasets" class="title-slide slide level1 center">
-<h1>Project 2 Datasets</h1>
+<section id="project-2" class="title-slide slide level1 center">
+<h1>Project 2</h1>
 
 </section>
-<section id="lauren-working-on-these-now" class="slide level2">
-<h2><strong>LAUREN WORKING ON THESE NOW</strong></h2>
+<section id="project-2-overview" class="slide level2 scrollable">
+<h2>Project 2: Overview</h2>
+<p>Use the data provided to:</p>
+<ul>
+<li><p>Perform an exploratory data analysis</p></li>
+<li><p>Assemble summary statistics</p></li>
+<li><p>Analyze spatial patterns, correlations, etc.</p></li>
+<li><p>Construct visualizations</p></li>
+</ul>
+<p>You must:</p>
+<ul>
+<li><p>Conduct market segmentation analysis via clustering</p></li>
+<li><p>Label clusters based on characteristics</p></li>
+<li><p>Develop a simple marketing strategy to target clusters</p></li>
+</ul>
+</section>
+<section id="project-2-data" class="slide level2">
+<h2>Project 2: Data</h2>
+<p>Overview: Transaction-level data from convenience stores across the U.S. during July of 2023</p>
+<p>A <em>transaction</em> is defined as a purchase incident made by a shopper. (Think: receipt)</p>
+<p>Transaction-level data includes information about the store where they made the purchase, the price and quantity of the products they purchased, and details about the items they purchased.</p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/data_schema.png" class="r-stretch quarto-figure-center"></section>
+<section id="project-2-data-1" class="slide level2 scrollable">
+<h2>Project 2: Data</h2>
+<p>“shopper_info.csv”</p>
+<ul>
+<li>This is the core file that contains information about the shopper and each transaction they made during the month of July 2023.</li>
+</ul>
+<p>“gtin.csv”</p>
+<ul>
+<li><p>You will link this file with “shopper_info” based on the variable gtin.</p></li>
+<li><p>GTIN stands for “Global Trade Item Number” and is similar to an SKU or UPC (i.e., barcode).</p></li>
+</ul>
+<p>“store_info.csv”</p>
+<ul>
+<li>This file contains the store details and can be linked with the “shopper_info” using the variable store_id.</li>
+</ul>
+</section>
+<section id="project-2-types-of-segmentations" class="slide level2">
+<h2>Project 2: Types of segmentations</h2>
+<div class=".columns">
+<div class="column" style="width:45%;">
+<p>By store:</p>
+<ul>
+<li><p>Which stores are similar by mix of products sold?</p></li>
+<li><p>Which stores are similar by sales?</p></li>
+</ul>
+<p>By product:</p>
+<ul>
+<li>Which products are similar?</li>
+</ul>
+</div>
+<div class="column" style="width:45%;">
+<p>By shopper:</p>
+<ul>
+<li><p>Which shoppers are similar based on where they shop?</p></li>
+<li><p>Which shoppers are similar based on what they purchase?</p></li>
+</ul>
+</div>
+</div>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
-<p>Explore your data: descriptive statistics, plotting distributions, plotting correlations</p>
-<p>Unsupervised learning methods like clustering can help you learn about patterns in your data</p>
-<p>Supervised learning methods like regression and classification can help you explain relationships and predict outcomes of new data</p>
+<p>Explore your data: understanding your data, identifying questions, descriptive statistics, plotting distributions, plotting correlations</p>
 <!-- OLD SLIDES THAT HAVE BEEN COMMENTED OUT OR MOVED TO UNIT 02 WEEK 01
 ![](includes/customer_segmentation.png)
 
@@ -618,6 +679,13 @@ B. Unsupervised learning requires labeled data, while supervised learning does n
 C. Both supervised and unsupervised learning require labeled data.
 
 D. There is no difference between supervised and unsupervised learning.
+
+## Summary 
+
+Unsupervised learning methods like clustering can help you learn about patterns in your data
+
+Supervised learning methods like regression and classification can help you explain relationships and predict outcomes of new data
+
 -->
 <div class="footer footer-default">
 

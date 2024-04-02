@@ -217,35 +217,107 @@ Identify customer personas
 
 Customer stage - leads, prospects, existing customers
 
-Customer demographics - age, gender, income, location, occupation,
+Customer demographics - age, gender, income, location, occupation
 
 Customer behaviors - purchase history, web browsing activity
 
+## Customer segmentation analysis
 
-## Met life case study
+A common application of cluster analysis is to use sales data to divide customers into groups to improve target marketing.
+
+Let's look at a case study. . .
+
+## MetLife case study
 
 ```{=html}
 <iframe width="100%" height="500" src="https://d3.harvard.edu/platform-rctom/submission/metlife-a-case-study-in-customer-segmentation/"></iframe>
 ```
 
-## Customer segmentation analysis
 
-A common application of cluster analysis is to use sales data to divide customers into groups to better target marketing
+# Project 2
+
+## Project 2: Overview {.scrollable}
+
+Use the data provided to:
+
+- Perform an exploratory data analysis 
+
+- Assemble summary statistics
+
+- Analyze spatial patterns, correlations, etc.
+
+- Construct visualizations
+
+You must:
+
+- Conduct market segmentation analysis via clustering
+
+- Label clusters based on characteristics
+
+- Develop a simple marketing strategy to target clusters
+
+## Project 2: Data
+
+Overview: Transaction-level data from convenience stores across the U.S. during July of 2023
+
+A *transaction* is defined as a purchase incident made by a shopper. (Think: receipt)
+
+Transaction-level data includes information about the store where they made the purchase, the price and quantity of the products they purchased, and details about the items they purchased.
 
 
+##
 
-# Project 2 Datasets
+![](includes/data_schema.png){fig-align="center"}
 
-## **LAUREN WORKING ON THESE NOW**
+## Project 2: Data {.scrollable}
+
+"shopper_info.csv"
+
+- This is the core file that contains information about the shopper and each transaction they made during the month of July 2023.
+
+"gtin.csv"
+
+- You will link this file with "shopper_info" based on the variable gtin. 
+
+- GTIN stands for "Global Trade Item Number" and is similar to an SKU or UPC (i.e., barcode).
+
+"store_info.csv"
+
+- This file contains the store details and can be linked with the "shopper_info" using the variable store_id.
+
+## Project 2: Types of segmentations
+::: .columns
+
+::: {.column width="45%"}
+By store:
+
+- Which stores are similar by mix of products sold?
+
+- Which stores are similar by sales?
+
+By product:
+
+- Which products are similar? 
+
+:::
+
+::: {.column width="45%"}
+By shopper:
+
+- Which shoppers are similar based on where they shop?
+
+- Which shoppers are similar based on what they purchase?
+
+:::
+
+:::
+
 
 
 ## Summary
 
-Explore your data: descriptive statistics, plotting distributions, plotting correlations
+Explore your data: understanding your data, identifying questions, descriptive statistics, plotting distributions, plotting correlations
 
-Unsupervised learning methods like clustering can help you learn about patterns in your data
-
-Supervised learning methods like regression and classification can help you explain relationships and predict outcomes of new data
 
 
 <!-- OLD SLIDES THAT HAVE BEEN COMMENTED OUT OR MOVED TO UNIT 02 WEEK 01
@@ -338,6 +410,13 @@ B. Unsupervised learning requires labeled data, while supervised learning does n
 C. Both supervised and unsupervised learning require labeled data.
 
 D. There is no difference between supervised and unsupervised learning.
+
+## Summary 
+
+Unsupervised learning methods like clustering can help you learn about patterns in your data
+
+Supervised learning methods like regression and classification can help you explain relationships and predict outcomes of new data
+
 -->
 
 
