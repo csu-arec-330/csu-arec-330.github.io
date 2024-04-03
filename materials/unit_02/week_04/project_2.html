@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Unit 2: Final Project and Presentations</title>
+<title>Project 2 – Presentation and Report: Bringing it all together</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Unit 2: Final Project and Presentations</h1>
+<h1 class="title">Project 2 – Presentation and Report: Bringing it all together</h1>
 </div>
 
 
@@ -76,21 +76,39 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-data" class="level3">
 <h3 class="anchored" data-anchor-id="the-data">The Data</h3>
-<p>You will be responsible for collecting your own cross sectional data to answer this question. There are resources on the course website, and you should feel free to follow-up with the professors if you are interested in applying data used in lectures and labs.</p>
+<!--
+You will be responsible for collecting your own cross sectional data to answer this question. There are resources on the course website, and you should feel free to follow-up with the professors if you are interested in applying data used in lectures and labs.
+-->
+<p>You will be using the convenience store data (shopper_info, gtin, store_info) files provided to you.</p>
 </section>
 <section id="the-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="the-analysis">The Analysis</h3>
 <p>Our expectation is that you will use cross sectional data from any of the sources provided on the course website to answer your proposed question. The only strict requirements are:</p>
 <ol type="1">
-<li><p>Present summary statistics of your data. We recommend including: a visual analysis including a regression line, a map that highlights geographical differences in your important variables, and the mean, standard deviation, and range of values for important variables.</p></li>
-<li><p>Perform either a regression or cluster analysis.</p></li>
-<li><p>Explain your analysis, including justifying your variable choice, justifying your model choice (how did you choose between regression v. cluster analysis), clearly explaining how the analysis should help to answer your research question.</p></li>
-<li><p>Discuss any assumptions you made in your analysis and identify limitations (e.g., are you using population forecasts that may or may not be accurate? Are you certain your data cover the entire population, or is it a sample?)</p></li>
-<li><p>Present and interpret your results. Use your analysis to clearly answer your research question and tell the audience what to do with the information provided. Provide interpretations of regression results or discuss the meaning of your different clusters. Use appropriate visual tools to accomplish this.</p></li>
+<li>Present summary statistics of your data. We recommend including: a visual analysis including a regression line, a map that highlights geographical differences in your important variables, and the mean, standard deviation, and range of values for important variables.</li>
+</ol>
+<!-- 
+2. Perform either a regression or cluster analysis.
+-->
+<ol start="2" type="1">
+<li>Perform a cluster analysis.</li>
+</ol>
+<!--
+3. Explain your analysis, including justifying your variable choice, justifying your model choice (how did you choose between regression v. cluster analysis), clearly explaining how the analysis should help to answer your research question.
+-->
+<ol start="3" type="1">
+<li><p>Explain your analysis, including justifying your variable choice, explaining why cluster analysis is the appropriate tool, clearly explaining how the analysis should help to answer your research question.</p></li>
+<li><p>Discuss any assumptions you made in your analysis and identify limitations (e.g., do your data cover the entire population, or is it a sample?)</p></li>
+</ol>
+<!--
+5. Present and interpret your results. Use your analysis to clearly answer your research question and tell the audience what to do with the information provided. Provide interpretations of regression results or discuss the meaning of your different clusters. Use appropriate visual tools to accomplish this.
+-->
+<ol start="5" type="1">
+<li>Present and interpret your results. Use your analysis to clearly answer your research question and tell the audience what to do with the information provided. Discuss the meaning of your different clusters. Use appropriate visual tools to accomplish this.</li>
 </ol>
 </section>
-<section id="the-presentation---in-class-4142023-80-points" class="level3">
-<h3 class="anchored" data-anchor-id="the-presentation---in-class-4142023-80-points">The Presentation - In Class 4/14/2023 (80 points)</h3>
+<section id="the-presentation-80-points" class="level3">
+<h3 class="anchored" data-anchor-id="the-presentation-80-points">The Presentation (80 points)</h3>
 <p><strong>Overall presentation expectations:</strong> (20 points total)</p>
 <p>Your presentations should be 6-9 minutes long. (5 points)</p>
 <p>Your presentation should be engaging, follow a logical structure, and should tell a cohesive story that answers your stated question. (5 points)</p>
@@ -124,8 +142,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p>What are the key take-aways for your intended audience?</p></li>
 </ul>
 </section>
-<section id="the-write-uponline-submission---due-1159-pm-3202023-40-points" class="level3">
-<h3 class="anchored" data-anchor-id="the-write-uponline-submission---due-1159-pm-3202023-40-points">The Write-up/Online Submission - Due 11:59 PM 3/20/2023 (40 points)</h3>
+<section id="the-write-uponline-submission-40-points" class="level3">
+<h3 class="anchored" data-anchor-id="the-write-uponline-submission-40-points">The Write-up/Online Submission (40 points)</h3>
 <p>You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code. The written portion of the assignment is due later so that you can incorporate feedback that you receive during the oral presentation in class.</p>
 <p>Because much of the presentation grade is tied to the content of your report, grading for the report will be based on:</p>
 <ol type="1">
@@ -166,9 +184,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -233,6 +265,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

@@ -11,9 +11,9 @@ format:
 
 ## Motivation
 
-Our goal in this course is to teach the tools and the process of analyzing data to inform decisions
+Our goal in this course is to teach tools and processes for analyzing data to inform decision-making.
 
-You now have some tools for data analysis
+You now have some tools for data analysis.
 
 Today, let's revisit the process.
 
@@ -21,10 +21,11 @@ How do we get from question to answer?
 
 ## Agenda 
 
-Patterns in grocery store location (clustering application)
+Finding patterns in grocery store location
 
-Where to expand grocery stores (regression application)
+Identifying target markets
 
+Project 2: Q\&A
 
 
 <!-- image -->
@@ -64,26 +65,34 @@ Local zoning laws: Check local zoning laws to ensure that the location you choos
 
 Some potential locations to consider for a grocery store in Arizona could include areas with growing populations, such as Phoenix, Tucson, and Mesa, or areas with a high concentration of college students, such as Tempe. Ultimately, conducting thorough research and analyzing the factors above can help you make an informed decision about the best location for your grocery store in Arizona.
 
-## Refining the question
+## Refining the question {.scrollable}
 
-How can we improve our current question: Where should we open a grocery store in AZ?
+Our current question: ``Where should we open a grocery store in AZ?''
 
 Normative. Can we clarify our objective?
-<!-- Where would opening a grocery store in AZ generate the most profit in 30 years? -->
+<!-- Where would opening a grocery store in AZ most likely generate the most profit in 30 years? -->
 
 Spatial scope. Can we clarify the spatial unit of analysis?
 <!-- In which county would opening a grocery store in AZ generate the most profit in 30 years? -->
 
-## Refining the question
+Store format. Can we clarify the type of grocery store?
+<!-- What type of grocery store format (e.g., supermarket, discount, specialty) would be most suitable in different areas of AZ? -->
+
+## Refining the question {.scrollable}
 
 Normative. Can we clarify our objective?
 
-- Where would opening a grocery store in AZ generate the most profit in 30 years?
+- Where would opening a grocery store in AZ most likely generate the most profit in 30 years?
 
 Spatial scope. Can we clarify the spatial unit of analysis?
 
 - In which county would opening a grocery store in AZ generate the most profit in 30 years?
 
+Store format. Can we clarify the type of grocery store?
+
+- What type of grocery store format (e.g., supermarket, discount, specialty) would be most suitable in different areas of AZ?
+
+<!--
 ## Conceptual framework 
 
 :::{.incremental}
@@ -97,7 +106,7 @@ How do the economics work in this context?  What should influence grocery store 
 - Cost: labor costs may be higher in higher income areas; land/building rental rates, taxes and operating expenses (power, water)
 
 :::
-
+-->
 ## Data
 
 - Grocery stores
@@ -110,11 +119,12 @@ How do the economics work in this context?  What should influence grocery store 
 
 - Land area
 
+
 ## EDA (Cluster Analysis)
 
 Let's explore the data with a cluster analysis
 
-Also, if your study industry or market is not in (or close) to equilibrium, cluster analysis may help identify areas with opportunities
+Also, if the market is not in (or close) to equilibrium, cluster analysis may help identify areas with opportunities
 
 3 clusters on: stores, population, income, land area, unemployment
 
@@ -131,8 +141,94 @@ Also, if your study industry or market is not in (or close) to equilibrium, clus
 
 ![](includes/Store Number x Land Area sq mi.png)
 
+## Additional Clustering Analysis
+
+:::{.incremental}
+
+- Perform additional clustering analysis using other relevant variables (e.g., demographics, competition, accessibility)
+
+- Interpret the clusters and identify potential opportunities for new grocery store locations
+
+- Use visualization techniques (e.g., scatter plots, maps) to explore the clusters and their characteristics
+
+:::
+
+## Clustering Interpretation and Recommendations
+
+:::{.incremental}
+
+- Summarize the key findings from the clustering analysis
+
+- Discuss which clusters or areas appear to be underserved or have potential for a new grocery store
+
+- Provide recommendations on potential locations based on the clustering results and other factors considered
+
+- Highlight any limitations or caveats of the analysis
+
+:::
+
+## Project 2: Q\&A
+
+Let's discuss your ideas and approaches for Project 2:
+
+- Summarizing data and visualizing patterns
+
+- Conducting cluster analysis
+
+- Interpreting results and answering your research question
+
+## Summarizing Data and Visualizing Patterns
+
+:::{.incremental}
+
+- What are some effective ways to present summary statistics and visualize your data?
+
+  - Scatterplots, histograms, maps
+
+  - Descriptive statistics (mean, standard deviation, range)
+
+- How can you highlight geographical differences in your variables?
+
+  - Choropleth maps, bubble maps
+
+- What other visualizations or techniques could be useful for your specific project?
+
+:::
+
+## Conducting Cluster Analysis {.scrollable}
+
+:::{.incremental}
+
+- What is your rationale for using cluster analysis to answer your research question?
+
+  - Identifying groups or segments with similar characteristics
+
+  - Exploring patterns and relationships in the data
+
+- How will you choose the appropriate variables for clustering?
+
+  - Relevant to your research question
+
+  - Capturing different aspects of the data (e.g., demographics, economic factors)
+
+- What are some potential challenges or limitations of your cluster analysis?
+
+  - Choosing the right number of clusters
+
+  - Interpreting and validating the clusters
+
+:::
 
 
+## Summary
+
+Strive to answer your question with your analysis.
+
+Chat GPT (and similar) can help you think through analyses.
+
+
+
+<!--
 ## Analysis
 
 Regression model to establish relationship between an areas population, income, and grocery stores
@@ -199,14 +295,7 @@ $$ forGS_i - GS_i $$
 ## Expand stores where gap is blue
 
 ![](includes/dumbell.png)
-
-
-## Summary
-
-Strive to answer your question with your analysis
-
-Chat GPT (and similar) can help you think through analyses
-
+-->
 
 
 
