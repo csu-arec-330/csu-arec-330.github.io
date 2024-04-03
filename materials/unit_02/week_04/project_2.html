@@ -62,24 +62,49 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The goal of this project is for you to apply the tools for cross sectional data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.</p>
+<p>The goal of this project is for you to apply the tools for cross sectional data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytical skills.</p>
 <p><a href="project_2_rubric.html"><strong>Rubric</strong></a></p>
 <section id="the-question" class="level3">
 <h3 class="anchored" data-anchor-id="the-question">The Question</h3>
-<p><strong>The question</strong> should be one related to agriculture, the environment, or natural resources and of interest to a business/company, a marketing board, policy makers, non-governmental organizations (NGO), or other nonprofit organizations. The question must be one that can be answered with cross-sectional data. For example:</p>
+<p>Your question should focus on identifying distinct segments or clusters of customers, stores, or products based on the transaction-level data from convenience stores across the U.S. during July 2023. Some potential questions could be:</p>
+<p><strong>Customer Segmentation</strong></p>
 <ul>
-<li><p><strong>Business:</strong> Where should I locate my business?</p></li>
-<li><p><strong>Marketing Board:</strong> What is consumer demand for our products by geographic location? By consumer demogrphic characteristics? Should we run marketing campaigns in areas where demand is low or target consumers in areas where consumption is already high?</p></li>
-<li><p><strong>Policy maker:</strong> Based on current snowpack levels, where should we anticipate fires this coming fire season?</p></li>
-<li><p><strong>NGO/Nonprofit:</strong> What is will demand be for electric cars in 5 years and what can we do to increase it?</p></li>
+<li><p>What are the distinct segments of shoppers based on their purchasing behavior (products bought, spending patterns, store preferences)?</p></li>
+<li><p>How can we segment shoppers based on their demographic characteristics and shopping habits?</p></li>
 </ul>
+<p><strong>Store Segmentation</strong></p>
+<ul>
+<li><p>What are the distinct clusters of stores based on their product mix, sales performance, or customer base?</p></li>
+<li><p>How can we group similar stores together based on their location, size, or other characteristics?</p></li>
+</ul>
+<p><strong>Product Segmentation</strong></p>
+<ul>
+<li><p>What are the distinct clusters of products based on their sales performance, customer preferences, or complementary relationships?</p></li>
+<li><p>How can we group similar products together based on their categories, pricing, or other attributes?</p></li>
+</ul>
+<p>The key is to formulate a question that can be answered by performing cluster analysis on the provided dataset, which includes information about shoppers, transactions, products, and stores.</p>
+<!--
+**The question** should be one related to agriculture, the environment, or natural resources and of interest to a business/company, a marketing board, policy makers, non-governmental organizations (NGO), or other nonprofit organizations. The question must be one that can be answered with cross-sectional data. For example:
+
+- **Business:** Where should I locate my business?
+
+- **Marketing Board:** What is consumer demand for our products by geographic location? By consumer demogrphic characteristics? Should we run marketing campaigns in areas where demand is low or target consumers in areas where consumption is already high?
+
+- **Policy maker:** Based on current snowpack levels, where should we anticipate fires this coming fire season?
+
+- **NGO/Nonprofit:** What is will demand be for electric cars in 5 years and what can we do to increase it?
+-->
 </section>
 <section id="the-data" class="level3">
 <h3 class="anchored" data-anchor-id="the-data">The Data</h3>
 <!--
 You will be responsible for collecting your own cross sectional data to answer this question. There are resources on the course website, and you should feel free to follow-up with the professors if you are interested in applying data used in lectures and labs.
 -->
-<p>You will be using the convenience store data (shopper_info, gtin, store_info) files provided to you.</p>
+<p>You will be using the following dataset for your analysis:</p>
+<p><strong>shopper_info.csv</strong>: This file contains transaction-level data, including information about the shopper, the store where the purchase was made, the products purchased (identified by GTIN), and the quantities and prices.</p>
+<p><strong>gtin.csv</strong>: This file provides additional details about the products, which can be linked to the shopper_info.csv file using the GTIN (Global Trade Item Number) variable.</p>
+<p><strong>store_info.csv</strong>: This file includes information about the stores, such as location, size, and other characteristics, which can be linked to the shopper_info.csv file using the store_id variable.</p>
+<p>Your analysis should leverage the provided data files to perform cluster analysis and identify distinct segments or clusters based on your chosen research question. You may need to combine or transform the data as necessary to suit your analysis.</p>
 </section>
 <section id="the-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="the-analysis">The Analysis</h3>
@@ -121,7 +146,7 @@ You will be responsible for collecting your own cross sectional data to answer t
 </ul>
 <p>You should then:</p>
 <ul>
-<li><p>Give us any relevant background info that is necessary to understanding your question (as in my example…) (5 points)</p></li>
+<li><p>Give us any relevant background info that is necessary to understanding your question (5 points)</p></li>
 <li><p>State your question (5 points - the question should be realistic (i.e., something a real world company would like an answer to), clearly stated, and answerable with a cross sectional analysis)</p></li>
 </ul>
 <p><strong>Presentation Data and Analysis:</strong> (35 points total)</p>
@@ -149,9 +174,22 @@ You will be responsible for collecting your own cross sectional data to answer t
 <ol type="1">
 <li><p>Is your code correct and well-explained (use comments to explain what you do at each step!)? Produce an R log.txt file using the <code>sink()</code> command and include it as an appendix to your write up. (15 points)</p></li>
 <li><p>Is your report readable and useful? We will not assess the quality of your research question, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (10 points)</p></li>
-<li><p>Does your report adequately addres the feedback provided after your presentation? We will assess whether and to what extent you incorporated our suggestions. (10 points)</p></li>
+<li><p>Does your report adequately address the feedback provided after your presentation? We will assess whether and to what extent you incorporated our suggestions. (10 points)</p></li>
 <li><p>Organization, formatting and structure. Is your report organized, presented in a logical order, with appropriate integration of writing, analysis, and code? (5 points)</p></li>
 </ol>
+</section>
+<section id="peer-evaluation-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="peer-evaluation-15-points">Peer Evaluation (15 points)</h3>
+<p>Each group will be required to provide feedback for three other groups in the class. This feedback process is an essential component of the project, as it encourages constructive criticism and fosters a collaborative learning environment. To facilitate this, each group will complete a Google Form designed specifically for peer evaluations.</p>
+<p>Instructions:</p>
+<ol type="1">
+<li><p><strong>Complete the Google Form:</strong> You must answer every question on the Google Form. The form is structured to cover various aspects of the presentations you will evaluate.</p></li>
+<li><p><strong>Fair Scoring:</strong> You cannot assign full scores in every category for each group. Be thoughtful and provide a balanced evaluation that reflects the strengths and areas for improvement in each presentation.</p></li>
+<li><p><strong>Be Respectful:</strong> It’s important to be respectful and constructive in your comments.</p></li>
+<li><p><strong>Impact on Grades:</strong> The peer feedback you provide will not be factored into the group’s final grade on the presentation. The purpose of this exercise is to give you an opportunity to critically engage with your peers’ work and to offer them valuable insights from an outsider’s perspective.</p></li>
+</ol>
+<p>A link to the Google Form is also available on Canvas and must be completed by the due date. Please ensure that you dedicate enough time to watch each assigned presentation thoroughly before completing the evaluation form.</p>
+<p>Your participation in the peer evaluation process is highly valued and contributes significantly to the learning experience in this course.</p>
 </section>
 </section>
 

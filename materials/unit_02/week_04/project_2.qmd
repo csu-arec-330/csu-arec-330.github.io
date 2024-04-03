@@ -7,13 +7,36 @@ format:
 
 ## Overview
 
-The goal of this project is for you to apply the tools for cross sectional data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
+The goal of this project is for you to apply the tools for cross sectional data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytical skills. 
 
 [**Rubric**](project_2_rubric.html)
 
 
 ### The Question
 
+Your question should focus on identifying distinct segments or clusters of customers, stores, or products based on the transaction-level data from convenience stores across the U.S. during July 2023. Some potential questions could be:
+
+**Customer Segmentation**
+
+- What are the distinct segments of shoppers based on their purchasing behavior (products bought, spending patterns, store preferences)?
+
+- How can we segment shoppers based on their demographic characteristics and shopping habits?
+
+**Store Segmentation**
+
+- What are the distinct clusters of stores based on their product mix, sales performance, or customer base?
+
+- How can we group similar stores together based on their location, size, or other characteristics?
+
+**Product Segmentation**
+
+- What are the distinct clusters of products based on their sales performance, customer preferences, or complementary relationships?
+
+- How can we group similar products together based on their categories, pricing, or other attributes?
+
+The key is to formulate a question that can be answered by performing cluster analysis on the provided dataset, which includes information about shoppers, transactions, products, and stores.
+
+<!--
 **The question** should be one related to agriculture, the environment, or natural resources and of interest to a business/company, a marketing board, policy makers, non-governmental organizations (NGO), or other nonprofit organizations. The question must be one that can be answered with cross-sectional data. For example:
 
 - **Business:** Where should I locate my business?
@@ -23,13 +46,24 @@ The goal of this project is for you to apply the tools for cross sectional data 
 - **Policy maker:** Based on current snowpack levels, where should we anticipate fires this coming fire season?
 
 - **NGO/Nonprofit:** What is will demand be for electric cars in 5 years and what can we do to increase it?
+-->
 
 ### The Data
 
 <!--
 You will be responsible for collecting your own cross sectional data to answer this question. There are resources on the course website, and you should feel free to follow-up with the professors if you are interested in applying data used in lectures and labs.
 -->
-You will be using the convenience store data (shopper_info, gtin, store_info) files provided to you.
+
+You will be using the following dataset for your analysis:
+
+**shopper_info.csv**: This file contains transaction-level data, including information about the shopper, the store where the purchase was made, the products purchased (identified by GTIN), and the quantities and prices.
+
+**gtin.csv**: This file provides additional details about the products, which can be linked to the shopper_info.csv file using the GTIN (Global Trade Item Number) variable.
+
+**store_info.csv**: This file includes information about the stores, such as location, size, and other characteristics, which can be linked to the shopper_info.csv file using the store_id variable.
+
+Your analysis should leverage the provided data files to perform cluster analysis and identify distinct segments or clusters based on your chosen research question. You may need to combine or transform the data as necessary to suit your analysis.
+
 
 ### The Analysis
 
@@ -74,7 +108,7 @@ You should begin your presentation with the following: (5 points)
 
 You should then: 
 
-- Give us any relevant background info that is necessary to understanding your question (as in my example...) (5 points)
+- Give us any relevant background info that is necessary to understanding your question (5 points)
 
 - State your question (5 points - the question should be realistic (i.e., something a real world company would like an answer to), clearly stated, and answerable with a cross sectional analysis)
 
@@ -111,7 +145,25 @@ Because much of the presentation grade is tied to the content of your report, gr
 
 2. Is your report readable and useful? We will not assess the quality of your research question, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (10 points)
 
-3. Does your report adequately addres the feedback provided after your presentation? We will assess whether and to what extent you incorporated our suggestions. (10 points)
+3. Does your report adequately address the feedback provided after your presentation? We will assess whether and to what extent you incorporated our suggestions. (10 points)
 
 3. Organization, formatting and structure. Is your report organized, presented in a logical order, with appropriate integration of writing, analysis, and code? (5 points)
+
+### Peer Evaluation (15 points)
+
+Each group will be required to provide feedback for three other groups in the class. This feedback process is an essential component of the project, as it encourages constructive criticism and fosters a collaborative learning environment. To facilitate this, each group will complete a Google Form designed specifically for peer evaluations.
+
+Instructions:
+
+1. **Complete the Google Form:** You must answer every question on the Google Form. The form is structured to cover various aspects of the presentations you will evaluate.
+
+2. **Fair Scoring:** You cannot assign full scores in every category for each group. Be thoughtful and provide a balanced evaluation that reflects the strengths and areas for improvement in each presentation.
+
+3. **Be Respectful:** It's important to be respectful and constructive in your comments.
+
+4. **Impact on Grades:** The peer feedback you provide will not be factored into the group's final grade on the presentation. The purpose of this exercise is to give you an opportunity to critically engage with your peers' work and to offer them valuable insights from an outsider's perspective.
+
+A link to the Google Form is also available on Canvas and must be completed by the due date. Please ensure that you dedicate enough time to watch each assigned presentation thoroughly before completing the evaluation form.
+
+Your participation in the peer evaluation process is highly valued and contributes significantly to the learning experience in this course.
 
