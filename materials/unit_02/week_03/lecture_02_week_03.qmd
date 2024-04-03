@@ -175,7 +175,8 @@ Let's discuss your ideas and approaches for Project 2:
 
 - Conducting cluster analysis
 
-- Interpreting results and answering your research question
+- Communicating cluster analysis
+
 
 ## Summarizing Data and Visualizing Patterns
 
@@ -219,14 +220,27 @@ Let's discuss your ideas and approaches for Project 2:
 
 :::
 
+## Communicating cluster analysis
+
+- What story does your cluster analysis tell?
+
+  - Sales in segment x are strong. 
+  
+- Create visuals to support your story.
+
+  - Bar chart with sales by segment.
+
+- What is your call to action?
+
+  - We should market segment x.
 
 ## Summary
 
-Strive to answer your question with your analysis.
+- Summarizing data and visualizing patterns
 
-Chat GPT (and similar) can help you think through analyses.
+- Conducting cluster analysis
 
-
+- Communicating cluster analysis
 
 <!--
 ## Analysis
