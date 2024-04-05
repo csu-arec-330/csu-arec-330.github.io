@@ -1,5 +1,5 @@
 ---
-title: "Week 11: Spatial Data"
+title: "Week 11: Connecting analysis to your objectives"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
