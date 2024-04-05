@@ -42,10 +42,11 @@ title: "Week 11: Connecting analysis to your objectives"
 
 <a  href="/materials/unit_02/week_04/project_2_rubric.html" target="_blank">Project 2 Rubric</a> <br> <br> 
 
+<!--
 <b>Problem Set Materials - Due Friday, April 12 by 11:59 PM:</b> <br>
 
 <a  href="/materials/unit_02/week_03/ps_02_week_03.html" target="_blank">Project 2 Problem Set 3 Instructions</a> <br> <br>
-
+-->
 </div>
 
 <br> 
