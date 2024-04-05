@@ -13,9 +13,10 @@ title: "Week 11: Spatial Data"
 
 <b>Lab Materials:</b> <br>
 
+<!--
 <a  href="/materials/unit_02/week_03/lab_02_week_03.html" target="_blank">Week 11 Lab Notes</a> <br> 
 
-<!--
+
 <a  href="/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv" download>Download arizona_grocery_foot_traffic.csv</a> <br>
 
 <a  href="/materials/unit_02/inputs/hauer_county_totpop_SSPs.csv" download>Download hauer_county_totpop_SSPs.csv</a> <br>

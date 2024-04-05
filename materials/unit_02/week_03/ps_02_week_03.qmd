@@ -19,9 +19,11 @@ This problem set is designed to apply both clustering and spatial data analysis.
 
 1. Using your project datasets, perform a K-means cluster analysis as appropriate for your research question or objective. Explain why you clustered on the dimensions you chose and what the clusters tell you. 
 
-2. Summarize the variables you included in your cluster analysis for each cluster. Discuss the results, including any notable differences between the variables across clusters. 
+2. What evidence can you show to support your choice of K (number of clusters)? sillhouette or elbow plot?
 
-3. Export a dataset that includes all variables you used in your cluster analysis, as well as your clusters. Write a narrative in your webpage explaining your cluster analysis and what you learned.
+3. Summarize the variables you included in your cluster analysis for each cluster. Discuss the results, including any notable differences between the variables across clusters. 
+
+4. Export a dataset that includes all variables you used in your cluster analysis, as well as your clusters. Write a narrative in your webpage explaining your cluster analysis and what you learned.
 
 <!--
 **IF using regression analysis** 
@@ -43,9 +45,8 @@ This problem set is designed to apply both clustering and spatial data analysis.
 Create TWO visualizations that help you assign meaning to your clusters. 
 -->
 
-1. Create TWO visualizations that show your clusters, exploring the underlying meaning of your clusters by seeing how clusters compare across the variables you used to define them (create scatter plots to show this). Your analysis should include a description of the "meaning" of each cluster. For example, does one cluster indicate the areas that are more favorable to locate your store?
+1. Create TWO visualizations that show your clusters, exploring the underlying meaning of your clusters by seeing how clusters compare across the variables you used to define them (create scatter plots to show this). Use these visuals to support a description of each cluster. 
 
-> Note: If the clusters you generated in R turn out to not be useful, you can use Tableau's clustering analysis to change the variables or number of clusters to find more useful groupings. 
 
 2. Discuss take-aways for your research question based on your analysis. What did your analysis uncover?
 
