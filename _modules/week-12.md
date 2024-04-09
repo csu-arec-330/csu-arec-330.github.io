@@ -19,8 +19,8 @@ Each student pair will be asked questions about their presentation during class.
 
 <a  href="/materials/unit_02/inputs/store_info.csv" download>Download store_info.csv</a> <br><br>
 
-<b>Video Presentation - Due Thursday, April 11 (10:00 am)</b> <br>
-<b>Report - Due Thursday, April 18 (11:59 pm)</b> <br>
+<b>Video Presentation - Due Thursday, April 11 (10:00 am)</b> <br><br>
+<b>Report - Due Friday, April 19 (11:59 pm)</b> <br>
 <!--
 <a  href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/En9XYlXUrXZHlRa9zbdgnuUBtCzr0QDxWzSYij-3V3PNFQ?e=iKX1ba" target="_blank">Project Data - PDI Convenience Store </a> <br> 
 -->
@@ -29,7 +29,7 @@ Each student pair will be asked questions about their presentation during class.
 
 <a  href="/materials/unit_02/week_04/project_2_rubric.html" target="_blank">Project 2 Rubric</a> <br> <br> 
 
-<b>Peer Evaluation - Due Thursday, April 18 (11:59 pm)</b> <br>
+<b>Peer Evaluation - Due Friday, April 19 (11:59 pm)</b> <br>
 
 
 
