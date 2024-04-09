@@ -1,6 +1,6 @@
 ---
 title: "Project 2: Where are Migrant Agricultural Workers?"
-author: "Ali Hill"
+author: "Author: Ali Hill"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -10,7 +10,7 @@ format:
     # center: TRUE
 ---
 
-## Before we Begin...
+## Before We Begin...
 
 **Who Am I?** 
 
@@ -18,7 +18,7 @@ I am a researcher with expertise in the employment patterns of U.S. agricultural
 
 **Who Are You?** 
 
-YOU are a group of government and non-profit employees from organizations like the [National Migrant and Seasonal Head Start Association](https://nmshsa.org), the [U.S. Department of Labor](https://www.dol.gov/general/topic/training/migrantfarmworkers), and the [CO Department of Labor and Employment](https://cdle.colorado.gov/jobs-training/find-a-job/migrant-seasonal-farmworkers).
+You are a group of government and non-profit employees from organizations like the [National Migrant and Seasonal Head Start Association](https://nmshsa.org), the [U.S. Department of Labor](https://www.dol.gov/general/topic/training/migrantfarmworkers), and the [CO Department of Labor and Employment](https://cdle.colorado.gov/jobs-training/find-a-job/migrant-seasonal-farmworkers).
 
 ## Why are we looking for migrant workers?
 
@@ -28,7 +28,17 @@ The U.S. government has a variety of publicly-funded programs aimed at helping m
   
   - Having a sufficient number of workers *when* and *where* they are needed is vital for our agricultural industry.
 
-  - But agricultural workers face ["chronic seasonal unemployment and underemployment"](https://www.dol.gov/general/topic/training/migrantfarmworkers)
+  - But agricultural workers face ["chronic seasonal unemployment and underemployment."](https://www.dol.gov/general/topic/training/migrantfarmworkers)
+
+::: {.notes}
+The U.S. government and associated non-profit organizations offer various publicly-funded programs aimed at supporting migrant and seasonal agricultural workers. These initiatives are crucial because:
+
+- Agricultural relies heavily on having a sufficient number of workers available at the right time and place. 
+
+- However, agricultural workers frequently face chronic seasonal unemployment and underemployment.
+
+- These programs moderate these fluctuations.
+:::
 
 ## Why are we looking for migrant workers?
 
@@ -48,7 +58,14 @@ The U.S. government has a variety of publicly-funded programs aimed at helping m
 
 The U.S. government has a variety of publicly-funded programs aimed at helping migrant and seasonal agricultural workers...
 
-But these programs have located offices and staffed according with historic migrant flows.
+Historically, these programs have located offices and staffed according to migrant flows.
+
+::: {.notes}
+The ability to accurately locate and understand the needs of migrant workers is fundamental to enhancing their employment conditions, providing them with necessary support services, and ensuring the agricultural industry's efficiency and productivity. 
+
+Without precise information on where these workers are or will be, it's challenging to allocate resources effectively and ensure they receive the support they need.
+:::
+
 
 ## An example of historic migrant flows
 
@@ -58,17 +75,18 @@ But these programs have located offices and staffed according with historic migr
 
 The U.S. government has a variety of publicly-funded programs aimed at helping migrant and seasonal agricultural workers...
 
-But these programs have located offices and staffed according with historic migrant flows.
+Historically, these programs have located offices and staffed according to migrant flows.
 
-<span style="color:green;">**And now they aren't successfully finding very many migrant workers.**</span>
+<span style="color:orange;">**But; now they aren't successfully finding very many migrant workers.**</span>
 
 ## 
 ::: {.r-fit-text}
 **The Question:** 
 
-*Where* and *when* can we 
+<!--*Where* and *when* can we--> 
+*Where* can we find
 
-find migrant ag workers?
+migrant ag workers?
 :::
 
 ## How will we answer this Q? The Data.
@@ -81,29 +99,29 @@ Workers are interviewed at their place of employment
 
   - This mitigates issues faced by household-based surveys in finding ag workers
 
-**Workers provide their work history, including the county and dates of employment, for all jobs in the past year**
+**Workers provide their work history, including the county and dates of employment, for all jobs in the past year.**
 
 ## {background-image="includes/naws_grid.png"}
 
 ## How will we answer this Q? The Analysis
 
-I will use a <span style="color:green;">**cluster**</span> analysis to answer this question.
+I will use a <span style="color:orange;">**cluster**</span> analysis to answer this question.
 
-**Why?** because I want to construct groups of counties that are "related" in terms of where groups of workers choose to work. 
+**Why?** I want to construct groups of counties that are "related" in terms of where groups of workers choose to work. 
 
 I will call these clusters "labor sheds" and they represent geographical areas in which workers are willing to mgirate within to work farm jobs.
 
 ## How will we answer this Q? The Analysis
 
-I will use a <span style="color:green;">**cluster**</span> analysis to answer this question.
+I will use a <span style="color:orange;">**cluster**</span> analysis to answer this question.
 
-**How?** first I will create a measure of how related/linked two counties are in terms of the number of workers who have worked in both counties. Geographers typically call this measure "proportional flow":
+**How?** First I will create a measure of how related/linked two counties are in terms of the number of workers who have worked in both counties. Geographers typically call this measure "proportional flow":
 
 $$
 \frac{C_{ij}}{\min\left( W_i, W_j \right)}
 $$
 
-Where $C_{ij}$ is the number of workers who worked in both county i and j and $W_i$, $W_j$ are the number of (distinct) workers who worked in county i, j
+Where $C_{ij}$ is the number of workers who worked in both county i and j and $W_i$, $W_j$ are the number of (distinct) workers who worked in county i, j.
 
 ## {background-image="includes/wi.png" background-size="contain"}
 
@@ -122,13 +140,15 @@ I will then use two variables to create clusters of counties that are "related"
 
   - an indicator for whether two counties are adjacent
 
+<!--
 Finally, I will use information on the timing of employment to... 
 
   - understand when workers are working within each county 
 
   - assess whether workers within each cluster find year-round employment
+-->
 
-## **Assumptions, limitations, and future work**
+## Assumptions, limitations, and future work
 
 ::: {.incremental}
 1. Workers provide accurate information on their employment
@@ -158,11 +178,14 @@ Finally, I will use information on the timing of employment to...
 
 Policy-makers, non-profit employees, 
 
-and other stakeholders (YOU!) 
+and other stakeholders (in this case, *you*) 
 
 can use my interactive maps to determine 
 
+<span style="color:green;">*where*</span> to locate offices.
+<!--
 <span style="color:green;">*where*</span> to locate offices and <span style="color:green;">*when*</span> to staff them.
+-->
 :::
 
 
@@ -179,5 +202,7 @@ have the most workers each month.
 
 ## {background-image="includes/how_ex.png" background-size="contain"} 
 
+# The End
+<!--
 # Thank you! Plz give me an A
-
+-->
