@@ -5,7 +5,7 @@ format:
     theme: [zephyr, ../../custom_doc.scss]
 ---
 
-## Oral Presentation {.center-head}
+## Presentation {.center-head}
 
 ::: {.column-screen}
 
@@ -14,10 +14,11 @@ format:
 | Presentation Length (5 points)     | On time                                                                        | Slightly under or over                                                                   | Too short or too long                                                                 |
 | Structure and Cohesion (5 points)  | The presentation has a clear and creative structure that tells a compelling and cohesive story that answers the stated question. | The presentation is fairly clear and tells a story that answers the stated question. | The presentation lacks a clear structure and does not tell a cohesive story that answers the stated question. |
 | Visualizations (10 points)         | The visualizations are well formatted, appropriate for the analysis/presentation, and visually engaging. | The visualizations are well formatted and appropriate for the analysis/presentation, but may be slightly lacking in detail or creativity. | The visualizations are poorly formatted and/or inappropriate for the analysis/presentation. |
+| Creativity (5 points)             | The presentation is highly original, employing unique and innovative approaches that significantly enhance engagement and understanding.                                                                 | Includes creative elements that make the presentation more interesting and engaging, though less innovative than top-tier examples.                                 | Attempts at creativity are minimal and do not significantly improve engagement or understanding, sticking to conventional methods.                                                        |
 | Introduction (10 points)           | The introduction clearly identifies the business/organization and the audience, provides relevant background information, and is engaging. | The introduction identifies the audience, and provides some relevant background information. | The introduction does not clearly identify the business/organization or the audience, and does not provide relevant background information. |
 | Question (5 points)                | The question is realistic, clearly stated, and answerable with a cross sectional data analysis. | The question is somewhat realistic and answerable with a cross sectional data analysis. | The question is not realistic, clearly stated, or answerable with a cross sectional data analysis. |
 | Data Description (15 points)       | The description of the data source, summary statistics, and visuals are clear and complete. | The description of the data source, summary statistics, and visuals are complete but not entirely clear. | The description of the data source is incomplete or unclear. Summary statistics and visuals are incomplete or unclear. |
-| Analysis (20 points)               | The model (regression or cluster) is identified and explained, assumptions and limitations are clearly discussed, and the results from the analysis are plotted and described in a clear and creative way. | The model is identified, assumptions and limitations are mentioned, and the results are plotted and described. | The model is not clearly identified, assumptions and limitations are not discussed, and/or the results are not plotted or described. |
+| Analysis (15 points)               | The model is identified and explained, assumptions and limitations are clearly discussed, and the results from the analysis are plotted and described in a clear and creative way. | The model is identified, assumptions and limitations are mentioned, and the results are plotted and described. | The model is not clearly identified, assumptions and limitations are not discussed, and/or the results are not plotted or described. |
 | Discussion/Conclusion (10 points) | The analysis is used to answer the question in a clear and creative way, and the key takeaways for the audience are clear and engaging. The next steps of a more in depth analysis are discussed. | The analysis is used to answer the question, and the key takeaways for the audience are clear. | The analysis is not used to answer the question, or the key takeaways for the audience are not clear. |
 
 :::
