@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -97,6 +68,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="lab_03_week_01_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="lab_03_week_01_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -111,6 +83,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
   <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a>
+  <ul class="collapse">
+  <li><a href="#orientation-and-terms" id="toc-orientation-and-terms" class="nav-link" data-scroll-target="#orientation-and-terms">Orientation and terms</a></li>
+  <li><a href="#task-overview" id="toc-task-overview" class="nav-link" data-scroll-target="#task-overview">Task overview</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#converting-to-a-spatial-format" id="toc-converting-to-a-spatial-format" class="nav-link" data-scroll-target="#converting-to-a-spatial-format">Converting to a spatial format</a></li>
+  <li><a href="#getting-census-boundaries" id="toc-getting-census-boundaries" class="nav-link" data-scroll-target="#getting-census-boundaries">Getting Census boundaries</a></li>
+  <li><a href="#intersecting-points-with-polygons" id="toc-intersecting-points-with-polygons" class="nav-link" data-scroll-target="#intersecting-points-with-polygons">Intersecting points with polygons</a></li>
+  <li><a href="#accessing-us-census-data" id="toc-accessing-us-census-data" class="nav-link" data-scroll-target="#accessing-us-census-data">Accessing US Census data</a>
+  <ul class="collapse">
+  <li><a href="#joining-with-convenience-store-county" id="toc-joining-with-convenience-store-county" class="nav-link" data-scroll-target="#joining-with-convenience-store-county">Joining with convenience store county</a></li>
+  </ul></li>
+  <li><a href="#aggregating-by-geography" id="toc-aggregating-by-geography" class="nav-link" data-scroll-target="#aggregating-by-geography">Aggregating by geography</a></li>
+  </ul></li>
+  <li><a href="#r-1" id="toc-r-1" class="nav-link" data-scroll-target="#r-1">R</a>
   <ul class="collapse">
   <li><a href="#difference-in-differences" id="toc-difference-in-differences" class="nav-link" data-scroll-target="#difference-in-differences">Difference in differences</a></li>
   <li><a href="#fixed-effects-with-marginal-changes" id="toc-fixed-effects-with-marginal-changes" class="nav-link" data-scroll-target="#fixed-effects-with-marginal-changes">Fixed effects with marginal changes</a>
@@ -153,37 +139,158 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="learning-objectives-r" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
 <ul>
-<li><p>Read in and manipulate panel data</p></li>
-<li><p>Estimate the treatment effect using fixed-effects regression</p></li>
-<li><p>Estimate the marginal effect of an exposure (pollution) on an outcome using fixed-effects regression</p></li>
+<li><p>Read in and manipulate spatial data in R</p></li>
+<li><p>Join spatial data</p></li>
+<li></li>
 </ul>
 </section>
 <section id="r" class="level1">
+<h1>R</h1>
+<p>Spatial data is a form of cross-sectional data that contains geographic information.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Examples include the location of a store or park, the boundary of a parcel of land, or the location of a weather measurement. In many cases, we need to process that data in some way or join it to other (potentially spatial) data for analysis.</p>
+<section id="orientation-and-terms" class="level2">
+<h2 class="anchored" data-anchor-id="orientation-and-terms">Orientation and terms</h2>
+<p>Two common types of spatial data in R are <em>vector</em> and <em>raster</em> data. Vector data represent geographic features as points, lines, and polygons, while raster data represent geographic features as a grid of cells with values assigned to each cell. Vector data is often used to represent discrete features such as the boundaries of a city or the location of a specific point of interest. Raster data, on the other hand, is often used to represent phenomena such as elevation or temperature that are continuous across the landscape.</p>
+<p>Working with spatial data in R involves using specialized packages and functions to read, manipulate, and visualize the data. Some popular packages for working with spatial data in R include <code>sf</code> and <code>raster</code>. With these tools, it’s possible to perform a wide range of spatial analyses, such as overlaying different layers of data to find areas of overlap or proximity, extracting data for specific regions of interest, and creating custom maps and visualizations. Taro Meino has written a useful reference on using <a href="https://tmieno2.github.io/R-as-GIS-for-Economists/">R for GIS</a>.</p>
+</section>
+<section id="task-overview" class="level2">
+<h2 class="anchored" data-anchor-id="task-overview">Task overview</h2>
+<p>It is common to find data with specific location information (e.g., latitude and longitude coordinates). You may have separate data with other information that you want to associate with your location data (e.g., census information on median income). This lab walks you through the process of joining one spatial dataset with another. Specifically, we will join store locations, defined by longitude and latitude, with county boundaries in order to associate county-level census data.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Our first step is to start an R script and load packages. We start by reading in the convenience store data set we have been using.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This script will demonstrate how to work with spatial data and conduct some basic operations (e.g., intersection)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse,janitor,sf,tigris,mapview,tidycensus)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># read in convenience store location dataset</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>store_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/store_info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="converting-to-a-spatial-format" class="level2">
+<h2 class="anchored" data-anchor-id="converting-to-a-spatial-format">Converting to a spatial format</h2>
+<p>The field of geography and geographic information systems (GIS) specialize in understanding and working with geospatial data. Locations are known because of a commonly understood reference system called a Coordinate Reference System (CRS). Think about a graph with <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> dimensions. A point on that graph has a set of coordinates that tell you the location. CRS in GIS can be more complicated because we are thinking about points that exist on a globe (this would be easier if the earth were flat).</p>
+<p>The <code>store_raw</code> dataframe has latitude and longitude coordinates (variables in the dataframe). At this point, R considers these numbers like any other numeric variable. There are packages built to understand and work with geospatial data. <code>sf</code> stands for simple features and is a commonly used package. We will use it to convert the <code>store_raw</code> data into a spatially aware data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert data frame to a points simple feature object</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>store_geo <span class="ot">&lt;-</span> store_raw <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(store_id,latitude,longitude) <span class="sc">%&gt;%</span>  <span class="co">#Keep only unique identifier and coordinates - we can always join back to the other information</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords=</span><span class="fu">c</span>(<span class="st">"longitude"</span>,<span class="st">"latitude"</span>),<span class="at">crs=</span><span class="fu">st_crs</span>(<span class="dv">4326</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that we first subset the variables <code>store_id</code> and the coordinates. The next line tells R that these are essentially <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> coordinates in a certain projection (represented by the code 4326; see <a href="https://epsg.io/" class="uri">https://epsg.io/</a>). <code>store__geo</code> is a different object than we have worked with before but it looks and usually behaves like a familiar dataframe. You can mutate new variables, arrange, and even summarize, but summarize also performs geospatial operations because you are changing the unit of analysis).</p>
+<p>It is often helpful to look at data especially when mapping. R can leverage very powerful mapping tools, but we will just use them to make sure we are doing what we think we are doing. We can use <code>mapview()</code> to look at the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Set the option to make mapview render the points in preview</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mapviewOptions</span>(<span class="at">fgb =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#map the grocery stores</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(store_geo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="getting-census-boundaries" class="level2">
+<h2 class="anchored" data-anchor-id="getting-census-boundaries">Getting Census boundaries</h2>
+<p>The dataframe <code>store_raw</code> contained a lot of meta information but not county. Boundaries for commonly used geometries are available from the US Census and accessible through an <em>API</em> to the census repository of these boundaries (called Tiger). The R package <code>tigris</code> provides a very convenient API to access them.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get county polygons from tigris (Census)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>us_co <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">counties</span>(<span class="at">cb=</span>T,<span class="at">class=</span><span class="st">"sf"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This command extracts the county boundaries for the US and reads them into an sf object called <code>us_co</code>. If for some reason, there is an error, you can also load the county boundary from the course website:</p>
+<p><code>us_co &lt;- st_read("https://csu-arec-330.github.io/materials/unit_03/inputs/us_co.gpkg")</code></p>
+<p>The names are capitalized, so I like to clean them and we want to ensure that it is in the same coordinate reference system as our store locations <code>st_transform()</code>. Notice that the spatial type of these data are MULTIPOLYGONs rather than POINTs.</p>
+<blockquote class="blockquote">
+<p>Use mapview to plot the county layer</p>
+</blockquote>
+<p>Note that the sf object <code>us_co</code> contains information about the counties in the US, including county name, state, the area covered by land and water, and some numeric codes. Since counties in different states can have the same name, a 5-digit county identifier known as a <a href="https://www.smarty.com/articles/county-fips-codes">Federal Information Processing Standard (FIPS)</a> uniquely identifies counties. This code is labeled <code>geoid</code> in the <code>us_co</code> object. The first two digits of the fips are the state and the next three identify a county. Larimer county in CO has the FIPS code 08069. This fips code is used to join county-level data.</p>
+</section>
+<section id="intersecting-points-with-polygons" class="level2">
+<h2 class="anchored" data-anchor-id="intersecting-points-with-polygons">Intersecting points with polygons</h2>
+<p>Spatial data processing tools can understand the shared location of points and polygons to associate data from one dataset with another. Our objective is to associate a county name and identifier with each convenience store.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#join county to store_geo</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>store_co_geo <span class="ot">&lt;-</span> <span class="fu">st_join</span>(store_geo,us_co,<span class="at">join=</span>st_intersects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>This operation may take some time depending on the machine you are working on. If working on the server, remember that it is a shared resource, so just be patient.</p>
+</blockquote>
+<p>Notice that <code>store_co_geo</code> has all of the observations from <code>store_geo</code> and has the corresponding variables from <code>us_co</code> attached to it. Now we have county information associated with the store location. We can join the convenience store data to census data or other data at the county level via the 5-digit FIPS. We can also aggregate convenience store information up to the county level (<code>group_by() %&gt;% summarize()</code>.</p>
+</section>
+<section id="accessing-us-census-data" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-us-census-data">Accessing US Census data</h2>
+<p>The US Census contains a wealth of data that can be used in analysis. We will access median household income from the American Community Survey, an annual survey conducted to supplement the decenial census, using the R package called <code>tidycensus</code> that conveniently wraps the Census API (<a href="https://walker-data.com/tidycensus/" class="uri">https://walker-data.com/tidycensus/</a>). The census stores many datasets, so we need to identify the one we want to use to represent median household income. Tidycensus provides a utility to find the table we want:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>v22 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2022</span>, <span class="st">"acs5"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use the filter feature in the Rstudio viewer or export the data as a csv that you can open in excel and search the descriptions. In this case, the median household income code is <code>B19013_001</code> (the table is B19013 and the variable we want is 001). We can access the data using the function <code>get_acs()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#download data from Census API</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>census_hhi <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,  <span class="co">#we want county-level data</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">survey =</span> <span class="st">"acs5"</span>, <span class="co">#get data from the 5-year American Community Survey</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>), <span class="co">#we want median household income from table B19013 </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">state =</span> <span class="cn">NULL</span>, <span class="co">#leave this null for the whole US but it could be used to subset states </span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">year =</span> <span class="dv">2022</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#make names lower snake case and keep only the geoid and the estimate (renamed to hhi)</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>hhi <span class="ot">&lt;-</span> census_hhi <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geoid,<span class="at">hhi=</span>estimate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This call to the API downloads county names and identifiers along with the variable estimate and margin of error.</p>
+<section id="joining-with-convenience-store-county" class="level3">
+<h3 class="anchored" data-anchor-id="joining-with-convenience-store-county">Joining with convenience store county</h3>
+<p>We can join median household income to the stores by the common variable, <code>geoid</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#joining on county identifier</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>store_hhi <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co">#convert sf object back to dataframe by simply stripping out the geometry</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(.,hhi,<span class="at">by=</span><span class="st">"geoid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We have added median household income to our store-level data. Export this data and visualize in Tableau.</p>
+</section>
+</section>
+<section id="aggregating-by-geography" class="level2">
+<h2 class="anchored" data-anchor-id="aggregating-by-geography">Aggregating by geography</h2>
+<p>Now we have the information to count the number of store in each county. We can use the <code>group_by()</code> and <code>summarize()</code> combination to calculate aggregate measures by county. Moreover, we don’t need the spatial information anymore since everything will be at the county level. We use <code>st_set_geometry(NULL)</code> to convert an sf object back to a data frame (without spatial information), then add the number of stores in a county.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#joining on county identifier</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>county_stores <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co">#convert sf object back to dataframe by simply stripping out the geometry</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid,<span class="at">county=</span>name,<span class="at">state=</span>stusps) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_stores =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co">#the function n() counts the number of occurrences</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="co">#safer; otherwise, the grouping stays with the dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="r-1" class="level1">
 <h1>R</h1>
 <p>Panel data is a type of longitudinal data that involves the collection of observations on the same individuals or units over time. This makes panel data different from cross-sectional data, which involves the collection of observations on different individuals or units at a single point in time, and time series data, which involves the collection of observations on the same variable over time.</p>
 <p>The structure of panel data allows analytical strategies better suited for inferring causality. In cases where some units are exposed to a policy or intervention, regression models can statistically compare exposed units (treated) to unexposed units (control). Regression models can also exploit panel data to control for unobserved differences between units allowing the statistical comparison of a unit to itself at another point in time.</p>
 <p>The objective of this lab is to introduce you to managing panel data and analyzing the data.</p>
 <section id="difference-in-differences" class="level2">
 <h2 class="anchored" data-anchor-id="difference-in-differences">Difference in differences</h2>
-<p>We will use the <code>did</code> package in R to illustrate how to use a regression model to estimate the effect of minimum wage increases on youth employment. We will use the dataset <code>mpdta</code> that is included with the package.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The dataset consists of employment, population, and information about the minimum wage increase by county by year. All panel data has a unit, usually denote <span class="math inline">\(i\)</span>, and a time, usually denoted <span class="math inline">\(t\)</span>. In this data, <span class="math inline">\(i\)</span> indexes counties and <span class="math inline">\(t\)</span> indexes years. Let’s first set up our script and call in the data.</p>
+<p>We will use the <code>did</code> package in R to illustrate how to use a regression model to estimate the effect of minimum wage increases on youth employment. We will use the dataset <code>mpdta</code> that is included with the package.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The dataset consists of employment, population, and information about the minimum wage increase by county by year. All panel data has a unit, usually denote <span class="math inline">\(i\)</span>, and a time, usually denoted <span class="math inline">\(t\)</span>. In this data, <span class="math inline">\(i\)</span> indexes counties and <span class="math inline">\(t\)</span> indexes years. Let’s first set up our script and call in the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This script demonstrates how to estimate a difference in differences model using the did package</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse,did)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># call in dataset</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mpdta <span class="ot">&lt;-</span> <span class="fu">data</span>(<span class="st">"mpdta"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#look at the data</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpdta) <span class="co">#or View(mpdta)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This script demonstrates how to estimate a difference in differences model using the did package</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse,did)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># call in dataset</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>mpdta <span class="ot">&lt;-</span> <span class="fu">data</span>(<span class="st">"mpdta"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#look at the data</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpdta) <span class="co">#or View(mpdta)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Take a look at the data. There is no clear binary (1/0) indicator for when the treatment turns on. Let’s create one. We want to create a new variable equal to 1 on the year of first treatment and all years following, and 0 otherwise.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create binary treatment indicator</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mpdta_new <span class="ot">&lt;-</span> mpdta <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treated=</span><span class="fu">ifelse</span>(treat<span class="sc">==</span><span class="dv">1</span>,year<span class="sc">&gt;=</span>first.treat,<span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create binary treatment indicator</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mpdta_new <span class="ot">&lt;-</span> mpdta <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treated=</span><span class="fu">ifelse</span>(treat<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> year<span class="sc">&gt;=</span>first.treat,<span class="dv">1</span>,<span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Look at the data and confirm that you created what you intended to create.</p>
 <p>Now we want to estimate the difference in differences regression model using what we call two-way fixed effects. The two-way refers to fixed effects for 1) the units, and 2) for time. The unit fixed effect accounts for unobserved variation between the units (each county has its own intercept). The time fixed effect accounts for unobserved variation common to all units but that varies over time. This leaves the binary treatment indicator we created to account for the treatment effect.</p>
@@ -191,15 +298,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>where the <span class="math inline">\(i\)</span> and <span class="math inline">\(t\)</span> represent county and year, <span class="math inline">\(\gamma_t\)</span> are the time fixed effects, and <span class="math inline">\(\delta_i\)</span> are the county fixed effects, and <span class="math inline">\(\beta\)</span> is the coefficient of interest - the treatment effect. R will automatically create the dummy variables if the variable is a factor. So, we need to convert the variables <code>year</code> and <code>countyreal</code> to factors using the function <code>as.factor()</code>. This function operates on a vector and does not change the dimension of the vector. Which <code>dplyr</code> function should you use?</p>
 <p>Estimate the following model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create binary treatment indicator</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mlm <span class="ot">&lt;-</span> <span class="fu">lm</span>(lemp <span class="sc">~</span> treated <span class="sc">+</span> countyreal <span class="sc">+</span> year,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>mpdta_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create binary treatment indicator</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mlm <span class="ot">&lt;-</span> <span class="fu">lm</span>(lemp <span class="sc">~</span> treated <span class="sc">+</span> countyreal <span class="sc">+</span> year,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>mpdta_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>mlm</code> is the regression object that contains information to construct a familiar regression table. Use <code>summary()</code> to view the table.</p>
 <p>The table is very long because of all of the dummy variable coefficients. There are many packages in R that produce nicer looking tables. I like <code>modelsummary</code>. Our model contains coefficient estimates for all of our dummy variables, but we are mainly concerned with the <span class="math inline">\(\beta\)</span> coefficient on <code>treated</code>. We can ask <code>modelsummary()</code> to only show us that coefficient. See the documentation for the many other options.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate regression table</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(mlm,<span class="at">coef_map =</span> <span class="st">"treated"</span>,<span class="at">output =</span> <span class="st">"markdown"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate regression table</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(mlm,<span class="at">coef_map =</span> <span class="st">"treated"</span>,<span class="at">output =</span> <span class="st">"markdown"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>What is the sign and magnitude of <span class="math inline">\(\beta\)</span>? What does this tell us about the effect of a minimum wage increase on youth employment?</p>
@@ -209,7 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="fixed-effects-with-marginal-changes" class="level2">
 <h2 class="anchored" data-anchor-id="fixed-effects-with-marginal-changes">Fixed effects with marginal changes</h2>
 <p>This section will cover how to estimate marginal changes with fixed effects and panel data. In this case, the goal is to use the fixed effects to control for unmeasured differences between the units that do not change over time (generally called unobserved heterogeneity).</p>
-<p>This exercise will use fixed effects models to analyze the impact of monthly fuel moisture on monthly wildfire activity in select counties in the US.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> You can download the data from <a href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi">this folder</a>. The folder contains two files: 1) <code>fires_303.csv.gz</code> and 2) <code>weather_303.csv.gz</code>. <code>fires_303.csv.gz</code> contains three variables: 1) a unique county identifier, <code>county_fips</code>, 2) the observation date <code>measure_date</code>, and 3) the number of wildfire burning on that date in that county, <code>fires</code>. <code>weather_303.csv.gz</code> contains the same county and date information along with 1000-hour fuel moisture measured in percent from 1 to 40.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>This exercise will use fixed effects models to analyze the impact of monthly fuel moisture on monthly wildfire activity in select counties in the US.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> You can download the data from <a href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi">this folder</a>. The folder contains two files: 1) <code>fires_303.csv.gz</code> and 2) <code>weather_303.csv.gz</code>. <code>fires_303.csv.gz</code> contains three variables: 1) a unique county identifier, <code>county_fips</code>, 2) the observation date <code>measure_date</code>, and 3) the number of wildfire burning on that date in that county, <code>fires</code>. <code>weather_303.csv.gz</code> contains the same county and date information along with 1000-hour fuel moisture measured in percent from 1 to 40.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>Start a new script. Download these data and read the datasets into R - call the dataframes <code>fire</code> and <code>weather</code>. Note, the datasets for this exercise are fairly large.</p>
 <section id="data-processing" class="level3">
 <h3 class="anchored" data-anchor-id="data-processing">Data processing</h3>
@@ -219,12 +326,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="analysis" class="level3">
 <h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
 <p>Our goal is to estimate the relationship between fuel moisture and the number of fire days across counties in the lower 48 states. In this case, the direction of causality is intuitive; dry hot weather dries out fuel and makes wildfire more likely. However, by estimating the model on all (fire prone) counties over time allows us to estimate the average effect over space and time (we also have the ability to estimate the relationship for any single county or point in time).</p>
-<p>We will use the function <code>feols</code> from the <code>fixest</code> package to estimate our fixed-effects regression. When we have a large number of units and time periods, creating a bunch of dummy variables is a lot of work for the computer. It turns out that subtracting the mean value of all variables along the dimensions of the fixed effects accomplishes the same thing.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. This trick saves the computer a lot of work.</p>
+<p>We will use the function <code>feols</code> from the <code>fixest</code> package to estimate our fixed-effects regression. When we have a large number of units and time periods, creating a bunch of dummy variables is a lot of work for the computer. It turns out that subtracting the mean value of all variables along the dimensions of the fixed effects accomplishes the same thing.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. This trick saves the computer a lot of work.</p>
 <p>We want to estimate the model: <span class="math display">\[ fires_{it} = \beta fm1000_{it} + \gamma_t + \delta_i +\varepsilon_{it} \]</span> where, again, the <span class="math inline">\(i\)</span> and <span class="math inline">\(t\)</span> represent county and time, <span class="math inline">\(\gamma_t\)</span> are the time fixed effects, and <span class="math inline">\(\delta_i\)</span> are the county fixed effects, and <span class="math inline">\(\beta\)</span> is the coefficient of interest. In this project, <span class="math inline">\(t\)</span> represents the year-month. The fixed effects play a similar role in this regression. The county fixed effects control for time-invariant factors of a county like vegetation, elevation, etc. The time fixed effects control for nationwide changes in a given month that may impact fires. For example, an announcement by the USFS that all fires will be contained as quickly as possible. The idea is that we net those factors captured by the fixed effects out of the effect of fuel moisture so that we are left with a more credible estimate.</p>
 <p>We enter the formula in <code>feols</code> similar to <code>lm()</code>, with a notable difference: the variables listed after the vertical pipe, <span class="math inline">\(|\)</span>, are considered fixed effects.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed effect regression model using fixest</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">feols</span>(fires <span class="sc">~</span> fm1000 <span class="sc">|</span> county_fips <span class="sc">+</span> ym,<span class="at">data =</span> analysis_ds )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed effect regression model using fixest</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">feols</span>(fires <span class="sc">~</span> fm1000 <span class="sc">|</span> county_fips <span class="sc">+</span> ym,<span class="at">data =</span> analysis_ds )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Use <code>summary()</code> to view the results. By default, model objects from <code>fixest</code> do not print the values of the fixed effects (though they can be recovered). Also, <code>fixest</code> provides its own function to view tables called <code>etable()</code>.</p>
 <blockquote class="blockquote">
@@ -242,10 +349,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>The dataset is a subset of the data used in <a href="https://www.sciencedirect.com/science/article/pii/S0304407620303948?via%3Dihub">Callaway and Sant’Anna (2021)</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>I removed counties that never experienced any fire between 2006-2015.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>1000-Hour Fuel Moisture (1000-hr FM) represents the modeled moisture content in dead fuels in the 3 to 8 inch diameter class and the layer of the forest floor about four inches below the surface. The 1000-hr FM value is based on a running 7-day computed average using length of day, daily temperature and relative humidity extremes (maximum and minimum values) and the 24-hour precipitation duration values. Values can range from 1 to 40 percent (<a href="https://gacc.nifc.gov/nrcc/predictive/fuels_fire-danger/psa_component_glossary.htm">source</a>).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>For example, subtracting the average of all variables across time, removes the county dummy variables since they don’t vary over time<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Spatial data can also have temporal dimensions, and the concepts we cover here extend to those data too.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The dataset is a subset of the data used in <a href="https://www.sciencedirect.com/science/article/pii/S0304407620303948?via%3Dihub">Callaway and Sant’Anna (2021)</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>I removed counties that never experienced any fire between 2006-2015.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>1000-Hour Fuel Moisture (1000-hr FM) represents the modeled moisture content in dead fuels in the 3 to 8 inch diameter class and the layer of the forest floor about four inches below the surface. The 1000-hr FM value is based on a running 7-day computed average using length of day, daily temperature and relative humidity extremes (maximum and minimum values) and the 24-hour precipitation duration values. Values can range from 1 to 40 percent (<a href="https://gacc.nifc.gov/nrcc/predictive/fuels_fire-danger/psa_component_glossary.htm">source</a>).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>For example, subtracting the average of all variables across time, removes the county dummy variables since they don’t vary over time<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
@@ -276,9 +384,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -343,6 +465,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
