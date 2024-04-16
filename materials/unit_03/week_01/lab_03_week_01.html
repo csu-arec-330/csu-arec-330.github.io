@@ -92,6 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#you-do-it" id="toc-you-do-it" class="nav-link" data-scroll-target="#you-do-it">You Do It</a></li>
   </ul></li>
+  <li><a href="#removing-spatial-outliers" id="toc-removing-spatial-outliers" class="nav-link" data-scroll-target="#removing-spatial-outliers">Removing spatial outliers</a></li>
   <li><a href="#intersecting-points-with-polygons" id="toc-intersecting-points-with-polygons" class="nav-link" data-scroll-target="#intersecting-points-with-polygons">Intersecting points with polygons</a>
   <ul class="collapse">
   <li><a href="#you-do-it-1" id="toc-you-do-it-1" class="nav-link" data-scroll-target="#you-do-it-1">You Do It</a></li>
@@ -215,12 +216,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note that the sf object <code>us_co</code> contains information about the counties in the US, including county name, state, the area covered by land and water, and some numeric codes. Since counties in different states can have the same name, a 5-digit county identifier known as a <a href="https://www.smarty.com/articles/county-fips-codes">Federal Information Processing Standard (FIPS)</a> uniquely identifies counties. This code is labeled <code>geoid</code> in the <code>us_co</code> object. The first two digits of the fips are the state and the next three identify a county. Larimer county in CO has the FIPS code 08069. This fips code is used to join county-level data.</p>
 </section>
 </section>
+<section id="removing-spatial-outliers" class="level2">
+<h2 class="anchored" data-anchor-id="removing-spatial-outliers">Removing spatial outliers</h2>
+<p>When analyzing spatial data, for tractability’s sake, we might only want to look at data for the contiguous United States. So, it’s often useful to remove territories and states that are not part of the “lower 48.” States like Alaska and Hawaii, as well as territories such as American Samoa, Guam, and Puerto Rico, differ significantly in their geographical context and may introduce anomalies or skew the results when evaluating nationwide trends or metrics. Excluding them helps to maintain a focused analysis on the contiguous states where geographical and demographic characteristics are more uniform. This simplification can be particularly beneficial in analyses that involve spatial relationships or distance calculations, where the vast distances to these non-contiguous areas can distort results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Look at the distinct state list by statefp code</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>unique_statefp <span class="ot">&lt;-</span> us_co <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co"># Remove geometry column</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(stusps, statefp) <span class="sc">%&gt;%</span>  <span class="co"># Select the columns of interest</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span>  <span class="co"># Remove duplicates, keeping only unique rows</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(stusps)  <span class="co"># Arrange alphabetically by stusps</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Filter out counties from American Samoa (60), Guam (66), Saipan Municipality (69), Puerto Rico (72), Virgin Islands (78), Alaska (02), and Hawaii (15)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>us_co_filtered <span class="ot">&lt;-</span> us_co <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>statefp <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"60"</span>, <span class="st">"66"</span>, <span class="st">"72"</span>, <span class="st">"02"</span>, <span class="st">"15"</span>, <span class="st">"69"</span>, <span class="st">"78"</span>))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Use mapview to plot the county layer, excluding the specified states</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(us_co_filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="intersecting-points-with-polygons" class="level2">
 <h2 class="anchored" data-anchor-id="intersecting-points-with-polygons">Intersecting points with polygons</h2>
 <p>Spatial data processing tools can understand the shared location of points and polygons to associate data from one dataset with another. Our objective is to associate a county name and identifier with each convenience store.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join county to store_geo</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>store_co_geo <span class="ot">&lt;-</span> <span class="fu">st_join</span>(store_geo,us_co,<span class="at">join=</span>st_intersects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join county to store_geo</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>store_co_geo <span class="ot">&lt;-</span> <span class="fu">st_join</span>(store_geo,us_co_filtered,<span class="at">join=</span>st_intersects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>This operation may take some time depending on the machine you are working on. If working on the server, remember that it is a shared resource, so just be patient.</p>
@@ -232,50 +252,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate store count by county</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>store_count_by_county <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">store_count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>)  <span class="co"># Drop groups to prevent regrouping</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Join aggregated data back with county geometries for mapping</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>county_store_map <span class="ot">&lt;-</span> <span class="fu">st_join</span>(us_co,store_count_by_county,<span class="at">join=</span>st_intersects)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the result with mapview (showing number of stores per county)</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(county_store_map, <span class="at">zcol =</span> <span class="st">"store_count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate store count by county</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>store_count_by_county <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">store_count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>)  <span class="co"># Drop groups to prevent regrouping</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Join aggregated data back with county geometries for mapping</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>county_store_map <span class="ot">&lt;-</span> <span class="fu">st_join</span>(us_co_filtered,store_count_by_county,<span class="at">join=</span>st_intersects)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the result with mapview (showing number of stores per county)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(county_store_map, <span class="at">zcol =</span> <span class="st">"store_count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 </section>
 <section id="accessing-us-census-data" class="level2">
 <h2 class="anchored" data-anchor-id="accessing-us-census-data">Accessing US Census data</h2>
-<p>The US Census contains a wealth of data that can be used in analysis. We will access median household income from the American Community Survey, an annual survey conducted to supplement the decenial census, using the R package called <code>tidycensus</code> that conveniently wraps the Census API (<a href="https://walker-data.com/tidycensus/" class="uri">https://walker-data.com/tidycensus/</a>). The census stores many datasets, so we need to identify the one we want to use to represent median household income. Tidycensus provides a utility to find the table we want:</p>
+<p>The US Census contains a wealth of data that can be used in analysis. We will access median household income from the American Community Survey, an annual survey conducted to supplement the decennial census, using the R package called <code>tidycensus</code> that conveniently wraps the Census API (<a href="https://walker-data.com/tidycensus/" class="uri">https://walker-data.com/tidycensus/</a>). The census stores many datasets, so we need to identify the one we want to use to represent median household income. Tidycensus provides a utility to find the table we want:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>v22 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2022</span>, <span class="st">"acs5"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>v22 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2022</span>, <span class="st">"acs5"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Use the filter feature in the Rstudio viewer or export the data as a csv that you can open in excel and search the descriptions. In this case, the median household income code is <code>B19013_001</code> (the table is B19013 and the variable we want is 001). We can access the data using the function <code>get_acs()</code>.</p>
-<p>Note: There are <strong>many</strong> other demographic variables in the Census data. Explore the Census data dictionary here: <a href=""></a>. You will have to know the corresponding code</p>
+<p>Use the filter feature in the Rstudio viewer or export the data as a csv that you can open in excel and search the descriptions. As you can see, there are <strong>many</strong> other demographic tables available in the Census data. In this case, the median household income code is <code>B19013_001</code> (the table is B19013 and the variable we want is 001). We can access the data using the function <code>get_acs()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download data from Census API</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>census_hhi <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,  <span class="co">#we want county-level data</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">survey =</span> <span class="st">"acs5"</span>, <span class="co">#get data from the 5-year American Community Survey</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>), <span class="co">#we want median household income from table B19013 </span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">state =</span> <span class="cn">NULL</span>, <span class="co">#leave this null for the whole US but it could be used to subset states </span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">year =</span> <span class="dv">2022</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make names lower snake case and keep only the geoid and the estimate (renamed to hhi)</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>hhi <span class="ot">&lt;-</span> census_hhi <span class="sc">%&gt;%</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geoid,<span class="at">hhi=</span>estimate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download data from Census API</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>census_hhi <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"county"</span>,  <span class="co">#we want county-level data</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">survey =</span> <span class="st">"acs5"</span>, <span class="co">#get data from the 5-year American Community Survey</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>), <span class="co">#we want median household income from table B19013 </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">state =</span> <span class="cn">NULL</span>, <span class="co">#leave this null for the whole US but it could be used to subset states </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">year =</span> <span class="dv">2022</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make names lower snake case and keep only the geoid and the estimate (renamed to hhi)</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>hhi <span class="ot">&lt;-</span> census_hhi <span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geoid,<span class="at">hhi=</span>estimate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This call to the API downloads county names and identifiers along with the variable estimate and margin of error.</p>
 <section id="joining-with-convenience-store-county" class="level3">
 <h3 class="anchored" data-anchor-id="joining-with-convenience-store-county">Joining with convenience store county</h3>
 <p>We can join median household income to the stores by the common variable, <code>geoid</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining on county identifier</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>store_hhi <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co">#convert sf object back to dataframe by simply stripping out the geometry</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(.,hhi,<span class="at">by=</span><span class="st">"geoid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining on county identifier</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>store_hhi <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co">#convert sf object back to dataframe by simply stripping out the geometry</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(.,hhi,<span class="at">by=</span><span class="st">"geoid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We have added median household income to our store-level data. Export this data and visualize in Tableau.</p>
 </section>
@@ -284,12 +303,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="aggregating-by-geography">Aggregating by geography</h2>
 <p>Now we have the information to count the number of store in each county. We can use the <code>group_by()</code> and <code>summarize()</code> combination to calculate aggregate measures by county. Moreover, we don’t need the spatial information anymore since everything will be at the county level. We use <code>st_set_geometry(NULL)</code> to convert an sf object back to a data frame (without spatial information), then add the number of stores in a county.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining on county identifier</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>county_stores <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co">#convert sf object back to dataframe by simply stripping out the geometry</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid,<span class="at">county=</span>name,<span class="at">state=</span>stusps) <span class="sc">%&gt;%</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_stores =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co">#the function n() counts the number of occurrences</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="co">#safer; otherwise, the grouping stays with the dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining on county identifier</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>county_stores <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co">#convert sf object back to dataframe by simply stripping out the geometry</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid,<span class="at">county=</span>name,<span class="at">state=</span>stusps) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_stores =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co">#the function n() counts the number of occurrences</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="co">#safer; otherwise, the grouping stays with the dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The result, <code>county_stores</code>, contains the number of convenience stores in each county.</p>
 </section>
@@ -297,37 +316,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="creating-a-panel">Creating a panel</h2>
 <p>We may want to join our data to other data that varies over time. Suppose we are interested in how total sales at a store correlates with high temperatures. Weather data varies over time and space; however, store locations are fixed and do not change over time. We can use our existing data <code>stores_co_geo</code>, which has county information associated with each store, and join it to <code>shopper_info</code>, which contains the transaction level information. We need to aggregate the transaction level data up to sales per store-day.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the transaction level data</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>shopper_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the weather data</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>weather_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/gridmet_county_daily_2023-2023.csv.gz"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the transaction level data</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>shopper_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the weather data</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>weather_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/gridmet_county_daily_2023-2023.csv.gz"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>shopper_info</code> contains <code>store_id</code>, which we can use to join to <code>store_co_geo</code>, and <code>date_time</code>. First, extract the date component as we are not concerned with the time of day. Then, we group by <code>measure_date</code> and <code>store_id</code> and sum sales (<code>unit_price</code>*<code>unit_quantity</code>)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining on county identifier</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>store_sales <span class="ot">&lt;-</span> shopper_info <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">as_date</span>(date_time)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(store_id,measure_date) <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sales=</span><span class="fu">sum</span>(unit_price<span class="sc">*</span>unit_quantity,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining on county identifier</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>store_sales <span class="ot">&lt;-</span> shopper_info <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">as_date</span>(date_time)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(store_id,measure_date) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sales=</span><span class="fu">sum</span>(unit_price<span class="sc">*</span>unit_quantity,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>store_sales</code> contains the total sales by date for each store in the dataset. We can now join <code>store_sales</code> with county information associated with each store.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining on county identifier</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>store_sales_co <span class="ot">&lt;-</span> <span class="fu">st_set_geometry</span>(store_co_geo,<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(store_id,geoid) <span class="sc">%&gt;%</span> <span class="co">#selecting on store_id and geoid only because we need the store id to join and the county id for weather</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(store_sales,.,<span class="at">by=</span><span class="st">"store_id"</span>) <span class="co">#inner_join here because we only want to consider stores that we have county information for</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining on county identifier</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>store_sales_co <span class="ot">&lt;-</span> <span class="fu">st_set_geometry</span>(store_co_geo,<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(store_id,geoid) <span class="sc">%&gt;%</span> <span class="co">#selecting on store_id and geoid only because we need the store id to join and the county id for weather</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(store_sales,.,<span class="at">by=</span><span class="st">"store_id"</span>) <span class="co">#inner_join here because we only want to consider stores for which we have county information</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We have county-day measurements of weather. However, the data is in long format(as opposed to wide). The unit of observation of <code>weather_raw</code> is county-day-weather_measurement, but we need it to be county-day with different measurements as columns. We can reshape this data from long to wide using the function <code>pivot_wider()</code>. The next step is to join the weather data with <code>store_sales_co</code>. However, the columns we need to join on have different names. We can rename them or tell R how to map the names. Note that the order of the variable name matters - the variable name on the left should be from the dataframe listed first. Also note that the weather data is for the continental US so store locations outside of that will be dropped because of the inner_join().</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reshaping weather data from long to wide</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>weather_wide <span class="ot">&lt;-</span> weather_raw <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(county,date),<span class="at">names_from =</span> variable,<span class="at">values_from =</span> value)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># joining weather to store_sales_co</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>store_sales_weather <span class="ot">&lt;-</span> store_sales_co <span class="sc">%&gt;%</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(.,weather_wide, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"measure_date"</span><span class="ot">=</span><span class="st">"date"</span>,<span class="st">"geoid"</span><span class="ot">=</span><span class="st">"county"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reshaping weather data from long to wide</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>weather_wide <span class="ot">&lt;-</span> weather_raw <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(county,date),<span class="at">names_from =</span> variable,<span class="at">values_from =</span> value)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># joining weather to store_sales_co</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>store_sales_weather <span class="ot">&lt;-</span> store_sales_co <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(.,weather_wide, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"measure_date"</span><span class="ot">=</span><span class="st">"date"</span>,<span class="st">"geoid"</span><span class="ot">=</span><span class="st">"county"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="summary" class="level2">

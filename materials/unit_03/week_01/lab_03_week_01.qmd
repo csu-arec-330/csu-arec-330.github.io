@@ -125,6 +125,29 @@ mapview(us_co)
 
 Note that the sf object `us_co` contains information about the counties in the US, including county name, state, the area covered by land and water, and some numeric codes. Since counties in different states can have the same name, a 5-digit county identifier known as a [Federal Information Processing Standard (FIPS)](https://www.smarty.com/articles/county-fips-codes) uniquely identifies counties. This code is labeled `geoid` in the `us_co` object. The first two digits of the fips are the state and the next three identify a county. Larimer county in CO has the FIPS code 08069. This fips code is used to join county-level data.
 
+## Removing spatial outliers
+
+When analyzing spatial data, for tractability's sake, we might only want to look at data for the contiguous United States. So, it's often useful to remove territories and states that are not part of the "lower 48." States like Alaska and Hawaii, as well as territories such as American Samoa, Guam, and Puerto Rico, differ significantly in their geographical context and may introduce anomalies or skew the results when evaluating nationwide trends or metrics. Excluding them helps to maintain a focused analysis on the contiguous states where geographical and demographic characteristics are more uniform. This simplification can be particularly beneficial in analyses that involve spatial relationships or distance calculations, where the vast distances to these non-contiguous areas can distort results.
+
+```{r}
+#| eval: false
+
+# Step 1: Look at the distinct state list by statefp code
+unique_statefp <- us_co %>%
+  st_set_geometry(NULL) %>%  # Remove geometry column
+  select(stusps, statefp) %>%  # Select the columns of interest
+  distinct() %>%  # Remove duplicates, keeping only unique rows
+  arrange(stusps)  # Arrange alphabetically by stusps
+
+# Step 2: Filter out counties from American Samoa (60), Guam (66), Saipan Municipality (69), Puerto Rico (72), Virgin Islands (78), Alaska (02), and Hawaii (15)
+us_co_filtered <- us_co %>%
+  filter(!statefp %in% c("60", "66", "72", "02", "15", "69", "78"))
+
+# Step 3: Use mapview to plot the county layer, excluding the specified states
+mapview(us_co_filtered)
+
+```
+
 ## Intersecting points with polygons
 
 Spatial data processing tools can understand the shared location of points and polygons to associate data from one dataset with another.  Our objective is to associate a county name and identifier with each convenience store.
@@ -133,7 +156,7 @@ Spatial data processing tools can understand the shared location of points and p
 #| eval: false
 
 # join county to store_geo
-store_co_geo <- st_join(store_geo,us_co,join=st_intersects)
+store_co_geo <- st_join(store_geo,us_co_filtered,join=st_intersects)
 
 ```
 
@@ -156,7 +179,7 @@ store_count_by_county <- store_co_geo %>%
   summarize(store_count = n(), .groups = 'drop')  # Drop groups to prevent regrouping
 
 # Join aggregated data back with county geometries for mapping
-county_store_map <- st_join(us_co,store_count_by_county,join=st_intersects)
+county_store_map <- st_join(us_co_filtered,store_count_by_county,join=st_intersects)
 
 # Visualize the result with mapview (showing number of stores per county)
 mapview(county_store_map, zcol = "store_count")
