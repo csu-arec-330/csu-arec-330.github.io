@@ -1,0 +1,342 @@
+---
+title: "Week 13: <br>Spatial Data and <br>  Project 3 Introduction"
+format: 
+  revealjs:
+    theme: [night, ../../custom.scss]
+    slide-number: c/t
+    width: 1400
+    # logo: path.png
+    # center: TRUE
+---
+
+## Agenda 
+
+Spatial data overview
+
+Spatial joins
+
+Project 3 overview 
+
+
+<!-- example of big text fit to slide width -->
+
+<!-- ::: {.r-fit-text} -->
+<!-- Big Text -->
+<!-- ::: -->
+
+<!-- :::: {.columns style="text-align: center"} -->
+<!-- ::: {.column width="40%"} -->
+<!-- ::: -->
+<!-- ::: {.column width="60%"} -->
+<!-- ::: -->
+<!-- :::: -->
+
+## What is spatial data? 
+
+Data about a point or area defined in space
+
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+Vector Data 
+
+- Point (e.g., locations of stores, geotagged tweets)
+
+- Line Data (e.g., roads, rivers)
+
+- Polygon Data (e.g., boundaries of countries, lakes)
+
+:::
+
+::: {.column width="50%"}
+
+Raster Data 
+
+- Grid/raster data is reported in a uniformly sized grid over some area (e.g., satellite images)
+
+:::
+
+::::
+
+<!-- ##  -->
+<!-- <section data-background-image="includes/cross-sectional.png" data-background-size="contain"> -->
+<!-- </section> -->
+
+<!-- Digression on compression -->
+<!-- Census API Key -->
+
+## Common Sources of Spatial Data
+
+- Public datasets (e.g., [USGS](https://apps.nationalmap.gov/viewer/), [NASA](https://firms.modaps.eosdis.nasa.gov/usfs/map/#d:24hrs;@-103.2,40.1,5.4z))
+
+- Private sources (e.g., [Google Maps](https://www.google.com/maps/@40.5753329,-105.0908151,15z?entry=ttu))
+
+- Crowdsourced data (e.g., [PurpleAir](https://map.purpleair.com/1/mAQI/a10/p604800/cC0#10.56/40.5138/-105.0647))
+
+
+# Understanding Spatial Relationships
+
+
+## Concepts of Spatial Relationships
+
+- Distance and proximity
+
+- Topology (e.g., adjacency, containment)
+
+- Accessibility and connectivity
+
+
+
+## Tools for Analyzing Spatial Relationships
+
+- Geographic Information Systems (GIS)
+
+- Spatial functions in databases (e.g., PostGIS)
+
+
+# Working with Spatial Data
+
+
+##  Data Collection Techniques
+
+- GPS data collection
+
+- Remote sensing and aerial photography
+
+## Data Processing and Cleaning
+
+- Calculating distance between objects
+
+- Calculating area of polygons
+
+- Spatial joins
+
+- Geocoding and reverse geocoding
+
+
+## Conclusion
+A. Recap of the Importance and Utility of Spatial Data
+B. Future Trends in Spatial Data Analysis
+C. Q&A
+
+
+
+##
+
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+![](includes/panel-data-differencing.png)
+
+::: 
+
+::: {.column width="50%"}
+What is the unit of measurement over time?
+
+How long is each unit measured?
+
+What variables are measured at each point in time?
+:::
+::::
+
+
+## Other examples of panel data
+
+Individuals' health status over time
+
+Individuals' wages over time
+
+Counties' precipitation over time
+
+Others?
+
+## Clicker question
+
+What is panel data?
+
+A. Data collected on different individuals or units at a single point in time
+
+B. Data collected on the same individuals or units over time
+
+C. Data collected on the same variable over time
+
+D. Data collected on different variables at a single point in time
+
+
+<!-- show examples -->
+
+## Panel data and the case for causality
+
+Causal inference is the gold standard in economics research
+
+We want to know the causal effect of a policy or intervention on people or some outcome
+
+How does an increase in the minimum wage impact youth employment?
+
+How might you answer that question? 
+
+What does economic theory say?
+
+## Time series perspective: youth employment in Benton Co, MN
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+![](includes/did_ts.png)
+
+::: 
+
+::: {.column width="50%"}
+What happens to youth employment after 2006?
+
+Can you conclude that an increase in the minimum wage reduces employment?
+:::
+::::
+
+
+## Cross section perspective : youth employment in 2007
+
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+![](includes/did_cs.png)
+
+::: 
+
+::: {.column width="50%"}
+What happens to youth employment in the treated counties?
+
+Can you conclude that an increase in the minimum wage increases employment?
+:::
+::::
+
+
+## Benefits of panel data
+
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+Panel data measures units over time
+
+This allows us to statistically compare those that experience the policy to those that do not
+
+::: 
+
+::: {.column width="50%"}
+
+![](includes/min_wage_data.png)
+
+:::
+::::
+
+
+## Analyzing Panel Data
+
+Analyzing panel data typically involves comparing a person or unit to themselves at different points in time
+
+Comparing a unit to themselves removes all characteristics of that unit that do not vary over time but may influence the outcome$^{*}$ 
+
+In regression, we remove (or control for) these characteristics with fixed effects
+
+We can use regression to compare units before and after some change or policy
+
+
+
+# The experimental ideal {background-image=includes/ucd_experiment.jpg}
+
+## Approximating the experimental ideal
+
+We cannot usually conduct our own experiments (though many in economics are now)
+
+We can look for opportunities where policy or nature create experiments (sugar rationing)
+
+Where some group of units is exposed to a policy or event (treated)
+
+The key is that treatment assignment is approximately random
+
+
+## Analyzing exposure
+
+In many cases, people or units are exposed to varying levels of something (e.g., pollution, heat)
+
+We can use regression to assess the incremental impact of the exposure
+
+Panel data enables comparison of units with a given exposure to themselves at different levels of exposure controlling for a unit's characteristics 
+
+## Difference in differences
+
+DiD is a popular method for exploiting panel data because it is simple and intuitive
+
+The method compares the difference between the change in some outcome in the treatment and control units
+
+Returning to our min wage example, we want to compare the change in employment (before to after policy) in the treatment unit to the control unit.
+
+[Card and Kruger](https://davidcard.berkeley.edu/papers/njmin-aer.pdf)
+
+## Potential problems with observational data
+
+Observational data is collected on the state of the world that is, and not on what could have been
+
+Our challenge is to estimate what could have been (the counterfactual)
+
+- omitted variables can bias estimates
+
+- measurement error in independent variables can bias estimates
+
+- simultaneity or reverse causality can bias estimates
+
+- selection on unobserved information
+
+## Summary
+
+Panel data measures units over time
+
+Panel data permits causal research designs
+
+Causal techniques try to get us back to the experimental ideal
+
+Be aware of possiblem problems in the research design
+
+
+## Exercise for Friday
+
+[Listen to podcast on sugar](https://youtu.be/k8T9qXKpoXs)
+
+[If interested, look at the paper](https://www.nber.org/papers/w30799)
+
+## Project 2: Overview
+
+Form groups of 2 (THIS WEEK)
+
+Choose one of the "treatment" datasets and find an outcome to evaluate
+
+What is the impact of $x$ on some outcome $y$
+
+Collect panel data and build dataset (talk to Jude and Ali early if you need help)
+
+Perform an exploratory data analysis and assemble summary statistics; analyze spatial patterns, correlations, etc.; and construct visualizations to answer your research question.
+
+Present results in class on final.
+
+## ["Treatment" datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/Ene2gKXT9QBMr5Zb383dEeYBmvLFvFZR6PTwxUcGNza_0g?e=gwtVHm)
+
+- County-level weekly drought (1980-2022)
+
+- State-level and federal minimum wage (1974-2016)
+
+- County-level daily PM2.5 and smoke presence (2006-2015)
+
+- Affordable Care Act expansion 
+
+## [Other datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EsuPJcqiDPZFu0qJ-JONVLcB1gnp08EAm2LuTPAHVz2yqA?e=IsLJkA)
+
+- County-level weather (1980-2022)
+
+- County-level number of burning wildfires by day (2006-2015)
+
+- State-level medical outcomes
+
