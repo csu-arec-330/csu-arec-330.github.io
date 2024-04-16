@@ -47,7 +47,7 @@ Our first step is to start an R script and load packages. We start by reading in
 
 # load packages
 library(pacman)
-p_load(tidyverse,janitor,sf,tigris,mapview,tidycensus)
+p_load(tidyverse,janitor,sf,tigris,mapview,tidycensus,dplyr)
 
 # read in convenience store location dataset
 store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
@@ -57,7 +57,7 @@ store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/s
 
 ## Converting to a spatial format
 
-The field of geography and geographic information systems (GIS) specialize in understanding and working with geospatial data. Locations are known because of a commonly understood reference system called a Coordinate Reference System (CRS). Think about a graph with $x$ and $y$ dimensions. A point on that graph has a set of coordinates that tell you the location. CRS in GIS can be more complicated because we are thinking about points that exist on a globe (this would be easier if the earth were flat). 
+The fields of geography and geographic information systems (GIS) specialize in understanding and working with geospatial data. Locations are known because of a commonly understood reference system called a Coordinate Reference System (CRS). Think about a graph with $x$ and $y$ dimensions. A point on that graph has a set of coordinates that tell you the location. CRS in GIS can be more complicated because we are thinking about points that exist on a globe (this would be easier if the earth were flat). 
 
 The `store_raw` dataframe has latitude and longitude coordinates (variables in the dataframe). At this point, R considers these numbers like any other numeric variable. There are packages built to understand and work with geospatial data. `sf` stands for simple features and is a commonly used package. We will use it to convert the `store_raw` data into a spatially aware data frame.
 
@@ -71,28 +71,30 @@ store_geo <- store_raw %>%
 
 ```
 
-Notice that we first subset the variables `store_id` and the coordinates. The next line tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326; see <https://epsg.io/>). `store__geo` is a different object than we have worked with before but it looks and usually behaves like a familiar dataframe. You can mutate new variables, arrange, and even summarize, but summarize also performs geospatial operations because you are changing the unit of analysis).
+Notice that we first subset the variables `store_id` and the coordinates. The next line tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326; see <https://epsg.io/>). `store_geo` is a different object than we have worked with before but it looks and usually behaves like a familiar dataframe. You can mutate new variables, arrange, and even summarize, but summarize also performs geospatial operations because you are changing the unit of analysis).
 
 It is often helpful to look at data especially when mapping. R can leverage very powerful mapping tools, but we will just use them to make sure we are doing what we think we are doing. We can use `mapview()` to look at the data. 
 
 ```{r}
 #| eval: false
-#Set the option to make mapview render the points in preview
+# set the option to make mapview render the points in preview
 mapviewOptions(fgb = FALSE)
 
-#map the grocery stores
+# map the grocery stores
 mapview(store_geo)
 
 ```
 
+> After you plot these points, what do you observe about the locations of the stores? What might you want to do with your data to remove outliers? Consider these answers as we move into the next section.
+
 ## Getting Census boundaries
 
-The dataframe `store_raw` contained a lot of meta information but not county. Boundaries for commonly used geometries are available from the US Census and accessible through an *API* to the census repository of these boundaries (called Tiger). The R package `tigris` provides a very convenient API to access them. 
+The dataframe `store_raw` contained a lot of meta information but not county. Boundaries for commonly used geometries (such as county boundaries) are available from the US Census and accessible through an **API** to the Census repository of these boundaries (called Tiger). The R package `tigris` provides a very convenient API to access them. 
 
 ```{r}
 #| eval: false
 
-#get county polygons from tigris (Census)
+# get county polygons from tigris (Census)
 us_co <- tigris::counties(cb=T,class="sf") %>%
   janitor::clean_names() %>%
   st_transform(4326)
@@ -105,7 +107,21 @@ This command extracts the county boundaries for the US and reads them into an sf
 
 The names are capitalized, so I like to clean them and we want to ensure that it is in the same coordinate reference system as our store locations `st_transform()`. Notice that the spatial type of these data are MULTIPOLYGONs rather than POINTs. 
 
-> Use mapview to plot the county layer
+
+### You Do It
+
+Use mapview to plot the county layer.
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+# use mapview to plot the county layer
+mapview(us_co)
+
+```
+
 
 Note that the sf object `us_co` contains information about the counties in the US, including county name, state, the area covered by land and water, and some numeric codes. Since counties in different states can have the same name, a 5-digit county identifier known as a [Federal Information Processing Standard (FIPS)](https://www.smarty.com/articles/county-fips-codes) uniquely identifies counties. This code is labeled `geoid` in the `us_co` object. The first two digits of the fips are the state and the next three identify a county. Larimer county in CO has the FIPS code 08069. This fips code is used to join county-level data.
 
@@ -116,18 +132,41 @@ Spatial data processing tools can understand the shared location of points and p
 ```{r}
 #| eval: false
 
-#join county to store_geo
+# join county to store_geo
 store_co_geo <- st_join(store_geo,us_co,join=st_intersects)
 
 ```
 
 > This operation may take some time depending on the machine you are working on. If working on the server, remember that it is a shared resource, so just be patient.
 
-Notice that `store_co_geo` has all of the observations from `store_geo` and has the corresponding variables from `us_co` attached to it. Now we have county information associated with the store location. We can join the convenience store data to census data or other data at the county level via the 5-digit FIPS. We can also aggregate convenience store information up to the county level (`group_by() %>% summarize()`. 
+Notice that `store_co_geo` has all of the observations from `store_geo` and has the corresponding variables from `us_co` attached to it. Now we have county information associated with the store location. We can join the convenience store data to census data or other data at the county level via the 5-digit FIPS. We can also aggregate convenience store information up to the county level using `group_by() %>% summarize()`. 
+
+### You Do It
+
+Aggregate convenience store information up to the county level using `group_by() %>% summarize()` and plot the number of stores per county using mapview. 
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+# Aggregate store count by county
+store_count_by_county <- store_co_geo %>%
+  group_by(geoid) %>%
+  summarize(store_count = n(), .groups = 'drop')  # Drop groups to prevent regrouping
+
+# Join aggregated data back with county geometries for mapping
+county_store_map <- st_join(us_co,store_count_by_county,join=st_intersects)
+
+# Visualize the result with mapview (showing number of stores per county)
+mapview(county_store_map, zcol = "store_count")
+
+```
+
 
 ## Accessing US Census data
 
-The US Census contains a wealth of data that can be used in analysis. We will access median household income from the American Community Survey, an annual survey conducted to supplement the decenial census, using the R package called `tidycensus` that conveniently wraps the Census API (<https://walker-data.com/tidycensus/>). The census stores many datasets, so we need to identify the one we want to use to represent median household income. Tidycensus provides a utility to find the table we want:
+The US Census contains a wealth of data that can be used in analysis. We will access median household income from the American Community Survey, an annual survey conducted to supplement the decennial census, using the R package called `tidycensus` that conveniently wraps the Census API (<https://walker-data.com/tidycensus/>). The census stores many datasets, so we need to identify the one we want to use to represent median household income. Tidycensus provides a utility to find the table we want:
 
 ```{r}
 #| eval: false
@@ -136,19 +175,20 @@ v22 <- load_variables(2022, "acs5", cache = TRUE)
 
 ```
 
-Use the filter feature in the Rstudio viewer or export the data as a csv that you can open in excel and search the descriptions. In this case, the median household income code is `B19013_001` (the table is B19013 and the variable we want is 001). We can access the data using the function `get_acs()`. 
+Use the filter feature in the Rstudio viewer or export the data as a csv that you can open in excel and search the descriptions. As you can see, there are **many** other demographic tables available in the Census data. In this case, the median household income code is `B19013_001` (the table is B19013 and the variable we want is 001). We can access the data using the function `get_acs()`. 
+
 
 ```{r}
 #| eval: false
 
-#download data from Census API
+# download data from Census API
 census_hhi <- get_acs(geography = "county",  #we want county-level data
                       survey = "acs5", #get data from the 5-year American Community Survey
                       variables = c(medincome = "B19013_001"), #we want median household income from table B19013 
                       state = NULL, #leave this null for the whole US but it could be used to subset states 
                       year = 2022)
 
-#make names lower snake case and keep only the geoid and the estimate (renamed to hhi)
+# make names lower snake case and keep only the geoid and the estimate (renamed to hhi)
 hhi <- census_hhi %>%
   clean_names() %>%
   select(geoid,hhi=estimate)
@@ -164,7 +204,7 @@ We can join median household income to the stores by the common variable, `geoid
 ```{r}
 #| eval: false
 
-#joining on county identifier
+# joining on county identifier
 store_hhi <- store_co_geo %>%
   st_set_geometry(NULL) %>%  #convert sf object back to dataframe by simply stripping out the geometry
   inner_join(.,hhi,by="geoid")
@@ -180,7 +220,7 @@ Now we have the information to count the number of store in each county. We can 
 ```{r}
 #| eval: false
 
-#joining on county identifier
+# joining on county identifier
 county_stores <- store_co_geo %>%
   st_set_geometry(NULL) %>%  #convert sf object back to dataframe by simply stripping out the geometry
   group_by(geoid,county=name,state=stusps) %>%
@@ -198,10 +238,10 @@ We may want to join our data to other data that varies over time. Suppose we are
 ```{r}
 #| eval: false
 
-#read in the transaction level data
+# read in the transaction level data
 shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
 
-#read in the weather data
+# read in the weather data
 weather_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/gridmet_county_daily_2023-2023.csv.gz")
 
 ```
@@ -211,7 +251,7 @@ weather_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs
 ```{r}
 #| eval: false
 
-#joining on county identifier
+# joining on county identifier
 store_sales <- shopper_info %>%
   mutate(measure_date=as_date(date_time)) %>%
   group_by(store_id,measure_date) %>%
@@ -225,10 +265,10 @@ store_sales <- shopper_info %>%
 ```{r}
 #| eval: false
 
-#joining on county identifier
+# joining on county identifier
 store_sales_co <- st_set_geometry(store_co_geo,NULL) %>%
   select(store_id,geoid) %>% #selecting on store_id and geoid only because we need the store id to join and the county id for weather
-  inner_join(store_sales,.,by="store_id") #inner_join here because we only want to consider stores that we have county information for
+  inner_join(store_sales,.,by="store_id") #inner_join here because we only want to consider stores for which we have county information
 ```
  
 We have county-day measurements of weather. However, the data is in long format(as opposed to wide). The unit of observation of `weather_raw` is county-day-weather_measurement, but we need it to be county-day with different measurements as columns. We can reshape this data from long to wide using the function `pivot_wider()`. The next step is to join the weather data with `store_sales_co`. However, the columns we need to join on have different names. We can rename them or tell R how to map the names. Note that the order of the variable name matters - the variable name on the left should be from the dataframe listed first. Also note that the weather data is for the continental US so store locations outside of that will be dropped because of the inner_join().  
@@ -236,15 +276,14 @@ We have county-day measurements of weather. However, the data is in long format(
 ```{r}
 #| eval: false
 
-#reshaping weather data from long to wide
+# reshaping weather data from long to wide
 weather_wide <- weather_raw %>%
   pivot_wider(id_cols = c(county,date),names_from = variable,values_from = value)
 
-#joining weather to store_sales_co
+# joining weather to store_sales_co
 store_sales_weather <- store_sales_co %>%
   inner_join(.,weather_wide, by = c("measure_date"="date","geoid"="county"))
 ```
-
 
 
 
