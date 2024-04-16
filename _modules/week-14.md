@@ -12,9 +12,9 @@ title: "Week 14: Understanding Panel Data Analysis and Panel Data Visualizations
 
 
 <b>Lab Materials:</b> <br>
-
+<!--
 <a  href="/materials/unit_03/week_02/includes/min_wage_data.csv" target="_blank">Download min_wage_data.csv</a> <br> 
-
+-->
  <a  href="/materials/unit_03/week_02/lab_03_week_02.html" target="_blank">Lab Notes</a> <br> <br> 
  
  
