@@ -19,8 +19,6 @@ The goal of this project is for you to apply panel data analysis that we have co
 
 **The question** Choose one of the treatment or exposure datasets and find an outcome to evaluate.  You are posing some form of the question: What is the impact of $x$ (treatment or exposure) on some outcome $y$?
 
-[Treatment or exposure datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/Ene2gKXT9QBMr5Zb383dEeYBmvLFvFZR6PTwxUcGNza_0g?e=gwtVHm)
-
 ### The Data
 
 You are given the treatment or exposure dataset. You are responsible for collecting additional data needed to answer this question. First, you need to identify data on the outcome $y$. Second, you need to identify data on any controls that you may need (e.g., weather).  Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation. You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.
@@ -42,7 +40,7 @@ We expect you to use fixed-effects regression to answer your proposed question. 
 
 5. Present and interpret your results. Use your analysis to clearly answer your research question and tell the audience what to do with the information provided. Provide interpretations of regression results (treatment effect or marginal effect). Use appropriate visualizations to communicate results.
 
-### The Presentation - In Class 5/10/2023 (80 points)
+### The Presentation (80 points)
 
 **Overall presentation expectations:** (20 points total)
 
@@ -87,7 +85,7 @@ Analysis:
 - What are the key take-aways for your intended audience?
 
 
-### The Write-up/Online Submission - Due 11:59 PM 5/11/2023 (40 points)
+### The Write-up/Online Submission (40 points)
 
 You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code. The written portion of the assignment is due later so that you can incorporate feedback that you receive during the oral presentation in class.
 
@@ -100,4 +98,22 @@ Because much of the presentation grade is tied to the content of your report, gr
 3. Does your report adequately address the feedback provided after your presentation? We will assess whether and to what extent you incorporated our suggestions. (10 points)
 
 3. Organization, formatting and structure. Is your report organized, presented in a logical order, with appropriate integration of writing, analysis, and code? (5 points)
+
+### Peer Evaluation (15 points)
+
+Each group will be required to provide feedback for three other groups in the class. This feedback process is an essential component of the project, as it encourages constructive criticism and fosters a collaborative learning environment. To facilitate this, each group will complete a Google Form designed specifically for peer evaluations.
+
+Instructions:
+
+1. **Complete the Google Form:** You must answer every question on the Google Form. The form is structured to cover various aspects of the presentations you will evaluate.
+
+2. **Fair Scoring:** You cannot assign full scores in every category for each group. Be thoughtful and provide a balanced evaluation that reflects the strengths and areas for improvement in each presentation.
+
+3. **Be Respectful:** It's important to be respectful and constructive in your comments.
+
+4. **Impact on Grades:** The peer feedback you provide will not be factored into the group's final grade on the presentation. The purpose of this exercise is to give you an opportunity to critically engage with your peers' work and to offer them valuable insights from an outsider's perspective.
+
+A link to the Google Form is also available on Canvas and must be completed by the due date. Please ensure that you dedicate enough time to watch each assigned presentation thoroughly before completing the evaluation form.
+
+Your participation in the peer evaluation process is highly valued and contributes significantly to the learning experience in this course.
 
