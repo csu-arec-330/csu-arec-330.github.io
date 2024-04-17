@@ -66,6 +66,12 @@ Raster Data
 <!-- Digression on compression -->
 <!-- Census API Key -->
 
+#
+
+![](includes/vector_raster.png){width="70%" height="70%"}
+
+
+
 ## Common Sources of Spatial Data
 
 - Public datasets (e.g., [USGS](https://apps.nationalmap.gov/viewer/), [NASA](https://firms.modaps.eosdis.nasa.gov/usfs/map/#d:24hrs;@-103.2,40.1,5.4z))
@@ -177,13 +183,14 @@ Raster Data
 :::: {.columns style="text-align: left"}
 
 ::: {.column width="50%"}
+- Geocoding and reverse geocoding
+
 - Calculating distance between objects
 
 - Calculating area of polygons
 
 - Spatial joins
 
-- Geocoding and reverse geocoding
 :::
 
 ::: {.column width="50%"}
@@ -192,7 +199,30 @@ Raster Data
 
 ::::
 
-## Spatial joins
+
+## Geocoding and Reverse Geocoding
+
+:::: {.columns style="text-align: left"}
+
+::: {.column width="50%"}
+
+- Geocoding: Converting an address to a set of coordinates 
+
+- Reverse Geocoding: The process from coordinates to address
+
+:::
+
+::: {.column width="50%"}
+
+![](https://geospatialmedia.s3.amazonaws.com/wp-content/uploads/2018/05/geocoding-graph.jpg)
+
+:::
+
+::::
+
+
+
+## Spatial Joins
 
 :::: {.columns style="text-align: left"}
 
@@ -205,13 +235,18 @@ Raster Data
 :::
 
 ::: {.fragment .fade-in fragment-index=2}
-- Points/lines in polygons
+- Point to point
 
 :::
 
 ::: {.fragment .fade-in fragment-index=3}
+- Points/lines to polygons
 
-- Intersecting polygons
+:::
+
+::: {.fragment .fade-in fragment-index=4}
+
+- Polygon to polygon (intersecting polygons)
 :::
 
 :::
@@ -232,25 +267,6 @@ Raster Data
 
 
 
-## Geocoding
-
-:::: {.columns style="text-align: left"}
-
-::: {.column width="50%"}
-
-- Converting an address to a set of coordinates 
-
-- Reverse geocoding is the process from coordinates to address
-
-:::
-
-::: {.column width="50%"}
-
-![](https://geospatialmedia.s3.amazonaws.com/wp-content/uploads/2018/05/geocoding-graph.jpg)
-
-:::
-
-::::
 
 ## Conclusion
 
@@ -262,5 +278,32 @@ Raster Data
 
 # Project 3
 
+## The Question
+
+The goal of this project is for you to apply panel data analysis to answer a real world question. This is also a chance to showcase your creativity and analytic skills, putting everything together that you have learned over the semester. 
+
+Your question for project 3 should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)? 
+
+## The Data
+
+For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
+
+- Option 1: Convenience store data and Demographic data from the US Census
+
+- Option 2: Convenience store data and Weather data from NOAA
+
+## Bringing It Together {.scrollable}
+
+You are posing some form of the question: What is the impact of $x$ (treatment or exposure) on some outcome $y$?
+
+1. Choose one of the two options. 
+
+2. Find an outcome to evaluate. In other words, you need to identify an outcome $y$ from the convenience store data. 
+
+3. Identify any controls that you may need (e.g., weather, population density) -- this (or these) will serve as your treatment or exposure variable(s), $x$.  
+
+- Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation. 
+
+You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.
 
 

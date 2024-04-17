@@ -10,21 +10,36 @@ format:
 The goal of this project is for you to gain experience with fixed-effects panel regression with an emphasis on causal inference. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
 -->
 
-The goal of this project is for you to apply panel data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytic skills. Create something that you are proud to show others.
+The goal of this project is for you to apply panel data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytic skills, putting everything together that you have learned over the semester. Create something that you are proud to show others.
 
 [**Rubric**](project_3_rubric.html)
 
 
 ### The Question
 
-**The question** Choose one of the treatment or exposure datasets and find an outcome to evaluate.  You are posing some form of the question: What is the impact of $x$ (treatment or exposure) on some outcome $y$?
+Your question for project 3 should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)? 
 
 ### The Data
 
-You are given the treatment or exposure dataset. You are responsible for collecting additional data needed to answer this question. First, you need to identify data on the outcome $y$. Second, you need to identify data on any controls that you may need (e.g., weather).  Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation. You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.
+For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
 
-[Additional Datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EsuPJcqiDPZFu0qJ-JONVLcB1gnp08EAm2LuTPAHVz2yqA?e=IsLJkA)
+- Option 1: Convenience store data and Demographic data from the US Census
 
+- Option 2: Convenience store data and Weather data from NOAA
+
+#### Bringing It Together
+
+You are posing some form of the question: What is the impact of $x$ (treatment or exposure) on some outcome $y$?
+
+1. Choose one of the two options. 
+
+2. Find an outcome to evaluate. In other words, you need to identify an outcome $y$ from the convenience store data. 
+
+3. Identify any controls that you may need (e.g., weather, population density) -- this (or these) will serve as your treatment or exposure variable(s), $x$.  
+
+- Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation. 
+
+You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.
 
 ### The Analysis
 

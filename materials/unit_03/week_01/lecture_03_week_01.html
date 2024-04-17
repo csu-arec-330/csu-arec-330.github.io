@@ -370,6 +370,11 @@
 <!-- Digression on compression -->
 <!-- Census API Key -->
 </section>
+<section>
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+<p><img data-src="includes/vector_raster.png" style="width:70.0%;height:70.0%"></p>
+</section>
 <section id="common-sources-of-spatial-data" class="slide level2">
 <h2>Common Sources of Spatial Data</h2>
 <ul>
@@ -377,7 +382,7 @@
 <li><p>Private sources (e.g., <a href="https://www.google.com/maps/@40.5753329,-105.0908151,15z?entry=ttu">Google Maps</a>)</p></li>
 <li><p>Crowdsourced data (e.g., <a href="https://map.purpleair.com/1/mAQI/a10/p604800/cC0#10.56/40.5138/-105.0647">PurpleAir</a>)</p></li>
 </ul>
-</section>
+</section></section>
 <section>
 <section id="understanding-spatial-relationships" class="title-slide slide level1 center">
 <h1>Understanding Spatial Relationships</h1>
@@ -489,18 +494,31 @@
 <div class="columns" style="text-align: left">
 <div class="column" style="width:50%;">
 <ul>
+<li><p>Geocoding and reverse geocoding</p></li>
 <li><p>Calculating distance between objects</p></li>
 <li><p>Calculating area of polygons</p></li>
 <li><p>Spatial joins</p></li>
-<li><p>Geocoding and reverse geocoding</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><img data-src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/sf.png"></p>
 </div>
 </div>
 </section>
+<section id="geocoding-and-reverse-geocoding" class="slide level2">
+<h2>Geocoding and Reverse Geocoding</h2>
+<div class="columns" style="text-align: left">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Geocoding: Converting an address to a set of coordinates</p></li>
+<li><p>Reverse Geocoding: The process from coordinates to address</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="https://geospatialmedia.s3.amazonaws.com/wp-content/uploads/2018/05/geocoding-graph.jpg"></p>
+</div>
+</div>
+</section>
 <section id="spatial-joins" class="slide level2">
-<h2>Spatial joins</h2>
+<h2>Spatial Joins</h2>
 <div class="columns" style="text-align: left">
 <div class="column" style="width:50%;">
 <div class="fragment fade-in" data-fragment-index="1">
@@ -510,12 +528,17 @@
 </div>
 <div class="fragment fade-in" data-fragment-index="2">
 <ul>
-<li>Points/lines in polygons</li>
+<li>Point to point</li>
 </ul>
 </div>
 <div class="fragment fade-in" data-fragment-index="3">
 <ul>
-<li>Intersecting polygons</li>
+<li>Points/lines to polygons</li>
+</ul>
+</div>
+<div class="fragment fade-in" data-fragment-index="4">
+<ul>
+<li>Polygon to polygon (intersecting polygons)</li>
 </ul>
 </div>
 </div><div class="column" style="width:40%;">
@@ -523,19 +546,6 @@
 <p><img data-src="https://gisgeography.com/wp-content/uploads/2019/04/Spatial-Join.png" class="fragment fade-in-then-out" data-fragment-index="1"></p>
 <p><img data-src="https://pygis.io/_images/overlay_intersects.jpg" class="fragment fade-in" data-fragment-index="2"></p>
 </div>
-</div>
-</div>
-</section>
-<section id="geocoding" class="slide level2">
-<h2>Geocoding</h2>
-<div class="columns" style="text-align: left">
-<div class="column" style="width:50%;">
-<ul>
-<li><p>Converting an address to a set of coordinates</p></li>
-<li><p>Reverse geocoding is the process from coordinates to address</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="https://geospatialmedia.s3.amazonaws.com/wp-content/uploads/2018/05/geocoding-graph.jpg"></p>
 </div>
 </div>
 </section>
@@ -547,12 +557,40 @@
 <li><p>Spatial information enables joining to other data (e.g., census)</p></li>
 </ul>
 </section></section>
+<section>
 <section id="project-3" class="title-slide slide level1 center">
 <h1>Project 3</h1>
+
+</section>
+<section id="the-question" class="slide level2">
+<h2>The Question</h2>
+<p>The goal of this project is for you to apply panel data analysis to answer a real world question. This is also a chance to showcase your creativity and analytic skills, putting everything together that you have learned over the semester</p>
+<p>Your question for project 3 should be in the form of: What is the association between <span class="math inline">\(x\)</span> (an explanatory variable) and <span class="math inline">\(y\)</span> (some outcome)?</p>
+</section>
+<section id="the-data" class="slide level2">
+<h2>The Data</h2>
+<p>For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your <span class="math inline">\(y\)</span>, and choose <strong>one</strong> of the two additional datasets (census data or weather data) to choose your <span class="math inline">\(x\)</span>.</p>
+<ul>
+<li><p>Option 1: Convenience store data and Demographic data from the US Census</p></li>
+<li><p>Option 2: Convenience store data and Weather data from NOAA</p></li>
+</ul>
+</section>
+<section id="bringing-it-together" class="slide level2 scrollable">
+<h2>Bringing It Together</h2>
+<p>You are posing some form of the question: What is the impact of <span class="math inline">\(x\)</span> (treatment or exposure) on some outcome <span class="math inline">\(y\)</span>?</p>
+<ol type="1">
+<li><p>Choose one of the two options.</p></li>
+<li><p>Find an outcome to evaluate. In other words, you need to identify an outcome <span class="math inline">\(y\)</span> from the convenience store data.</p></li>
+<li><p>Identify any controls that you may need (e.g., weather, population density) – this (or these) will serve as your treatment or exposure variable(s), <span class="math inline">\(x\)</span>.</p></li>
+</ol>
+<ul>
+<li>Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation.</li>
+</ul>
+<p>You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.</p>
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
