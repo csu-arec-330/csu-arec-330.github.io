@@ -6,49 +6,37 @@ format:
 ---
 ## Problem Set Overview
 
-This problem set is intended to get you started on your third project for the course. You should make a new page on your google site that answers the following:
+This problem set is intended to get you started on your third project for the course. 
 
-1. Who are your Project 3 Team Members?
+### The Question & The Data
 
-2. What is your Project 3 question and "treatment" dataset?  Your question should guide the data collection.  If your question is: what is the effect of $x$ on $y$? Your regression model should be something like $y=\beta x + \varepsilon$.  In other words you need data for $x$ and $y$.
+Your question for project 3 should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)? For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
 
-3. What other data Project 3 data sources will you use (see course materials page on website)? - List your data sources and describe all the fields (variables) you plan to use in your analysis
+- Option 1: Convenience store data and Demographic data from the US Census
 
-4. Show evidence that you have assembled a dataset for analysis
-
-
-## Project 3 Overview
-
-The goal of this project is for you to gain experience with fixed-effects panel regression with an emphasis on causal inference. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
-
-
-### The Question
-
-Your question should be in the form of: what is the effect of $x$ on some outcome, $y$. For this project, you will choose one of four policy or exposure variables (your $x$):
-
-1. County-level weekly drought (1980-2022)
-
-2. State-level and federal minimum wage (1974-2016)
-
-3. County-level daily PM2.5 and smoke presence (2006-2015)
-
-4. Affordable Care Act expansion (2014)
-
-["Treatment" datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/Ene2gKXT9QBMr5Zb383dEeYBmvLFvFZR6PTwxUcGNza_0g?e=gwtVHm)
-
-### The Data
-
-You are responsible for collecting additional data to build your panel dataset and answer this question. Weather and ongoing wildfire data are available here: [Other datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EsuPJcqiDPZFu0qJ-JONVLcB1gnp08EAm2LuTPAHVz2yqA?e=IsLJkA)
-
-There are resources on the course website. Reach out to the professors if you need help or would like to know where to find data.
-
+- Option 2: Convenience store data and Weather data from NOAA
 
 ### Building your panel dataset
 
-Once you have the question and data in mind, you need to build the dataset.  Building the dataset may look different depending on your question, the regression model you intend to estimate, and the availability of data. Start by thinking about the ideal dataset to answer your question. How close can you get with the data available to you?
+Once you have the question in mind, you need to build the dataset. Building the dataset may look different depending on your question and the regression model you intend to estimate. For this problem set, you will practice building datasets using both the Census data and the weather data.
 
+#### Part 1: Using Census data
+1. In the lab, we loaded median income from the American Community Survey (ACS) Census data. For your problem set, find the table associated population density. Then, create a new spatial dataframe that joins population density to the geocoded store data. Only include the data for the 48 contiguous US states.
 
+2. Generate a map in R that plots county-level population density using mapview. Note: You will have to manipulate the data using `group_by()` and `summarize()`.
+
+#### Part 2: Using weather data
+
+1. Following the instructions from the lab, read in the shopper info data and the weather data. Join the two dataframes and create a panel dataset.
+
+2. Group the merged dataset by county and calculate the average monthly rainfall for each county. Then, generate a map in R that plots county-level average rainfall using mapview. Only include the data for the 48 contiguous US states.
+
+### Project 3
+
+1. Who are your Project 3 team members?
+
+2. What is the relationship you want to examine? (Indicate whether you are selecting Option 1 or Option 2, described above.)
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Project 3 Problem Set 1`. Submit the link to your google site webpage in Canvas. You should work with your group but submit a link to your own webpage.
+You should create a new webpage on your Google site titled `Project 3 Problem Set 1`. Your webpage should include the code you used to generate the two maps, the two maps themselves, and response to the questions, where pertinent. Submit the link to your Google site webpage in Canvas. You should work on building your own webpage, but only one member of the group needs to submit the link.

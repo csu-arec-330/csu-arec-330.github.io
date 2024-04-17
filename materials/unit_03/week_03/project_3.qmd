@@ -6,6 +6,9 @@ format:
 ---
 
 ## Overview
+<!--
+The goal of this project is for you to gain experience with fixed-effects panel regression with an emphasis on causal inference. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
+-->
 
 The goal of this project is for you to apply panel data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytic skills. Create something that you are proud to show others.
 

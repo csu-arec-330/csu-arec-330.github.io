@@ -1,54 +1,23 @@
 ---
-title: "Project 3 Problem Set 1: Starting Project 3 and working with panel data"
+title: "Project 3 Problem Set 2: Regression analysis"
 format: 
   html:
     theme: zephyr
 ---
 ## Problem Set Overview
 
-This problem set is intended to get you started on your third project for the course. You should make a new page on your google site that answers the following:
-
-1. Who are your Project 3 Team Members?
-
-2. What is your Project 3 question and "treatment" dataset?  Your question should guide the data collection.  If your question is: what is the effect of $x$ on $y$? Your regression model should be something like $y=\beta x + \varepsilon$.  In other words you need data for $x$ and $y$.
-
-3. What other data Project 3 data sources will you use (see course materials page on website)? - List your data sources and describe all the fields (variables) you plan to use in your analysis
-
-4. Show evidence that you have assembled a dataset for analysis
+This problem set is intended for you to gain experience with fixed-effects panel regression. 
 
 
-## Project 3 Overview
+### Problem Set Instructions
 
-The goal of this project is for you to gain experience with fixed-effects panel regression with an emphasis on causal inference. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
+1. What is your question? (Recall that your question should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?)
 
+2. Why is this question interesting?
 
-### The Question
-
-Your question should be in the form of: what is the effect of $x$ on some outcome, $y$. For this project, you will choose one of four policy or exposure variables (your $x$):
-
-1. County-level weekly drought (1980-2022)
-
-2. State-level and federal minimum wage (1974-2016)
-
-3. County-level daily PM2.5 and smoke presence (2006-2015)
-
-4. Affordable Care Act expansion (2014)
-
-["Treatment" datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/Ene2gKXT9QBMr5Zb383dEeYBmvLFvFZR6PTwxUcGNza_0g?e=gwtVHm)
-
-### The Data
-
-You are responsible for collecting additional data to build your panel dataset and answer this question. Weather and ongoing wildfire data are available here: [Other datasets](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EsuPJcqiDPZFu0qJ-JONVLcB1gnp08EAm2LuTPAHVz2yqA?e=IsLJkA)
-
-There are resources on the course website. Reach out to the professors if you need help or would like to know where to find data.
-
-
-### Building your panel dataset
-
-Once you have the question and data in mind, you need to build the dataset.  Building the dataset may look different depending on your question, the regression model you intend to estimate, and the availability of data. Start by thinking about the ideal dataset to answer your question. How close can you get with the data available to you?
-
+3. Show evidence that you have assembled a dataset for analysis.
 
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Project 3 Problem Set 1`. Submit the link to your google site webpage in Canvas. You should work with your group but submit a link to your own webpage.
+You should create a new webpage on your Google site titled `Project 3 Problem Set 2`. Submit the link to your Google site webpage in Canvas. You should work on building your own webpage, but only one member of the group needs to submit the link.
