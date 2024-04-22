@@ -17,10 +17,13 @@ title: "Week 14: Understanding Panel Data Analysis and Panel Data Visualizations
 -->
  <a  href="/materials/unit_03/week_02/lab_03_week_02.html" target="_blank">Lab Notes</a> <br> <br> 
  
- 
+<b>Problem Set Materials - Due Friday, May 3 by 11:59 PM:</b> <br>
+
+<a  href="/materials/unit_02/week_02/ps_03_week_02.html" target="_blank">Project 3 Problem Set 2 Instructions</a> <br><br>
+
 <b>Project Materials:</b> <br>
 
-<b>Video Presentation - Due Thursday, May 02 (10:00 am)</b> <br>
+<b>Video Presentation - Due Monday, May 06 (10:00 am)</b> <br>
 <a  href="/materials/unit_03/week_03/project_3.html" target="_blank">Project 3 Instructions</a> <br> 
 
 <a  href="/materials/unit_03/week_03/project_3_rubric.html" target="_blank">Project 3 Rubric</a> <br> <br> 

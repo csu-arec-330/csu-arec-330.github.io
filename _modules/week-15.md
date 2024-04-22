@@ -11,12 +11,15 @@ title: "Week 15: Panel Data Analysis Project"
 
 
 <b>Lab Materials:</b> <br>
-Each student pair will be asked questions about their presentation during class. <br> <br>
+Lab Notes <br> <br>
 
 
 <b>Project Materials:</b> <br>
 
-<b>Video Presentation - Due Thursday, May 02 (10:00 am)</b> <br>
+<b>Video Presentation - Due Monday, May 06 (10:00 am)</b> <br>
+
+Note: We will meet on Tuesday, May 07 (4:15 pm) in Nutrien 103 for student presentation summaries. <br><br>
+
 <b>Report - Due Thursday, May 09 (11:59 pm)</b> <br>
 
 <a  href="/materials/unit_03/week_03/project_3.html" target="_blank">Project 3 Instructions</a> <br> 
