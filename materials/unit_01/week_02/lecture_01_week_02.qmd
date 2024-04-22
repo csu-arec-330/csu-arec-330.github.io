@@ -114,8 +114,6 @@ data.frame(x=seq.int(0,10,1),
 
 ::::
 
-## Shiny App
-
 
 
 ## Regression analysis {.scrollable}

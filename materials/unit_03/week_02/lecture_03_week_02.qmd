@@ -13,6 +13,8 @@ execute:
 
 ## Agenda 
 
+Linear Regression.
+
 Knowledge check.
 
 Differences-in-differences regressions: Intuition.
@@ -20,8 +22,6 @@ Differences-in-differences regressions: Intuition.
 Differences-in-differences regressions: Assumptions.
 
 Fixed effects regressions: Intuition.
-
-
 
 <!-- example of big text fit to slide width -->
 
@@ -35,6 +35,215 @@ Fixed effects regressions: Intuition.
 <!-- ::: {.column width="60%"} -->
 <!-- ::: -->
 <!-- :::: -->
+
+
+
+<!-- ============================= -->
+<!-- (4-22-2024) Lauren moved material in from Week 06 (Lecture 01 Week 02) For next year, plan is to re-do Week 06 lecture to be more about forecasting and decomposition. I left the content in there for Week 05 (commented out) for now. -->
+<!-- ============================= -->
+
+
+# Linear Regression
+
+# 
+::: {.r-fit-text }
+**The objective:** <br>
+We want to understand the <br> 
+relationship between two variables
+:::
+#
+
+::: {.r-fit-text }
+**The simple solution:** <br> 
+Assume the relationship is linear <br> 
+and estimate the "average" trend
+:::
+
+
+## Linear regression: The intuition {.scrollable}
+
+Imagine you have been tracking carrot prices for several years and you want to make a prediction about what carrot prices will look like in the future.
+
+You plotted your data on carrot prices, and you want to know: Does the price of carrots relate to how many months have passed since the financial crisis?
+
+::: {.notes}
+The financial crisis was a major event that we can expect had a significant effect on food prices. We want to understand if carrot prices increase (or decrease) as more time passes, as this can indicate changes in the cost of production.
+
+:::
+
+
+
+## Linear regression: The intuition {.scrollable}
+
+We can use statistical tools to determine the relationship between "Months since financial crisis" and "Carrot price" to answer questions that cannot always be determined by simply looking at a data plot.
+
+The tool is linear regression, or *regression analysis*.
+
+::: {.notes}
+
+:::
+
+
+
+## Equation of a line {.scrollable}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Quick review: The equation of a line plotting the relationship between $y$ and $x$ is,
+$$y=mx+b $$
+
+Which variable represents the slope?
+
+Which variable represents the intercept?
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-width: 5
+
+library(ggplot2,quietly = T)
+data.frame(x=seq.int(0,10,1),
+           y=seq(3,23,length.out=11)) |>
+  ggplot(aes(x,y)) + 
+    geom_line() +
+    scale_y_continuous(breaks = seq.int(0,24,2),limits = c(0,24)) +
+    scale_x_continuous(breaks = seq.int(0,10,2)) 
+```
+:::
+
+::::
+
+## Shiny App
+
+
+
+## Regression analysis {.scrollable}
+
+**Regression analysis** is a tool that examines the average relationship between two (or more) variables.
+
+It helps us understand:
+
+- How an outcome, or the "dependent" variable, (carrot price) changes when one or more "independent" variables (months since the financial crisis) change.
+
+<!-- - What factors predict a change in an outcome, given a change in an independent variable. -->
+
+We use regression analysis to:
+
+- Forecast future values of the dependent variable (e.g., what carrot prices might be in the future, given past responses to economic events).
+
+- Evaluate the strength of each predictor, i.e., which independent variables are most strongly correlated with changes in carrot prices.
+
+::: {.notes}
+
+How an outcome changes in response to an ind. var change: Since the model is specifying the relationship between independent (RHS vars) and an outcome (y or dependent vars), new observed independent vars + the model can predict new outcomes.
+
+:::
+
+## Regression analysis, applied {.scrollable}
+
+We use linear regression, along with our data, to answer:
+
+1.  Are carrot prices, *on average*, increasing or decreasing?
+
+2.  How much of the observed variation in carrot prices can be explained by a simple time-trend line?
+
+3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
+
+## The Ordinary Least Squares Regression 
+
+Ordinary Least Squares (OLS) is the most common estimation method for linear models.
+
+For a good reason: As long as your model satisfies the certain assumptions, you're getting the BEST possible estimates.
+
+BEST = accurate (unbiased) + most precise (best)
+
+Tableau, Excel, and other programs use OLS to estimate trend lines.
+
+## OLS: Unbiased {.scrollable}
+
+What do we mean by "unbiased"?
+
+- predictions are correct on average
+
+- the average value of errors (the distance between observations and predictions) equals zero
+
+# 
+![](includes/estimates_bias.png){width="100%"}
+
+::: {style="font-size: 80%;"}
+*Source:* [Statistics by Jim](https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/)
+
+:::
+
+## OLS: Best {.scrollable}
+
+What do we mean by "best"?
+
+- predictions have the smallest possible variance
+
+- larger variance = larger probability that our estimates are further away from the correct/true/observed value
+
+# 
+![](includes/estimates_precision.png){width="100%"}
+
+::: {style="font-size: 80%;"}
+*Source:* [Statistics by Jim](https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/)
+
+:::
+
+
+## The OLS regression equation {.scrollable}
+
+The following equation represents the mathematical relationship between an independent variable and a dependent variable. 
+![](includes/reg_eq.png){width="80%"}
+
+The $\beta_1$ coefficient:
+
+- Acts as the "weight" that the independent variable has in predicting the dependent variable.
+
+- Tells you how much the dependent variable is expected to increase (or decrease) when the independent variable increases by one unit.
+
+The $\beta_0$ coefficient:
+
+- This is our intercept term.
+
+- It is the value of the dependent variable when all the independent variables are zero.
+
+- It represents the expected value of the outcome you're interested in predicting when all of your predictor variables are zero.
+
+::: {.notes}
+Beta 1: If you're looking at the relationship between hours studied (independent variable) and exam score (dependent variable), the coefficient of the hours studied tells you how many points you'd expect the exam score to increase for every additional hour studied. If the coefficient is 2, it means that for each additional hour studied, the exam score is expected to increase by 2 points, holding all else constant.
+
+The coefficient essentially acts as a weight that quantifies the impact of one unit change in the independent variable on the dependent variable.
+
+Beta 0: In the same study examining the relationship between hours studied and test scores, the intercept would indicate the predicted test score for a student who did not study at all (zero hours). If the intercept is 50, it suggests that a student is expected to score 50 on the test without studying, assuming the model holds true and all other factors are constant.
+:::
+
+## OLS Estimation {.scrollable}
+
+**Problem:** 
+
+We need to estimate $\beta_0$ and $\beta_1$ using observed values of $Y_i$ and $X_i$
+
+**Solution:** 
+
+$$
+\widehat{\beta}_0 = \bar{Y} - \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}\cdot \bar{X}
+$$
+
+$$
+\widehat{\beta}_1 = \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}
+$$
+
+
+
+<!-- ============================= -->
+<!-- Beginning of slides from 2023 -->
+<!-- ============================= -->
 
 ## Knowledge Check 1 {.scrollable}
 

@@ -1,5 +1,5 @@
 ---
-title: "Week 5: Intro to time series"
+title: "Week 5: Intro to Time Series"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
