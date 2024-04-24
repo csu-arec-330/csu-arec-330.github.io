@@ -1,5 +1,5 @@
 ---
-title: "Week 14: Understanding Panel Data Analysis and Panel Data Visualizations"
+title: "Week 14: Intro to Regression"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
