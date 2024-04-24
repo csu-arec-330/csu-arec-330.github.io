@@ -1,5 +1,5 @@
 ---
-title: "Week 14: <br>Understanding Panel Data Analysis <br>"
+title: "Week 14: <br>Regression Analysis and Hypothesis Testing <br>"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -9,19 +9,14 @@ format:
     # center: TRUE
 execute:
   echo: true
+
 ---
 
 ## Agenda 
 
-Linear Regression.
+Linear Regression
 
-Knowledge check.
-
-Differences-in-differences regressions: Intuition.
-
-Differences-in-differences regressions: Assumptions.
-
-Fixed effects regressions: Intuition.
+Hypothesis testing
 
 <!-- example of big text fit to slide width -->
 
@@ -51,8 +46,8 @@ Fixed effects regressions: Intuition.
 We want to understand the <br> 
 relationship between two variables
 :::
-#
 
+#
 ::: {.r-fit-text }
 **The simple solution:** <br> 
 Assume the relationship is linear <br> 
@@ -62,26 +57,18 @@ and estimate the "average" trend
 
 ## Linear regression: The intuition {.scrollable}
 
-Imagine you have been tracking carrot prices for several years and you want to make a prediction about what carrot prices will look like in the future.
+Imagine you're trying to figure out a relationship between two things. 
 
-You plotted your data on carrot prices, and you want to know: Does the price of carrots relate to how many months have passed since the financial crisis?
+For instance, how the number of hours you study affects your score on a test. 
 
-::: {.notes}
-The financial crisis was a major event that we can expect had a significant effect on food prices. We want to understand if carrot prices increase (or decrease) as more time passes, as this can indicate changes in the cost of production.
+Intuitively, you might think that the more you study, the better your score. 
 
-:::
-
-
-
-## Linear regression: The intuition {.scrollable}
-
-We can use statistical tools to determine the relationship between "Months since financial crisis" and "Carrot price" to answer questions that cannot always be determined by simply looking at a data plot.
-
-The tool is linear regression, or *regression analysis*.
+Linear regression helps us quantify this relationship.
 
 ::: {.notes}
 
 :::
+
 
 
 
@@ -103,591 +90,361 @@ Which variable represents the intercept?
 ::: {.column width="50%"}
 
 ```{r}
-#| fig-width: 5
+#| fig-width: 6
 
 library(ggplot2,quietly = T)
 data.frame(x=seq.int(0,10,1),
-           y=seq(3,23,length.out=11)) |>
+           y=seq(2,22,length.out=11)) |>
   ggplot(aes(x,y)) + 
     geom_line() +
     scale_y_continuous(breaks = seq.int(0,24,2),limits = c(0,24)) +
-    scale_x_continuous(breaks = seq.int(0,10,2)) 
+    scale_x_continuous(breaks = seq.int(0,10,2)) +
+    theme_bw(base_size = 15)
 ```
 :::
 
 ::::
 
-## Shiny App
 
-
-
-## Regression analysis {.scrollable}
-
-**Regression analysis** is a tool that examines the average relationship between two (or more) variables.
-
-It helps us understand:
-
-- How an outcome, or the "dependent" variable, (carrot price) changes when one or more "independent" variables (months since the financial crisis) change.
-
-<!-- - What factors predict a change in an outcome, given a change in an independent variable. -->
-
-We use regression analysis to:
-
-- Forecast future values of the dependent variable (e.g., what carrot prices might be in the future, given past responses to economic events).
-
-- Evaluate the strength of each predictor, i.e., which independent variables are most strongly correlated with changes in carrot prices.
-
-::: {.notes}
-
-How an outcome changes in response to an ind. var change: Since the model is specifying the relationship between independent (RHS vars) and an outcome (y or dependent vars), new observed independent vars + the model can predict new outcomes.
-
-:::
-
-## Regression analysis, applied {.scrollable}
-
-We use linear regression, along with our data, to answer:
-
-1.  Are carrot prices, *on average*, increasing or decreasing?
-
-2.  How much of the observed variation in carrot prices can be explained by a simple time-trend line?
-
-3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
-
-## The Ordinary Least Squares Regression 
-
-Ordinary Least Squares (OLS) is the most common estimation method for linear models.
-
-For a good reason: As long as your model satisfies the certain assumptions, you're getting the BEST possible estimates.
-
-BEST = accurate (unbiased) + most precise (best)
-
-Tableau, Excel, and other programs use OLS to estimate trend lines.
-
-## OLS: Unbiased {.scrollable}
-
-What do we mean by "unbiased"?
-
-- predictions are correct on average
-
-- the average value of errors (the distance between observations and predictions) equals zero
-
-# 
-![](includes/estimates_bias.png){width="100%"}
-
-::: {style="font-size: 80%;"}
-*Source:* [Statistics by Jim](https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/)
-
-:::
-
-## OLS: Best {.scrollable}
-
-What do we mean by "best"?
-
-- predictions have the smallest possible variance
-
-- larger variance = larger probability that our estimates are further away from the correct/true/observed value
-
-# 
-![](includes/estimates_precision.png){width="100%"}
-
-::: {style="font-size: 80%;"}
-*Source:* [Statistics by Jim](https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/)
-
-:::
-
-
-## The OLS regression equation {.scrollable}
-
-The following equation represents the mathematical relationship between an independent variable and a dependent variable. 
-![](includes/reg_eq.png){width="80%"}
-
-The $\beta_1$ coefficient:
-
-- Acts as the "weight" that the independent variable has in predicting the dependent variable.
-
-- Tells you how much the dependent variable is expected to increase (or decrease) when the independent variable increases by one unit.
-
-The $\beta_0$ coefficient:
-
-- This is our intercept term.
-
-- It is the value of the dependent variable when all the independent variables are zero.
-
-- It represents the expected value of the outcome you're interested in predicting when all of your predictor variables are zero.
-
-::: {.notes}
-Beta 1: If you're looking at the relationship between hours studied (independent variable) and exam score (dependent variable), the coefficient of the hours studied tells you how many points you'd expect the exam score to increase for every additional hour studied. If the coefficient is 2, it means that for each additional hour studied, the exam score is expected to increase by 2 points, holding all else constant.
-
-The coefficient essentially acts as a weight that quantifies the impact of one unit change in the independent variable on the dependent variable.
-
-Beta 0: In the same study examining the relationship between hours studied and test scores, the intercept would indicate the predicted test score for a student who did not study at all (zero hours). If the intercept is 50, it suggests that a student is expected to score 50 on the test without studying, assuming the model holds true and all other factors are constant.
-:::
-
-## OLS Estimation {.scrollable}
-
-**Problem:** 
-
-We need to estimate $\beta_0$ and $\beta_1$ using observed values of $Y_i$ and $X_i$
-
-**Solution:** 
-
-$$
-\widehat{\beta}_0 = \bar{Y} - \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}\cdot \bar{X}
-$$
-
-$$
-\widehat{\beta}_1 = \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}
-$$
-
-
-
-<!-- ============================= -->
-<!-- Beginning of slides from 2023 -->
-<!-- ============================= -->
-
-## Knowledge Check 1 {.scrollable}
-
-In lab you used data to estimate the following D-i-D regression:
-$$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
-Which parameter gave you the effect of a minimum wage increase on employment?
-
-A.  $\beta$ 
-
-B.  $\gamma_t$ 
-
-C.  $\delta_i$ 
-
-D.  $\varepsilon_{it}$
-
-## Knowledge Check 2 {.scrollable}
-
-In lab you used data to estimate the following D-i-D regression:
-$$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
-Which parameter controlled for factors that may have impacted employment across time?
-
-A.  $\beta$ 
-
-B.  $\gamma_t$ 
-
-C.  $\delta_i$ 
-
-D.  $\varepsilon_{it}$
-
-## Knowledge Check 3 {.scrollable}
-
-In lab you used data to estimate the following D-i-D regression:
-$$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
-Which parameter controlled for factors that may have impacted employment across counties?
-
-A.  $\beta$ 
-
-B.  $\gamma_t$ 
-
-C.  $\delta_i$ 
-
-D.  $\varepsilon_{it}$
-
-## Discussion
-
-In lab you used data to estimate the following D-i-D regression:
-
-$$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$
-
-Which parameters controlled for factors that may have impacted employment across time and space?
-
-**How do these parameters "control" for these factors?**
-
-**How does including these parameters change your regression results and interpretation?**
-
-## Differences-in-Differences (DiD): Intuition
-
-The simplest version of the DiD estimator comes from a two-period, two-group analysis.
-
-Consider our previous analysis of the employment effects of minimum wage increases, simplified to fit this context:
-
-- In 2019, Colorado's minimum wage was $11.10 per hour. 
-  
-- In 2020, Colorado's minimum wage increased to $12.00 per hour.
-
-# {background-image="includes/co_emp1.png" background-size="contain"}
-
-
-## DiD: Intuition Knowledge Check 1
-
-Given this information, what effect did the minimum wage increase have on employment?
-
-A.  It increased employment
-
-B.  It decreased employment
-
-C.  It had no effect on employment
-
-D.  Unsure/Unclear effect
-
-## DiD: Intuition Knowledge Check 2
-
-What type of data did I show you in the previous bar graph?
-
-A.  Panel data
-
-B.  Time series data
-
-C.  Cross-sectional data
-
-D.  Repeated cross-sectional data
-
-## DiD: Intuition
-
-Consider our previous analysis of the employment effects of minimum wage increases, simplified to fit this context:
-
-- In 2019, Colorado's minimum wage was $11.10 per hour. 
-  
-- In 2020, Colorado's minimum wage increased to $12.00 per hour.
-
-- In 2019 and 2020, Wyoming's minimum wage was constant at $7.25 per hour.
-
-# {background-image="includes/co_emp2.png" background-size="contain"}
-
-## DiD: Intuition Knowledge Check 3
-
-Given this information, what effect did the minimum wage increase have on employment?
-
-A.  It increased employment
-
-B.  It decreased employment
-
-C.  It had no effect on employment
-
-D.  Unsure/Unclear effect
-
-## DiD: Intuition Knowledge Check 4
-
-What type of data did I show you in the previous bar graph?
-
-A.  Panel data
-
-B.  Time series data
-
-C.  Cross-sectional data
-
-D.  Repeated cross-sectional data
-
-## DiD: Intuition
-
-Consider our previous analysis of the employment effects of minimum wage increases, simplified to fit this context:
-
-- In 2019, Colorado's minimum wage was $11.10 per hour. 
-  
-- In 2020, Colorado's minimum wage increased to $12.00 per hour.
-
-- In 2019 and 2020, Wyoming's minimum wage was constant at $7.25 per hour.
-
-# {background-image="includes/co_emp3.png" background-size="contain"}
-
-## DiD: Intuition Knowledge Check 5
-
-Given this information, what effect did the minimum wage increase have on employment?
-
-A.  It increased employment
-
-B.  It decreased employment
-
-C.  It had no effect on employment
-
-D.  Unsure/Unclear effect
-
-## DiD: Intuition Knowledge Check 6
-
-What type of data did I show you in the previous bar graph?
-
-A.  Panel data
-
-B.  Time series data
-
-C.  Cross-sectional data
-
-D.  Repeated cross-sectional data
-
-## DiD: Intuition
-
-How can we use these numbers to estimate the effect of the minimum wage increase?
-
-![](includes/did1.png)
-
-## DiD: Intuition
-
-How can we use these numbers to estimate the effect of the minimum wage increase?
-
-![](includes/did2.png)
-
-## DiD: Intuition
-
-How can we use these numbers to estimate the effect of the minimum wage increase?
-
-![](includes/did3.png)
-
-## DiD: Intuition
-
-How can we use these numbers to estimate the effect of the minimum wage increase?
-
-![](includes/did4.png)
-
-The minimum wage increase caused employment to decrease by 37,760.
-
-Does this seem right to you?
-
-## DiD: The importance of transforming data
-
-How can we use these numbers to estimate the effect of the minimum wage increase?
-
-![](includes/did5.png)
-
-
-## DiD: The importance of transforming data
-
-How can we use these numbers to estimate the effect of the minimum wage increase?
-
-![](includes/did5.png)
-
-The minimum wage increase caused employment to decrease by 0.7%
-
-## DiD: Comparison to regression results
-
-Consider the following dataset (named df) based on this information:
-
-![](includes/Rdata.png)
-
-## DiD: Comparison to regression results
-
-Then suppose we run the following regression:
+## Studying and Test Scores
 
 ```{r}
-#| eval: false
-# regression using binary treatment indicators
-mlm <- lm(employment ~ treated + treat_group + treat_time, data=df)
+#| echo: false
+
+
+library(pacman)
+
+# Load ggplot2 package
+p_load(tidyverse,modelsummary)
+
+len=150
+# Set seed for reproducibility
+set.seed(20)
+
+# Generate data
+hours_studied <- rnorm(len,mean = 25,sd=18) #1:len  # Students studying between 1 to 50 hours
+hours_studied <- hours_studied[between(hours_studied,0,100)]
+#hours_studied <- ifelse(hours_studied>50,50,hours_studied)
+test_scores <- 40 + .8 * hours_studied + rnorm(length(hours_studied), mean = 0, sd = 15)  # Basic linear model with noise
+
+# Combine into a data frame
+data <- data.frame(hours_studied, test_scores) %>%
+  filter(between(test_scores,0,100))
 ```
 
-<style>
-span.small {
-  font-size: smaller;
-}
-</style>
 
-::: {.fragment}
-<p style = "padding: 0px; margin: 0px;"><span class="small"> Note that this is equivalent to our earlier regression equation:</span></p>
-<p style = "padding: 0px; margin: 0px;"><span class="small"> $$ Y_{it} = \beta \cdot \text{treated}_{it} + \gamma_t + \delta_i + \varepsilon_{it}$$</span></p>
-:::
-::: {.fragment} 
-<p style = "padding: 0px; margin: 20px;"><span class="small">where $Y_{it}$ is employment in state $i$ and year $t$, </span></p>
-
-<p style = "padding: 0px; margin: 20px;"><span class="small">$\text{treated}_{it}$ is an indicator variable for observations in the treated state (Colorado) in the treatment year (2020),</span></p>
-
-<p style = "padding: 0px; margin: 20px;"><span class="small">and $\gamma_t$ and $\delta_i$ are indicators for each state and year in the sample.</span></p>
-
-:::
-
-
-## DiD: Comparison to regression results
-
-::: columns
-::: {.column width="50%"}
-
-![](includes/did6.jpg)
-
-::: 
+:::: {.columns}
 
 ::: {.column width="50%"}
 
-|            |   Results   |
-|:-----------|:-----------:|
-|(Intercept) | 282455.000  |
-|treated     | -37760.000  |
-|treat_group | 2740565.000 |
-|treat_time  |  -6067.000  |
-|   |      |
+We observe hours studied and test scores
+
+Always plot your data
+
+
 :::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-width: 6
+
+p_load(GGally)
+
+# Basic scatter plot with ggplot
+ggpairs(data) 
+  
+```
+
+:::
+
 ::::
 
-What do each of the coefficients correspond with?
+## Scatter plot
 
-**Why?**
 
-## DiD: Comparison to regression results
+:::: {.columns}
 
-What if we run the regression using logged employment?
+::: {.column width="50%"}
+
+We observe hours studied and test scores
+
+Always plot your data
+
+What is the apparent relationship?
+
+Slope? Intercept?
+
+$$y=mx+b $$
+
+:::
+
+::: {.column width="50%"}
 
 ```{r}
-#| eval: false
-# convert to logs
-df$lemp <- log(df$employment)
+#| echo: false
+#| fig-width: 6
 
-# run a regression using logged employment
-mlm <- lm(lemp ~ treated + treat_group + treat_time,
-          data=df)
+# Basic scatter plot with ggplot
+p1 <- ggplot(data, aes(x = hours_studied, y = test_scores)) +
+  geom_point(alpha=.6) +  # Add points for scatter plot
+  #geom_smooth(method = "lm", se = FALSE, col = "blue") +  # Add linear regression line
+  labs(subtitle = "Relationship between Hours Studied and Test Scores",
+       x = "Hours Studied",
+       y = "Test Scores") +
+  theme_bw(base_size = 15)  # Use a minimal theme for aesthetics
+
+p1
 ```
-::: columns
-::: {.column width="50%"}
 
-![](includes/did7.png)
-
-::: 
-
-::: {.column width="50%"}
-
-|            |   Results   |
-|:-----------|:------:|
-|(Intercept) | 12.551 |
-|treated     | 0.007 |
-|treat_group | 2.370  |
-|treat_time  | -0.022 |
-|   |      |
 :::
+
 ::::
 
 #
 
 ::: {.r-fit-text}
-What if we have data from... 
-
-more than two time periods?
-
-more than two groups?
+How does OLS estimate regression coefficients? <br>
+Shiny App
 :::
 
-# {background-image="includes/co_emp4.png" background-size="contain"}
 
-## Our DiD table becomes less helpful
+## Estimate Regression {.scrollable}
 
-![](includes/did_ex.png)
 
-## Our dataset gets larger
+:::: {.columns}
 
-![](includes/did_ex3.png)
-
-## But our regression is exactly the same!
+::: {.column width="50%"}
 
 ```{r}
-#| eval: false
-# convert states and years to factor variables
-df$state <- as.factor(df$state)
-df$year <- as.factor(df$year)
+#| echo: true
+
+model1 <- lm(test_scores ~ hours_studied,data)
+
+m_out <- modelsummary(model1,stars = TRUE,coef_rename = c("(Intercept)"="Intercept","hours_studied"="Hours Studied"),gof_map = c("nobs", "r.squared"))
+
+m_out
 ```
 
-Note that this effectively changes our dataset to this:
-
-![](includes/did_ex2.png)
-
-## But our regression is exactly the same!
-
-```{r}
-#| eval: false
-# convert states and years to factor variables
-df$state <- as.factor(df$state)
-df$year <- as.factor(df$year)
-
-# convert to logs
-df$lemp <- log(df$employment)
-
-# run a regression using logged employment
-mlm <- lm(lemp ~ treated + state + year,
-          data=df)
-
-# generate regression table
-modelsummary(mlm,statistic = "std.error", output = "markdown")
-```
-
-
-## How can we interpret these results? {.smaller}
-
-
-|             |  Results   |
-|:------------|:---------:|
-|(Intercept)  |  14.905   |
-|             |  (0.005)  |
-|treated      |   0.017   |
-|             |  (0.008)  |
-|stateWyoming |  -2.363   |
-|             |  (0.005)  |
-|year2019     |   0.013   |
-|             |  (0.005)  |
-|year2020     |  -0.013   |
-|             |  (0.007)  |
-|year2021     |  -0.013   |
-|             |  (0.007)  |
-|             |  |
-
-# DiD Assumptions for Causality
-
-# {background-image="includes/co_emp4.png" background-size="contain"}
-
-## Assumption 1: Parallel trends
-
-This assumption states that prior to the intervention (treatment or policy), the treatment and control units had similar trends in the outcome unit.
-
-**Why is this important?**
-
-# {background-image="includes/did_ex4.png" background-size="contain"}
-
-## Assumption 1: Parallel trends
-
-This assumption states that prior to the intervention (treatment or policy), the treatment and control units had similar trends in the outcome unit.
-
-**Why is this important?**
-
-Satisfying this assumption indicates that the non-treatment group is a good control for the treatment group.
-
-## Assumption 2: The Intervention
-
-This might seem obvious, but we also need to assume that the intervention we are studying is the **only** thing that changed **for treated units in the post-treatment time period**.
-
-## Opinion Question (Open Ended)
-
-![](includes/co_emp4.png)
-
-**Did anything else change between 2019 and 2020?**
-
-## Opinion Question (Open Ended)
-
-![](includes/co_emp4.png)
-
-**Is this problematic for causally identifying the effect of the minimum wage increase?**
-
-## Fixed Effects (FE) Regressions: Intuition
-
-In lab last week you studied the effect of fuel moisture on the prevalence of wildfires using the following regression:
-
-$$ fires_{it} = \beta \cdot fm_{it} + \gamma_t + \delta_i +\varepsilon_{it} $$
-
-::: {.fragment}
-This equation looks identical to our difference in differences equation. 
-
-The only difference is that here we have a continuous "treatment" (fm) rather than binary.
 :::
 
-## Fixed Effects (FE) Regressions: Intuition
+::: {.column width="50%"}
 
-In lab last week you studied the effect of fuel moisture on the prevalence of wildfires using the following regression:
+```{r}
+#| echo: false
+#| fig-width: 6
 
-$$ fires_{it} = \beta \cdot fm_{it} + \gamma_t + \delta_i +\varepsilon_{it} $$
+# Basic scatter plot with ggplot
+p1 +  # Add points for scatter plot
+  geom_smooth(method = "lm", se = FALSE, col = "blue")   # Add linear regression line
+  
+```
 
-What are the role of the fixed effects $\gamma_t$ and $\delta_i$ in this regression?
+:::
 
-**Conceptually, what are these parameters doing?**
+::::
 
-<section data-background-iframe="https://public.tableau.com/views/fires_fe_ex/county_ttl_fires_year?:language=en-US&:showVizHome=no&:embed=true"
-          data-background-interactive>
-</section>
 
-## 
+## True model vs estimates
 
-## Fixed Effects (FE) Regressions: Intuition
+$$scores=40 + 0.8 * hours + \varepsilon ;~~ \varepsilon \sim N(0,15)$$
+```{r}
+#| echo: false
 
-In lab last week you studied the effect of fuel moisture on the prevalence of wildfires using the following regression:
 
-$$ fires_{it} = \beta \cdot fm_{it} + \gamma_t + \delta_i +\varepsilon_{it} $$
+m_out
+```
 
-What are the role of the fixed effects $\gamma_t$ and $\delta_i$ in this regression?
+## How well does our model fit? {.scrollable}
 
-**Conceptually, what are these parameters doing?**
+R^2^ is a statistic used to measures the proportion of variance in the dependent variable that is predictable from the independent variables
 
-We are **demeaning** the outcome and predictor variables so that we are identifying effects based on variation *within* our units. [Still confused by FEs?](https://ds4ps.org/pe4ps-textbook/docs/p-040-fixed-effects.html)
+$$ R^2 = \frac{Explained ~~ Variation}{Total ~~ Variation}  $$
+
+The value of R^2^ ranges from 0 to 1:
+
+- 0 means that the model explains none of the variability of the response data around its mean.
+
+- 1 means that the model explains all the variability of the response data around its mean.
+
+::: {.notes}
+
+Intuitive Explanation
+Imagine you are a teacher trying to understand the performance of your students on a test. You suspect that several factors like hours of study, attendance, and participation in class could influence test scores.
+
+Here’s how R2  fits into this scenario:
+
+Total Variation: First, look at the variation in test scores among all students. Some score high, some low, and many in the middle. This spread of scores is the "total variation" in your dataset.
+
+Explained Variation: Now, suppose you create a statistical model that attempts to predict these scores based on the factors you think might affect them (study hours, attendance, etc.). After applying your model, some of this total variation in test scores will be "explained" by the factors in your model. For example, perhaps students who study more and attend regularly score higher.
+
+Unexplained Variation: There's almost always some part of the variation that your model can't explain. Maybe some students do well on tests because they're just good test-takers or they have a strong background in the subject that wasn’t measured.
+
+:::
+
+## Putting the coefficients on trial
+
+Did we observe our estimate by chance or can we trust it?
+
+**The Hypotheses:**
+
+- Null Hypothesis (H0): posits that the regression coefficient is equal to zero - no effect of the independent variable (e.g., hours studied) on the dependent variable (e.g., test scores). 
+
+- Alternative Hypothesis (H1): posits that the coefficient is not zero - there is an effect, and the amount of studying does influence test scores.
+
+
+## Testing the hypothesis
+
+We use a t-test to determine whether the regression coefficients are significantly different from zero.
+
+The t-statistic is a ratio. The numerator is the difference between the estimated coefficient and zero (or other null hypothesis). The denominator is the standard error of the coefficient. 
+
+
+$$ t =  \frac{\beta - 0}{se} =  \frac{0.783 - 0}{0.09} = 8.7 $$
+
+## Student's t-distribution 
+
+The shaded area is the probability that we observe the value by chance (p-value)
+
+```{r}
+#| echo: false
+
+# Set degrees of freedom
+df <- nrow(data)-2
+
+# Create a sequence of t-values
+t_values <- seq(-5, 5, length.out = 300)
+
+# Compute the density of these t-values
+t_density <- dt(t_values, df)
+
+# Create a data frame for plotting
+plot_data <- data.frame(t_values, t_density)
+
+
+# Plotting the t-distribution
+ggplot(plot_data, aes(x = t_values, y = t_density)) +
+  geom_line() +  # Draw the density line
+  geom_area(data = plot_data %>% filter(t_values > 1.96), fill = "blue", alpha = 0.4) +  
+  geom_area(data = plot_data %>% filter(t_values < -1.96), fill = "blue", alpha = 0.4) +  
+  geom_vline(xintercept = 0,linetype="dashed") +
+  labs(title = paste0("Density of t-distribution (df = ",df,")"),
+       x = "t value",
+       y = "Density") +
+  theme_minimal(base_size = 15)  # Use a minimal theme
+
+```
+
+
+## Student's t-distribution 
+
+Locating our t-statistic on the density of the t-distribution quantifies the probability that we observe our result by chance (p-val = 1.199041e-14)
+
+```{r}
+#| echo: false
+
+# Set degrees of freedom
+df <- nrow(data)-2
+
+# Create a sequence of t-values
+t_values <- seq(-5, 10, length.out = 300)
+
+# Compute the density of these t-values
+t_density <- dt(t_values, df)
+
+# Create a data frame for plotting
+plot_data <- data.frame(t_values, t_density)
+
+
+# Plotting the t-distribution
+ggplot(plot_data, aes(x = t_values, y = t_density)) +
+  geom_line() +  # Draw the density line
+  geom_point(aes(x=8.7,y=0)) +
+  geom_area(data = plot_data %>% filter(t_values > 1.96), fill = "blue", alpha = 0.4) +  
+  geom_area(data = plot_data %>% filter(t_values < -1.96), fill = "blue", alpha = 0.4) +  
+  geom_vline(xintercept = 0,linetype="dashed") +
+  labs(title = paste0("Density of t-distribution (df = ",df,")"),
+       x = "t value",
+       y = "Density") +
+  theme_minimal(base_size = 15)  # Use a minimal theme
+
+
+```
+
+## 95% Confidence Interval
+
+Reverse engineer the p-value of 0.05 to find the test statistic (1.96)
+
+
+$$ 1.96 =  \frac{\beta - 0}{se}  $$
+
+Then rearrange the t-statistics calculation
+
+$$ upper = \beta + 1.96*se ; ~~~ lower = \beta - 1.96*se$$
+
+## Inference - back to the trial
+
+The p-val = 0.00000000000001199041 suggests the probability of observing the relationship between studying and test score by chance is small.
+
+Formally, we reject the null hypothesis H0 (no relationship) at an alpha=.05
+
+Our test does not prove that H1 is correct, but it provides strong evidence
+
+## Interpreting regression coefficients
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+
+
+m_out
+```
+
+:::
+
+::: {.column width="50%"}
+
+A student that does not study is expected to get a score of 40.389
+
+A student's score should improve by 0.78 points per hour of additional studying
+
+How many hours should a student study to get 80 points or better?
+
+:::
+
+::::
+
+## Predicting new values
+
+We can use the coefficient estimates to calculate expected scores from new students based on study time
+
+$$scores=40 + 0.78 * hours $$
+
+## Multivariate regression
+
+You can add additional independent variables (aka regressors)
+
+$$ y=\alpha + \beta_1 X_1 + \beta_2 X_2 + ... +\varepsilon $$
+
+The $\beta$'s are **conditional** on the other covariates
+
+Inference is similar
+
+
+## Summary
+
+Regression is a tool to estimate relationships between variables (measurements)
+
+When assumptions are met, the regression provides the best estimates of the relationship
+
+Hypothesis testing helps us understand the quality of our estimates
+
+
+
+
+
+
