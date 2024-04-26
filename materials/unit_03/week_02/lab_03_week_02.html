@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 13 Lab: Introduction to Panel Data Analysis</title>
+<title>Week 13 Lab: Introduction to Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,8 +17,42 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -34,6 +68,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="lab_03_week_02_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="lab_03_week_02_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -45,21 +81,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link active" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
-  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
+  <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#lab-overview" id="toc-lab-overview" class="nav-link" data-scroll-target="#lab-overview">Lab overview</a></li>
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data processing</a>
   <ul class="collapse">
-  <li><a href="#difference-in-differences" id="toc-difference-in-differences" class="nav-link" data-scroll-target="#difference-in-differences">Difference in differences</a>
-  <ul class="collapse">
-  <li><a href="#treatment-and-control-groups" id="toc-treatment-and-control-groups" class="nav-link" data-scroll-target="#treatment-and-control-groups">Treatment and Control Groups</a></li>
-  <li><a href="#staggered-treatment-times" id="toc-staggered-treatment-times" class="nav-link" data-scroll-target="#staggered-treatment-times">Staggered Treatment Times</a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda">EDA</a></li>
   </ul></li>
-  <li><a href="#fixed-effects-with-marginal-changes" id="toc-fixed-effects-with-marginal-changes" class="nav-link" data-scroll-target="#fixed-effects-with-marginal-changes">Fixed effects with marginal changes</a>
-  <ul class="collapse">
-  <li><a href="#maps-with-pages-visualizing-spatial-data-over-time" id="toc-maps-with-pages-visualizing-spatial-data-over-time" class="nav-link" data-scroll-target="#maps-with-pages-visualizing-spatial-data-over-time">Maps with Pages (visualizing spatial data over time)</a></li>
-  <li><a href="#lines-with-distributions-visualizing-heterogeneity-over-time" id="toc-lines-with-distributions-visualizing-heterogeneity-over-time" class="nav-link" data-scroll-target="#lines-with-distributions-visualizing-heterogeneity-over-time">Lines with Distributions (visualizing heterogeneity over time)</a></li>
-  </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  </ul></li>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression">Regression</a></li>
   </ul>
 </nav>
 </div>
@@ -67,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 13 Lab: Introduction to Panel Data Analysis</h1>
+<h1 class="title">Week 13 Lab: Introduction to Regression</h1>
 </div>
 
 
@@ -90,83 +118,198 @@ ul.task-list li input[type="checkbox"] {
 <div style="font-size: 1.5em">
 <p>This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8</p>
 </div>
-<section id="learning-objectives-tableau" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
+<section id="learning-objectives-r" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
 <ul>
-<li><p>Create visualizations for DiD analyses that account for:</p>
-<ul>
-<li><p>Treatment and control groups</p></li>
-<li><p>Staggered treatment times</p></li>
-</ul></li>
-<li><p>Create visualizations for panel data analysis:</p>
-<ul>
-<li><p>Maps and pages</p></li>
-<li><p>Visualizing temporal variation</p></li>
-</ul></li>
+<li>Estimate regression in R</li>
 </ul>
 </section>
-<section id="tableau" class="level1">
-<h1>Tableau</h1>
-<p>Panel data is a type of longitudinal data that involves the collection of observations on the same individuals or units over time. This makes panel data different from cross-sectional data, which involves the collection of observations on different individuals or units at a single point in time, and time series data, which involves the collection of observations on the same variable over time.</p>
-<p>The objective of this lab is to show you how to create effective visualizations for your panel data analysis. We have touched on how to create all of these visualizations in prior labs, so today our focus will be less on the procedures for creating visualizations and more on ideas for tailoring these vizzes to panel data.</p>
-<section id="difference-in-differences" class="level2">
-<h2 class="anchored" data-anchor-id="difference-in-differences">Difference in differences</h2>
-<p>The classic DiD visualization looks something like this:</p>
-<p><img src="includes/did_figex1.png" class="img-fluid"></p>
-<p>Or this:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="includes/did_figex2.png" class="figure-img"></p>
-</figure>
+<section id="lab-overview" class="level2">
+<h2 class="anchored" data-anchor-id="lab-overview">Lab overview</h2>
+<p>The objective of this lab is to answer the question: Do fuel stations (i.e., convenience stores) charge more for fuel when they are closer to major roadways in the US?</p>
+<blockquote class="blockquote">
+<p>What do you think? Can you formulate a hypothesis?</p>
+</blockquote>
+<p>We will answer this question by estimating the following regression:</p>
+<p><span class="math display">\[ price_i = \alpha + \beta ~ dist_i + \varepsilon_i \]</span></p>
+<p>where <span class="math inline">\(price\)</span> is the average price of all fuel sold at store <span class="math inline">\(i\)</span> in July 2023, <span class="math inline">\(dist_i\)</span> is the distance between the store and its nearest major roadway (e.g., interstate, US/State highway) in kilometers, <span class="math inline">\(\alpha\)</span> is the intercept, and <span class="math inline">\(\beta\)</span> is the slope.</p>
+<blockquote class="blockquote">
+<p>What is the conceptual interpretation of <span class="math inline">\(\beta\)</span>?</p>
+</blockquote>
+</section>
+<section id="data-processing" class="level2">
+<h2 class="anchored" data-anchor-id="data-processing">Data processing</h2>
+<p>We will continue using the convenience store data that we have been using, but we will focus on the fuel products. <strong>You do not need to run the following code. It is here as a reference</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This script constructs a dataset of convenience stores, fuel prices, and distance from major roads and estimates a regression</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse,modelsummary,sf,progress)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the transaction level data</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>shopper_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to classify fuel and not fuel based on descriptions</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>classify_fuel <span class="ot">&lt;-</span> <span class="cf">function</span>(description) {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if the description is not NA and is a character</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(description) <span class="sc">&amp;&amp;</span> <span class="fu">is.character</span>(description)) {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert description to lower case for case-insensitivity</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    description_lower <span class="ot">&lt;-</span> <span class="fu">tolower</span>(description)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define keywords associated with fuel</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    fuel_keywords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"unld"</span>,<span class="st">"unlead"</span>, <span class="st">"unleaded"</span>, <span class="st">"regular"</span>, <span class="st">"mid"</span>, <span class="st">"premium"</span>, <span class="st">"diesel"</span>, </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"gas"</span>, <span class="st">"ethanol"</span>, <span class="st">"e85"</span>, <span class="st">"fuel"</span>, <span class="st">"octane"</span>, <span class="st">"ultra"</span>, <span class="st">"prem"</span>,<span class="st">"super"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check for the presence of fuel-related keywords or a number in the description</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">sapply</span>(fuel_keywords, grepl, <span class="at">x =</span> description_lower)) <span class="sc">||</span> <span class="fu">grepl</span>(<span class="st">"[0-9]"</span>, description_lower)) {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="st">"fuel"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="st">"not fuel"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"not fuel"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>store_gas <span class="ot">&lt;-</span> shopper_info <span class="sc">%&gt;%</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(gtin)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gas =</span> <span class="fu">sapply</span>(pos_description, classify_fuel)) <span class="sc">%&gt;%</span> <span class="co">#classify all observations as fuel or not</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gas<span class="sc">==</span><span class="st">"fuel"</span>) <span class="sc">%&gt;%</span> <span class="co">#remove non-fuel observations</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(store_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">unit_price=</span><span class="fu">mean</span>(unit_price,<span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> <span class="co">#calculate the average price of fuel items sold at the location</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(unit_price,<span class="fl">2.5</span>,<span class="dv">5</span>)) <span class="co">#based on a distribution of the data, remove fuel prices less than $2.50 and above $5.00</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the distribution of price data</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(store_gas,aes(x=unit_price)) + geom_histogram()</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="do">####################################################</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we need to calculate the distance between each store and its nearest major road</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="do">####################################################</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co"># read in convenience store location dataset</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>store_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz"</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co">#join the store-level fuel price back to the raw store dataset to attach the coordinates</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>store_gas_geo <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(store_gas,<span class="fu">select</span>(store_raw,store_id,latitude,longitude),<span class="at">by=</span><span class="st">"store_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords=</span><span class="fu">c</span>(<span class="st">"longitude"</span>,<span class="st">"latitude"</span>),<span class="at">crs=</span><span class="fu">st_crs</span>(<span class="dv">4326</span>))</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">#Load all US primary roads - downloaded from https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&amp;layergroup=Roads</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>us_roads <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"tl_2021_us_primaryroads/tl_2021_us_primaryroads.shp"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co">#testing</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>df<span class="ot">=</span>store_gas_geo[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="co">#Find nearest primary road</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">st_nearest_feature</span>(df,us_roads)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculate distance from store to nearest primary road</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df,<span class="at">dist=</span><span class="fu">as.numeric</span>(<span class="fu">st_distance</span>(df,us_roads[nd,],<span class="at">by_element =</span> T))<span class="sc">/</span><span class="dv">1000</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(df,<span class="at">col.region=</span><span class="st">"red"</span>) <span class="sc">+</span> <span class="fu">mapview</span>(us_roads[nd,],<span class="at">col.region=</span><span class="st">"blue"</span>)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="co">#split store gas into chunks to process and cache</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the number of groups needed</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>group_size <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>number_of_groups <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">nrow</span>(store_gas_geo) <span class="sc">/</span> group_size)</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="co">#Create cache directory if it doesn't exist</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="st">"rd_cache"</span>)) <span class="fu">dir.create</span>(<span class="st">"rd_cache"</span>)</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co">#Create progress bar</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>pb <span class="ot">&lt;-</span> progress_bar<span class="sc">$</span><span class="fu">new</span>(<span class="at">total =</span> number_of_groups)</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="co">#Loop through chunks first calculating the nearest road to each store, then calculating the distance to that road and caching the results</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>store_gas_geo <span class="sc">%&gt;%</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>(<span class="at">gid=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>number_of_groups, <span class="at">each=</span>group_size, <span class="at">length.out=</span><span class="fu">nrow</span>(.))) <span class="sc">%&gt;%</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">walk</span>(<span class="cf">function</span>(df){</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    pb<span class="sc">$</span><span class="fu">tick</span>()</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Find nearest primary road</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>    nd <span class="ot">&lt;-</span> <span class="fu">st_nearest_feature</span>(df,us_roads)</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Calculate distance from store to nearest primary road</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(df,<span class="at">dist=</span><span class="fu">as.numeric</span>(<span class="fu">st_distance</span>(df,us_roads[nd,],<span class="at">by_element =</span> T))<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>      <span class="fu">saveRDS</span>(<span class="fu">paste0</span>(<span class="st">"rd_cache/dist"</span>,df<span class="sc">$</span>gid[<span class="dv">1</span>],<span class="st">".rds"</span>))</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in all the cached data and append (bind) into a single dataframe</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>store_dist <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"rd_cache"</span>,<span class="at">full.names =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(readRDS) <span class="sc">%&gt;%</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>  data.table<span class="sc">::</span><span class="fu">rbindlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="co">#Cache a dataframe with store</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>store_dist <span class="sc">%&gt;%</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span> <span class="co">#convert from sf to dataframe</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>gid) <span class="sc">%&gt;%</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(<span class="st">"store_dist.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>By now you are all well equiped to create these line graphs in Tableau, but there are two nuances to creating these that are worth discussion.</p>
-<section id="treatment-and-control-groups" class="level3">
-<h3 class="anchored" data-anchor-id="treatment-and-control-groups">Treatment and Control Groups</h3>
-<p>Let’s connect to the minimum wage and employment dataset you used in lab last week – <code>min_wage_data.csv</code>. Notice that there is already a variable called <code>treat</code> and recall that this variable is equal to 1 if the county is in a state with a minimum wage increase and 0 otherwise.</p>
-<ol type="1">
-<li><p>Create a line graph that shows logged employment in treated and non-treated states. (Hint: use the <code>treat</code> field to assign colors to your lines.)</p></li>
-<li><p>Are there any meaningful differences in average employment across treated and non-treated areas?</p></li>
-</ol>
-</section>
-<section id="staggered-treatment-times" class="level3">
-<h3 class="anchored" data-anchor-id="staggered-treatment-times">Staggered Treatment Times</h3>
-<ol start="3" type="1">
-<li><p>Now recall that different states implemented minimum wage increases at different points in time. What variable could we use to see if effects of the minimum wage increases are more apparent if we separate treated units by the timing or type of treatment? Create a line graph that shows logged employment by the treatment timing.</p></li>
-<li><p>A downside to line graphs is that they don’t capture variation in employment well. Let’s try creating box and whisker plots so that this variation is more clear. Open a new sheet, select <code>year</code> and <code>Lemp</code> and go to <code>Show Me</code> -&gt; Box and whisker</p></li>
-<li><p>Change <code>Lemp</code> to a <code>Dimension</code>, then drag <code>year</code> to columns shelf and assign it as <code>Discrete</code>.</p></li>
-<li><p>Note that box and whisker plots show the median of the distribution, but we might also be interested in the means. How can you overlay this box and whisker plot with a line that shows the average value of <code>Lemp</code>?</p></li>
-<li><p>Finally, let’s do this separately by treatment year. Drag <code>First.Treat</code> to the <code>Pages</code> card and change it to a dimension. Note that the title of your worksheet can now automatically change as you change pages. Let’s change the title to read <code>Distribution of Annual Employment For States with &lt;Page Name&gt;</code>, then let’s edit the aliases of the First.Treat variable to be more useful for this title. We can change 0 to say <code>No Minimum Wage Increase</code>, 2004 to say <code>Minimum Wage Increase in 2004</code>, etc.</p></li>
-</ol>
-</section>
-</section>
-<section id="fixed-effects-with-marginal-changes" class="level2">
-<h2 class="anchored" data-anchor-id="fixed-effects-with-marginal-changes">Fixed effects with marginal changes</h2>
-<p>This section will cover how to visualize changes in variables over space and time. We will use the fires and weather data you used in last week’s lab. You can download the data from <a href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi">this folder</a>. The folder contains two files: 1) <code>fires_303.csv.gz</code> and 2) <code>weather_303.csv.gz</code>. <code>fires_303.csv.gz</code> contains three variables: 1) a unique county identifier, <code>county_fips</code>, 2) the observation date <code>measure_date</code>, and 3) the number of wildfire burning on that date in that county, <code>fires</code>. <code>weather_303.csv.gz</code> contains the same county and date information along with 1000-hour fuel moisture measured in percent from 1 to 40.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<section id="maps-with-pages-visualizing-spatial-data-over-time" class="level3">
-<h3 class="anchored" data-anchor-id="maps-with-pages-visualizing-spatial-data-over-time">Maps with Pages (visualizing spatial data over time)</h3>
-<p>Connect to the fires dataset and create a map that shows the total number of fires in each county. Now assign the <code>Year</code> variable as your pages and give your map a useful title (that changes with the year).</p>
-<p>Note that you might want to play with different maximum values of your fires variable so that differences across time are more apparent. Try this now by going to Color -&gt; Edit Colors -&gt; Advanced -&gt; and choose a reasonable top copding value.</p>
-</section>
-<section id="lines-with-distributions-visualizing-heterogeneity-over-time" class="level3">
-<h3 class="anchored" data-anchor-id="lines-with-distributions-visualizing-heterogeneity-over-time">Lines with Distributions (visualizing heterogeneity over time)</h3>
-<p>Create a line graph that shows average fires across years in the sample.</p>
-<p>Next, create a new variable that counts the total number of (logged) fires in a county each year by creating a new calculated field called <code>Total Fires</code> using the equation <code>{FIXED [year],[county_fips]: SUM(LN([Fires]))}</code>.</p>
-<p>Create a circle plot of this variable by dragging it to the rows shelf to the right of avg. fires. Drag the total fires varaible again to the <code>Size</code> icon, and change it to <code>count</code>. You should now have circles that reflect the number of counties with the indicated number of fires. You may want to filter on this variable to remove the large number of zeros.</p>
+<section id="eda" class="level3">
+<h3 class="anchored" data-anchor-id="eda">EDA</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This script constructs a dataset of convenience stores, fuel prices, and distance from major roads and estimates a regression</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse,modelsummary,GGally)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>store_dist <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/store_dist.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s briefly explore the data:</p>
+<ul>
+<li>summary statistics</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(unit_price <span class="sc">+</span> dist <span class="sc">~</span> Mean <span class="sc">+</span> sd <span class="sc">+</span> min <span class="sc">+</span> max,<span class="at">data=</span>store_dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>plot distributions</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(<span class="at">data=</span>store_dist,<span class="at">columns =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s remove any stores that are further than 40km from a major road.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep only stores within 40 km of major road</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>store_dist_40 <span class="ot">&lt;-</span> store_dist <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dist<span class="sc">&lt;</span><span class="dv">40</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>This lab covered different ways of visualizing panel data. There are of course many other avenues you can take to visualize your data and I encourage you to think outside the box for your final project. Dream of your ideal visualization and I can probably help you put it together!</p>
-</section>
+<section id="regression" class="level2">
+<h2 class="anchored" data-anchor-id="regression">Regression</h2>
+<p>Now, we can estimate a regression model to test our hypothesis. The <code>lm()</code> function (linear model) estimates a linear regression. <code>lm</code> requires a formula and a dataset. The formula is similar to how we would write the equation using the <code>~</code> as the equals sign. <code>lm</code> understands that it needs to estimate coefficients based on this model. We specify <code>data=store_dist_40</code> to indicate which dataset we want it to use to estimate the model coefficients.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate regression</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(unit_price <span class="sc">~</span> dist,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">data=</span>store_dist_40) </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>summary()</code> behaves differently depending on the argument. In this case, it will print out the regression results including the coefficient estimates, standard errors, t-values and p-values.</p>
+<blockquote class="blockquote">
+<p>Interpret the coefficients. What does the (Intercept) mean? What does the dist coefficient mean?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>How credible are the estimates? What are the results of the statistical hypothesis test?</p>
+</blockquote>
+<p>You can export your regression results in a nicer looking table using the function <code>modelsummary()</code>. See the documentation for additional options to include additional information like p-values or confidence intervals.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#output the regression table</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(reg1)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(reg1,<span class="at">statistic =</span> <span class="st">"conf.int"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>1000-Hour Fuel Moisture (1000-hr FM) represents the modeled moisture content in dead fuels in the 3 to 8 inch diameter class and the layer of the forest floor about four inches below the surface. The 1000-hr FM value is based on a running 7-day computed average using length of day, daily temperature and relative humidity extremes (maximum and minimum values) and the 24-hour precipitation duration values. Values can range from 1 to 40 percent (<a href="https://gacc.nifc.gov/nrcc/predictive/fuels_fire-danger/psa_component_glossary.htm">source</a>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main>
+</main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -195,9 +338,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -262,6 +419,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

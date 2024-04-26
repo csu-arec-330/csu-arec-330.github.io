@@ -1,5 +1,5 @@
 ---
-title: "Week 13 Lab: Introduction to Panel Data Analysis"
+title: "Week 13 Lab: Introduction to Regression"
 format: 
   html:
     theme: zephyr
@@ -15,80 +15,240 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 
 
 
-## Learning Objectives Tableau
+## Learning Objectives R
 
-- Create visualizations for DiD analyses that account for: 
+- Estimate regression in R
 
-  - Treatment and control groups
+
+## Lab overview
+
+The objective of this lab is to answer the question: Do fuel stations (i.e., convenience stores) charge more for fuel when they are closer to major roadways in the US? 
+
+> What do you think? Can you formulate a hypothesis?
+
+We will answer this question by estimating the following regression:
+
+$$ price_i = \alpha + \beta ~ dist_i + \varepsilon_i $$
+
+where $price$ is the average price of all fuel sold at store $i$ in July 2023, $dist_i$ is the distance between the store and its nearest major roadway (e.g., interstate, US/State highway) in kilometers, $\alpha$ is the intercept, and $\beta$ is the slope. 
+
+> What is the conceptual interpretation of $\beta$?
+
+
+
+
+## Data processing
+
+We will continue using the convenience store data that we have been using, but we will focus on the fuel products. **You do not need to run the following code. It is here as a reference** 
+
+
+
+```{r}
+#| eval: false
+
+#This script constructs a dataset of convenience stores, fuel prices, and distance from major roads and estimates a regression
+
+library(pacman)
+p_load(tidyverse,modelsummary,sf,progress)
+
+# read in the transaction level data
+shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
+
+
+# Function to classify fuel and not fuel based on descriptions
+classify_fuel <- function(description) {
+  # Check if the description is not NA and is a character
+  if (!is.na(description) && is.character(description)) {
+    # Convert description to lower case for case-insensitivity
+    description_lower <- tolower(description)
+    
+    # Define keywords associated with fuel
+    fuel_keywords <- c("unld","unlead", "unleaded", "regular", "mid", "premium", "diesel", 
+                       "gas", "ethanol", "e85", "fuel", "octane", "ultra", "prem","super")
+    
+    # Check for the presence of fuel-related keywords or a number in the description
+    if (any(sapply(fuel_keywords, grepl, x = description_lower)) || grepl("[0-9]", description_lower)) {
+      return("fuel")
+    } else {
+      return("not fuel")
+    }
+  } else {
+    return("not fuel")
+  }
+}
+
+store_gas <- shopper_info %>%
+  filter(is.na(gtin)) %>%
+  mutate(gas = sapply(pos_description, classify_fuel)) %>% #classify all observations as fuel or not
+  filter(gas=="fuel") %>% #remove non-fuel observations
+  group_by(store_id) %>% 
+  summarise(unit_price=mean(unit_price,na.rm = T)) %>% #calculate the average price of fuel items sold at the location
+  ungroup() %>%
+  filter(between(unit_price,2.5,5)) #based on a distribution of the data, remove fuel prices less than $2.50 and above $5.00
+
+#plot the distribution of price data
+#ggplot(store_gas,aes(x=unit_price)) + geom_histogram()
+
+
+####################################################
+#Now we need to calculate the distance between each store and its nearest major road
+####################################################
+
+# read in convenience store location dataset
+store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
+
+#join the store-level fuel price back to the raw store dataset to attach the coordinates
+store_gas_geo <- inner_join(store_gas,select(store_raw,store_id,latitude,longitude),by="store_id") %>%
+  st_as_sf(coords=c("longitude","latitude"),crs=st_crs(4326))
+
+
+#Load all US primary roads - downloaded from https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Roads
+us_roads <- st_read("tl_2021_us_primaryroads/tl_2021_us_primaryroads.shp") %>%
+  st_transform(4326)
+
+
+
+#testing
+df=store_gas_geo[1:5,]
+#Find nearest primary road
+nd <- st_nearest_feature(df,us_roads)
+#Calculate distance from store to nearest primary road
+df <- mutate(df,dist=as.numeric(st_distance(df,us_roads[nd,],by_element = T))/1000)
+
+library(mapview)
+mapview(df,col.region="red") + mapview(us_roads[nd,],col.region="blue")
+
+#split store gas into chunks to process and cache
+# Calculate the number of groups needed
+group_size <- 100
+number_of_groups <- ceiling(nrow(store_gas_geo) / group_size)
+
+#Create cache directory if it doesn't exist
+if(!dir.exists("rd_cache")) dir.create("rd_cache")
+
+#Create progress bar
+pb <- progress_bar$new(total = number_of_groups)
+
+#Loop through chunks first calculating the nearest road to each store, then calculating the distance to that road and caching the results
+store_gas_geo %>%
+  group_split(gid=rep(1:number_of_groups, each=group_size, length.out=nrow(.))) %>%
+  walk(function(df){
+    pb$tick()
+    #Find nearest primary road
+    nd <- st_nearest_feature(df,us_roads)
+    
+    #Calculate distance from store to nearest primary road
+    mutate(df,dist=as.numeric(st_distance(df,us_roads[nd,],by_element = T))/1000) %>%
+      saveRDS(paste0("rd_cache/dist",df$gid[1],".rds"))
+    
+  })
+
+
+#Read in all the cached data and append (bind) into a single dataframe
+store_dist <- list.files("rd_cache",full.names = TRUE) %>%
+  map(readRDS) %>%
+  data.table::rbindlist() %>%
+  st_as_sf()
+
+#Cache a dataframe with store
+store_dist %>%
+  st_set_geometry(NULL) %>% #convert from sf to dataframe
+  select(-gid) %>%
+  write_csv("store_dist.csv")
+
+```
+
+
+### EDA
+
+
+```{r}
+#| eval: false
+
+#This script constructs a dataset of convenience stores, fuel prices, and distance from major roads and estimates a regression
+
+library(pacman)
+p_load(tidyverse,modelsummary,GGally)
+
+# Read in data
+store_dist <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_dist.csv")
+
+
+
+```
+
+Let's briefly explore the data:
+
+- summary statistics
+
+```{r}
+#| eval: false
+
+datasummary(unit_price + dist ~ Mean + sd + min + max,data=store_dist)
+
+```
+
+- plot distributions
+
+```{r}
+#| eval: false
+
+ggpairs(data=store_dist,columns = 2:3)
+
+```
+
+
+Let's remove any stores that are further than 40km from a major road.
+
+
+```{r}
+#| eval: false
+
+# keep only stores within 40 km of major road
+store_dist_40 <- store_dist %>%
+  filter(dist<40)
+
+
+```
+
+## Regression
+
+Now, we can estimate a regression model to test our hypothesis. The `lm()` function (linear model) estimates a linear regression. `lm` requires a formula and a dataset. The formula is similar to how we would write the equation using the `~` as the equals sign. `lm` understands that it needs to estimate coefficients based on this model. We specify `data=store_dist_40` to indicate which dataset we want it to use to estimate the model coefficients.
+
+
+```{r}
+#| eval: false
+
+# Estimate regression
+reg1 <- lm(unit_price ~ dist,
+           data=store_dist_40) 
   
-  - Staggered treatment times
+summary(reg1)
 
-- Create visualizations for panel data analysis: 
+```
 
-  - Maps and pages 
+The `summary()` behaves differently depending on the argument. In this case, it will print out the regression results including the coefficient estimates, standard errors, t-values and p-values. 
 
-  - Visualizing temporal variation
+> Interpret the coefficients. What does the (Intercept) mean? What does the dist coefficient mean?
+
+> How credible are the estimates? What are the results of the statistical hypothesis test?
 
 
-# Tableau 
 
-Panel data is a type of longitudinal data that involves the collection of observations on the same individuals or units over time. This makes panel data different from cross-sectional data, which involves the collection of observations on different individuals or units at a single point in time, and time series data, which involves the collection of observations on the same variable over time.
+You can export your regression results in a nicer looking table using the function `modelsummary()`. See the documentation for additional options to include additional information like p-values or confidence intervals.
 
-The objective of this lab is to show you how to create effective visualizations for your panel data analysis. We have touched on how to create all of these visualizations in prior labs, so today our focus will be less on the procedures for creating visualizations and more on ideas for tailoring these vizzes to panel data. 
+```{r}
+#| eval: false
 
-## Difference in differences
+#output the regression table
+modelsummary(reg1)
 
-The classic DiD visualization looks something like this:
+modelsummary(reg1,statistic = "conf.int")
 
-![](includes/did_figex1.png){width=40%,fig-align="center"}
+```
 
-Or this:
 
-![](includes/did_figex2.png){height=60%, fig-align="center"}
 
-By now you are all well equiped to create these line graphs in Tableau, but there are two nuances to creating these that are worth discussion.
-
-### Treatment and Control Groups
-
-Let's connect to the minimum wage and employment dataset you used in lab last week -- `min_wage_data.csv`. Notice that there is already a variable called `treat` and recall that this variable is equal to 1 if the county is in a state with a minimum wage increase and 0 otherwise.
-
-1. Create a line graph that shows logged employment in treated and non-treated states. (Hint: use the `treat` field to assign colors to your lines.)
-
-2. Are there any meaningful differences in average employment across treated and non-treated areas?
-
-### Staggered Treatment Times
-
-3. Now recall that different states implemented minimum wage increases at different points in time. What variable could we use to see if effects of the minimum wage increases are more apparent if we separate treated units by the timing or type of treatment? Create a line graph that shows logged employment by the treatment timing.
-
-4. A downside to line graphs is that they don't capture variation in employment well. Let's try creating box and whisker plots so that this variation is more clear. Open a new sheet, select `year` and `Lemp` and go to `Show Me` -> Box and whisker
-   
-5. Change `Lemp` to a `Dimension`, then drag `year` to columns shelf and assign it as `Discrete`.
-
-6. Note that box and whisker plots show the median of the distribution, but we might also be interested in the means. How can you overlay this box and whisker plot with a line that shows the average value of `Lemp`?
-
-7. Finally, let's do this separately by treatment year. Drag `First.Treat` to the `Pages` card and change it to a dimension. Note that the title of your worksheet can now automatically change as you change pages. Let's change the title to read `Distribution of Annual Employment For States with <Page Name>`, then let's edit the aliases of the First.Treat variable to be more useful for this title. We can change 0 to say `No Minimum Wage Increase`, 2004 to say `Minimum Wage Increase in 2004`, etc. 
-
-## Fixed effects with marginal changes
-
-This section will cover how to visualize changes in variables over space and time. We will use the fires and weather data you used in last week's lab. You can download the data from [this folder](https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi). The folder contains two files: 1) `fires_303.csv.gz` and 2) `weather_303.csv.gz`.  `fires_303.csv.gz` contains three variables: 1) a unique county identifier, `county_fips`, 2) the observation date `measure_date`, and 3) the number of wildfire burning on that date in that county, `fires`.  `weather_303.csv.gz` contains the same county and date information along with 1000-hour fuel moisture measured in percent from 1 to 40.^[1000-Hour Fuel Moisture (1000-hr FM) represents the modeled moisture content in dead fuels in the 3 to 8 inch diameter class and the layer of the forest floor about four inches below the surface. The 1000-hr FM value is based on a running 7-day computed average using length of day, daily temperature and relative humidity extremes (maximum and minimum values) and the 24-hour precipitation duration values. Values can range from 1 to 40 percent ([source](https://gacc.nifc.gov/nrcc/predictive/fuels_fire-danger/psa_component_glossary.htm)).] 
-
-### Maps with Pages (visualizing spatial data over time)
-
-Connect to the fires dataset and create a map that shows the total number of fires in each county. Now assign the `Year` variable as your pages and give your map a useful title (that changes with the year).
-
-Note that you might want to play with different maximum values of your fires variable so that differences across time are more apparent. Try this now by going to Color -> Edit Colors -> Advanced -> and choose a reasonable top copding value.
-
-### Lines with Distributions (visualizing heterogeneity over time)
-
-Create a line graph that shows average fires across years in the sample. 
-
-Next, create a new variable that counts the total number of (logged) fires in a county each year by creating a new calculated field called `Total Fires` using the equation `{FIXED [year],[county_fips]: SUM(LN([Fires]))}`.
-
-Create a circle plot of this variable by dragging it to the rows shelf to the right of avg. fires. Drag the total fires varaible again to the `Size` icon, and change it to `count`. You should now have circles that reflect the number of counties with the indicated number of fires. You may want to filter on this variable to remove the large number of zeros.
-
-## Summary
-
-This lab covered different ways of visualizing panel data. There are of course many other avenues you can take to visualize your data and I encourage you to think outside the box for your final project. Dream of your ideal visualization and I can probably help you put it together!
 
 
 
