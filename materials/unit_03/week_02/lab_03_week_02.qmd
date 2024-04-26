@@ -1,5 +1,5 @@
 ---
-title: "Week 13 Lab: Introduction to Regression"
+title: "Week 14 Lab: Introduction to Regression"
 format: 
   html:
     theme: zephyr
