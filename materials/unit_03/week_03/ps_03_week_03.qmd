@@ -1,14 +1,13 @@
 ---
-title: "Project 3 Problem Set 3: Starting Project 3 and working with panel data"
+title: "Project 3 Problem Set 3: Estimating your regression"
 format: 
   html:
     theme: zephyr
 ---
 ## Problem Set Overview
 
-This problem set is intended to get you started on your third project for the course. You should make a new page on your google site that answers the following:
+This problem set is intended to walk you through your analysis for project 3. You should make a new page on your google site that answers the following:
 
-1. Who are your Project 3 Team Members?
 
 2. What is your Project 3 question and "treatment" dataset?  Your question should guide the data collection.  If your question is: what is the effect of $x$ on $y$? Your regression model should be something like $y=\beta x + \varepsilon$.  In other words you need data for $x$ and $y$.
 

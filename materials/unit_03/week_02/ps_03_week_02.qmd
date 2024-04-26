@@ -6,16 +6,39 @@ format:
 ---
 ## Problem Set Overview
 
-This problem set is intended for you to gain experience with fixed-effects panel regression. 
-
+This problem set is intended to walk you through your analysis for project 3. You should make a new page on your google site that answers the following questions
 
 ### Problem Set Instructions
 
-1. What is your question? (Recall that your question should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?)
+1. What is your question? (Recall that your question should be about the relationship between two variables: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?)
 
-2. Why is this question interesting?
+2. Describe your dataset:
 
-3. Show evidence that you have assembled a dataset for analysis.
+    (a) What datasets have you joined together?
+
+    (b) What are your key variables? 
+
+    (c) Generate a table of summary statistics.
+
+    (d) What is the unit of analysis?
+
+3. Think about the relationship between your dependent and outcome variables:
+
+    (a) Formulate an economic hypothesis that you will test with regression analysis, and explain it. 
+
+    (b) Do you think the relationship is positive or negative? 
+
+    (c) Should it be large or small?
+
+4. Estimate the regression to test your economic hypothesis. Display a regression table.
+
+5. Interpret your regression results.
+
+    (a) Interpret the statistical hypothesis test.
+
+    (b) Interpret the coefficient estimates. Does it support your *economic* hypothesis about the relationship between $x$ and $y$? Explain.
+
+    (c) If your results did not support your economic hypothesis, how might you revise your analysis?
 
 
 ## How to Submit
