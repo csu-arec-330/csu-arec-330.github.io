@@ -19,7 +19,7 @@ title: "Week 14: Intro to Regression"
  
 <b>Problem Set Materials - Due Friday, May 3 by 11:59 PM:</b> <br>
 
-<a  href="/materials/unit_02/week_02/ps_03_week_02.html" target="_blank">Project 3 Problem Set 2 Instructions</a> <br><br>
+<a  href="/materials/unit_03/week_02/ps_03_week_02.html" target="_blank">Project 3 Problem Set 2 Instructions</a> <br><br>
 
 <b>Project Materials:</b> <br>
 
