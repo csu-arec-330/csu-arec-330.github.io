@@ -96,20 +96,106 @@ Benefits about re-routing the highway:
 - More tax revenue from more gas sales
 
 
-## Data Collection
+## Data Collection {.scrollable}
 
 We gathered data from U.S. convenience stores with gas stations. 
 
 We calculated their distance to the nearest highway and removed stores located further than 40 kilometers away. 
 
+```{r}
+#| echo: false
 
+# Load necessary packages
+library(pacman)
+p_load(tidyverse, modelsummary, sf, progress, GGally, knitr, readr)
+
+# Read in the transaction level data
+shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
+
+# Read in store distance data
+store_dist <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_dist.csv")
+
+# read in convenience store location dataset
+store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
+
+# Function to classify fuel and not fuel based on descriptions
+classify_fuel <- function(description) {
+  # Check if the description is not NA and is a character
+  if (!is.na(description) && is.character(description)) {
+    # Convert description to lower case for case-insensitivity
+    description_lower <- tolower(description)
+    
+    # Define keywords associated with fuel
+    fuel_keywords <- c("unld","unlead", "unleaded", "regular", "mid", "premium", "diesel", 
+                       "gas", "ethanol", "e85", "fuel", "octane", "ultra", "prem","super")
+    
+    # Check for the presence of fuel-related keywords or a number in the description
+    if (any(sapply(fuel_keywords, grepl, x = description_lower)) || grepl("[0-9]", description_lower)) {
+      return("fuel")
+    } else {
+      return("not fuel")
+    }
+  } else {
+    return("not fuel")
+  }
+}
+
+store_gas <- shopper_info %>%
+  filter(is.na(gtin)) %>%
+  mutate(gas = sapply(pos_description, classify_fuel)) %>% #classify all observations as fuel or not
+  filter(gas=="fuel") %>% #remove non-fuel observations
+  group_by(store_id) %>% 
+  summarise(unit_price=mean(unit_price,na.rm = T)) %>% #calculate the average price of fuel items sold at the location
+  ungroup() %>%
+  filter(between(unit_price,2.5,5)) #based on a distribution of the data, remove fuel prices less than $2.50 and above $5.00
+
+#join the store-level fuel price back to the raw store dataset to attach the coordinates
+store_gas_geo <- inner_join(store_gas,select(store_raw,store_id,latitude,longitude,zip_code),by="store_id") %>%
+  st_as_sf(coords=c("longitude","latitude"),crs=st_crs(4326))
+
+#Calculate the number of stores within 10km of each other
+
+store_geo_m <- store_gas_geo %>%
+  st_transform(5070)
+
+# Calculate the matrix of distances between all stores
+distance_matrix <- st_distance(store_geo_m)
+
+# Count stores within 5 km for each store
+# 5000 meters is equivalent to 5 kilometers
+stores_within_5km <- apply(distance_matrix, 1, function(distances) sum(distances <= 5000, na.rm = TRUE) - 1)
+
+# Add this count as a new column to the sf object
+stores_within <- store_gas %>%
+  mutate(count_within = stores_within_5km)
+
+
+#Load all US primary roads - downloaded from https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Roads
+us_roads <- st_read("tl_2022_us_primaryroads/tl_2022_us_primaryroads.shp") %>%
+  st_transform(4326)
+
+#testing
+Litchfield_County <- store_gas_geo %>%
+  arrange(zip_code) %>%
+  filter(zip_code == "06790") %>%
+  head(5)
+
+#Find nearest primary road
+nd <- st_nearest_feature(Litchfield_County,us_roads)
+
+#Calculate distance from store to nearest primary road
+Litchfield_County <- mutate(Litchfield_County,dist=as.numeric(st_distance(Litchfield_County,us_roads[nd,],by_element = T))/1000)
+
+library(mapview)
+mapview(Litchfield_County,col.region="red") + mapview(us_roads[nd,],col.region="blue")
+```
 
 
 ## Summary Statistics
 
 Below is a summary table of average prices per gallon and distances from the nearest highway for our sample of gas stations.
 
-<h2 style="text-align: center; font-weight: bold; font-size:40px">Table: Summary Statistics for Unit Price and Distance</h2>
+<h2 style="text-align: center; font-weight: bold; font-size:40px">Table 1: Summary Statistics for Unit Price and Distance</h2>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
@@ -144,22 +230,13 @@ Figure 1: Matrix of density plots for unit price and distance
 ```{r}
 #| echo: false
 
-# Load necessary libraries
-library(pacman)
-p_load(tidyverse, modelsummary, sf, progress, GGally, knitr)
-
-# Read in the transaction level data
-shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
-
-# Read in store distance data
-store_dist <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_dist.csv")
-
 # Filter dataset to keep only stores within 40 km of a major road
 store_dist_40 <- store_dist %>%
-  filter(dist < 40)
+  filter(dist < 40) %>%
+  inner_join(select(stores_within,-unit_price),by="store_id")
 
-# Generate a pair plot using GGally to visualize relationships
 ggpairs(store_dist_40, columns = 2:3)
+
 ```
 
 ## Unit prices appear to decrease as distance to highway increases
@@ -168,29 +245,15 @@ Figure 2: Scatter plot of unit price and distance
 ```{r}
 #| echo: false
 
-# Load necessary libraries
-library(pacman)
-p_load(tidyverse, modelsummary, sf, progress, GGally, knitr)
-
-# Read in the transaction level data
-shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
-
-# Read in store distance data
-store_dist <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_dist.csv")
-
-# Filter dataset to keep only stores within 40 km of a major road
-store_dist_40 <- store_dist %>%
-  filter(dist < 40)
-
 # Scatter plot of unit prices and distance
 ggplot(store_dist_40, aes(x = dist, y = unit_price)) +
   geom_point(alpha = 0.5, color = "blue") +
   theme_minimal()
 ```
 
-## Univariate Regression Analysis
+## Univariate Regression Analysis {.smaller}
 
-Although we can draw some insights from the scatter plot, we use regression analysis to determine the relationship between distance and price. 
+Although we can draw loose insights from the scatter plot, we use regression analysis to determine the relationship between distance and price. 
 
 $$ pr_{i} = \beta \cdot Dist_{i} + \alpha_i + \varepsilon_{i} $$
 
@@ -200,8 +263,41 @@ $$ pr_{i} = \beta \cdot Dist_{i} + \alpha_i + \varepsilon_{i} $$
 
 - Unit of observation: convenience stores with gas pumps
 
+## Univariate Regression Results {.smaller}
 
-## Multivariate Regression Analysis
+```{r}
+#| echo: false
+
+# Estimate linear regression of unit_price on distance
+reg1 <- lm(unit_price ~ dist, data = store_dist_40) 
+
+# Extract model results
+results_df <- broom::tidy(reg1, conf.int = TRUE)
+
+# Convert results to wide format if necessary or customize the table manually
+kable(results_df, format = "html", caption = "Table 2: Regression Results for Unit Price vs. Distance")
+
+```
+
+Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices.
+
+## For each additional km away from the highway, unit prices decrease by $0.005 cents per gallon
+
+Figure 3: Scatter plot of unit price and distance, with line of best fit
+```{r}
+#| echo: false
+
+ggplot(store_dist_40, aes(x = dist, y = unit_price)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  labs(title = "Relationship between Distance and Unit Price",
+       x = "Distance from Highway (km)",
+       y = "Unit Price (cents per gallon)") +
+  theme_minimal()
+```
+
+
+## Multivariate Regression Analysis {.smaller}
 
 After adding additional control variables, we want to test if our results still hold.
 
@@ -216,11 +312,30 @@ $$ pr_{i} = \beta_1 \cdot Dist_{i} + \beta_2 \cdot X_{i} + \alpha_i + \varepsilo
 - Unit of observation: convenience stores with gas pumps
 
 
-## Interpretation
+## Multivariate Regression Results {.smaller}
 
-Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices.
+```{r}
+#| echo: false
 
-Specifically, for every kilometer a gas station is located away from the highway, the price per gallon increases by 0.005 cents.
+# Estimate linear regression of unit_price on distance
+reg2 <- lm(unit_price ~ dist + count_within, data = store_dist_40) 
+
+# Extract model results
+results_df <- broom::tidy(reg2, conf.int = TRUE)
+
+# Convert results to wide format if necessary or customize the table manually
+kable(results_df, format = "html", caption = "Table 3: Regression Results for Unit Price vs. Distance and Number of Competitors")
+
+```
+
+The p-value associated with the number of gas stations within 5 km is not statistically significant, so we cannot reject the null hypothesis that the coefficient is different from zero.
+
+
+## Takeaways
+
+Our analysis shows consistent results between distance and unit price-each kilometer away from the highway corresponds with a decrease in gas prices.
+
+Adding a control variable that attempts to capture competition (number of gas stations within 5 km) does not explain variation in unit prices.
 
 
 ## Assumptions and Limitations {.smaller}
