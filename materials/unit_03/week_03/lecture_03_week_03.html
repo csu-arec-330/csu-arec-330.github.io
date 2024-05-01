@@ -348,8 +348,8 @@
 </section>
 <section id="project-overview" class="slide level2 scrollable">
 <h2><a href="project_3.html">Project Overview</a></h2>
-<p><strong>The Question:</strong> Your question for Project 3 should be formulated as: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?</p>
-<p><strong>The Data:</strong> You will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose <strong>one</strong> of the two additional datasets (census data or weather data) to choose your $x$.</p>
+<p><strong>The Question:</strong> Your question for Project 3 should be formulated as: What is the association between <span class="math inline">\(x\)</span> (an explanatory variable) and <span class="math inline">\(y\)</span> (some outcome)?</p>
+<p><strong>The Data:</strong> You will use the convenience store data (shopper_info, store_info, gtin) to select your <span class="math inline">\(y\)</span>, and choose <strong>one</strong> of the two additional datasets (census data or weather data) to choose your <span class="math inline">\(x\)</span>.</p>
 <ul>
 <li><p><strong>Option 1:</strong> Convenience store data combined with Demographic data from the US Census</p></li>
 <li><p><strong>Option 2:</strong> Convenience store data combined with Weather data from NOAA</p></li>
@@ -365,29 +365,115 @@
 <p>Good evening. I’m Lauren, a local economic analyst.</p>
 <p>We’re here today because the community needs to consider adding a new access road to Highway 101.</p>
 <p>There is room in the town’s budget for infrastructure improvements, but there concern that developing new roads might lead to higher fuel costs.</p>
-<p>Tonight, I’ll present to you analysis my team and I conducted on how the distance from the highway influences the gas prices.</p>
+<p>Tonight, I’ll present to you analysis my team and I conducted on how gas prices vary with distance to the highway.</p>
 <p><strong>Goal:</strong> To better understand the trade-offs involved with improving highway access so that you, the town planning committee, can decide to add a new access road.</p>
 </section>
 <section id="the-question" class="slide level2">
 <h2>The Question</h2>
-<p><strong>How does the distance from the nearest highway exit affect the price of gas in our town?</strong></p>
+<p><strong>How does the distance from the nearest highway relate with the price of gas?</strong></p>
 <p>Understanding this can help us predict and manage our travel and budgeting more effectively.</p>
 </section>
 <section id="data-collection" class="slide level2">
 <h2>Data Collection</h2>
-<p>We gathered data from all gas stations in our area, noting their prices and distances from the nearest highway exit.</p>
+<p>We gathered data from all convenience stores with gas stations.</p>
+<p>We calculated their distance to the nearest highway and removed stores located further than 40 kilometers away.</p>
+<p>Below is a summary table of average prices per gallon and distances from the nearest highway for our sample of gas stations.</p>
+<h2 style="text-align: center; font-weight: bold; font-size:40px">
+Table: Summary Statistics for Unit Price and Distance
+</h2>
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Mean
+</th>
+<th style="text-align:right;">
+SD
+</th>
+<th style="text-align:right;">
+Min
+</th>
+<th style="text-align:right;">
+Max
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Price Per Gallon
+</td>
+<td style="text-align:right;">
+3.49
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Distance
+</td>
+<td style="text-align:right;">
+14.75
+</td>
+<td style="text-align:right;">
+68.72
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+2,346.76
+</td>
+</tr>
+</tbody>
+
+</table>
 </section>
-<section id="visualization" class="slide level2">
-<h2>Visualization</h2>
-<p>Display a scatter plot or line graph illustrating the price increase with distance from the highway.</p>
-<p>This graph shows the gradual rise in prices as we move further from the highway.</p>
-</section>
+<section id="distribution-of-unit-price-and-distance" class="slide level2">
+<h2>Distribution of Unit Price and Distance</h2>
+<p>Figure 1: Matrix of density plots for unit price and distance</p>
+
+<img data-src="lecture_03_week_03_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="unit-prices-appear-to-decrease-as-distance-to-highway-increases" class="slide level2">
+<h2>Unit prices appear to decrease as distance to highway increases</h2>
+<p>Figure 2: Scatter plot of unit price and distance</p>
+
+<img data-src="lecture_03_week_03_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="analysis" class="slide level2">
 <h2>Analysis</h2>
-<p>Our analysis shows a clear trend—each mile away from the highway leads to an increase in gas prices.</p>
+<p>Although we can draw some insights from the scatter plot, we use regression analysis to determine the relationship between distance and price.</p>
+<p><span class="math display">\[ pr_{i} = \beta \cdot Dist_{i} + \alpha_i + \varepsilon_{i} \]</span></p>
+<ul>
+<li><p>Outcome: price per gallon</p></li>
+<li><p>Explanatory variable: distance to the highway (in kilometers)</p></li>
+<li><p>Unit of observation: convenience stores with gas pumps</p></li>
+</ul>
+</section>
+<section id="multivariate-regression" class="slide level2">
+<h2>Multivariate Regression</h2>
+<p>After adding additional control variables, we want to test if our results still hold.</p>
+<p><span class="math display">\[ pr_{i} = \beta_1 \cdot Dist_{i} + \beta_2 \cdot X_{i} + \alpha_i + \varepsilon_{i} \]</span></p>
+<ul>
+<li><p>Outcome: price per gallon</p></li>
+<li><p>Explanatory variable: distance to the highway (in kilometers)</p></li>
+<li><p>Controls: number of gas stations within 10 kilometers</p></li>
+<li><p>Unit of observation: convenience stores with gas pumps</p></li>
+</ul>
 </section>
 <section id="interpretation" class="slide level2">
 <h2>Interpretation</h2>
+<p>Our analysis shows a clear trend—each mile away from the highway leads to an increase in gas prices.</p>
 <p>Specifically, for every mile a gas station is located away from the highway, the price per gallon increases by 0.005 cents.</p>
 </section>
 <section id="assumptions-and-limitations" class="slide level2">
@@ -765,6 +851,44 @@ iclicker
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
