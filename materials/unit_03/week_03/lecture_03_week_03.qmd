@@ -492,6 +492,11 @@ C. To determine the forecast accuracy of the time series.
 
 D. To identify the underlying patterns and relationships within the data.
 
+<!-- Answer D
+
+Explanation: Decomposing a time series into its components is primarily done to understand and identify the underlying patterns and relationships within the data, including trends, seasonal variations, and irregular components. This process allows analysts to better understand the time series dynamics and can aid in improving forecasting models by clarifying what influences the data's movements over time.
+
+-->
 
 ## When is clustering analysis an appropriate technique for data analysis?
 
@@ -503,17 +508,28 @@ C. When the data has a linear relationship between variables.
 
 D. When the data is in a time series format.
 
+<!-- Answer A
+
+Explanation: Clustering analysis is particularly suitable when you are dealing with unlabeled or unstructured data, as it helps to identify inherent groupings or patterns within the data without any prior labels. This technique is used to explore data and discover natural segments, groups, or classes by analyzing the structure based solely on the properties of the data.
+
+-->
+
 
 ## Which of the following analysis techniques is regression *not* suitable for?
 
-A. Time series analysis
+A. Predicting a continuous outcome based on multiple input variables.
 
-B. Unsupervised learning
+B. Estimating the effect of price changes on sales volume.
 
-C. Supervised learning
+C. Analyzing the relationship between temperature and energy consumption.
 
-D. Difference in differences
+D. Identifying distinct clusters of customers based on shopping behavior.
 
+<!-- Answer: D 
+
+Explanation: Regression analysis is used to model and predict continuous outcomes, estimate effects, and analyze relationships between variables. It is not suitable for identifying clusters, which is a task for cluster analysis techniques like k-means or hierarchical clustering that are designed to detect patterns and groupings in data.
+
+-->
 
 ## How can color be used effectively in a data visualization?
 
