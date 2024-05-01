@@ -1,5 +1,5 @@
 ---
-title: "Week 15: <br>Panel Data Example and Course Summary <br>"
+title: "Week 15: <br>Regression Analysis Example and Course Summary <br>"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -37,18 +37,80 @@ Course recap
 ## [Project Overview](project_3.html) {.scrollable}
 
 
-Choose one of the "treatment" datasets and find an outcome to evaluate
+**The Question:** Your question for Project 3 should be formulated as: What is the association between \$x\$ (an explanatory variable) and \$y\$ (some outcome)?
 
-What is the impact of $x$ (treatment or exposure) on some outcome $y$?
+**The Data:** You will use the convenience store data (shopper_info, store_info, gtin) to select your \$y\$, and choose **one** of the two additional datasets (census data or weather data) to choose your \$x\$.
+ 
+- **Option 1:** Convenience store data combined with Demographic data from the US Census
 
-Collect panel data and build dataset. Aggregate to the lowest common unit of analysis (e.g., county year). Merge data.
+- **Option 2:** Convenience store data combined with Weather data from NOAA
 
-Perform an exploratory data analysis and assemble summary statistics. Analyze spatial patterns, correlations, etc. Estimate the effect of $x$ on $y$. Build visualizations to answer your research question.
+# Understanding Gas Prices in Our Community: <br>A Town Hall Discussion
 
-Present results in class on final (May 10 9-11 AM). 
+## Introduction {.smaller}
 
-Incorporate feedback into report due Thursday May 11.
+Good evening. I'm Lauren, a local economic analyst.
 
+We're here today because the community needs to consider adding a new access road to Highway 101.
+
+There is room in the town's budget for infrastructure improvements, but there concern that developing new roads might lead to higher fuel costs.
+
+Tonight, I'll present to you analysis my team and I conducted on how the distance from the highway influences the gas prices. 
+
+**Goal:** To better understand the trade-offs involved with improving highway access so that you, the town planning committee, can decide to add a new access road.
+
+
+## The Question
+
+**How does the distance from the nearest highway exit affect the price of gas in our town?**
+
+Understanding this can help us predict and manage our travel and budgeting more effectively.
+
+
+## Data Collection
+
+We gathered data from all gas stations in our area, noting their prices and distances from the nearest highway exit.
+
+
+## Visualization
+
+Display a scatter plot or line graph illustrating the price increase with distance from the highway.
+
+This graph shows the gradual rise in prices as we move further from the highway.
+
+
+## Analysis
+
+Our analysis shows a clear trend—each mile away from the highway leads to an increase in gas prices.
+
+
+## Interpretation
+
+Specifically, for every mile a gas station is located away from the highway, the price per gallon increases by 0.005 cents.
+
+## Assumptions and Limitations
+
+
+## Discussion
+
+This pattern suggests that stations closer to the highway can offer lower prices due to higher traffic and potentially lower transportation costs.
+
+For those living or working far from the highway, this might mean higher daily expenses.
+
+## Conclusion
+
+Our analysis confirms that distance from the highway is a key factor affecting gas prices in our community.
+
+However, the considering the current travel cost to the highway without the access road, offsets the modest expected increase in gas prices.
+
+Possible solutions: 
+
+- Organize carpooling options 
+
+- Support local gas stations with loyalty programs
+
+
+<!--
 ## Bats and Ag Land Prices ([Manning & Ando](https://www.journals.uchicago.edu/doi/full/10.1086/720303))
 
 ![](includes/09-bats-1024x659.jpeg)
@@ -127,6 +189,7 @@ D. To control for federal agricultural policies that may change over time
 ## Summarize the implications of the analysis?
 
 iclicker
+-->
 
 # Course Review
 
