@@ -5,116 +5,80 @@ format:
     theme: zephyr
 ---
 
-## Overview
-<!--
-The goal of this project is for you to gain experience with fixed-effects panel regression with an emphasis on causal inference. This is also a chance to showcase your creativity and analytical skills. Create something that you are proud to show others.
--->
+# Project Overview
 
-The goal of this project is for you to apply panel data analysis that we have covered in the course to answer a real world question. This is also a chance to showcase your creativity and analytic skills, putting everything together that you have learned over the semester. Create something that you are proud to show others.
+The goal of this project is for you to apply the regression analysis techniques covered in the course to address a real-world question. This is an opportunity to demonstrate your creativity and analytical skills by synthesizing everything you have learned throughout the semester into a project that you are proud to present.
 
 [**Rubric**](project_3_rubric.html)
 
+## The Question
 
-### The Question
+Your question for Project 3 should be formulated as: What is the association between \$x\$ (an explanatory variable) and \$y\$ (some outcome)?
 
-Your question for project 3 should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)? 
+## The Data
 
-### The Data
+For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your \$y\$, and choose **one** of the two additional datasets (census data or weather data) to choose your \$x\$.
 
-For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
+- **Option 1:** Convenience store data combined with Demographic data from the US Census
+- **Option 2:** Convenience store data combined with Weather data from NOAA
 
-- Option 1: Convenience store data and Demographic data from the US Census
+## Bringing It Together
 
-- Option 2: Convenience store data and Weather data from NOAA
+Here’s how to approach Project 3:
 
-#### Bringing It Together
+1. Select one of the two options above.
 
-You are posing some form of the question: What is the impact of $x$ (treatment or exposure) on some outcome $y$?
+2. Identify an outcome \$y\$ from the convenience store data.
 
-1. Choose one of the two options. 
+3. Choose control variables (e.g., population density from the Census data or precipitation from the weather data) which will serve as your explanatory variable(s), \$x$.
 
-2. Find an outcome to evaluate. In other words, you need to identify an outcome $y$ from the convenience store data. 
+4. You are responsible for merging or joining your datasets, ensuring you identify and use the common unit of analysis in each dataset and aggregate data as necessary.
 
-3. Identify any controls that you may need (e.g., weather, population density) -- this (or these) will serve as your treatment or exposure variable(s), $x$.  
+5. You are expected to use regression analysis to address your research question. The requirements include:
 
-- Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation. 
+    (1) Present summary statistics of your data, highlighting the number of observations.
+    (2) Conduct a univariate regression analysis.
+    (3) Perform a multivariate regression analysis by including one additional variable in your regression equation from (2).
+    (4) Thoroughly explain your analysis and how it answers your research question.
+    (5) Discuss any assumptions and identify limitations in your analysis.
+    (6) Present and interpret your results clearly, explaining the implications of your findings and using appropriate visualizations to communicate these results.
 
-You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.
+## The Presentation (80 points)
 
-### The Analysis
+### Overall presentation expectations (20 points total)
 
-We expect you to use fixed-effects regression to answer your proposed question. The only strict requirements are: 
+- **Duration:** Your presentation should be 6-9 minutes long. (5 points)
+- **Content and Engagement:** Ensure your presentation is engaging, follows a logical structure, and cohesively answers your stated question. (5 points)
+- **Visualizations:** Use well-formatted and relevant visualizations suited to your analysis and presentation. (10 points)
 
-1. Present summary statistics of your data. Many of the tabular or data visualization techniques covered in previous units apply to panel data.  You should make clear the number of units and time periods in your dataset. 
+### Introduction, Background, and Question (15 points total)
 
-2. Perform a fixed-effects regression.
+- **Introduction:** Start with who you are and the organization interested in your question. Define your audience (e.g., business executives, policy makers, consumers). (5 points)
+- **Background and Question:** Provide necessary background information and clearly state your research question. (10 points)
 
-3. Explain your analysis. Is your analysis designed to estimate a treatment effect (of a policy that is present or not) or the marginal effect of an exposure (a continuous variable). You should clearly explain how the analysis helps to answer your research question.
+### Data and Analysis (35 points total)
 
-4. Discuss any assumptions you made in your analysis and identify limitations.
+- **Data Description:** Detail the sources of your data, any modifications made, and how you integrated different datasets. (10 points)
+- **Summary Statistics and Visualizations:** Provide and explain the summary statistics and visualizations of your data. (5 points)
+- **Analysis Discussion:** Describe your analysis assumptions, limitations, and present your findings visually and descriptively. (20 points)
 
-5. Present and interpret your results. Use your analysis to clearly answer your research question and tell the audience what to do with the information provided. Provide interpretations of regression results (treatment effect or marginal effect). Use appropriate visualizations to communicate results.
+### Discussion/Conclusion (10 points total)
 
-### The Presentation (80 points)
+- **Conclusions Drawn from Analysis:** Explain how your analysis answers your research question and discuss the key takeaways for your intended audience. (10 points)
 
-**Overall presentation expectations:** (20 points total)
+## The Report/Online Submission (40 points)
 
-Your presentations should be 6-9 minutes long. (5 points)
+You and your partner are required to produce a written version of this analysis for online publication on your designated website. This written report should encompass all elements discussed in your presentation, effectively serving as a detailed document to accompany and support the presentation. In addition, include your R code to provide a comprehensive view of your analytical processes. The written portion of the assignment is due later, allowing you the opportunity to refine it based on feedback received during the oral presentation in class.
 
-Your presentation should be engaging, follow a logical structure, and should tell a cohesive story that answers your stated question. (5 points)
+Grading for the report will focus on several key areas:
 
-Your visualizations should be well formatted and appropriate for your analysis/presentation (10 points)
+1. **Code Accuracy and Explanation:** Is your code correct and adequately explained? Use comments within your code to clarify each step of your analysis. Generate an R log file using the `sink()` command and append it to your report as an appendix. (15 points)
 
-**Presentation Introduction, Background, and Question:** (15 points total)
+2. **Readability and Utility:** Is your report clear and informative? While the quality of your research question is not being assessed here, the clarity with which you present your findings is crucial. Your report should be understandable and actionable for your intended audience. (10 points)
 
-You should begin your presentation with the following: (5 points)
+3. **Feedback Incorporation:** Does your report effectively incorporate the feedback you received after your presentation? Your ability to integrate suggestions and improvements will be evaluated. (10 points)
 
-- Who are you? (what business, organization, etc. wants an answer to your question) 
-
-- Who is your audience? (business executive team, policy makers, consumers?) 
-
-You should then: 
-
-- Give us any relevant background info that is necessary to understanding your question (5 points)
-
-- State your question (5 points)
-
-**Presentation Data and Analysis:** (35 points total)
-
-Data: 
-
-- Describe where your data is from, any modifications to the original data, and how you combined disparate data into a single dataset (10 points)
-
-- Provide summary statistics and visualizations (5 points, see step 1 under `Analysis` above)
-
-Analysis:
-
-- What assumptions did you make in your analysis?  What are limitations to your analysis? (10 points, see step 3 under `Analysis` above)
-
-- Plot AND describe your analysis. (10 points)
-
-**Presentation Discussion/Conclusion:** (10 points total)
-
-- How did you use your analysis to answer your question? What is the answer to your question?
-
-- What are the key take-aways for your intended audience?
-
-
-### The Write-up/Online Submission (40 points)
-
-You and your partner should also produce a written version of this analysis to post on your website. This should include all of the above components that went into your presentation (think of this as the report that you give to your audience to accompany your presentation) in addition to your R code. The written portion of the assignment is due later so that you can incorporate feedback that you receive during the oral presentation in class.
-
-Because much of the presentation grade is tied to the content of your report, grading for the report will be based on: 
-
-1. Is your code correct and well-explained (use comments to explain what you do at each step!)? Produce an R log.txt file using the `sink()` command and include it as an appendix to your write up. (15 points)
-
-2. Is your report readable and useful? We will not assess the quality of your research question, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (10 points)
-
-3. Does your report adequately address the feedback provided after your presentation? We will assess whether and to what extent you incorporated our suggestions. (10 points)
-
-3. Organization, formatting and structure. Is your report organized, presented in a logical order, with appropriate integration of writing, analysis, and code? (5 points)
-
-### Peer Evaluation (15 points)
+## Peer Evaluation (15 points)
 
 Each group will be required to provide feedback for three other groups in the class. This feedback process is an essential component of the project, as it encourages constructive criticism and fosters a collaborative learning environment. To facilitate this, each group will complete a Google Form designed specifically for peer evaluations.
 
