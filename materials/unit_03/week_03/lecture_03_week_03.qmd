@@ -40,7 +40,6 @@ Course recap
 
 ## [Project Overview](project_3.html) {.scrollable}
 
-
 **The Question:** Your question for Project 3 should be formulated as: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?
 
 **The Data:** You will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
@@ -48,6 +47,14 @@ Course recap
 - **Option 1:** Convenience store data combined with Demographic data from the US Census
 
 - **Option 2:** Convenience store data combined with Weather data from NOAA
+
+## How to succeed for Project 3
+
+Review the lab notes from Week 14 
+
+Convey to us that you can turn your question into a model
+
+Spend time interpreting your results 
 
 # Understanding Gas Prices in Our Community: <br>A Town Hall Discussion
 
@@ -57,7 +64,7 @@ Good evening. I'm Lauren, a local economic analyst.
 
 We're here today because the community needs to consider adding a new access road to Highway 101.
 
-There is room in the town's budget for infrastructure improvements, but there concern that developing new roads might lead to higher fuel costs.
+There is room in the town's budget for infrastructure improvements, but there is a concern that developing new roads might lead to higher fuel costs.
 
 Tonight, I'll present to you analysis my team and I conducted on how gas prices vary with distance to the highway. 
 
@@ -66,16 +73,39 @@ Tonight, I'll present to you analysis my team and I conducted on how gas prices 
 
 ## The Question
 
-**How does the distance from the nearest highway relate with the price of gas?**
+**How does the distance to the nearest highway relate to the price of gas paid by consumers?**
 
-Understanding this can help us predict and manage our travel and budgeting more effectively.
+Understanding this relationship can help predict expected costs to consumers and manage the town's budget more effectively.
+
+
+## Background 
+
+Concerns about re-routing the highway: 
+
+- Could create more traffic for the town
+
+- Could lead to an increase in gas prices (gas stations could charge a higher price due to proximity to the highway)
+
+
+Benefits about re-routing the highway:
+
+- Shorter commuting time for residents
+
+- Better-conditioned road which offers ancillary benefits 
+
+- More tax revenue from more gas sales
 
 
 ## Data Collection
 
-We gathered data from all convenience stores with gas stations. 
+We gathered data from U.S. convenience stores with gas stations. 
 
 We calculated their distance to the nearest highway and removed stores located further than 40 kilometers away. 
+
+
+
+
+## Summary Statistics
 
 Below is a summary table of average prices per gallon and distances from the nearest highway for our sample of gas stations.
 
@@ -158,7 +188,7 @@ ggplot(store_dist_40, aes(x = dist, y = unit_price)) +
   theme_minimal()
 ```
 
-## Analysis
+## Univariate Regression Analysis
 
 Although we can draw some insights from the scatter plot, we use regression analysis to determine the relationship between distance and price. 
 
@@ -171,7 +201,7 @@ $$ pr_{i} = \beta \cdot Dist_{i} + \alpha_i + \varepsilon_{i} $$
 - Unit of observation: convenience stores with gas pumps
 
 
-## Multivariate Regression
+## Multivariate Regression Analysis
 
 After adding additional control variables, we want to test if our results still hold.
 
@@ -181,26 +211,42 @@ $$ pr_{i} = \beta_1 \cdot Dist_{i} + \beta_2 \cdot X_{i} + \alpha_i + \varepsilo
 
 - Explanatory variable: distance to the highway (in kilometers)
 
-- Controls: number of gas stations within 10 kilometers
+- Controls: number of gas stations within 5 kilometers
 
 - Unit of observation: convenience stores with gas pumps
 
 
 ## Interpretation
 
-Our analysis shows a clear trend—each mile away from the highway leads to an increase in gas prices.
+Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices.
+
+Specifically, for every kilometer a gas station is located away from the highway, the price per gallon increases by 0.005 cents.
 
 
-Specifically, for every mile a gas station is located away from the highway, the price per gallon increases by 0.005 cents.
+## Assumptions and Limitations {.smaller}
 
-## Assumptions and Limitations
+Assumptions:
+
+- We assume that a gas station will locate along the new highway access road (once it is built) near the highway to attract traffic flow from Highway 101.
+
+- We assume that gas stations compete uniformly along prices of their grades of gasoline.
+
+
+Limitations:
+
+- We use distance "as the crow flies" versus travel distance along the road.
+
+- We do not account for other confounding factors that could influence gas prices, such as the traffic flow on Highway 101 nearest to the town and distance to the nearest major metropolitan area.
 
 
 ## Discussion
 
-This pattern suggests that stations closer to the highway can offer lower prices due to higher traffic and potentially lower transportation costs.
+The pattern we observe (inverse relationship between distance and price) suggests that stations closer to the highway charge a premium for the convenience of being located near the highway.
 
-For those living or working far from the highway, this might mean higher daily expenses.
+<!--can offer lower prices due to higher traffic and potentially lower transportation costs.-->
+
+For those commuting to work places outside of town, this might mean higher travel expenses.
+
 
 ## Conclusion
 
@@ -315,7 +361,7 @@ iclicker
 
 - Cross sectional and spatial data
 
-- Panel data
+- Regression analysis 
 
 What methods did we cover in these areas?
 
@@ -366,7 +412,7 @@ D. To distract from the key message of the visualization.
 
 
 
-## What are your takeaways from the course?
+## Our key takeaways from this course
 
 :::{.incremental}
 - Let the business or research question guide your analysis
@@ -377,5 +423,5 @@ D. To distract from the key message of the visualization.
 
 :::
 
-
+# What are your takeaways from the course?
 

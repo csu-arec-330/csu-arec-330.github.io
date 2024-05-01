@@ -355,6 +355,12 @@
 <li><p><strong>Option 2:</strong> Convenience store data combined with Weather data from NOAA</p></li>
 </ul>
 </section>
+<section id="how-to-succeed-for-project-3" class="slide level2">
+<h2>How to succeed for Project 3</h2>
+<p>Review the lab notes from Week 14</p>
+<p>Convey to us that you can turn your question into a model</p>
+<p>Spend time interpreting your results</p>
+</section>
 <section>
 <section id="understanding-gas-prices-in-our-community-a-town-hall-discussion" class="title-slide slide level1 center">
 <h1>Understanding Gas Prices in Our Community: <br>A Town Hall Discussion</h1>
@@ -364,19 +370,36 @@
 <h2>Introduction</h2>
 <p>Good evening. I’m Lauren, a local economic analyst.</p>
 <p>We’re here today because the community needs to consider adding a new access road to Highway 101.</p>
-<p>There is room in the town’s budget for infrastructure improvements, but there concern that developing new roads might lead to higher fuel costs.</p>
+<p>There is room in the town’s budget for infrastructure improvements, but there is a concern that developing new roads might lead to higher fuel costs.</p>
 <p>Tonight, I’ll present to you analysis my team and I conducted on how gas prices vary with distance to the highway.</p>
 <p><strong>Goal:</strong> To better understand the trade-offs involved with improving highway access so that you, the town planning committee, can decide to add a new access road.</p>
 </section>
 <section id="the-question" class="slide level2">
 <h2>The Question</h2>
-<p><strong>How does the distance from the nearest highway relate with the price of gas?</strong></p>
-<p>Understanding this can help us predict and manage our travel and budgeting more effectively.</p>
+<p><strong>How does the distance to the nearest highway relate to the price of gas paid by consumers?</strong></p>
+<p>Understanding this relationship can help predict expected costs to consumers and manage the town’s budget more effectively.</p>
+</section>
+<section id="background" class="slide level2">
+<h2>Background</h2>
+<p>Concerns about re-routing the highway:</p>
+<ul>
+<li><p>Could create more traffic for the town</p></li>
+<li><p>Could lead to an increase in gas prices (gas stations could charge a higher price due to proximity to the highway)</p></li>
+</ul>
+<p>Benefits about re-routing the highway:</p>
+<ul>
+<li><p>Shorter commuting time for residents</p></li>
+<li><p>Better-conditioned road which offers ancillary benefits</p></li>
+<li><p>More tax revenue from more gas sales</p></li>
+</ul>
 </section>
 <section id="data-collection" class="slide level2">
 <h2>Data Collection</h2>
-<p>We gathered data from all convenience stores with gas stations.</p>
+<p>We gathered data from U.S. convenience stores with gas stations.</p>
 <p>We calculated their distance to the nearest highway and removed stores located further than 40 kilometers away.</p>
+</section>
+<section id="summary-statistics" class="slide level2">
+<h2>Summary Statistics</h2>
 <p>Below is a summary table of average prices per gallon and distances from the nearest highway for our sample of gas stations.</p>
 <h2 style="text-align: center; font-weight: bold; font-size:40px">
 Table: Summary Statistics for Unit Price and Distance
@@ -450,8 +473,8 @@ Distance
 <p>Figure 2: Scatter plot of unit price and distance</p>
 
 <img data-src="lecture_03_week_03_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="analysis" class="slide level2">
-<h2>Analysis</h2>
+<section id="univariate-regression-analysis" class="slide level2">
+<h2>Univariate Regression Analysis</h2>
 <p>Although we can draw some insights from the scatter plot, we use regression analysis to determine the relationship between distance and price.</p>
 <p><span class="math display">\[ pr_{i} = \beta \cdot Dist_{i} + \alpha_i + \varepsilon_{i} \]</span></p>
 <ul>
@@ -460,29 +483,40 @@ Distance
 <li><p>Unit of observation: convenience stores with gas pumps</p></li>
 </ul>
 </section>
-<section id="multivariate-regression" class="slide level2">
-<h2>Multivariate Regression</h2>
+<section id="multivariate-regression-analysis" class="slide level2">
+<h2>Multivariate Regression Analysis</h2>
 <p>After adding additional control variables, we want to test if our results still hold.</p>
 <p><span class="math display">\[ pr_{i} = \beta_1 \cdot Dist_{i} + \beta_2 \cdot X_{i} + \alpha_i + \varepsilon_{i} \]</span></p>
 <ul>
 <li><p>Outcome: price per gallon</p></li>
 <li><p>Explanatory variable: distance to the highway (in kilometers)</p></li>
-<li><p>Controls: number of gas stations within 10 kilometers</p></li>
+<li><p>Controls: number of gas stations within 5 kilometers</p></li>
 <li><p>Unit of observation: convenience stores with gas pumps</p></li>
 </ul>
 </section>
 <section id="interpretation" class="slide level2">
 <h2>Interpretation</h2>
-<p>Our analysis shows a clear trend—each mile away from the highway leads to an increase in gas prices.</p>
-<p>Specifically, for every mile a gas station is located away from the highway, the price per gallon increases by 0.005 cents.</p>
+<p>Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices.</p>
+<p>Specifically, for every kilometer a gas station is located away from the highway, the price per gallon increases by 0.005 cents.</p>
 </section>
-<section id="assumptions-and-limitations" class="slide level2">
+<section id="assumptions-and-limitations" class="slide level2 smaller">
 <h2>Assumptions and Limitations</h2>
+<p>Assumptions:</p>
+<ul>
+<li><p>We assume that a gas station will locate along the new highway access road (once it is built) near the highway to attract traffic flow from Highway 101.</p></li>
+<li><p>We assume that gas stations compete uniformly along prices of their grades of gasoline.</p></li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li><p>We use distance “as the crow flies” versus travel distance along the road.</p></li>
+<li><p>We do not account for other confounding factors that could influence gas prices, such as the traffic flow on Highway 101 nearest to the town and distance to the nearest major metropolitan area.</p></li>
+</ul>
 </section>
 <section id="discussion" class="slide level2">
 <h2>Discussion</h2>
-<p>This pattern suggests that stations closer to the highway can offer lower prices due to higher traffic and potentially lower transportation costs.</p>
-<p>For those living or working far from the highway, this might mean higher daily expenses.</p>
+<p>The pattern we observe (inverse relationship between distance and price) suggests that stations closer to the highway charge a premium for the convenience of being located near the highway.</p>
+<!--can offer lower prices due to higher traffic and potentially lower transportation costs.-->
+<p>For those commuting to work places outside of town, this might mean higher travel expenses.</p>
 </section>
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
@@ -595,7 +629,7 @@ iclicker
 <ul>
 <li><p>Time series</p></li>
 <li><p>Cross sectional and spatial data</p></li>
-<li><p>Panel data</p></li>
+<li><p>Regression analysis</p></li>
 </ul>
 <p>What methods did we cover in these areas?</p>
 </section>
@@ -627,8 +661,8 @@ iclicker
 <p>C. To confuse the viewer with too many colors.</p>
 <p>D. To distract from the key message of the visualization.</p>
 </section>
-<section id="what-are-your-takeaways-from-the-course" class="slide level2">
-<h2>What are your takeaways from the course?</h2>
+<section id="our-key-takeaways-from-this-course" class="slide level2">
+<h2>Our key takeaways from this course</h2>
 <div>
 <ul>
 <li class="fragment"><p>Let the business or research question guide your analysis</p></li>
@@ -636,10 +670,13 @@ iclicker
 <li class="fragment"><p>Support your story with effective and appropriate visualizations</p></li>
 </ul>
 </div>
+</section></section>
+<section id="what-are-your-takeaways-from-the-course" class="title-slide slide level1 center">
+<h1>What are your takeaways from the course?</h1>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
