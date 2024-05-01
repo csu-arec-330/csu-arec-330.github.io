@@ -78,7 +78,7 @@ Tonight, I'll present to you analysis my team and I conducted on how gas prices 
 Understanding this relationship can help predict expected costs to consumers and manage the town's budget more effectively.
 
 
-## Background 
+## Background {.scrollable}
 
 Concerns about re-routing the highway: 
 
@@ -255,7 +255,7 @@ ggplot(store_dist_40, aes(x = dist, y = unit_price)) +
 
 Although we can draw loose insights from the scatter plot, we use regression analysis to determine the relationship between distance and price. 
 
-$$ pr_{i} = \beta \cdot Dist_{i} + \alpha_i + \varepsilon_{i} $$
+$$ pr_{i} = \beta \cdot Dist_{i} + \alpha + \varepsilon_{i} $$
 
 - Outcome: price per gallon
 
@@ -301,7 +301,7 @@ ggplot(store_dist_40, aes(x = dist, y = unit_price)) +
 
 After adding additional control variables, we want to test if our results still hold.
 
-$$ pr_{i} = \beta_1 \cdot Dist_{i} + \beta_2 \cdot X_{i} + \alpha_i + \varepsilon_{i} $$
+$$ pr_{i} = \beta_1 \cdot Dist_{i} + \beta_2 \cdot X_{i} + \alpha + \varepsilon_{i} $$
 
 - Outcome: price per gallon
 
