@@ -1,5 +1,5 @@
 ---
-title: "Week 15: Panel Data Analysis Project"
+title: "Week 15: Regression Analysis Project"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
