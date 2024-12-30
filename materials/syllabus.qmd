@@ -17,23 +17,24 @@ Lab: Nutrien 103, Fri 1:00 - 2:40 PM
 
 ## Course Webpages
 
-[Course Website](https://csu-arec-330.github.io/)
+<a href="https://csu-arec-330.github.io/" target="_blank">Course Website</a>
 
-[Course Canvas](https://colostate.instructure.com/courses/179150)
+<a href="https://colostate.instructure.com/courses/198940" target="_blank">Course Canvas</a>
+
 
 ## Who
 
 **Lauren Chenarides** (Instructor), [lauren.chenarides\@colostate.edu](mailto:lauren.chenarides@colostate.edu), 970-491-2480, Nutrien 201
 
-Office Hours: F 3-4PM & by appt <https://usemotion.com/meet/lauren-chenarides/meeting>
+Office Hours: W 2-3PM & by appt <https://usemotion.com/meet/lauren-chenarides/meeting>
 
-**Jude Bayham** (Instructor), [jbayham\@colostate.edu](mailto:jbayham@colostate.edu), 970-491-2836, Nutrien 203
+<!--**Jude Bayham** (Instructor), [jbayham\@colostate.edu](mailto:jbayham@colostate.edu), 970-491-2836, Nutrien 203
 
 Office Hours: W 2-3PM & by appt <https://go.oncehub.com/jude_bayham>
+-->
+**Diya Khatiwada** (TA), [dikshya.khatiwada\@colostate.edu](mailto:dikshya.khatiwada@colostate.edu)
 
-**Zarif Rasul** (TA), [Zarif.Rasul\@colostate.edu](mailto:Zarif.Rasul@colostate.edu)
-
-Office Hours: Th 12-1PM Nutrien 165
+Office Hours: F 2:45-3:45PM Nutrien 165
 
 ## Course Description
 
