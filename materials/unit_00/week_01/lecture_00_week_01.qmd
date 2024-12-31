@@ -1,16 +1,26 @@
 ---
-title: "Week 1: Introduction"
+title: "Week 1: Course Overview"
 format: 
   revealjs:
     theme: night
 ---
-<!-- Syllabus, overview of course, give examples of data-driven decision-making (d3m) in sports (moneyball), in government, in business, in agriculture. -->
-# Meet your instructors*
+## Meet your instructor, Dr. Lauren Chenarides {.scrollable}
 
-*That's right -- you have two!
+| ![Image 1](lauren/farmers-market.jpg){width=600} | 
+|:-------------------------------------:|
+| I have my PhD in Agricultural Economics. |
+|  |
+| ![Image 2](lauren/usda.jpg){width=600} |
+| My research focuses on food policy questions. |
+|  |
+| ![Image 3](lauren/waffles.jpg){width=600} | 
+| My meditation practice is baking. |
+|  |
+| ![Image 4](lauren/data.png){width=600} |
+| I am a data junkie. |
 
-&nbsp; 
 
+<!--
 #
 **To get to know you better, we have a few questions for you . . .**
 
@@ -69,6 +79,8 @@ format:
 
 
 # Thank you. Now onto the lecture.
+-->
+## Data is not the same as information. It is merely a collection of numbers and facts until we give it meaning. (Tim Harford, *The Data Detective*)
 
 ## Data IRL
 
@@ -151,11 +163,11 @@ Introduction to Tableau
 
 &nbsp; 
 
-Dr. Bayham's Office Hours: Wednesday 2-3 pm, Rm 201
+<!--Dr. Bayham's Office Hours: Wednesday 2-3 pm, Rm 203-->
 
-Dr. Chenarides' Office Hours: Friday 3-4 pm, Rm 203
+Dr. Chenarides' Office Hours: Wednesday 2-3 pm, Rm 201
 
-Zarif's Office Hours: Thursday 12-1 pm, Rm 165
+Diya's Office Hours: Friday 2:45-3:45 pm, Rm 165
 
 ## D$^3$M {.smaller}
 
@@ -290,4 +302,4 @@ Bring computers on Friday -->
 Bring computers on Friday -->
 
 ## What is Tableau?
-{{< video https://youtu.be/gAruNQGxYMA width="90%" height="90%" >}}
+{{< video https://youtu.be/hb-qwRAltOw?si=euDN6X_E0PNkM83z width="90%" height="90%" >}}
