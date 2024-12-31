@@ -3,20 +3,19 @@ title: "Week 4: Mini Project"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Feb 07 & Feb 09</u></b> <br> <br>
 
-<b>Lecture Materials:</b> <br>
+<b>Lecture: Feb 12</b> <br>
 
 
 <a  href="/materials/unit_00/week_04/lecture_00_week_04.html" target="_blank">Lecture Slides</a> <br> <br>
 
 
-<b>Lab Materials:</b> <br>
+<b>Lab: Feb 14</b> <br>
 
 <a  href="/materials/unit_00/week_04/lab_00_week_04.html" target="_blank">Week 4 Lab Notes</a> <br> <br> 
 
 
-<b>Project Materials - Due Friday, Feb 16 by 11:59 PM:</b> <br>
+<b>Problem Set 4 (Mini-Project): Due Feb 21 at 11:59 PM</b> <br>
 
 <a  href="/materials/unit_00/week_04/ps4.html" target="_blank">Problem Set 4 Instructions</a> <br> 
 

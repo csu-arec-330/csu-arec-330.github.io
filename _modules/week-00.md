@@ -7,7 +7,8 @@ title: "Useful Links"
 
 <b>Course Software:</b> <br>
 <ul>
-  <li><a  href="http://darecompute-01.aggie.colostate.edu:8787/" target="_blank">Access RStudio on the Server</a></li>
+  <!--<li><a  href="http://darecompute-01.aggie.colostate.edu:8787/" target="_blank">Access RStudio on the Server</a></li>-->
+  <li><a  href="https://posit.co/download/rstudio-desktop/" target="_blank">RStudio Desktop</a></li>
   <li><a  href="https://public.tableau.com/app/discover" target="_blank">Tableau Public</a></li>
   <li><a  href="https://www.tableau.com/products/desktop" target="_blank">Tableau Desktop</a></li>
   <li><a  href="https://it.colostate.edu/cybersecurity/globalprotect-vpn/" target="_blank">Global Protect VPN</a></li>

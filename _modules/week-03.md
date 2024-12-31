@@ -3,20 +3,19 @@ title: "Week 3: Effective Data Visualizations"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Jan 31 & Feb 02</u></b> <br> <br>
 
-<b>Lecture Materials:</b> <br>
+<b>Lecture: Feb 5</b> <br>
 
 
 <a  href="/materials/unit_00/week_03/lecture_00_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
 
 
-<b>Lab Materials:</b> <br>
+<b>Lab: Feb 7</b> <br>
 
 <a  href="/materials/unit_00/week_03/lab_00_week_03.html" target="_blank">Week 3 Lab Notes</a> <br> <br>
 
 
-<b>Problem Set 3 Materials - Due Friday, Feb 09 by 11:59 PM:</b> <br>
+<b>Problem Set 3: Due Feb 14 at 11:59 PM</b> <br>
 
 <a  href="/materials/unit_00/week_03/ps3.html" target="_blank">Problem Set 3 Instructions</a> <br>
 
