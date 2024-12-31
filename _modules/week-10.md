@@ -3,14 +3,13 @@ title: "Week 10: Intro to Mapping and Visualizing Cross-Sectional Data"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Mar 27 & Mar 29</u></b> <br> <br>
 
-<b>Lecture Materials:</b> <br>
+<b>Lecture: Apr 2</b> <br>
 
 <a  href="/materials/unit_02/week_02/lecture_02_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
 
 
-<b>Lab Materials:</b> <br>
+<b>Lab: Apr 4</b> <br>
 
 <a  href="/materials/unit_02/week_02/lab_02_week_02.html" target="_blank">Week 10 Lab Notes</a> <br> 
 
@@ -22,9 +21,9 @@ title: "Week 10: Intro to Mapping and Visualizing Cross-Sectional Data"
 
 <a  href="/materials/unit_02/inputs/store_info.csv" download>Download store_info.csv</a> <br><br>
 
-<b>Problem Set Materials - Due Friday, April 5 by 11:59 PM:</b> <br>
+<b>Problem Set 9: Due Apr 11 at 11:59 PM</b> <br>
 
-<a  href="/materials/unit_02/week_02/ps_02_week_02.html" target="_blank">Project 2 Problem Set 2 Instructions</a> <br> 
+<a  href="/materials/unit_02/week_02/ps_02_week_02.html" target="_blank">Problem Set 9 Instructions</a> <br> 
 
 </div>
 

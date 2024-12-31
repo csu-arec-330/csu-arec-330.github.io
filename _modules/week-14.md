@@ -1,31 +1,29 @@
 ---
-title: "Week 14: Intro to Regression"
+title: "Week 14: Intro to Regression Analysis"
 ---
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
-<b><u>Apr 24 & Apr 26</u></b> <br> <br>
 
-
-<b>Lecture Materials:</b> <br>
+<b>Lecture: Apr 30</b> <br>
 
 <a  href="/materials/unit_03/week_02/lecture_03_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
 
 
-<b>Lab Materials:</b> <br>
+<b>Lab: May 2</b> <br>
 <!--
 <a  href="/materials/unit_03/week_02/includes/min_wage_data.csv" target="_blank">Download min_wage_data.csv</a> <br> 
 -->
- <a  href="/materials/unit_03/week_02/lab_03_week_02.html" target="_blank">Lab Notes</a> <br> <br> 
+
+<a  href="/materials/unit_03/week_02/lab_03_week_02.html" target="_blank">Lab Notes</a> <br> <br> 
  
-<b>Problem Set Materials - Due Friday, May 3 by 11:59 PM:</b> <br>
+<b>Problem Set 12: Due MONDAY May 5 at 11:59 PM</b> <br>
 
-<a  href="/materials/unit_03/week_02/ps_03_week_02.html" target="_blank">Project 3 Problem Set 2 Instructions</a> <br><br>
+<a  href="/materials/unit_03/week_02/ps_03_week_02.html" target="_blank">Problem Set 12 Instructions</a> <br><br>
 
-<b>Project Materials:</b> <br>
+<b>Project 3:</b> <br>
 
-<b>Video Presentation - Due Monday, May 06 (10:00 am)</b> <br>
+<b>Video Presentation - Due WEDNESDAY May 7 at 11:59 PM</b> <br>
 <a  href="/materials/unit_03/week_03/project_3.html" target="_blank">Project 3 Instructions</a> <br> 
-
 <a  href="/materials/unit_03/week_03/project_3_rubric.html" target="_blank">Project 3 Rubric</a> <br> <br> 
 
  <!--
