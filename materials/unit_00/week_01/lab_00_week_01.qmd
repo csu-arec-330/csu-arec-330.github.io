@@ -36,7 +36,8 @@ format:
 
 Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.
 
-Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <https://cran.r-project.org/>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>. Alternatively, you will have access to a version of RStudio on a CSU server that you can access via web browser here: <http://darecompute-01.aggie.colostate.edu:8787/>.  I will provide you with log in credentials in class.
+Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <https://cran.r-project.org/>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>. 
+<!--Alternatively, you will have access to a version of RStudio on a CSU server that you can access via web browser here: <http://darecompute-01.aggie.colostate.edu:8787/>.  I will provide you with log in credentials in class.-->
 
 RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient.  Open up RStudio and you should see something that looks like this:
 
@@ -46,22 +47,57 @@ RStudio provides a user-friendly interface for working with R and offers a varie
 
 The RStudio interface is divided into several panels:
 
-- The Console panel is where you can enter and run R commands.
+- The **Console** panel is where you can enter and run R commands.
 
-- The Source panel is where you can open and edit R scripts, which are files that contain R code.
+- The **Source** panel is where you can open and edit R scripts, which are files that contain R code.
 
-- The Environment and History panels display information about the current environment and command history.
+- The **Environment** and **History** panels display information about the current environment and command history.
 
-- The Files, Plots, Packages, and Help panels provide access to various resources and tools.
+- The **Files, Plots, Packages, and Help** panels provide access to various resources and tools.
 
 Now that you have both R and RStudio installed and running, let's dive into some basic concepts of the R programming language.
 
-First, R is an interpreted language, which means that you can enter commands directly into the console and see the results immediately. You can start the R console by opening RStudio and clicking on the "Console" tab.
+### Locating your working directory
+
+The working directory is the folder on your computer where R looks for files to read and where it saves any files you create. It’s like the "home base" for your R session. Knowing your working directory is important because:
+
+- If you want to read a data file (like a `.csv` file), R will look for it in the working directory unless you provide a full path.
+- When you save files, such as plots or datasets, R will save them in the working directory by default.
+
+Think of it as the default folder R uses to organize your work during a session.
+
+You can check your current working directory by using the `getwd()` function:
+
+```{r}
+#| eval: false
+getwd()
+```
+
+This will display the path of the current working directory in the console.
+
+To set your working directory to a specific folder, use the setwd() function and provide the path to the folder. For example:
+
+```{r}
+#| eval: false
+setwd("C:/Users/YourName/Documents/MyRProjects")
+```
+
+After running this command, R will use the specified folder as the working directory for the rest of the session.
+
+#### Tips for Managing Your Working Directory
+1. In RStudio, you can also set the working directory interactively by going to **Session > Set Working Directory > Choose Directory...** and selecting the folder.
+
+2. You can see the contents of your working directory in the **Files** panel in RStudio.
+
+3. For reproducibility, it's a good idea to include the `setwd()` command in your R script so that others can run your code without confusion about file locations. 
+
+> Think of the working directory as a specific "drawer" in your desk where you store tools. When you start working, you know where to find your materials and where to put things back.
 
 ### Basics
 
-To assign a value to a variable in R, you can use the assignment operator `<-` or `=` like this:
+R is an interpreted language, which means that you can enter commands directly into the console and see the results immediately. You can start the R console by opening RStudio and clicking on the "Console" tab.
 
+To assign a value to a variable in R, you can use the assignment operator `<-` or `=` like this:
 
 ```{r}
 x <- 5
@@ -85,7 +121,10 @@ print(z)
 
 First, we assign the variable `y` the value 3.  Then, we assign `z` the value of `x` (assigned 5 earlier) plus `y` (just assigned 3), which sum to 8.
 
-*Comprehension check: Try assigning the variables `a` and `b` different values and dividing them.*
+:::{.callout-important}
+## Comprehension Check
+Try assigning the variables `a` and `b` different values and dividing them.
+:::
 
 R also has a wide range of data types, including: numerical, character, and logical.  Variables can be different datatypes.  Collections of variables are called a vector - a one-dimensional array of data.  You can create a vector using the "c()" function, which stands for concatenate.  A vector may only contain one type of data.
 
@@ -104,7 +143,10 @@ A single entry in a vector is called an element. You can access elements of a ve
 print(numbers[1])
 ```
 
-*Comprehension check: Try accessing a different element of the vector `numbers` or one of the other vectors.*
+:::{.callout-important}
+## Comprehension Check
+Try accessing a different element of the vector `numbers` or one of the other vectors.
+:::
 
 You can also access series of elements in the vector.  To access a continuous range of values use the colon `:`
 ```{r}
@@ -121,10 +163,15 @@ Depending on the datatype, there are functions that operate on the vector.  For 
 print(sum(numbers))
 ```
 
-*Comprehension check: Can you sum the numbers of the vector `characters`?  How about logical?*
+:::{.callout-important}
+## Comprehension Check
+Can you sum the numbers of the vector `characters`?  How about logical?
+:::
 
-
-*Challenge: Can you figure out how to calculate the product of the vector `numbers`?*
+:::{.callout-important}
+## Challenge
+Can you figure out how to calculate the product of the vector `numbers`?
+:::
 
 You can also add, subtract, multiply, and divide all of the numbers in a vector
 ```{r}
@@ -155,7 +202,10 @@ df <- data.frame(numbers=numbers[1:3],
 print(df)
 ```
 
-*Comprehension check: Why did I subset the vector numbers?*
+:::{.callout-important}
+## Comprehension Check
+Why did I subset the vector numbers?
+:::
 
 ### Reading data
 
@@ -188,7 +238,7 @@ library(dplyr)
 ```
 
 
-Here, we have installed and loaded the "dplyr" package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session. If you are working on the server, the packages you need will be installed; you just need to load them.
+Here, we have installed and loaded the `dplyr` package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session. If you are working on the server, the packages you need will be installed; you just need to load them.
 
 ### Running scripts and saving output
 
