@@ -41,7 +41,7 @@ Before we get started, you will need to install R on your computer. You can down
 
 RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient.  Open up RStudio and you should see something that looks like this:
 
-![](figs/01-rstudio.png)
+![](figs/rstudio-panes-labeled.jpeg)
 
 
 
@@ -53,7 +53,7 @@ The RStudio interface is divided into several panels:
 
 - The **Environment** and **History** panels display information about the current environment and command history.
 
-- The **Files, Plots, Packages, and Help** panels provide access to various resources and tools.
+- The **Output** panel includes several tabs (Files, Plots, Packages, and Help) that provide access to various resources and tools.
 
 Now that you have both R and RStudio installed and running, let's dive into some basic concepts of the R programming language.
 
