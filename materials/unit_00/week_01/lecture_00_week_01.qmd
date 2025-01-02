@@ -13,12 +13,17 @@ format:
 | ![Image 2](lauren/usda.jpg){width=600} |
 | My research focuses on food policy questions. |
 |  |
-| ![Image 3](lauren/waffles.jpg){width=600} | 
+| <img src="lauren/waffles.jpg" alt="Image 3" style="width: 600px; height: 500px; object-fit: cover; object-position: top;"> | 
 | My meditation practice is baking. |
 |  |
 | ![Image 4](lauren/data.png){width=600} |
 | I am a data junkie. |
+|  |
 
+## Your first assignment (15 points): 
+Schedule a 15-minute one-on-one meeting with me. All meetings must take place before Feb 7th.
+
+[Book your one-on-one here.](https://app.usemotion.com/meet/lauren-chenarides/arec330)
 
 <!--
 #
@@ -129,9 +134,7 @@ Example 2: [Sustainable Happiness](https://informationisbeautiful.net/wp-content
 Example 3: [Mapping Segregation](https://www.nytimes.com/interactive/2015/07/08/us/census-race-map.html)
 
 ## Sharpening your data visualization tools
-By the end of this course, you might not be producing interactive maps for the NY Times (although we would fully endorse this)...
-
-But, you will learn the tools to produce high-quality figures.
+By the end of this course, you will learn skills to produce high-quality figures.
 
 Example 1: [Student 1](https://sites.google.com/view/csudarecourserepository-dodd/home)
 
