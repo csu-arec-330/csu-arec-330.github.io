@@ -10,13 +10,13 @@ format:
 |:-------------------------------------:|
 | I have my PhD in Agricultural Economics. |
 |  |
-| ![Image 2](lauren/usda.jpg){width=600} |
+| ![Image 2](lauren/usda.JPG){width=600} |
 | My research focuses on food policy questions. |
 |  |
 | <img src="lauren/waffles.jpg" alt="Image 3" style="width: 600px; height: 500px; object-fit: cover; object-position: top;"> | 
 | My meditation practice is baking. |
 |  |
-| ![Image 4](lauren/data.png){width=600} |
+| ![Image 4](lauren/data.PNG){width=600} |
 | I am a data junkie. |
 |  |
 
