@@ -46,6 +46,9 @@ title: "Useful Links"
 
 <ul>
   <li><a  href="https://csu-arec-330.github.io/materials/unit_02/week_04/project_2.html" target="_blank">Project 02 Instructions</a></li>
+    <li><a  href="https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html" target="_blank">Convenience Store Data Overview</a></li>
+  <li><a  href="https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales.csv" target="_blank">Download Convenience Store Data</a></li>
+  
   <!--
   <li><a  href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" target="_blank">US EPA Pollution Annual Summary Data</a></li>
   <li><a  href="https://www.eia.gov/maps/maps.htm#geodata" target="_blank">US Energy Information Administration Data</a></li>
