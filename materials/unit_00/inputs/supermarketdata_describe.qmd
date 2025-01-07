@@ -3,7 +3,6 @@ title: "Supermarket Sales Data Overview"
 format: html
 ---
 
-## Supermarket Sales Data
 ### Description
 This supermarket dataset is a collection of data that provides information about the transactions that took place in a supermarket chain. The dataset includes sales observations from 3 different branches over a 3 month period. This dataset includes information such as the date and time of the transaction, the products that were purchased, the price of each product, the total amount spent on the transaction, and other relevant details.
 
@@ -14,11 +13,13 @@ Overall, this supermarket dataset can be a valuable tool for understanding and p
 This dataset is available from kaggle: [https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales](https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales)
 
 
-### Variables 
+### Data Dictionary
+
+The table below provides an overview of the dataset [supermarket_sales.csv](../inputs/supermarket_sales.csv). 
 
 | Variable Name           | Description                                                                                                                                                    |
 | ----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Invoice id              | Computer generated sales slip invoice identification number                                                                                                    |
+| Invoice ID              | Computer generated sales slip invoice identification number                                                                                                    |
 | Branch                  | Branch of supercenter (3 branches are available identified by A, B and C).                                                                                     |
 | City                    | Location of supercenter                                                                                                                                        |
 | Customer                | Type of customers, recorded by Members for customers using member card and Normal for without member card.                                                     |

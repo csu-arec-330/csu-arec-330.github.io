@@ -15,7 +15,7 @@ title: "Useful Links"
   <li><a  href="https://sites.google.com/u/0/new?authuser=0" target="_blank">Google Sites</a></li> 
 </ul> <br>
 
-<b>Project 00: Data Dictionary:</b> <br>
+<b>Project 00: Data Dictionary</b> <br>
 
 <ul>
   <li><a  href="https://fred.stlouisfed.org/tags/series" target="_blank">Economic data from the St. Louis Fed</a></li>
@@ -27,7 +27,7 @@ title: "Useful Links"
   <li><a  href="https://www.kaggle.com" target="_blank">Kaggle</a></li>
 </ul> <br>
 
-<b>Project 01: Choose Your Own Time-Series Data from These Sources:</b> <br>
+<b>Project 01: Choose Your Own Time-Series Data from These Sources</b> <br>
 
 <ul>
   <li><a  href="https://fred.stlouisfed.org/tags/series" target="_blank">Economic data from the St. Louis Fed</a></li>
@@ -39,7 +39,7 @@ title: "Useful Links"
   <li><a  href="https://www.kaggle.com" target="_blank">Kaggle</a></li>
 </ul> <br>
 
-<b>Sources for Cross-Sectional and Spatial Data (Project 2):</b> <br>
+<b>Project 02: Choose Your Own Cross-Sectional and Spatial Data from These Sources</b> <br>
 
 <ul>
   <li><a  href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" target="_blank">US EPA Pollution Annual Summary Data</a></li>
@@ -55,9 +55,19 @@ title: "Useful Links"
   <li><a  href="https://www.gallup.com/analytics/318923/world-poll-public-datasets.aspx" target="_blank">Gallup Analytics</a></li>
   <li><a  href="https://data.census.gov/profile?q=United+States&g=0100000US" target="_blank">US Census Data</a></li>
   <li><a  href="https://www.kaggle.com" target="_blank">Kaggle</a></li>
+</ul> <br>
 
-</ul>
+<b>Project 03: Data Dictionary</b> <br>
 
+<ul>
+  <li><a  href="https://fred.stlouisfed.org/tags/series" target="_blank">Economic data from the St. Louis Fed</a></li>
+  <li><a  href="https://www.ams.usda.gov/market-news" target="_blank">USDA Ag Marketing Service Market News Data</a></li>
+  <li><a  href="https://www.epa.gov/outdoor-air-quality-data/download-daily-data" target="_blank">US EPA Pollution Data</a></li>
+  <li><a  href="https://www.statista.com" target="_blank">Statista</a></li>
+  <li><a  href="https://www.gallup.com/analytics/318923/world-poll-public-datasets.aspx" target="_blank">Gallup Analytics</a></li>
+  <li><a  href="https://data.census.gov/profile?q=United+States&g=0100000US" target="_blank">US Census Data</a></li>
+  <li><a  href="https://www.kaggle.com" target="_blank">Kaggle</a></li>
+</ul> <br>
 </div>
 
 <br> 
