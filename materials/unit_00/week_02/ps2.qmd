@@ -5,6 +5,8 @@ format:
     theme: zephyr
 ---
 
+Link to the description of the supermarket sales data available in the [Supermarket Sales Data Overview](https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html).
+
 ## Part 1: Getting started with Tableau
 
 Connect to the `supermarket_sales.csv`.
@@ -53,10 +55,23 @@ Save your workbook and publish it to your Tableau Public site.
 
 ## How to Submit
 
-You should create a new webpage on your Google site titled `Problem Set 2`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set.
+1. **Create a Webpage on Your Google Site:**
 
-Part 1 should contain answers to each question 1-10, including embedded figures from your Tableau Public site for questions 9 & 10. 
+- Title the new webpage Problem Set 2.
+- This page should include your responses to Part 1 and Part 2 of the problem set.
 
-Part 2 should contain the embedded workbook (with a tab for each figure) from your Tableau Public site. 
+2. **Include the Following Content:**
 
-Submit the link to your Google site webpage in Canvas.
+- **Part 1:**
+
+  - Provide answers to each question (1–10).
+  - For questions 9 and 10, embed the corresponding figures from your Tableau Public site directly on the webpage.
+
+- **Part 2:**
+
+  - Embed your Tableau Public workbook on the webpage. Ensure the workbook includes a tab for each figure.
+
+3. **Submit the Link to Your Google Site Page:**
+
+- Copy the URL of your Google Site webpage for Problem Set 2.
+- Submit this link via Canvas.
