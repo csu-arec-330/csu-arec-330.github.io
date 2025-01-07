@@ -1,71 +1,97 @@
 ---
-title: "Problem Set 4: Mini Project"
+title: "Project 00 (Problem Set 4): Mini Project"
 format: 
   html:
     theme: zephyr
 ---
 
-The objectives of the project are:
+The objectives of the project are to:
 
-- to integrate the R and Tableau skills that you have learned so far in the course 
+- Integrate the R and Tableau skills that you have learned so far in the course 
 
-- to analyze data with a question or insight in mind
+- Analyze data with a question or insight in mind
 
-- to communicate your insight through a webpage
+- Communicate your insight through a webpage
 
 ## Prompt
 
-You are the analysts tapped to investigate trends in sales data from three branches from 2017 through 2019.  You are not given much direction, but the boss (decision maker) wants to use data to make better decisions.  First, you should explore the data (conduct exploratory data analysis).  Your goal is to identify an insight worth sharing with management.  Once you find an insight, develop your [data story](https://csu-arec-330.github.io/materials/unit_00/week_04/lecture_00_week_04.html#/story-overview).  
+You have been tasked as analysts to investigate trends in sales data from three branches spanning 2017 through 2019. The decision-maker wants to leverage data insights to inform better business decisions but has not provided specific direction.
 
+Your role is to:
+
+1. Conduct exploratory data analysis (EDA) to understand the dataset.
+2. Identify a meaningful insight worth sharing with management.
+3. Develop a compelling data story that effectively communicates your findings to the audience.
+
+Once you find an insight, develop your [data story](https://csu-arec-330.github.io/materials/unit_00/week_04/lecture_00_week_04.html#/story-overview).  
 
 ## R: Data Processing
 
-1. You are given the data in three separate files (one for each year). You need to append the datasets (or bind them together) to produce a single dataset that you can output for Tableau to read.
+Link to the description of the supermarket sales data available in the [Supermarket Sales Data Overview](https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html).
 
-2. There was a problem integrating the E-wallet payment system data with the rest of the dataset.  The `gross_income` and `gross_margin_percentage` values are missing for transactions with E-wallet payments.  Use other information in the dataset to fill in the missing values (labeled as "NA") by calculating these fields.  *You can check your work by comparing your calculated values with those present in the dataset.*
+Using R, complete the following steps:
 
-3. Use R to write a csv file that your can read into Tableau.
+1. **Combine Datasets**. You are given sales data in three separate files (one for each year). Use R to append those datasets into a single dataset suitable for analysis and output it as a CSV file for Tableau.
+
+2. **Handle Missing Data**. There was a problem integrating the E-wallet payment system data with the rest of the dataset.  The `gross_income` and `gross_margin_percentage` values are missing for transactions with E-wallet payments.  Use other information in the dataset to fill in the missing values (labeled as "NA") by calculating these fields.  *You can check your work by comparing your calculated values with those present in the dataset.*
+
+3. **Export the Dataset**. Use R to write a csv file that your can read into Tableau.
 
 
 ## Tableau: Data Visualization
 
-Use Tableau to produce **at least three visualizations** that help you tell your data story.  These can be static or interactive visualizations.  The visualizations should adhere to the [guidelines for better data visualizations](../week_03/lecture_00_week_03.html#/guidelines-for-a-better-data-vis).
+Using Tableau, create **at least three visualizations** to support your data story. The visualizations can be static or interactive but should adhere to the [guidelines for better data visualizations](../week_03/lecture_00_week_03.html#/guidelines-for-a-better-data-vis).
+
+Visualization Requirements:
+
+- Each visualization should highlight a specific aspect of your analysis.
+- Be clear but informative while supporting your narrative effectively.
 
 
+## Google Sites: Webpage Report
 
-## Google sites: Webpage
+Present your analysis as a comprehensive webpage report. The webpage should:
 
-You will present your analysis in a webpage report. The webpage should contain a written narrative and data visualizations that support your narrative. We expect the written narrative to be **500 to 750 words**.  
-
-
-
-Here are some questions to consider as you engage in your analysis:  
+1. **Narrative**: Include a written narrative of **500 to 750 words** that explains your analysis and insights. Examples of questions you might ask the data are:
 
 - What are the sales trends over time? Are the patterns stable across branches/years?
-
 - What products generate the most sales?  Which products yield the highest gross income? Does this vary by location?
-
 - How is customer satisfaction trending?  Does this vary by location or product?
 
-Here are some questions to consider as you develop the webpage (not in any particular order):
+2. **Visualizations**: Embed Tableau visualizations to support your narrative. Be sure that they support a narrative consistent with the questions you are asking and answering.
+<!-- - What is your insight?  use data visuals to explain why something is the way it is-->
 
-- What is your insight?  use data visuals to explain why something is the way it is
+3. **Data Story Elements**: The webpage should contain these elements:
 
-- What is the action or change your insight implies? 
+- Question or compelling hook: What are you investigating?
+- Characters and setting: Context of the sales data and branches.
+- Preliminaries: Important observations or trends leading to your insight.
+- Answer or insight: What is your main finding?
+- Next steps: What can the manager/decision-maker do with this information? What recommendations do you have for further analysis?
 <!-- increase sales, identify underperforming regions -->
+- Limitations of analysis: What are the shortcomings of your analysis?  How might you alter your data collection processes to revisit your question in the future?
 
-- What are your key visuals?  Do they support a consistent narrative?
-
-- Does your webpage contain the data story elements? Question or compelling hook, Characters and setting, 
-Preliminaries, Answer (or insight), Next steps
-
-- Who is the audience? 
-<!-- management team -->
-
-- What are the shortcomings of your analysis?  How might you alter your data collection processes to revisit your question in the future?
-
+Remember: This report is being written for a management team, so be sure to write the report with this audience in mind.
 
 
 ## How to Submit
 
 You should create a new webpage on your Google site titled `Unit 0 Mini Project`. This webpage should include a write up of your analysis including a brief description of any data processing steps. Generate a log file from your R code and submit that to Canvas. Submit the link to your Google site webpage in Canvas.
+
+1. **Create a Webpage:**
+
+- Title your webpage Unit 0 Mini Project.
+- Include the following:
+  - A write-up of your analysis with a brief description of the data processing steps.
+  - Embedded Tableau visualizations.
+  - Your narrative (500–750 words).
+
+2. **Generate a Log File:**
+
+- Use the `sink()` command in R to create a log file that demonstrates your script ran successfully.
+
+3. **Submit via Canvas:**
+
+- Submit the link to your Google Site webpage in Canvas.
+- Upload your R log file as a separate submission.
+

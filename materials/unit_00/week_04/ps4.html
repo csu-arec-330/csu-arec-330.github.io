@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Problem Set 4: Mini Project</title>
+<title>Project 00 (Problem Set 4): Mini Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Problem Set 4: Mini Project</h1>
+<h1 class="title">Project 00 (Problem Set 4): Mini Project</h1>
 </div>
 
 
@@ -58,52 +58,99 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
 
-<p>The objectives of the project are:</p>
+
+<p>The objectives of the project are to:</p>
 <ul>
-<li><p>to integrate the R and Tableau skills that you have learned so far in the course</p></li>
-<li><p>to analyze data with a question or insight in mind</p></li>
-<li><p>to communicate your insight through a webpage</p></li>
+<li><p>Integrate the R and Tableau skills that you have learned so far in the course</p></li>
+<li><p>Analyze data with a question or insight in mind</p></li>
+<li><p>Communicate your insight through a webpage</p></li>
 </ul>
 <section id="prompt" class="level2">
 <h2 class="anchored" data-anchor-id="prompt">Prompt</h2>
-<p>You are the analysts tapped to investigate trends in sales data from three branches from 2017 through 2019. You are not given much direction, but the boss (decision maker) wants to use data to make better decisions. First, you should explore the data (conduct exploratory data analysis). Your goal is to identify an insight worth sharing with management. Once you find an insight, develop your <a href="https://csu-arec-330.github.io/materials/unit_00/week_04/lecture_00_week_04.html#/story-overview">data story</a>.</p>
+<p>You have been tasked as analysts to investigate trends in sales data from three branches spanning 2017 through 2019. The decision-maker wants to leverage data insights to inform better business decisions but has not provided specific direction.</p>
+<p>Your role is to:</p>
+<ol type="1">
+<li>Conduct exploratory data analysis (EDA) to understand the dataset.</li>
+<li>Identify a meaningful insight worth sharing with management.</li>
+<li>Develop a compelling data story that effectively communicates your findings to the audience.</li>
+</ol>
+<p>Once you find an insight, develop your <a href="https://csu-arec-330.github.io/materials/unit_00/week_04/lecture_00_week_04.html#/story-overview">data story</a>.</p>
 </section>
 <section id="r-data-processing" class="level2">
 <h2 class="anchored" data-anchor-id="r-data-processing">R: Data Processing</h2>
+<p>Link to the description of the supermarket sales data available in the <a href="https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html">Supermarket Sales Data Overview</a>.</p>
+<p>Using R, complete the following steps:</p>
 <ol type="1">
-<li><p>You are given the data in three separate files (one for each year). You need to append the datasets (or bind them together) to produce a single dataset that you can output for Tableau to read.</p></li>
-<li><p>There was a problem integrating the E-wallet payment system data with the rest of the dataset. The <code>gross_income</code> and <code>gross_margin_percentage</code> values are missing for transactions with E-wallet payments. Use other information in the dataset to fill in the missing values (labeled as “NA”) by calculating these fields. <em>You can check your work by comparing your calculated values with those present in the dataset.</em></p></li>
-<li><p>Use R to write a csv file that your can read into Tableau.</p></li>
+<li><p><strong>Combine Datasets</strong>. You are given sales data in three separate files (one for each year). Use R to append those datasets into a single dataset suitable for analysis and output it as a CSV file for Tableau.</p></li>
+<li><p><strong>Handle Missing Data</strong>. There was a problem integrating the E-wallet payment system data with the rest of the dataset. The <code>gross_income</code> and <code>gross_margin_percentage</code> values are missing for transactions with E-wallet payments. Use other information in the dataset to fill in the missing values (labeled as “NA”) by calculating these fields. <em>You can check your work by comparing your calculated values with those present in the dataset.</em></p></li>
+<li><p><strong>Export the Dataset</strong>. Use R to write a csv file that your can read into Tableau.</p></li>
 </ol>
 </section>
 <section id="tableau-data-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="tableau-data-visualization">Tableau: Data Visualization</h2>
-<p>Use Tableau to produce <strong>at least three visualizations</strong> that help you tell your data story. These can be static or interactive visualizations. The visualizations should adhere to the <a href="../week_03/lecture_00_week_03.html#/guidelines-for-a-better-data-vis">guidelines for better data visualizations</a>.</p>
+<p>Using Tableau, create <strong>at least three visualizations</strong> to support your data story. The visualizations can be static or interactive but should adhere to the <a href="../week_03/lecture_00_week_03.html#/guidelines-for-a-better-data-vis">guidelines for better data visualizations</a>.</p>
+<p>Visualization Requirements:</p>
+<ul>
+<li>Each visualization should highlight a specific aspect of your analysis.</li>
+<li>Be clear but informative while supporting your narrative effectively.</li>
+</ul>
 </section>
-<section id="google-sites-webpage" class="level2">
-<h2 class="anchored" data-anchor-id="google-sites-webpage">Google sites: Webpage</h2>
-<p>You will present your analysis in a webpage report. The webpage should contain a written narrative and data visualizations that support your narrative. We expect the written narrative to be <strong>500 to 750 words</strong>.</p>
-<p>Here are some questions to consider as you engage in your analysis:</p>
+<section id="google-sites-webpage-report" class="level2">
+<h2 class="anchored" data-anchor-id="google-sites-webpage-report">Google Sites: Webpage Report</h2>
+<p>Present your analysis as a comprehensive webpage report. The webpage should:</p>
+<ol type="1">
+<li><strong>Narrative</strong>: Include a written narrative of <strong>500 to 750 words</strong> that explains your analysis and insights. Examples of questions you might ask the data are:</li>
+</ol>
 <ul>
-<li><p>What are the sales trends over time? Are the patterns stable across branches/years?</p></li>
-<li><p>What products generate the most sales? Which products yield the highest gross income? Does this vary by location?</p></li>
-<li><p>How is customer satisfaction trending? Does this vary by location or product?</p></li>
+<li>What are the sales trends over time? Are the patterns stable across branches/years?</li>
+<li>What products generate the most sales? Which products yield the highest gross income? Does this vary by location?</li>
+<li>How is customer satisfaction trending? Does this vary by location or product?</li>
 </ul>
-<p>Here are some questions to consider as you develop the webpage (not in any particular order):</p>
+<ol start="2" type="1">
+<li><p><strong>Visualizations</strong>: Embed Tableau visualizations to support your narrative. Be sure that they support a narrative consistent with the questions you are asking and answering. <!-- - What is your insight?  use data visuals to explain why something is the way it is--></p></li>
+<li><p><strong>Data Story Elements</strong>: The webpage should contain these elements:</p></li>
+</ol>
 <ul>
-<li><p>What is your insight? use data visuals to explain why something is the way it is</p></li>
-<li><p>What is the action or change your insight implies? <!-- increase sales, identify underperforming regions --></p></li>
-<li><p>What are your key visuals? Do they support a consistent narrative?</p></li>
-<li><p>Does your webpage contain the data story elements? Question or compelling hook, Characters and setting, Preliminaries, Answer (or insight), Next steps</p></li>
-<li><p>Who is the audience? <!-- management team --></p></li>
-<li><p>What are the shortcomings of your analysis? How might you alter your data collection processes to revisit your question in the future?</p></li>
+<li>Question or compelling hook: What are you investigating?</li>
+<li>Characters and setting: Context of the sales data and branches.</li>
+<li>Preliminaries: Important observations or trends leading to your insight.</li>
+<li>Answer or insight: What is your main finding?</li>
+<li>Next steps: What can the manager/decision-maker do with this information? What recommendations do you have for further analysis? <!-- increase sales, identify underperforming regions --></li>
+<li>Limitations of analysis: What are the shortcomings of your analysis? How might you alter your data collection processes to revisit your question in the future?</li>
 </ul>
+<p>Remember: This report is being written for a management team, so be sure to write the report with this audience in mind.</p>
 </section>
 <section id="how-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
 <p>You should create a new webpage on your Google site titled <code>Unit 0 Mini Project</code>. This webpage should include a write up of your analysis including a brief description of any data processing steps. Generate a log file from your R code and submit that to Canvas. Submit the link to your Google site webpage in Canvas.</p>
+<ol type="1">
+<li><strong>Create a Webpage:</strong></li>
+</ol>
+<ul>
+<li>Title your webpage Unit 0 Mini Project.</li>
+<li>Include the following:
+<ul>
+<li>A write-up of your analysis with a brief description of the data processing steps.</li>
+<li>Embedded Tableau visualizations.</li>
+<li>Your narrative (500–750 words).</li>
+</ul></li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Generate a Log File:</strong></li>
+</ol>
+<ul>
+<li>Use the <code>sink()</code> command in R to create a log file that demonstrates your script ran successfully.</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Submit via Canvas:</strong></li>
+</ol>
+<ul>
+<li>Submit the link to your Google Site webpage in Canvas.</li>
+<li>Upload your R log file as a separate submission.</li>
+</ul>
 </section>
 
 </main>
@@ -143,18 +190,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -186,11 +222,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -200,8 +275,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -213,7 +297,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -257,6 +464,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -282,6 +490,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -342,6 +576,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

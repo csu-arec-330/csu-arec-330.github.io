@@ -161,8 +161,8 @@ Introduction to Tableau
 ## How to succeed in this course
 
 (1) Attend class lectures (W) and labs (F) (5% of grade).
-(2) Don't miss the quizzes (20% of grade).
-(3) Review project assignments in advance. There are four projects (75% of grade).
+(2) Don't miss the quizzes (20% of grade). *Lowest quiz grade is dropped.
+(3) Review project assignments in advance. Each project is broken up into weekly problem sets. There are four projects (75% of grade).
 
 &nbsp; 
 
