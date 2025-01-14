@@ -92,8 +92,9 @@ All course materials are freely available on the course website. There is no sin
 
 The course will require the use of [R (statistical computing software)](https://www.r-project.org/) and [Tableau (business intelligence software)](https://www.tableau.com/). R is an open source platform free to anyone. Tableau is freely available to you while you are a student at CSU. You will need to use these tools outside of class, so we recommend installing them on your own computer. Otherwise, it will be your responsibility to use the computer labs outside of class to complete assignments.
 
+<!--
 Another option for accessing R is to use the DARE compute server. You can access RStudio on the server here: <http://darecompute-01.aggie.colostate.edu:8787/>. This link should simply work while you are **on campus**. While you are **off campus**, you need to active the virtual private network (VPN). You can find instructions for setting up the VPN here: <https://it.colostate.edu/cybersecurity/globalprotect-vpn/>.
-
+-->
 We will use iClicker software to take attendance at lecture and assess understanding of the material. If you have not already joined the course, you can do so using this link: <https://join.iclicker.com/BIDY>
 
 ## Course Structure
@@ -204,7 +205,7 @@ Students are encouraged to positively impact the academic integrity culture of C
 
 Examples of academic misconduct include (but are not limited to):
 
-1.  Cheating -- Cheating includes using unauthorized sources of information and providing or receiving unauthorized assistance on any form of academic work or engaging in any behavior specifically prohibited by the instructor in the course syllabus or class presentation. **Do not use generative AI (e.g., Chat GPT) to generate content that you represent as your own. You may use the tool as a coding assistant to solve problems and help you understand the software used in the course**
+1.  Cheating -- Cheating includes using unauthorized sources of information and providing or receiving unauthorized assistance on any form of academic work or engaging in any behavior specifically prohibited by the instructor in the course syllabus or class presentation. **You may use generative AI tools (e.g., ChatGPT) as a coding assistant to help you solve problems and to help you understand the software used in this course. However, if you choose to use such tools, you are claiming the resulting work as your own, and you bear full responsibility for its accuracy and appropriateness. In your assignments, you must also disclose if AI tools were used and how. Doing so will not harm your grade; rather, it helps me guide you in using these tools effectively to enhance your grasp of the material. Remember, generative AI cannot advocate for itself or provide proper attributions; it is your responsibility to ensure integrity in your work.**
 
 2.  Plagiarism -- Plagiarism includes the copying of language, structure, images, ideas, or thoughts of another, and representing them as one's own without proper acknowledgment, and is related only to work submitted for credit. Also included is the failure to cite sources properly; sources must always be appropriately referenced, whether the source is printed, electronic or spoken.
 

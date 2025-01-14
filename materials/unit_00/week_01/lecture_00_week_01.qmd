@@ -4,7 +4,7 @@ format:
   revealjs:
     theme: night
 ---
-## Meet your instructor, Dr. Lauren Chenarides {.scrollable}
+## Welcome to D$^3$! About me. {.scrollable}
 
 | ![Image 1](lauren/farmers-market.jpg){width=600} | 
 |:-------------------------------------:|
@@ -20,86 +20,79 @@ format:
 | I am a data junkie. |
 |  |
 
-## Your first assignment (15 points): 
+## I'd like to get to know you, too. 
+
+**Your first assignment (15 points):**
+
 Schedule a 15-minute one-on-one meeting with me. All meetings must take place before Feb 7th.
 
 [Book your one-on-one here.](https://app.usemotion.com/meet/lauren-chenarides/arec330)
 
-<!--
-#
-**To get to know you better, we have a few questions for you . . .**
 
-#
-**Would you choose to watch a documentary about the mysteries of the universe or the depths of the ocean over a popular TV series?**
-
-(1) Definitely yes
-
-&nbsp; 
-
-(2) Neutral
-
-&nbsp; 
-
-(3) Definitely not
-
-
-#
-**Do you prefer watching live sports events, such as basketball or football games, over educational programs about nature or history?**
-
-(1) Definitely yes
-
-&nbsp; 
-
-(2) Neutral
-
-&nbsp; 
-
-(3) Definitely not
-
-#
-**If you come across a news article about a new scientific discovery or technology, are you likely to read it immediately?**
-
-(1) Definitely yes
-
-&nbsp; 
-
-(2) Neutral
-
-&nbsp; 
-
-(3) Definitely not
-
-# 
-**Would you rather watch reality TV shows or celebrity gossip programs instead of documentaries on nature or scientific topics?**
-
-(1) Definitely yes
-
-&nbsp; 
-
-(2) Neutral
-
-&nbsp; 
-
-(3) Definitely not
-
-
-# Thank you. Now onto the lecture.
--->
 ## Data is not the same as information. It is merely a collection of numbers and facts until we give it meaning. (Tim Harford, *The Data Detective*)
 
-## Data IRL
+# Let's start with some examples.
+
+## 
+![Aldi leaves town ‘without a single grocery store’](https://www.the-sun.com/wp-content/uploads/sites/6/2024/11/glass-door-red-white-closed-948417732.jpg){width="90%" height="90%"}
+
+## Addressing Food Deserts with Data {.scrollable}
+
+How can communities improve access to affordable, healthy food? *Data*! 
+
+Using data-driven analysis, researchers and policymakers identify and address food deserts: 
+
+- Map underserved areas by analyzing geographic and transportation data alongside income levels.
+- Predict how adding a new grocery store or market impacts household food access, shopping behaviors, and local competition.
+
+For example, the abrupt closure of an ALDI store in West Pullman, Chicago in November 2024 left the neighborhood without a grocery store, exacerbating food desert conditions. Using data to proactively identify such risks can help communities and retailers address food insecurity before it worsens. ([Source](https://www.the-sun.com/money/12872786/aldi-closure-leaves-town-without-grocery-store/))
+
+## Explore Food Access in the U.S. {.scrollable}
+
+The [**Food Access Research Atlas**](https://www.ers.usda.gov/data-products/food-access-research-atlas/go-to-the-atlas) allows users to visualize food access indicators across the United States, helping identify food deserts and areas with limited access to healthy foods.
+
+<iframe src="https://www.ers.usda.gov/data-products/food-access-research-atlas/go-to-the-atlas" 
+        width="100%" 
+        height="400px" 
+        style="border: none;">
+</iframe>
+
+Understanding food retail geography allows policymakers and research to answer questions like:
+
+- Which areas of the country are most affected by food deserts?
+
+- How might policy interventions or new retail locations address access challenges?
+
+- What demographic or economic factors correlate with low food access?
+
+## 
+![Empty shelves cost retailers billions](https://inventoro.com/files/uploads/2020/10/Snimek-obrazovky-2020-10-29-v-11.24.41.png){width="90%" height="90%"}
+
+## Preventing Stockouts with Inventory Management {.scrollable}
+
+Stockouts don't just frustrate customers—they can cost businesses their loyalty. 
+
+Research shows that by the third time a product is out of stock, **70%** of customers will not return to the store. ([Source](https://www.veeqo.com/gb/blog/preventing-stockouts))
+
+Retailers use data analytics to minimize stockouts by:
+
+- Accurately forecasting demand to avoid overstock or understock.
+- Tracking real-time inventory levels to ensure timely restocking.
+- Analyzing sales patterns to predict peak demand periods.
+
+Effective inventory management is an application of D$^3$ that helps businesses retain customers and maintain profitability.
 
 <!-- Oakland A video -->
-
-{{< video https://youtu.be/vQbUZZVv4Rg width="90%" height="90%" >}}
-
 
 <!-- 
 The A's win the American league west with one of the lowest payrolls in baseball.  
 Sabermetrics is use of in game data to drive team management decisions (sign these players because they will produce numbers for good value)
 -->
 
---- 
+<!--
+
+{{< video https://youtu.be/vQbUZZVv4Rg width="90%" height="90%" >}}
+
 ## The Oakland A's
 
 The A's go on to *win* the American League West with one of the lowest payrolls in baseball.
@@ -111,19 +104,20 @@ The team uses in-game data to drive team management decisions:
   - sign players because they have high stats (e.g., on base percentage) for a good value
   
   - tell players to look for certain pitches because they tend to hit those pitches better
-  
+-->
+
 ## Data-driven decision making is a process in which decisions are based on data and analysis rather than on intuition or personal experience.
 
 ## The objective of this course is to introduce this process of transforming data into actionable insights.
 
 ## This process requires understanding how to *read* figures (e.g., graphs, charts, and maps), *discern* between "good" figures and "bad" figures, and *tell effective stories* using data-derived figures. 
 
-## Let's start with a few examples
+## Let's discuss these figures.
 (1) What does the figure tell you?
 
 (2) Is it clear what the author's did to produce the figure?
 
-(3) Was the research a shock or exactly as you expected?
+(3) Was the research finding a shock or exactly as you expected?
 
 &nbsp; 
 
@@ -134,7 +128,7 @@ Example 2: [Sustainable Happiness](https://informationisbeautiful.net/wp-content
 Example 3: [Mapping Segregation](https://www.nytimes.com/interactive/2015/07/08/us/census-race-map.html)
 
 ## Sharpening your data visualization tools
-By the end of this course, you will learn skills to produce high-quality figures.
+By the end of this course, you will learn skills to produce high-quality figures by processing large datasets using R and Tableau.
 
 Example 1: [Student 1](https://sites.google.com/view/csudarecourserepository-dodd/home)
 
@@ -144,7 +138,7 @@ Example 2: [Student 2](https://sites.google.com/view/codyarec330/unit-0-mini-pro
 
 &nbsp; 
 
-[Syllabus](../../syllabus.html) and course orientation
+[Syllabus](https://csu-arec-330.github.io/materials/syllabus.html) and course orientation
 
 &nbsp; 
 
@@ -164,13 +158,22 @@ Introduction to Tableau
 (2) Don't miss the quizzes (20% of grade). *Lowest quiz grade is dropped.
 (3) Review project assignments in advance. Each project is broken up into weekly problem sets. There are four projects (75% of grade).
 
-&nbsp; 
+## Generative AI and Coding {.scrollable}
 
+- You **may use generative AI tools (e.g., ChatGPT)** as coding assistants to help solve problems or to help you understand the software used in this course.  
+- However, if you choose to use such tools, you are claiming the resulting work as your own, and you bear full responsibility for its accuracy and appropriateness.  
+- **You must disclose** if AI tools were used and how they were applied.  
+  - **Example**: "Used ChatGPT to debug this code and suggest ways to improve its readability."  
+- Disclosure will **not harm your grade** and helps me guide you in using AI effectively.  
+
+**Reminder:** Generative AI cannot advocate for itself or attribute content appropriately. Integrity in your submissions is your responsibility.
+
+## Office Hours
 <!--Dr. Bayham's Office Hours: Wednesday 2-3 pm, Rm 203-->
 
 Dr. Chenarides' Office Hours: Wednesday 2-3 pm, Rm 201
 
-Diya's Office Hours: Friday 2:45-3:45 pm, Rm 165
+Diya's (TA) Office Hours: Friday 2:45-3:45 pm, Rm 165
 
 ## D$^3$M {.smaller}
 
@@ -306,3 +309,64 @@ Bring computers on Friday -->
 
 ## What is Tableau?
 {{< video https://youtu.be/hb-qwRAltOw?si=euDN6X_E0PNkM83z width="90%" height="90%" >}}
+
+<!--
+#
+**To get to know you better, we have a few questions for you . . .**
+
+#
+**Would you choose to watch a documentary about the mysteries of the universe or the depths of the ocean over a popular TV series?**
+
+(1) Definitely yes
+
+&nbsp; 
+
+(2) Neutral
+
+&nbsp; 
+
+(3) Definitely not
+
+
+#
+**Do you prefer watching live sports events, such as basketball or football games, over educational programs about nature or history?**
+
+(1) Definitely yes
+
+&nbsp; 
+
+(2) Neutral
+
+&nbsp; 
+
+(3) Definitely not
+
+#
+**If you come across a news article about a new scientific discovery or technology, are you likely to read it immediately?**
+
+(1) Definitely yes
+
+&nbsp; 
+
+(2) Neutral
+
+&nbsp; 
+
+(3) Definitely not
+
+# 
+**Would you rather watch reality TV shows or celebrity gossip programs instead of documentaries on nature or scientific topics?**
+
+(1) Definitely yes
+
+&nbsp; 
+
+(2) Neutral
+
+&nbsp; 
+
+(3) Definitely not
+
+
+# Thank you. Now onto the lecture.
+-->
