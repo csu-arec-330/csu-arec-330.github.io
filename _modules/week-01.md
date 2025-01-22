@@ -10,11 +10,11 @@ title: "Week 1: Course Overview"
 
 <b>Lab: Jan 24</b> <br>
 
-<a  href="/materials/unit_00/week_01/lab_etiquette.html" target="_blank">Lab Etiquette</a> <br> <br>
+<a  href="/materials/unit_00/week_01/lab_etiquette.html" target="_blank">Lab Etiquette</a> <br>
 
-<a  href="/materials/unit_00/week_01/lab_00_week_01.html" target="_blank">Week 1 Lab Notes</a> <br> <br>
+<a  href="/materials/unit_00/week_01/lab_00_week_01.html" target="_blank">Week 1 Lab Notes</a> <br> 
 
-<a  href="/materials/unit_00/week_01/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br>
+<a  href="/materials/unit_00/week_01/handout_00_week_01.html" target="_blank">Tableau Terminology Handout</a> <br> <br>
 
 <b>Problem Set 1: Due Jan 31 at 11:59 PM</b> <br>
 
