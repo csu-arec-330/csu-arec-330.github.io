@@ -15,19 +15,19 @@ format:
 
 -  Get oriented with RStudio
 
--  Conduct basic calculations in R
-
 -  Navigate directories from within R
+
+-  Conduct basic calculations in R
 
 -  Read in an external data set in R
 
 -  Load a package in R
 
--  Create your google site and a project page
+-  Create your Google site and a project page
 
 -  Apply for Teableau academic license
 
--  Download Tableau desktop and ensure working correctly
+-  Download Tableau desktop (if using personal computers) and ensure working correctly
 
 -  Register for Tableau public
 
@@ -36,7 +36,14 @@ format:
 
 Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.
 
-Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <https://cran.r-project.org/>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>. 
+:::{.callout-important}
+Before lab 1, if you are using your personal computer, you will need to install R and R Studio on your computer. 
+
+**Step 1: Installing R**: You can download the latest version of R for free from the official website <https://cran.r-project.org/>. 
+
+**Step 2: Installing RStudio**: Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <https://rstudio.com/>. 
+:::
+
 <!--Alternatively, you will have access to a version of RStudio on a CSU server that you can access via web browser here: <http://darecompute-01.aggie.colostate.edu:8787/>.  I will provide you with log in credentials in class.-->
 
 RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient.  Open up RStudio and you should see something that looks like this:
@@ -57,7 +64,7 @@ The RStudio interface is divided into several panels:
 
 Now that you have both R and RStudio installed and running, let's dive into some basic concepts of the R programming language.
 
-### Open a new R script
+### Opening a new R script
 
 Because R is a command-line application, we can write a script (i.e., text file) with a sequence of commands.  There are many benefits to scripting:  
 
@@ -92,7 +99,7 @@ setwd("C:/Users/YourName/Documents/MyRProjects")
 
 After running this command, R will use the specified folder as the working directory for the rest of the session.
 
-#### Tips for Managing Your Working Directory
+#### Tips for managing your working directory
 1. In RStudio, you can also set the working directory interactively by going to **Session > Set Working Directory > Choose Directory...** and selecting the folder.
 
 2. You can see the contents of your working directory in the **Files** panel in RStudio.
@@ -101,10 +108,11 @@ After running this command, R will use the specified folder as the working direc
 
 > Think of the working directory as a specific "drawer" in your desk where you store tools. When you start working, you know where to find your materials and where to put things back.
 
-### Basics
+## R Basics
 
 R is an interpreted language, which means that you can enter commands directly into the console and see the results immediately. You can start the R console by opening RStudio and clicking on the "Console" tab.
 
+### Defining variables 
 To assign a value to a variable in R, you can use the assignment operator `<-` or `=` like this:
 
 ```{r}
@@ -113,12 +121,37 @@ x <- 5
 x = 5 #Does the same thing
 ```
 
-Here, we have created a variable called `x` and assigned it the value of 5.  Anything following the hashtag on the same line is interpreted as a comment and not executed. Once you assign a variable a value, you can see it in your environment panel.  You can use the `print()` function to display the value of a variable:
+Here, we have created a variable called `x` and assigned it the value of 5.  Once you assign a variable a value, you can see it in your environment panel.  You can use the `print()` function to display the value of a variable:
 ```{r}
 print(x)
 ```
 
-You can also perform basic arithmetic operations in R using the standard operators (`+, -, *, /`):
+:::{.callout-tip}
+## Code comments
+
+When you have multiple pieces of code in a single code chunk (or even a single piece of code), it is recommended that you use code comments to explain what your code is doing. Since R treats everything inside a code chunk as code, if you want to write some text comments inside a code chunk, you can tell R that your text is not code by placing a `#` symbol at the beginning of your text like this:
+
+```{r}
+# compute 4 times 5
+4 * 5
+```
+
+R will ignore anything that follows a `#` symbol. So in the above code chunk, R will ignore the first line with the code comment "compute 4 times 5", and then it will compute the R code on the next line, `4 * 5`. 
+
+Code comments are really helpful for explaining what your code is doing. I usually reserve the text *outside* code chunks for more general discussion of my data, analysis, and results and I reserve code comments *inside* code chunks for explaining my code itself. Since I tend to forget the reasons behind certain decisions I made in my code, adding explanations in code comments helps me remember my motivations and intentions days, months, or even years later.
+:::
+
+### Doing math with R
+You can also perform basic arithmetic operations in R using the standard operators (`+, -, *, /`). Here are some helpful math symbols in R:
+
+* Parentheses: `(`, `)`
+* Exponents: `^` or `**`
+* Multiply: `*`
+* Divide: `/`
+* Add: `+`
+* Subtract: `-`
+
+Some basic mathematical computations you can compute in R:
 ```{r}
 y <- 3
 z <- x + y
@@ -127,11 +160,12 @@ print(z)
 
 First, we assign the variable `y` the value 3.  Then, we assign `z` the value of `x` (assigned 5 earlier) plus `y` (just assigned 3), which sum to 8.
 
-:::{.callout-important}
+:::{.callout-tip}
 ## Comprehension Check
 Try assigning the variables `a` and `b` different values and dividing them.
 :::
 
+### Creating vectors
 R also has a wide range of data types, including: numerical, character, and logical.  Variables can be different datatypes.  Collections of variables are called a vector - a one-dimensional array of data.  You can create a vector using the "c()" function, which stands for concatenate.  A vector may only contain one type of data.
 
 ```{r}
@@ -149,7 +183,7 @@ A single entry in a vector is called an element. You can access elements of a ve
 print(numbers[1])
 ```
 
-:::{.callout-important}
+:::{.callout-tip}
 ## Comprehension Check
 Try accessing a different element of the vector `numbers` or one of the other vectors.
 :::
@@ -169,14 +203,9 @@ Depending on the datatype, there are functions that operate on the vector.  For 
 print(sum(numbers))
 ```
 
-:::{.callout-important}
+:::{.callout-tip}
 ## Comprehension Check
 Can you sum the numbers of the vector `characters`?  How about logical?
-:::
-
-:::{.callout-important}
-## Challenge
-Can you figure out how to calculate the product of the vector `numbers`?
 :::
 
 You can also add, subtract, multiply, and divide all of the numbers in a vector
@@ -189,7 +218,12 @@ Or add, subtract, multiply, and divide numbers of equal-length vectors
 print(numbers + numbers*2)
 ```
 
-### data.frames
+:::{.callout-tip}
+## Challenge
+Can you figure out how to calculate the product of the vector `numbers`?
+:::
+
+### Building data frames
 
 Using R like a fancy calculator is intended to help you understand how R works.  R is generally used to analyze data sets.  Data sets are collections of equal-length vectors in a table or what R calls a `data.frame`. Here is a simple example:
 ```{r}
@@ -208,7 +242,7 @@ df <- data.frame(numbers=numbers[1:3],
 print(df)
 ```
 
-:::{.callout-important}
+:::{.callout-tip}
 ## Comprehension Check
 Why did I subset the vector numbers?
 :::
@@ -217,7 +251,7 @@ Why did I subset the vector numbers?
 
 Creating data.frames by hand is tedious.  Fortunately, R has some utilities to read data stored in certain files types.  Before we explore R's ability to read data, we must understand how R interacts with the computer's file system.  
 
-:::{.callout-tip}
+:::{.callout-note}
 ## Recall
 At any point in time, you are in an active directory (similar to windows explorer or macos finder).  You can ask R to tell you the current working directory (where R is looking at the moment).
 ```{r}
@@ -236,13 +270,15 @@ To read data into R, we will use another function built into R.  We will be read
 super_sales <- read.csv("../inputs/supermarket_sales.csv")
 ```
 
-### Naming Objects
+## Best practices when using R
+
+### Naming objects
 
 You can give objects almost any name as long as it does not start with a number and it cannot contain a space.  However, you want to choose descriptive names so that your future self and others will find it easier to read.  I prefer what is called [snake_case](https://en.wikipedia.org/wiki/Snake_case) where words are separated by an underscore and all lower case.  There are other options and it is a matter of opinion.  I suggest choosing one and sticking with it.
 
 ### Packages or Libraries
 
-Finally, R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.^[If you like this concept, you might explore the linux operating system. I use [Ubuntu](https://ubuntu.com/download).] You can install and load a package using the "install.packages()" and "library()" functions:
+R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.^[If you like this concept, you might explore the linux operating system. I use [Ubuntu](https://ubuntu.com/download).] You can install and load a package using the "install.packages()" and "library()" functions:
 
 ```{r}
 #Run only once 

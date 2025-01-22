@@ -82,13 +82,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link" data-scroll-target="#introduction-to-r">Introduction to R</a>
   <ul class="collapse">
-  <li><a href="#open-a-new-r-script" id="toc-open-a-new-r-script" class="nav-link" data-scroll-target="#open-a-new-r-script">Open a new R script</a></li>
+  <li><a href="#opening-a-new-r-script" id="toc-opening-a-new-r-script" class="nav-link" data-scroll-target="#opening-a-new-r-script">Opening a new R script</a></li>
   <li><a href="#locating-your-working-directory" id="toc-locating-your-working-directory" class="nav-link" data-scroll-target="#locating-your-working-directory">Locating your working directory</a></li>
-  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
+  </ul></li>
+  <li><a href="#r-basics" id="toc-r-basics" class="nav-link" data-scroll-target="#r-basics">R Basics</a>
+  <ul class="collapse">
+  <li><a href="#defining-variables" id="toc-defining-variables" class="nav-link" data-scroll-target="#defining-variables">Defining variables</a></li>
+  <li><a href="#doing-math-with-r" id="toc-doing-math-with-r" class="nav-link" data-scroll-target="#doing-math-with-r">Doing math with R</a></li>
+  <li><a href="#creating-vectors" id="toc-creating-vectors" class="nav-link" data-scroll-target="#creating-vectors">Creating vectors</a></li>
   <li><a href="#indexing" id="toc-indexing" class="nav-link" data-scroll-target="#indexing">Indexing</a></li>
-  <li><a href="#data.frames" id="toc-data.frames" class="nav-link" data-scroll-target="#data.frames">data.frames</a></li>
+  <li><a href="#building-data-frames" id="toc-building-data-frames" class="nav-link" data-scroll-target="#building-data-frames">Building data frames</a></li>
   <li><a href="#reading-data" id="toc-reading-data" class="nav-link" data-scroll-target="#reading-data">Reading data</a></li>
-  <li><a href="#naming-objects" id="toc-naming-objects" class="nav-link" data-scroll-target="#naming-objects">Naming Objects</a></li>
+  </ul></li>
+  <li><a href="#best-practices-when-using-r" id="toc-best-practices-when-using-r" class="nav-link" data-scroll-target="#best-practices-when-using-r">Best practices when using R</a>
+  <ul class="collapse">
+  <li><a href="#naming-objects" id="toc-naming-objects" class="nav-link" data-scroll-target="#naming-objects">Naming objects</a></li>
   <li><a href="#packages-or-libraries" id="toc-packages-or-libraries" class="nav-link" data-scroll-target="#packages-or-libraries">Packages or Libraries</a></li>
   <li><a href="#running-scripts-and-saving-output" id="toc-running-scripts-and-saving-output" class="nav-link" data-scroll-target="#running-scripts-and-saving-output">Running scripts and saving output</a></li>
   <li><a href="#creating-a-log-file-with-sink" id="toc-creating-a-log-file-with-sink" class="nav-link" data-scroll-target="#creating-a-log-file-with-sink">Creating a log file with <code>sink()</code></a></li>
@@ -127,20 +135,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>This lab contributes to Course Objectives 2, 3, &amp; 4</p></li>
 <li><p>Open R/Rstudio and ensure it is functioning properly</p></li>
 <li><p>Get oriented with RStudio</p></li>
-<li><p>Conduct basic calculations in R</p></li>
 <li><p>Navigate directories from within R</p></li>
+<li><p>Conduct basic calculations in R</p></li>
 <li><p>Read in an external data set in R</p></li>
 <li><p>Load a package in R</p></li>
-<li><p>Create your google site and a project page</p></li>
+<li><p>Create your Google site and a project page</p></li>
 <li><p>Apply for Teableau academic license</p></li>
-<li><p>Download Tableau desktop and ensure working correctly</p></li>
+<li><p>Download Tableau desktop (if using personal computers) and ensure working correctly</p></li>
 <li><p>Register for Tableau public</p></li>
 </ul>
 </section>
 <section id="introduction-to-r" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-to-r">Introduction to R</h2>
 <p>Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.</p>
-<p>Before we get started, you will need to install R on your computer. You can download the latest version of R for free from the official website <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>. Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <a href="https://rstudio.com/" class="uri">https://rstudio.com/</a>. <!--Alternatively, you will have access to a version of RStudio on a CSU server that you can access via web browser here: <http://darecompute-01.aggie.colostate.edu:8787/>.  I will provide you with log in credentials in class.--></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before lab 1, if you are using your personal computer, you will need to install R and R Studio on your computer.</p>
+<p><strong>Step 1: Installing R</strong>: You can download the latest version of R for free from the official website <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>.</p>
+<p><strong>Step 2: Installing RStudio</strong>: Once the installation is complete, you will also need to install RStudio, a popular integrated development environment (IDE) for R. You can download RStudio from the official website <a href="https://rstudio.com/" class="uri">https://rstudio.com/</a>.</p>
+</div>
+</div>
+<!--Alternatively, you will have access to a version of RStudio on a CSU server that you can access via web browser here: <http://darecompute-01.aggie.colostate.edu:8787/>.  I will provide you with log in credentials in class.-->
 <p>RStudio provides a user-friendly interface for working with R and offers a variety of features to make working with R easier and more efficient. Open up RStudio and you should see something that looks like this:</p>
 <p><img src="figs/rstudio-panes-labeled.jpeg" class="img-fluid"></p>
 <p>The RStudio interface is divided into several panels:</p>
@@ -151,8 +174,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>The <strong>Output</strong> panel includes several tabs (Files, Plots, Packages, and Help) that provide access to various resources and tools.</p></li>
 </ul>
 <p>Now that you have both R and RStudio installed and running, let’s dive into some basic concepts of the R programming language.</p>
-<section id="open-a-new-r-script" class="level3">
-<h3 class="anchored" data-anchor-id="open-a-new-r-script">Open a new R script</h3>
+<section id="opening-a-new-r-script" class="level3">
+<h3 class="anchored" data-anchor-id="opening-a-new-r-script">Opening a new R script</h3>
 <p>Because R is a command-line application, we can write a script (i.e., text file) with a sequence of commands. There are many benefits to scripting:</p>
 <ol type="1">
 <li>You can save a record of the commands if you need to reproduce the analysis.<br>
@@ -180,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>After running this command, R will use the specified folder as the working directory for the rest of the session.</p>
 <section id="tips-for-managing-your-working-directory" class="level4">
-<h4 class="anchored" data-anchor-id="tips-for-managing-your-working-directory">Tips for Managing Your Working Directory</h4>
+<h4 class="anchored" data-anchor-id="tips-for-managing-your-working-directory">Tips for managing your working directory</h4>
 <ol type="1">
 <li><p>In RStudio, you can also set the working directory interactively by going to <strong>Session &gt; Set Working Directory &gt; Choose Directory…</strong> and selecting the folder.</p></li>
 <li><p>You can see the contents of your working directory in the <strong>Files</strong> panel in RStudio.</p></li>
@@ -191,33 +214,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 </section>
 </section>
-<section id="basics" class="level3">
-<h3 class="anchored" data-anchor-id="basics">Basics</h3>
+</section>
+<section id="r-basics" class="level2">
+<h2 class="anchored" data-anchor-id="r-basics">R Basics</h2>
 <p>R is an interpreted language, which means that you can enter commands directly into the console and see the results immediately. You can start the R console by opening RStudio and clicking on the “Console” tab.</p>
+<section id="defining-variables" class="level3">
+<h3 class="anchored" data-anchor-id="defining-variables">Defining variables</h3>
 <p>To assign a value to a variable in R, you can use the assignment operator <code>&lt;-</code> or <code>=</code> like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">5</span> <span class="co">#Does the same thing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Here, we have created a variable called <code>x</code> and assigned it the value of 5. Anything following the hashtag on the same line is interpreted as a comment and not executed. Once you assign a variable a value, you can see it in your environment panel. You can use the <code>print()</code> function to display the value of a variable:</p>
+<p>Here, we have created a variable called <code>x</code> and assigned it the value of 5. Once you assign a variable a value, you can see it in your environment panel. You can use the <code>print()</code> function to display the value of a variable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
 </div>
-<p>You can also perform basic arithmetic operations in R using the standard operators (<code>+, -, *, /</code>):</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code comments
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you have multiple pieces of code in a single code chunk (or even a single piece of code), it is recommended that you use code comments to explain what your code is doing. Since R treats everything inside a code chunk as code, if you want to write some text comments inside a code chunk, you can tell R that your text is not code by placing a <code>#</code> symbol at the beginning of your text like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute 4 times 5</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">*</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+<p>R will ignore anything that follows a <code>#</code> symbol. So in the above code chunk, R will ignore the first line with the code comment “compute 4 times 5”, and then it will compute the R code on the next line, <code>4 * 5</code>.</p>
+<p>Code comments are really helpful for explaining what your code is doing. I usually reserve the text <em>outside</em> code chunks for more general discussion of my data, analysis, and results and I reserve code comments <em>inside</em> code chunks for explaining my code itself. Since I tend to forget the reasons behind certain decisions I made in my code, adding explanations in code comments helps me remember my motivations and intentions days, months, or even years later.</p>
+</div>
+</div>
+</section>
+<section id="doing-math-with-r" class="level3">
+<h3 class="anchored" data-anchor-id="doing-math-with-r">Doing math with R</h3>
+<p>You can also perform basic arithmetic operations in R using the standard operators (<code>+, -, *, /</code>). Here are some helpful math symbols in R:</p>
+<ul>
+<li>Parentheses: <code>(</code>, <code>)</code></li>
+<li>Exponents: <code>^</code> or <code>**</code></li>
+<li>Multiply: <code>*</code></li>
+<li>Divide: <code>/</code></li>
+<li>Add: <code>+</code></li>
+<li>Subtract: <code>-</code></li>
+</ul>
+<p>Some basic mathematical computations you can compute in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
 <p>First, we assign the variable <code>y</code> the value 3. Then, we assign <code>z</code> the value of <code>x</code> (assigned 5 earlier) plus <code>y</code> (just assigned 3), which sum to 8.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -230,23 +290,26 @@ Comprehension Check
 <p>Try assigning the variables <code>a</code> and <code>b</code> different values and dividing them.</p>
 </div>
 </div>
+</section>
+<section id="creating-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="creating-vectors">Creating vectors</h3>
 <p>R also has a wide range of data types, including: numerical, character, and logical. Variables can be different datatypes. Collections of variables are called a vector - a one-dimensional array of data. You can create a vector using the “c()” function, which stands for concatenate. A vector may only contain one type of data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>characters <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>characters <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="indexing" class="level3">
 <h3 class="anchored" data-anchor-id="indexing">Indexing</h3>
 <p>A single entry in a vector is called an element. You can access elements of a vector using the square bracket notation:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -261,26 +324,26 @@ Comprehension Check
 </div>
 <p>You can also access series of elements in the vector. To access a continuous range of values use the colon <code>:</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(characters[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(characters[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "b" "c"</code></pre>
 </div>
 </div>
 <p>You can even use a vector of index values to call discontinuous subsets of the vector.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(characters[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(characters[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "a" "c"</code></pre>
 </div>
 </div>
 <p>Depending on the datatype, there are functions that operate on the vector. For example, you can sum the elements of the numeric vector <code>numbers</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sum</span>(numbers))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sum</span>(numbers))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -293,7 +356,21 @@ Comprehension Check
 <p>Can you sum the numbers of the vector <code>characters</code>? How about logical?</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
+<p>You can also add, subtract, multiply, and divide all of the numbers in a vector</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers<span class="sc">+</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p>Or add, subtract, multiply, and divide numbers of equal-length vectors</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers <span class="sc">+</span> numbers<span class="sc">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3  6  9 12 15</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -306,28 +383,14 @@ Challenge
 <p>Can you figure out how to calculate the product of the vector <code>numbers</code>?</p>
 </div>
 </div>
-<p>You can also add, subtract, multiply, and divide all of the numbers in a vector</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers<span class="sc">+</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  6  7  8  9 10</code></pre>
-</div>
-</div>
-<p>Or add, subtract, multiply, and divide numbers of equal-length vectors</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(numbers <span class="sc">+</span> numbers<span class="sc">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  3  6  9 12 15</code></pre>
-</div>
-</div>
 </section>
-<section id="data.frames" class="level3">
-<h3 class="anchored" data-anchor-id="data.frames">data.frames</h3>
+<section id="building-data-frames" class="level3">
+<h3 class="anchored" data-anchor-id="building-data-frames">Building data frames</h3>
 <p>Using R like a fancy calculator is intended to help you understand how R works. R is generally used to analyze data sets. Data sets are collections of equal-length vectors in a table or what R calls a <code>data.frame</code>. Here is a simple example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">a=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b=</span><span class="fu">c</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>),</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">d=</span><span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">a=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">b=</span><span class="fu">c</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">d=</span><span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  a b d
 1 1 4 7
@@ -338,11 +401,11 @@ Challenge
 <p>Where <code>a,b,d</code> are the column or variable names and the <code>1,2,3</code> on the far left are row numbers.</p>
 <p>You can build a data.frame using the vectors above and assign the object a name.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">numbers=</span>numbers[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                 characters,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                 logical)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">numbers=</span>numbers[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                 characters,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                 logical)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  numbers characters logical
 1       1          a    TRUE
@@ -350,7 +413,7 @@ Challenge
 3       3          c    TRUE</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -367,7 +430,7 @@ Comprehension Check
 <section id="reading-data" class="level3">
 <h3 class="anchored" data-anchor-id="reading-data">Reading data</h3>
 <p>Creating data.frames by hand is tedious. Fortunately, R has some utilities to read data stored in certain files types. Before we explore R’s ability to read data, we must understand how R interacts with the computer’s file system.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -379,7 +442,7 @@ Recall
 <div class="callout-body-container callout-body">
 <p>At any point in time, you are in an active directory (similar to windows explorer or macos finder). You can ask R to tell you the current working directory (where R is looking at the moment).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_00/week_01"</code></pre>
 </div>
@@ -391,22 +454,25 @@ Recall
 </div>
 <p>To read data into R, we will use another function built into R. We will be reading a file type called <em>comma-separated values</em> denoted by the file extension <em>.csv</em>. The commas separate the variables, so R knows where a new variable starts. We will read the file into a data.frame called <code>super_sales</code>. You can download the file <a href="../inputs/supermarket_sales.csv">here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>super_sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../inputs/supermarket_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>super_sales <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../inputs/supermarket_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+</section>
+<section id="best-practices-when-using-r" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices-when-using-r">Best practices when using R</h2>
 <section id="naming-objects" class="level3">
-<h3 class="anchored" data-anchor-id="naming-objects">Naming Objects</h3>
+<h3 class="anchored" data-anchor-id="naming-objects">Naming objects</h3>
 <p>You can give objects almost any name as long as it does not start with a number and it cannot contain a space. However, you want to choose descriptive names so that your future self and others will find it easier to read. I prefer what is called <a href="https://en.wikipedia.org/wiki/Snake_case">snake_case</a> where words are separated by an underscore and all lower case. There are other options and it is a matter of opinion. I suggest choosing one and sticking with it.</p>
 </section>
 <section id="packages-or-libraries" class="level3">
 <h3 class="anchored" data-anchor-id="packages-or-libraries">Packages or Libraries</h3>
-<p>Finally, R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> You can install and load a package using the “install.packages()” and “library()” functions:</p>
+<p>R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> You can install and load a package using the “install.packages()” and “library()” functions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run only once </span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("dplyr")</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run only once </span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("dplyr")</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'dplyr' was built under R version 4.4.1</code></pre>
+<pre><code>Warning: package 'dplyr' was built under R version 4.4.2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
@@ -430,7 +496,7 @@ Attaching package: 'dplyr'</code></pre>
 <p>In this class, you’ll often write scripts, which are text files containing a series of R commands (like a recipe for your analysis). Once your script is complete, you may want R to execute all the commands at once. The command to run a script in R is <code>source()</code>.</p>
 <p>You can run <code>source()</code> directly in the <strong>Console</strong>, or click the <strong>Source</strong> button in the upper-right corner of the <strong>Source</strong> panel in RStudio. For example, suppose you have a script named <code>lab_01_example.R</code> saved in your current working directory. You can run it by typing the following in the Console:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_01_example.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_01_example.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>echo = TRUE</code> tells R to print each command and its output in the Console as the script runs, making it easier to follow what’s happening.</p>
 </section>
@@ -443,9 +509,9 @@ Attaching package: 'dplyr'</code></pre>
 <li>Type the following commands (lines) into the new script or directly into the Console:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="at">file =</span> <span class="st">"lab_01_example.log"</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_01_example.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="at">file =</span> <span class="st">"lab_01_example.log"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_01_example.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How it works:</p>
 <ul>
