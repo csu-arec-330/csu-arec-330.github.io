@@ -40,3 +40,10 @@ To ensure an effective and productive learning environment, please follow these 
 - Tableau academic license: [https://www.tableau.com/academic/students](https://www.tableau.com/academic/students)
 
 By adhering to these guidelines, we can ensure a productive and respectful lab environment that supports everyone’s learning journey!
+
+---
+
+<div style="text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 1.5em; margin-bottom: 20px;">
+"Slow is smooth, smooth is fast."
+</div>
+

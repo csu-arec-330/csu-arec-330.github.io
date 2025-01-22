@@ -267,7 +267,7 @@ This video describes a computer's file system and organization: <https://www.you
 
 To read data into R, we will use another function built into R.  We will be reading a file type called *comma-separated values* denoted by the file extension *.csv*.  The commas separate the variables, so R knows where a new variable starts.  We will read the file into a data.frame called `super_sales`.  You can download the file [here](../inputs/supermarket_sales.csv).
 ```{r}
-super_sales <- read.csv("../inputs/supermarket_sales.csv")
+super_sales <- read.csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales.csv")
 ```
 
 ## Best practices when using R
