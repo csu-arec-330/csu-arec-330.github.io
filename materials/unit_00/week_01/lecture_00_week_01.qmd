@@ -4,7 +4,7 @@ format:
   revealjs:
     theme: night
 ---
-## Welcome to D$^3$! About me. {.scrollable}
+## Welcome to D$^3$M! About me. {.scrollable}
 
 | ![Image 1](lauren/farmers-market.jpg){width=600} | 
 |:-------------------------------------:|
@@ -31,7 +31,7 @@ Schedule a 15-minute one-on-one meeting with me. All meetings must take place be
 
 ## Data is not the same as information. It is merely a collection of numbers and facts until we give it meaning. (Tim Harford, *The Data Detective*)
 
-# Let's start with some examples.
+# Where do I see D$^3$M in my research?
 
 ## 
 ![Aldi leaves town ‘without a single grocery store’](https://www.the-sun.com/wp-content/uploads/sites/6/2024/11/glass-door-red-white-closed-948417732.jpg){width="90%" height="90%"}
@@ -80,7 +80,7 @@ Retailers use data analytics to minimize stockouts by:
 - Tracking real-time inventory levels to ensure timely restocking.
 - Analyzing sales patterns to predict peak demand periods.
 
-Effective inventory management is an application of D$^3$ that helps businesses retain customers and maintain profitability.
+Effective inventory management is an application of D$^3$M that helps businesses retain customers and maintain profitability.
 
 <!-- Oakland A video -->
 
@@ -134,6 +134,19 @@ Example 1: [Student 1](https://sites.google.com/view/csudarecourserepository-dod
 
 Example 2: [Student 2](https://sites.google.com/view/codyarec330/unit-0-mini-project?authuser=0)
 
+## Learning Objectives
+
+- Read in large datasets into R and Tableau
+
+- Classify types of datasets (e.g., time series, cross-sectional, panel data)
+
+- Apply computational tools in R and Tableau to analyze datasets
+
+- Visualize data and interpret patterns
+
+- Communicate findings through storytelling
+
+<!--
 ## Agenda
 
 &nbsp; 
@@ -151,6 +164,7 @@ Introduction to R
 &nbsp; 
 
 Introduction to Tableau
+-->
 
 ## How to succeed in this course
 
@@ -158,7 +172,9 @@ Introduction to Tableau
 (2) Don't miss the quizzes (20% of grade). *Lowest quiz grade is dropped.
 (3) Review project assignments in advance. Each project is broken up into weekly problem sets. There are four projects (75% of grade).
 
-## Generative AI and Coding {.scrollable}
+Please review the [syllabus](https://csu-arec-330.github.io/materials/syllabus.html).
+
+## Generative AI and Coding {.scrollable .smaller}
 
 - You **may use generative AI tools (e.g., ChatGPT)** as coding assistants to help solve problems or to help you understand the software used in this course.  
 - However, if you choose to use such tools, you are claiming the resulting work as your own, and you bear full responsibility for its accuracy and appropriateness.  
@@ -194,7 +210,9 @@ Turn to a neighbor and...
 4.  Share one example related to ag or natural resources with the class.
 
 
-## Google Human Resources {.smaller}
+## Example: Google {.smaller}
+
+Google Human Resources uses D$^3$M throughout their company:
 
 **Google's Project Oxygen**: Google surveys employees about their managers and connects the responses to team output to figure out what attributes or management practices lead to more productive teams. 
 
@@ -212,7 +230,7 @@ Turn to a neighbor and...
 
 <!-- https://www.peoplehum.com/blog/how-google-is-using-people-analytics-to-completely-reinvent-hr -->
 
-## Amazon
+## Example: Amazon
 
 ![](figs/Amazon_big_data.png){fig-align="center"}
 
@@ -278,19 +296,19 @@ How does Amazon use the data it collects?
 
 <!-- ![](figs/inline-project-management-data-driven-decision-making-2-2x.webp){fig-align="center"} -->
 
-## Summary and Reminders
+## Before Lab
 
 &nbsp; 
 
-What is D$^3$M?
+Review [Lab Notes](https://csu-arec-330.github.io/materials/unit_00/week_01/lab_00_week_01.html) for week 1
 
 &nbsp; 
 
-What are the course objectives?
+Read the syllabus
 
 &nbsp; 
 
-Up Next: What is R? What is Tableau?
+Schedule your 15-minute 1-on-1 
 
 
 <!--

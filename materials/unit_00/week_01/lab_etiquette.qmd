@@ -1,0 +1,42 @@
+---
+title: "AREC 330 Lab Etiquette"
+format: 
+  html:
+    theme: zephyr
+    toc: true
+---
+
+This course involves regular lab sessions. All lab computers have access to R, RStudio, Tableau, and any additional software or accounts needed for the lab. You may also use your personal computers as long as you have the necessary software downloaded on your PCs. *Please note that I am proficient in PC/Windows products, so, if you are a Mac user, I recommend using the lab computers.*
+
+To ensure an effective and productive learning environment, please follow these guidelines:
+
+### Be Prepared
+- **Review materials ahead of time**: Check the lab objectives and assigned readings or tutorials before coming to the lab.
+
+### Be Respectful
+- **Collaborate constructively**: Labs often involve working with peers. Please be inclusive and collaborative.
+- **Minimize distractions**: Silence phones and avoid non-lab-related activities during lab time.
+- **Stay focused**: Avoid watching YouTube, browsing social media, or engaging in other non-lab-related activities during lab time, as it distracts your peers. Anyone who does so will be asked to leave the lab session.
+
+### Be Responsible
+- **Backup your work**: Save your progress frequently.
+- **Ask questions**: Labs are a time to explore and learn. Don’t hesitate to seek help from the instructor, TA, or your classmates.
+- **Clean up after yourself**: Close applications, log out of shared accounts, and collect any belongings you may have brought with you.
+
+---
+
+### Expectations for Lab Sessions
+
+- **Timeliness**: Arrive on time to ensure you have the full session to complete the lab tasks.
+- **Focus on learning**: Labs are designed to build your skills through hands-on experience. Engage actively with the exercises.
+- **Follow instructions**: Pay attention to the instructor's guidance to complete lab objectives efficiently.
+
+---
+
+### Resources
+
+- R installation guide: [https://cran.r-project.org/](https://cran.r-project.org/)
+- RStudio setup: [https://rstudio.com/](https://rstudio.com/)
+- Tableau academic license: [https://www.tableau.com/academic/students](https://www.tableau.com/academic/students)
+
+By adhering to these guidelines, we can ensure a productive and respectful lab environment that supports everyone’s learning journey!
