@@ -39,10 +39,10 @@ print(characters[c(1,3)]) # Print the first and third elements of characters
 # Can you sum the numbers of the vector characters? How about logical?
 # Attempting to sum the characters vector will result in an error because it contains non-numeric data.
 # Uncomment the line below to see the error.
-sum(characters)
+# sum(characters)
 
 # Sum the logical vector. TRUE is treated as 1, and FALSE is treated as 0.
-print(sum(logical))
+# print(sum(logical))
 
 # Perform vectorized operations
 print(numbers+5) # Add 5 to each element of numbers

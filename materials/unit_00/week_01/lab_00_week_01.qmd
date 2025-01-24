@@ -268,27 +268,95 @@ This video describes a computer's file system and organization: <https://www.you
 
 To read data into R, we will use another function built into R.  We will be reading a file type called *comma-separated values* denoted by the file extension *.csv*.  The commas separate the variables, so R knows where a new variable starts.  We will read the file into a data.frame called `super_sales`.  You can download the file [here](../inputs/supermarket_sales.csv).
 ```{r}
-super_sales <- read.csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales.csv")
+#| eval: false
+super_sales <- read.csv("supermarket_sales.csv")
 ```
 
-## Best practices when using R
-
+:::{.callout-note}
 ### Naming objects
+You can give objects (i.e., variables, vectors, and data frames) almost any name as long as it does not start with a number and it cannot contain a space. However, you want to choose descriptive names so that your future self and others will find it easier to read.  I prefer what is called [snake_case](https://en.wikipedia.org/wiki/Snake_case) where **words are separated by an underscore and all lower case.** There are other options and it is a matter of opinion.  I suggest choosing one and sticking with it.
+:::
 
-You can give objects almost any name as long as it does not start with a number and it cannot contain a space.  However, you want to choose descriptive names so that your future self and others will find it easier to read.  I prefer what is called [snake_case](https://en.wikipedia.org/wiki/Snake_case) where words are separated by an underscore and all lower case.  There are other options and it is a matter of opinion.  I suggest choosing one and sticking with it.
-
-### Packages or Libraries
-
-R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.^[If you like this concept, you might explore the linux operating system. I use [Ubuntu](https://ubuntu.com/download).] You can install and load a package using the "install.packages()" and "library()" functions:
-
+::: {.callout-tip collapse="true" title="Lab Script for Week 1: Introduction to R"}
 ```{r}
-#Run only once 
-#install.packages("dplyr")
-library(dplyr)
+#| eval: false
+# Lab Script for Week 1: Introduction to R
+
+# Set and check the working directory
+getwd() # Displays the current working directory
+setwd("C:/Users/YourName/Documents/MyRProjects") # Sets the working directory
+
+# Assign values to variables
+x <- 5 # Assign 5 to x using the preferred assignment operator
+x = 5 # Does the same thing but using = for assignment
+
+# Print the value of x
+print(x)
+
+# Perform basic arithmetic
+# Compute 4 times 5
+4 * 5
+
+y <- 3 # Assign 3 to y
+z <- x + y # Add x and y, assign the result to z
+print(z) # Print the value of z
+
+# Divide two variables
+a <- 30 # Assign 30 to a
+b <- 10 # Assign 10 to b
+a / b # Divide a by b
+
+# Create vectors of different data types
+numbers <- c(1, 2, 3, 4, 5) # Numeric vector
+characters <- c("a", "b", "c") # Character vector
+logical <- c(TRUE, FALSE, TRUE) # Logical vector
+
+# Access elements of a vector
+print(numbers[1]) # Print the first element of numbers
+print(numbers[3]) # Print the third element of numbers
+
+print(characters[2:3]) # Print the second and third elements of characters
+print(characters[c(1,3)]) # Print the first and third elements of characters
+
+# Can you sum the numbers of the vector characters? How about logical?
+# Attempting to sum the characters vector will result in an error because it contains non-numeric data.
+# Uncomment the line below to see the error.
+# sum(characters)
+
+# Sum the logical vector. TRUE is treated as 1, and FALSE is treated as 0.
+# print(sum(logical))
+
+# Perform vectorized operations
+print(numbers+5) # Add 5 to each element of numbers
+print(numbers + numbers*2) # Multiply each element of numbers by 2 and add it to the original numbers
+
+# Can you figure out how to calculate the product of the vector numbers?
+# Use the prod() function to calculate the product of all elements in the vector
+print(prod(numbers))
+
+# Create and display a data frame
+print(data.frame(a=c(1:3),
+                 b=c(4:6),
+                 d=c(7:9)))
+
+# Create a data frame using existing vectors
+df <- data.frame(numbers=numbers[1:3],
+                 characters,
+                 logical)
+
+print(df) # Print the data frame
+
+# Read in an external data set
+super_sales <- read.csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales.csv")
+
+head(super_sales) # Display the first few rows of the data set
+
+# Install and load a package
+# Run the following command only once to install the package
+# install.packages("dplyr")
+library(dplyr) # Load the dplyr package
 ```
-
-
-Here, we have installed and loaded the `dplyr` package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session. If you are working on the server, the packages you need will be installed; you just need to load them.
+:::
 
 ### Running scripts and saving output
 
@@ -325,7 +393,19 @@ How it works:
 
 Once the script runs, you can open the log file (`lab_01_example.log`) to review everything that was executed and ensure your code ran without errors.
 
-### Documentation
+## Packages or Libraries
+
+R has a vast collection of libraries or packages that provide a wide range of functions for data manipulation and analysis. Since R is open source, anyone can write libraries and share them with the world.^[If you like this concept, you might explore the linux operating system. I use [Ubuntu](https://ubuntu.com/download).] You can install and load a package using the "install.packages()" and "library()" functions:
+
+```{r}
+#Run only once 
+#install.packages("dplyr")
+library(dplyr)
+```
+
+Here, we have installed and loaded the `dplyr` package, which provides a wide range of functions for data manipulation. Note that you only need to install packages once, but you need to load them using the `library()` command each session. If you are working on the server, the packages you need will be installed; you just need to load them.
+
+## Documentation
 
 Documentation is critical to understanding how functions and packages work in R.  There is a help tab in the lower right panel in RStudio.  You can also place your cursor in the function name in your code and press F1 to bring up the help for that function.  R documentation always provides a brief description, information about arguments (or inputs), information about outputs, and some examples of how you would use it.  Learning to read the documentation is critical for learning new packages.
 
