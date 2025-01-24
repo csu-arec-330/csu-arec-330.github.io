@@ -25,7 +25,7 @@ format:
 
 -  Create your Google site and a project page
 
--  Apply for Teableau academic license
+-  Apply for Tableau academic license
 
 -  Download Tableau desktop (if using personal computers) and ensure working correctly
 
