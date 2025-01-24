@@ -31,6 +31,7 @@ format:
 
 -  Register for Tableau public
 
+## [Download Lab Handout Here](lab_00_week_01_handout.pdf)
 
 ## Introduction to R
 

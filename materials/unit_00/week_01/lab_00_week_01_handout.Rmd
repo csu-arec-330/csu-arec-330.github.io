@@ -1,0 +1,226 @@
+---
+title: "Lab 00 Week 01 Worksheet"
+output: 
+  pdf_document:
+    keep_tex: true
+geometry: margin=1in
+fontsize: 11pt
+header-includes:
+  - \usepackage{setspace}
+  - \setlength{\parindent}{0pt}
+---
+
+This worksheet is designed to help you take notes on the functions and concepts we learn in this lab session. For each function or topic listed, write down what it does, how it works, and any useful examples or observations. Happy coding!
+
+### 1. RStudio Interface Components
+- **Description**: Familiarize yourself with the main panes of RStudio:
+  - Source (Script Editor)
+  - Console
+  - Environment/History
+  - Files/Plots/Packages/Help
+- **Why learn this?**: Understanding the RStudio layout helps you work efficiently.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 2. `getwd()`
+- **Description**: Returns the current working directory.
+- **Example**: `getwd()`
+- **Why use it?**: Helps you check where R is currently looking for files.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 3. `setwd()`
+- **Description**: Changes the current working directory.
+- **Example**: `setwd("path/to/your/folder")`
+- **Why use it?**: Ensures R knows where to find or save files.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+
+### 4. `ls()`
+- **Description**: Lists all objects in the current R environment.
+- **Example**: `ls()`
+- **Why use it?**: Easily displays contents of working directory.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 5. Assigning Variables (`<-`)
+- **Description**: Assigns values to a variable.
+- **Example**: `x <- 10`
+- **Why use it?**: Variables store data for use in calculations or analysis.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 6. Basic Math Operations
+- **Description**: Use R as a calculator.
+- **Examples**:
+  - Addition: `2 + 3`
+  - Subtraction: `5 - 1`
+  - Multiplication: `4 * 2`
+  - Division: `10 / 2`
+  - Exponentiation: `2^3`
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 7. Commenting Code
+- **Description**: Comments are lines of text in your code that R ignores during execution. Use them to explain your code, organize your thoughts, or leave reminders for future reference.
+- **How to Comment**: Add a `#` before any text to turn it into a comment.
+- **Examples**:
+  ```r
+  # This is a comment
+  x <- 10 # Assign the value 10 to x
+  ```
+- **Why use it?**: Improves readability of your code. Helps others (and yourself) understand your logic.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 8. `rm()`
+- **Description**: Removes objects (variables) from the R environment.
+- **Examples**:
+  1. **Remove a single variable**:
+     ```r
+     rm(variable_name)
+     ```
+     Example:
+     ```r
+     x <- 10
+     rm(x)  # Removes the variable x
+     ```
+  2. **Remove multiple variables**:
+     ```r
+     rm(var1, var2)
+     ```
+     Example:
+     ```r
+     a <- 5
+     b <- 15
+     rm(a, b)  # Removes variables a and b
+     ```
+  3. **Remove all variables from the environment**:
+     ```r
+     rm(list = ls())
+     ```
+     This clears everything from the R environment.
+
+- **Why use it?**: Helps clean up your workspace by removing unnecessary objects or freeing up memory.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 9. `source()`
+- **Description**: Executes an external R script file.
+- **Examples**:
+  1. **Run an R script**:
+     ```r
+     source("script_name.R")
+     ```
+  2. **Source a script with echo** (show the code as it runs):
+     ```r
+     source("script_name.R", echo = TRUE)
+     ```
+
+- **Why use it?**: Automates running code stored in external files, which is helpful for organizing and reusing scripts.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 10. `sink()`
+- **Description**: Redirects R output to a file (useful for saving console output or logs).
+- **Examples**:
+  1. **Redirect output to a file**:
+     ```r
+      # Redirect output to a file
+      sink("output.txt")
+      
+      # Run a script and capture its output
+      source("example_script.R")
+      
+      # Stop redirecting
+      sink()
+      
+      # Check output.txt to see the results
+     ```
+- **Why use it?**: Useful for saving the results of your analysis or debugging logs.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### 11. `help()` and `?`
+- **Description**: Accesses documentation for functions in R.
+- **Example**: 
+  - `help(mean)`
+  - `?mean`
+- **Why use it?**: Quickly learn how a function works.
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### Additional Functions (Add as needed)
+Use this space to list any other functions covered during the lab session.
+
+**Function Name:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+**Description:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+**Example:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+**Notes:**
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
+
+
+### Questions or Reflections
+Use this space to jot down any questions or reflections you have about the lab session.
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________
