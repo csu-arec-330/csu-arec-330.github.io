@@ -8,9 +8,9 @@
 <link href="lecture_00_week_02_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_00_week_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_00_week_02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
-  <title>Week 2: Data Driven Decision Making and Data Storytelling</title>
+  <title>Week 2: Data Driven Decision Making as a Process</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -324,55 +325,57 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 2: Data Driven Decision Making and Data Storytelling</h1>
+  <h1 class="title">Week 2: Data Driven Decision Making as a Process</h1>
 
 <div class="quarto-title-authors">
 </div>
 
-</section>
-<section id="agenda" class="slide level2">
-<h2>Agenda</h2>
-<p>D<sup>3</sup>M</p>
-<ul>
-<li><p>Why? cognitive biases</p></li>
-<li><p>How? develop a process</p></li>
-</ul>
-<p>Data storytelling</p>
-<ul>
-<li><p>Why? it works</p></li>
-<li><p>Intro on how to tell a data story</p></li>
-</ul>
 </section>
 <section>
 <section id="d3m" class="title-slide slide level1 center">
 <h1>D<sup>3</sup>M</h1>
 
 </section>
-<section id="fundamental-problem" class="slide level2">
-<h2>Fundamental problem</h2>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>People that run businesses, government, or other organizations are striving to reach some goal and need to adapt to changing conditions</p>
+<section id="setting" class="slide level2">
+<h2>Setting</h2>
+<p>People that run businesses, government, or other organizations are striving to reach some goal and need to adapt to changing conditions.</p>
 </section>
-<section id="data-analysis-as-part-of-the-solution" class="slide level2">
-<h2>Data analysis as part of the solution</h2>
-<p>Instead of relying on experience or gut instinct alone, businesses can use careful data analysis to help guide their decisions (e.g., google, amazon)</p>
-<p>Objective data analysis is less susceptible to psychological biases</p>
-<p>However, data analysis alone is rarely the solution</p>
-</section>
-<section id="cogitive-or-psychological-biases" class="slide level2">
-<h2>Cogitive or psychological biases</h2>
-<p>Predictable mental errors that arise from our limited ability to process information objectively</p>
+<section id="human-judgement-as-a-threat-to-sound-decision-making" class="slide level2">
+<h2>Human judgement as a threat to sound decision-making</h2>
 <ul>
-<li>Examples: confirmation bias, anchoring, gambler’s fallacy</li>
+<li><p>Decisions—whether in business, government, or other fields—are often influenced by human judgment.</p></li>
+<li><p>Our intuition can be helpful, but it can also lead us astray.</p></li>
+<li><p>Recognizing the predictable errors in our thinking helps us make better use of data and avoid common pitfalls in decision-making.</p></li>
 </ul>
-<p>Strong positive and negative emotions can influence decisions (Bucurean, 2018)</p>
-<p>Behavioral economics studies why people behave the way they do</p>
+</section>
+<section id="cogitive-or-psychological-biases" class="slide level2 smaller scrollable">
+<h2>Cogitive or psychological biases</h2>
+<p>Predictable mental errors arise from our limited ability to process information objectively:</p>
+<div>
+<ul>
+<li class="fragment"><strong>Confirmation bias</strong>: Favoring information that aligns with our preconceptions.
+<ul>
+<li class="fragment"><em>Example</em>: You believe that studying in the library is always more productive than at home, so you only pay attention to times when you were productive at the library, ignoring moments when studying at home was equally or more effective.</li>
+</ul></li>
+<li class="fragment"><strong>Anchoring</strong>: Overemphasizing initial pieces of information when making decisions.
+<ul>
+<li class="fragment"><em>Example</em>: While shopping for a car, you see a high sticker price on the first car and assume all cars in your budget are a good deal by comparison, even if they aren’t.</li>
+</ul></li>
+<li class="fragment"><strong>Gambler’s fallacy</strong>: Believing that past events influence future probabilities in situations where they do not.
+<ul>
+<li class="fragment"><em>Example</em>: You’re flipping a coin, and it lands on heads five times in a row. You assume the next flip <em>must</em> be tails, even though the probability remains 50/50.</li>
+</ul></li>
+</ul>
+</div>
+<p>Strong positive or negative emotions can also significantly influence decisions (Bucurean, 2018).</p>
+<p>As humans, we are inherently susceptible to these emotional and psychological biases.</p>
 <aside class="notes">
 <p>Confirmation bias is the tendency to search for, interpret, focus on and remember information in a way that confirms one’s preconceptions.</p>
 <p>The anchoring bias, or focalism, is the tendency to rely too heavily—to “anchor”—on one trait or piece of information when making decisions (usually the first piece of information acquired on that subject).</p>
 <p>Gambler’s fallacy, the tendency to think that future probabilities are altered by past events, when in reality they are unchanged</p>
-<p>Empirical evidence: <!-- First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart.  --></p>
+<p>Behavioral economics studies why people behave the way they do</p>
+<!-- Empirical evidence: 
+First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart.-->
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -385,10 +388,24 @@
           display:block!important;
       }</style></aside>
 </section>
+<section id="data-analysis-as-part-of-the-solution" class="slide level2">
+<h2>Data analysis as part of the solution</h2>
+<p>Instead of relying solely on experience or gut instinct, businesses can use careful data analysis to help guide their decisions.</p>
+<ul>
+<li><p>Objective data analysis is less susceptible to psychological biases.</p></li>
+<li><p>However, data analysis alone is rarely the solution—it serves as evidence to support the decision-making process.</p></li>
+</ul>
+</section>
+<section id="the-idea" class="slide level2">
+<h2>The Idea</h2>
+<p>The premise of this class is to build <strong>evidence-based decisions</strong> using D<sup>3</sup>M.</p>
+<p>Data and analysis are important tools that complement—rather than replace—intuition and experience.</p>
+<p>By integrating data with our judgment, we can make more informed and balanced decisions!</p>
+</section>
 <section id="section" class="slide level2 smaller">
 <h2></h2>
 
-<img data-src="figs/Intuition-vs-Data-Driven-Decision-1.webp" class="r-stretch quarto-figure-center"><p class="caption">source: <a href="https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/" class="uri">https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/</a></p><aside class="notes">
+<img data-src="figs/Intuition-vs-Data-Driven-Decision-1.webp" class="r-stretch quarto-figure-center"><p class="caption">Source: <a href="https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/" class="uri">https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/</a></p><aside class="notes">
 <p>D3M relies on facts in the data: Need to ensure quality and fidelity of the data</p>
 <p>Choice are tested: The decision to go with a certain marketing strategy, color scheme, or phrase is based on data analysis demonstrating that the choice is better than the alternatives at achieving the objective</p>
 <p>Inspired by experience but not completely reliant on it. There is context and information not always measured in data</p>
@@ -406,10 +423,38 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="d3m-is-expanding-rapidly" class="slide level2">
-<h2>D<sup>3</sup>M is expanding rapidly</h2>
+<section id="example-addressing-food-deserts" class="slide level2 smaller scrollable">
+<h2>Example: Addressing food deserts</h2>
+<h3 id="setting-1">Setting</h3>
+<p>A local government wants to improve food access in underserved communities. They aim to identify food deserts—areas with limited access to affordable and nutritious food—and determine where to establish new grocery stores or other interventions.</p>
+<h3 id="data-analysis-as-part-of-the-solution-1">Data analysis as part of the solution</h3>
+<p>To identify food deserts, the government gathers and analyzes data such as:</p>
+<ul>
+<li><strong>Demographics</strong>: Income levels, population density, and household characteristics.</li>
+<li><strong>Geography</strong>: Proximity of neighborhoods to existing grocery stores.</li>
+<li><strong>Transportation</strong>: Availability of public transit and average travel times.</li>
+</ul>
+<p>The data is used to map food deserts and prioritize areas based on need and potential impact.</p>
+<h3 id="cognitive-biases-can-influence-decision-making">Cognitive biases can influence decision-making</h3>
+<p>Even with data, biases can affect decision-making:</p>
+<ul>
+<li><strong>Confirmation Bias</strong>: Decision-makers may focus on areas they already perceive as food deserts, ignoring contrary evidence.</li>
+<li><strong>Anchoring</strong>: Overemphasizing certain metrics, such as population density, while underestimating the importance of transit access.</li>
+<li><strong>Emotions</strong>: Favoring high-profile neighborhoods for political or personal reasons.</li>
+</ul>
+<h3 id="the-solution">The Solution</h3>
+<p>By combining data analysis with an awareness of these biases, the government can:</p>
+<ul>
+<li>Identify areas with the greatest need for interventions.</li>
+<li>Develop targeted strategies that address root causes of food insecurity.</li>
+<li>Monitor and evaluate the impact of new grocery stores or transportation improvements to determine effectiveness.</li>
+</ul>
+<!--
+## D^3^M is expanding rapidly
 
-<img data-src="figs/AER_fig.png" class="r-stretch quarto-figure-center"><p class="caption">Figure 1. Adoption of Data-Driven Decision-Making in US Manufacturing (Brynjolfsson &amp; McElheran, 2016, AER)</p></section></section>
+![Figure 1. Adoption of Data-Driven Decision-Making in US Manufacturing (Brynjolfsson & McElheran, 2016, AER)](figs/AER_fig.png)
+-->
+</section></section>
 <section>
 <section id="d3m-is-a-process" class="title-slide slide level1 center">
 <h1>D<sup>3</sup>M is a process</h1>
@@ -420,21 +465,24 @@
 <ol type="1">
 <li><p>Define an objective</p></li>
 <li><p>Establish a hypothesis</p></li>
-<li><p>Identify data need, build data process, collect data</p></li>
+<li><p>Collect relevant data</p></li>
 <li><p>Analyze the data</p></li>
+<li><p>Interpret the results</p></li>
 <li><p>Communicate insights</p></li>
 </ol>
-
-<aside><div>
-<p>Adapted from <a href="https://www.smartsheet.com/data-driven-decision-making-management" class="uri">https://www.smartsheet.com/data-driven-decision-making-management</a></p>
-</div></aside></section>
-<section id="define-question-or-objective" class="slide level2">
-<h2>1. Define question or objective</h2>
+<p>Adapted from <a href="https://www.smartsheet.com/data-driven-decision-making-management">source</a>.</p>
+</section>
+<section id="define-an-objective" class="slide level2 scrollable">
+<h2>1. Define an objective</h2>
 <p>What is the business or operational question you are trying to answer?</p>
 <ul>
-<li><p>Do we sell our product now or hold out for a higher price?</p></li>
-<li><p>Do we contract for feed or buy on the spot market?</p></li>
+<li><p><strong>Examples:</strong></p>
+<ul>
+<li>Should we sell our product now or wait for a higher price?</li>
+<li>Should we contract for feed or purchase on the spot market?</li>
+</ul></li>
 </ul>
+<p>Clearly defining your objective provides focus and ensures your analysis aligns with the problem at hand.</p>
 <aside class="notes">
 <p>The USFS spends a lot of money on wildfire suppression. Their objective is to spend as little as possible while protecting life and property. They want to identify which fires are the most expensive and understand why in hope that they can spend less in the future.</p>
 <p>USFS is interested in suppression expenditures after a large fire occurs.</p>
@@ -451,20 +499,14 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="you-do-it-define-question-or-objective" class="slide level2 smaller">
-<h2>You Do It: Define question or objective</h2>
-<p><strong>In Pairs</strong>:</p>
-<p>Identify a business that you might be interested in starting some day or any organization that you might want to work for. The business should be related to agriculture and/or natural resources.</p>
-<ol type="1">
-<li><p>Briefly describe this business (give the name if it already exists)</p></li>
-<li><p>Define a question or objective that business might face. Try to be specific.</p></li>
-</ol>
-<p>Include responses to both 1 and 2 in your iClicker response (140 characters).</p>
-</section>
-<section id="establish-hypothesis" class="slide level2">
-<h2>2. Establish hypothesis</h2>
-<p>What do you think the answer is and why?</p>
-<p>You should be able to describe the mechanics of the system and explain your hypothesis</p>
+<section id="establish-a-hypothesis" class="slide level2 scrollable">
+<h2>2. Establish a hypothesis</h2>
+<p>A hypothesis is a proposed explanation or prediction based on your understanding of the system.</p>
+<ul>
+<li>What do you think the answer is, and why?</li>
+<li>Describe the mechanics of the system and explain your reasoning.</li>
+</ul>
+<p><em>Example:</em> “I hypothesize that contracting for feed reduces cost volatility compared to buying on the spot market because it locks in prices ahead of market fluctuations.”</p>
 <aside class="notes">
 <p>Wildfire management is complex. Some factors that drive resource use (and cost) are determined by human decisions while others are biophysical. Some factors can be anticipated while others cannot. Hypothesis: there are decisions about resource use that lead to higher-cost fires.</p>
 <style type="text/css">
@@ -479,19 +521,15 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="you-do-it-establish-hypothesis" class="slide level2">
-<h2>You Do It: Establish hypothesis</h2>
-<p><strong>In Your Same Pairs</strong>:</p>
-<p>Based on your business question or objective, what do you think the business would need to do to achieve this goal, and <strong>why</strong>?</p>
-<p>Write a short response in the iClicker field (140 characters).</p>
-</section>
-<section id="data" class="slide level2">
-<h2>3. Data</h2>
-<p>What data do you need to answer your question?</p>
-<p>How will you assemble the data? Do you need equipment?</p>
-<p>What resources do you need?</p>
-<p>Will the data be reliable?</p>
-<p>Collect data in a way that it can be analyzed - not sticky notes.</p>
+<section id="collect-relevant-data" class="slide level2 scrollable">
+<h2>3. Collect relevant data</h2>
+<p>Gather the information needed to answer your question:</p>
+<ul>
+<li><strong>Identify the data:</strong> What specific data will help you answer your question? (e.g., historical prices, production costs, weather patterns)</li>
+<li><strong>Assemble the data:</strong> Will you need equipment, surveys, or external databases?</li>
+<li><strong>Evaluate reliability:</strong> Are your data sources accurate and unbiased?</li>
+<li><strong>Organize effectively:</strong> Collect data in a format that can be analyzed—avoid unstructured formats…or sticky-notes :-)</li>
+</ul>
 <aside class="notes">
 <p>The USFS collects data on expenditures. Expenditures tend to be tracked well because someone has to pay those bills. It also collects data on factors that are expected to influence fire behavior and management strategy:</p>
 <ul>
@@ -510,18 +548,15 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="you-do-it-data" class="slide level2">
-<h2>You Do It: Data</h2>
-<p><strong>In Your Same Pairs</strong>:</p>
-<p>What data do you need to answer your question?</p>
-<p>List the data sources that come to mind in the iClicker field.</p>
-<p><strong>Think about</strong>: How will you collect and assemble these data? Do they already exist?</p>
-</section>
-<section id="analyze-data" class="slide level2">
-<h2>4. Analyze data</h2>
-<p>Design an analysis strategy to answer your question</p>
-<p>Model different scenarios</p>
-<p>What can be changed to better achieve your objective?</p>
+<section id="analyze-the-data" class="slide level2 scrollable">
+<h2>4. Analyze the data</h2>
+<p>Design an analysis strategy to address your question:</p>
+<ul>
+<li>Choose an appropriate method (e.g., statistical analysis, cluster analysis, or regression analysis).</li>
+<li>Test different scenarios to explore potential outcomes.</li>
+<li>Identify variables or factors that can be changed to better achieve your objective.</li>
+</ul>
+<p><em>Example:</em> Simulate how feed price volatility impacts profit margins under different contract terms.</p>
 <aside class="notes">
 <p>They use a regression model to study what factors explain variation in the suppression costs of past fires, then use that model to predict the suppression cost of a single fire. The predicted cost is compared to the actual cost. Fires that exceed their expected costs can be interrogated more closely.</p>
 <style type="text/css">
@@ -536,11 +571,22 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="communicate-insight-implement-restart" class="slide level2">
-<h2>5. Communicate insight, implement, restart</h2>
-<p>Use the data to tell a story - develop visuals that show the audience the consequence of the current decision and how a different one could change the outcome</p>
-<p>Articulate the benefits of the change</p>
-<p>Implement the change and restart the process</p>
+<section id="interpret-the-results" class="slide level2 scrollable">
+<h2>5. Interpret the results</h2>
+<ul>
+<li>What do the results tell you about your original question?</li>
+<li>Identify actionable insights based on your findings.</li>
+<li>Reflect on whether the data supports your hypothesis or reveals something unexpected.</li>
+</ul>
+</section>
+<section id="communicate-insights" class="slide level2 scrollable">
+<h2>6. Communicate insights</h2>
+<p>Present your findings clearly and effectively:</p>
+<ul>
+<li><strong>Tell a story with data:</strong> Use visuals to show the audience the impact of the current decision and how an alternative could improve outcomes.</li>
+<li><strong>Highlight benefits:</strong> Clearly articulate how the proposed change adds value or reduces risk.</li>
+</ul>
+<p><em>Example:</em> A graph comparing profits with and without a feed contract can illustrate the stability achieved through contracting.</p>
 <aside class="notes">
 <p>Develop a graphic to show which fires lie above the regression line of cost on X. Then, look for patterns across the fires that cost more than expected. Find what they have in common.</p>
 <style type="text/css">
@@ -555,141 +601,163 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="you-do-it-analyze-and-communicate" class="slide level2">
-<h2>You Do It: Analyze and Communicate</h2>
-<p><strong>In Your Same Pairs</strong>:</p>
-<ol type="1">
-<li><p>How would you analyze these data to answer your question? What software would you use? What statistics would you construct?</p></li>
-<li><p>How would you communicate your findings to other people in the business? What visualizations might be useful?</p></li>
-</ol>
-</section>
-<section id="d3m-across-scales" class="slide level2">
-<h2>D<sup>3</sup>M across scales</h2>
-<p>People make decisions all day every day - some are big and consequential and some are small.</p>
-<p>Data can help make better decisions across the spectrum, and in some cases, may be the only determinant.</p>
-<div>
+<section id="implement-evaluate-restart" class="slide level2 scrollable">
+<h2>7. Implement, Evaluate, Restart</h2>
 <ul>
-<li class="fragment"><p>Would you trust an algorithm to make decisions based on data without human input?</p></li>
-<li class="fragment"><p>How much would you rely on data for strategic decisions?</p></li>
+<li><strong>Implement:</strong> Act on your recommendations and put the decision into practice.</li>
+<li><strong>Evaluate:</strong> Monitor the outcomes to determine if the changes achieve the desired results.</li>
+<li><strong>Restart:</strong> Refine your approach and revisit the process for continuous improvement.</li>
 </ul>
-</div>
-<aside class="notes">
-<p>How about a thermostat at home or cruise control in your car</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="data-storytelling" class="title-slide slide level1 center">
-<h1>Data storytelling</h1>
-
+<p>This cycle ensures ongoing adaptation and decision-making based on data-driven insights.</p>
 </section>
-<section id="importance-of-storytelling" class="slide level2">
-<h2>Importance of storytelling</h2>
-<p>Storytelling is fundamental to human existence. We connect, share, teach and learn through stories.</p>
-<p>Statistics provide evidence but we need stories to truly communicate the insights to the audience</p>
-<p>Our brains are predisposed to remember stories</p>
-</section>
-<section id="lets-look-at-an-example-the-minimalist-version" class="slide level2">
-<h2>Let’s look at an example: The minimalist version</h2>
-
-<img data-src="figs/diamonds-1.jpg" class="r-stretch quarto-figure-center"><p class="caption">source: <a href="https://medium.com/@ccr20/post-9-the-functional-art-1f0ee13b225e" class="uri">https://medium.com/@ccr20/post-9-the-functional-art-1f0ee13b225e</a></p></section>
-<section id="lets-look-at-an-example-with-pizzazz" class="slide level2">
-<h2>Let’s look at an example: With pizzazz</h2>
-
-<img data-src="figs/diamonds-2.jpg" class="r-stretch quarto-figure-center"><p class="caption">source: <a href="https://timharford.com/books/datadetective/" class="uri">https://timharford.com/books/datadetective/</a></p></section>
-<section id="elements-of-a-data-story" class="slide level2">
-<h2>3 elements of a data story</h2>
-
-<img data-src="figs/data_storytelling.png" class="r-stretch quarto-figure-center"><p class="caption">Source: Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.</p><aside class="notes">
+<section id="you-do-it-d3m-activity" class="slide level2 scrollable">
+<h2>You Do It: D<sup>3</sup>M Activity</h2>
+<p>In Pairs: Choose a business or organization (real or imagined) related to agriculture or natural resources. Work through the following steps together, completing the <a href="d3m_handout.pdf" target="&quot;_blank&quot;">handout</a> as a guide:</p>
+<p><strong>1. Define the Objective</strong></p>
 <ul>
-<li><p>Explain: narrative and data help explain what is happening. Context and commentary guide the audience through the meaning of what is being shared.</p></li>
-<li><p>Enlighten: a picture is worth a thousand words or numbers. Graphs and charts help you see trends and patterns. We will discuss some of the theory and best practices for making effective graphics. You want to make it as simple as possible for the audience to see your insight.</p></li>
-<li><p>Engage: narrative and visuals help engage the audience. We spend billions on visual media entertainment. The best movies may have good effects but definitely have a good story.</p></li>
+<li>What is the business or operational question the organization is trying to answer?</li>
+<li>Briefly describe the business and its context.</li>
 </ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<p><strong>2. Establish a Hypothesis</strong></p>
+<ul>
+<li>What do you think the answer is, and why?</li>
+<li>Describe the mechanics of the system and explain your reasoning.</li>
+</ul>
+<p><strong>3. Collect Relevant Data</strong></p>
+<ul>
+<li>What data would you need to answer the question?</li>
+<li>Where would you find this data, and how would you collect it?</li>
+</ul>
+<p><strong>4. Analyze, Interpret, and Communicate</strong></p>
+<ul>
+<li>How would you analyze the data to answer the question? (e.g., software, statistics, or methods).</li>
+<li>How would you communicate the findings? What visuals or tools would help?</li>
+</ul>
+<p><strong>Submit your responses using iClicker.</strong></p>
+<p>Here’s <a href="d3m_handout_example.pdf" target="&quot;_blank&quot;">an example of addressing food deserts in rural communities.</a></p>
+<!--
+## You Do It: Define question or objective  {.smaller}
+
+**In Pairs**: 
+
+Identify a business that you might be interested in starting some day or any organization that you might want to work for. The business should be related to agriculture and/or natural resources.
+
+
+1.  Briefly describe this business (give the name if it already exists)
+
+2.  Define a question or objective that business might face. Try to be specific.
+
+
+Include responses to both 1 and 2 in your iClicker response (140 characters).
+
+## You Do It: Establish hypothesis
+
+**In Your Same Pairs**: 
+
+Based on your business question or objective, what do you think the business would need to do to achieve this goal, and **why**?
+
+
+Write a short response in the iClicker field (140 characters).
+
+## You Do It: Data
+
+**In Your Same Pairs**: 
+
+What data do you need to answer your question?  
+
+List the data sources that come to mind in the iClicker field.
+
+**Think about**: How will you collect and assemble these data? Do they already exist?
+
+## You Do It: Analyze and Communicate
+
+**In Your Same Pairs**: 
+
+1.  How would you analyze these data to answer your question? What software would you use? What statistics would you construct?
+
+2.  How would you communicate your findings to other people in the business? What visualizations might be useful?
+-->
 </section>
-<section id="data-story-data-visualization" class="slide level2">
-<h2>Data story ≠ data visualization</h2>
-<p>While clear and appealing data visualizations are part of a data story, they are not data stories by themselves.</p>
-<p>Data stories bring your analytical insights to life</p>
-</section>
-<section id="six-elements-of-a-data-story" class="slide level2">
-<h2>Six elements of a data story</h2>
-<ol type="1">
-<li><p>Data foundation</p></li>
-<li><p>Main point</p></li>
-<li><p>Explanatory focus (vs exploratory)</p></li>
-<li><p>Linear sequence</p></li>
-<li><p>Dramatic elements</p></li>
-<li><p>Visual anchors</p></li>
-</ol>
-<aside class="notes">
-<ol type="1">
-<li><p>Story is grounded in data - something real that is observable</p></li>
-<li><p>The story needs to have a main point. Have something to say.</p></li>
-<li><p>Your goal is to explain some insight. What is going on? Who are the actors? What are the mechanisms? This relates to what we will discuss about causal inference.</p></li>
-<li><p>Your story will consist of a series of supporting points or information that are tied together to build to some larger point. The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.</p></li>
-<li><p>Dramatic elements include characters, setting, plots. These elements help humanize the data story and make it relatable. Set some context: sales are $200k. Is that good or bad? It depends on previous sales. Be selective about the information - only include information that helps to advance the narrative.</p></li>
-<li><p>Visual anchors are the charts and graphs or other visuals you rely on to tell the story. We will spend considerable time on developing effective visuals to help tell your story.</p></li>
-</ol>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="review-question-1" class="slide level2">
-<h2>Review Question 1</h2>
-<p>Which of the following is NOT one of the 5 steps in the D<sup>3</sup>M process?</p>
-<ol type="A">
-<li><p>Define objective</p></li>
-<li><p>Analyze data</p></li>
-<li><p>Apply intuition</p></li>
-<li><p>Communicate insights</p></li>
-</ol>
-</section>
-<section id="review-question-2" class="slide level2">
-<h2>Review Question 2</h2>
-<p>Which of the following is one of the reasons it is important to use data when making (important) decisions?</p>
-<ol type="A">
-<li><p>Gut instincts are often correct</p></li>
-<li><p>Data analysis is less susceptible to biases</p></li>
-<li><p>Data analysis is more susceptible to biases</p></li>
-<li><p>Annecdotal evidence is more convincing when communicating insights</p></li>
-</ol>
+<section id="before-lab" class="slide level2">
+<h2>Before Lab</h2>
+<p>&nbsp;</p>
+<p>Review <a href="https://csu-arec-330.github.io/materials/unit_00/week_02/lab_00_week_02.html">Lab Notes</a> for week 2</p>
+<p>&nbsp;</p>
+<p>Schedule your 15-minute 1-on-1 (if you haven’t already)</p>
+<!--
+## D^3^M across scales 
+
+People make decisions all day every day - some are big and consequential and some are small.  
+
+Data can help make better decisions across the spectrum, and in some cases, may be the only determinant. 
+
+::: {.incremental}
+- Would you trust an algorithm to make decisions based on data without human input?
+
+- How much would you rely on data for strategic decisions?
+:::
+
+
+::: {.notes}
+How about a thermostat at home or cruise control in your car
+:::
+-->
+<!-- # Data storytelling -->
+<!-- ## Importance of storytelling -->
+<!-- Storytelling is fundamental to human existence.  We connect, share, teach and learn through stories. -->
+<!-- Statistics provide evidence but we need stories to truly communicate the insights to the audience -->
+<!-- Our brains are predisposed to remember stories -->
+<!-- ## Let's look at an example: The minimalist version -->
+<!-- ![source: <https://medium.com/@ccr20/post-9-the-functional-art-1f0ee13b225e>](figs/diamonds-1.jpg) -->
+<!-- ## Let's look at an example: With pizzazz -->
+<!-- ![source: <https://timharford.com/books/datadetective/>](figs/diamonds-2.jpg) -->
+<!-- ## 3 elements of a data story -->
+<!-- ![Source: Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.](figs/data_storytelling.png) -->
+<!-- ::: {.notes} -->
+<!-- - Explain: narrative and data help explain what is happening.  Context and commentary guide the audience through the meaning of what is being shared. -->
+<!-- - Enlighten: a picture is worth a thousand words or numbers.  Graphs and charts help you see trends and patterns.  We will discuss some of the theory and best practices for making effective graphics.  You want to make it as simple as possible for the audience to see your insight. -->
+<!-- - Engage: narrative and visuals help engage the audience.  We spend billions on visual media entertainment.  The best movies may have good effects but definitely have a good story. -->
+<!-- ::: -->
+<!-- ## Data story ≠ data visualization -->
+<!-- While clear and appealing data visualizations are part of a data story, they are not data stories by themselves. -->
+<!-- Data stories bring your analytical insights to life -->
+<!-- ## Six elements of a data story -->
+<!-- 1. Data foundation -->
+<!-- 2. Main point -->
+<!-- 3. Explanatory focus (vs exploratory) -->
+<!-- 4. Linear sequence -->
+<!-- 5. Dramatic elements -->
+<!-- 6. Visual anchors -->
+<!-- ::: {.notes} -->
+<!-- 1. Story is grounded in data - something real that is observable -->
+<!-- 2. The story needs to have a main point.  Have something to say. -->
+<!-- 3. Your goal is to explain some insight.  What is going on?  Who are the actors?  What are the mechanisms?  This relates to what we will discuss about causal inference. -->
+<!-- 4. Your story will consist of a series of supporting points or information that are tied together to build to some larger point.  The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase. -->
+<!-- 5. Dramatic elements include characters, setting, plots.  These elements help humanize the data story and make it relatable.  Set some context: sales are $200k.  Is that good or bad?  It depends on previous sales.  Be selective about the information - only include information that helps to advance the narrative. -->
+<!-- 6. Visual anchors are the charts and graphs or other visuals you rely on to tell the story.  We will spend considerable time on developing effective visuals to help tell your story. -->
+<!-- ::: -->
+<!-- ## Review Question 1 -->
+<!-- Which of the following is NOT one of the 5 steps in the D^3^M process? -->
+<!-- A.  Define objective -->
+<!-- B.  Analyze data -->
+<!-- C.  Apply intuition -->
+<!-- D.  Communicate insights -->
+<!-- ## Review Question 2 -->
+<!-- Which of the following is one of the reasons it is important to use data when making (important) decisions?  -->
+<!-- A.  Gut instincts are often correct -->
+<!-- B.  Data analysis is less susceptible to biases -->
+<!-- C.  Data analysis is more susceptible to biases -->
+<!-- D.  Annecdotal evidence is more convincing when communicating insights -->
 </section>
 <section id="references" class="slide level2 scrollable">
 <h2>References</h2>
 <p>Brynjolfsson, Erik, and Kristina McElheran. “The rapid adoption of data-driven decision-making.” American Economic Review 106.5 (2016): 133-39.</p>
-<p>Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.</p>
-<p>Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin.</p>
+<!-- Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley. -->
+<!-- Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin. -->
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>
@@ -718,7 +786,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -935,18 +1002,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -978,11 +1034,50 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -992,8 +1087,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1007,7 +1111,11 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

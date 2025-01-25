@@ -42,7 +42,7 @@ title: "Useful Links"
   <li><a  href="https://www.kaggle.com" target="_blank">Kaggle</a></li>
 </ul> <br>
 
-<b>Project 02: Choose Your Own Cross-Sectional and Spatial Data from These Sources</b> <br>
+<b>Project 02: Data for Project</b> <br>
 
 <ul>
   <li><a  href="https://csu-arec-330.github.io/materials/unit_02/week_04/project_2.html" target="_blank">Project 02 Instructions</a></li>

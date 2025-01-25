@@ -1,5 +1,5 @@
 ---
-title: "Week 2: Data Driven Decision Making and Data Storytelling"
+title: "Week 2: Data Driven Decision Making as a Process"
 format: 
   revealjs:
     theme: [night, ../../custom.scss]
@@ -8,50 +8,38 @@ format:
     # center: TRUE
 ---
 
-## Agenda
-
-D^3^M 
-
-- Why? cognitive biases
-
-- How? develop a process
-
-Data storytelling
-
-- Why? it works
-
-- Intro on how to tell a data story
-
 # D^3^M 
 
-## Fundamental problem
+## Setting
 
-&nbsp; 
+People that run businesses, government, or other organizations are striving to reach some goal and need to adapt to changing conditions.
 
-&nbsp; 
+## Human judgement as a threat to sound decision-making
 
-People that run businesses, government, or other organizations are striving to reach some goal and need to adapt to changing conditions
+- Decisions—whether in business, government, or other fields—are often influenced by human judgment. 
 
+- Our intuition can be helpful, but it can also lead us astray. 
 
-## Data analysis as part of the solution
+- Recognizing the predictable errors in our thinking helps us make better use of data and avoid common pitfalls in decision-making.
 
-Instead of relying on experience or gut instinct alone, businesses can use careful data analysis to help guide their decisions (e.g., google, amazon)
+## Cogitive or psychological biases {.smaller .scrollable}
 
-Objective data analysis is less susceptible to psychological biases
+Predictable mental errors arise from our limited ability to process information objectively:
 
-However, data analysis alone is rarely the solution
+::: {.incremental}
+  - **Confirmation bias**: Favoring information that aligns with our preconceptions.
+    - *Example*: You believe that studying in the library is always more productive than at home, so you only pay attention to times when you were productive at the library, ignoring moments when studying at home was equally or more effective.
+  
+  - **Anchoring**: Overemphasizing initial pieces of information when making decisions.
+    - *Example*: While shopping for a car, you see a high sticker price on the first car and assume all cars in your budget are a good deal by comparison, even if they aren’t.
 
+  - **Gambler's fallacy**: Believing that past events influence future probabilities in situations where they do not.
+    - *Example*: You’re flipping a coin, and it lands on heads five times in a row. You assume the next flip *must* be tails, even though the probability remains 50/50.
+:::
 
-## Cogitive or psychological biases
+Strong positive or negative emotions can also significantly influence decisions (Bucurean, 2018).
 
-Predictable mental errors that arise from our limited ability to process information objectively 
-
--  Examples: confirmation bias, anchoring, gambler's fallacy
-
-Strong positive and negative emotions can influence decisions (Bucurean, 2018)
-
-Behavioral economics studies why people behave the way they do
-
+As humans, we are inherently susceptible to these emotional and psychological biases.
 
 ::: {.notes}
 Confirmation bias is the tendency to search for, interpret, focus on and remember information in a way that confirms one's preconceptions. 
@@ -60,18 +48,32 @@ The anchoring bias, or focalism, is the tendency to rely too heavily—to "ancho
 
 Gambler's fallacy, the tendency to think that future probabilities are altered by past events, when in reality they are unchanged
 
+Behavioral economics studies why people behave the way they do
 
-
-Empirical evidence: 
-<!-- First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart.  -->
-
-
+<!-- Empirical evidence: 
+First, moods and emotions are interfering with managers’ ability to process information, specifically, negative moods and emotions diminishes the ability of the managers to process information, while positive moods and emotions lead to a greater ability to process information. Related with this issue, the second theme refers to the effects of moods and emotion to the making decision time. The main aspect we have pointed out here is that while negative emotions lead to increased decision-making time, positive emotions have a contrary effect. Third, positive moods and emotions lead the manager to make a decision being controlled by his/her heart not by t his/her mind. On the other hand, the decisions made by managers being influenced by negative moods and emotions are mostly controlled by their mind, not by their heart.-->
 :::
 
 
+## Data analysis as part of the solution
+
+Instead of relying solely on experience or gut instinct, businesses can use careful data analysis to help guide their decisions.
+
+- Objective data analysis is less susceptible to psychological biases.
+
+- However, data analysis alone is rarely the solution—it serves as evidence to support the decision-making process.
+
+## The Idea
+
+The premise of this class is to build **evidence-based decisions** using D^3^M. 
+
+Data and analysis are important tools that complement—rather than replace—intuition and experience. 
+
+By integrating data with our judgment, we can make more informed and balanced decisions!
+
 ##  {.smaller}
 
-![source: <https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/>](figs/Intuition-vs-Data-Driven-Decision-1.webp)
+![Source: <https://blog.happyfox.com/data-driven-decision-making-using-data-to-fuel-growth/>](figs/Intuition-vs-Data-Driven-Decision-1.webp)
 
 ::: {.notes}
 
@@ -84,12 +86,41 @@ Inspired by experience but not completely reliant on it. There is context and in
 D3m is risk aversing because decisions are made based on evidence and not emotions or gut feeling
 
 Directive vs corrective because the organization is being proactive and making informed decisions rather than reacting to negative outcomes. This ad campaign didn't work so we should scrap it and start another one.
-
 :::
 
+## Example: Addressing food deserts {.smaller .scrollable}
+
+### Setting
+A local government wants to improve food access in underserved communities. They aim to identify food deserts—areas with limited access to affordable and nutritious food—and determine where to establish new grocery stores or other interventions.
+
+### Data analysis as part of the solution
+To identify food deserts, the government gathers and analyzes data such as:
+
+- **Demographics**: Income levels, population density, and household characteristics.
+- **Geography**: Proximity of neighborhoods to existing grocery stores.
+- **Transportation**: Availability of public transit and average travel times.
+
+The data is used to map food deserts and prioritize areas based on need and potential impact.
+
+### Cognitive biases can influence decision-making
+Even with data, biases can affect decision-making:
+
+- **Confirmation Bias**: Decision-makers may focus on areas they already perceive as food deserts, ignoring contrary evidence.
+- **Anchoring**: Overemphasizing certain metrics, such as population density, while underestimating the importance of transit access.
+- **Emotions**: Favoring high-profile neighborhoods for political or personal reasons.
+
+### The Solution
+By combining data analysis with an awareness of these biases, the government can:
+
+- Identify areas with the greatest need for interventions.
+- Develop targeted strategies that address root causes of food insecurity.
+- Monitor and evaluate the impact of new grocery stores or transportation improvements to determine effectiveness.
+
+<!--
 ## D^3^M is expanding rapidly
 
 ![Figure 1. Adoption of Data-Driven Decision-Making in US Manufacturing (Brynjolfsson & McElheran, 2016, AER)](figs/AER_fig.png)
+-->
 
 # D^3^M is a process
 
@@ -99,27 +130,26 @@ Directive vs corrective because the organization is being proactive and making i
 
 2. Establish a hypothesis
 
-3. Identify data need, build data process, collect data
+3. Collect relevant data
 
 4. Analyze the data
 
-5. Communicate insights
+5. Interpret the results
 
+6. Communicate insights
 
+Adapted from [source](https://www.smartsheet.com/data-driven-decision-making-management).
 
-
-::: aside
-Adapted from <https://www.smartsheet.com/data-driven-decision-making-management>
-:::
-
-## 1. Define question or objective
+## 1. Define an objective {.scrollable}
 
 What is the business or operational question you are trying to answer?
 
-- Do we sell our product now or hold out for a higher price?
+- **Examples:**
 
-- Do we contract for feed or buy on the spot market?
+  - Should we sell our product now or wait for a higher price?
+  - Should we contract for feed or purchase on the spot market?
 
+Clearly defining your objective provides focus and ensures your analysis aligns with the problem at hand.
 
 ::: {.notes}
 The USFS spends a lot of money on wildfire suppression. Their objective is to spend as little as possible while protecting life and property. They want to identify which fires are the most expensive and understand why in hope that they can spend less in the future.
@@ -127,9 +157,114 @@ The USFS spends a lot of money on wildfire suppression. Their objective is to sp
 USFS is interested in suppression expenditures after a large fire occurs. 
 
 They use a regression model to study what factors explain variation in the suppression costs of past fires, then use that model to predict the suppression cost of a single fire. The predicted cost is compared to the actual cost.
+:::
+
+## 2. Establish a hypothesis {.scrollable}
+
+A hypothesis is a proposed explanation or prediction based on your understanding of the system.
+
+- What do you think the answer is, and why?
+- Describe the mechanics of the system and explain your reasoning.
+
+*Example:* "I hypothesize that contracting for feed reduces cost volatility compared to buying on the spot market because it locks in prices ahead of market fluctuations."
+
+::: {.notes}
+Wildfire management is complex. Some factors that drive resource use (and cost) are determined by human decisions while others are biophysical. Some factors can be anticipated while others cannot. Hypothesis: there are decisions about resource use that lead to higher-cost fires.
 
 :::
 
+## 3. Collect relevant data {.scrollable}
+
+Gather the information needed to answer your question:
+
+- **Identify the data:** What specific data will help you answer your question? (e.g., historical prices, production costs, weather patterns)
+- **Assemble the data:** Will you need equipment, surveys, or external databases?
+- **Evaluate reliability:** Are your data sources accurate and unbiased?
+- **Organize effectively:** Collect data in a format that can be analyzed—avoid unstructured formats...or sticky-notes :-)
+
+
+::: {.notes}
+The USFS collects data on expenditures. Expenditures tend to be tracked well because someone has to pay those bills. It also collects data on factors that are expected to influence fire behavior and management strategy: 
+
+- vegetation, topography, weather
+- values at risk like homes
+:::
+
+## 4. Analyze the data {.scrollable}
+
+Design an analysis strategy to address your question:
+
+- Choose an appropriate method (e.g., statistical analysis, cluster analysis, or regression analysis).
+- Test different scenarios to explore potential outcomes.
+- Identify variables or factors that can be changed to better achieve your objective.
+
+*Example:* Simulate how feed price volatility impacts profit margins under different contract terms.
+
+
+::: {.notes}
+
+They use a regression model to study what factors explain variation in the suppression costs of past fires, then use that model to predict the suppression cost of a single fire. The predicted cost is compared to the actual cost. Fires that exceed their expected costs can be interrogated more closely.
+
+:::
+
+## 5. Interpret the results {.scrollable}
+
+- What do the results tell you about your original question?
+- Identify actionable insights based on your findings.
+- Reflect on whether the data supports your hypothesis or reveals something unexpected.
+
+
+## 6. Communicate insights {.scrollable}
+
+Present your findings clearly and effectively:
+
+- **Tell a story with data:** Use visuals to show the audience the impact of the current decision and how an alternative could improve outcomes.
+- **Highlight benefits:** Clearly articulate how the proposed change adds value or reduces risk.
+
+*Example:* A graph comparing profits with and without a feed contract can illustrate the stability achieved through contracting.
+
+
+::: {.notes}
+Develop a graphic to show which fires lie above the regression line of cost on X. Then, look for patterns across the fires that cost more than expected. Find what they have in common.
+:::
+
+## 7. Implement, Evaluate, Restart {.scrollable}
+
+- **Implement:** Act on your recommendations and put the decision into practice.
+- **Evaluate:** Monitor the outcomes to determine if the changes achieve the desired results.
+- **Restart:** Refine your approach and revisit the process for continuous improvement.
+
+This cycle ensures ongoing adaptation and decision-making based on data-driven insights.
+
+## You Do It: D^3^M Activity {.scrollable}
+
+In Pairs: Choose a business or organization (real or imagined) related to agriculture or natural resources. Work through the following steps together, completing the [handout](d3m_handout.pdf){target=\"_blank\"} as a guide:
+
+**1. Define the Objective**
+
+- What is the business or operational question the organization is trying to answer?
+- Briefly describe the business and its context.
+
+**2. Establish a Hypothesis**
+
+- What do you think the answer is, and why?
+- Describe the mechanics of the system and explain your reasoning.
+
+**3. Collect Relevant Data**
+
+- What data would you need to answer the question?
+- Where would you find this data, and how would you collect it?
+
+**4. Analyze, Interpret, and Communicate**
+
+- How would you analyze the data to answer the question? (e.g., software, statistics, or methods).
+- How would you communicate the findings? What visuals or tools would help?
+
+**Submit your responses using iClicker.**
+
+Here's [an example of addressing food deserts in rural communities.](d3m_handout_example.pdf){target=\"_blank\"}
+
+<!--
 ## You Do It: Define question or objective  {.smaller}
 
 **In Pairs**: 
@@ -144,20 +279,6 @@ Identify a business that you might be interested in starting some day or any org
 
 Include responses to both 1 and 2 in your iClicker response (140 characters).
 
-
-## 2. Establish hypothesis
-
-
-What do you think the answer is and why?
-
-
-You should be able to describe the mechanics of the system and explain your hypothesis
-
-::: {.notes}
-Wildfire management is complex. Some factors that drive resource use (and cost) are determined by human decisions while others are biophysical. Some factors can be anticipated while others cannot. Hypothesis: there are decisions about resource use that lead to higher-cost fires.
-
-:::
-
 ## You Do It: Establish hypothesis
 
 **In Your Same Pairs**: 
@@ -166,32 +287,6 @@ Based on your business question or objective, what do you think the business wou
 
 
 Write a short response in the iClicker field (140 characters).
-
-## 3. Data
-
-
-What data do you need to answer your question?
-
-
-How will you assemble the data? Do you need equipment?
-
-
-What resources do you need?
-
-
-Will the data be reliable?
-
-
-Collect data in a way that it can be analyzed - not sticky notes.
-
-::: {.notes}
-
-The USFS collects data on expenditures. Expenditures tend to be tracked well because someone has to pay those bills. It also collects data on factors that are expected to influence fire behavior and management strategy: 
-
-- vegetation, topography, weather
-- values at risk like homes
-
-:::
 
 ## You Do It: Data
 
@@ -203,34 +298,6 @@ List the data sources that come to mind in the iClicker field.
 
 **Think about**: How will you collect and assemble these data? Do they already exist?
 
-## 4. Analyze data
-
-
-Design an analysis strategy to answer your question
-
-Model different scenarios
-
-What can be changed to better achieve your objective?
-
-::: {.notes}
-
-They use a regression model to study what factors explain variation in the suppression costs of past fires, then use that model to predict the suppression cost of a single fire. The predicted cost is compared to the actual cost. Fires that exceed their expected costs can be interrogated more closely.
-
-:::
-
-## 5. Communicate insight, implement, restart
-
-Use the data to tell a story - develop visuals that show the audience the consequence of the current decision and how a different one could change the outcome
-
-Articulate the benefits of the change
-
-Implement the change and restart the process
-
-::: {.notes}
-Develop a graphic to show which fires lie above the regression line of cost on X. Then, look for patterns across the fires that cost more than expected. Find what they have in common.
-
-:::
-
 ## You Do It: Analyze and Communicate
 
 **In Your Same Pairs**: 
@@ -238,8 +305,20 @@ Develop a graphic to show which fires lie above the regression line of cost on X
 1.  How would you analyze these data to answer your question? What software would you use? What statistics would you construct?
 
 2.  How would you communicate your findings to other people in the business? What visualizations might be useful?
+-->
+
+## Before Lab
+
+&nbsp; 
+
+Review [Lab Notes](https://csu-arec-330.github.io/materials/unit_00/week_02/lab_00_week_02.html) for week 2
+
+&nbsp; 
+
+Schedule your 15-minute 1-on-1 (if you haven't already)
 
 
+<!--
 ## D^3^M across scales 
 
 People make decisions all day every day - some are big and consequential and some are small.  
@@ -256,8 +335,7 @@ Data can help make better decisions across the spectrum, and in some cases, may 
 ::: {.notes}
 How about a thermostat at home or cruise control in your car
 :::
-
-
+-->
 
 <!-- # Data storytelling -->
 
@@ -351,7 +429,6 @@ How about a thermostat at home or cruise control in your car
 <!-- C.  Data analysis is more susceptible to biases -->
 
 <!-- D.  Annecdotal evidence is more convincing when communicating insights -->
-
 
 
 ## References {.scrollable}
