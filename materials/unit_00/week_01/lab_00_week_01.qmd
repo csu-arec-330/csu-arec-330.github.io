@@ -220,7 +220,7 @@ print(numbers + numbers*2)
 ```
 
 :::{.callout-tip}
-## Challenge
+## Challenge Question
 Can you figure out how to calculate the product of the vector `numbers`?
 :::
 

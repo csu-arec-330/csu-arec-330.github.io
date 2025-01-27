@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -47,25 +47,29 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link active" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
   <li><a href="#tableau-setup" id="toc-tableau-setup" class="nav-link" data-scroll-target="#tableau-setup">Tableau Setup</a></li>
-  <li><a href="#the-tableau-workflow" id="toc-the-tableau-workflow" class="nav-link" data-scroll-target="#the-tableau-workflow">The Tableau Workflow</a>
+  <li><a href="#applying-d3m-to-analyze-data-in-tableau" id="toc-applying-d3m-to-analyze-data-in-tableau" class="nav-link" data-scroll-target="#applying-d3m-to-analyze-data-in-tableau">Applying D<sup>3</sup>M to analyze data in Tableau</a>
+  <ul class="collapse">
+  <li><a href="#the-d3m-process-applied-to-the-supermarket-sales-data" id="toc-the-d3m-process-applied-to-the-supermarket-sales-data" class="nav-link" data-scroll-target="#the-d3m-process-applied-to-the-supermarket-sales-data">The D<sup>3</sup>M process applied to the Supermarket Sales data</a></li>
+  </ul></li>
+  <li><a href="#the-tableau-workflow-connect---analyze---share" id="toc-the-tableau-workflow-connect---analyze---share" class="nav-link" data-scroll-target="#the-tableau-workflow-connect---analyze---share">The Tableau Workflow: Connect -&gt; Analyze -&gt; Share</a>
   <ul class="collapse">
   <li><a href="#part-1-connect" id="toc-part-1-connect" class="nav-link" data-scroll-target="#part-1-connect">Part 1: Connect</a></li>
   <li><a href="#part-2-analyze" id="toc-part-2-analyze" class="nav-link" data-scroll-target="#part-2-analyze">Part 2: Analyze</a></li>
-  <li><a href="#applying-d3m-to-analyze-data-in-tableau" id="toc-applying-d3m-to-analyze-data-in-tableau" class="nav-link" data-scroll-target="#applying-d3m-to-analyze-data-in-tableau">Applying D<sup>3</sup>M to analyze data in Tableau</a></li>
   <li><a href="#create-calculated-fields" id="toc-create-calculated-fields" class="nav-link" data-scroll-target="#create-calculated-fields">1. Create calculated fields</a></li>
-  <li><a href="#organize-your-data-into-folders" id="toc-organize-your-data-into-folders" class="nav-link" data-scroll-target="#organize-your-data-into-folders">2. Organize your data into folders</a></li>
-  <li><a href="#visualizing-data-with-bar-charts" id="toc-visualizing-data-with-bar-charts" class="nav-link" data-scroll-target="#visualizing-data-with-bar-charts">3. Visualizing data with bar charts</a></li>
-  <li><a href="#sorting-bar-charts" id="toc-sorting-bar-charts" class="nav-link" data-scroll-target="#sorting-bar-charts">4. Sorting bar charts</a></li>
-  <li><a href="#using-the-marks-card" id="toc-using-the-marks-card" class="nav-link" data-scroll-target="#using-the-marks-card">5. Using the marks card</a></li>
-  <li><a href="#formatting-titles-axes-legends-etc." id="toc-formatting-titles-axes-legends-etc." class="nav-link" data-scroll-target="#formatting-titles-axes-legends-etc.">6. Formatting titles, axes, legends, etc.</a></li>
-  <li><a href="#using-the-filters-card" id="toc-using-the-filters-card" class="nav-link" data-scroll-target="#using-the-filters-card">8. Using the filters card</a></li>
-  <li><a href="#stacking-bar-charts" id="toc-stacking-bar-charts" class="nav-link" data-scroll-target="#stacking-bar-charts">9. Stacking bar charts</a></li>
-  <li><a href="#creating-bar-in-bar-charts" id="toc-creating-bar-in-bar-charts" class="nav-link" data-scroll-target="#creating-bar-in-bar-charts">10. Creating bar in bar charts</a></li>
-  <li><a href="#basic-line-charts-and-datetime" id="toc-basic-line-charts-and-datetime" class="nav-link" data-scroll-target="#basic-line-charts-and-datetime">11. Basic line charts and datetime</a></li>
-  <li><a href="#adding-trend-lines" id="toc-adding-trend-lines" class="nav-link" data-scroll-target="#adding-trend-lines">12. Adding trend lines</a></li>
+  <li><a href="#visualizing-data-with-bar-charts" id="toc-visualizing-data-with-bar-charts" class="nav-link" data-scroll-target="#visualizing-data-with-bar-charts">2. Visualizing data with bar charts</a></li>
+  <li><a href="#sorting-bar-charts" id="toc-sorting-bar-charts" class="nav-link" data-scroll-target="#sorting-bar-charts">3. Sorting bar charts</a></li>
+  <li><a href="#using-the-marks-card" id="toc-using-the-marks-card" class="nav-link" data-scroll-target="#using-the-marks-card">4. Using the marks card</a></li>
+  <li><a href="#formatting-titles-axes-legends-etc." id="toc-formatting-titles-axes-legends-etc." class="nav-link" data-scroll-target="#formatting-titles-axes-legends-etc.">5. Formatting titles, axes, legends, etc.</a></li>
+  <li><a href="#using-the-filters-card" id="toc-using-the-filters-card" class="nav-link" data-scroll-target="#using-the-filters-card">6. Using the filters card</a></li>
+  <li><a href="#stacking-bar-charts" id="toc-stacking-bar-charts" class="nav-link" data-scroll-target="#stacking-bar-charts">7. Stacking bar charts</a></li>
+  <li><a href="#creating-bar-in-bar-charts" id="toc-creating-bar-in-bar-charts" class="nav-link" data-scroll-target="#creating-bar-in-bar-charts">8. Creating bar in bar charts</a></li>
+  <li><a href="#basic-line-charts-and-datetime" id="toc-basic-line-charts-and-datetime" class="nav-link" data-scroll-target="#basic-line-charts-and-datetime">9. Basic line charts and datetime</a></li>
+  <li><a href="#adding-trend-lines" id="toc-adding-trend-lines" class="nav-link" data-scroll-target="#adding-trend-lines">10. Adding trend lines</a></li>
+  <li><a href="#organize-your-data-into-folders" id="toc-organize-your-data-into-folders" class="nav-link" data-scroll-target="#organize-your-data-into-folders">11. Organize your data into folders</a></li>
   <li><a href="#part-3-share" id="toc-part-3-share" class="nav-link" data-scroll-target="#part-3-share">Part 3: Share</a></li>
   </ul></li>
-  <li><a href="#review-questions" id="toc-review-questions" class="nav-link" data-scroll-target="#review-questions">Review Questions</a></li>
+  <li><a href="#on-your-own-additional-review-questions" id="toc-on-your-own-additional-review-questions" class="nav-link" data-scroll-target="#on-your-own-additional-review-questions">On Your Own: Additional Review Questions</a></li>
+  <li><a href="#this-weeks-assignment" id="toc-this-weeks-assignment" class="nav-link" data-scroll-target="#this-weeks-assignment">This Week’s Assignment</a></li>
   </ul>
 </nav>
 </div>
@@ -86,7 +90,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <p><img src="figs/shopping.webp" class="img-fluid"></p>
 <div style="font-size: 1.5em">
@@ -114,20 +120,147 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tableau-setup" class="level2">
 <h2 class="anchored" data-anchor-id="tableau-setup">Tableau Setup</h2>
-<p>We will be using two Tableau products in this course (although there are many more - <a href="https://csu-arec-330.github.io/materials/unit_00/week_01/handout_00_week_01.html">see handout</a>): Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free.</p>
-
-<!-- Visit [Tableau for students](https://www.tableau.com/academic/students) and apply for your 1-year academic license. -->
-<p>Visit <a href="https://www.tableau.com/products/desktop">Tableau Desktop</a> and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license.</p>
-<p>Visit <a href="https://public.tableau.com/app/discover">Tableau Public</a> and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.</p>
+<p>We will be using two Tableau products in this course: Tableau Desktop and Tableau Public. Tableau desktop typically requires a paid subscription, but as students (and teachers) we get it for free.</p>
+<ul>
+<li><p>Visit <a href="https://www.tableau.com/academic/students">Tableau for students</a> and apply for your 1-year academic license.</p></li>
+<li><p>Visit <a href="https://www.tableau.com/products/desktop">Tableau Desktop</a> and download Tableau Desktop using the 14-day free trial. You can enter your product license key once you receive an email with your academic license.</p></li>
+<li><p>Visit <a href="https://public.tableau.com/app/discover">Tableau Public</a> and create an account. You will use this account to host your data visualizations, which you can then embed on your google site. You will be required to use this to upload homework assignments.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Tableau eLearning Resources">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tableau eLearning Resources
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>If you are ever feeling lost in this class, I recommend checking out some of Tableau’s free <a href="https://elearning.tableau.com">eLearning resources</a>. We will use some videos from these trainings throughout the course and I am happy to recommend specific resources to fit your needs.</p>
+</div>
+</div>
 </section>
-<section id="the-tableau-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="the-tableau-workflow">The Tableau Workflow</h2>
-<p>Connect -&gt; Analyze -&gt; Share</p>
+<section id="applying-d3m-to-analyze-data-in-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="applying-d3m-to-analyze-data-in-tableau">Applying D<sup>3</sup>M to analyze data in Tableau</h2>
+<p>In today’s lab, we will use the <strong>Supermarket Sales</strong> data and apply the <a href="d3m_handout.pdf" target="&quot;_blank&quot;">D<sup>3</sup>M process</a> to create data visualizations.</p>
+<p>After reading the <a href="https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html">data documentation for the supermarket sales data</a>, we know that this dataset:</p>
+<ul>
+<li>Provides information about the transactions that took place in a supermarket chain.</li>
+<li>Includes sales observations from 3 different branches over a 3 month period.</li>
+<li>Includes information such as the date and time of the transaction, the products that were purchased, the price of each product, the total amount spent on the transaction, and other relevant details.</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Scenario:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You are a data analyst for a supermarket chain tasked with providing insights to the district manager. The manager wants to improve customer satisfaction and sales across all branches. Your analysis will focus on identifying underperforming product lines, uncovering branch-specific trends, and understanding how customer ratings have changed over time. Based on your findings, you will recommend actionable strategies for improvement.</p>
+<p>Using the <strong>Supermarket Sales</strong> data, we will apply the D3M process to create data visualizations that answer the following questions:</p>
+<ol type="1">
+<li><strong>Which product line has the lowest average customer rating across all branches?</strong></li>
+</ol>
+<ul>
+<li>Identify the product line with the lowest average customer rating based on the available data.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Do product lines with the lowest average customer rating differ by store branch?</strong></li>
+</ol>
+<ul>
+<li>Analyze whether specific branches have consistently lower-rated product lines.</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>How have average customer ratings changed over time?</strong></li>
+</ol>
+<ul>
+<li>Examine trends in customer ratings over time.</li>
+<li>Consider whether ratings have improved, declined, or remained stable.</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Have average customer ratings changed over time by store branch?</strong></li>
+</ol>
+<ul>
+<li>Compare changes in customer ratings over time across branches.</li>
+</ul>
+</div>
+</div>
+<section id="the-d3m-process-applied-to-the-supermarket-sales-data" class="level3">
+<h3 class="anchored" data-anchor-id="the-d3m-process-applied-to-the-supermarket-sales-data">The D<sup>3</sup>M process applied to the Supermarket Sales data</h3>
+<section id="step-1-define-an-objective" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-define-an-objective">Step 1: Define an Objective</h4>
+<p><strong>Prompt:</strong> What operational or business question are you trying to answer?</p>
+<ul>
+<li>Example: “Which product line has the lowest average customer rating, and how can we address it?”</li>
+</ul>
+<p>Write your own objective here:</p>
+<ul>
+<li><hr></li>
+<li><hr></li>
+</ul>
+</section>
+<section id="step-2-establish-a-hypothesis" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-establish-a-hypothesis">Step 2: Establish a Hypothesis</h4>
+<p><strong>Prompt:</strong> What do you expect the data will reveal? Why?</p>
+<ul>
+<li>Example: “I hypothesize that Electronic Accessories has the lowest customer ratings because customers may face issues with functionality or durability.”</li>
+</ul>
+<p>Write your hypothesis here:</p>
+<ul>
+<li><hr></li>
+<li><hr></li>
+</ul>
+</section>
+<section id="step-3-analyze-and-visualize" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-analyze-and-visualize">Step 3: Analyze and Visualize</h4>
+<p><strong>Task:</strong> Create visualizations in Tableau to answer the questions:</p>
+<ol type="1">
+<li><p><strong>Which product line has the lowest average customer rating?</strong></p></li>
+<li><p><strong>Does this differ by store branch?</strong></p></li>
+<li><p><strong>How have customer ratings changed over time?</strong></p></li>
+</ol>
+</section>
+<section id="step-4-interpret-results" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-interpret-results">Step 4: Interpret Results</h4>
+<p><strong>Prompt:</strong> Summarize your key findings:</p>
+<ul>
+<li>What do the results tell you about your hypothesis? Were there any surprises?</li>
+<li>What actionable recommendations can you make based on your analysis?</li>
+</ul>
+<p>Write your interpretation here:</p>
+<ul>
+<li><hr></li>
+<li><hr></li>
+</ul>
+</section>
+<section id="step-5-communicate-insights" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-communicate-insights">Step 5: Communicate Insights</h4>
+<p><strong>Task:</strong> Use Tableau to create a <strong>dashboard</strong> combining your key visualizations.</p>
+<p><strong>Prompt:</strong> Imagine presenting this to the store manager. Summarize your insights in 1–2 sentences:</p>
+<ul>
+<li><hr></li>
+<li><hr></li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="the-tableau-workflow-connect---analyze---share" class="level2">
+<h2 class="anchored" data-anchor-id="the-tableau-workflow-connect---analyze---share">The Tableau Workflow: Connect -&gt; Analyze -&gt; Share</h2>
 <p><a href="https://elearning.tableau.com/getting-started-with-tableau-desktop/699179/scorm/26hb0xo2vxhr">Video: The Tableau Desktop Workflow</a> [Est. Time: 4 hours]</p>
+<p>Tableau’s workflow can be summarized in three stages: <strong>Connect</strong>, <strong>Analyze</strong>, and <strong>Share</strong>.</p>
+<ol type="1">
+<li><strong>Connect</strong>: Link Tableau to your data source and prepare the data for analysis.</li>
+<li><strong>Analyze</strong>: Use Tableau’s tools to explore your data, create visualizations, and uncover insights.</li>
+<li><strong>Share</strong>: Present your findings through dashboards and publish them to Tableau Public or other platforms for collaboration and decision-making.</li>
+</ol>
+<p>This workflow ensures a structured approach to handling data, from connection to actionable results.</p>
 <section id="part-1-connect" class="level3">
 <h3 class="anchored" data-anchor-id="part-1-connect">Part 1: Connect</h3>
-<p>You will <strong>connect</strong> to your data on the <strong>Data Source Page</strong> following these steps:</p>
+<p><strong>Connect</strong> to your data on the <strong>Data Source Page</strong> following these steps:</p>
 <ol type="1">
 <li><p>Establish a connection</p></li>
 <li><p>View available sheets</p></li>
@@ -137,28 +270,64 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <section id="establish-a-connection" class="level4">
 <h4 class="anchored" data-anchor-id="establish-a-connection">1. Establish a connection</h4>
-<p>Download <code>supermarket_sales.csv</code> and save it to a new folder in your working directory called <code>arec330_lab_02</code>.</p>
-<p>Locate <strong>To a File</strong> under the Connect toolbar and select <code>Text file</code>.</p>
-<p>Note: Files that end in <code>.csv</code> are considered text files. The extension <code>.csv</code> stands for comma-separated values which allows data to be saved in a table structured format, even though it can easily be read in by Microsoft Excel and look very similar to files ending in <code>.xls</code> or <code>.xlsx</code>.</p>
+<p>Download <a href="../inputs/supermarket_sales.csv"><code>supermarket_sales.csv</code></a> and save it to a new folder in your working directory under <code>arec_330</code> called <code>lab_02</code>.</p>
+<p>Locate <strong>To a File</strong> under the Connect toolbar and select <strong>Text file</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Files that end in <code>.csv</code> are considered text files. The extension <code>.csv</code> stands for comma-separated values which allows data to be saved in a table structured format, even though it can easily be read in by Microsoft Excel and look very similar to files ending in <code>.xls</code> or <code>.xlsx</code>.</p>
+</div>
+</div>
 <p><img src="figs/tconnect.png" class="img-fluid"> After the data is connected, it’s time to save your work. Save the Tableau workbook as <code>arec330_lab_02.twb</code> in the same working directory (Note: You might have to navigate to the appropriate folder in your Windows Explorer or Finder). The default extension will be <code>.twb</code> so there shouldn’t be a need to change the extension.</p>
-<p>Tip: Make sure you select <strong>Extract</strong> (located in the upper right corner). In Tableau, live connections are dynamic and provide real-time updates, while extracts are snapshots of data that need to be refreshed. If your data file is not expected to change, then extracting will be preferred.</p>
-<p>Note: When extracting data, you will be prompted to save a file ending in <code>.hyper</code>. Save this file to the same folder where you saved your data (in this case, <code>arec330_lab_02</code>).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure you select <strong>Extract</strong> (located in the upper right corner). In Tableau, live connections are dynamic and provide real-time updates, while extracts are snapshots of data that need to be refreshed. If your data file is not expected to change, then extracting will be preferred.</p>
+<p>When <strong>extracting data</strong>, you will be prompted to save a file ending in <code>.hyper</code>. Save this file to the same folder where you saved your data (in this case, <code>arec330_lab_02</code>).</p>
+</div>
+</div>
 </section>
 <section id="view-available-sheets" class="level4">
 <h4 class="anchored" data-anchor-id="view-available-sheets">2. View available sheets</h4>
-<p>Once the data is connected, you will auto-magically be taken to the Data Source Page, where you can view the available sheets. In <code>supermarket_sales.csv</code> there is one sheet.</p>
+<p>Once the data is connected, your screen will automatically display the <strong>Data Source</strong> Page, where you can view the available sheets. In <code>supermarket_sales.csv</code> there is one sheet.</p>
 <p><img src="figs/tsheets.png" class="img-fluid"></p>
 </section>
 <section id="select-the-first-sheet-you-want-to-work-with" class="level4">
 <h4 class="anchored" data-anchor-id="select-the-first-sheet-you-want-to-work-with">3. Select the first sheet you want to work with</h4>
-<p>At the bottom of the Data Source Page is where you can toggle between the Data Source Page and the available sheets within the connected data.</p>
-<p><img src="figs/tsheets2.png" class="img-fluid"> For now, we will remain on the Data Source Page.</p>
+<p>The bottom of the <strong>Data Source</strong> Page is where you can toggle between the Data Source Page and the available sheets within the connected data.</p>
+<p><img src="figs/tsheets2.png" class="img-fluid"> For now, we will remain on the <strong>Data Source</strong> Page.</p>
 </section>
 <section id="view-and-edit-sheet-metadata" class="level4">
 <h4 class="anchored" data-anchor-id="view-and-edit-sheet-metadata">4. View and edit sheet metadata</h4>
 <p>The metadata shows information about the data, such as the field name and data type. You can edit the metadata on this page.</p>
-<p><img src="figs/tmetadata.png" class="img-fluid"> To the left of the metadata and data preview, you will find additional metadata about the data fields. Here you can determine the data <strong>type</strong>.</p>
-<p><strong>You do it:</strong> What is the type of the variable <code>Gender</code>?</p>
+<p><img src="figs/tmetadata.png" class="img-fluid"> To the left of the metadata and data preview, you will find additional metadata about the data fields. Here you can determine the data <strong>type</strong>. Data types tell you the <em>type</em> of variable. The three most common data types are string variables or characters, numbers or integers, and spatial or geographic variables (e.g., latitude and longitude, county, zip code).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the type of the variable <strong>Gender</strong>?</p>
+</div>
+</div>
 </section>
 <section id="connect-additional-sheets-optional" class="level4">
 <h4 class="anchored" data-anchor-id="connect-additional-sheets-optional">5. Connect additional sheets (optional)</h4>
@@ -168,14 +337,576 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="part-2-analyze" class="level3">
 <h3 class="anchored" data-anchor-id="part-2-analyze">Part 2: Analyze</h3>
-<p><strong>Analyzing</strong> your data in Tableau happens in the <strong>worksheet</strong>/<strong>workspace</strong>.</p>
-<p>Click on <code>Sheet 1</code> at the bottom of the Data Source Page. This action brings you to the <strong>Worksheets/Workspaces Page</strong>.</p>
+<p><strong>Analyzing</strong> your data in Tableau happens in the <strong>Worksheet</strong>/<strong>Workspace</strong>.</p>
+<p>To switch to the <strong>Workspace</strong>, click on <strong>Sheet 1</strong> at the bottom of the Data Source Page.</p>
 <p><img src="figs/tworkspaces.png" class="img-fluid"></p>
-<p>Use the <code>Data Pane</code> to view the data source and explore data fields within a worksheet.</p>
+<p>Use the <strong>Data Pane</strong> to view the data source and explore data fields within a worksheet.</p>
 <p><img src="figs/tdatapane.png" class="img-fluid"></p>
-<p>Within the Data pane view, we can determine the <strong>role</strong> of each data field. Because we have not calculated any variables yet, the two role options are <strong>dimensions</strong> or <strong>measures</strong>. <em>Dimensions</em> are qualitative fields (like names, dates, or geographic data) that are typically used to categorize, segment, and reveal the details in your data. They usually appear as rows, columns, or in filters. <em>Measures</em> are quantitative fields (like sales, profits, or counts) that can be aggregated (summed, averaged, etc.). They often provide the numerical values that you analyze.</p>
-<p><strong>You do it:</strong> What is the role of the variable <code>Gender</code>?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Role: Dimensions vs. Measures">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Role: Dimensions vs.&nbsp;Measures
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Within the Data Pane view, we can determine the <strong>role</strong> of each data field. Because we have not calculated any variables yet, the two role options are <strong>dimensions</strong> or <strong>measures</strong>.</p>
+<ul>
+<li><p><em>Dimensions</em> are qualitative fields (like names, dates, or geographic data) that are typically used to categorize, segment, and reveal the details in your data. They usually appear as rows, columns, or in filters.</p></li>
+<li><p><em>Measures</em> are quantitative fields (like sales, profits, or counts) that can be aggregated (summed, averaged, etc.). They often provide the numerical values that you analyze.</p></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the role of the variable <code>Gender</code>?</p>
+</div>
+</div>
+<p>In Tableau, there are multiple tools to assist you with analyzing data:</p>
+<ol type="1">
+<li><p>Creating calculated fields</p></li>
+<li><p>Bar charts: Sorting, stacking, and bar-in-bar</p></li>
+<li><p>Using the <code>Marks</code> card for formatting</p></li>
+<li><p>Formatting titles, axes, legends, and tooltips</p></li>
+<li><p>Creating line charts and adding trend lines</p></li>
+<li><p>Organizing fields in folders</p></li>
+</ol>
+<p>We will learn how to use these tools to answer the questions in our scenario:</p>
+<ol type="1">
+<li><p><strong>Which product line has the lowest average customer rating?</strong></p></li>
+<li><p><strong>Does this differ by store branch?</strong></p></li>
+<li><p><strong>How have customer ratings changed over time?</strong></p></li>
+</ol>
+</section>
+<section id="create-calculated-fields" class="level3">
+<h3 class="anchored" data-anchor-id="create-calculated-fields">1. Create calculated fields</h3>
+<p>Calculate the <strong>total value</strong> of each transaction using the <code>unit_price</code> and <code>quantity</code> columns.</p>
+<p>Select the icon in the Data pane.</p>
+<p><img src="figs/newvar.png" class="img-fluid" style="width:60.0%"></p>
+<p>Then select <code>Create Calculated Field...</code></p>
+<p><img src="figs/tsubtotal.png" class="img-fluid"></p>
+<p>Give your field a useful name (let’s use <code>subtotal</code>).</p>
+<p><img src="figs/tsubtotal2.png" class="img-fluid"></p>
+<p>Create a new column <code>subtotal</code> = <code>[Quantity] * [Unit Price]</code>.</p>
+<p>Drag the relevant variables into the calculation field. Type the appropriate function (the asterisk is the symbol we use to multiply two values). Click OK. And Voila – the new variable will appear as a new data field in your Data pane.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Validate that the value labeled <code>tax</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Explore some other options for data manipulation by clicking the right triangle in the <strong>Create Calculated Field</strong> box. Try creating a new variable of your choosing.</p>
+</div>
+</div>
+</section>
+<section id="visualizing-data-with-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-data-with-bar-charts">2. Visualizing data with bar charts</h3>
+<p>Suppose we want to look at average customer ratings by product line to answer the question <strong>Which product line has the lowest average customer rating?</strong></p>
+<p>Locate the <strong>Columns and Rows Shelves</strong> in the <strong>Workspace</strong>. The Columns and Rows Shelves are used to create a structure for your visualization.</p>
+<p>Drag <code>Product Line</code> into the Columns shelf and <code>Rating</code> into the Rows shelf.</p>
+<p>What did you notice? Aside from a vertical bar chart appearing, <strong>Rating</strong> (a measure) defaulted to <code>SUM</code>.</p>
+<p>If we want the average, we need to change the measure by clicking on the drop down menu next to <code>SUM(Rating)</code>, select <code>Measure (Sum)</code>, and change this to <code>Average</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose now that we wanted to display this in a horizontal bar chart. What would you need to alter?</p>
+</div>
+</div>
+</section>
+<section id="sorting-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="sorting-bar-charts">3. Sorting bar charts</h3>
+<p>You can <strong>sort</strong> the data so that the category with the highest rating is first, and the category with the lowest rating is last, using either the toolbar or the icon next to the y-axis label.</p>
+<section id="option-1-using-the-toolbar" class="level4">
+<h4 class="anchored" data-anchor-id="option-1-using-the-toolbar">Option 1: Using the Toolbar</h4>
+<ul>
+<li>In the toolbar, find the sort button, which typically looks like a pair of bars with an arrow pointing either up or down.</li>
+<li>Click the sort button to sort the data. Clicking once will sort it in one direction (e.g., lowest to highest), and clicking again will reverse the sort order (e.g., highest to lowest).</li>
+</ul>
+</section>
+<section id="option-2-using-the-icon-next-to-the-y-axis-label" class="level4">
+<h4 class="anchored" data-anchor-id="option-2-using-the-icon-next-to-the-y-axis-label">Option 2: Using the Icon Next to the Y-Axis Label</h4>
+<ul>
+<li>Go to the Columns Shelf and hover your cursor over <code>Product Line</code> until you see the upside down triangle.</li>
+<li>Click this icon and find <strong>Sort</strong>.</li>
+<li>In the drop down menu, select either <strong>Nested</strong> or <strong>Field</strong>. The default is <strong>Data source order</strong>.</li>
+<li>You can either sort Ascending or Descending by Field Name (Rating) and Aggregation (Average).</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="using-the-marks-card" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-marks-card">4. Using the marks card</h3>
+<section id="using-colors" class="level4">
+<h4 class="anchored" data-anchor-id="using-colors">Using colors</h4>
+<p>What if we want to use <strong>color</strong> to highlight the top category?</p>
+<p>There are a few ways to do this:</p>
+<ul>
+<li><p>Drag <code>Product Line</code> to <code>Color</code> on the <strong>Marks</strong> card (then edit colors)</p></li>
+<li><p>Right click the bar you want to stand out and click <code>Group</code> (then edit colors)</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Locate the product line with the highest rating and highlight the category with a different color.</p>
+</div>
+</div>
+</section>
+<section id="adding-labels" class="level4">
+<h4 class="anchored" data-anchor-id="adding-labels">Adding labels</h4>
+<p>What if we want to add <strong>labels</strong> with the value of the rating?</p>
+<ul>
+<li>Select <code>Label</code> in the Marks card -&gt; check <code>Show mark labels</code></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Show mark labels and click around with the other options on the label card. What formatting do you like best?</p>
+</div>
+</div>
+</section>
+<section id="formatting-the-bars" class="level4">
+<h4 class="anchored" data-anchor-id="formatting-the-bars">Formatting the bars</h4>
+<p>What if we want to change the <strong>width of our bars</strong>?</p>
+<ul>
+<li>Select <code>Size</code> in the Marks card -&gt; Adjust (moving cursor to the right widens the bars)</li>
+</ul>
+</section>
+<section id="displaying-additional-information" class="level4">
+<h4 class="anchored" data-anchor-id="displaying-additional-information">Displaying additional information</h4>
+<p>By default, hovering your cursor over the bars will display information. What if we want to add <strong>extra info</strong> on the box that appears when we hover over a bar?</p>
+<ul>
+<li>Select <code>Tooltip</code> in the Marks card -&gt; Click on <code>Insert</code></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Try adding some text to the tooltip. What else can you add to the tooltip?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="formatting-titles-axes-legends-etc." class="level3">
+<h3 class="anchored" data-anchor-id="formatting-titles-axes-legends-etc.">5. Formatting titles, axes, legends, etc.</h3>
+<section id="adjusting-the-scale-of-the-y-axis" class="level4">
+<h4 class="anchored" data-anchor-id="adjusting-the-scale-of-the-y-axis">Adjusting the scale of the y-axis</h4>
+<p>What if we want to <strong>adjust the scale</strong> of the y-axis so that differences across the bars are easier to see?</p>
+<ul>
+<li><p>Right click the y-axis</p></li>
+<li><p>Click <code>Edit Axis</code></p></li>
+<li><p>Under <code>Range</code> select <code>Custom</code>. Set an appropriate range by selecting appropriate values for <code>Fixed start</code> and <code>Fixed end</code>.</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Challenge Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What if we want to compare customer ratings across <strong>branches</strong>? Does the product line with the top ratings vary by store?*</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Challenge Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Highlight the product line with the top rating at branch A. How does this rank in the other branches?</p>
+</div>
+</div>
+</section>
+<section id="changing-the-formatting-of-the-axis-labels" class="level4">
+<h4 class="anchored" data-anchor-id="changing-the-formatting-of-the-axis-labels">Changing the formatting of the axis labels</h4>
+<p>What if we want to <strong>change the font size</strong> (or color, etc.) of the axis labels?</p>
+<ul>
+<li><p>Right click the axis you want to edit</p></li>
+<li><p>Click <code>Format</code></p></li>
+</ul>
+</section>
+<section id="renaming-fields" class="level4">
+<h4 class="anchored" data-anchor-id="renaming-fields">Renaming fields</h4>
+<p>What if instead of having Branch / Product line at the top of the bar chart, we want to rename A as Branch A, B as Branch B, and C as Branch C?</p>
+<ul>
+<li><p>Right click <strong>Branch / Product line</strong> -&gt; Select <code>Hide Field Labels for Columns</code></p></li>
+<li><p>Right click <code>Branch</code> in the Columns shelf -&gt; Select <code>Edit Aliases...</code></p></li>
+<li><p>Rename each branch under the column titled <code>Value (Alias)</code></p></li>
+</ul>
+</section>
+<section id="annotating-the-bar-chart" class="level4">
+<h4 class="anchored" data-anchor-id="annotating-the-bar-chart">Annotating the bar chart</h4>
+<p><strong>Adding a caption</strong> that describes details about your visualization.</p>
+<ul>
+<li><p>Right click the blank area of the visualization</p></li>
+<li><p>Select <code>Annotate</code> -&gt; Select either <code>Point</code> or <code>Area</code></p></li>
+</ul>
+<p>– By selecting <code>Area</code> you can add text to comment about a specific region of a visualization.</p>
+<p>– By selecting <code>Point</code> you can call out a specific data point in the visualization.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are <strong>many</strong> other features to explore in the Tableau toolbar. Hover over each icon in the toolbar and click to explore.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="using-the-filters-card" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-filters-card">6. Using the filters card</h3>
+<p>What if we want to recreate our analysis of ratings for female customers only?</p>
+<p>First, let’s <strong>duplicate</strong> the existing worksheet.</p>
+<ul>
+<li><p>Locate your active sheet (this should be called <strong>Sheet 1</strong>)</p></li>
+<li><p>Right click and select <code>Duplicate</code></p></li>
+</ul>
+<p>Your new active worksheet will be <strong>Sheet 1 (2)</strong>.</p>
+<p>Now, let’s add a filter for females:</p>
+<ul>
+<li><p>Drag the field <code>Gender</code> to the <code>Filters</code> card</p></li>
+<li><p>Select <code>Female</code></p></li>
+</ul>
+</section>
+<section id="stacking-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="stacking-bar-charts">7. Stacking bar charts</h3>
+<p>What if you want to see total sales split by gender and purchase category?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a visualization (in a new sheet) that shows total sales (<code>Total</code>) by <code>Gender</code> and <code>Product Line</code>.</p>
+</div>
+</div>
+<p>What if, instead, we want to see this in terms of the percent of total sales within each category are from females vs.&nbsp;males?</p>
+<p>First, let’s try <strong>stacking</strong> our bars and adding labels:</p>
+<ul>
+<li><p>Move <code>Gender</code> from the Columns shelf and drag it to the <code>Color</code> icon on the <code>Marks</code> card</p></li>
+<li><p>Select <code>Label</code> from the <code>Marks</code> card -&gt; Check <code>Show mark labels</code> to display the value of total sales for males and females</p></li>
+</ul>
+<p>Next, convert this display to see the percent of total sales that are from males and females:</p>
+<ul>
+<li><p>Click the drop down menu next to SUM(Total) on the Rows shelf</p></li>
+<li><p>Select <code>Quick Table Calculation</code> -&gt; <code>Percent of Total</code></p></li>
+</ul>
+<p>This gives us the percentage of total sales that are from males and females, but as a percent of <em>all</em> sales.</p>
+<p>What if we want to see the percent of total sales <em>within each category</em> that are from males and females?</p>
+<p>We need to create a <em>100% stacked bar chart</em>.</p>
+<ul>
+<li><p>Click the drop down menu next to SUM(Total) on the Rows shelf</p></li>
+<li><p>Select <code>Compute Using</code> -&gt; <code>Gender</code></p></li>
+</ul>
+<p>Note: The default is <code>Table (across)</code>.</p>
+</section>
+<section id="creating-bar-in-bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="creating-bar-in-bar-charts">8. Creating bar in bar charts</h3>
+<p>Another way to compare sales for males and females is to use a bar in bar chart. This will allow you to easily see whether total sales are higher for males or females.</p>
+<ul>
+<li><p>Duplicate the 100% stacked bar chart by right-clicking on Sheet 2 and selecting <code>Duplicate</code></p></li>
+<li><p>Drag <code>Gender</code> to the <code>Size</code> icon in the <code>Marks</code> card</p></li>
+<li><p>From the toolbar, click <code>Analysis</code> -&gt; <code>Stack Marks</code> -&gt; and select <code>Off</code></p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Challenge Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What if we want to swap which gender is the wide bar and which is the narrow bar?</p>
+</div>
+</div>
+</section>
+<section id="basic-line-charts-and-datetime" class="level3">
+<h3 class="anchored" data-anchor-id="basic-line-charts-and-datetime">9. Basic line charts and datetime</h3>
+<p>The second type of chart we will learn to create is a line chart.</p>
+<p>Suppose we want to see trends in sales over time:</p>
+<ul>
+<li><p>Open a new worksheet</p></li>
+<li><p>Drag <code>Total</code> to the Rows shelf and <code>Date</code> to the Columns shelf</p></li>
+<li><p>Click the drop down menu next to <code>Date</code></p></li>
+<li><p>Select <code>Week Number</code></p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Challenge Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are two options for each date display option. What is the difference between these fields?*</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Explore the other date display options. Which do you like best for this analysis?</p>
+</div>
+</div>
+</section>
+<section id="adding-trend-lines" class="level3">
+<h3 class="anchored" data-anchor-id="adding-trend-lines">10. Adding trend lines</h3>
+<p>What if we want to see trends in sales across months?</p>
+<p>Let’s look at two options for doing this.</p>
+<ol type="1">
+<li><p>Side-by-side lines:</p>
+<ul>
+<li><p>Double click <code>Date</code> to add to to the Columns shelf, and drag <code>Total</code> to the Rows shelf.</p></li>
+<li><p>Set the aggregation to <code>MONTH(Date)</code> in the Columns shelf and <code>SUM(Total)</code> in the Rows shelf.</p></li>
+<li><p>Double click the <code>Date</code> field (again) in the Data pane. This will add it to the Columns shelf.</p></li>
+<li><p>Click the drop down menu on the <code>YEAR(Date)</code> field on the Columns shelf and select <code>Day</code></p></li>
+</ul></li>
+<li><p>Combined lines:</p>
+<ul>
+<li>Drag <code>MONTH(Date)</code> to the colors card</li>
+</ul></li>
+</ol>
+<p>Note: Both date values need to be <em>dimensions</em>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You will notice that a new <code>Path</code> icon now appears on the <code>Marks</code> card. Experiment with different line types.</p>
+</div>
+</div>
+<p>To add trend lines, from the toolbar select <code>Analysis</code> -&gt; <code>Trend Lines</code> -&gt; <code>Show Trend Lines</code></p>
+</section>
+<section id="organize-your-data-into-folders" class="level3">
+<h3 class="anchored" data-anchor-id="organize-your-data-into-folders">11. Organize your data into folders</h3>
+<p>In Tableau, one way to reduce the number of fields you see if by organizing your data into folders.</p>
+<p>Let’s try organizing a few of our data fields into folders.</p>
+<p><strong>Step 1:</strong> Right-Click a Field.</p>
+<p>Start by right-clicking on a field (dimension or measure) in the Data pane that you want to organize into a folder. Let’s pick <code>Product line</code>.</p>
+<p><strong>Step 2:</strong> Create a New Folder.</p>
+<p>After right-clicking, navigate to <code>Folders</code> in the context menu. Select <code>Create Folder...</code> from the sub-menu.</p>
+<p>Note: If you cannot select <code>Folders</code>, you need to first select <code>Group by</code> in the context menu. Then select <code>Folders</code>. The default view in Tableau is <code>Data Source Table</code>.</p>
+<p><strong>Step 3:</strong> Name Your Folder.</p>
+<p>In the dialog that appears, give your new folder a meaningful name that reflects the fields you plan to organize within it. Let’s name the folder <code>Product_Ratings</code>.</p>
+<p><strong>Step 4:</strong> Add Fields to the Folder.</p>
+<p>After creating the folder, you can add other fields to it by right-clicking them, selecting <code>Folders,</code> and then choosing the name of the folder you created.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Comprehension Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Locate the data field <code>Rating</code> and add it to the <code>Product_Rating</code> folder.</p>
+</div>
+</div>
+<p><strong>Step 5:</strong> Select Group by Folder.</p>
+<p>To view your fields organized by the folders you’ve created, go to the drop-down menu at the top of the Data pane. Select <code>Group by Folder</code> from this menu. This will organize all fields in the Data pane into their respective folders.</p>
+<p><img src="figs/tgroupby.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that organizing fields into folders is just for convenience and does not affect how you can combine data in your visualizations. You can still use fields from different folders together in your visualizations.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Lab Steps for Week 2: Introduction to Tableau">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lab Steps for Week 2: Introduction to Tableau
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><strong>Which product line has the lowest average customer rating?</strong></p>
+<ul>
+<li>Drag <code>Product line</code> to <strong>Columns</strong> and <code>Rating</code> to <strong>Rows</strong>.</li>
+<li>Change the aggregation for <code>Rating</code> to <strong>Average</strong>.</li>
+<li>Sort the bars to find the product line with the lowest rating.</li>
+</ul>
+<p><strong>Reflection:</strong> What does this reveal about customer satisfaction?</p></li>
+<li><p><strong>Does this differ by store branch?</strong></p>
+<ul>
+<li>Drag <code>Branch</code> to <strong>Columns</strong> and <code>Product line</code> to <strong>Rows</strong>.</li>
+<li>Add <code>Rating</code> to <strong>Rows</strong> and change to <strong>Average</strong>.</li>
+<li>Use the <code>Color</code> option in the <code>Marks</code> card to highlight differences.</li>
+</ul>
+<p><strong>Reflection:</strong> Are there significant differences in ratings across branches?</p></li>
+<li><p><strong>How have customer ratings changed over time?</strong></p>
+<ul>
+<li>Drag <code>Date</code> to <strong>Columns</strong> and <code>Rating</code> to <strong>Rows</strong>.</li>
+<li>Adjust <code>Date</code> to show <code>Month</code>.</li>
+<li>Add <code>Branch</code> to <strong>Color</strong> to compare trends by location.</li>
+</ul>
+<p><strong>Reflection:</strong> What trends or patterns do you observe?</p></li>
+</ol>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="part-3-share" class="level3">
+<h3 class="anchored" data-anchor-id="part-3-share">Part 3: Share</h3>
+<p>You will <strong>share</strong> your <strong>worksheet</strong> on Tableau Public by following these steps:</p>
+<ol type="1">
+<li>Connect Tableau Desktop to your Tableau Public account.</li>
+</ol>
+<ul>
+<li>On the toolbar, locate <code>Server</code> -&gt; click <code>Tableau Public</code></li>
+</ul>
+<ol start="2" type="1">
+<li>Publish your work to your account. There are two ways to do this:</li>
+</ol>
+<ul>
+<li><p><code>Server</code> -&gt; <code>Publish Workbook</code></p></li>
+<li><p><code>Server -&gt;</code>Tableau Public<code>-&gt;</code>Save to Tableau Public`</p></li>
+</ul>
+<p>You should also save a local copy of your work as a Tableau Workbook. There are two ways to do this:</p>
+<ul>
+<li><p>On the toolbar, locate <code>File</code> -&gt; click <code>Save</code></p></li>
+<li><p>Click the floppy disk icon (<img src="figs/save.png" class="img-fluid" style="width:5.0%">) at the top of the page</p></li>
+</ul>
+<ol start="3" type="1">
+<li>Embed your visualization in your Google website.</li>
+</ol>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/uPdIgUIRnyo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<hr>
+</section>
+</section>
+<section id="on-your-own-additional-review-questions" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own-additional-review-questions">On Your Own: Additional Review Questions</h2>
+<ol type="1">
+<li><p>Which payment type has the highest total spending?</p></li>
+<li><p>Do more females or more males use this payment type?</p></li>
+<li><p>Which payment type has seen the greatest increase in total spending over time?</p></li>
+<li><p>For a challenge: Which payment type has seen the greatest increase in the <strong>number of customers using it</strong> over time?</p></li>
+</ol>
+<hr>
+</section>
+<section id="this-weeks-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="this-weeks-assignment">This Week’s Assignment</h2>
+<p>In problem set 2, you will follow this workflow to produce a simple data visualization using the grocery store spending dataset. <a href="https://csu-arec-330.github.io/materials/unit_00/week_02/ps2.html" class="uri">https://csu-arec-330.github.io/materials/unit_00/week_02/ps2.html</a></p>
+<!---
+-  Selecting `Group by folder`
 
+-  Right click a field you want in the new folder
+
+-  Click Folders -> Create Folder...
+
+-  Give your folder a useful name
+
+Note that you can still combine data across different folders in your visualizations, you have just created a more organized data pane.
+--->
 <!---
 3.  Use the Columns and Rows Shelves to create a structure for your visualization. You will create a visualization by placing fields on these shelves. You can place any number of fields on these shelves.
 
@@ -191,19 +922,6 @@ We will go into steps 3--7 of the analyze step of the process later in this lab.
 
 Throughout the course you will continue to learn new features of the analysis capabilities of Tableau, but for now this is what you need to know.
 --->
-</section>
-<section id="applying-d3m-to-analyze-data-in-tableau" class="level3">
-<h3 class="anchored" data-anchor-id="applying-d3m-to-analyze-data-in-tableau">Applying D<sup>3</sup>M to analyze data in Tableau</h3>
-<p>Using the Supermarket Sales data, we will construct data visualizations that answer the following questions:</p>
-<ol type="1">
-<li><p>Which product line has the lowest average customer rating?</p></li>
-<li><p>Does this differ by store branch?</p>
-<p>-&gt; What actionable insights does this analysis reveal for the stores?</p></li>
-<li><p>How have average customer ratings changed over time?</p></li>
-<li><p>Does this differ by store branch?</p>
-<p>-&gt; What actionable insights does this analysis reveal for the stores?</p></li>
-</ol>
-
 <!---
 Now, we are going to go in more detail in the analyze step of the process. 
 
@@ -212,135 +930,29 @@ We will learn the following:
 - Make a few new figures
 - Additional features of the Tableau analysis page
 - Ways to change the formatting of your visualizations to make them more effective
+
+We will be covering the following:  
+
+1.  Creating calculated fields
+
+2.  Organizing fields in folders
+
+3.  More advanced bar charts: Sorting
+
+4.  Using the `Marks` card and creating groups
+
+5.  Formatting titles, axes, legends, etc.
+
+6.  Exploring the Tableau toolbar
+
+7.  Using the `Filters` card
+
+8.  More advanced bar charts: Stacking
+
+9.  More advanced bar charts: Bar in bar
+
+10.  Intro to line charts and manipulating dates
 --->
-<p>We will be covering the following:</p>
-<ol type="1">
-<li><p>Creating calculated fields</p></li>
-<li><p>Organizing fields in folders</p></li>
-<li><p>More advanced bar charts: Sorting</p></li>
-<li><p>Using the <code>Marks</code> card and creating groups</p></li>
-<li><p>Formatting titles, axes, legends, etc.</p></li>
-<li><p>Exploring the Tableau toolbar</p></li>
-<li><p>Using the <code>Filters</code> card</p></li>
-<li><p>More advanced bar charts: Stacking</p></li>
-<li><p>More advanced bar charts: Bar in bar</p></li>
-<li><p>Intro to line charts and manipulating dates</p></li>
-</ol>
-</section>
-<section id="create-calculated-fields" class="level3">
-<h3 class="anchored" data-anchor-id="create-calculated-fields">1. Create calculated fields</h3>
-<p>We will calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns, and name the new column <code>subtotal</code>.</p>
-<p>Select the icon in the Data pane.</p>
-<p><img src="figs/newvar.png" class="img-fluid" style="width:60.0%"></p>
-<p>Then select <code>Create Calculated Field...</code></p>
-<p><img src="figs/tsubtotal.png" class="img-fluid"></p>
-<p>Give your field a useful name (let’s use <code>subtotal</code>).</p>
-<p><img src="figs/tsubtotal2.png" class="img-fluid"></p>
-<p>Drag the relevant variables into the box. Type the appropriate function (what symbol do you use to multiply two values?). Click OK. And Voila – the new variable will appear as a new data field in your Data pane.</p>
-<p><strong>You do it:</strong> Validate that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>.</p>
-<p><strong>You do it:</strong> Explore some other options for data manipulation by clicking the right triangle in the Create Calculated Field box. Try creating a new variable of your choosing.</p>
-</section>
-<section id="organize-your-data-into-folders" class="level3">
-<h3 class="anchored" data-anchor-id="organize-your-data-into-folders">2. Organize your data into folders</h3>
-<!---In your last assignment you were asked to use R to create a dataframe containing only a subset of your data, with the columns `city, product_line, unit_price, quantity, total, rating`--->
-<p>In Tableau, one way to reduce the number of fields you see if by organizing your data into folders.</p>
-<p>Let’s try organizing a few of our data fields into folders.</p>
-<p><strong>Step 1:</strong> Right-Click a Field.</p>
-<p>Start by right-clicking on a field (dimension or measure) in the Data pane that you want to organize into a folder. Let’s pick <code>Product line</code>.</p>
-<p><strong>Step 2:</strong> Create a New Folder.</p>
-<p>After right-clicking, navigate to <code>Folders</code> in the context menu. Select <code>Create Folder...</code> from the submenu.</p>
-<p>Note: If you cannot select <code>Folders</code>, you need to first select <code>Group by</code> in the context menu. Then select <code>Folders</code>. The default view in Tableau is <code>Data Source Table</code>.</p>
-<p><strong>Step 3:</strong> Name Your Folder.</p>
-<p>In the dialog that appears, give your new folder a meaningful name that reflects the fields you plan to organize within it. Let’s name the folder <code>Product_Ratings</code>.</p>
-<p><strong>Step 4:</strong> Add Fields to the Folder.</p>
-<p>After creating the folder, you can add other fields to it by right-clicking them, selecting <code>Folders,</code> and then choosing the name of the folder you created.</p>
-<p><strong>You do it:</strong> Locate the data field <code>Rating</code> and add it to the <code>Product_Rating</code> folder.</p>
-<p><strong>Step 5:</strong> Select Group by Folder.</p>
-<p>To view your fields organized by the folders you’ve created, go to the drop-down menu at the top of the Data pane. Select <code>Group by Folder</code> from this menu. This will organize all fields in the Data pane into their respective folders.</p>
-<p><img src="figs/tgroupby.png" class="img-fluid"></p>
-<p>Note: Remember that organizing fields into folders is just for convenience and does not affect how you can combine data in your visualizations. You can still use fields from different folders together in your visualizations.</p>
-<!---
--  Selecting `Group by folder`
-
--  Right click a field you want in the new folder
-
--  Click Folders -> Create Folder...
-
--  Give your folder a useful name
-
-Note that you can still combine data across different folders in your visualizations, you have just created a more organized data pane.
---->
-</section>
-<section id="visualizing-data-with-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="visualizing-data-with-bar-charts">3. Visualizing data with bar charts</h3>
-<!---Let's start off with our bar chart from last class where we looked at customer ratings by product line...--->
-<p>Suppose we want to look at average customer ratings by product line.</p>
-<p>What are some ways we could visualize this to answer the question “Which product line has the lowest average customer rating?”</p>
-<p>Locate the <strong>Columns and Rows Shelves</strong> in workspace. The Columns and Rows Shelves are used to create a structure for your visualization.</p>
-<p>Suppose we want to create a vertical bar chart. Simply drag <code>Product line</code> into the Columns shelf and <code>Rating</code> into the Rows shelf.</p>
-<p>What did you notice? Aside from a vertical bar chart appearing, the Measure of Rating defaulted to <code>SUM</code>. If we want the average, we need to change the measure by clicking on the dropdown menu next to <code>SUM(Rating)</code>, select <code>Measure (Sum)</code>, and change this to <code>Average</code>.</p>
-<p><strong>You do it:</strong> Suppose now that we wanted to display this in a horizontal bar chart. What would you need to alter?</p>
-</section>
-<section id="sorting-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="sorting-bar-charts">4. Sorting bar charts</h3>
-<div class="notes">
-<p>Title, adding color to highlight the top category, making font larger and easier to read, maybe changing axis range</p>
-</div>
-<p>You can <strong>sort</strong> the data so that the category with the highest rating is first, and the category with the lowest rating is last, using either the toolbar or the icon next to the y-axis label.</p>
-<section id="option-1-using-the-toolbar" class="level4">
-<h4 class="anchored" data-anchor-id="option-1-using-the-toolbar">Option 1: Using the Toolbar</h4>
-<ul>
-<li>Click on the bar chart you want to sort.</li>
-<li>Look for the toolbar at the top of the Tableau workspace.</li>
-<li>In the toolbar, find the sort button, which typically looks like a pair of bars with an arrow pointing either up or down.</li>
-<li>Click the sort button to sort the data. Clicking once will sort it in one direction (e.g., lowest to highest), and clicking again will reverse the sort order (e.g., highest to lowest).</li>
-</ul>
-</section>
-<section id="option-2-using-the-icon-next-to-the-y-axis-label" class="level4">
-<h4 class="anchored" data-anchor-id="option-2-using-the-icon-next-to-the-y-axis-label">Option 2: Using the Icon Next to the Y-Axis Label</h4>
-<ul>
-<li>Click on your bar chart.</li>
-<li>Find the y-axis (vertical axis) label. This is usually where your categories or group names are listed.</li>
-<li>Next to the axis label, there should be a small sort icon. This icon is usually an arrow or a pair of arrows pointing up and down.</li>
-<li>Click on this icon to sort the bars. The first click sorts in ascending order (lowest to highest), the second click sorts in descending order (highest to lowest), and the third click restores it to its default ordering.</li>
-</ul>
-<p><strong>You do it:</strong> Sort the data so that the category with the highest rating is first and the category with the lowest rating is last.</p>
-</section>
-</section>
-<section id="using-the-marks-card" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-marks-card">5. Using the marks card</h3>
-<section id="using-colors" class="level4">
-<h4 class="anchored" data-anchor-id="using-colors">Using colors</h4>
-<p>What if we want to use <strong>color</strong> to highlight the top category?</p>
-<p>There are a few ways to do this:</p>
-<ul>
-<li><p>Drag <code>Product line</code> to <code>Color</code> on the <strong>Marks</strong> card (then edit colors)</p></li>
-<li><p>Right click the bar you want to stand out and click <code>Group</code> (then edit colors)</p></li>
-</ul>
-<p><strong>You do it:</strong> Locate the product line with the highest rating and highlight the category with a different color.</p>
-</section>
-<section id="adding-labels" class="level4">
-<h4 class="anchored" data-anchor-id="adding-labels">Adding labels</h4>
-<p>What if we want to add <strong>labels</strong> with the value of the rating?</p>
-<ul>
-<li>Select <code>Label</code> in the Marks card -&gt; check <code>Show mark labels</code></li>
-</ul>
-<p><strong>You do it:</strong> Show mark labels and click around with the other options on the label card. What formatting do you like best?</p>
-</section>
-<section id="formatting-the-bars" class="level4">
-<h4 class="anchored" data-anchor-id="formatting-the-bars">Formatting the bars</h4>
-<p>What if we want to change the <strong>width of our bars</strong>?</p>
-<ul>
-<li>Select <code>Size</code> in the Marks card -&gt; Adjust (moving cursor to the right widens the bars)</li>
-</ul>
-</section>
-<section id="displaying-additional-information" class="level4">
-<h4 class="anchored" data-anchor-id="displaying-additional-information">Displaying additional information</h4>
-<p>By default, hovering your cursor over the bars will display information. What if we want to add <strong>extra info</strong> on the box that appears when we hover over a bar?</p>
-<ul>
-<li>Select <code>Tooltip</code> in the Marks card -&gt; Click on <code>Insert</code></li>
-</ul>
-<p><strong>You do it:</strong> Try adding some text to the tooltip. What else can you add to the tooltip?</p>
 <!---
 ### Creating groups
 
@@ -368,195 +980,6 @@ The new group will appear in the Data pane, typically named as per your input. Y
 
 If you need to make changes to the group later, right-click on the group field in the Data pane and select `Edit Group`. In the edit dialog, you can add or remove product lines, or make other adjustments to the group.
 --->
-</section>
-</section>
-<section id="formatting-titles-axes-legends-etc." class="level3">
-<h3 class="anchored" data-anchor-id="formatting-titles-axes-legends-etc.">6. Formatting titles, axes, legends, etc.</h3>
-<section id="adjusting-the-scale-of-the-y-axis" class="level4">
-<h4 class="anchored" data-anchor-id="adjusting-the-scale-of-the-y-axis">Adjusting the scale of the y-axis</h4>
-<p>What if we want to <strong>adjust the scale</strong> of the y-axis so that differences across the bars are easier to see?</p>
-<ul>
-<li><p>Right click the y-axis</p></li>
-<li><p>Click <code>Edit Axis</code></p></li>
-<li><p>Under <code>Range</code> select <code>Custom</code>. Set an appropriate range by selecting appropriate values for <code>Fixed start</code> and <code>Fixed end</code>.</p></li>
-</ul>
-<p><em>Challenge question: What if we want to compare customer ratings across <strong>branches</strong>? Does the product line with the top ratings vary by store?</em></p>
-<p><strong>You do it:</strong> Highlight the product line with the top rating at branch A. How does this rank in the other branches?</p>
-<!---**You do it:** Click on the different options in the legend.--->
-</section>
-<section id="changing-the-formatting-of-the-axis-labels" class="level4">
-<h4 class="anchored" data-anchor-id="changing-the-formatting-of-the-axis-labels">Changing the formatting of the axis labels</h4>
-<p>What if we want to <strong>change the font size</strong> (or color, etc.) of the axis labels?</p>
-<ul>
-<li><p>Right click the axis you want to edit</p></li>
-<li><p>Click <code>Format</code></p></li>
-</ul>
-</section>
-<section id="renaming-fields" class="level4">
-<h4 class="anchored" data-anchor-id="renaming-fields">Renaming fields</h4>
-<p>What if instead of having Branch / Product line at the top of the bar chart, we want to rename A as Branch A, B as Branch B, and C as Branch C?</p>
-<ul>
-<li><p>Right click <strong>Branch / Product line</strong> -&gt; Select <code>Hide Field Labels for Columns</code></p></li>
-<li><p>Right click <code>Branch</code> in the Columns shelf -&gt; Select <code>Edit Aliases...</code></p></li>
-<li><p>Rename each branch under the column titled <code>Value (Alias)</code></p></li>
-</ul>
-</section>
-<section id="changing-or-hiding-legends" class="level4">
-<h4 class="anchored" data-anchor-id="changing-or-hiding-legends">Changing or hiding legends</h4>
-<p>What if we want to <strong>remove the legend</strong>?</p>
-</section>
-<section id="annotating-the-bar-chart" class="level4">
-<h4 class="anchored" data-anchor-id="annotating-the-bar-chart">Annotating the bar chart</h4>
-<p><strong>Adding a caption</strong> that describes details about your visualization.</p>
-<ul>
-<li><p>Right click the blank area of the visualization</p></li>
-<li><p>Select <code>Annotate</code> -&gt; Select either <code>Point</code> or <code>Area</code></p></li>
-</ul>
-<p>– By selecting <code>Area</code> you can add text to comment about a specific region of a visualization.</p>
-<p>– By selecting <code>Point</code> you can call out a specific data point in the visualization.</p>
-<p>Note: There are <strong>many</strong> other features to explore in the Tableau toolbar. Hover over each icon in the toolbar and click to explore.</p>
-</section>
-</section>
-<section id="using-the-filters-card" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-filters-card">8. Using the filters card</h3>
-<p>What if we want to recreate our analysis of ratings for female customers only?</p>
-<p>First, let’s <strong>duplicate</strong> the existing worksheet.</p>
-<ul>
-<li><p>Locate your active sheet (this should be called <strong>Sheet 1</strong>)</p></li>
-<li><p>Right click and select <code>Duplicate</code></p></li>
-</ul>
-<p>Your new active worksheet will be <strong>Sheet 1 (2)</strong>.</p>
-<p>Now, let’s add a filter for females:</p>
-<ul>
-<li><p>Drag the field <code>Gender</code> to the <code>Filters</code> card</p></li>
-<li><p>Select <code>Female</code></p></li>
-</ul>
-</section>
-<section id="stacking-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="stacking-bar-charts">9. Stacking bar charts</h3>
-<p>What if you want to see total sales split by gender and purchase category?</p>
-<p><strong>You do it:</strong> Create a visualization (in a new sheet) that shows total sales (<code>Total</code>) by <code>Gender</code> and <code>Product line</code>.</p>
-<p>What if, instead, we want to see this in terms of the percent of total sales within each category are from females vs.&nbsp;males?</p>
-<p>First, let’s try <strong>stacking</strong> our bars and adding labels:</p>
-<ul>
-<li><p>Move <code>Gender</code> from the Columns shelf and drag it to the <code>Color</code> icon on the <code>Marks</code> card</p></li>
-<li><p>Select <code>Label</code> from the <code>Marks</code> card -&gt; Check <code>Show mark labels</code> to display the value of total sales for males and females</p></li>
-</ul>
-<p>Next, convert this display to see the percent of total sales that are from males and females:</p>
-<ul>
-<li><p>Click the drop down menu next to SUM(Total) on the Rows shelf</p></li>
-<li><p>Select <code>Quick Table Calculation</code> -&gt; <code>Percent of Total</code></p></li>
-</ul>
-<p>This gives us the percentage of total sales that are from males and females, but as a percent of <em>all</em> sales.</p>
-<p>What if we want to see the percent of total sales <em>within each category</em> that are from males and females?</p>
-<p>We need to create a <em>100% stacked bar chart</em>.</p>
-<ul>
-<li><p>Click the drop down menu next to SUM(Total) on the Rows shelf</p></li>
-<li><p>Select <code>Compute Using</code> -&gt; <code>Gender</code></p></li>
-</ul>
-<p>Note: The default is <code>Table (across)</code>.</p>
-<!---**You do it:** What do the other compute using options do?--->
-</section>
-<section id="creating-bar-in-bar-charts" class="level3">
-<h3 class="anchored" data-anchor-id="creating-bar-in-bar-charts">10. Creating bar in bar charts</h3>
-<p>Another way to compare sales for males and females is to use a bar in bar chart. This will allow you to easily see whether total sales are higher for males or females.</p>
-<ul>
-<li><p>Duplicate the 100% stacked bar chart by right-clicking on Sheet 2 and selecting <code>Duplicate</code></p></li>
-<li><p>Drag <code>Gender</code> to the <code>Size</code> icon in the <code>Marks</code> card</p></li>
-<li><p>From the toolbar, click <code>Analysis</code> -&gt; <code>Stack Marks</code> -&gt; and select <code>Off</code></p></li>
-</ul>
-<p><em>Challenge question: What if we want to swap which gender is the wide bar and which is the narrow bar?</em></p>
-</section>
-<section id="basic-line-charts-and-datetime" class="level3">
-<h3 class="anchored" data-anchor-id="basic-line-charts-and-datetime">11. Basic line charts and datetime</h3>
-<p>The second type of chart we will learn to create is a line chart.</p>
-<p>Suppose we want to see trends in sales over time:</p>
-<ul>
-<li><p>Open a new worksheet</p></li>
-<li><p>Drag <code>Total</code> to the Rows shelf and <code>Date</code> to the Columns shelf</p></li>
-<li><p>Click the drop down menu next to <code>Date</code></p></li>
-<li><p>Select <code>Week Number</code></p></li>
-</ul>
-<p><em>Challenge question: There are two options for each date display option. What is the difference between these fields?</em></p>
-<p><strong>You do it:</strong> Explore the other date display options. Which do you like best for this analysis?</p>
-<p>What if we want to see trends in sales across months?</p>
-<p>Let’s look at two options for doing this.</p>
-<ol type="1">
-<li><p>Side-by-side lines:</p>
-<ul>
-<li><p>Double click <code>Date</code> to add to to the Columns shelf, and drag <code>Total</code> to the Rows shelf.</p></li>
-<li><p>Set the aggregation to <code>MONTH(Date)</code> in the Columns shelf and <code>SUM(Total)</code> in the Rows shelf.</p></li>
-<li><p>Double click the <code>Date</code> field (again) in the Data pane. This will add it to the Columns shelf.</p></li>
-<li><p>Click the drop down menu on the <code>YEAR(Date)</code> field on the Columns shelf and select <code>Day</code></p></li>
-</ul></li>
-<li><p>Combined lines:</p>
-<ul>
-<li>Drag <code>MONTH(Date)</code> to the colors card</li>
-</ul></li>
-</ol>
-<p>Note: Both date values need to be <em>dimensions</em>.</p>
-<p><strong>You do it:</strong> You will notice that a new <code>Path</code> icon now appears on the <code>Marks</code> card. Experiment with different line types.</p>
-</section>
-<section id="adding-trend-lines" class="level3">
-<h3 class="anchored" data-anchor-id="adding-trend-lines">12. Adding trend lines</h3>
-<p>To add trend lines, from the toolbar select <code>Analysis</code> -&gt; <code>Trend Lines</code> -&gt; <code>Show Trend Lines</code></p>
-<p>For next time: What are trend lines?</p>
-</section>
-<section id="part-3-share" class="level3">
-<h3 class="anchored" data-anchor-id="part-3-share">Part 3: Share</h3>
-<p>You will <strong>share</strong> your <strong>worksheet</strong> on Tableau Public by following these steps:</p>
-<ol type="1">
-<li>Connect Tableau Desktop to your Tableau Public account.</li>
-</ol>
-<ul>
-<li>On the toolbar, locate <code>Server</code> -&gt; click <code>Tableau Public</code></li>
-</ul>
-<ol start="2" type="1">
-<li>Publish your work to your account. There are two ways to do this:</li>
-</ol>
-<ul>
-<li><p><code>Server</code> -&gt; <code>Publish Workbook</code></p></li>
-<li><p><code>Server -&gt;</code>Tableau Public<code>-&gt;</code>Save to Tableau Public`</p></li>
-</ul>
-<p>You should also save a local copy of your work as a Tableau Workbook. There are two ways to do this:</p>
-<ul>
-<li><p>On the toolbar, locate <code>File</code> -&gt; click <code>Save</code></p></li>
-<li><p>Click the floppy disk icon (<img src="figs/save.png" class="img-fluid" style="width:5.0%">) at the top of the page</p></li>
-</ul>
-<ol start="3" type="1">
-<li>Embed your visualization in your Google website.</li>
-</ol>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/uPdIgUIRnyo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-
-<!---
-## Applying the Tableau Workflow
-
-Using the Supermarket Sales data, construct data visualizations that answer the following questions:
-
-1.  Which product line has the lowest average customer rating?
-
-2.  Does this differ by store branch?
-
-3.  What actionable insights does this analysis reveal for the stores?
-
-4.  How have average customer ratings changed over time?
-
-5.  Does this differ by store branch?
-
-6.  What actionable insights does this analysis reveal for the stores?
-
-In problem set 2, you will follow this workflow to produce a simple data visualization using the grocery store spending dataset. 
---->
-</section>
-</section>
-<section id="review-questions" class="level2">
-<h2 class="anchored" data-anchor-id="review-questions">Review Questions</h2>
-<ol type="1">
-<li><p>Which payment type has the highest total spending?</p></li>
-<li><p>Do more females or more males use this payment type?</p></li>
-<li><p>Which payment type has seen the greatest increase in total spending over time?</p></li>
-<li><p>For a challenge: Which payment type has seen the greatest increase in the <strong>number of customers using it</strong> over time?</p></li>
-</ol>
 </section>
 
 </main>
@@ -596,18 +1019,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -639,11 +1051,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -653,8 +1104,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -666,7 +1126,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -710,6 +1293,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -735,6 +1319,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -795,6 +1405,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
