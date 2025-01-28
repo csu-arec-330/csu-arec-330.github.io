@@ -33,6 +33,8 @@ format:
 
 ## [Download Lab Handout Here](lab_00_week_01_handout.pdf)
 
+<embed src="lab_00_week_01_handout.pdf" width="100%" height="600px" type="application/pdf">
+
 ## Introduction to R
 
 Welcome to the world of R programming! R is a powerful and widely used programming language in the field of data analysis and statistical computing. It is known for its vast collection of libraries and packages that allow users to easily perform complex data manipulation and analysis tasks.
