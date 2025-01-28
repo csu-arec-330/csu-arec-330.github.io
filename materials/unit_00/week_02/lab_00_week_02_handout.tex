@@ -1,0 +1,187 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{setspace}
+\setlength{\parindent}{0pt}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Lab 00 Week 02 Worksheet},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Lab 00 Week 02 Worksheet}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\subsubsection{\texorpdfstring{The D\textsuperscript{3}M process applied
+to the Supermarket Sales
+data}{The D3M process applied to the Supermarket Sales data}}\label{the-d3m-process-applied-to-the-supermarket-sales-data}
+
+\paragraph{Step 1: Define an
+Objective}\label{step-1-define-an-objective}
+
+\textbf{Prompt:} What operational or business question are you trying to
+answer?
+
+\begin{itemize}
+\tightlist
+\item
+  Example: ``Which product line has the lowest average customer rating,
+  and how can we address it?''
+\end{itemize}
+
+Write your own objective here:
+
+\begin{itemize}
+\item
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\item
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\end{itemize}
+
+\paragraph{Step 2: Establish a
+Hypothesis}\label{step-2-establish-a-hypothesis}
+
+\textbf{Prompt:} What do you expect the data will reveal? Why?
+
+\begin{itemize}
+\tightlist
+\item
+  Example: ``I hypothesize that Electronic Accessories has the lowest
+  customer ratings because customers may face issues with functionality
+  or durability.''
+\end{itemize}
+
+Write your hypothesis here:
+
+\begin{itemize}
+\item
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\item
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\end{itemize}
+
+\paragraph{Step 3: Analyze and
+Visualize}\label{step-3-analyze-and-visualize}
+
+\textbf{Task:} Create visualizations in Tableau to answer the questions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Which product line has the lowest average customer rating?}
+\item
+  \textbf{Does this differ by store branch?}
+\item
+  \textbf{How have customer ratings changed over time?}
+\end{enumerate}
+
+\paragraph{Step 4: Interpret Results}\label{step-4-interpret-results}
+
+\textbf{Prompt:} Summarize your key findings:
+
+\begin{itemize}
+\tightlist
+\item
+  What do the results tell you about your hypothesis? Were there any
+  surprises?
+\item
+  What actionable recommendations can you make based on your analysis?
+\end{itemize}
+
+Write your interpretation here:
+
+\begin{itemize}
+\item
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\item
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\end{itemize}
+
+\paragraph{Step 5: Communicate
+Insights}\label{step-5-communicate-insights}
+
+\textbf{Task:} Use Tableau to create a \textbf{dashboard} combining your
+key visualizations.
+
+\textbf{Prompt:} Imagine presenting this to the store manager. Summarize
+your insights in 1--2 sentences:
+
+\begin{itemize}
+\item
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\item
+  \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\end{itemize}
+
+\subsubsection{Questions or Reflections}\label{questions-or-reflections}
+
+Use this space to jot down any questions or reflections you have about
+the lab session.
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\end{document}

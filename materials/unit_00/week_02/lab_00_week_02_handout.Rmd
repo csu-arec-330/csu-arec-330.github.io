@@ -1,0 +1,80 @@
+---
+title: "Lab 00 Week 02 Worksheet"
+output: 
+  pdf_document:
+    keep_tex: true
+geometry: margin=1in
+fontsize: 11pt
+header-includes:
+  - \usepackage{setspace}
+  - \setlength{\parindent}{0pt}
+---
+
+### The D^3^M process applied to the Supermarket Sales data 
+
+#### Step 1: Define an Objective
+
+**Prompt:**
+What operational or business question are you trying to answer?
+
+- Example: "Which product line has the lowest average customer rating, and how can we address it?"
+
+Write your own objective here:
+
+- _______________________________________________________________
+- _______________________________________________________________
+
+#### Step 2: Establish a Hypothesis
+
+**Prompt:**
+What do you expect the data will reveal? Why?
+
+- Example: "I hypothesize that Electronic Accessories has the lowest customer ratings because customers may face issues with functionality or durability."
+
+Write your hypothesis here:
+
+- _______________________________________________________________
+- _______________________________________________________________
+
+#### Step 3: Analyze and Visualize
+
+**Task:**
+Create visualizations in Tableau to answer the questions:
+
+1. **Which product line has the lowest average customer rating?**
+
+2. **Does this differ by store branch?**
+
+3. **How have customer ratings changed over time?**
+
+#### Step 4: Interpret Results
+
+**Prompt:**
+Summarize your key findings:
+
+- What do the results tell you about your hypothesis? Were there any surprises?
+- What actionable recommendations can you make based on your analysis?
+
+Write your interpretation here:
+
+- _______________________________________________________________
+- _______________________________________________________________
+
+#### Step 5: Communicate Insights
+
+**Task:**
+Use Tableau to create a **dashboard** combining your key visualizations.
+
+**Prompt:**
+Imagine presenting this to the store manager. Summarize your insights in 1–2 sentences:
+
+- _______________________________________________________________
+- _______________________________________________________________
+
+
+
+### Questions or Reflections
+Use this space to jot down any questions or reflections you have about the lab session.
+______________________________________________________________________________
+______________________________________________________________________________
+______________________________________________________________________________

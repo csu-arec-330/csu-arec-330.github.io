@@ -549,7 +549,7 @@ Suppose we want to see trends in sales over time:
 
 :::{.callout-tip}
 ## Challenge Question
-There are two options for each date display option. What is the difference between these fields?*
+There are two options for each date display option. What is the difference between these fields?
 :::
 
 :::{.callout-tip}
@@ -558,7 +558,7 @@ Explore the other date display options. Which do you like best for this analysis
 :::
 
 
-### 10. Adding trend lines
+### 10. Trends and trend lines
 
 What if we want to see trends in sales across months?  
 
@@ -591,8 +591,6 @@ To add trend lines, from the toolbar select `Analysis` -> `Trend Lines` -> `Show
 
 In Tableau, one way to reduce the number of fields you see if by organizing your data into folders.
 
-Let's try organizing a few of our data fields into folders.
-
 **Step 1:** Right-Click a Field.
 
 Start by right-clicking on a field (dimension or measure) in the Data pane that you want to organize into a folder. Let's pick `Product line`.
@@ -602,7 +600,7 @@ Start by right-clicking on a field (dimension or measure) in the Data pane that 
 
 After right-clicking, navigate to `Folders` in the context menu. Select `Create Folder...` from the sub-menu.
 
-Note: If you cannot select `Folders`, you need to first select `Group by` in the context menu. Then select `Folders`. The default view in Tableau is `Data Source Table`.
+If you cannot select `Folders`, you need to first select `Group by` in the context menu. Then select `Folders`. The default view in Tableau is `Data Source Table`.
 
 **Step 3:** Name Your Folder. 
 
