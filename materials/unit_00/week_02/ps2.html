@@ -65,36 +65,102 @@ ul.task-list li input[type="checkbox"] {
 <p>Link to the description of the supermarket sales data available in the <a href="https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html">Supermarket Sales Data Overview</a>.</p>
 <section id="part-1-getting-started-with-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-getting-started-with-tableau">Part 1: Getting started with Tableau</h2>
-<p>Connect to the <code>supermarket_sales.csv</code>.</p>
-<p>Answer the following questions using information on the <code>Start Page</code>, <code>Data Source Page</code>, and by opening a new <code>Worksheet</code>.</p>
+<p>Open Tableau and connect to the <strong>Supermarket Sales</strong> Data (<code>supermarket_sales.csv</code>).</p>
+<p>Answer the following questions using information on the <strong>Start Page</strong>, <strong>Data Source</strong> Page, and by opening a new <strong>Worksheet/Workspace</strong>.</p>
 <ol type="1">
+<li><p>Describe your steps in connecting to the data.</p>
+<ul>
 <li><p>What type of connection did you use to connect to <code>supermarket_sales.csv</code>?</p></li>
 <li><p>What type of data is <code>supermarket_sales.csv</code>?</p></li>
+</ul></li>
+<li><p>Describe the dataset.</p>
+<ul>
 <li><p>How many sheets are included in <code>supermarket_sales.csv</code>?</p></li>
 <li><p>How many data fields are included in <code>supermarket_sales.csv</code>?</p></li>
-<li><p>What is the role of the variable <code>City</code>?</p></li>
 <li><p>What is the type of the variable <code>City</code>?</p></li>
-<li><p>What is the role of the variable <code>Total</code>?</p></li>
 <li><p>What is the type of the variable <code>Total</code>?</p></li>
-<li><p>Create a data visualization that shows total spending by all customers in each city a store is located in. Give your sheet and figure a useful title and ensure that axes labels are easy to read and informative. What did you find? Discuss how the stores could use this information to increase sales.</p></li>
-<li><p>Create a data visualization that shows total spending for males and females in each city a store is located in. Give your figure a useful title and ensure that axes labels are easy to read and informative. What did you find? Discuss how the stores could use this information to increase sales.</p></li>
-<li><p>Title your two sheets <code>PS2_Q9</code> and <code>PS2_Q10</code>, save your workbook, and publish it to your Tableau Public site.</p></li>
+</ul></li>
+<li><p>Describe the elements of the dataset.</p>
+<ul>
+<li><p>What is the role of the variable <code>City</code>?</p></li>
+<li><p>What is the role of the variable <code>Total</code>?</p></li>
+</ul></li>
 </ol>
 </section>
 <section id="part-2-data-visualizations-with-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-data-visualizations-with-tableau">Part 2: Data visualizations with Tableau</h2>
-<p>Answer the following questions that will help you determine staffing needs at each store branch. All visualizations should follow best practices for effective data visualizations, including a useful title, good formatting, and useful annotations.</p>
-<ol start="12" type="1">
-<li><p>What times of day have the highest and lowest total sales? Explain what this means for staffing in the figure caption (annotation). Name the worksheet with this visualization <code>PS2_12</code>.</p></li>
-<li><p>Are there differences in peak sales hours across the three store branches? Explain what this means for staffing in the figure caption (annotation). Name the worksheet with this visualization <code>PS2_13</code>.</p></li>
+<ol start="4" type="1">
+<li><p>Create a data visualization that shows <strong>total spending by city</strong>. Make sure to include a useful title and ensure that axes labels are easy to read and informative.</p></li>
+<li><p>Write a paragraph that discusses the figure created in Question 4. If you were presenting this to the regional manager, how might they use this information to <strong>increase sales</strong>?</p></li>
+<li><p>Create a data visualization that shows <strong>total spending by city and by gender</strong>. Make sure to include a useful title and ensure that axes labels are easy to read and informative.</p></li>
+<li><p>Write a paragraph that discusses the figure created in Question 6. If you were presenting this to the regional manager, how might they use this information to <strong>increase sales</strong>?</p></li>
 </ol>
-<p>Now suppose that staffing needs are determined within departments. Department 1 includes products in the Fashion Accessories and Health and Beauty product lines. Department 2 includes products in the Food and Beverages and Home and Lifestyle product lines. Department 3 includes products in the Electronic Accessories and Sports and Travel product lines.</p>
-<ol start="14" type="1">
-<li><p>How do sales differ across departments in Yangon? Explain what this means for staffing in the figure caption (annotation). Name the worksheet with this visualization <code>PS2_14</code>.</p></li>
-<li><p>What percent of total sales in Yangon occur in Department 2 on Sundays? Explain what this means for staffing in the figure caption (annotation). Name the worksheet with this visualization <code>PS2_15</code>.</p></li>
-<li><p>On which day of the week does Department 1 account for the largest percentage of total sales in Yangon? Explain what this means for staffing in the figure caption (annotation). Name the worksheet with this visualization <code>PS2_16</code>. (Hint: you will need to create a 100% stacked bar chart to answer this question)</p></li>
-</ol>
-<p>Save your workbook and publish it to your Tableau Public site.</p>
+<p><strong>Save your workbook, and publish your visualizations and paragraph summaries to your Tableau Public site.</strong></p>
+</section>
+<section id="part-3-applying-the-d3m-process-to-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-applying-the-d3m-process-to-tableau">Part 3: Applying the D<sup>3</sup>M Process to Tableau</h2>
+<p>In this section, you will apply the <strong>Data-Driven Decision-Making (D3M) process</strong> to analyze the <strong>Supermarket Sales</strong> data in Tableau.</p>
+<p>Your goal is to <strong>determine staffing needs at each branch</strong> based on sales trends and department-level insights. Follow the D3M framework to guide your analysis:</p>
+<section id="step-1-define-the-objective" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-define-the-objective"><strong>Step 1: Define the Objective</strong></h3>
+<p>Choose <strong>one</strong> of the following objectives to answer using Tableau:</p>
+<section id="option-1-identify-peak-and-low-sales-times" class="level4">
+<h4 class="anchored" data-anchor-id="option-1-identify-peak-and-low-sales-times"><strong>Option 1: Identify Peak and Low Sales Times</strong></h4>
+<p><strong>Question:</strong> What times of day have the highest and lowest total sales?</p>
+</section>
+<section id="option-2-compare-peak-sales-hours-across-branches" class="level4">
+<h4 class="anchored" data-anchor-id="option-2-compare-peak-sales-hours-across-branches"><strong>Option 2: Compare Peak Sales Hours Across Branches</strong></h4>
+<p><strong>Question:</strong> Are there differences in peak sales hours across the three store branches?</p>
+</section>
+<section id="option-3-department-sales-breakdown-in-yangon" class="level4">
+<h4 class="anchored" data-anchor-id="option-3-department-sales-breakdown-in-yangon"><strong>Option 3: Department Sales Breakdown in Yangon</strong></h4>
+<p><strong>Question:</strong> How do sales differ across departments in Yangon?</p>
+</section>
+</section>
+<section id="step-2-establish-a-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-establish-a-hypothesis"><strong>Step 2: Establish a Hypothesis</strong></h3>
+<p>Before conducting the analysis, write down what you expect to find (i.e., write down your hypothesis). Consider the following:</p>
+<ul>
+<li>Do you expect sales to peak at certain times of the day or week?</li>
+<li>Do you expect different store branches to have unique sales patterns that require customized staffing?</li>
+<li>Do you expect departments to have different staffing needs based on sales volume and timing?</li>
+</ul>
+<hr>
+</section>
+<section id="step-3-collect-and-explore-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-collect-and-explore-the-data"><strong>Step 3: Collect and Explore the Data</strong></h3>
+<p>Describe what elements of your dataset you will use to test your hypothesis and answer your question. Recall that your dataset includes:</p>
+<ul>
+<li><strong>Transaction timestamps</strong> to analyze sales trends by time and day.</li>
+<li><strong>Branch locations</strong> to compare sales patterns across stores.</li>
+<li><strong>Product categories</strong> to group sales into departments.</li>
+</ul>
+<p>Use Tableau to and organize the data before building visualizations.</p>
+<hr>
+</section>
+<section id="step-4-analyze-and-visualize" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-analyze-and-visualize"><strong>Step 4: Analyze and Visualize</strong></h3>
+<p>Create a data visualization that you will show to the regional manager to provide data-driven insights to help them optimize their staffing needs. For each question, consider the following:</p>
+<ul>
+<li><strong>Option 1:</strong> Create a line or bar chart to visualize sales by hour.</li>
+<li><strong>Option 2:</strong> Create a comparative visualization, such as a stacked bar chart.</li>
+<li><strong>Option 3:</strong> Create a bar chart to compare total sales by department.</li>
+</ul>
+<p>Your visualization should include a clear title, proper formatting, and annotations to explain insights. Be sure to save your visualization to a worksheet with an appropriate name.</p>
+<hr>
+</section>
+<section id="step-5-interpret-and-apply-insights" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-interpret-and-apply-insights"><strong>Step 5: Interpret and Apply Insights</strong></h3>
+<ul>
+<li>Explain how your insights gathered from creating the data visualization would inform staffing needs.</li>
+</ul>
+</section>
+<section id="step-6-communicate-insights" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-communicate-insights"><strong>Step 6: Communicate Insights</strong></h3>
+<p>Summarize your key findings and <strong>provide actionable staffing recommendations</strong> based on your analysis. Consider: - What adjustments should store managers make to staffing schedules? - How do differences between branches and departments impact resource allocation?</p>
+<p>Use annotations in Tableau to communicate these insights clearly in your final dashboard.</p>
+<p><strong>Save your workbook and publish it to your Tableau Public site.</strong></p>
+</section>
 </section>
 <section id="how-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
@@ -103,21 +169,13 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <ul>
 <li>Title the new webpage Problem Set 2.</li>
-<li>This page should include your responses to Part 1 and Part 2 of the problem set.</li>
 </ul>
 <ol start="2" type="1">
 <li><strong>Include the Following Content:</strong></li>
 </ol>
 <ul>
-<li><p><strong>Part 1:</strong></p>
-<ul>
-<li>Provide answers to each question (1–10).</li>
-<li>For questions 9 and 10, embed the corresponding figures from your Tableau Public site directly on the webpage.</li>
-</ul></li>
-<li><p><strong>Part 2:</strong></p>
-<ul>
-<li>Embed your Tableau Public workbook on the webpage. Ensure the workbook includes a tab for each figure.</li>
-</ul></li>
+<li>Provide responses to Parts 1, 2, and 3 of the problem set.</li>
+<li>Embed the corresponding figures from your Tableau Public site directly on the webpage.</li>
 </ul>
 <ol start="3" type="1">
 <li><strong>Submit the Link to Your Google Site Page:</strong></li>
