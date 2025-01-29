@@ -3,6 +3,8 @@ title: "Week 1: Course Overview"
 format: 
   revealjs:
     theme: night
+    embed-resources: true
+    pdf-export: true
 ---
 ## Welcome to D$^3$M! About me. {.scrollable}
 
@@ -327,6 +329,9 @@ Bring computers on Friday -->
 
 ## What is Tableau?
 {{< video https://youtu.be/hb-qwRAltOw?si=euDN6X_E0PNkM83z width="90%" height="90%" >}}
+
+## Download Week 1 Slides
+[📥 Download as PDF](?print-pdf){target="_blank"}
 
 <!--
 #

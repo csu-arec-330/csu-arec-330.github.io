@@ -6,6 +6,8 @@ format:
     slide-number: c/t
     # logo: path.png
     # center: TRUE
+    embed-resources: true
+    pdf-export: true
 ---
 
 # D^3^M 
@@ -317,6 +319,18 @@ Review [Lab Notes](https://csu-arec-330.github.io/materials/unit_00/week_02/lab_
 
 Schedule your 15-minute 1-on-1 (if you haven't already)
 
+&nbsp;
+
+## References {.scrollable}
+
+Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
+
+<!-- Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley. -->
+
+<!-- Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin. -->
+
+## Download Week 2 Slides
+[📥 Download as PDF](?print-pdf){target="_blank"}
 
 <!--
 ## D^3^M across scales 
@@ -431,10 +445,4 @@ How about a thermostat at home or cruise control in your car
 <!-- D.  Annecdotal evidence is more convincing when communicating insights -->
 
 
-## References {.scrollable}
 
-Brynjolfsson, Erik, and Kristina McElheran. "The rapid adoption of data-driven decision-making." American Economic Review 106.5 (2016): 133-39.
-
-<!-- Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley. -->
-
-<!-- Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin. -->
