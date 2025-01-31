@@ -14,12 +14,10 @@ Open Tableau and connect to the **Supermarket Sales** Data (`supermarket_sales.c
 Answer the following questions using information on the **Start Page**, **Data Source** Page, and by opening a new **Worksheet/Workspace**.
 
 1.  Describe your steps in connecting to the data.
-
-    - What type of connection did you use to connect to `supermarket_sales.csv`? 
     
-    - What type of data is `supermarket_sales.csv`? 
-
 2.  Describe the dataset.
+
+    - What type of data is `supermarket_sales.csv`? 
 
     - How many sheets are included in `supermarket_sales.csv`?
 
@@ -45,7 +43,7 @@ Answer the following questions using information on the **Start Page**, **Data S
 
 7. Write a paragraph that discusses the figure created in Question 6. If you were presenting this to the regional manager, how might they use this information to **increase sales**?
 
-**Save your workbook, and publish your visualizations and paragraph summaries to your Tableau Public site.**
+**Save your workbook and publish your visualizations to your Tableau Public site.**
 
 ## Part 3: Applying the D^3^M Process to Tableau
 
@@ -113,7 +111,7 @@ Summarize your key findings and **provide actionable staffing recommendations** 
 
 Use annotations in Tableau to communicate these insights clearly in your final dashboard.
 
-**Save your workbook and publish it to your Tableau Public site.** 
+**Save your workbook and publish your visualizations to your Tableau Public site.** 
 
 ## How to Submit
 
@@ -123,7 +121,7 @@ Use annotations in Tableau to communicate these insights clearly in your final d
 
 2. **Include the Following Content:**
 
-- Provide responses to Parts 1, 2, and 3 of the problem set.
+- Provide responses to Parts 1, 2, and 3 of the problem set, including paragraphs that describe your visualizations.
 - Embed the corresponding figures from your Tableau Public site directly on the webpage.
 
 3. **Submit the Link to Your Google Site Page:**
