@@ -43,7 +43,7 @@ Answer the following questions using information on the **Start Page**, **Data S
 
 7. Write a paragraph that discusses the figure created in Question 6. If you were presenting this to the regional manager, how might they use this information to **increase sales**?
 
-**Save your workbook and publish your visualizations to your Tableau Public site.**
+**Save your workbook and publish your visualizations to your Tableau Public site.** [Follow these instructions to connect your Tableau Desktop to your Tableau Public account.](https://csu-arec-330.github.io/materials/unit_00/week_02/lab_00_week_02.html#part-3-share)
 
 ## Part 3: Applying the D^3^M Process to Tableau
 
@@ -122,7 +122,9 @@ Use annotations in Tableau to communicate these insights clearly in your final d
 2. **Include the Following Content:**
 
 - Provide responses to Parts 1, 2, and 3 of the problem set, including paragraphs that describe your visualizations.
-- Embed the corresponding figures from your Tableau Public site directly on the webpage.
+- **Copy the embed code generated for your visualization in Tableau Public to *embed* the corresponding figures directly onto your PS2 Google webpage.** The video below goes through these steps.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uPdIgUIRnyo?si=pwQdrWrhKwfiKTgB&amp;start=62" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 3. **Submit the Link to Your Google Site Page:**
 
