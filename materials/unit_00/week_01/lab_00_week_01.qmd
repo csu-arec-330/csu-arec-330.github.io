@@ -398,7 +398,10 @@ Once the script runs, you can open the log file (`lab_01_example.log`) to review
 ### Watch the demo
 Here is a video that walks you through how to generate a log file using `sink()` and `source()` in RStudio. You can also access the video through this [link](https://colostate-my.sharepoint.com/:v:/g/personal/lachenar_colostate_edu/EcqjbmCUf2NHhmuMF6q9RAMBqMjRvg3Gzw59KOIfsPupOg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Fgefze){target=\"_blank\"}.
 
+{{< video https://youtu.be/AysPiUIzKnE aspect-ratio="16x9" >}}
+<!--
 <iframe src="https://colostate-my.sharepoint.com/personal/lachenar_colostate_edu/_layouts/15/embed.aspx?UniqueId=606ea3ca-7f94-4763-866b-8c17aabd4403&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen title="Recording-20250124_162619.webm"></iframe>
+-->
 
 ## Packages or Libraries
 
