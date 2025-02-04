@@ -1,0 +1,434 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{setspace}
+\setlength{\parindent}{0pt}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Guidelines for Data Storytelling and Creating Effective Visualizations},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Guidelines for Data Storytelling and Creating Effective
+Visualizations}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\section{Six Elements of a Data
+Story}\label{six-elements-of-a-data-story}
+
+\subsection{\texorpdfstring{\textbf{1. Data
+Foundation}}{1. Data Foundation}}\label{data-foundation}
+
+Your story is grounded in \textbf{real, observable data}. A strong data
+foundation provides evidence for your narrative and helps build
+credibility.
+
+\textbf{Guiding Questions:}
+
+\begin{itemize}
+\tightlist
+\item
+  What data supports your story?
+\item
+  Is the data reliable, accurate, and relevant?
+\end{itemize}
+
+\subsection{\texorpdfstring{\textbf{2. Main
+Point}}{2. Main Point}}\label{main-point}
+
+Every story needs a \textbf{clear main point}. What message do you want
+your audience to take away?
+
+\textbf{Guiding Questions:}
+
+\begin{itemize}
+\tightlist
+\item
+  What is the central insight or argument?
+\item
+  Why does this matter to your audience?
+\end{itemize}
+
+\subsection{\texorpdfstring{\textbf{3. Explanatory
+Focus}}{3. Explanatory Focus}}\label{explanatory-focus}
+
+Your goal is to \textbf{explain} an insight, not just explore data. Your
+story should help the audience understand \textbf{what is happening, who
+is involved, and why it matters}.
+
+\textbf{Guiding Questions:}
+
+\begin{itemize}
+\tightlist
+\item
+  What is the key takeaway?
+\item
+  Who are the main actors or groups affected?
+\item
+  What mechanisms explain the observed patterns?
+\end{itemize}
+
+\subsection{\texorpdfstring{\textbf{4. Linear
+Sequence}}{4. Linear Sequence}}\label{linear-sequence}
+
+A strong data story follows a \textbf{logical progression}, with
+supporting points building toward the main takeaway.
+
+\textbf{Example Sequence:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Step 1:} Consumer preferences are shifting toward plant-based
+  foods.\\
+\item
+  \textbf{Step 2:} A company introduces more plant-based products.\\
+\item
+  \textbf{Step 3:} Sales for plant-based products increase.
+\end{itemize}
+
+\textbf{Guiding Questions:}
+
+\begin{itemize}
+\tightlist
+\item
+  Are your supporting points structured logically?
+\item
+  Does each section build toward the main point?
+\end{itemize}
+
+\subsection{\texorpdfstring{\textbf{5. Dramatic
+Elements}}{5. Dramatic Elements}}\label{dramatic-elements}
+
+Data stories can be \textbf{humanized} by including \textbf{characters,
+settings, and context}. Numbers alone don't create impact---your
+audience needs to understand the \textbf{why} behind the data.
+
+\textbf{Example:}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Our store's annual sales hit \$200K last year.'' (Is this good or
+  bad?)\\
+\item
+  ``Sales grew from \$100K to \$200K in just one year, doubling revenue
+  after launching an online platform.'' (Now the context is clear!)
+\end{itemize}
+
+\textbf{Guiding Questions:}
+
+\begin{itemize}
+\tightlist
+\item
+  What details make the data relatable?
+\item
+  How can you frame the data in a way that resonates with your audience?
+\end{itemize}
+
+\subsection{\texorpdfstring{\textbf{6. Visual
+Anchors}}{6. Visual Anchors}}\label{visual-anchors}
+
+Visuals \textbf{enhance comprehension} and make key insights stand out.
+Well-designed \textbf{charts, graphs, and images} should reinforce your
+message.
+
+\textbf{Guiding Questions:}
+
+\begin{itemize}
+\tightlist
+\item
+  Which visual best represents the main point?
+\item
+  Are the visuals simple, clear, and aligned with the story?
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\textbf{Applying these
+elements}}{Applying these elements}}\label{applying-these-elements}
+
+When working on your D\textsuperscript{3}M projects, outline how each of
+these six elements will shape your presentation. Focus on:
+
+\begin{itemize}
+\tightlist
+\item
+  Defining a clear main point
+\item
+  Organizing supporting evidence in a logical sequence
+\item
+  Using effective visuals to drive the message home
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Guidelines for Effective Data
+Visualizations}\label{guidelines-for-effective-data-visualizations}
+
+\subsection{Data Story vs.~Data
+Visualization}\label{data-story-vs.-data-visualization}
+
+A \textbf{data story} provides \textbf{context and explanation}, using a
+sequence of insights to guide the audience toward a conclusion. A
+\textbf{data visualization}, on the other hand, is a \textbf{single
+representation} of data that helps the audience interpret trends,
+relationships, or distributions. A strong data story integrates multiple
+visualizations into a cohesive narrative.
+
+\subsection{\texorpdfstring{\textbf{Six Guidelines for Better Data
+Visualizations}}{Six Guidelines for Better Data Visualizations}}\label{six-guidelines-for-better-data-visualizations}
+
+\subsubsection{\texorpdfstring{\textbf{1. Identify Your
+Objective}}{1. Identify Your Objective}}\label{identify-your-objective}
+
+Before designing your visualization, clarify:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{What message do I want to convey?}
+\item
+  \textbf{What action should my audience take based on this
+  information?}
+\end{itemize}
+
+A well-defined objective ensures your visualization serves its intended
+purpose.
+
+\subsubsection{\texorpdfstring{\textbf{2. Show the
+Data}}{2. Show the Data}}\label{show-the-data}
+
+Your audience can only grasp your point if they can \textbf{see} the
+data clearly.
+
+\begin{itemize}
+\tightlist
+\item
+  Make sure that data is visible and not obscured by unnecessary
+  elements.
+\item
+  Choose the appropriate chart type for your message.
+\item
+  Provide meaningful labels and scales.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\textbf{3. Reduce the
+Clutter}}{3. Reduce the Clutter}}\label{reduce-the-clutter}
+
+Unnecessary elements distract from the main message. Minimize:
+
+\begin{itemize}
+\tightlist
+\item
+  Heavy tick marks and grid lines.
+\item
+  Overlapping and overwhelming data markers.
+\item
+  Gradient colors, patterns, and excessive dimensions.
+\item
+  Excessive text, legends, or labels.
+\end{itemize}
+
+\textbf{Simpler = Better.} A clean, direct visualization improves
+comprehension.
+
+\subsubsection{\texorpdfstring{\textbf{4. Integrate Graphics and
+Text}}{4. Integrate Graphics and Text}}\label{integrate-graphics-and-text}
+
+Text enhance understanding.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Remove legends} when possible and label data directly.
+\item
+  \textbf{Use active titles} that summarize key takeaways.
+\item
+  \textbf{Add annotations} to highlight critical insights.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\textbf{5. Avoid the Spaghetti
+Chart}}{5. Avoid the Spaghetti Chart}}\label{avoid-the-spaghetti-chart}
+
+Overloaded line charts with too many overlapping lines create confusion.
+
+\begin{itemize}
+\tightlist
+\item
+  Simplify by showing only the most relevant information.
+\item
+  Break complex charts into smaller, focused components.
+\item
+  Highlight only the most important trends or comparisons.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\textbf{6. Start with
+Gray}}{6. Start with Gray}}\label{start-with-gray}
+
+To emphasize key insights strategically:
+
+\begin{itemize}
+\tightlist
+\item
+  Start with all elements in \textbf{gray}.
+\item
+  Gradually add \textbf{color} only where emphasis is needed.
+\item
+  This forces intentional use of visual cues to guide the audience's
+  attention.
+\end{itemize}
+
+\subsection{\texorpdfstring{\textbf{Applying the
+Guidelines}}{Applying the Guidelines}}\label{applying-the-guidelines}
+
+Choose a past visualization you've created and evaluate it using these
+six guidelines. Identify:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{One area to simplify}
+\item
+  \textbf{One way to enhance clarity}
+\item
+  \textbf{One way to better integrate graphics and text}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{Connecting D\textsuperscript{3}M, Data
+Storytelling, and Effective
+Visualizations}{Connecting D3M, Data Storytelling, and Effective Visualizations}}\label{connecting-d3m-data-storytelling-and-effective-visualizations}
+
+This table outlines how the \textbf{Data-Driven Decision-Making (D3M)
+process}, \textbf{data storytelling principles}, and \textbf{effective
+visualization techniques} align to create clear, actionable insights.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2266}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3750}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3984}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{D3M Process}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Data Storytelling}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Effective Visualizations}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{1. Define an Objective} & Identify the key message or insight. &
+Choose the right chart type for the message. \\
+\textbf{2. Establish a Hypothesis} & Frame a compelling narrative or
+question. & Highlight expected vs.~unexpected results. \\
+\textbf{3. Collect Relevant Data} & Ensure data supports the story's
+credibility. & Use clean, reliable data sources. \\
+\textbf{4. Analyze the Data} & Find patterns, relationships, and key
+takeaways. & Use comparisons, trends, and breakdowns to show
+insights. \\
+\textbf{5. Interpret the Results} & Provide context: Who? What? Why? &
+Remove clutter and focus attention on insights. \\
+\textbf{6. Communicate Insights} & Deliver a clear, engaging message. &
+Integrate text, annotations, and active titles. \\
+\end{longtable}
+
+\subsection{\texorpdfstring{\textbf{Main
+Takeaways}}{Main Takeaways}}\label{main-takeaways}
+
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{D\textsuperscript{3}M process} presents a structured
+  approach to analyzing data.
+\item
+  \textbf{Data storytelling} makes insights meaningful by adding context
+  and a narrative.
+\item
+  \textbf{Effective visualizations} enhance comprehension by reducing
+  noise and focusing attention on key takeaways.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\textbf{Connecting the Three
+Frameworks}}{Connecting the Three Frameworks}}\label{connecting-the-three-frameworks}
+
+In preparing your projects, outline how you would: 1. Apply \textbf{D3M}
+to structure your analysis. 2. Use \textbf{data storytelling} techniques
+to craft a compelling narrative. 3. Implement \textbf{effective
+visualization} principles to communicate insights clearly.
+
+\end{document}

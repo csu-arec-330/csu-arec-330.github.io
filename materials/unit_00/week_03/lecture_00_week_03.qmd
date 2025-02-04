@@ -21,11 +21,11 @@ format:
 
 ## Review Question 1
 
-Which of the following is NOT one of the 5 steps in the D^3^M process?
+Which of the following is NOT one of the steps in the D^3^M process?
 
-A.  Define objective
+A.  Define an objective
 
-B.  Analyze data
+B.  Analyze the data
 
 C.  Apply intuition
 
@@ -47,11 +47,11 @@ D.  Anecdotal evidence is more convincing when communicating insights
 
 ## Agenda
 
-Data Storytelling
+Data storytelling
 
 Why use data visualizations?
 
-Five guidelines for effective data visualizations
+Guidelines for effective data visualizations
 
 
 # Data storytelling
@@ -84,6 +84,8 @@ While clear and appealing data visualizations are part of a data story, they are
 
 Data stories bring your analytical insights to life.
 
+*Side note: If you enjoy creating data stories, read more about [data journalism](https://shorthand.com/the-craft/how-data-journalists-create-beautiful-feature-stories/index.html).*
+
 
 <!---
 ## Let's look at an example: The minimalist version
@@ -112,26 +114,32 @@ Data stories bring your analytical insights to life.
 6. Visual anchors
 
 ::: {.notes}
-1. Story is grounded in data - something real that is observable
+1. Data foundation: Story is grounded in data. Something real that is observable.
 
-2. The story needs to have a main point.  Have something to say.
+2. Main point: The story needs to have a main point. Have something to say.
 
-3. Your goal is to explain some insight.  What is going on?  Who are the actors?  What are the mechanisms?  This relates to what we will discuss about causal inference.
+3. Explanatory focus: Your goal is to *explain* some insight.  What is going on?  Who are the actors?  What are the mechanisms?  This relates to what we will discuss about causal inference.
 
-4. Your story will consist of a series of supporting points or information that are tied together to build to some larger point.  The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.
+4. Linear sequence: Your story will consist of a series of supporting points or information that are tied together to build to some larger point.  The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.
 
-5. Dramatic elements include characters, setting, plots.  These elements help humanize the data story and make it relatable.  Set some context: sales are $200k.  Is that good or bad?  It depends on previous sales.  Be selective about the information - only include information that helps to advance the narrative.
+5. Dramatic elements: These include characters, setting, plots.  These elements help humanize the data story and make it relatable.  Set some context: sales are $200k.  Is that good or bad?  It depends on previous sales.  Be selective about the information - only include information that helps to advance the narrative.
 
-6. Visual anchors are the charts and graphs or other visuals you rely on to tell the story.  We will spend considerable time on developing effective visuals to help tell your story.
-
+6. Visual anchors: These are the charts and graphs or other visuals you rely on to tell the story.  We will spend considerable time on developing effective visuals to help tell your story.
 :::
 
 
-## Example
+## Examples
 
-<https://pudding.cool/2020/07/gendered-descriptions/>
+[How my dad fishes for the future](https://dad-fishes-for-the-future.msc.org/)
 
 
+[Coronavirus timeline in New Zealand](https://shorthand.radionz.co.nz/coronavirus-timeline/index.html)
+
+
+[Physical traits that define men and women in literature](https://pudding.cool/2020/07/gendered-descriptions/)
+
+<!-- ----------------------- -->
+<!--       Next section      -->
 <!-- ----------------------- -->
 # Data Visualizations
 
@@ -224,15 +232,15 @@ Recall: Federal spending on health care and Social Security **increased**, but t
 ##
 ![](includes/fig1.png){width="120%"}
 
-## Which is the most effective vis?
+## Which is the most effective visualizations?
 
  &nbsp; &nbsp; &nbsp; &nbsp;A. ![](includes/fig3.png){width="30%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B.  ![](includes/fig2.png){width="30%"}
 
  &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/fig4_2.png){width="30%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D.  ![](includes/fig1.png){width="30%"} 
 
-## What is an *effective* data vis?
+## What is an *effective* data visualizations?
 
-Which vis best tells this story?
+Which visualization best tells this story?
 
 . . . 
 
@@ -242,25 +250,25 @@ Which vis best tells this story?
 
 **How else could you improve these visualizations?**
 
-## 5 guidelines for a better data vis {.smaller}
+## Guidelines for a better data visualizations {.smaller}
 
-0.  Identify your objective 
+1.  Identify your objective 
 
-1.  Show the data
+2.  Show the data
 
-2.  Reduce the clutter
+3.  Reduce the clutter
 
-3.  Integrate the graphics and text
+4.  Integrate the graphics and text
 
-4.  Avoid the spaghetti chart
+5.  Avoid the spaghetti chart
 
-5.  Start with gray
+6.  Start with gray
 
 ::: aside
 Adapted from *Better Data Visualizations* by Jonathan Schwabish
 :::
 
-## 0. Identify your objective
+## 1. Identify your objective
 
 Before designing your visualization, answer these questions: 
 
@@ -281,18 +289,18 @@ What if we retitled it - Federal Spending on non-health care related social welf
 What if we retitled it - The Federal Government is over-spending on Health Care?
 :::
 
-## 1. Show (me!) the Data
+## 2. Show the data
 
 Your audience will only grasp your point, argument, or story if they can *see* the data supporting it.
 
 As visualization creators, our first challenge is deciding how much data to show and the best way to show it.
 
-##  1. Show (me!) the Data
+##  2. Show the data
 &nbsp; 
 
 ![](includes/guide1.png){width="120%"}
 
-## 2.  Reduce the clutter
+## 3.  Reduce the clutter
 
 The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
@@ -311,7 +319,7 @@ Some examples?
 ::: aside
 Source: <https://medium.com/biovinci/good-chart-bad-chart-b6a6725f8795>
 :::
-## 2.  Reduce the clutter
+## 3.  Reduce the clutter
 
 The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
@@ -321,7 +329,7 @@ Some examples?
 
 -  Overlapping and overwhelming data markers
 
-## Why tho?
+## Why though?
 
 ![](includes/image10.png){width="80%"}
 
@@ -329,7 +337,7 @@ Some examples?
 Source: <https://dvia.samizdat.cc/2017/line-graph/>
 :::
 
-## 2.  Reduce the clutter
+## 3.  Reduce the clutter
 
 The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
@@ -345,7 +353,7 @@ Some examples?
 
 ![](includes/excel1.png){width="100%"}
 
-## 2.  Reduce the clutter
+## 3.  Reduce the clutter
 
 The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
@@ -370,7 +378,7 @@ Some examples?
 Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
 :::
 
-## 2.  Reduce the clutter
+## 3.  Reduce the clutter
 
 The use of unnecessary visual elements distracts your audience from the central data and clutters the page.
 
@@ -403,11 +411,13 @@ Some examples?
 Source: <https://getdolphins.com/blog/the-worst-graphs-of-2017/>
 :::
 
-## 3. Integrate graphics and text {.smaller}
+## 4. Integrate graphics and text 
 
 Our main focus when creating a visualization is on the graphical elements - bars, points, lines, etc.
 
 But the text we include is often just as important. In fact, the included annotations are vitally important to audience comprehension.
+
+## 4. Integrate graphics and text
 
 3 ways to integrate text into graphs and visuals:
 
@@ -439,7 +449,6 @@ Recall the exercise on slide titles from earlier.
  &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/legend3.png){width="35%"}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D.  ![](includes/legend4.png){width="35%"} 
 
 ## Removing legends
-&nbsp; 
 
 Legends take up valuable space.
 
@@ -448,7 +457,6 @@ When possible, remove them.
 Adding data labels directly on the chart makes it faster and easier to interpret and gives our data more space.
 
 ## Active titles
-&nbsp; 
 
 Write your vis titles like a newspaper headline. 
 
@@ -462,8 +470,6 @@ Your title should tell the audience *what they should learn from your data*.
 ![](includes/fed_budget.png){width="48%"} ![](includes/fig4.png){width="48%"}
 
 ## Add detail
-
-&nbsp; 
 
 Annotations allows audience members - especially those with less data vis experience - to grasp and understand the content quickly.
 
@@ -479,26 +485,26 @@ Colors draw the readers' attention to key points and can differentiate between "
  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;![](includes/crime.png){width="60%"}
 
 
-## 3. Integrate graphics and text
+## 4. Integrate graphics and text
 
-&nbsp; 
+Recap:
 
-1.  Remove legends
+(1) Remove legends
 
-2.  Create active titles 
+(2) Create active titles
 
-3.  Add detail - annotations and color
+(3) Add detail
 
 
-## 4. Avoid the spaghetti chart
+## 5. Avoid the spaghetti chart
 
-&nbsp; 
+Avoid figures that contain too much information. 
 
-Avoid figures that contain too much information - line charts that look like spaghetti.
+The "spaghetti chart" is one such example, a line charts that look like spaghetti.
 
-One solution is to convey less information - what is vital?
+One solution is to convey less information. Only display what is vital.
 
-Another is to break one chart into smaller parts, ideally with identical formatting.
+If you have more information to convey, break one chart into smaller parts, ideally with identical formatting.
 
 ## Spaghetti!
 ![](includes/noodles.png)
@@ -509,11 +515,9 @@ Another is to break one chart into smaller parts, ideally with identical formatt
 ## Even better - what's your point?
 ![](includes/better3.png)
 
-## 5. Start with gray
+## 6. Start with gray
 
-&nbsp; 
-
-One last piece of advice - whenever you make your graph, start with all gray data elements. 
+Whenever you make your graph, start with all gray data elements. 
 
 This will force you to be **purposeful** and **strategic** in your use of color, labels, and other elements.
 
@@ -539,6 +543,7 @@ When you start with all gray, it is pretty clear that this cannot be your finish
 Here you might have chosen to highlight the top two lines. Once you do that, you think... why did I choose these two? Maybe my take-away is not currently what I have as my slide title.
 :::
 
+<!--
 ## Objectives
 
 1.  Explain the importance of data visualizations. [CO 6]
@@ -548,7 +553,7 @@ Here you might have chosen to highlight the top two lines. Once you do that, you
 3.  Describe the five guidelines for effective data visualizations. [CO 5]
 
 4.  Next time... Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]
-
+-->
 ## Objective 1 Review Question
 
 &nbsp; 
@@ -559,7 +564,7 @@ Why use data visualizations instead of text?
 
 &nbsp; 
 
-Which vis?
+Which visualization?
 
 
 ## Which vis do you like best?
@@ -571,14 +576,14 @@ Which vis?
 ## Which vis do you like best?
 ![](includes/acre3.png){width="100%"}
 
-## Obj. 2: Which vis?
+## Which vis do you like best?
  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;A. ![](includes/acre1.png){width="29%"} 
 
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B.  ![](includes/acre2.png){width="35%"} &nbsp; &nbsp; &nbsp; &nbsp;C. ![](includes/acre3.png){width="35%"} 
 
 ## Objective 3 Review Question
 
-Which of the following steps should you accomplish before even starting your data vis?
+Which of the following steps should you accomplish before even starting your data visualization?
 
 A.  Start with gray
 

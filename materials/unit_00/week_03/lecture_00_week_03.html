@@ -8,7 +8,7 @@
 <link href="lecture_00_week_03_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_00_week_03_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_00_week_03_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Week 3: Effective Data Visualizations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -341,10 +342,10 @@
 </section>
 <section id="review-question-1" class="slide level2">
 <h2>Review Question 1</h2>
-<p>Which of the following is NOT one of the 5 steps in the D<sup>3</sup>M process?</p>
+<p>Which of the following is NOT one of the steps in the D<sup>3</sup>M process?</p>
 <ol type="A">
-<li><p>Define objective</p></li>
-<li><p>Analyze data</p></li>
+<li><p>Define an objective</p></li>
+<li><p>Analyze the data</p></li>
 <li><p>Apply intuition</p></li>
 <li><p>Communicate insights</p></li>
 </ol>
@@ -361,9 +362,9 @@
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<p>Data Storytelling</p>
+<p>Data storytelling</p>
 <p>Why use data visualizations?</p>
-<p>Five guidelines for effective data visualizations</p>
+<p>Guidelines for effective data visualizations</p>
 </section>
 <section>
 <section id="data-storytelling" class="title-slide slide level1 center">
@@ -401,6 +402,7 @@
 <h2>Data story ≠ data visualization</h2>
 <p>While clear and appealing data visualizations are part of a data story, they are not data stories by themselves.</p>
 <p>Data stories bring your analytical insights to life.</p>
+<p><em>Side note: If you enjoy creating data stories, read more about <a href="https://shorthand.com/the-craft/how-data-journalists-create-beautiful-feature-stories/index.html">data journalism</a>.</em></p>
 <!---
 ## Let's look at an example: The minimalist version
 
@@ -424,12 +426,12 @@
 </ol>
 <aside class="notes">
 <ol type="1">
-<li><p>Story is grounded in data - something real that is observable</p></li>
-<li><p>The story needs to have a main point. Have something to say.</p></li>
-<li><p>Your goal is to explain some insight. What is going on? Who are the actors? What are the mechanisms? This relates to what we will discuss about causal inference.</p></li>
-<li><p>Your story will consist of a series of supporting points or information that are tied together to build to some larger point. The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.</p></li>
-<li><p>Dramatic elements include characters, setting, plots. These elements help humanize the data story and make it relatable. Set some context: sales are $200k. Is that good or bad? It depends on previous sales. Be selective about the information - only include information that helps to advance the narrative.</p></li>
-<li><p>Visual anchors are the charts and graphs or other visuals you rely on to tell the story. We will spend considerable time on developing effective visuals to help tell your story.</p></li>
+<li><p>Data foundation: Story is grounded in data. Something real that is observable.</p></li>
+<li><p>Main point: The story needs to have a main point. Have something to say.</p></li>
+<li><p>Explanatory focus: Your goal is to <em>explain</em> some insight. What is going on? Who are the actors? What are the mechanisms? This relates to what we will discuss about causal inference.</p></li>
+<li><p>Linear sequence: Your story will consist of a series of supporting points or information that are tied together to build to some larger point. The supporting information should build: a) consumer prefs are shifting to favor Kale, b) we offer more Kale products and sales increase.</p></li>
+<li><p>Dramatic elements: These include characters, setting, plots. These elements help humanize the data story and make it relatable. Set some context: sales are $200k. Is that good or bad? It depends on previous sales. Be selective about the information - only include information that helps to advance the narrative.</p></li>
+<li><p>Visual anchors: These are the charts and graphs or other visuals you rely on to tell the story. We will spend considerable time on developing effective visuals to help tell your story.</p></li>
 </ol>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -443,9 +445,13 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
-<p><a href="https://pudding.cool/2020/07/gendered-descriptions/" class="uri">https://pudding.cool/2020/07/gendered-descriptions/</a></p>
+<section id="examples" class="slide level2">
+<h2>Examples</h2>
+<p><a href="https://dad-fishes-for-the-future.msc.org/">How my dad fishes for the future</a></p>
+<p><a href="https://shorthand.radionz.co.nz/coronavirus-timeline/index.html">Coronavirus timeline in New Zealand</a></p>
+<p><a href="https://pudding.cool/2020/07/gendered-descriptions/">Physical traits that define men and women in literature</a></p>
+<!-- ----------------------- -->
+<!--       Next section      -->
 <!-- ----------------------- -->
 </section></section>
 <section>
@@ -538,14 +544,14 @@
 <h2></h2>
 
 <img data-src="includes/fig1.png" style="width:120.0%" class="r-stretch"></section>
-<section id="which-is-the-most-effective-vis" class="slide level2">
-<h2>Which is the most effective vis?</h2>
+<section id="which-is-the-most-effective-visualizations" class="slide level2">
+<h2>Which is the most effective visualizations?</h2>
 <p>&nbsp; &nbsp; &nbsp; &nbsp;A. <img data-src="includes/fig3.png" style="width:30.0%"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B. <img data-src="includes/fig2.png" style="width:30.0%"></p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp;C. <img data-src="includes/fig4_2.png" style="width:30.0%"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D. <img data-src="includes/fig1.png" style="width:30.0%"></p>
 </section>
-<section id="what-is-an-effective-data-vis" class="slide level2">
-<h2>What is an <em>effective</em> data vis?</h2>
-<p>Which vis best tells this story?</p>
+<section id="what-is-an-effective-data-visualizations" class="slide level2">
+<h2>What is an <em>effective</em> data visualizations?</h2>
+<p>Which visualization best tells this story?</p>
 <div class="fragment">
 <p><strong>Why?</strong></p>
 </div>
@@ -553,9 +559,9 @@
 <p><strong>How else could you improve these visualizations?</strong></p>
 </div>
 </section>
-<section id="guidelines-for-a-better-data-vis" class="slide level2 smaller">
-<h2>5 guidelines for a better data vis</h2>
-<ol start="0" type="1">
+<section id="guidelines-for-a-better-data-visualizations" class="slide level2 smaller">
+<h2>Guidelines for a better data visualizations</h2>
+<ol type="1">
 <li><p>Identify your objective</p></li>
 <li><p>Show the data</p></li>
 <li><p>Reduce the clutter</p></li>
@@ -568,7 +574,7 @@
 <p>Adapted from <em>Better Data Visualizations</em> by Jonathan Schwabish</p>
 </div></aside></section>
 <section id="identify-your-objective" class="slide level2">
-<h2>0. Identify your objective</h2>
+<h2>1. Identify your objective</h2>
 <p>Before designing your visualization, answer these questions:</p>
 <ul>
 <li><p><strong>What do I want my figure to convey?</strong></p></li>
@@ -595,18 +601,18 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="show-me-the-data" class="slide level2">
-<h2>1. Show (me!) the Data</h2>
+<section id="show-the-data" class="slide level2">
+<h2>2. Show the data</h2>
 <p>Your audience will only grasp your point, argument, or story if they can <em>see</em> the data supporting it.</p>
 <p>As visualization creators, our first challenge is deciding how much data to show and the best way to show it.</p>
 </section>
-<section id="show-me-the-data-1" class="slide level2">
-<h2>1. Show (me!) the Data</h2>
+<section id="show-the-data-1" class="slide level2">
+<h2>2. Show the data</h2>
 <p>&nbsp;</p>
 
 <img data-src="includes/guide1.png" style="width:120.0%" class="r-stretch"></section>
 <section id="reduce-the-clutter" class="slide level2">
-<h2>2. Reduce the clutter</h2>
+<h2>3. Reduce the clutter</h2>
 <p>The use of unnecessary visual elements distracts your audience from the central data and clutters the page.</p>
 <div class="fragment">
 <p>Some examples?</p>
@@ -624,7 +630,7 @@
 <p>Source: <a href="https://medium.com/biovinci/good-chart-bad-chart-b6a6725f8795" class="uri">https://medium.com/biovinci/good-chart-bad-chart-b6a6725f8795</a></p>
 </div></aside></section>
 <section id="reduce-the-clutter-1" class="slide level2">
-<h2>2. Reduce the clutter</h2>
+<h2>3. Reduce the clutter</h2>
 <p>The use of unnecessary visual elements distracts your audience from the central data and clutters the page.</p>
 <p>Some examples?</p>
 <ul>
@@ -632,15 +638,15 @@
 <li><p>Overlapping and overwhelming data markers</p></li>
 </ul>
 </section>
-<section id="why-tho" class="slide level2">
-<h2>Why tho?</h2>
+<section id="why-though" class="slide level2">
+<h2>Why though?</h2>
 <p><img data-src="includes/image10.png" style="width:80.0%"></p>
 
 <aside><div>
 <p>Source: <a href="https://dvia.samizdat.cc/2017/line-graph/" class="uri">https://dvia.samizdat.cc/2017/line-graph/</a></p>
 </div></aside></section>
 <section id="reduce-the-clutter-2" class="slide level2">
-<h2>2. Reduce the clutter</h2>
+<h2>3. Reduce the clutter</h2>
 <p>The use of unnecessary visual elements distracts your audience from the central data and clutters the page.</p>
 <p>Some examples?</p>
 <ul>
@@ -654,7 +660,7 @@
 
 <img data-src="includes/excel1.png" style="width:100.0%" class="r-stretch"></section>
 <section id="reduce-the-clutter-3" class="slide level2">
-<h2>2. Reduce the clutter</h2>
+<h2>3. Reduce the clutter</h2>
 <p>The use of unnecessary visual elements distracts your audience from the central data and clutters the page.</p>
 <p>Some examples?</p>
 <ul>
@@ -673,7 +679,7 @@
 <p>Source: <a href="https://getdolphins.com/blog/the-worst-graphs-of-2017/" class="uri">https://getdolphins.com/blog/the-worst-graphs-of-2017/</a></p>
 </div></aside></section>
 <section id="reduce-the-clutter-4" class="slide level2">
-<h2>2. Reduce the clutter</h2>
+<h2>3. Reduce the clutter</h2>
 <p>The use of unnecessary visual elements distracts your audience from the central data and clutters the page.</p>
 <p>Some examples?</p>
 <ul>
@@ -699,10 +705,13 @@
 <aside><div>
 <p>Source: <a href="https://getdolphins.com/blog/the-worst-graphs-of-2017/" class="uri">https://getdolphins.com/blog/the-worst-graphs-of-2017/</a></p>
 </div></aside></section>
-<section id="integrate-graphics-and-text" class="slide level2 smaller">
-<h2>3. Integrate graphics and text</h2>
+<section id="integrate-graphics-and-text" class="slide level2">
+<h2>4. Integrate graphics and text</h2>
 <p>Our main focus when creating a visualization is on the graphical elements - bars, points, lines, etc.</p>
 <p>But the text we include is often just as important. In fact, the included annotations are vitally important to audience comprehension.</p>
+</section>
+<section id="integrate-graphics-and-text-1" class="slide level2">
+<h2>4. Integrate graphics and text</h2>
 <p>3 ways to integrate text into graphs and visuals:</p>
 <ol type="1">
 <li><p>Remove legends</p></li>
@@ -746,14 +755,12 @@
 </section>
 <section id="removing-legends" class="slide level2">
 <h2>Removing legends</h2>
-<p>&nbsp;</p>
 <p>Legends take up valuable space.</p>
 <p>When possible, remove them.</p>
 <p>Adding data labels directly on the chart makes it faster and easier to interpret and gives our data more space.</p>
 </section>
 <section id="active-titles" class="slide level2">
 <h2>Active titles</h2>
-<p>&nbsp;</p>
 <p>Write your vis titles like a newspaper headline.</p>
 <p>Your title should tell the audience <em>what they should learn from your data</em>.</p>
 </section>
@@ -764,7 +771,6 @@
 </section>
 <section id="add-detail" class="slide level2">
 <h2>Add detail</h2>
-<p>&nbsp;</p>
 <p>Annotations allows audience members - especially those with less data vis experience - to grasp and understand the content quickly.</p>
 <p>Colors draw the readers’ attention to key points and can differentiate between “good” and “bad.”</p>
 </section>
@@ -777,21 +783,21 @@
 <h2></h2>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img data-src="includes/crime.png" style="width:60.0%"></p>
 </section>
-<section id="integrate-graphics-and-text-1" class="slide level2">
-<h2>3. Integrate graphics and text</h2>
-<p>&nbsp;</p>
+<section id="integrate-graphics-and-text-2" class="slide level2">
+<h2>4. Integrate graphics and text</h2>
+<p>Recap:</p>
 <ol type="1">
 <li><p>Remove legends</p></li>
 <li><p>Create active titles</p></li>
-<li><p>Add detail - annotations and color</p></li>
+<li><p>Add detail</p></li>
 </ol>
 </section>
 <section id="avoid-the-spaghetti-chart" class="slide level2">
-<h2>4. Avoid the spaghetti chart</h2>
-<p>&nbsp;</p>
-<p>Avoid figures that contain too much information - line charts that look like spaghetti.</p>
-<p>One solution is to convey less information - what is vital?</p>
-<p>Another is to break one chart into smaller parts, ideally with identical formatting.</p>
+<h2>5. Avoid the spaghetti chart</h2>
+<p>Avoid figures that contain too much information.</p>
+<p>The “spaghetti chart” is one such example, a line charts that look like spaghetti.</p>
+<p>One solution is to convey less information. Only display what is vital.</p>
+<p>If you have more information to convey, break one chart into smaller parts, ideally with identical formatting.</p>
 </section>
 <section id="spaghetti" class="slide level2">
 <h2>Spaghetti!</h2>
@@ -806,9 +812,8 @@
 
 <img data-src="includes/better3.png" class="r-stretch"></section>
 <section id="start-with-gray" class="slide level2">
-<h2>5. Start with gray</h2>
-<p>&nbsp;</p>
-<p>One last piece of advice - whenever you make your graph, start with all gray data elements.</p>
+<h2>6. Start with gray</h2>
+<p>Whenever you make your graph, start with all gray data elements.</p>
 <p>This will force you to be <strong>purposeful</strong> and <strong>strategic</strong> in your use of color, labels, and other elements.</p>
 <p>When using R, Tableau, Excel, or really any program literally starting in gray would take some effort. But consider this a mental process…</p>
 </section>
@@ -847,15 +852,17 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="objectives-1" class="slide level2">
-<h2>Objectives</h2>
-<ol type="1">
-<li><p>Explain the importance of data visualizations. [CO 6]</p></li>
-<li><p>Identify effective data visualizations. [CO 5]</p></li>
-<li><p>Describe the five guidelines for effective data visualizations. [CO 5]</p></li>
-<li><p>Next time… Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]</p></li>
-</ol>
+<!--
+## Objectives
+
+1.  Explain the importance of data visualizations. [CO 6]
+
+2.  Identify effective data visualizations. [CO 5]
+
+3.  Describe the five guidelines for effective data visualizations. [CO 5]
+
+4.  Next time... Demonstrate an ability to produce effective data visualizations to inform business and policy solutions. [CO 8]
+-->
 </section>
 <section id="objective-1-review-question" class="slide level2">
 <h2>Objective 1 Review Question</h2>
@@ -865,7 +872,7 @@
 <section id="objective-2-review-question" class="slide level2">
 <h2>Objective 2 Review Question</h2>
 <p>&nbsp;</p>
-<p>Which vis?</p>
+<p>Which visualization?</p>
 </section>
 <section id="which-vis-do-you-like-best-5" class="slide level2">
 <h2>Which vis do you like best?</h2>
@@ -879,14 +886,14 @@
 <h2>Which vis do you like best?</h2>
 
 <img data-src="includes/acre3.png" style="width:100.0%" class="r-stretch"></section>
-<section id="obj.-2-which-vis" class="slide level2">
-<h2>Obj. 2: Which vis?</h2>
+<section id="which-vis-do-you-like-best-8" class="slide level2">
+<h2>Which vis do you like best?</h2>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;A. <img data-src="includes/acre1.png" style="width:29.0%"></p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B. <img data-src="includes/acre2.png" style="width:35.0%"> &nbsp; &nbsp; &nbsp; &nbsp;C. <img data-src="includes/acre3.png" style="width:35.0%"></p>
 </section>
 <section id="objective-3-review-question" class="slide level2">
 <h2>Objective 3 Review Question</h2>
-<p>Which of the following steps should you accomplish before even starting your data vis?</p>
+<p>Which of the following steps should you accomplish before even starting your data visualization?</p>
 <ol type="A">
 <li><p>Start with gray</p></li>
 <li><p>Show the data</p></li>
@@ -901,8 +908,10 @@
 <p>Harford, T. (2022). The data detective: Ten easy rules to make sense of statistics. Penguin.</p>
 <p>Schwabish, J. (2016). <em>Better Presentations: A Guide for Scholars, Researchers, and Wonks</em>. Columbia University Press. <a href="https://policyviz.com/pv_books/better-presentations-a-guide-for-scholars-researchers-and-wonks/" class="uri">https://policyviz.com/pv_books/better-presentations-a-guide-for-scholars-researchers-and-wonks/</a></p>
 <p>Schwabish, J. (2021). <em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em>. Columbia University Press. <a href="https://policyviz.com/pv_books/better-data-visualizations-a-guide-for-scholars-researchers-and-wonks/" class="uri">https://policyviz.com/pv_books/better-data-visualizations-a-guide-for-scholars-researchers-and-wonks/</a></p>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>
@@ -931,7 +940,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1148,18 +1156,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1191,11 +1188,50 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1205,8 +1241,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1220,7 +1265,11 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
