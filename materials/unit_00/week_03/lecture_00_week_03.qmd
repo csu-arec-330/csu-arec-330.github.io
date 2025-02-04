@@ -543,6 +543,14 @@ When you start with all gray, it is pretty clear that this cannot be your finish
 Here you might have chosen to highlight the top two lines. Once you do that, you think... why did I choose these two? Maybe my take-away is not currently what I have as my slide title.
 :::
 
+## Connecting D^3^M, Data Storytelling, and Effective Visualizations {.smaller}
+
+- The **D^3^M process** presents a structured approach to analyzing data.
+- **Data storytelling** makes insights meaningful by adding context and a narrative.
+- **Effective visualizations** enhance comprehension by reducing noise and focusing attention on key takeaways.
+
+Review handout [here](data_story_handout.pdf){target=\"_blank\"}
+
 <!--
 ## Objectives
 

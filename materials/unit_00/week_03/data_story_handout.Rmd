@@ -151,24 +151,75 @@ Choose a past visualization you've created and evaluate it using these six guide
 
 # Connecting D^3^M, Data Storytelling, and Effective Visualizations
 
-This table outlines how the **Data-Driven Decision-Making (D3M) process**, **data storytelling principles**, and **effective visualization techniques** align to create clear, actionable insights.
+This table outlines the key elements of the **Data-Driven Decision-Making (D3M) process**, **data storytelling principles**, and **effective visualization techniques** to create clear, evidence-based, actionable insights.
 
 | **D3M Process**            | **Data Storytelling**                           | **Effective Visualizations**                         |
-|:----------------------------|:-----------------------------------------------|:--------------------------------------------------|
+|:----------------------------------|:-----------------------------------------------|:--------------------------------------------------|
 | **1. Define an Objective** | Identify the key message or insight.          | Choose the right chart type for the message.      |
 | **2. Establish a Hypothesis** | Frame a compelling narrative or question.    | Highlight expected vs. unexpected results.        |
-| **3. Collect Relevant Data** | Ensure data supports the story's credibility. | Use clean, reliable data sources.                 |
+| **3. Collect Relevant Data** | Use data to support the story's credibility. | Use clean, reliable data sources.                 |
 | **4. Analyze the Data**     | Find patterns, relationships, and key takeaways. | Use comparisons, trends, and breakdowns to show insights. |
 | **5. Interpret the Results** | Provide context: Who? What? Why?              | Remove clutter and focus attention on insights.   |
 | **6. Communicate Insights** | Deliver a clear, engaging message.            | Integrate text, annotations, and active titles.   |
 
 ## **Main Takeaways**
+
 - The **D^3^M process** presents a structured approach to analyzing data.
 - **Data storytelling** makes insights meaningful by adding context and a narrative.
 - **Effective visualizations** enhance comprehension by reducing noise and focusing attention on key takeaways.
 
 ### **Connecting the Three Frameworks**
-In preparing your projects, outline how you would:
+In preparing your projects, remember the following:
+
 1. Apply **D3M** to structure your analysis.
 2. Use **data storytelling** techniques to craft a compelling narrative.
 3. Implement **effective visualization** principles to communicate insights clearly.
+
+
+## **Interconnected Framework: D3M, Data Storytelling, and Effective Visualizations**
+
+### **D3M: The Analytical Approach**
+
+- Guides how data is structured, analyzed, and interpreted.
+- Focuses on accuracy and objectivity.
+- Forms the foundation of evidence-based storytelling.
+
+**Feedback Loop:** Analytical insights may evolve based on the effectiveness of storytelling and visualization.
+
+- Define the key message based on data analysis.
+- Identify the most important trends, comparisons, or relationships.
+- Frame findings in a way that highlights their significance.
+
+**Feedback Loop:** Refining the story can highlight gaps in analysis, requiring further D3M refinement.
+
+### **Data Storytelling: Communicating the Analysis**
+
+- Translates complex data into a structured, compelling narrative.
+- Aligns with principles of clarity, engagement, and relevance.
+- Ensures the audience understands the significance of the data.
+
+**Feedback Loop:** Testing different narratives may reveal the need for stronger visual representation or refined analysis.
+
+- Craft a narrative that provides context and meaning.
+- Structure information in a logical, engaging sequence.
+- Emphasize key takeaways with relatable examples or analogies.
+
+**Feedback Loop:** Reviewing visual effectiveness may lead to adjustments in storytelling or analytical focus.
+
+### **Effective Data Visualizations: Principles for Clarity**
+
+- Apply design principles to reinforce the narrative.
+- Use appropriate chart types, color, and annotations to emphasize insights.
+- Reduce clutter while maintaining necessary context.
+
+**Final Feedback Loop:** Visualizations should be clear and impactful, supporting both the storytelling and analytical approach.
+
+- Select the best chart type to support the narrative.
+- Highlight insights using color, annotations, and active titles.
+- Remove clutter to keep the focus on what matters most.
+
+## **The Continuous Process**
+
+- **D3M leads to clear insights**, which need a structured narrative.
+- **Data storytelling provides meaning**, making the information engaging and relatable.
+- **Effective visualizations enhance clarity**, allowing the audience to quickly grasp key messages.
