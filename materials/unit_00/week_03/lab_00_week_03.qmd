@@ -28,6 +28,11 @@ This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8
 
 - Subset or select columns of the data
 
+## [Download Lab Handout Here](lab_00_week_03_handout.pdf)
+
+<embed src="lab_00_week_03_handout.pdf" width="100%" height="600px" type="application/pdf">
+
+
 ## Data processing with R
 
 Data processing is an important step in analysis. It can be complicated depending on the number of data sources, quality of the data, and structure of the data. We will start with an already clean dataset to demonstrate how to use R to manipulate the dataset. We will continue to use these commands in increasingly complex combinations, so it will pay dividends to invest the time to understand them now.
@@ -94,7 +99,7 @@ For example, in this lab, we will use three packages:
 ### Why Do We Need to Install Packages?
 When you first install R, it does not include all available packages. If you want to use a package, you need to install it first using the install.packages("package_name") function. Installation only needs to be done once on your computer. If you try to use a function from a package without loading it first, R will return an error saying the function is not found. 
 
-### Why Do We Use the library() Function?
+### Why Do We Use the `library()` Function?
 Even though a package is installed, R does not automatically load it when you start a new session. To use functions from an installed package, you must load it using the library() function. **You only need to install a package once, but you must load it with library() every time you start R and want to use it.**
 
 6. Insert the following code below where you load packages. These commands print information about the system and version of R you are running. This information will be displayed when you source the script and is useful for troubleshooting.
@@ -120,7 +125,7 @@ supermarket_raw <- read_csv("supermarket_sales.csv")
 head(supermarket_raw)
 ```
 
-:::{.callout-important title="Difference Between `read.csv()` and `read_csv()`"}
+:::{.callout-important title="Difference Between `read.csv()` and `read_csv()`" collapse=true}
 
 Both **`read.csv()`** and **`read_csv()`** are used to read CSV files into R, but they come from different packages and have some key differences.
 
@@ -144,7 +149,7 @@ supermarket_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_00/in
 4. `read_csv()` returns a **tibble**, which has better printing behavior and is more compatible with the tidyverse.
 :::
 
-:::{.callout-note title="Tibbles vs. Data Frames"}
+:::{.callout-note title="Tibbles vs. Data Frames" collapse=true}
 In R, both **tibbles** and **data frames** store tabular data, but tibbles are a more modern version with improved behavior.  
 
 #### **Key Differences**  
@@ -205,7 +210,7 @@ Try it on your own: Use the `clean_names()` function to convert all of the colum
 #| eval: false
 #| include: true
 
-supermarket_raw <- clean_names(supermarket_raw,"snake")
+supermarket_raw <- clean_names(supermarket_raw, "snake")
 ```
 :::
 
@@ -239,17 +244,9 @@ The following exercises will introduce you to these core functions while explori
 
 ### 1. Mutate  
 
-The `mutate()` function creates or modifies variables within a dataframe. Let’s create the column `subtotal` by multiplying `unit_price` and `quantity`.  
+The `mutate()` function creates or modifies variables within a dataframe. 
 
-Here, we create a new variable called `subtotal` and store the modified dataframe in a new object called `my_super_sales`:  
-```{r}
-#| eval: false
-my_super_sales <- mutate(supermarket_raw, subtotal = unit_price * quantity)
-```
-
-> Check: Is the calculated **subtotal** column exactly the same as the existing total column in supermarket_raw? Why or why not?
-
-:::{.callout-note title="Reading `mutate()` Syntax"}
+:::{.callout-note title="Reading `mutate()` Syntax" collapse=true}
 
 The `mutate()` function can be written generically as follows:
 ```{r}
@@ -268,9 +265,32 @@ new_dataframe <- mutate(original_dataframe, new_column = operation, modified_col
 - **Important:** The result of a `mutate()` operation must be a vector of the same length as the dataframe. If the lengths don't match, R will return an error.
 :::
 
+Let’s create the column `subtotal` by multiplying `unit_price` and `quantity`.
+
+Here, we create a new variable called `subtotal` and store the modified dataframe in a new object called `my_super_sales`:  
+```{r}
+#| eval: false
+my_super_sales <- mutate(supermarket_raw, subtotal = unit_price * quantity)
+```
+
+> Check: Is the calculated **subtotal** column exactly the same as the existing total column in supermarket_raw? Why or why not?
+
 ### 2. Select (and Rename)
 
 The `select()` function allows you to **choose specific columns** from a dataframe.  
+
+:::{.callout-note title="Reading `select()` Syntax" collapse=true}
+
+The `select()` function can be written generically as follows:
+```{r}
+#| eval: false
+new_dataframe <- select(original_dataframe, column1, column2, column3)
+```
+
+- `original_dataframe` $\rightarrow$ The dataframe you are selecting from.
+- `column1`, `column2`, `column3` $\rightarrow$ The columns you want to keep.
+- `new_dataframe` $\rightarrow$ The resulting dataframe with only the selected columns.
+:::
 
 For example, suppose you want to create a new dataframe containing only:  
 - **Invoice ID** (`invoice_id`)  
@@ -288,6 +308,19 @@ select_super_sales <- select(my_super_sales, invoice_id, city, total, subtotal)
 #### Renaming columns
 If you want to rename a column instead of selecting a subset, use `rename()`.
 
+:::{.callout-note title="Reading `rename()` Syntax" collapse=true}
+
+The `rename()` function can be written generically as follows:
+```{r}
+#| eval: false
+new_dataframe <- rename(original_dataframe, new_name1 = old_name1, new_name2 = old_name2)
+```
+
+- `original_dataframe` $\rightarrow$ The dataframe you are renaming columns in.
+- ``new_name1` = old_name1` $\rightarrow$ The new column name is on the left, the old column name is on the right.
+- `new_dataframe` $\rightarrow$ The resulting dataframe with renamed columns.
+:::
+
 For example, if you prefer market instead of city:
 ```{r}
 #| eval: false
@@ -302,38 +335,30 @@ You can rename columns directly within `select()`, avoiding the need for a separ
 select_super_sales <- select(my_super_sales, invoice_id, market = city, total, subtotal)
 ```
 
-:::{.callout-note title="Reading `select()` and `rename()` Syntax"}
-
-#### Reading `select()` Syntax  
-
-The `select()` function can be written generically as follows:
-```{r}
-#| eval: false
-new_dataframe <- select(original_dataframe, column1, column2, column3)
-```
-
-- `original_dataframe` $\rightarrow$ The dataframe you are selecting from.
-- `column1`, `column2`, `column3` $\rightarrow$ The columns you want to keep.
-- `new_dataframe` $\rightarrow$ The resulting dataframe with only the selected columns.
-
---
-
-#### Reading `rename()` Syntax  
-
-The `rename()` function can be written generically as follows:
-```{r}
-#| eval: false
-new_dataframe <- rename(original_dataframe, new_name1 = old_name1, new_name2 = old_name2)
-```
-
-- `original_dataframe` $\rightarrow$ The dataframe you are renaming columns in.
-- `old_name1` → `new_name1` $\rightarrow$ The new column name is on the left, the old column name is on the right.
-- `new_dataframe` $\rightarrow$ The resulting dataframe with renamed columns.
-:::
 
 ### 3. Filter
 
 The `filter()` function is used to **keep only rows that meet a condition**. It evaluates a logical statement for each row and retains rows where the result is `TRUE`. This is a common concept in programming and allows us to extract only the data that meets specific criteria.  
+
+:::{.callout-note title="Reading `filter()` Syntax" collapse=true}
+
+The `filter()` function can be written generically as follows:
+```{r}
+#| eval: false
+new_dataframe <- filter(original_dataframe, condition)
+```
+
+- `original_dataframe` $\rightarrow$ The dataframe you are filtering.
+- `condition` $\rightarrow$ A logical statement that evaluates to `TRUE` or `FALSE` for each row.
+- `new_dataframe` $\rightarrow$ The resulting dataframe, containing only the rows where `condition` is `TRUE`.
+
+#### Important points about `filter()`
+
+- `filter()` keeps only rows where the condition is `TRUE`.
+- Works with text (strings) and numbers using comparison operators.
+- Case-sensitive when filtering strings.
+- Multiple conditions can be combined using `&` (AND) or `|` (OR), which we will use later.
+:::
 
 In this example, we filter the dataframe to include only rows where `market` (renamed from `city`) is **"Yangon"**:  
 
@@ -361,25 +386,6 @@ low_quantity_sales <- filter(select_super_sales, quantity < 5)
 ```
 For more on logical operators, check out this resource: [Logical operators in R](https://www.statmethods.net/management/operators.html).
 
-:::{.callout-note title="Reading `filter()` Syntax"}
-
-The `filter()` function can be written generically as follows:
-```{r}
-#| eval: false
-new_dataframe <- filter(original_dataframe, condition)
-```
-
-- `original_dataframe` $\rightarrow$ The dataframe you are filtering.
-- `condition` $\rightarrow$ A logical statement that evaluates to `TRUE` or `FALSE` for each row.
-- `new_dataframe` $\rightarrow$ The resulting dataframe, containing only the rows where `condition` is `TRUE`.
-
-#### Important points about `filter()`
-
-- `filter()` keeps only rows where the condition is `TRUE`.
-- Works with text (strings) and numbers using comparison operators.
-- Case-sensitive when filtering strings.
-- Multiple conditions can be combined using `&` (AND) or `|` (OR), which we will use later.
-:::
 
 ### 4. Arrange (Sorting Data)  
 
@@ -387,6 +393,26 @@ The `arrange()` function **reorders rows** in a dataframe based on the values in
 
 - R can sort both **numeric values** (smallest to largest) and **character strings** (alphabetical order).  
 - By default, sorting is **ascending** (smallest first), but you can use `desc()` to sort in **descending** order.  
+
+:::{.callout-note title="Reading `arrange()` Syntax" collapse=true}
+
+The `arrange()` function can be written generically as follows:
+```{r}
+#| eval: false
+sorted_dataframe <- arrange(original_dataframe, column1, column2)
+```
+
+- `original_dataframe` $\rightarrow$  The dataframe you are sorting.
+- `column1` $\rightarrow$  The primary column used for sorting (default: ascending).
+- `column2` (optional) $\rightarrow$  If values in `column1` are the same, use `column2` for sorting.
+- `sorted_dataframe` $\rightarrow$  The resulting dataframe, now sorted.
+
+#### Important points about `arrange()`
+
+- `arrange()` modifies the order of rows without changing data values.
+- Default sorting is ascending; use `desc()` for descending order.
+- Sorting by multiple columns helps order data when the first column has duplicates.
+:::
 
 #### Sorting by One Column
 
@@ -427,7 +453,7 @@ arrange(supermarket_raw, total)       # Sorts total in ascending order (default)
 arrange(supermarket_raw, desc(total)) # Sorts total in descending order
 ```
 
-:::{.callout-important title="Best Practice: Comment Your Code"}
+:::{.callout-important title="Reminder: Comment Your Code"}
 Always add comments in your code to help you remember what each step does! This makes it easier to understand your work when you revisit it later.
 :::
 
@@ -494,7 +520,7 @@ summarize(supermarket_raw, quantity_mean = mean(quantity))
 summarize(supermarket_raw, max_price = max(unit_price))
 ```
 
-:::{.callout-note title="Important points about `summarize()`"}
+:::{.callout-note title="Important points about `summarize()`" collapse=true}
 
 - `summarize()` reduces multiple rows into a single row with summary statistics.
 - If you don’t assign the output to an object, you can’t use it later.
@@ -554,6 +580,27 @@ Manually filtering each branch is tedious. In programming, if something feels re
 
 The `group_by()` function automatically groups data based on a variable (e.g., branch) so we can summarize each group in a single step.
 
+:::{.callout-note title="Reading `group_by()` Syntax" collapse=true}
+
+The function `group_by()` can be written generically as follows:
+```{r}
+#| eval: false
+grouped_data <- group_by(original_dataframe, grouping_variable)
+```
+
+- `original_dataframe` → The dataframe you want to group.
+- `grouping_variable` → The column that defines the groups.
+- `grouped_data` → The resulting dataframe, where rows are grouped but unchanged.
+
+
+#### Important points about `group_by()`
+- `group_by()` does not change the data—it only signals R to group rows.
+- Use `summarize()` after `group_by()` to calculate statistics for each group.
+- `summarize()` performs calculations on each group separately.
+- You can group by one or multiple columns.
+- This is much more efficient than filtering each group manually.
+:::
+
 **Step 1: Group Data by Branch**
 
 ```{r}
@@ -586,27 +633,6 @@ Use `group_by()` and `summarize()` to calculate the average unit_price for each 
 # Your turn: Find the average unit price by product line
 avg_price_by_product <- summarize(group_by(supermarket_raw, product_line), avg_unit_price = mean(unit_price))
 ```
-
-:::{.callout-note title="Reading `group_by()` Syntax"}
-
-The function `group_by()` can be written generically as follows:
-```{r}
-#| eval: false
-grouped_data <- group_by(original_dataframe, grouping_variable)
-```
-
-- `original_dataframe` → The dataframe you want to group.
-- `grouping_variable` → The column that defines the groups.
-- `grouped_data` → The resulting dataframe, where rows are grouped but unchanged.
-
-
-#### Important points about `group_by()`
-- `group_by()` does not change the data—it only signals R to group rows.
-- Use `summarize()` after `group_by()` to calculate statistics for each group.
-- `summarize()` performs calculations on each group separately.
-- You can group by one or multiple columns.
-- This is much more efficient than filtering each group manually.
-:::
 
 ---
 
@@ -660,7 +686,7 @@ Each step in this code chunk is clearly separated by the pipe symbol `%>%`:
 - Step 2: Group by branch.
 - Step 3: Pass the grouped data to summarize() to calculate total_quantity.
 
-:::{.callout-note title="Why Use Piping?"}
+:::{.callout-note title="Why Use Piping?" collapse=true}
 
 - Reduces unnecessary variables – no need to store temporary objects.
 - Improves readability – each step is clearly separated.
@@ -736,7 +762,18 @@ source("lab_03.R", echo = TRUE)
 sink()
 ```
 
-This will execute `lab_03.R` and store its output in `lab_03_log.txt`. The argument `echo = TRUE` ensures the log captures the script output as seen in the console.
+This will execute `lab_03.R` and store its output in `lab_03_log.txt`. The argument `echo = TRUE` ensures the log captures the script output as seen in the console. 
+
+**Why Use `.log` or `.txt` for output?**
+
+When capturing script output using `sink()`, you can save the log as either a `.log` or `.txt` file.
+
+Functionally, both file types generate the same output, and R does not treat them differently. The choice between `.log` and `.txt` is mostly a matter of convention:
+
+- `.log` is often used for logging outputs from scripts, making it clear that the file contains execution details.
+- `.txt` is a more general format, making it easier to open with standard text editors or share with others.
+
+In short: Either extension works!
 
 :::{.callout-important title="Important notes about running your log script"}
 

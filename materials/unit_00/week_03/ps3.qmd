@@ -7,25 +7,43 @@ format:
 
 Link to the description of the supermarket sales data available in the [Supermarket Sales Data Overview](https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html).
 
-## Write an R script to complete the following tasks:
+## Instructions
 
-1. Read in the dataset `supermarket_sales.csv` using `read_csv()`. Note: What packages do you need to have installed before loading in the data using this command?
+Write an R script that completes the following tasks. Make sure you follow best practices, including commenting on your code.
 
-2. Calculate the total value of the sale using the `unit_price` and `quantity` columns.  Name the new column (variable) `subtotal`.  Then verify that the value labeled `tax_5_percent` is indeed 5% of the `subtotal` by creating a new variable called `tax_verify`. Assign the object to a new dataframe.
+## Tasks
 
-3. Create a dataframe containing only the subset of sales from the product line `Food and beverages`.
+1. Read in the dataset `supermarket_sales.csv` using `read_csv()`. 
 
-4. Create a dataframe containing only the columns `city, product_line, unit_price, quantity, total, rating` where the product line is `Food and beverages`. 
+- **Question:** What packages do you need to have installed before loading in the data using this command? Write your response as a comment below the line of code where you load the necessary packages.
 
-5. Sort the dataframe by `quantity` in descending order. 
+2. Calculate the total value of the sale using the `unit_price` and `quantity` columns.  
 
-6. Load the `dplyr` package and use the appropriate commands to calculate the **median sales by payment type**.
+- Create a new column called `subtotal`. 
+- Verify that the value labeled `tax_5_percent` is indeed 5% of the `subtotal` by creating a new variable called `tax_verify`. 
+- Assign the object to a new dataframe.
 
-7. Suppose you are asked to develop a new performance indicator for the company.  You wonder if the transaction `rating` per `unit price` might provide insights into consumer preferences for different product lines.  Calculate the **rating per unit price for each transaction** and call this new variable `rup`. Explain what this performance indicator might tell decision-makers at the company.
+3. Filter the dataset to create a dataframe containing only the sales from the product line "Food and beverages".
 
-8. Calculate the mean `rup` and `unit price` **by product line**. 
+4. Select relevant columns: Create a dataframe that contains only the columns `city, product_line, unit_price, quantity, total, rating` for sales in "Food and beverages". 
 
-9. Print the contents of this dataframe into the console using the `print()` function. What conclusions do you draw from your analysis? Explain.
+5. Sort the dataframe by `quantity` in **descending order**. 
+
+6. Calculate **median sales by payment type** using the appropriate commands.
+
+7. Suppose you are asked to develop a new **performance indicator** for the company.  You decide that "rating per unit price" or "rup" would be a helpful metric. 
+
+- Compute the rating per unit price for each transaction by creating a new column called `rup`. 
+- **Explain:** What insights might this performance indicator provide to decision-makers in the company? Write your response as a comment below the line of code where you create the variable `rup`.
+
+8. Summarize `rup` and `unit price` **by product line**:
+
+- Compute the `mean(rup)` and `mean(unit_price)` grouped by product line.
+
+9. Print the summarized dataframe:
+
+- Use the print() function to display the results
+- **Explain:** What conclusions can you draw from your analysis?
 
 10. Include the following lines of code to ensure that you have loaded all the necessary packages for this assignment:
 ```{r}
@@ -34,7 +52,9 @@ version
 print(.packages())
 ```
 
-11. Generate a log file from your script to show that it ran successfully in R. Use the `sink()` command to capture both the code and its output. Here is a hint for the structure of your script:
+11. Save your R script as `problem_set_3.R`.
+
+12. Generate a log file to show that it ran successfully in R. Use the `sink()` command to capture both the code and its output. Run the script and store the log in `problem_set_3.log`. Below is a hint for structuring this:
 
 ```{r}
 #| eval: false
@@ -42,6 +62,8 @@ sink("problem_set_3.log")  # Start capturing output
 source("problem_set_3.R", echo = TRUE)  # Run your script and show commands + output
 sink()  # Stop capturing output
 ```
+
+[Refer to Week 3 Lab Notes if you're still having trouble.](https://csu-arec-330.github.io/materials/unit_00/week_03/lab_00_week_03.html#saving-the-log-file-for-lab_03.r)
 
 ## How to Submit
 

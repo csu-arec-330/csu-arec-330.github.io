@@ -109,12 +109,13 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#download-lab-handout-here" id="toc-download-lab-handout-here" class="nav-link" data-scroll-target="#download-lab-handout-here">Download Lab Handout Here</a></li>
   <li><a href="#data-processing-with-r" id="toc-data-processing-with-r" class="nav-link" data-scroll-target="#data-processing-with-r">Data processing with R</a>
   <ul class="collapse">
   <li><a href="#starting-a-task-or-project-in-r" id="toc-starting-a-task-or-project-in-r" class="nav-link" data-scroll-target="#starting-a-task-or-project-in-r">Starting a task or project in R</a></li>
   <li><a href="#what-are-packages-and-why-do-we-use-them" id="toc-what-are-packages-and-why-do-we-use-them" class="nav-link" data-scroll-target="#what-are-packages-and-why-do-we-use-them">What Are Packages and Why Do We Use Them?</a></li>
   <li><a href="#why-do-we-need-to-install-packages" id="toc-why-do-we-need-to-install-packages" class="nav-link" data-scroll-target="#why-do-we-need-to-install-packages">Why Do We Need to Install Packages?</a></li>
-  <li><a href="#why-do-we-use-the-library-function" id="toc-why-do-we-use-the-library-function" class="nav-link" data-scroll-target="#why-do-we-use-the-library-function">Why Do We Use the library() Function?</a></li>
+  <li><a href="#why-do-we-use-the-library-function" id="toc-why-do-we-use-the-library-function" class="nav-link" data-scroll-target="#why-do-we-use-the-library-function">Why Do We Use the <code>library()</code> Function?</a></li>
   <li><a href="#read-the-data-into-r" id="toc-read-the-data-into-r" class="nav-link" data-scroll-target="#read-the-data-into-r">Read the data into R</a></li>
   <li><a href="#modifying-the-dataframe" id="toc-modifying-the-dataframe" class="nav-link" data-scroll-target="#modifying-the-dataframe">Modifying the Dataframe</a></li>
   <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">1. Mutate</a></li>
@@ -165,6 +166,10 @@ window.Quarto = {
 <li><p>Subset or filter rows of the data</p></li>
 <li><p>Subset or select columns of the data</p></li>
 </ul>
+</section>
+<section id="download-lab-handout-here" class="level2">
+<h2 class="anchored" data-anchor-id="download-lab-handout-here"><a href="lab_00_week_03_handout.pdf">Download Lab Handout Here</a></h2>
+<embed src="lab_00_week_03_handout.pdf" width="100%" height="600px" type="application/pdf">
 </section>
 <section id="data-processing-with-r" class="level2">
 <h2 class="anchored" data-anchor-id="data-processing-with-r">Data processing with R</h2>
@@ -252,7 +257,7 @@ When to add comments with <code>install.packages()</code>
 <p>When you first install R, it does not include all available packages. If you want to use a package, you need to install it first using the install.packages(“package_name”) function. Installation only needs to be done once on your computer. If you try to use a function from a package without loading it first, R will return an error saying the function is not found.</p>
 </section>
 <section id="why-do-we-use-the-library-function" class="level3">
-<h3 class="anchored" data-anchor-id="why-do-we-use-the-library-function">Why Do We Use the library() Function?</h3>
+<h3 class="anchored" data-anchor-id="why-do-we-use-the-library-function">Why Do We Use the <code>library()</code> Function?</h3>
 <p>Even though a package is installed, R does not automatically load it when you start a new session. To use functions from an installed package, you must load it using the library() function. <strong>You only need to install a package once, but you must load it with library() every time you start R and want to use it.</strong></p>
 <ol start="6" type="1">
 <li>Insert the following code below where you load packages. These commands print information about the system and version of R you are running. This information will be displayed when you source the script and is useful for troubleshooting.</li>
@@ -276,14 +281,16 @@ When to add comments with <code>install.packages()</code>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(supermarket_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled" title="Difference Between `read.csv()` and `read_csv()`">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Difference Between <code>read.csv()</code> and <code>read_csv()</code>
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Both <strong><code>read.csv()</code></strong> and <strong><code>read_csv()</code></strong> are used to read CSV files into R, but they come from different packages and have some key differences.</p>
 <table class="caption-top table">
@@ -342,15 +349,18 @@ Difference Between <code>read.csv()</code> and <code>read_csv()</code>
 </section>
 </div>
 </div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled" title="Tibbles vs. Data Frames">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Tibbles vs.&nbsp;Data Frames
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>In R, both <strong>tibbles</strong> and <strong>data frames</strong> store tabular data, but tibbles are a more modern version with improved behavior.</p>
 <section id="key-differences" class="level4">
@@ -417,6 +427,7 @@ Tibbles vs.&nbsp;Data Frames
 </section>
 </div>
 </div>
+</div>
 <ol start="3" type="1">
 <li>Take a look at the dataframe. There are a few ways to inspect it:</li>
 </ol>
@@ -446,7 +457,7 @@ Cleaning variable names
 <p>Sometimes variable names have spaces. <strong>We generally avoid spaces in coding because they make variable names harder to reference and require special syntax to use them in functions or calculations.</strong> This can make your code more difficult to read and maintain. Spaces are allowed in R, but they are awkward because you will be using these names in your code. We will cover <em>renaming variables</em> later today, but there is a function to <em>clean</em> (i.e., modify) the names. The function called <code>clean_names()</code> is part of the <code>janitor</code> package.</p>
 <p>Try it on your own: Use the <code>clean_names()</code> function to convert all of the column names to snake case. Reference the documentation in the help tab of the lower right panel. The default conversion case is “snake” but you can also specify it in the function explicitly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(supermarket_raw,<span class="st">"snake"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(supermarket_raw, <span class="st">"snake"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -482,27 +493,22 @@ Cleaning variable names
 </section>
 <section id="mutate" class="level3">
 <h3 class="anchored" data-anchor-id="mutate">1. Mutate</h3>
-<p>The <code>mutate()</code> function creates or modifies variables within a dataframe. Let’s create the column <code>subtotal</code> by multiplying <code>unit_price</code> and <code>quantity</code>.</p>
-<p>Here, we create a new variable called <code>subtotal</code> and store the modified dataframe in a new object called <code>my_super_sales</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw, <span class="at">subtotal =</span> unit_price <span class="sc">*</span> quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<blockquote class="blockquote">
-<p>Check: Is the calculated <strong>subtotal</strong> column exactly the same as the existing total column in supermarket_raw? Why or why not?</p>
-</blockquote>
+<p>The <code>mutate()</code> function creates or modifies variables within a dataframe.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reading `mutate()` Syntax">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Reading <code>mutate()</code> Syntax
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The <code>mutate()</code> function can be written generically as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">mutate</span>(original_dataframe, <span class="at">new_column =</span> operation, <span class="at">modified_column =</span> transformation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">mutate</span>(original_dataframe, <span class="at">new_column =</span> operation, <span class="at">modified_column =</span> transformation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe where new or modified columns will be created.</li>
@@ -520,10 +526,43 @@ Reading <code>mutate()</code> Syntax
 </section>
 </div>
 </div>
+</div>
+<p>Let’s create the column <code>subtotal</code> by multiplying <code>unit_price</code> and <code>quantity</code>.</p>
+<p>Here, we create a new variable called <code>subtotal</code> and store the modified dataframe in a new object called <code>my_super_sales</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw, <span class="at">subtotal =</span> unit_price <span class="sc">*</span> quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Check: Is the calculated <strong>subtotal</strong> column exactly the same as the existing total column in supermarket_raw? Why or why not?</p>
+</blockquote>
 </section>
 <section id="select-and-rename" class="level3">
 <h3 class="anchored" data-anchor-id="select-and-rename">2. Select (and Rename)</h3>
 <p>The <code>select()</code> function allows you to <strong>choose specific columns</strong> from a dataframe.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading `select()` Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading <code>select()</code> Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>select()</code> function can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">select</span>(original_dataframe, column1, column2, column3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are selecting from.</li>
+<li><code>column1</code>, <code>column2</code>, <code>column3</code> <span class="math inline">\(\rightarrow\)</span> The columns you want to keep.</li>
+<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe with only the selected columns.</li>
+</ul>
+</div>
+</div>
+</div>
 <p>For example, suppose you want to create a new dataframe containing only:<br>
 - <strong>Invoice ID</strong> (<code>invoice_id</code>)<br>
 - <strong>City</strong> (<code>city</code>)<br>
@@ -531,97 +570,66 @@ Reading <code>mutate()</code> Syntax
 - <strong>Calculated total</strong> (<code>subtotal</code>)</p>
 <p>You can use <code>select()</code> like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales, invoice_id, city, total, subtotal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales, invoice_id, city, total, subtotal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="renaming-columns" class="level4">
 <h4 class="anchored" data-anchor-id="renaming-columns">Renaming columns</h4>
 <p>If you want to rename a column instead of selecting a subset, use <code>rename()</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading `rename()` Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading <code>rename()</code> Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>rename()</code> function can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">rename</span>(original_dataframe, <span class="at">new_name1 =</span> old_name1, <span class="at">new_name2 =</span> old_name2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are renaming columns in.</li>
+<li>`<code>new_name1</code> = old_name1` <span class="math inline">\(\rightarrow\)</span> The new column name is on the left, the old column name is on the right.</li>
+<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe with renamed columns.</li>
+</ul>
+</div>
+</div>
+</div>
 <p>For example, if you prefer market instead of city:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">rename</span>(select_super_sales, <span class="at">market =</span> city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">rename</span>(select_super_sales, <span class="at">market =</span> city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="combining-select-and-rename" class="level4">
 <h4 class="anchored" data-anchor-id="combining-select-and-rename">Combining <code>select()</code> and <code>rename()</code></h4>
 <p>You can rename columns directly within <code>select()</code>, avoiding the need for a separate <code>rename()</code> step:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales, invoice_id, <span class="at">market =</span> city, total, subtotal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Reading `select()` and `rename()` Syntax">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Reading <code>select()</code> and <code>rename()</code> Syntax
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<section id="reading-select-syntax" class="level4">
-<h4 class="anchored" data-anchor-id="reading-select-syntax">Reading <code>select()</code> Syntax</h4>
-<p>The <code>select()</code> function can be written generically as follows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">select</span>(original_dataframe, column1, column2, column3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are selecting from.</li>
-<li><code>column1</code>, <code>column2</code>, <code>column3</code> <span class="math inline">\(\rightarrow\)</span> The columns you want to keep.</li>
-<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe with only the selected columns.</li>
-</ul>
-<p>–</p>
-</section>
-<section id="reading-rename-syntax" class="level4">
-<h4 class="anchored" data-anchor-id="reading-rename-syntax">Reading <code>rename()</code> Syntax</h4>
-<p>The <code>rename()</code> function can be written generically as follows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">rename</span>(original_dataframe, <span class="at">new_name1 =</span> old_name1, <span class="at">new_name2 =</span> old_name2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are renaming columns in.</li>
-<li><code>old_name1</code> → <code>new_name1</code> <span class="math inline">\(\rightarrow\)</span> The new column name is on the left, the old column name is on the right.</li>
-<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe with renamed columns.</li>
-</ul>
-</section>
-</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales, invoice_id, <span class="at">market =</span> city, total, subtotal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="filter" class="level3">
 <h3 class="anchored" data-anchor-id="filter">3. Filter</h3>
 <p>The <code>filter()</code> function is used to <strong>keep only rows that meet a condition</strong>. It evaluates a logical statement for each row and retains rows where the result is <code>TRUE</code>. This is a common concept in programming and allows us to extract only the data that meets specific criteria.</p>
-<p>In this example, we filter the dataframe to include only rows where <code>market</code> (renamed from <code>city</code>) is <strong>“Yangon”</strong>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, market <span class="sc">==</span> <span class="st">"Yangon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>How this works:</strong></p>
-<ul>
-<li>The condition <code>market == "Yangon"</code> is checked for every row in the dataframe.</li>
-<li>If the condition is <code>TRUE</code>, the row is kept; if <code>FALSE</code>, the row is removed.</li>
-<li>This is <strong>case-sensitive</strong>, meaning “Yangon” must match exactly (uppercase and lowercase matter).</li>
-</ul>
-<p><strong>Other ways to filter data:</strong></p>
-<p>You can also use comparison operators to filter numeric values:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where unit_price is greater than 10</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>high_price_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, unit_price <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where quantity is less than 5</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>low_quantity_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, quantity <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>For more on logical operators, check out this resource: <a href="https://www.statmethods.net/management/operators.html">Logical operators in R</a>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Reading `filter()` Syntax">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Reading <code>filter()</code> Syntax
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The <code>filter()</code> function can be written generically as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">filter</span>(original_dataframe, condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">filter</span>(original_dataframe, condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are filtering.</li>
@@ -639,6 +647,27 @@ Reading <code>filter()</code> Syntax
 </section>
 </div>
 </div>
+</div>
+<p>In this example, we filter the dataframe to include only rows where <code>market</code> (renamed from <code>city</code>) is <strong>“Yangon”</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, market <span class="sc">==</span> <span class="st">"Yangon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>How this works:</strong></p>
+<ul>
+<li>The condition <code>market == "Yangon"</code> is checked for every row in the dataframe.</li>
+<li>If the condition is <code>TRUE</code>, the row is kept; if <code>FALSE</code>, the row is removed.</li>
+<li>This is <strong>case-sensitive</strong>, meaning “Yangon” must match exactly (uppercase and lowercase matter).</li>
+</ul>
+<p><strong>Other ways to filter data:</strong></p>
+<p>You can also use comparison operators to filter numeric values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where unit_price is greater than 10</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>high_price_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, unit_price <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where quantity is less than 5</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>low_quantity_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, quantity <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For more on logical operators, check out this resource: <a href="https://www.statmethods.net/management/operators.html">Logical operators in R</a>.</p>
 </section>
 <section id="arrange-sorting-data" class="level3">
 <h3 class="anchored" data-anchor-id="arrange-sorting-data">4. Arrange (Sorting Data)</h3>
@@ -648,11 +677,44 @@ Reading <code>filter()</code> Syntax
 </li>
 <li>By default, sorting is <strong>ascending</strong> (smallest first), but you can use <code>desc()</code> to sort in <strong>descending</strong> order.</li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading `arrange()` Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading <code>arrange()</code> Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>arrange()</code> function can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sorted_dataframe <span class="ot">&lt;-</span> <span class="fu">arrange</span>(original_dataframe, column1, column2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are sorting.</li>
+<li><code>column1</code> <span class="math inline">\(\rightarrow\)</span> The primary column used for sorting (default: ascending).</li>
+<li><code>column2</code> (optional) <span class="math inline">\(\rightarrow\)</span> If values in <code>column1</code> are the same, use <code>column2</code> for sorting.</li>
+<li><code>sorted_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe, now sorted.</li>
+</ul>
+<section id="important-points-about-arrange" class="level4">
+<h4 class="anchored" data-anchor-id="important-points-about-arrange">Important points about <code>arrange()</code></h4>
+<ul>
+<li><code>arrange()</code> modifies the order of rows without changing data values.</li>
+<li>Default sorting is ascending; use <code>desc()</code> for descending order.</li>
+<li>Sorting by multiple columns helps order data when the first column has duplicates.</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
 <section id="sorting-by-one-column" class="level4">
 <h4 class="anchored" data-anchor-id="sorting-by-one-column">Sorting by One Column</h4>
 <p>Let’s start by sorting the <strong>Yangon sales dataset</strong> (<code>yangon_super_sales</code>) in <strong>ascending order</strong> based on <code>total</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(yangon_super_sales, total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(yangon_super_sales, total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>Result:</strong> Reorders rows so that smaller <code>total</code> values appear first.</p>
@@ -667,7 +729,7 @@ Reading <code>filter()</code> Syntax
 <li>Within each market, sort <code>total</code> in descending order (highest sales first).</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>super_sales_top <span class="ot">&lt;-</span> <span class="fu">arrange</span>(select_super_sales, market, <span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>super_sales_top <span class="ot">&lt;-</span> <span class="fu">arrange</span>(select_super_sales, market, <span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>Result:</strong> First, sorts by <code>market</code> alphabetically. Second, within each market, sorts <code>total</code> from highest to lowest.</p>
@@ -680,17 +742,17 @@ Reading <code>filter()</code> Syntax
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(supermarket_raw, total)       <span class="co"># Sorts total in ascending order (default)</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(supermarket_raw, <span class="fu">desc</span>(total)) <span class="co"># Sorts total in descending order</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(supermarket_raw, total)       <span class="co"># Sorts total in ascending order (default)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(supermarket_raw, <span class="fu">desc</span>(total)) <span class="co"># Sorts total in descending order</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="callout callout-style-default callout-important callout-titled" title="Best Practice: Comment Your Code">
+<div class="callout callout-style-default callout-important callout-titled" title="Reminder: Comment Your Code">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Best Practice: Comment Your Code
+Reminder: Comment Your Code
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -716,7 +778,7 @@ Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv
 <p><strong>Calculating total quantity sold</strong></p>
 <p>We can use <code>summarize()</code> to calculate the <strong>total number of units sold</strong> across all transactions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_summed =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_summed =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>Result:</strong> This outputs a single row with the total quantity sold. <strong>Notice:</strong> This command does not assign the result to an object. This is useful for a quick check before saving the output.</p>
@@ -726,7 +788,7 @@ Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv
 <p>The answer is <strong>No</strong>. Because we didn’t store it in an object, the value exists only in the output window and cannot be used later.</p>
 <p>Let’s modify the command to store the result in an object called <code>total_sold</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>total_sold <span class="ot">&lt;-</span> <span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_summed =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>total_sold <span class="ot">&lt;-</span> <span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_summed =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>Result:</strong> Now, the result is saved in total_sold and can be used in other operations.</p>
@@ -738,27 +800,30 @@ Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv
 <li>The maximum (<code>max</code>) <code>unit_price</code>.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of quantity</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_mean =</span> <span class="fu">mean</span>(quantity))  </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the maximum unit price</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">max_price =</span> <span class="fu">max</span>(unit_price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of quantity</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_mean =</span> <span class="fu">mean</span>(quantity))  </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the maximum unit price</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">max_price =</span> <span class="fu">max</span>(unit_price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Important points about `summarize()`">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Important points about <code>summarize()</code>
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><code>summarize()</code> reduces multiple rows into a single row with summary statistics.</li>
 <li>If you don’t assign the output to an object, you can’t use it later.</li>
 <li>Common summary functions: <code>sum()</code>, <code>mean()</code>, <code>max()</code>, <code>min()</code>, and <code>n()</code>.</li>
 </ul>
+</div>
 </div>
 </div>
 </section>
@@ -776,14 +841,14 @@ Important points about <code>summarize()</code>
 <h4 class="anchored" data-anchor-id="grouping-data-manually">Grouping Data Manually</h4>
 <p>First, we filter for only <strong>Branch A</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"A"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"A"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>Result:</strong> The new dataframe branch_A_sales contains only sales from Branch A. It has 340 observations and includes all original columns.</p>
 </blockquote>
 <p>Now, we sum the <code>quantity</code> column:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>branch_A_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_A_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>branch_A_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_A_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>Result:</strong> This gives us the total quantity sold for Branch A.</p>
@@ -791,54 +856,34 @@ Important points about <code>summarize()</code>
 <p><strong>Try it Yourself</strong></p>
 <p>Repeat the same process for Branch B and Branch C:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Branch B</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"B"</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>branch_B_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_B_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Branch C</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"C"</span>)</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>branch_C_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_C_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Branch B</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"B"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>branch_B_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_B_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Branch C</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"C"</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>branch_C_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_C_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-better-way-to-group-data-using-group_by" class="level4">
 <h4 class="anchored" data-anchor-id="a-better-way-to-group-data-using-group_by">A Better Way to Group Data: Using <code>group_by()</code></h4>
 <p>Manually filtering each branch is tedious. In programming, if something feels repetitive, there’s usually a better way to do it!</p>
 <p>The <code>group_by()</code> function automatically groups data based on a variable (e.g., branch) so we can summarize each group in a single step.</p>
-<p><strong>Step 1: Group Data by Branch</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group the data by branch</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>super_sales_grouped_branch <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw, branch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<blockquote class="blockquote">
-<p><strong>Result:</strong> This does not perform any calculations yet. It creates a signal that tells R to treat each branch as a separate group.</p>
-</blockquote>
-<p><strong>Step 2: Summarize within Each Group</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize total quantity sold by branch</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch <span class="ot">&lt;-</span> <span class="fu">summarize</span>(super_sales_grouped_branch, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<blockquote class="blockquote">
-<p><strong>Result:</strong> Now, we get the total quantity sold for each branch in a single step! <strong>Check:</strong> Do these results match your manual calculations?</p>
-</blockquote>
-<p><strong>Try it Yourself</strong></p>
-<p>Use <code>group_by()</code> and <code>summarize()</code> to calculate the average unit_price for each product_line in the dataset.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your turn: Find the average unit price by product line</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>avg_price_by_product <span class="ot">&lt;-</span> <span class="fu">summarize</span>(<span class="fu">group_by</span>(supermarket_raw, product_line), <span class="at">avg_unit_price =</span> <span class="fu">mean</span>(unit_price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div class="callout callout-style-default callout-note callout-titled" title="Reading `group_by()` Syntax">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Reading <code>group_by()</code> Syntax
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The function <code>group_by()</code> can be written generically as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>grouped_data <span class="ot">&lt;-</span> <span class="fu">group_by</span>(original_dataframe, grouping_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>grouped_data <span class="ot">&lt;-</span> <span class="fu">group_by</span>(original_dataframe, grouping_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><code>original_dataframe</code> → The dataframe you want to group.</li>
@@ -856,6 +901,29 @@ Reading <code>group_by()</code> Syntax
 </ul>
 </section>
 </div>
+</div>
+</div>
+<p><strong>Step 1: Group Data by Branch</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group the data by branch</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>super_sales_grouped_branch <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw, branch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Result:</strong> This does not perform any calculations yet. It creates a signal that tells R to treat each branch as a separate group.</p>
+</blockquote>
+<p><strong>Step 2: Summarize within Each Group</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize total quantity sold by branch</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch <span class="ot">&lt;-</span> <span class="fu">summarize</span>(super_sales_grouped_branch, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Result:</strong> Now, we get the total quantity sold for each branch in a single step! <strong>Check:</strong> Do these results match your manual calculations?</p>
+</blockquote>
+<p><strong>Try it Yourself</strong></p>
+<p>Use <code>group_by()</code> and <code>summarize()</code> to calculate the average unit_price for each product_line in the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your turn: Find the average unit price by product line</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>avg_price_by_product <span class="ot">&lt;-</span> <span class="fu">summarize</span>(<span class="fu">group_by</span>(supermarket_raw, product_line), <span class="at">avg_unit_price =</span> <span class="fu">mean</span>(unit_price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
@@ -876,9 +944,9 @@ Reading <code>group_by()</code> Syntax
 <section id="how-to-read-piping-syntax" class="level4">
 <h4 class="anchored" data-anchor-id="how-to-read-piping-syntax">How to Read Piping Syntax</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span>  <span class="co"># Starts with the data</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(condition) <span class="sc">%&gt;%</span>   <span class="co"># Arranges the data based on a condition</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">result =</span> <span class="fu">mean</span>(column))  <span class="co"># Passes the arranged data to summarize() to compute the mean of column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span>  <span class="co"># Starts with the data</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(condition) <span class="sc">%&gt;%</span>   <span class="co"># Arranges the data based on a condition</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">result =</span> <span class="fu">mean</span>(column))  <span class="co"># Passes the arranged data to summarize() to compute the mean of column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Each step in this code chunk is clearly separated by the pipe symbol <code>%&gt;%</code>, making it easier to follow than a series of nested function calls:</p>
 <ul>
@@ -892,10 +960,10 @@ Reading <code>group_by()</code> Syntax
 <h4 class="anchored" data-anchor-id="using-piping-with-group_by-and-summarize">Using Piping with <code>group_by()</code> and <code>summarize()</code></h4>
 <p>Let’s apply piping to our <code>group_by()</code> and <code>summarize()</code> sequence:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the pipe to group and summarize in one step</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> supermarket_raw <span class="sc">%&gt;%</span>  <span class="co"># Start with supermarket_raw</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(branch) <span class="sc">%&gt;%</span>  <span class="co"># Group by branch</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))  <span class="co"># Summarize total quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the pipe to group and summarize in one step</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> supermarket_raw <span class="sc">%&gt;%</span>  <span class="co"># Start with supermarket_raw</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(branch) <span class="sc">%&gt;%</span>  <span class="co"># Group by branch</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))  <span class="co"># Summarize total quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Each step in this code chunk is clearly separated by the pipe symbol <code>%&gt;%</code>:</p>
 <ul>
@@ -904,20 +972,23 @@ Reading <code>group_by()</code> Syntax
 <li>Step 3: Pass the grouped data to summarize() to calculate total_quantity.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Why Use Piping?">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Why Use Piping?
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Reduces unnecessary variables – no need to store temporary objects.</li>
 <li>Improves readability – each step is clearly separated.</li>
 <li>Easier debugging – you can run each part separately if needed.</li>
 </ul>
+</div>
 </div>
 </div>
 <hr>
@@ -929,9 +1000,9 @@ Why Use Piping?
 <p><strong>Breaking the Dataset into Branches</strong></p>
 <p>Let’s revisit the example where we split the dataset by branch. If you haven’t already created separate dataframes for each branch, you can do so with the following commands:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"A"</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"B"</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"A"</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"B"</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Each of these dataframes contains sales records for only one branch.</p>
 <p><strong>Why Append Data?</strong></p>
@@ -939,7 +1010,7 @@ Why Use Piping?
 <p><strong>Using <code>bind_rows()</code> to append data</strong></p>
 <p>The <code>dplyr</code> function for appending rows is <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. This function efficiently combines multiple dataframes by stacking their rows together.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales, branch_B_sales, branch_C_sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales, branch_B_sales, branch_C_sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>How <code>bind_rows()</code> Works</strong></p>
 <ul>
@@ -966,11 +1037,19 @@ Why Use Piping?
 <li>Run the following commands. <strong>Do not include them in <code>lab_03.R</code> itself.</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will execute <code>lab_03.R</code> and store its output in <code>lab_03_log.txt</code>. The argument <code>echo = TRUE</code> ensures the log captures the script output as seen in the console.</p>
+<p><strong>Why Use <code>.log</code> or <code>.txt</code> for output?</strong></p>
+<p>When capturing script output using <code>sink()</code>, you can save the log as either a <code>.log</code> or <code>.txt</code> file.</p>
+<p>Functionally, both file types generate the same output, and R does not treat them differently. The choice between <code>.log</code> and <code>.txt</code> is mostly a matter of convention:</p>
+<ul>
+<li><code>.log</code> is often used for logging outputs from scripts, making it clear that the file contains execution details.</li>
+<li><code>.txt</code> is a more general format, making it easier to open with standard text editors or share with others.</li>
+</ul>
+<p>In short: Either extension works!</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Important notes about running your log script">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

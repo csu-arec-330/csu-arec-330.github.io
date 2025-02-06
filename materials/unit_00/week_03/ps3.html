@@ -97,32 +97,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Link to the description of the supermarket sales data available in the <a href="https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html">Supermarket Sales Data Overview</a>.</p>
-<section id="write-an-r-script-to-complete-the-following-tasks" class="level2">
-<h2 class="anchored" data-anchor-id="write-an-r-script-to-complete-the-following-tasks">Write an R script to complete the following tasks:</h2>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p>Write an R script that completes the following tasks. Make sure you follow best practices, including commenting on your code.</p>
+</section>
+<section id="tasks" class="level2">
+<h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
 <ol type="1">
-<li><p>Read in the dataset <code>supermarket_sales.csv</code> using <code>read_csv()</code>. Note: What packages do you need to have installed before loading in the data using this command?</p></li>
-<li><p>Calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns. Name the new column (variable) <code>subtotal</code>. Then verify that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>. Assign the object to a new dataframe.</p></li>
-<li><p>Create a dataframe containing only the subset of sales from the product line <code>Food and beverages</code>.</p></li>
-<li><p>Create a dataframe containing only the columns <code>city, product_line, unit_price, quantity, total, rating</code> where the product line is <code>Food and beverages</code>.</p></li>
-<li><p>Sort the dataframe by <code>quantity</code> in descending order.</p></li>
-<li><p>Load the <code>dplyr</code> package and use the appropriate commands to calculate the <strong>median sales by payment type</strong>.</p></li>
-<li><p>Suppose you are asked to develop a new performance indicator for the company. You wonder if the transaction <code>rating</code> per <code>unit price</code> might provide insights into consumer preferences for different product lines. Calculate the <strong>rating per unit price for each transaction</strong> and call this new variable <code>rup</code>. Explain what this performance indicator might tell decision-makers at the company.</p></li>
-<li><p>Calculate the mean <code>rup</code> and <code>unit price</code> <strong>by product line</strong>.</p></li>
-<li><p>Print the contents of this dataframe into the console using the <code>print()</code> function. What conclusions do you draw from your analysis? Explain.</p></li>
-<li><p>Include the following lines of code to ensure that you have loaded all the necessary packages for this assignment:</p></li>
+<li>Read in the dataset <code>supermarket_sales.csv</code> using <code>read_csv()</code>.</li>
+</ol>
+<ul>
+<li><strong>Question:</strong> What packages do you need to have installed before loading in the data using this command? Write your response as a comment below the line of code where you load the necessary packages.</li>
+</ul>
+<ol start="2" type="1">
+<li>Calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns.</li>
+</ol>
+<ul>
+<li>Create a new column called <code>subtotal</code>.</li>
+<li>Verify that the value labeled <code>tax_5_percent</code> is indeed 5% of the <code>subtotal</code> by creating a new variable called <code>tax_verify</code>.</li>
+<li>Assign the object to a new dataframe.</li>
+</ul>
+<ol start="3" type="1">
+<li><p>Filter the dataset to create a dataframe containing only the sales from the product line “Food and beverages”.</p></li>
+<li><p>Select relevant columns: Create a dataframe that contains only the columns <code>city, product_line, unit_price, quantity, total, rating</code> for sales in “Food and beverages”.</p></li>
+<li><p>Sort the dataframe by <code>quantity</code> in <strong>descending order</strong>.</p></li>
+<li><p>Calculate <strong>median sales by payment type</strong> using the appropriate commands.</p></li>
+<li><p>Suppose you are asked to develop a new <strong>performance indicator</strong> for the company. You decide that “rating per unit price” or “rup” would be a helpful metric.</p></li>
+</ol>
+<ul>
+<li>Compute the rating per unit price for each transaction by creating a new column called <code>rup</code>.</li>
+<li><strong>Explain:</strong> What insights might this performance indicator provide to decision-makers in the company? Write your response as a comment below the line of code where you create the variable <code>rup</code>.</li>
+</ul>
+<ol start="8" type="1">
+<li>Summarize <code>rup</code> and <code>unit price</code> <strong>by product line</strong>:</li>
+</ol>
+<ul>
+<li>Compute the <code>mean(rup)</code> and <code>mean(unit_price)</code> grouped by product line.</li>
+</ul>
+<ol start="9" type="1">
+<li>Print the summarized dataframe:</li>
+</ol>
+<ul>
+<li>Use the print() function to display the results</li>
+<li><strong>Explain:</strong> What conclusions can you draw from your analysis?</li>
+</ul>
+<ol start="10" type="1">
+<li>Include the following lines of code to ensure that you have loaded all the necessary packages for this assignment:</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>version</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">.packages</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="11" type="1">
-<li>Generate a log file from your script to show that it ran successfully in R. Use the <code>sink()</code> command to capture both the code and its output. Here is a hint for the structure of your script:</li>
+<li><p>Save your R script as <code>problem_set_3.R</code>.</p></li>
+<li><p>Generate a log file to show that it ran successfully in R. Use the <code>sink()</code> command to capture both the code and its output. Run the script and store the log in <code>problem_set_3.log</code>. Below is a hint for structuring this:</p></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"problem_set_3.log"</span>)  <span class="co"># Start capturing output</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"problem_set_3.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)  <span class="co"># Run your script and show commands + output</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()  <span class="co"># Stop capturing output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><a href="https://csu-arec-330.github.io/materials/unit_00/week_03/lab_00_week_03.html#saving-the-log-file-for-lab_03.r">Refer to Week 3 Lab Notes if you’re still having trouble.</a></p>
 </section>
 <section id="how-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
