@@ -35,7 +35,6 @@ Data processing is an important step in analysis. It can be complicated dependin
 ### Starting a task or project in R
 
 1. Open RStudio either on your computer.
-
 <!--or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.] 
 -->
 
@@ -668,70 +667,98 @@ Each step in this code chunk is clearly separated by the pipe symbol `%>%`:
 - Easier debugging – you can run each part separately if needed.
 :::
 
-<!-- The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]   -->
-
-<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
-
 ---
 
 ### Appending data
 
-In many cases, you will need to combine parts of datasets into a single larger dataset.  
+In many cases, you will need to combine multiple datasets into a single, larger dataset. This process is called **appending data**. 
 
-Let's return to the example of breaking up the dataset by branch.  If you have not created dataframes for each branch above, do it using these commands:
+**Breaking the Dataset into Branches**
 
-```{r}
-#| eval: false
-branch_A_sales <- filter(supermarket_raw,branch=="A")
-branch_B_sales <- filter(supermarket_raw,branch=="B")
-branch_C_sales <- filter(supermarket_raw,branch=="C")
-```
-
-Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name.  
-
-Suppose you were given the data as three separate files and you read them into these dataframes.  However, you want to profile company sales across the branches.  You need to **append** them together.  The `dplyr` function to append rows is `bind_rows()`.^[[`bind_rows()`](https://dplyr.tidyverse.org/reference/bind.html) is a more efficient version of a function in base R called `rbind()`.]  
+Let’s revisit the example where we split the dataset by branch. If you haven’t already created separate dataframes for each branch, you can do so with the following commands:
 
 ```{r}
 #| eval: false
-super_reconstruct <- bind_rows(branch_A_sales,branch_B_sales,branch_C_sales) 
+
+branch_A_sales <- filter(supermarket_raw, branch == "A")
+branch_B_sales <- filter(supermarket_raw, branch == "B")
+branch_C_sales <- filter(supermarket_raw, branch == "C")
 ```
 
-Note that `bind_rows()` looks for shared column names in each dataframe.  If one dataframe is missing a column, it will be filled with `NA`. `NA` in R stands for "Not Available" or "Not Applicable." `NA' is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an "NA" value, it treats it differently from other values, and special functions are often used to handle missing data. 
+Each of these dataframes contains sales records for only one branch.
+
+**Why Append Data?**
+
+Suppose you were originally given the data as three separate files—one per branch. If you want to analyze company-wide sales, you need to append these datasets back together into a single dataframe.
+
+**Using `bind_rows()` to append data**
+
+The `dplyr` function for appending rows is ^[[`bind_rows()`](https://dplyr.tidyverse.org/reference/bind.html) is a more efficient version of a function in base R called `rbind()`.]. This function efficiently combines multiple dataframes by stacking their rows together.
+
+```{r}
+#| eval: false
+super_reconstruct <- bind_rows(branch_A_sales, branch_B_sales, branch_C_sales)
+```
+
+**How `bind_rows()` Works**
+
+- `bind_rows()` looks for shared column names in each dataframe.
+- If one dataframe is missing a column, the missing values will be automatically filled with `NA`.
+
+**Handling Missing Values (`NA`) in R**
+
+In R, `NA` stands for “Not Available” or “Not Applicable”. It indicates missing or undefined values in a dataset. This can happen when:
+
+- Data is not available for a specific observation.
+- A calculation cannot be performed for some reason.
+
+When R encounters an `NA` value, it treats it differently from regular values. Special functions, such as `is.na()`, are often used to handle missing data appropriately in analysis.
+
+Now that you’ve reconstructed the full dataset, you can proceed with company-wide sales analysis!
 
 ---
 
-### Log file (revisited)
+### Saving the Log File for `lab_03.R`
 
-To output the log from sourcing an R script to a text file, you can use the `sink()` function. The `sink()` function redirects R output to a file or connection.
+To capture the output of sourcing an R script in a text file, use the `sink()` function. This redirects R output to a specified file. The `source()` function runs an external R script as if you typed each line in the console, allowing automation and reproducibility.
 
-For example, to redirect the output of `source("script.R",echo = TRUE)` to a file named "log.txt", you can use the following command. Remember to run this set of commands from another script or directly in the console. Do not include it in the script you are sourcing (i.e., `script.R`).
+**Example: Saving the Log for `lab_03.R`**
 
-```{r}
-#| eval: false
-
-sink(file = "log.txt")
-source("lab_03.R",echo = TRUE)
-sink()
-
-```
-
-This will run the script "script.R" and redirect all the output to the file "log.txt". `echo=TRUE` ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of "script.R" because the command `source()` is equivalent to running every line of "script.R."
-
-Open a new script and call it `lab_03_log.R`. Update the code above so it will run the script `lab_03_script.R`. 
-
-:::{.callout-important title="Don't forget to comment out these lines of code"}
-Before running your log script ("sink-source-sink"), you will have to comment out any places where you installed packages `install.packages()`,  or used the commands `setwd()`, `getwd()`, and `dir()`. Then, save your `lab_03.R` script before running the log script.
-:::
+- Open a new script. 
+- Save it as `lab_03_log_script.R`. 
+- Run the following commands. **Do not include them in `lab_03.R` itself.**
 
 ```{r}
 #| eval: false
-#| include: true
 
 sink("lab_03_log.txt")
-source("lab_03_script.R",echo = TRUE)
+source("lab_03.R", echo = TRUE)
 sink()
 ```
+
+This will execute `lab_03.R` and store its output in `lab_03_log.txt`. The argument `echo = TRUE` ensures the log captures the script output as seen in the console.
+
+:::{.callout-important title="Important notes about running your log script"}
+
+Before running the **log script**, in your `lab_03.R` script, comment out any occurrences of:
+
+- `install.packages()`
+
+- `setwd()`
+
+- `getwd()`
+
+- `dir()`
+
+Also, save your `lab_03.R` script before executing the log script.
+:::
 
 Here is a video that walks you through how to generate a log file using `sink()` and `source()` in RStudio. You can also access the video through this [link](https://colostate-my.sharepoint.com/:v:/g/personal/lachenar_colostate_edu/EcqjbmCUf2NHhmuMF6q9RAMBqMjRvg3Gzw59KOIfsPupOg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Fgefze){target=\"_blank\"}.
 
 {{< video https://youtu.be/AysPiUIzKnE aspect-ratio="16x9" >}}
+
+
+<!-- The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]   -->
+
+<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
+

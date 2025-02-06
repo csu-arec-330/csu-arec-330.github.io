@@ -125,7 +125,7 @@ window.Quarto = {
   <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">6. Group By</a></li>
   <li><a href="#chaining-commands-piping-with-or" id="toc-chaining-commands-piping-with-or" class="nav-link" data-scroll-target="#chaining-commands-piping-with-or">Chaining Commands (Piping with <code>%&gt;%</code> or <code>|&gt;</code>)</a></li>
   <li><a href="#appending-data" id="toc-appending-data" class="nav-link" data-scroll-target="#appending-data">Appending data</a></li>
-  <li><a href="#log-file-revisited" id="toc-log-file-revisited" class="nav-link" data-scroll-target="#log-file-revisited">Log file (revisited)</a></li>
+  <li><a href="#saving-the-log-file-for-lab_03.r" id="toc-saving-the-log-file-for-lab_03.r" class="nav-link" data-scroll-target="#saving-the-log-file-for-lab_03.r">Saving the Log File for <code>lab_03.R</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -172,11 +172,8 @@ window.Quarto = {
 <section id="starting-a-task-or-project-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="starting-a-task-or-project-in-r">Starting a task or project in R</h3>
 <ol type="1">
-<li>Open RStudio either on your computer.</li>
-</ol>
-<!--or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.] 
--->
-<ol start="2" type="1">
+<li><p>Open RStudio either on your computer. <!--or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.] 
+--></p></li>
 <li><p>Open up a new script.</p>
 <ul>
 <li>Create a new subfolder within your <code>Documents/arec330</code> directory called <code>lab_03</code>.<br>
@@ -923,59 +920,81 @@ Why Use Piping?
 </ul>
 </div>
 </div>
-<!-- The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]   -->
-<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
 <hr>
 </section>
 </section>
 <section id="appending-data" class="level3">
 <h3 class="anchored" data-anchor-id="appending-data">Appending data</h3>
-<p>In many cases, you will need to combine parts of datasets into a single larger dataset.</p>
-<p>Let’s return to the example of breaking up the dataset by branch. If you have not created dataframes for each branch above, do it using these commands:</p>
+<p>In many cases, you will need to combine multiple datasets into a single, larger dataset. This process is called <strong>appending data</strong>.</p>
+<p><strong>Breaking the Dataset into Branches</strong></p>
+<p>Let’s revisit the example where we split the dataset by branch. If you haven’t already created separate dataframes for each branch, you can do so with the following commands:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"A"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"B"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name.</p>
-<p>Suppose you were given the data as three separate files and you read them into these dataframes. However, you want to profile company sales across the branches. You need to <strong>append</strong> them together. The <code>dplyr</code> function to append rows is <code>bind_rows()</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Each of these dataframes contains sales records for only one branch.</p>
+<p><strong>Why Append Data?</strong></p>
+<p>Suppose you were originally given the data as three separate files—one per branch. If you want to analyze company-wide sales, you need to append these datasets back together into a single dataframe.</p>
+<p><strong>Using <code>bind_rows()</code> to append data</strong></p>
+<p>The <code>dplyr</code> function for appending rows is <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. This function efficiently combines multiple dataframes by stacking their rows together.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales,branch_B_sales,branch_C_sales) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales, branch_B_sales, branch_C_sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Note that <code>bind_rows()</code> looks for shared column names in each dataframe. If one dataframe is missing a column, it will be filled with <code>NA</code>. <code>NA</code> in R stands for “Not Available” or “Not Applicable.” `NA’ is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an “NA” value, it treats it differently from other values, and special functions are often used to handle missing data.</p>
+<p><strong>How <code>bind_rows()</code> Works</strong></p>
+<ul>
+<li><code>bind_rows()</code> looks for shared column names in each dataframe.</li>
+<li>If one dataframe is missing a column, the missing values will be automatically filled with <code>NA</code>.</li>
+</ul>
+<p><strong>Handling Missing Values (<code>NA</code>) in R</strong></p>
+<p>In R, <code>NA</code> stands for “Not Available” or “Not Applicable”. It indicates missing or undefined values in a dataset. This can happen when:</p>
+<ul>
+<li>Data is not available for a specific observation.</li>
+<li>A calculation cannot be performed for some reason.</li>
+</ul>
+<p>When R encounters an <code>NA</code> value, it treats it differently from regular values. Special functions, such as <code>is.na()</code>, are often used to handle missing data appropriately in analysis.</p>
+<p>Now that you’ve reconstructed the full dataset, you can proceed with company-wide sales analysis!</p>
 <hr>
 </section>
-<section id="log-file-revisited" class="level3">
-<h3 class="anchored" data-anchor-id="log-file-revisited">Log file (revisited)</h3>
-<p>To output the log from sourcing an R script to a text file, you can use the <code>sink()</code> function. The <code>sink()</code> function redirects R output to a file or connection.</p>
-<p>For example, to redirect the output of <code>source("script.R",echo = TRUE)</code> to a file named “log.txt”, you can use the following command. Remember to run this set of commands from another script or directly in the console. Do not include it in the script you are sourcing (i.e., <code>script.R</code>).</p>
+<section id="saving-the-log-file-for-lab_03.r" class="level3">
+<h3 class="anchored" data-anchor-id="saving-the-log-file-for-lab_03.r">Saving the Log File for <code>lab_03.R</code></h3>
+<p>To capture the output of sourcing an R script in a text file, use the <code>sink()</code> function. This redirects R output to a specified file. The <code>source()</code> function runs an external R script as if you typed each line in the console, allowing automation and reproducibility.</p>
+<p><strong>Example: Saving the Log for <code>lab_03.R</code></strong></p>
+<ul>
+<li>Open a new script.</li>
+<li>Save it as <code>lab_03_log_script.R</code>.</li>
+<li>Run the following commands. <strong>Do not include them in <code>lab_03.R</code> itself.</strong></li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="at">file =</span> <span class="st">"log.txt"</span>)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This will run the script “script.R” and redirect all the output to the file “log.txt”. <code>echo=TRUE</code> ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the <code>sink()</code> function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of “script.R” because the command <code>source()</code> is equivalent to running every line of “script.R.”</p>
-<p>Open a new script and call it <code>lab_03_log.R</code>. Update the code above so it will run the script <code>lab_03_script.R</code>.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="Don't forget to comment out these lines of code">
+<p>This will execute <code>lab_03.R</code> and store its output in <code>lab_03_log.txt</code>. The argument <code>echo = TRUE</code> ensures the log captures the script output as seen in the console.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Important notes about running your log script">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Don’t forget to comment out these lines of code
+Important notes about running your log script
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before running your log script (“sink-source-sink”), you will have to comment out any places where you installed packages <code>install.packages()</code>, or used the commands <code>setwd()</code>, <code>getwd()</code>, and <code>dir()</code>. Then, save your <code>lab_03.R</code> script before running the log script.</p>
+<p>Before running the <strong>log script</strong>, in your <code>lab_03.R</code> script, comment out any occurrences of:</p>
+<ul>
+<li><p><code>install.packages()</code></p></li>
+<li><p><code>setwd()</code></p></li>
+<li><p><code>getwd()</code></p></li>
+<li><p><code>dir()</code></p></li>
+</ul>
+<p>Also, save your <code>lab_03.R</code> script before executing the log script.</p>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03_script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is a video that walks you through how to generate a log file using <code>sink()</code> and <code>source()</code> in RStudio. You can also access the video through this <a href="https://colostate-my.sharepoint.com/:v:/g/personal/lachenar_colostate_edu/EcqjbmCUf2NHhmuMF6q9RAMBqMjRvg3Gzw59KOIfsPupOg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&amp;e=Fgefze" target="&quot;_blank&quot;">link</a>.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AysPiUIzKnE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<!-- The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]   -->
+<!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
 </section>
 </section>
 
