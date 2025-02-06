@@ -34,20 +34,72 @@ Data processing is an important step in analysis. It can be complicated dependin
 
 ### Starting a task or project in R
 
-1. Open RStudio either on your own computer or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.] 
+1. Open RStudio either on your computer.
 
-2. Open up a new script.  
+<!--or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.] 
+-->
 
-3. Write a brief comment in the first line describing what the script will do.  
+2. Open up a new script.
+
+   - Create a new subfolder within your `Documents/arec330` directory called `lab_03`.  
+   - Save your new script as `lab_03.R` inside this folder.
+
+3. Write a brief comment in the first line of the script describing what the script will do.  
 ```{r}
 #This script corresponds to the lab notes for week 3.
 ```
 
-4. Load any libraries/packages used in the script.^[Install if necessary.]  In this lab, we will use 3 packages: `readr,dplyr,janitor`.  
+4. Set the working directory to the new `lab_03` folder you created. This ensures that your script can access any data files you store there.
+```{r}
+#| eval: false
+# Set working directory (modify the path if needed)
+setwd("~/Documents/arec330/lab_03")
 
-5. Set the working directory to a known location.  This may be a new directory where you will store any external data and save the code file.
+# Confirm working directory
+getwd()
+```
 
-6. Insert the following code below where you load packages. These commands print information about the system and version of R you are running. The information will be displayed when you source the script and is for your instructors.
+:::{.callout-note title="Check that your working directory is set correctly"}
+To check that your working directory is set correctly, look at the **console window** in RStudio. Click the **curly arrow** in the Console pane toolbar to refresh the working directory display.
+:::
+
+5. Load any libraries/packages. If you have not installed them before, you may need to install them first. In this lab, we will use three packages: `readr`, `dplyr`, and `janitor`.  
+```{r}
+#| eval: false
+
+# Install packages if not already installed
+# Comment out these lines after the first time you run them
+install.packages("readr")
+install.packages("dplyr")
+install.packages("janitor")
+
+# Load necessary libraries
+library(readr)
+library(dplyr)
+library(janitor)
+```
+
+:::{.callout-note title="When to add comments with `install.packages()`"}
+If you have already installed these packages, you should comment out (add **#** before) the `install.packages()` lines before running your script again. This prevents R from unnecessarily reinstalling the packages every time you run your script, which can slow down execution.
+:::
+
+### What Are Packages and Why Do We Use Them?
+R packages are collections of functions, data, and documentation that extend the basic functionality of R. The base version of R includes many useful functions, but specialized tasks—such as reading different file formats, cleaning data, or creating visualizations—often require additional tools.
+
+For example, in this lab, we will use three packages:
+
+- `readr` – for reading CSV files efficiently
+- `dplyr` – for data manipulation
+- `janitor` – for cleaning variable names and handling messy data
+
+### Why Do We Need to Install Packages?
+When you first install R, it does not include all available packages. If you want to use a package, you need to install it first using the install.packages("package_name") function. Installation only needs to be done once on your computer. If you try to use a function from a package without loading it first, R will return an error saying the function is not found. 
+
+### Why Do We Use the library() Function?
+Even though a package is installed, R does not automatically load it when you start a new session. To use functions from an installed package, you must load it using the library() function. **You only need to install a package once, but you must load it with library() every time you start R and want to use it.**
+
+6. Insert the following code below where you load packages. These commands print information about the system and version of R you are running. This information will be displayed when you source the script and is useful for troubleshooting.
+
 ```{r}
 #| eval: false
 version
@@ -56,259 +108,571 @@ print(.packages())
 
 ### Read the data into R
 
-1. Download `supermarket_sales.csv` to the project directory.
+1. Download [`supermarket_sales.csv`](../inputs/supermarket_sales.csv) to your working directory.
 
 2. Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw`.
+```{r}
+#| eval: false
 
-3. Take a look at the dataframe.  There are a few ways to look at the dataframe:
+# Read the data
+supermarket_raw <- read_csv("supermarket_sales.csv")
+
+# Check the first few rows
+head(supermarket_raw)
+```
+
+:::{.callout-important title="Difference Between `read.csv()` and `read_csv()`"}
+
+Both **`read.csv()`** and **`read_csv()`** are used to read CSV files into R, but they come from different packages and have some key differences.
+
+| Function | Package | Speed | Output Type | Default Behavior | Best Use Case |
+|----------|---------|-------|-------------|------------------|---------------|
+| `read.csv()` | Base R | Slower | **Data frame** | Converts character columns to factors | Basic CSV reading in traditional R scripts |
+| `read_csv()` | `readr` (tidyverse) | Faster | **Tibble** (modern data frame) | Keeps character columns as characters | Handles large datasets more efficiently, works better with modern workflows |
+
+### Why use `read_csv()` instead of `read.csv()`?
+
+Going forward, because we will be reading data from **websites**, `read_csv()` is the better option.
+
+1. **`read_csv()` supports reading from URLs** directly without extra steps.
+```{r}
+#| eval: false
+supermarket_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales.csv")
+```   
+2. `read.csv()` requires downloading the file first or additional steps to read from a URL, just as we have been doing. You can see how cumbersome this is!
+3. `read_csv()` is faster and more efficient, especially for larger datasets.
+4. `read_csv()` treats text as text (character) instead of automatically converting it to factor, preventing issues when working with non-categorical text data.
+4. `read_csv()` returns a **tibble**, which has better printing behavior and is more compatible with the tidyverse.
+:::
+
+:::{.callout-note title="Tibbles vs. Data Frames"}
+In R, both **tibbles** and **data frames** store tabular data, but tibbles are a more modern version with improved behavior.  
+
+#### **Key Differences**  
+
+| Feature          | Data Frame (Base R)   | Tibble (tidyverse) |
+|-----------------|----------------------|---------------------|
+| Character data  | Converted to factors by default | Stays as character |
+| Row names       | Present by default    | No row names       |
+| Printing        | Shows all columns, can be cluttered | Shows first 10 rows, fits screen |
+| Best for?       | Base R functions      | Tidyverse (`dplyr`, `ggplot2`) |
+
+#### **Why Use Tibbles?**  
+Tibbles are **easier to read and work better with the tidyverse**. Since `read_csv()` returns tibbles, we will use them in this course.  
+
+**Examples**  
+```{r}
+#| eval: false
+#| code-fold: true
+
+# Create a data frame
+df <- data.frame(name = c("Alice", "Bob"), age = c(25, 30))
+str(df)  # Notice 'name' is a factor
+
+# Create a tibble
+library(tibble)
+tb <- tibble(name = c("Alice", "Bob"), age = c(25, 30))
+str(tb)  # 'name' stays as character
+
+# You can convert between them if needed
+tibble_version <- as_tibble(df)  # Convert data frame to tibble
+df_version <- as.data.frame(tb)  # Convert tibble to data frame
+```
+We will cover more on tibbles in future labs.
+:::
+
+3. Take a look at the dataframe.  There are a few ways to inspect it:
 
   - Type the name of the dataframe in the console.  This shows the data in the first several rows of the first several columns.
   
-  - Use the function `View()` with the dataframe name as the argument.  Alternatively, you can click on the name of the object in the environment pane. 
-  
-  - Use the function `glimpse()` with the dataframe name as the argument.
+  - Use the function `View()` with the dataframe name as the argument. **Notice View() has a capital 'V' unlike many other functions in R that are all lower case.** Alternatively, you can click on the name of the object in the environment pane. 
+```{r}
+#| eval: false
+View(supermarket_raw)
+```
 
-**Variable names**: You'll notice that some of the variable names have spaces.  This is allowed in R, but they are awkward because you will be using these names in your code.  We will cover renaming variables later today, but there is a function to *clean* (i.e., modify) the names.  The function called `clean_names()` is part of the `janitor` package.
+  - Use the `glimpse()` function to get a compact summary of the dataframe.
+```{r}
+#| eval: false
+glimpse(supermarket_raw)
+```
 
-> Try it on your own: Use the `clean_names()` function to convert all of the column names to snake case. Reference the documentation in the help tab of the lower right panel. The default conversion case is "snake" but you can also specify it in the function explicitly. 
+:::{.callout-important title="Cleaning variable names"}
+Sometimes variable names have spaces. **We generally avoid spaces in coding because they make variable names harder to reference and require special syntax to use them in functions or calculations.** This can make your code more difficult to read and maintain. Spaces are allowed in R, but they are awkward because you will be using these names in your code.  We will cover *renaming variables* later today, but there is a function to *clean* (i.e., modify) the names.  The function called `clean_names()` is part of the `janitor` package.
+
+Try it on your own: Use the `clean_names()` function to convert all of the column names to snake case. Reference the documentation in the help tab of the lower right panel. The default conversion case is "snake" but you can also specify it in the function explicitly. 
 
 ```{r}
 #| eval: false
 #| include: true
-#| code-fold: true
 
 supermarket_raw <- clean_names(supermarket_raw,"snake")
 ```
+:::
 
-Check the datatypes of the variables in the dataframe.  Do they make sense?
+4. Check the datatypes of the variables in the dataframe.  Do they make sense?
+```{r}
+#| eval: false
+#| include: true
 
+# Check data types
+str(supermarket_raw)
+```
 
-### Modifying the dataframe
+---
 
-You will often need to modify the data you read in.  The package `dplyr` contains a set of utilities that help you modify dataframes.^[The package `dplyr` is part of a larger set of packages known as the `tidyverse` <https://www.tidyverse.org/>.  The term *tidy* refers to a structure of data.  There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available.  Most of what I teach in this class will be part of the tidyverse or adherant to its principles.  Video tutorial here: <https://youtu.be/bUM3wX4YZDc>] `dplyr` argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<https://dplyr.tidyverse.org/>):
+### Modifying the Dataframe  
 
-1. `mutate()` creates new variables (vector) by transforming or operating on one or more other variables
+You will often need to modify the data you read in. The `dplyr` package provides a set of functions that make data manipulation easier.^[The package `dplyr` is part of the `tidyverse` <https://www.tidyverse.org/>—a collection of R packages designed for data science. *Tidy* refers to a structured way of organizing data. The `tidyverse` has extensive documentation and a large community for support. Most of what we cover in this class follows `tidyverse` principles. Video tutorial: <https://youtu.be/bUM3wX4YZDc>]  
 
-2.  `select()` picks variables based on their names.
+`dplyr` simplifies data modification by breaking tasks into a set of **core functions** that follow a verb-based structure (<https://dplyr.tidyverse.org/>):  
 
-3.  `filter()` picks cases based on their values.
+1. **`mutate()`** – Creates new variables by transforming or operating on existing ones.
+2. **`select()`** – Chooses specific columns based on their names.  
+3. **`filter()`** – Selects rows based on conditions.  
+4. **`arrange()`** – Reorders rows based on values.  
+5. **`summarise()`** – Aggregates values into a summary statistic, often changing the dimensions of the dataframe.  
+6. **`group_by()`** – Alters how `mutate()` and `summarise()` behave by grouping data before applying operations.  
 
-4.  `arrange()` changes the ordering of the rows.
+> **Note:** The function `summarise()` (British spelling) is the same as `summarize()` (American spelling). You may see both versions in documentation, but we will cover its use later in the lab.  
 
-5.  `summarise()` creates a new variable of different dimension by performing an operation that summarizes another variable(s)
+The following exercises will introduce you to these core functions while exploring the `supermarket_sales` dataset. Each function returns a **modified dataframe** as output.  
 
-6.  `group_by()` an intermediate function that can alter how `mutate` and `summarize` behave.
+### 1. Mutate  
 
-The following exercises will introduce you to these core functions while exploring the supermarket_sales data.  These functions will all return a dataframe as the output.
+The `mutate()` function creates or modifies variables within a dataframe. Let’s create the column `subtotal` by multiplying `unit_price` and `quantity`.  
 
-### 1. Mutate
+Here, we create a new variable called `subtotal` and store the modified dataframe in a new object called `my_super_sales`:  
+```{r}
+#| eval: false
+my_super_sales <- mutate(supermarket_raw, subtotal = unit_price * quantity)
+```
 
-`mutate()` is the function to create or add new variables.  Let's recreate the column `total` by multiplying the columns `unit_price` and `quantity`.  Note that we create a new variable called `total_calc` and assign this dataframe to a new object called `my_super_sales`.
+> Check: Is the calculated **subtotal** column exactly the same as the existing total column in supermarket_raw? Why or why not?
+
+:::{.callout-note title="Reading `mutate()` Syntax"}
+
+The `mutate()` function can be written generically as follows:
+```{r}
+#| eval: false
+new_dataframe <- mutate(original_dataframe, new_column = operation, modified_column = transformation)
+```
+
+- `original_dataframe` $\rightarrow$ The dataframe where new or modified columns will be created.
+- `new_column` = operation $\rightarrow$ Defines a new column by performing an operation.
+- `modified_column` = `transformation` $\rightarrow$ Modifies an existing column using a transformation.
+- `new_dataframe` $\rightarrow$ The resulting dataframe with the changes.
+
+#### Important points about `mutate()`
+- `mutate()` adds or modifies a column while keeping the dataframe the same size.
+- It works with numeric columns (e.g., multiplication, addition) and character columns (e.g., string operations like combining text).
+- **Important:** The result of a `mutate()` operation must be a vector of the same length as the dataframe. If the lengths don't match, R will return an error.
+:::
+
+### 2. Select (and Rename)
+
+The `select()` function allows you to **choose specific columns** from a dataframe.  
+
+For example, suppose you want to create a new dataframe containing only:  
+- **Invoice ID** (`invoice_id`)  
+- **City** (`city`)  
+- **Reported total** (`total`)  
+- **Calculated total** (`subtotal`)  
+
+You can use `select()` like this:  
 
 ```{r}
 #| eval: false
-my_super_sales <- mutate(supermarket_raw,total_calc=unit_price*quantity)
-
+select_super_sales <- select(my_super_sales, invoice_id, city, total, subtotal)
 ```
 
-> Is the result `total_calc` equal to the existing column `total`?  Why or why not?
+#### Renaming columns
+If you want to rename a column instead of selecting a subset, use `rename()`.
 
-You can perform most mathematical operations on numeric columns and other types of operations on string or character data types.  The key point to remember is that mutate operations must output a vector that is the same length as the dataframe.
+For example, if you prefer market instead of city:
+```{r}
+#| eval: false
+select_super_sales <- rename(select_super_sales, market = city)
+```
 
-### 2. Select (and rename)
-
-`select()` is a function to subset columns from the dataframe. Suppose you want to create a new dataframe with only the invoice id, the city, the reported total, and the calculated total.
+#### Combining `select()` and `rename()`
+You can rename columns directly within `select()`, avoiding the need for a separate `rename()` step:
 
 ```{r}
 #| eval: false
-select_super_sales <- select(my_super_sales,invoice_id,city,total,total_calc)
+select_super_sales <- select(my_super_sales, invoice_id, market = city, total, subtotal)
 ```
 
-`rename()` is a related function used to rename columns rather than subset them.  Suppose that you didn't like the name `city` and wanted to call it `market`.
+:::{.callout-note title="Reading `select()` and `rename()` Syntax"}
 
+#### Reading `select()` Syntax  
+
+The `select()` function can be written generically as follows:
 ```{r}
 #| eval: false
-select_super_sales <- rename(select_super_sales,market=city)
+new_dataframe <- select(original_dataframe, column1, column2, column3)
 ```
 
-You can combine the operations using the rename syntax to rename a column inside of a select statement.
+- `original_dataframe` $\rightarrow$ The dataframe you are selecting from.
+- `column1`, `column2`, `column3` $\rightarrow$ The columns you want to keep.
+- `new_dataframe` $\rightarrow$ The resulting dataframe with only the selected columns.
 
+--
+
+#### Reading `rename()` Syntax  
+
+The `rename()` function can be written generically as follows:
 ```{r}
 #| eval: false
-select_super_sales <- select(my_super_sales,invoice_id,market=city,total,total_calc)
+new_dataframe <- rename(original_dataframe, new_name1 = old_name1, new_name2 = old_name2)
 ```
+
+- `original_dataframe` $\rightarrow$ The dataframe you are renaming columns in.
+- `old_name1` → `new_name1` $\rightarrow$ The new column name is on the left, the old column name is on the right.
+- `new_dataframe` $\rightarrow$ The resulting dataframe with renamed columns.
+:::
 
 ### 3. Filter
 
-`filter()` is a function to subset the rows of a dataframe based on a condition that returns a `TRUE` or `FALSE`. This is a very general concept used in all sorts of programming applications.  In this context, we will write a statement that is true for some elements of the vector `city` (renamed to market).  To filter the dataframe to only data from the market "Yangon", we write
+The `filter()` function is used to **keep only rows that meet a condition**. It evaluates a logical statement for each row and retains rows where the result is `TRUE`. This is a common concept in programming and allows us to extract only the data that meets specific criteria.  
+
+In this example, we filter the dataframe to include only rows where `market` (renamed from `city`) is **"Yangon"**:  
 
 ```{r}
 #| eval: false
-yangon_super_sales <- filter(select_super_sales,market=="Yangon")
+yangon_super_sales <- filter(select_super_sales, market == "Yangon")
 ```
 
-The statement `market=="Yangon"` can be evaluated on every row as either `TRUE` or `FALSE`.  This command keeps only the rows where the market name equals the exact word "Yangon."  This is case sensitive because the statement is comparing the market name in each row.  You can also create statements using the greater than `>` or less than `<` comparing numeric values.  You can find more information on logical operators here: <https://www.statmethods.net/management/operators.html>
+**How this works:**
 
-### 4. Arrange (or sort)
+- The condition `market == "Yangon"` is checked for every row in the dataframe.
+- If the condition is `TRUE`, the row is kept; if `FALSE`, the row is removed.
+- This is **case-sensitive**, meaning "Yangon" must match exactly (uppercase and lowercase matter).
 
-`arrange()` is a function that modifies the order of the rows in the dataframe based on the values of a column or set of columns.  R can sort numeric and character strings (alphabetical).  Let's start by sorting the dataframe in ascending order based on the column `total`.
+**Other ways to filter data:**
+
+You can also use comparison operators to filter numeric values:
+```{r}
+#| eval: false
+# Filter for rows where unit_price is greater than 10
+high_price_sales <- filter(select_super_sales, unit_price > 10)
+
+# Filter for rows where quantity is less than 5
+low_quantity_sales <- filter(select_super_sales, quantity < 5)
+```
+For more on logical operators, check out this resource: [Logical operators in R](https://www.statmethods.net/management/operators.html).
+
+:::{.callout-note title="Reading `filter()` Syntax"}
+
+The `filter()` function can be written generically as follows:
+```{r}
+#| eval: false
+new_dataframe <- filter(original_dataframe, condition)
+```
+
+- `original_dataframe` $\rightarrow$ The dataframe you are filtering.
+- `condition` $\rightarrow$ A logical statement that evaluates to `TRUE` or `FALSE` for each row.
+- `new_dataframe` $\rightarrow$ The resulting dataframe, containing only the rows where `condition` is `TRUE`.
+
+#### Important points about `filter()`
+
+- `filter()` keeps only rows where the condition is `TRUE`.
+- Works with text (strings) and numbers using comparison operators.
+- Case-sensitive when filtering strings.
+- Multiple conditions can be combined using `&` (AND) or `|` (OR), which we will use later.
+:::
+
+### 4. Arrange (Sorting Data)  
+
+The `arrange()` function **reorders rows** in a dataframe based on the values in one or more columns.  
+
+- R can sort both **numeric values** (smallest to largest) and **character strings** (alphabetical order).  
+- By default, sorting is **ascending** (smallest first), but you can use `desc()` to sort in **descending** order.  
+
+#### Sorting by One Column
+
+Let's start by sorting the **Yangon sales dataset** (`yangon_super_sales`) in **ascending order** based on `total`:  
 
 ```{r}
 #| eval: false
-yangon_super_sales_sorted <- arrange(yangon_super_sales,total)
+yangon_super_sales_sorted <- arrange(yangon_super_sales, total)
 ```
 
-You can sort on multiple columns.  The order determines how the data are sorted.  
+> **Result:** Reorders rows so that smaller `total` values appear first.
 
-Let's try something more complex. Use the dataset with all of the markets (`select_super_sales`) and sort based on market, then by total in descending order to see the top sales in each market.
+#### Sorting by Multiple Columns
+
+You can sort by multiple columns. The order in which you list columns matters—R sorts by the first column first, then resolves ties using the second column, and so on.
+
+Let's use the full dataset (`select_super_sales`) and:
+
+- Sort by `market` (alphabetical order).
+- Within each market, sort `total` in descending order (highest sales first).
 
 ```{r}
 #| eval: false
-super_sales_top <- arrange(select_super_sales,market,desc(total))
+super_sales_top <- arrange(select_super_sales, market, desc(total))
 ```
 
-The function `desc()` is short for descending and indicates that the total should be sorted in descending order.
+> **Result:** First, sorts by `market` alphabetically. Second, within each market, sorts `total` from highest to lowest.
 
-**Remember to comment in your code so you can refer back to see what you did.**
+#### Understanding `desc()` 
+
+The function `desc()` means "descending order". Without it, `arrange()` sorts smallest to largest by default.
+
+**Examples**
+```{r}
+#| eval: false
+#| code-fold: true
+arrange(supermarket_raw, total)       # Sorts total in ascending order (default)
+arrange(supermarket_raw, desc(total)) # Sorts total in descending order
+```
+
+:::{.callout-important title="Best Practice: Comment Your Code"}
+Always add comments in your code to help you remember what each step does! This makes it easier to understand your work when you revisit it later.
+:::
 
 
-<!---## R: `dplyr` continued  --->
+<!-- Now you know the four `dplyr` verbs generally used to manipulate data.  We covered `mutate, filter, select,` and `arrange`.  Next, we will introduce `summarize` and a helpful companion function `group_by`.
 
-Now you know the four `dplyr` verbs generally used to manipulate data.  We covered `mutate, filter, select,` and `arrange`.  Next, we will introduce `summarize` and a helpful companion function `group_by`.
-
-<!-- Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). -->
+Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). -->
 
 <!-- >Note that you can read in data and files from directories other than your working directory.  You can include the directory in the file path. -->
 
 ### 5. Summarize
-The `summarize` function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data. 
 
-We can use `summarize()` to calculate the total number of units sold in the dataset.
+The `summarize()` function **collapses multiple rows** into a **single row** by computing summary statistics, such as:  
+- **Sum: `sum()`**  
+- **Mean: `mean()`**  
+- **Count: `n()`**  
+- **Minimum: `min()`**  
+- **Maximum: `max()`**  
 
-```{r}
-#| eval: false
-summarize(supermarket_raw,quantity_summed=sum(quantity)) 
-```
+These statistics help aggregate data based on groups or the entire dataset.  
 
-Notice that the command above does not assign the output to an object. It can be useful to quickly check the output of a command before assigning an object. Is the variable `quantity_summed` accessible to you? In other words, could you call that value within R and perform other operations on it?  
+---
 
-> Try it on your own: Modify the previous command to assign the output to an object called `total_sold`.
+**Calculating total quantity sold**
 
-```{r}
-#| eval: false
-#| include: true
-#| code-fold: true
-
-total_sold <- summarize(supermarket_raw,quantity_summed=sum(quantity)) 
-```
-
-> Next, calculate the following: (1) Calculate the average of the `quantity` variable.  In R, the function to calculate average is `mean()`.  (2) Calculate the maximum `unit_price`.  The function to calculate the maximum is `max()`.
+We can use `summarize()` to calculate the **total number of units sold** across all transactions:  
 
 ```{r}
 #| eval: false
-#| include: true
-#| code-fold: true
-
-#Mean quantity
-summarize(supermarket_raw,quantity_mean=mean(quantity)) 
-
-#Max price
-summarize(supermarket_raw,max_price=max(unit_price)) 
+summarize(supermarket_raw, quantity_summed = sum(quantity))
 ```
 
+> **Result:** This outputs a single row with the total quantity sold. **Notice:** This command does not assign the result to an object. This is useful for a quick check before saving the output.
 
-### 6. Group by
+**Is `quantity_summed` accessible?**
 
-Often times, you need to perform some operation on a group of data.  You can think about this as a sequence of operations: part 1) subset the group that you want to focus on, and part 2) perform the operation. For example, you might want to know the quantity of goods sold by branch.  
+Notice how in the code above we created a new variable called `quantity_summed`. Can you use it elsewhere in R?
 
-Step 1: Filter the data in each branch (let's just do branch A for example)
-```{r}
-#| eval: false
-branch_A_sales <- filter(supermarket_raw,branch=="A")
-```
-You should see a new dataframe called `branch_A_sales` with 340 observations.  All of the variables from `supermarket_raw` are there including `quantity`.
+The answer is **No**. Because we didn’t store it in an object, the value exists only in the output window and cannot be used later.
 
-Step 2: Sum the quantity of goods sold
-```{r}
-#| eval: false
-branch_A_total_quantity <- summarize(branch_A_sales,total_quantity=sum(quantity))
-```
-
-> Try it on your own: Do the same thing for branch B and C.  
-
-```{r}
-#| eval: false
-#| include: true
-#| code-fold: true
-
-branch_B_sales <- filter(supermarket_raw,branch=="B")
-branch_B_total_quantity <- summarize(branch_B_sales,total_quantity=sum(quantity))
-
-branch_C_sales <- filter(supermarket_raw,branch=="C")
-branch_C_total_quantity <- summarize(branch_C_sales,total_quantity=sum(quantity))
-```
-
-
-This is pretty tedious.  If operations in R or other programming languages seems tedious or repetitive, there are probably much better ways to do it.  In this case, we can use a function `group_by()`.  `group_by()` tells R to perform some operation like `sum` on each of the subgroups defined by another variable.  Let's sum the quantity by branch using `group_by()` and `summarize()`.  We will do this in two steps:
-
-Step 1: Use `group_by()` to group the data by `branch`
+Let's modify the command to store the result in an object called `total_sold`:
 ```{r}
 #| eval: false
 
-#This will create a signal for summarize but not perform any calculation.  
-super_sales_grouped_branch <- group_by(supermarket_raw,branch)
+total_sold <- summarize(supermarket_raw, quantity_summed = sum(quantity))
 ```
 
-Step 2: Use `summarize()` to calculate the total quantity (by branch)
+> **Result:** Now, the result is saved in total_sold and can be used in other operations.
+
+**Try it Yourself**
+
+Write code that calculates the following:
+
+1. The average (`mean`) of the `quantity` variable.
+2. The maximum (`max`) `unit_price`.  
+
 ```{r}
 #| eval: false
 
-#This will create a signal for summarize but not perform any calculation.  
-total_quantity_by_branch <- summarize(super_sales_grouped_branch,total_quantity=sum(quantity))
+# Calculate the mean of quantity
+summarize(supermarket_raw, quantity_mean = mean(quantity))  
+
+# Find the maximum unit price
+summarize(supermarket_raw, max_price = max(unit_price))
 ```
 
-Notice that the result has the quantity sum for each branch.  Do they match your manual calculations?
+:::{.callout-note title="Important points about `summarize()`"}
 
-> Try it on your own: Calculate the average `unit_price` for each `product_line` in the data. 
+- `summarize()` reduces multiple rows into a single row with summary statistics.
+- If you don’t assign the output to an object, you can’t use it later.
+- Common summary functions: `sum()`, `mean()`, `max()`, `min()`, and `n()`.
+:::
 
+### 6. Group By  
 
-### Chaining commands (or piping `%>%` or `|>`)
+Often, we need to perform calculations on **subgroups** of data rather than the entire dataset. You can think of this as a **two-step process**:  
 
-A **script** is a set of instructions for R that get executed in order.  In some cases, you do not care about or need to save the intermediate output. The `group_by` and `summarize` sequence is a good example; you don't need to store the dataframe `super_sales_grouped_branch` unless there is a clear use for it later.  
+1. **Subset the group** you want to analyze.  
+2. **Perform the operation** (e.g., sum, mean, count) on that group.  
 
-The pipe symbol, represented as `%>%` or `|>`, plays a crucial role in streamlining code. It allows for a more readable way of writing sequences of operations. 
+For example, let’s calculate the **total quantity of goods sold by branch**.  
 
-**What It Does:** The pipe symbol takes the result of the expression on its left and passes it as the first argument to the function on its right. In simpler terms, it "pipes" the output of one function directly into the next function.
+---
 
-**How to Read It:** When you see `x %>% f()`, interpret it as "take x and then apply f() to it."
+#### Grouping Data Manually  
 
-**Code Structure:** Often, you'll find the pipe at the end of a line, with the next operation starting on a new, often indented, line. This format enhances readability, especially in complex sequences of data manipulation steps.
+First, we filter for only **Branch A**:  
 
-Here is a brief example:
 ```{r}
 #| eval: false
-data %>%
-  arrange(condition) %>%
-  summarize(result = mean(column))
+branch_A_sales <- filter(supermarket_raw, branch == "A")
 ```
 
-This code snippet takes called `data`, arranges it according to some condition, and then calculates the mean of column, summarizing the result. Each step is clearly separated by the pipe symbol, making the sequence of operations easy to follow.
+> **Result:** The new dataframe branch_A_sales contains only sales from Branch A. It has 340 observations and includes all original columns.
+
+Now, we sum the `quantity` column:
+
+```{r}
+#| eval: false
+branch_A_total_quantity <- summarize(branch_A_sales, total_quantity = sum(quantity))
+```
+
+> **Result:** This gives us the total quantity sold for Branch A.
+
+**Try it Yourself**
+
+Repeat the same process for Branch B and Branch C:
+
+```{r}
+#| eval: false
+
+# Branch B
+branch_B_sales <- filter(supermarket_raw, branch == "B")
+branch_B_total_quantity <- summarize(branch_B_sales, total_quantity = sum(quantity))
+
+# Branch C
+branch_C_sales <- filter(supermarket_raw, branch == "C")
+branch_C_total_quantity <- summarize(branch_C_sales, total_quantity = sum(quantity))
+```
+
+#### A Better Way to Group Data: Using `group_by()`
+
+Manually filtering each branch is tedious. In programming, if something feels repetitive, there’s usually a better way to do it!
+
+The `group_by()` function automatically groups data based on a variable (e.g., branch) so we can summarize each group in a single step.
+
+**Step 1: Group Data by Branch**
+
+```{r}
+#| eval: false
+
+# Group the data by branch
+super_sales_grouped_branch <- group_by(supermarket_raw, branch)
+```
+
+> **Result:** This does not perform any calculations yet. It creates a signal that tells R to treat each branch as a separate group.
+
+**Step 2: Summarize within Each Group**
+
+```{r}
+#| eval: false
+
+# Summarize total quantity sold by branch
+total_quantity_by_branch <- summarize(super_sales_grouped_branch, total_quantity = sum(quantity))
+```
+
+> **Result:** Now, we get the total quantity sold for each branch in a single step! **Check:** Do these results match your manual calculations?
+
+**Try it Yourself**
+
+Use `group_by()` and `summarize()` to calculate the average unit_price for each product_line in the dataset.
+
+```{r}
+#| eval: false
+
+# Your turn: Find the average unit price by product line
+avg_price_by_product <- summarize(group_by(supermarket_raw, product_line), avg_unit_price = mean(unit_price))
+```
+
+:::{.callout-note title="Reading `group_by()` Syntax"}
+
+The function `group_by()` can be written generically as follows:
+```{r}
+#| eval: false
+grouped_data <- group_by(original_dataframe, grouping_variable)
+```
+
+- `original_dataframe` → The dataframe you want to group.
+- `grouping_variable` → The column that defines the groups.
+- `grouped_data` → The resulting dataframe, where rows are grouped but unchanged.
+
+
+#### Important points about `group_by()`
+- `group_by()` does not change the data—it only signals R to group rows.
+- Use `summarize()` after `group_by()` to calculate statistics for each group.
+- `summarize()` performs calculations on each group separately.
+- You can group by one or multiple columns.
+- This is much more efficient than filtering each group manually.
+:::
+
+---
+
+### Chaining Commands (Piping with `%>%` or `|>`)  
+
+A **script** is a set of instructions for R that execute in order. Often, you do **not** need to store intermediate steps unless they serve a specific purpose later.  
+
+For example, in our `group_by()` and `summarize()` sequence, storing `super_sales_grouped_branch` is unnecessary if we only need the final result. Instead of creating temporary objects, we can **chain commands** using the **pipe operator** (`%>%` in `dplyr`, `|>` in base R).  
+
+#### What Does the Pipe Do?
+
+The pipe **passes the output** of one function **directly** into the next function, eliminating the need for intermediate variables.  
+
+- `x %>% f()` means **"take `x` and apply `f()` to it."**  
+- The pipe improves **readability**, especially when applying multiple functions in sequence.  
+
+#### How to Read Piping Syntax
+
+```{r}
+#| eval: false
+
+data %>%  # Starts with the data
+  arrange(condition) %>%   # Arranges the data based on a condition
+  summarize(result = mean(column))  # Passes the arranged data to summarize() to compute the mean of column
+```
+
+Each step in this code chunk is clearly separated by the pipe symbol `%>%`, making it easier to follow than a series of nested function calls:
+
+- Step 1: Starts with data.
+- Step 2: Arranges data based on condition.
+- Step 3: Pass the arranged data to `summarize()` to compute the mean of column.
+
+[Video tutorial here](https://youtu.be/e_SQnJpS5fA)
+
+#### Using Piping with `group_by()` and `summarize()`
+
+Let’s apply piping to our `group_by()` and `summarize()` sequence:
+
+```{r}
+#| eval: false
+
+# Using the pipe to group and summarize in one step
+total_quantity_by_branch_pipe <- supermarket_raw %>%  # Start with supermarket_raw
+  group_by(branch) %>%  # Group by branch
+  summarize(total_quantity = sum(quantity))  # Summarize total quantity by branch
+```
+
+Each step in this code chunk is clearly separated by the pipe symbol `%>%`:
+
+- Step 1: Start with supermarket_raw.
+- Step 2: Group by branch.
+- Step 3: Pass the grouped data to summarize() to calculate total_quantity.
+
+:::{.callout-note title="Why Use Piping?"}
+
+- Reduces unnecessary variables – no need to store temporary objects.
+- Improves readability – each step is clearly separated.
+- Easier debugging – you can run each part separately if needed.
+:::
 
 <!-- The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]   -->
 
 <!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
 
-Video tutorial here: <https://youtu.be/e_SQnJpS5fA>
-
-Let's return to our `group_by()` and `summarize()` sequence and use the pipe technique rather than assign the intermediate step to a dataframe. Try it!
-
-```{r}
-#| eval: false
-#| code-fold: true
-#Using the pipe to chain two statements 
-total_quantity_by_branch_pipe <- group_by(supermarket_raw,branch) %>% #group by branch and pass the output to summarize
-  summarize(.,total_quantity=sum(quantity)) #Sum the quantity by branch
-```
+---
 
 ### Appending data
 
@@ -334,6 +698,7 @@ super_reconstruct <- bind_rows(branch_A_sales,branch_B_sales,branch_C_sales)
 
 Note that `bind_rows()` looks for shared column names in each dataframe.  If one dataframe is missing a column, it will be filled with `NA`. `NA` in R stands for "Not Available" or "Not Applicable." `NA' is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an "NA" value, it treats it differently from other values, and special functions are often used to handle missing data. 
 
+---
 
 ### Log file (revisited)
 
@@ -343,22 +708,30 @@ For example, to redirect the output of `source("script.R",echo = TRUE)` to a fil
 
 ```{r}
 #| eval: false
-sink("log.txt")
-source("script.R",echo = TRUE)
+
+sink(file = "log.txt")
+source("lab_03.R",echo = TRUE)
 sink()
 
 ```
 
 This will run the script "script.R" and redirect all the output to the file "log.txt". `echo=TRUE` ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the `sink()` function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of "script.R" because the command `source()` is equivalent to running every line of "script.R."
 
-> Try it on your own: Open a new script and call it `lab_03_log.R`. Update the code above so it will run the script `lab_03_script.R`. Note: You will have to comment out any places where you installed packages, and used the commands `setwd()`, `getwd()`, and `dir()`. 
+Open a new script and call it `lab_03_log.R`. Update the code above so it will run the script `lab_03_script.R`. 
+
+:::{.callout-important title="Don't forget to comment out these lines of code"}
+Before running your log script ("sink-source-sink"), you will have to comment out any places where you installed packages `install.packages()`,  or used the commands `setwd()`, `getwd()`, and `dir()`. Then, save your `lab_03.R` script before running the log script.
+:::
 
 ```{r}
 #| eval: false
 #| include: true
-#| code-fold: true
 
 sink("lab_03_log.txt")
 source("lab_03_script.R",echo = TRUE)
 sink()
 ```
+
+Here is a video that walks you through how to generate a log file using `sink()` and `source()` in RStudio. You can also access the video through this [link](https://colostate-my.sharepoint.com/:v:/g/personal/lachenar_colostate_edu/EcqjbmCUf2NHhmuMF6q9RAMBqMjRvg3Gzw59KOIfsPupOg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Fgefze){target=\"_blank\"}.
+
+{{< video https://youtu.be/AysPiUIzKnE aspect-ratio="16x9" >}}

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -68,6 +68,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="lab_00_week_03_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="lab_00_week_03_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,15 +112,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-processing-with-r" id="toc-data-processing-with-r" class="nav-link" data-scroll-target="#data-processing-with-r">Data processing with R</a>
   <ul class="collapse">
   <li><a href="#starting-a-task-or-project-in-r" id="toc-starting-a-task-or-project-in-r" class="nav-link" data-scroll-target="#starting-a-task-or-project-in-r">Starting a task or project in R</a></li>
+  <li><a href="#what-are-packages-and-why-do-we-use-them" id="toc-what-are-packages-and-why-do-we-use-them" class="nav-link" data-scroll-target="#what-are-packages-and-why-do-we-use-them">What Are Packages and Why Do We Use Them?</a></li>
+  <li><a href="#why-do-we-need-to-install-packages" id="toc-why-do-we-need-to-install-packages" class="nav-link" data-scroll-target="#why-do-we-need-to-install-packages">Why Do We Need to Install Packages?</a></li>
+  <li><a href="#why-do-we-use-the-library-function" id="toc-why-do-we-use-the-library-function" class="nav-link" data-scroll-target="#why-do-we-use-the-library-function">Why Do We Use the library() Function?</a></li>
   <li><a href="#read-the-data-into-r" id="toc-read-the-data-into-r" class="nav-link" data-scroll-target="#read-the-data-into-r">Read the data into R</a></li>
-  <li><a href="#modifying-the-dataframe" id="toc-modifying-the-dataframe" class="nav-link" data-scroll-target="#modifying-the-dataframe">Modifying the dataframe</a></li>
+  <li><a href="#modifying-the-dataframe" id="toc-modifying-the-dataframe" class="nav-link" data-scroll-target="#modifying-the-dataframe">Modifying the Dataframe</a></li>
   <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">1. Mutate</a></li>
-  <li><a href="#select-and-rename" id="toc-select-and-rename" class="nav-link" data-scroll-target="#select-and-rename">2. Select (and rename)</a></li>
+  <li><a href="#select-and-rename" id="toc-select-and-rename" class="nav-link" data-scroll-target="#select-and-rename">2. Select (and Rename)</a></li>
   <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter">3. Filter</a></li>
-  <li><a href="#arrange-or-sort" id="toc-arrange-or-sort" class="nav-link" data-scroll-target="#arrange-or-sort">4. Arrange (or sort)</a></li>
+  <li><a href="#arrange-sorting-data" id="toc-arrange-sorting-data" class="nav-link" data-scroll-target="#arrange-sorting-data">4. Arrange (Sorting Data)</a></li>
   <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize">5. Summarize</a></li>
-  <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">6. Group by</a></li>
-  <li><a href="#chaining-commands-or-piping-or" id="toc-chaining-commands-or-piping-or" class="nav-link" data-scroll-target="#chaining-commands-or-piping-or">Chaining commands (or piping <code>%&gt;%</code> or <code>|&gt;</code>)</a></li>
+  <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">6. Group By</a></li>
+  <li><a href="#chaining-commands-piping-with-or" id="toc-chaining-commands-piping-with-or" class="nav-link" data-scroll-target="#chaining-commands-piping-with-or">Chaining Commands (Piping with <code>%&gt;%</code> or <code>|&gt;</code>)</a></li>
   <li><a href="#appending-data" id="toc-appending-data" class="nav-link" data-scroll-target="#appending-data">Appending data</a></li>
   <li><a href="#log-file-revisited" id="toc-log-file-revisited" class="nav-link" data-scroll-target="#log-file-revisited">Log file (revisited)</a></li>
   </ul></li>
@@ -115,7 +147,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p><img src="includes/shopping.webp" class="img-fluid"></p>
 <p>This Lab Contributes to Course Objectives 2, 3, 4, 5, 6, and 8</p>
@@ -138,248 +172,810 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="starting-a-task-or-project-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="starting-a-task-or-project-in-r">Starting a task or project in R</h3>
 <ol type="1">
-<li><p>Open RStudio either on your own computer or access it via the DARE server: <a href="http://darecompute-01.aggie.colostate.edu:8787/" class="uri">http://darecompute-01.aggie.colostate.edu:8787/</a>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
-<li><p>Open up a new script.</p></li>
-<li><p>Write a brief comment in the first line describing what the script will do.</p></li>
+<li>Open RStudio either on your computer.</li>
+</ol>
+<!--or access it via the DARE server: <http://darecompute-01.aggie.colostate.edu:8787/>.^[Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.] 
+-->
+<ol start="2" type="1">
+<li><p>Open up a new script.</p>
+<ul>
+<li>Create a new subfolder within your <code>Documents/arec330</code> directory called <code>lab_03</code>.<br>
+</li>
+<li>Save your new script as <code>lab_03.R</code> inside this folder.</li>
+</ul></li>
+<li><p>Write a brief comment in the first line of the script describing what the script will do.</p></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This script corresponds to the lab notes for week 3.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
-<li><p>Load any libraries/packages used in the script.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In this lab, we will use 3 packages: <code>readr,dplyr,janitor</code>.</p></li>
-<li><p>Set the working directory to a known location. This may be a new directory where you will store any external data and save the code file.</p></li>
-<li><p>Insert the following code below where you load packages. These commands print information about the system and version of R you are running. The information will be displayed when you source the script and is for your instructors.</p></li>
+<li>Set the working directory to the new <code>lab_03</code> folder you created. This ensures that your script can access any data files you store there.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>version</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">.packages</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory (modify the path if needed)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/Documents/arec330/lab_03"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm working directory</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Check that your working directory is set correctly">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check that your working directory is set correctly
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To check that your working directory is set correctly, look at the <strong>console window</strong> in RStudio. Click the <strong>curly arrow</strong> in the Console pane toolbar to refresh the working directory display.</p>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Load any libraries/packages. If you have not installed them before, you may need to install them first. In this lab, we will use three packages: <code>readr</code>, <code>dplyr</code>, and <code>janitor</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install packages if not already installed</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Comment out these lines after the first time you run them</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readr"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"janitor"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="When to add comments with `install.packages()`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+When to add comments with <code>install.packages()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have already installed these packages, you should comment out (add <strong>#</strong> before) the <code>install.packages()</code> lines before running your script again. This prevents R from unnecessarily reinstalling the packages every time you run your script, which can slow down execution.</p>
+</div>
+</div>
+</section>
+<section id="what-are-packages-and-why-do-we-use-them" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-packages-and-why-do-we-use-them">What Are Packages and Why Do We Use Them?</h3>
+<p>R packages are collections of functions, data, and documentation that extend the basic functionality of R. The base version of R includes many useful functions, but specialized tasks—such as reading different file formats, cleaning data, or creating visualizations—often require additional tools.</p>
+<p>For example, in this lab, we will use three packages:</p>
+<ul>
+<li><code>readr</code> – for reading CSV files efficiently</li>
+<li><code>dplyr</code> – for data manipulation</li>
+<li><code>janitor</code> – for cleaning variable names and handling messy data</li>
+</ul>
+</section>
+<section id="why-do-we-need-to-install-packages" class="level3">
+<h3 class="anchored" data-anchor-id="why-do-we-need-to-install-packages">Why Do We Need to Install Packages?</h3>
+<p>When you first install R, it does not include all available packages. If you want to use a package, you need to install it first using the install.packages(“package_name”) function. Installation only needs to be done once on your computer. If you try to use a function from a package without loading it first, R will return an error saying the function is not found.</p>
+</section>
+<section id="why-do-we-use-the-library-function" class="level3">
+<h3 class="anchored" data-anchor-id="why-do-we-use-the-library-function">Why Do We Use the library() Function?</h3>
+<p>Even though a package is installed, R does not automatically load it when you start a new session. To use functions from an installed package, you must load it using the library() function. <strong>You only need to install a package once, but you must load it with library() every time you start R and want to use it.</strong></p>
+<ol start="6" type="1">
+<li>Insert the following code below where you load packages. These commands print information about the system and version of R you are running. This information will be displayed when you source the script and is useful for troubleshooting.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>version</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">.packages</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="read-the-data-into-r" class="level3">
 <h3 class="anchored" data-anchor-id="read-the-data-into-r">Read the data into R</h3>
 <ol type="1">
-<li><p>Download <code>supermarket_sales.csv</code> to the project directory.</p></li>
+<li><p>Download <a href="../inputs/supermarket_sales.csv"><code>supermarket_sales.csv</code></a> to your working directory.</p></li>
 <li><p>Use the function <code>read_csv()</code> to read <code>supermarket_sales.csv</code> into a dataframe called <code>supermarket_raw</code>.</p></li>
-<li><p>Take a look at the dataframe. There are a few ways to look at the dataframe:</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"supermarket_sales.csv"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the first few rows</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(supermarket_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Difference Between `read.csv()` and `read_csv()`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Difference Between <code>read.csv()</code> and <code>read_csv()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Both <strong><code>read.csv()</code></strong> and <strong><code>read_csv()</code></strong> are used to read CSV files into R, but they come from different packages and have some key differences.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 25%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Package</th>
+<th>Speed</th>
+<th>Output Type</th>
+<th>Default Behavior</th>
+<th>Best Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read.csv()</code></td>
+<td>Base R</td>
+<td>Slower</td>
+<td><strong>Data frame</strong></td>
+<td>Converts character columns to factors</td>
+<td>Basic CSV reading in traditional R scripts</td>
+</tr>
+<tr class="even">
+<td><code>read_csv()</code></td>
+<td><code>readr</code> (tidyverse)</td>
+<td>Faster</td>
+<td><strong>Tibble</strong> (modern data frame)</td>
+<td>Keeps character columns as characters</td>
+<td>Handles large datasets more efficiently, works better with modern workflows</td>
+</tr>
+</tbody>
+</table>
+<section id="why-use-read_csv-instead-of-read.csv" class="level3">
+<h3 class="anchored" data-anchor-id="why-use-read_csv-instead-of-read.csv">Why use <code>read_csv()</code> instead of <code>read.csv()</code>?</h3>
+<p>Going forward, because we will be reading data from <strong>websites</strong>, <code>read_csv()</code> is the better option.</p>
+<ol type="1">
+<li><strong><code>read_csv()</code> supports reading from URLs</strong> directly without extra steps.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><code>read.csv()</code> requires downloading the file first or additional steps to read from a URL, just as we have been doing. You can see how cumbersome this is!</li>
+<li><code>read_csv()</code> is faster and more efficient, especially for larger datasets.</li>
+<li><code>read_csv()</code> treats text as text (character) instead of automatically converting it to factor, preventing issues when working with non-categorical text data.</li>
+<li><code>read_csv()</code> returns a <strong>tibble</strong>, which has better printing behavior and is more compatible with the tidyverse.</li>
+</ol>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Tibbles vs. Data Frames">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tibbles vs.&nbsp;Data Frames
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, both <strong>tibbles</strong> and <strong>data frames</strong> store tabular data, but tibbles are a more modern version with improved behavior.</p>
+<section id="key-differences" class="level4">
+<h4 class="anchored" data-anchor-id="key-differences"><strong>Key Differences</strong></h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 36%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Data Frame (Base R)</th>
+<th>Tibble (tidyverse)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Character data</td>
+<td>Converted to factors by default</td>
+<td>Stays as character</td>
+</tr>
+<tr class="even">
+<td>Row names</td>
+<td>Present by default</td>
+<td>No row names</td>
+</tr>
+<tr class="odd">
+<td>Printing</td>
+<td>Shows all columns, can be cluttered</td>
+<td>Shows first 10 rows, fits screen</td>
+</tr>
+<tr class="even">
+<td>Best for?</td>
+<td>Base R functions</td>
+<td>Tidyverse (<code>dplyr</code>, <code>ggplot2</code>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="why-use-tibbles" class="level4">
+<h4 class="anchored" data-anchor-id="why-use-tibbles"><strong>Why Use Tibbles?</strong></h4>
+<p>Tibbles are <strong>easier to read and work better with the tidyverse</strong>. Since <code>read_csv()</code> returns tibbles, we will use them in this course.</p>
+<p><strong>Examples</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>), <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># Notice 'name' is a factor</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a tibble</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>), <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tb)  <span class="co"># 'name' stays as character</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># You can convert between them if needed</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>tibble_version <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df)  <span class="co"># Convert data frame to tibble</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>df_version <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(tb)  <span class="co"># Convert tibble to data frame</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We will cover more on tibbles in future labs.</p>
+</section>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Take a look at the dataframe. There are a few ways to inspect it:</li>
 </ol>
 <ul>
 <li><p>Type the name of the dataframe in the console. This shows the data in the first several rows of the first several columns.</p></li>
-<li><p>Use the function <code>View()</code> with the dataframe name as the argument. Alternatively, you can click on the name of the object in the environment pane.</p></li>
-<li><p>Use the function <code>glimpse()</code> with the dataframe name as the argument.</p></li>
+<li><p>Use the function <code>View()</code> with the dataframe name as the argument. <strong>Notice View() has a capital ‘V’ unlike many other functions in R that are all lower case.</strong> Alternatively, you can click on the name of the object in the environment pane.</p></li>
 </ul>
-<p><strong>Variable names</strong>: You’ll notice that some of the variable names have spaces. This is allowed in R, but they are awkward because you will be using these names in your code. We will cover renaming variables later today, but there is a function to <em>clean</em> (i.e., modify) the names. The function called <code>clean_names()</code> is part of the <code>janitor</code> package.</p>
-<blockquote class="blockquote">
-<p>Try it on your own: Use the <code>clean_names()</code> function to convert all of the column names to snake case. Reference the documentation in the help tab of the lower right panel. The default conversion case is “snake” but you can also specify it in the function explicitly.</p>
-</blockquote>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(supermarket_raw,<span class="st">"snake"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(supermarket_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Check the datatypes of the variables in the dataframe. Do they make sense?</p>
+<ul>
+<li>Use the <code>glimpse()</code> function to get a compact summary of the dataframe.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(supermarket_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Cleaning variable names">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cleaning variable names
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sometimes variable names have spaces. <strong>We generally avoid spaces in coding because they make variable names harder to reference and require special syntax to use them in functions or calculations.</strong> This can make your code more difficult to read and maintain. Spaces are allowed in R, but they are awkward because you will be using these names in your code. We will cover <em>renaming variables</em> later today, but there is a function to <em>clean</em> (i.e., modify) the names. The function called <code>clean_names()</code> is part of the <code>janitor</code> package.</p>
+<p>Try it on your own: Use the <code>clean_names()</code> function to convert all of the column names to snake case. Reference the documentation in the help tab of the lower right panel. The default conversion case is “snake” but you can also specify it in the function explicitly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(supermarket_raw,<span class="st">"snake"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Check the datatypes of the variables in the dataframe. Do they make sense?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check data types</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(supermarket_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
 </section>
 <section id="modifying-the-dataframe" class="level3">
-<h3 class="anchored" data-anchor-id="modifying-the-dataframe">Modifying the dataframe</h3>
-<p>You will often need to modify the data you read in. The package <code>dplyr</code> contains a set of utilities that help you modify dataframes.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <code>dplyr</code> argues that most data modification tasks can be broken into a set of tasks that can be accomplished with these functions named after verbs (<a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a>):</p>
+<h3 class="anchored" data-anchor-id="modifying-the-dataframe">Modifying the Dataframe</h3>
+<p>You will often need to modify the data you read in. The <code>dplyr</code> package provides a set of functions that make data manipulation easier.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p><code>dplyr</code> simplifies data modification by breaking tasks into a set of <strong>core functions</strong> that follow a verb-based structure (<a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a>):</p>
 <ol type="1">
-<li><p><code>mutate()</code> creates new variables (vector) by transforming or operating on one or more other variables</p></li>
-<li><p><code>select()</code> picks variables based on their names.</p></li>
-<li><p><code>filter()</code> picks cases based on their values.</p></li>
-<li><p><code>arrange()</code> changes the ordering of the rows.</p></li>
-<li><p><code>summarise()</code> creates a new variable of different dimension by performing an operation that summarizes another variable(s)</p></li>
-<li><p><code>group_by()</code> an intermediate function that can alter how <code>mutate</code> and <code>summarize</code> behave.</p></li>
+<li><strong><code>mutate()</code></strong> – Creates new variables by transforming or operating on existing ones.</li>
+<li><strong><code>select()</code></strong> – Chooses specific columns based on their names.<br>
+</li>
+<li><strong><code>filter()</code></strong> – Selects rows based on conditions.<br>
+</li>
+<li><strong><code>arrange()</code></strong> – Reorders rows based on values.<br>
+</li>
+<li><strong><code>summarise()</code></strong> – Aggregates values into a summary statistic, often changing the dimensions of the dataframe.<br>
+</li>
+<li><strong><code>group_by()</code></strong> – Alters how <code>mutate()</code> and <code>summarise()</code> behave by grouping data before applying operations.</li>
 </ol>
-<p>The following exercises will introduce you to these core functions while exploring the supermarket_sales data. These functions will all return a dataframe as the output.</p>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> The function <code>summarise()</code> (British spelling) is the same as <code>summarize()</code> (American spelling). You may see both versions in documentation, but we will cover its use later in the lab.</p>
+</blockquote>
+<p>The following exercises will introduce you to these core functions while exploring the <code>supermarket_sales</code> dataset. Each function returns a <strong>modified dataframe</strong> as output.</p>
 </section>
 <section id="mutate" class="level3">
 <h3 class="anchored" data-anchor-id="mutate">1. Mutate</h3>
-<p><code>mutate()</code> is the function to create or add new variables. Let’s recreate the column <code>total</code> by multiplying the columns <code>unit_price</code> and <code>quantity</code>. Note that we create a new variable called <code>total_calc</code> and assign this dataframe to a new object called <code>my_super_sales</code>.</p>
+<p>The <code>mutate()</code> function creates or modifies variables within a dataframe. Let’s create the column <code>subtotal</code> by multiplying <code>unit_price</code> and <code>quantity</code>.</p>
+<p>Here, we create a new variable called <code>subtotal</code> and store the modified dataframe in a new object called <code>my_super_sales</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw,<span class="at">total_calc=</span>unit_price<span class="sc">*</span>quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw, <span class="at">subtotal =</span> unit_price <span class="sc">*</span> quantity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Is the result <code>total_calc</code> equal to the existing column <code>total</code>? Why or why not?</p>
+<p>Check: Is the calculated <strong>subtotal</strong> column exactly the same as the existing total column in supermarket_raw? Why or why not?</p>
 </blockquote>
-<p>You can perform most mathematical operations on numeric columns and other types of operations on string or character data types. The key point to remember is that mutate operations must output a vector that is the same length as the dataframe.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading `mutate()` Syntax">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading <code>mutate()</code> Syntax
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>mutate()</code> function can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">mutate</span>(original_dataframe, <span class="at">new_column =</span> operation, <span class="at">modified_column =</span> transformation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe where new or modified columns will be created.</li>
+<li><code>new_column</code> = operation <span class="math inline">\(\rightarrow\)</span> Defines a new column by performing an operation.</li>
+<li><code>modified_column</code> = <code>transformation</code> <span class="math inline">\(\rightarrow\)</span> Modifies an existing column using a transformation.</li>
+<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe with the changes.</li>
+</ul>
+<section id="important-points-about-mutate" class="level4">
+<h4 class="anchored" data-anchor-id="important-points-about-mutate">Important points about <code>mutate()</code></h4>
+<ul>
+<li><code>mutate()</code> adds or modifies a column while keeping the dataframe the same size.</li>
+<li>It works with numeric columns (e.g., multiplication, addition) and character columns (e.g., string operations like combining text).</li>
+<li><strong>Important:</strong> The result of a <code>mutate()</code> operation must be a vector of the same length as the dataframe. If the lengths don’t match, R will return an error.</li>
+</ul>
+</section>
+</div>
+</div>
 </section>
 <section id="select-and-rename" class="level3">
-<h3 class="anchored" data-anchor-id="select-and-rename">2. Select (and rename)</h3>
-<p><code>select()</code> is a function to subset columns from the dataframe. Suppose you want to create a new dataframe with only the invoice id, the city, the reported total, and the calculated total.</p>
+<h3 class="anchored" data-anchor-id="select-and-rename">2. Select (and Rename)</h3>
+<p>The <code>select()</code> function allows you to <strong>choose specific columns</strong> from a dataframe.</p>
+<p>For example, suppose you want to create a new dataframe containing only:<br>
+- <strong>Invoice ID</strong> (<code>invoice_id</code>)<br>
+- <strong>City</strong> (<code>city</code>)<br>
+- <strong>Reported total</strong> (<code>total</code>)<br>
+- <strong>Calculated total</strong> (<code>subtotal</code>)</p>
+<p>You can use <code>select()</code> like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales,invoice_id,city,total,total_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales, invoice_id, city, total, subtotal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>rename()</code> is a related function used to rename columns rather than subset them. Suppose that you didn’t like the name <code>city</code> and wanted to call it <code>market</code>.</p>
+<section id="renaming-columns" class="level4">
+<h4 class="anchored" data-anchor-id="renaming-columns">Renaming columns</h4>
+<p>If you want to rename a column instead of selecting a subset, use <code>rename()</code>.</p>
+<p>For example, if you prefer market instead of city:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">rename</span>(select_super_sales,<span class="at">market=</span>city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">rename</span>(select_super_sales, <span class="at">market =</span> city)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can combine the operations using the rename syntax to rename a column inside of a select statement.</p>
+</section>
+<section id="combining-select-and-rename" class="level4">
+<h4 class="anchored" data-anchor-id="combining-select-and-rename">Combining <code>select()</code> and <code>rename()</code></h4>
+<p>You can rename columns directly within <code>select()</code>, avoiding the need for a separate <code>rename()</code> step:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales,invoice_id,<span class="at">market=</span>city,total,total_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales, invoice_id, <span class="at">market =</span> city, total, subtotal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading `select()` and `rename()` Syntax">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading <code>select()</code> and <code>rename()</code> Syntax
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<section id="reading-select-syntax" class="level4">
+<h4 class="anchored" data-anchor-id="reading-select-syntax">Reading <code>select()</code> Syntax</h4>
+<p>The <code>select()</code> function can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">select</span>(original_dataframe, column1, column2, column3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are selecting from.</li>
+<li><code>column1</code>, <code>column2</code>, <code>column3</code> <span class="math inline">\(\rightarrow\)</span> The columns you want to keep.</li>
+<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe with only the selected columns.</li>
+</ul>
+<p>–</p>
+</section>
+<section id="reading-rename-syntax" class="level4">
+<h4 class="anchored" data-anchor-id="reading-rename-syntax">Reading <code>rename()</code> Syntax</h4>
+<p>The <code>rename()</code> function can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">rename</span>(original_dataframe, <span class="at">new_name1 =</span> old_name1, <span class="at">new_name2 =</span> old_name2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are renaming columns in.</li>
+<li><code>old_name1</code> → <code>new_name1</code> <span class="math inline">\(\rightarrow\)</span> The new column name is on the left, the old column name is on the right.</li>
+<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe with renamed columns.</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
 </section>
 <section id="filter" class="level3">
 <h3 class="anchored" data-anchor-id="filter">3. Filter</h3>
-<p><code>filter()</code> is a function to subset the rows of a dataframe based on a condition that returns a <code>TRUE</code> or <code>FALSE</code>. This is a very general concept used in all sorts of programming applications. In this context, we will write a statement that is true for some elements of the vector <code>city</code> (renamed to market). To filter the dataframe to only data from the market “Yangon”, we write</p>
+<p>The <code>filter()</code> function is used to <strong>keep only rows that meet a condition</strong>. It evaluates a logical statement for each row and retains rows where the result is <code>TRUE</code>. This is a common concept in programming and allows us to extract only the data that meets specific criteria.</p>
+<p>In this example, we filter the dataframe to include only rows where <code>market</code> (renamed from <code>city</code>) is <strong>“Yangon”</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales,market<span class="sc">==</span><span class="st">"Yangon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, market <span class="sc">==</span> <span class="st">"Yangon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The statement <code>market=="Yangon"</code> can be evaluated on every row as either <code>TRUE</code> or <code>FALSE</code>. This command keeps only the rows where the market name equals the exact word “Yangon.” This is case sensitive because the statement is comparing the market name in each row. You can also create statements using the greater than <code>&gt;</code> or less than <code>&lt;</code> comparing numeric values. You can find more information on logical operators here: <a href="https://www.statmethods.net/management/operators.html" class="uri">https://www.statmethods.net/management/operators.html</a></p>
+<p><strong>How this works:</strong></p>
+<ul>
+<li>The condition <code>market == "Yangon"</code> is checked for every row in the dataframe.</li>
+<li>If the condition is <code>TRUE</code>, the row is kept; if <code>FALSE</code>, the row is removed.</li>
+<li>This is <strong>case-sensitive</strong>, meaning “Yangon” must match exactly (uppercase and lowercase matter).</li>
+</ul>
+<p><strong>Other ways to filter data:</strong></p>
+<p>You can also use comparison operators to filter numeric values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where unit_price is greater than 10</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>high_price_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, unit_price <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where quantity is less than 5</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>low_quantity_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, quantity <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For more on logical operators, check out this resource: <a href="https://www.statmethods.net/management/operators.html">Logical operators in R</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading `filter()` Syntax">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading <code>filter()</code> Syntax
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>filter()</code> function can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">filter</span>(original_dataframe, condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>original_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The dataframe you are filtering.</li>
+<li><code>condition</code> <span class="math inline">\(\rightarrow\)</span> A logical statement that evaluates to <code>TRUE</code> or <code>FALSE</code> for each row.</li>
+<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe, containing only the rows where <code>condition</code> is <code>TRUE</code>.</li>
+</ul>
+<section id="important-points-about-filter" class="level4">
+<h4 class="anchored" data-anchor-id="important-points-about-filter">Important points about <code>filter()</code></h4>
+<ul>
+<li><code>filter()</code> keeps only rows where the condition is <code>TRUE</code>.</li>
+<li>Works with text (strings) and numbers using comparison operators.</li>
+<li>Case-sensitive when filtering strings.</li>
+<li>Multiple conditions can be combined using <code>&amp;</code> (AND) or <code>|</code> (OR), which we will use later.</li>
+</ul>
 </section>
-<section id="arrange-or-sort" class="level3">
-<h3 class="anchored" data-anchor-id="arrange-or-sort">4. Arrange (or sort)</h3>
-<p><code>arrange()</code> is a function that modifies the order of the rows in the dataframe based on the values of a column or set of columns. R can sort numeric and character strings (alphabetical). Let’s start by sorting the dataframe in ascending order based on the column <code>total</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(yangon_super_sales,total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can sort on multiple columns. The order determines how the data are sorted.</p>
-<p>Let’s try something more complex. Use the dataset with all of the markets (<code>select_super_sales</code>) and sort based on market, then by total in descending order to see the top sales in each market.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>super_sales_top <span class="ot">&lt;-</span> <span class="fu">arrange</span>(select_super_sales,market,<span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The function <code>desc()</code> is short for descending and indicates that the total should be sorted in descending order.</p>
-<p><strong>Remember to comment in your code so you can refer back to see what you did.</strong></p>
-<!---## R: `dplyr` continued  --->
-<p>Now you know the four <code>dplyr</code> verbs generally used to manipulate data. We covered <code>mutate, filter, select,</code> and <code>arrange</code>. Next, we will introduce <code>summarize</code> and a helpful companion function <code>group_by</code>.</p>
-<!-- Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). -->
+</section>
+<section id="arrange-sorting-data" class="level3">
+<h3 class="anchored" data-anchor-id="arrange-sorting-data">4. Arrange (Sorting Data)</h3>
+<p>The <code>arrange()</code> function <strong>reorders rows</strong> in a dataframe based on the values in one or more columns.</p>
+<ul>
+<li>R can sort both <strong>numeric values</strong> (smallest to largest) and <strong>character strings</strong> (alphabetical order).<br>
+</li>
+<li>By default, sorting is <strong>ascending</strong> (smallest first), but you can use <code>desc()</code> to sort in <strong>descending</strong> order.</li>
+</ul>
+<section id="sorting-by-one-column" class="level4">
+<h4 class="anchored" data-anchor-id="sorting-by-one-column">Sorting by One Column</h4>
+<p>Let’s start by sorting the <strong>Yangon sales dataset</strong> (<code>yangon_super_sales</code>) in <strong>ascending order</strong> based on <code>total</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>yangon_super_sales_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(yangon_super_sales, total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Result:</strong> Reorders rows so that smaller <code>total</code> values appear first.</p>
+</blockquote>
+</section>
+<section id="sorting-by-multiple-columns" class="level4">
+<h4 class="anchored" data-anchor-id="sorting-by-multiple-columns">Sorting by Multiple Columns</h4>
+<p>You can sort by multiple columns. The order in which you list columns matters—R sorts by the first column first, then resolves ties using the second column, and so on.</p>
+<p>Let’s use the full dataset (<code>select_super_sales</code>) and:</p>
+<ul>
+<li>Sort by <code>market</code> (alphabetical order).</li>
+<li>Within each market, sort <code>total</code> in descending order (highest sales first).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>super_sales_top <span class="ot">&lt;-</span> <span class="fu">arrange</span>(select_super_sales, market, <span class="fu">desc</span>(total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Result:</strong> First, sorts by <code>market</code> alphabetically. Second, within each market, sorts <code>total</code> from highest to lowest.</p>
+</blockquote>
+</section>
+<section id="understanding-desc" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-desc">Understanding <code>desc()</code></h4>
+<p>The function <code>desc()</code> means “descending order”. Without it, <code>arrange()</code> sorts smallest to largest by default.</p>
+<p><strong>Examples</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(supermarket_raw, total)       <span class="co"># Sorts total in ascending order (default)</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(supermarket_raw, <span class="fu">desc</span>(total)) <span class="co"># Sorts total in descending order</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Best Practice: Comment Your Code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Best Practice: Comment Your Code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Always add comments in your code to help you remember what each step does! This makes it easier to understand your work when you revisit it later.</p>
+</div>
+</div>
+<!-- Now you know the four `dplyr` verbs generally used to manipulate data.  We covered `mutate, filter, select,` and `arrange`.  Next, we will introduce `summarize` and a helpful companion function `group_by`.
+
+Let's return to our dataset `supermarket_sales.csv`.  Use the function `read_csv()` to read `supermarket_sales.csv` into a dataframe called `supermarket_raw` (see [lab 2](../week_02/lab_00_week_02.html#read-the-data-into-r)). -->
 <!-- >Note that you can read in data and files from directories other than your working directory.  You can include the directory in the file path. -->
+</section>
 </section>
 <section id="summarize" class="level3">
 <h3 class="anchored" data-anchor-id="summarize">5. Summarize</h3>
-<p>The <code>summarize</code> function is used to collapse multiple rows of data into a single row, by computing summary statistics for each group. This function can be used to summarize and aggregate data by computing statistics such as mean, sum, count, minimum, maximum, etc. for each group defined in the data.</p>
-<p>We can use <code>summarize()</code> to calculate the total number of units sold in the dataset.</p>
+<p>The <code>summarize()</code> function <strong>collapses multiple rows</strong> into a <strong>single row</strong> by computing summary statistics, such as:<br>
+- <strong>Sum: <code>sum()</code></strong><br>
+- <strong>Mean: <code>mean()</code></strong><br>
+- <strong>Count: <code>n()</code></strong><br>
+- <strong>Minimum: <code>min()</code></strong><br>
+- <strong>Maximum: <code>max()</code></strong></p>
+<p>These statistics help aggregate data based on groups or the entire dataset.</p>
+<hr>
+<p><strong>Calculating total quantity sold</strong></p>
+<p>We can use <code>summarize()</code> to calculate the <strong>total number of units sold</strong> across all transactions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_summed=</span><span class="fu">sum</span>(quantity)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Notice that the command above does not assign the output to an object. It can be useful to quickly check the output of a command before assigning an object. Is the variable <code>quantity_summed</code> accessible to you? In other words, could you call that value within R and perform other operations on it?</p>
-<blockquote class="blockquote">
-<p>Try it on your own: Modify the previous command to assign the output to an object called <code>total_sold</code>.</p>
-</blockquote>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>total_sold <span class="ot">&lt;-</span> <span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_summed=</span><span class="fu">sum</span>(quantity)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_summed =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Next, calculate the following: (1) Calculate the average of the <code>quantity</code> variable. In R, the function to calculate average is <code>mean()</code>. (2) Calculate the maximum <code>unit_price</code>. The function to calculate the maximum is <code>max()</code>.</p>
+<p><strong>Result:</strong> This outputs a single row with the total quantity sold. <strong>Notice:</strong> This command does not assign the result to an object. This is useful for a quick check before saving the output.</p>
 </blockquote>
+<p><strong>Is <code>quantity_summed</code> accessible?</strong></p>
+<p>Notice how in the code above we created a new variable called <code>quantity_summed</code>. Can you use it elsewhere in R?</p>
+<p>The answer is <strong>No</strong>. Because we didn’t store it in an object, the value exists only in the output window and cannot be used later.</p>
+<p>Let’s modify the command to store the result in an object called <code>total_sold</code>:</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mean quantity</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">quantity_mean=</span><span class="fu">mean</span>(quantity)) </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Max price</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw,<span class="at">max_price=</span><span class="fu">max</span>(unit_price)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>total_sold <span class="ot">&lt;-</span> <span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_summed =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Result:</strong> Now, the result is saved in total_sold and can be used in other operations.</p>
+</blockquote>
+<p><strong>Try it Yourself</strong></p>
+<p>Write code that calculates the following:</p>
+<ol type="1">
+<li>The average (<code>mean</code>) of the <code>quantity</code> variable.</li>
+<li>The maximum (<code>max</code>) <code>unit_price</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of quantity</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_mean =</span> <span class="fu">mean</span>(quantity))  </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the maximum unit price</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">max_price =</span> <span class="fu">max</span>(unit_price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Important points about `summarize()`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important points about <code>summarize()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>summarize()</code> reduces multiple rows into a single row with summary statistics.</li>
+<li>If you don’t assign the output to an object, you can’t use it later.</li>
+<li>Common summary functions: <code>sum()</code>, <code>mean()</code>, <code>max()</code>, <code>min()</code>, and <code>n()</code>.</li>
+</ul>
+</div>
 </div>
 </section>
 <section id="group-by" class="level3">
-<h3 class="anchored" data-anchor-id="group-by">6. Group by</h3>
-<p>Often times, you need to perform some operation on a group of data. You can think about this as a sequence of operations: part 1) subset the group that you want to focus on, and part 2) perform the operation. For example, you might want to know the quantity of goods sold by branch.</p>
-<p>Step 1: Filter the data in each branch (let’s just do branch A for example)</p>
+<h3 class="anchored" data-anchor-id="group-by">6. Group By</h3>
+<p>Often, we need to perform calculations on <strong>subgroups</strong> of data rather than the entire dataset. You can think of this as a <strong>two-step process</strong>:</p>
+<ol type="1">
+<li><strong>Subset the group</strong> you want to analyze.<br>
+</li>
+<li><strong>Perform the operation</strong> (e.g., sum, mean, count) on that group.</li>
+</ol>
+<p>For example, let’s calculate the <strong>total quantity of goods sold by branch</strong>.</p>
+<hr>
+<section id="grouping-data-manually" class="level4">
+<h4 class="anchored" data-anchor-id="grouping-data-manually">Grouping Data Manually</h4>
+<p>First, we filter for only <strong>Branch A</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You should see a new dataframe called <code>branch_A_sales</code> with 340 observations. All of the variables from <code>supermarket_raw</code> are there including <code>quantity</code>.</p>
-<p>Step 2: Sum the quantity of goods sold</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>branch_A_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_A_sales,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"A"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Try it on your own: Do the same thing for branch B and C.</p>
+<p><strong>Result:</strong> The new dataframe branch_A_sales contains only sales from Branch A. It has 340 observations and includes all original columns.</p>
 </blockquote>
+<p>Now, we sum the <code>quantity</code> column:</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>branch_B_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_B_sales,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>branch_C_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_C_sales,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>branch_A_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_A_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This is pretty tedious. If operations in R or other programming languages seems tedious or repetitive, there are probably much better ways to do it. In this case, we can use a function <code>group_by()</code>. <code>group_by()</code> tells R to perform some operation like <code>sum</code> on each of the subgroups defined by another variable. Let’s sum the quantity by branch using <code>group_by()</code> and <code>summarize()</code>. We will do this in two steps:</p>
-<p>Step 1: Use <code>group_by()</code> to group the data by <code>branch</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create a signal for summarize but not perform any calculation.  </span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>super_sales_grouped_branch <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Step 2: Use <code>summarize()</code> to calculate the total quantity (by branch)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This will create a signal for summarize but not perform any calculation.  </span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch <span class="ot">&lt;-</span> <span class="fu">summarize</span>(super_sales_grouped_branch,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Notice that the result has the quantity sum for each branch. Do they match your manual calculations?</p>
 <blockquote class="blockquote">
-<p>Try it on your own: Calculate the average <code>unit_price</code> for each <code>product_line</code> in the data.</p>
+<p><strong>Result:</strong> This gives us the total quantity sold for Branch A.</p>
 </blockquote>
+<p><strong>Try it Yourself</strong></p>
+<p>Repeat the same process for Branch B and Branch C:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Branch B</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"B"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>branch_B_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_B_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Branch C</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"C"</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>branch_C_total_quantity <span class="ot">&lt;-</span> <span class="fu">summarize</span>(branch_C_sales, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="chaining-commands-or-piping-or" class="level3">
-<h3 class="anchored" data-anchor-id="chaining-commands-or-piping-or">Chaining commands (or piping <code>%&gt;%</code> or <code>|&gt;</code>)</h3>
-<p>A <strong>script</strong> is a set of instructions for R that get executed in order. In some cases, you do not care about or need to save the intermediate output. The <code>group_by</code> and <code>summarize</code> sequence is a good example; you don’t need to store the dataframe <code>super_sales_grouped_branch</code> unless there is a clear use for it later.</p>
-<p>The pipe symbol, represented as <code>%&gt;%</code> or <code>|&gt;</code>, plays a crucial role in streamlining code. It allows for a more readable way of writing sequences of operations.</p>
-<p><strong>What It Does:</strong> The pipe symbol takes the result of the expression on its left and passes it as the first argument to the function on its right. In simpler terms, it “pipes” the output of one function directly into the next function.</p>
-<p><strong>How to Read It:</strong> When you see <code>x %&gt;% f()</code>, interpret it as “take x and then apply f() to it.”</p>
-<p><strong>Code Structure:</strong> Often, you’ll find the pipe at the end of a line, with the next operation starting on a new, often indented, line. This format enhances readability, especially in complex sequences of data manipulation steps.</p>
-<p>Here is a brief example:</p>
+<section id="a-better-way-to-group-data-using-group_by" class="level4">
+<h4 class="anchored" data-anchor-id="a-better-way-to-group-data-using-group_by">A Better Way to Group Data: Using <code>group_by()</code></h4>
+<p>Manually filtering each branch is tedious. In programming, if something feels repetitive, there’s usually a better way to do it!</p>
+<p>The <code>group_by()</code> function automatically groups data based on a variable (e.g., branch) so we can summarize each group in a single step.</p>
+<p><strong>Step 1: Group Data by Branch</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(condition) <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">result =</span> <span class="fu">mean</span>(column))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group the data by branch</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>super_sales_grouped_branch <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw, branch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This code snippet takes called <code>data</code>, arranges it according to some condition, and then calculates the mean of column, summarizing the result. Each step is clearly separated by the pipe symbol, making the sequence of operations easy to follow.</p>
+<blockquote class="blockquote">
+<p><strong>Result:</strong> This does not perform any calculations yet. It creates a signal that tells R to treat each branch as a separate group.</p>
+</blockquote>
+<p><strong>Step 2: Summarize within Each Group</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize total quantity sold by branch</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch <span class="ot">&lt;-</span> <span class="fu">summarize</span>(super_sales_grouped_branch, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Result:</strong> Now, we get the total quantity sold for each branch in a single step! <strong>Check:</strong> Do these results match your manual calculations?</p>
+</blockquote>
+<p><strong>Try it Yourself</strong></p>
+<p>Use <code>group_by()</code> and <code>summarize()</code> to calculate the average unit_price for each product_line in the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your turn: Find the average unit price by product line</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>avg_price_by_product <span class="ot">&lt;-</span> <span class="fu">summarize</span>(<span class="fu">group_by</span>(supermarket_raw, product_line), <span class="at">avg_unit_price =</span> <span class="fu">mean</span>(unit_price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading `group_by()` Syntax">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading <code>group_by()</code> Syntax
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The function <code>group_by()</code> can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>grouped_data <span class="ot">&lt;-</span> <span class="fu">group_by</span>(original_dataframe, grouping_variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>original_dataframe</code> → The dataframe you want to group.</li>
+<li><code>grouping_variable</code> → The column that defines the groups.</li>
+<li><code>grouped_data</code> → The resulting dataframe, where rows are grouped but unchanged.</li>
+</ul>
+<section id="important-points-about-group_by" class="level4">
+<h4 class="anchored" data-anchor-id="important-points-about-group_by">Important points about <code>group_by()</code></h4>
+<ul>
+<li><code>group_by()</code> does not change the data—it only signals R to group rows.</li>
+<li>Use <code>summarize()</code> after <code>group_by()</code> to calculate statistics for each group.</li>
+<li><code>summarize()</code> performs calculations on each group separately.</li>
+<li>You can group by one or multiple columns.</li>
+<li>This is much more efficient than filtering each group manually.</li>
+</ul>
+</section>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="chaining-commands-piping-with-or" class="level3">
+<h3 class="anchored" data-anchor-id="chaining-commands-piping-with-or">Chaining Commands (Piping with <code>%&gt;%</code> or <code>|&gt;</code>)</h3>
+<p>A <strong>script</strong> is a set of instructions for R that execute in order. Often, you do <strong>not</strong> need to store intermediate steps unless they serve a specific purpose later.</p>
+<p>For example, in our <code>group_by()</code> and <code>summarize()</code> sequence, storing <code>super_sales_grouped_branch</code> is unnecessary if we only need the final result. Instead of creating temporary objects, we can <strong>chain commands</strong> using the <strong>pipe operator</strong> (<code>%&gt;%</code> in <code>dplyr</code>, <code>|&gt;</code> in base R).</p>
+<section id="what-does-the-pipe-do" class="level4">
+<h4 class="anchored" data-anchor-id="what-does-the-pipe-do">What Does the Pipe Do?</h4>
+<p>The pipe <strong>passes the output</strong> of one function <strong>directly</strong> into the next function, eliminating the need for intermediate variables.</p>
+<ul>
+<li><code>x %&gt;% f()</code> means <strong>“take <code>x</code> and apply <code>f()</code> to it.”</strong><br>
+</li>
+<li>The pipe improves <strong>readability</strong>, especially when applying multiple functions in sequence.</li>
+</ul>
+</section>
+<section id="how-to-read-piping-syntax" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-read-piping-syntax">How to Read Piping Syntax</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span>  <span class="co"># Starts with the data</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(condition) <span class="sc">%&gt;%</span>   <span class="co"># Arranges the data based on a condition</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">result =</span> <span class="fu">mean</span>(column))  <span class="co"># Passes the arranged data to summarize() to compute the mean of column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Each step in this code chunk is clearly separated by the pipe symbol <code>%&gt;%</code>, making it easier to follow than a series of nested function calls:</p>
+<ul>
+<li>Step 1: Starts with data.</li>
+<li>Step 2: Arranges data based on condition.</li>
+<li>Step 3: Pass the arranged data to <code>summarize()</code> to compute the mean of column.</li>
+</ul>
+<p><a href="https://youtu.be/e_SQnJpS5fA">Video tutorial here</a></p>
+</section>
+<section id="using-piping-with-group_by-and-summarize" class="level4">
+<h4 class="anchored" data-anchor-id="using-piping-with-group_by-and-summarize">Using Piping with <code>group_by()</code> and <code>summarize()</code></h4>
+<p>Let’s apply piping to our <code>group_by()</code> and <code>summarize()</code> sequence:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the pipe to group and summarize in one step</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> supermarket_raw <span class="sc">%&gt;%</span>  <span class="co"># Start with supermarket_raw</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(branch) <span class="sc">%&gt;%</span>  <span class="co"># Group by branch</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))  <span class="co"># Summarize total quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Each step in this code chunk is clearly separated by the pipe symbol <code>%&gt;%</code>:</p>
+<ul>
+<li>Step 1: Start with supermarket_raw.</li>
+<li>Step 2: Group by branch.</li>
+<li>Step 3: Pass the grouped data to summarize() to calculate total_quantity.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Why Use Piping?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why Use Piping?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Reduces unnecessary variables – no need to store temporary objects.</li>
+<li>Improves readability – each step is clearly separated.</li>
+<li>Easier debugging – you can run each part separately if needed.</li>
+</ul>
+</div>
+</div>
 <!-- The symbol known as the pipe, `%>%`, means take the output of the function on the left and use it as an input for the function on the right.^[The pipe was originally introduced in the package [`magrittr`](https://magrittr.tidyverse.org/reference/pipe.html) and is represented by the symbol `%>%`.  The pipe syntax became so popular that it is now part of R without loading packages (aka base R) using the symbol `|>`.  They are not equivalent.  I will use the `magrittr` pipe in this class.]   -->
 <!---A quick note about a symbol in R code called the "pipe" `%>%` or `|>`.  The pipe means take the output from the function preceding the pipe and use it as the input to the function following the pipe.  You will often see the pipe as the final symbol on the line and the next function call on the next line (indented). --->
-<p>Video tutorial here: <a href="https://youtu.be/e_SQnJpS5fA" class="uri">https://youtu.be/e_SQnJpS5fA</a></p>
-<p>Let’s return to our <code>group_by()</code> and <code>summarize()</code> sequence and use the pipe technique rather than assign the intermediate step to a dataframe. Try it!</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the pipe to chain two statements </span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw,branch) <span class="sc">%&gt;%</span> <span class="co">#group by branch and pass the output to summarize</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(.,<span class="at">total_quantity=</span><span class="fu">sum</span>(quantity)) <span class="co">#Sum the quantity by branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<hr>
+</section>
 </section>
 <section id="appending-data" class="level3">
 <h3 class="anchored" data-anchor-id="appending-data">Appending data</h3>
 <p>In many cases, you will need to combine parts of datasets into a single larger dataset.</p>
 <p>Let’s return to the example of breaking up the dataset by branch. If you have not created dataframes for each branch above, do it using these commands:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"A"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"B"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw,branch<span class="sc">==</span><span class="st">"C"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that each of these dataframes contains only the sales from the branch indicated in the dataframe name.</p>
-<p>Suppose you were given the data as three separate files and you read them into these dataframes. However, you want to profile company sales across the branches. You need to <strong>append</strong> them together. The <code>dplyr</code> function to append rows is <code>bind_rows()</code>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>Suppose you were given the data as three separate files and you read them into these dataframes. However, you want to profile company sales across the branches. You need to <strong>append</strong> them together. The <code>dplyr</code> function to append rows is <code>bind_rows()</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales,branch_B_sales,branch_C_sales) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales,branch_B_sales,branch_C_sales) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that <code>bind_rows()</code> looks for shared column names in each dataframe. If one dataframe is missing a column, it will be filled with <code>NA</code>. <code>NA</code> in R stands for “Not Available” or “Not Applicable.” `NA’ is used to indicate that a value is missing or undefined in a data set. This can happen when data is not available for a particular observation, or when a value cannot be calculated for some reason. When R encounters an “NA” value, it treats it differently from other values, and special functions are often used to handle missing data.</p>
+<hr>
 </section>
 <section id="log-file-revisited" class="level3">
 <h3 class="anchored" data-anchor-id="log-file-revisited">Log file (revisited)</h3>
 <p>To output the log from sourcing an R script to a text file, you can use the <code>sink()</code> function. The <code>sink()</code> function redirects R output to a file or connection.</p>
 <p>For example, to redirect the output of <code>source("script.R",echo = TRUE)</code> to a file named “log.txt”, you can use the following command. Remember to run this set of commands from another script or directly in the console. Do not include it in the script you are sourcing (i.e., <code>script.R</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"log.txt"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="at">file =</span> <span class="st">"log.txt"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will run the script “script.R” and redirect all the output to the file “log.txt”. <code>echo=TRUE</code> ensures that the output of the script is just like you see in the console when you run each line individually. Once the script is finished, you can use the <code>sink()</code> function again to stop redirecting the output and return it to the console. Note that the sink command must be run outside of “script.R” because the command <code>source()</code> is equivalent to running every line of “script.R.”</p>
-<blockquote class="blockquote">
-<p>Try it on your own: Open a new script and call it <code>lab_03_log.R</code>. Update the code above so it will run the script <code>lab_03_script.R</code>. Note: You will have to comment out any places where you installed packages, and used the commands <code>setwd()</code>, <code>getwd()</code>, and <code>dir()</code>.</p>
-</blockquote>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03_script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>Open a new script and call it <code>lab_03_log.R</code>. Update the code above so it will run the script <code>lab_03_script.R</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Don't forget to comment out these lines of code">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Don’t forget to comment out these lines of code
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before running your log script (“sink-source-sink”), you will have to comment out any places where you installed packages <code>install.packages()</code>, or used the commands <code>setwd()</code>, <code>getwd()</code>, and <code>dir()</code>. Then, save your <code>lab_03.R</code> script before running the log script.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03_script.R"</span>,<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is a video that walks you through how to generate a log file using <code>sink()</code> and <code>source()</code> in RStudio. You can also access the video through this <a href="https://colostate-my.sharepoint.com/:v:/g/personal/lachenar_colostate_edu/EcqjbmCUf2NHhmuMF6q9RAMBqMjRvg3Gzw59KOIfsPupOg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&amp;e=Fgefze" target="&quot;_blank&quot;">link</a>.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AysPiUIzKnE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 </section>
 
@@ -387,10 +983,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Remember that you need to be signed on to the VPN if you are off campus. If you are on campus, the link should take you to the RStudio sign on page.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Install if necessary.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>The package <code>dplyr</code> is part of a larger set of packages known as the <code>tidyverse</code> <a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>. The term <em>tidy</em> refers to a structure of data. There is a large and growing community that develops R packages that adhere to the tidy principles, so there is extensive documentation and support available. Most of what I teach in this class will be part of the tidyverse or adherant to its principles. Video tutorial here: <a href="https://youtu.be/bUM3wX4YZDc" class="uri">https://youtu.be/bUM3wX4YZDc</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p><a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> is a more efficient version of a function in base R called <code>rbind()</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The package <code>dplyr</code> is part of the <code>tidyverse</code> <a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>—a collection of R packages designed for data science. <em>Tidy</em> refers to a structured way of organizing data. The <code>tidyverse</code> has extensive documentation and a large community for support. Most of what we cover in this class follows <code>tidyverse</code> principles. Video tutorial: <a href="https://youtu.be/bUM3wX4YZDc" class="uri">https://youtu.be/bUM3wX4YZDc</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> is a more efficient version of a function in base R called <code>rbind()</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
@@ -429,18 +1023,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -472,11 +1055,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -486,8 +1108,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -499,7 +1130,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -543,6 +1297,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -568,6 +1323,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -628,6 +1409,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
