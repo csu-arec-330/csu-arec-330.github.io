@@ -662,10 +662,10 @@ Reading <code>filter()</code> Syntax
 <p>You can also use comparison operators to filter numeric values:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where unit_price is greater than 10</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>high_price_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, unit_price <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>high_price_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(my_super_sales, unit_price <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where quantity is less than 5</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>low_quantity_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, quantity <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>low_quantity_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(my_super_sales, quantity <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For more on logical operators, check out this resource: <a href="https://www.statmethods.net/management/operators.html">Logical operators in R</a>.</p>
 </section>
@@ -940,9 +940,18 @@ Reading <code>group_by()</code> Syntax
 </li>
 <li>The pipe improves <strong>readability</strong>, especially when applying multiple functions in sequence.</li>
 </ul>
-</section>
-<section id="how-to-read-piping-syntax" class="level4">
-<h4 class="anchored" data-anchor-id="how-to-read-piping-syntax">How to Read Piping Syntax</h4>
+<div class="callout callout-style-default callout-note callout-titled" title="How to Read Piping Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+How to Read Piping Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span>  <span class="co"># Starts with the data</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(condition) <span class="sc">%&gt;%</span>   <span class="co"># Arranges the data based on a condition</span></span>
@@ -954,6 +963,9 @@ Reading <code>group_by()</code> Syntax
 <li>Step 2: Arranges data based on condition.</li>
 <li>Step 3: Pass the arranged data to <code>summarize()</code> to compute the mean of column.</li>
 </ul>
+</div>
+</div>
+</div>
 <p><a href="https://youtu.be/e_SQnJpS5fA">Video tutorial here</a></p>
 </section>
 <section id="using-piping-with-group_by-and-summarize" class="level4">
@@ -972,7 +984,7 @@ Reading <code>group_by()</code> Syntax
 <li>Step 3: Pass the grouped data to summarize() to calculate total_quantity.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Why Use Piping?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -981,7 +993,7 @@ Why Use Piping?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Reduces unnecessary variables – no need to store temporary objects.</li>

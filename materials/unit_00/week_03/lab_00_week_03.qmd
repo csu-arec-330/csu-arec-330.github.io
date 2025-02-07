@@ -379,10 +379,10 @@ You can also use comparison operators to filter numeric values:
 ```{r}
 #| eval: false
 # Filter for rows where unit_price is greater than 10
-high_price_sales <- filter(select_super_sales, unit_price > 10)
+high_price_sales <- filter(my_super_sales, unit_price > 10)
 
 # Filter for rows where quantity is less than 5
-low_quantity_sales <- filter(select_super_sales, quantity < 5)
+low_quantity_sales <- filter(my_super_sales, quantity < 5)
 ```
 For more on logical operators, check out this resource: [Logical operators in R](https://www.statmethods.net/management/operators.html).
 
@@ -649,7 +649,7 @@ The pipe **passes the output** of one function **directly** into the next functi
 - `x %>% f()` means **"take `x` and apply `f()` to it."**  
 - The pipe improves **readability**, especially when applying multiple functions in sequence.  
 
-#### How to Read Piping Syntax
+:::{.callout-note title="How to Read Piping Syntax" collapse=true}
 
 ```{r}
 #| eval: false
@@ -664,6 +664,7 @@ Each step in this code chunk is clearly separated by the pipe symbol `%>%`, maki
 - Step 1: Starts with data.
 - Step 2: Arranges data based on condition.
 - Step 3: Pass the arranged data to `summarize()` to compute the mean of column.
+:::
 
 [Video tutorial here](https://youtu.be/e_SQnJpS5fA)
 
