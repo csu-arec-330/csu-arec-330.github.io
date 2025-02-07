@@ -7,6 +7,10 @@ format:
 
 Link to the description of the supermarket sales data available in the [Supermarket Sales Data Overview](https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html).
 
+## Part 0: Before You Begin
+
+If you are still on the 14-day free trial, you will need to apply for your 1-year academic license through the [Tableau for students site](https://www.tableau.com/academic/students). After you register, you will receive your product activation key.
+
 ## Part 1: Getting started with Tableau
 
 Open Tableau and connect to the **Supermarket Sales** Data (`supermarket_sales.csv`).
