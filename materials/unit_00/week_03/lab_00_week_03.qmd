@@ -720,7 +720,7 @@ Suppose you were originally given the data as three separate files—one per bra
 
 **Using `bind_rows()` to append data**
 
-The `dplyr` function for appending rows is ^[[`bind_rows()`](https://dplyr.tidyverse.org/reference/bind.html) is a more efficient version of a function in base R called `rbind()`.]. This function efficiently combines multiple dataframes by stacking their rows together.
+The [`bind_rows()`](https://dplyr.tidyverse.org/reference/bind.html) function is used to **append (stack) multiple dataframes by rows**, even if they do not have identical column names. It is a flexible and efficient alternative to `rbind()` from base R.
 
 ```{r}
 #| eval: false
@@ -732,7 +732,67 @@ super_reconstruct <- bind_rows(branch_A_sales, branch_B_sales, branch_C_sales)
 - `bind_rows()` looks for shared column names in each dataframe.
 - If one dataframe is missing a column, the missing values will be automatically filled with `NA`.
 
-**Handling Missing Values (`NA`) in R**
+:::{.callout-note title="Reading `bind_rows()` Syntax" collapse=true}
+
+The function `bind_rows()` can be written generically as follows:
+```{r}
+#| eval: false
+new_dataframe <- bind_rows(dataframe1, dataframe2, dataframe3)
+```
+
+- `dataframe1`, `dataframe2`, `dataframe3` → Dataframes to be combined.
+- `new_dataframe` $\rightarrow$ The resulting dataframe with rows from all input dataframes.
+
+**Important points about `bind_rows()`**
+
+- Automatically handles missing columns: If a column exists in one dataframe but not another, `bind_rows()` fills the missing values with `NA`.
+- Can combine more than two dataframes at once: Unlike `rbind()`, `bind_rows()` easily stacks multiple dataframes in a single function call.
+- Works well with tibbles: `bind_rows()` is part of the `tidyverse` and integrates smoothly with tibbles.
+:::
+
+:::{.callout-important title="Difference Between `bind_rows()` and `rbind()`" collapse=true}
+
+Both functions **append dataframes by rows**, but they differ in flexibility.  
+
+**`bind_rows()` (`dplyr`)**
+
+- **Handles missing columns**: Fills with `NA` if a column is missing.  
+- **Supports multiple dataframes**: Can bind more than two at once.  
+- **Works with tibbles**: Preserves tibble structure.  
+
+**`rbind()` (Base R)**
+
+- **Requires identical column names**: Will fail if columns do not match.  
+- **Only two at a time**: Must manually chain for more.  
+- **Converts tibbles to data frames**.  
+
+**Comparison Table**  
+
+| Feature            | `bind_rows()` (`dplyr`) | `rbind()` (Base R) |
+|--------------------|------------------------|---------------------|
+| Missing columns   | Fills with `NA`      | Must match      |
+| Multiple inputs   | Yes                  | No, only two    |
+| Tibble support    | Yes                  | Converts to df  |
+| Performance       | Faster                | Slower for large data |
+
+**Examples**  
+
+```{r}
+#| eval: false
+library(dplyr)
+
+df1 <- tibble(id = 1:3, value = c(10, 20, 30))
+df2 <- tibble(id = 4:5, category = c("A", "B"))  # No 'value' column
+
+# Using bind_rows()
+bind_rows(df1, df2)  # Adds 'category' column, fills missing values with NA
+
+# Using rbind() (will fail)
+rbind(df1, df2)  # Error: columns must match
+```
+:::
+
+### Handling Missing Values (`NA`) in R
 
 In R, `NA` stands for “Not Available” or “Not Applicable”. It indicates missing or undefined values in a dataset. This can happen when:
 

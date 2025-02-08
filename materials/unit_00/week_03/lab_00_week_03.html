@@ -126,6 +126,7 @@ window.Quarto = {
   <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">6. Group By</a></li>
   <li><a href="#chaining-commands-piping-with-or" id="toc-chaining-commands-piping-with-or" class="nav-link" data-scroll-target="#chaining-commands-piping-with-or">Chaining Commands (Piping with <code>%&gt;%</code> or <code>|&gt;</code>)</a></li>
   <li><a href="#appending-data" id="toc-appending-data" class="nav-link" data-scroll-target="#appending-data">Appending data</a></li>
+  <li><a href="#handling-missing-values-na-in-r" id="toc-handling-missing-values-na-in-r" class="nav-link" data-scroll-target="#handling-missing-values-na-in-r">Handling Missing Values (<code>NA</code>) in R</a></li>
   <li><a href="#saving-the-log-file-for-lab_03.r" id="toc-saving-the-log-file-for-lab_03.r" class="nav-link" data-scroll-target="#saving-the-log-file-for-lab_03.r">Saving the Log File for <code>lab_03.R</code></a></li>
   </ul></li>
   </ul>
@@ -1020,7 +1021,7 @@ Why Use Piping?
 <p><strong>Why Append Data?</strong></p>
 <p>Suppose you were originally given the data as three separate files—one per branch. If you want to analyze company-wide sales, you need to append these datasets back together into a single dataframe.</p>
 <p><strong>Using <code>bind_rows()</code> to append data</strong></p>
-<p>The <code>dplyr</code> function for appending rows is <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. This function efficiently combines multiple dataframes by stacking their rows together.</p>
+<p>The <a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> function is used to <strong>append (stack) multiple dataframes by rows</strong>, even if they do not have identical column names. It is a flexible and efficient alternative to <code>rbind()</code> from base R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales, branch_B_sales, branch_C_sales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1029,7 +1030,115 @@ Why Use Piping?
 <li><code>bind_rows()</code> looks for shared column names in each dataframe.</li>
 <li>If one dataframe is missing a column, the missing values will be automatically filled with <code>NA</code>.</li>
 </ul>
-<p><strong>Handling Missing Values (<code>NA</code>) in R</strong></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Reading `bind_rows()` Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reading <code>bind_rows()</code> Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The function <code>bind_rows()</code> can be written generically as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(dataframe1, dataframe2, dataframe3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>dataframe1</code>, <code>dataframe2</code>, <code>dataframe3</code> → Dataframes to be combined.</li>
+<li><code>new_dataframe</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe with rows from all input dataframes.</li>
+</ul>
+<p><strong>Important points about <code>bind_rows()</code></strong></p>
+<ul>
+<li>Automatically handles missing columns: If a column exists in one dataframe but not another, <code>bind_rows()</code> fills the missing values with <code>NA</code>.</li>
+<li>Can combine more than two dataframes at once: Unlike <code>rbind()</code>, <code>bind_rows()</code> easily stacks multiple dataframes in a single function call.</li>
+<li>Works well with tibbles: <code>bind_rows()</code> is part of the <code>tidyverse</code> and integrates smoothly with tibbles.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Difference Between `bind_rows()` and `rbind()`">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Difference Between <code>bind_rows()</code> and <code>rbind()</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Both functions <strong>append dataframes by rows</strong>, but they differ in flexibility.</p>
+<p><strong><code>bind_rows()</code> (<code>dplyr</code>)</strong></p>
+<ul>
+<li><strong>Handles missing columns</strong>: Fills with <code>NA</code> if a column is missing.<br>
+</li>
+<li><strong>Supports multiple dataframes</strong>: Can bind more than two at once.<br>
+</li>
+<li><strong>Works with tibbles</strong>: Preserves tibble structure.</li>
+</ul>
+<p><strong><code>rbind()</code> (Base R)</strong></p>
+<ul>
+<li><strong>Requires identical column names</strong>: Will fail if columns do not match.<br>
+</li>
+<li><strong>Only two at a time</strong>: Must manually chain for more.<br>
+</li>
+<li><strong>Converts tibbles to data frames</strong>.</li>
+</ul>
+<p><strong>Comparison Table</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th><code>bind_rows()</code> (<code>dplyr</code>)</th>
+<th><code>rbind()</code> (Base R)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Missing columns</td>
+<td>Fills with <code>NA</code></td>
+<td>Must match</td>
+</tr>
+<tr class="even">
+<td>Multiple inputs</td>
+<td>Yes</td>
+<td>No, only two</td>
+</tr>
+<tr class="odd">
+<td>Tibble support</td>
+<td>Yes</td>
+<td>Converts to df</td>
+</tr>
+<tr class="even">
+<td>Performance</td>
+<td>Faster</td>
+<td>Slower for large data</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>))</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">category =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>))  <span class="co"># No 'value' column</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Using bind_rows()</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(df1, df2)  <span class="co"># Adds 'category' column, fills missing values with NA</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Using rbind() (will fail)</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(df1, df2)  <span class="co"># Error: columns must match</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="handling-missing-values-na-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="handling-missing-values-na-in-r">Handling Missing Values (<code>NA</code>) in R</h3>
 <p>In R, <code>NA</code> stands for “Not Available” or “Not Applicable”. It indicates missing or undefined values in a dataset. This can happen when:</p>
 <ul>
 <li>Data is not available for a specific observation.</li>
@@ -1049,9 +1158,9 @@ Why Use Piping?
 <li>Run the following commands. <strong>Do not include them in <code>lab_03.R</code> itself.</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will execute <code>lab_03.R</code> and store its output in <code>lab_03_log.txt</code>. The argument <code>echo = TRUE</code> ensures the log captures the script output as seen in the console.</p>
 <p><strong>Why Use <code>.log</code> or <code>.txt</code> for output?</strong></p>
@@ -1094,7 +1203,6 @@ Important notes about running your log script
 
 <ol>
 <li id="fn1"><p>The package <code>dplyr</code> is part of the <code>tidyverse</code> <a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>—a collection of R packages designed for data science. <em>Tidy</em> refers to a structured way of organizing data. The <code>tidyverse</code> has extensive documentation and a large community for support. Most of what we cover in this class follows <code>tidyverse</code> principles. Video tutorial: <a href="https://youtu.be/bUM3wX4YZDc" class="uri">https://youtu.be/bUM3wX4YZDc</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://dplyr.tidyverse.org/reference/bind.html"><code>bind_rows()</code></a> is a more efficient version of a function in base R called <code>rbind()</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
