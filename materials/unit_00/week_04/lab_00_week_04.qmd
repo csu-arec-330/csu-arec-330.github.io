@@ -33,49 +33,83 @@ This Lab Contributes to Course Objectives: 2, 3, 4, 5, 8
 
 The objective of the project is to integrate the R and Tableau skills that you have learned so far in the course, conduct an analysis, and present your findings. We have covered most of the skills you will need to conduct your analysis.  This lab will cover a few tasks that will aid you in developing an entire analytics workflow.  By workflow, we mean a sequence of steps beginning with an R script and ending with a set of steps in Tableau to create visuals. 
 
+[Link to Project 00 (Problem Set 4) Mini Project](https://csu-arec-330.github.io/materials/unit_00/week_04/ps4.html)
+
 ## R 
 
-### Reading data from a file path
+### Getting Started
 
-**Download the data:** You now have 3 years worth of data (2017 - 2019). The data are hosted on the course materials webpage here: <https://csu-arec-330.github.io/course-materials/>.  
+**Download the data:** 
 
-**Import the data:** The structure of the data is the same in each year, but you need to combine them into a single dataframe.  
+You now have 3 years worth of data (2017 - 2019). The data are hosted on the course materials webpage here: <https://csu-arec-330.github.io/course-materials/>.  
 
-**Inspect the data:** There are some slight problems that need fixing.  Then you need to export the data to be used in Tableau.
+**Import the data:** 
 
-Start a new R script and get set up:
+Each dataset has the same structure, and you will need to combine them into a single dataframe for analysis.
 
-- write a brief description of the script
+**Inspect the data:** 
 
-- set working directory
+Before proceeding, check for any inconsistencies or missing values that need to be addressed. Once cleaned, you will export the data for use in Tableau.
 
-- load required packages
+### Set up your R script
+
+Create a new R script and include the following:
+
+- Write a brief description of the script's purpose.
+
+- Set your working directory.
+
+- Load required packages (e.g., `readr`, `dplyr`, etc.)
 
 ### Reading data from a URL
 
-Up until now, we have downloaded data and read it into R or Tableau. We want you to understand the process of reading data from your file system and understand the structure of your file system.  However, R is capable of downloading and reading files directly from web addresses. Using the `read_csv()` function from the `readr` package, you will read in the data and assign the output to a new dataframe.
+Previously, we downloaded data before reading it into R or Tableau. Understanding how to manage local file paths is important, but R can also read data directly from the web. This is useful for automating updates when datasets change frequently online.
+
+Use the `read_csv()` function from the `readr` package to read in the datasets:
 
 ```{r}
 #| eval: false
 
 super_2017 <- read_csv("your_url_here.csv")
+super_2018 <- read_csv("your_url_here.csv")
+super_2019 <- read_csv("your_url_here.csv")
 ```
 
-Do the same for years 2018 and 2019.
-
-On occasion datasets are hosted on a website and updated regularly.  Writing an R script to pull data from another website and process it can save you time in the future. 
+This method saves time when working with regularly updated datasets hosted online.
 
 ### Data processing
 
-Now you have three dataframes with the same columns. You need to append 2018 and 2019 onto 2017 (i.e., bind the dataframes together).
+Now you have three dataframes (`super_2017`, `super_2018`, `super_2019`) with the same columns, you need to: 
 
-Once you have a single dataframe with all of the years, inspect the dataframe for missing data.  Use the appropriate `dplyr` functions to fill in the missing data.
+1. **Append** the datasets: Use `bind_rows()` to combine all three years into a single dataframe.
+
+```{r}
+#| eval: false
+
+super_sales_all <- bind_rows(super_2017, super_2018, super_2019)
+```
+
+2. **Check for missing data**: Use the `dplyr` functions (`mutate()` and `replace_na()`) to fill missing values.
+
+**Your Task:** Find which variables contain `NA` values and replace them the the appropriate default value. **Note the data type**—replace strings with a string and numeric values with a numeric value.
+
+```{r}
+#| eval: false
+
+# Example: Replace missing values in a specific column
+super_sales_all <- super_sales_all %>%
+  mutate(column_name = replace_na(column_name, "Default Value"))
+```
+
+:::{.callout-note}
+A default value is a value that is automatically assigned to a variable when no other value is provided. In the context of `replace_na(column_name, "Default Value")`, it means that any missing (`NA`) values in column_name will be replaced with `"Default Value"` instead of remaining empty or undefined.
+:::
 
 *Note: Gross margin is calculated as the proportion of revenue that exceeds the cost of goods sold (COGS).*
 
 ### Exporting dataframes
 
-So far, you have read in data and processed it all within R. For this project, you will need to export the cleaned data from R in a format that can be read into Tableau.  The `readr` package contains `write_*()` functions that are analogous to the `read_*()` functions.  
+Once your data is cleaned, export it in a format that can be read into Tableau. The `readr` package contains `write_*()` functions for exporting data, which work similarly to `read_*()` functions.  
 
 ```{r}
 #| eval: false
@@ -83,72 +117,81 @@ So far, you have read in data and processed it all within R. For this project, y
 write_csv(your_dataframe,"filename.csv")
 ```
 
-Read through the documentation. Since `write_csv()` is writing data, you need to tell R what dataframe (e.g., `super_2017`) you want to write and the name of the file you intend to create `filename.csv`. Note that you can also write to another directory just as you read from another directory.
+**Important:**
+
+- Specify the dataframe you want to export (e.g., `super_sales_all`).
+
+- Choose an appropriate filename (e.g., `"supermarket_sales_cleaned.csv"`). Check that your punctuation matches the example code!
+
+- If needed, specify a different directory for the output file.
+
+Read the documentation for `write_csv()` to understand additional options for exporting data efficiently.
 
 {{< video https://youtu.be/uy_XIVghxWw aspect-ratio="16x9" >}}
 
 
 ## Tableau
 
-So far, we have focused on making single graphics.  One strength of Tableau is the ability to create interactive dashboards with interconnected elements.  
+So far, we have focused on making single graphics.  One of Tableau'’'s strengths is the ability to create interactive **dashboards** that connect multiple visual elements.
 
 ### Part 1: Create your visualizations
 
 Follow the steps from previous labs to connect to the dataset and create two graphics:
 
-1. A line graph plotting total sales by date
+1. A **line graph** plotting total sales by date
 
-2. A bar chart plotting the count of transactions by payment type
+2. A **bar chart** plotting the count of transactions by payment type
 
 ### Part 2: Build your dashboard
 
-Now create a dashboard with these two visualizations by following these steps:
+Now, bring these visualizations into a **dashboard** by following these steps:
 
-1.  Click the 'New Dashboard' icon at the bottom of Tableau Desktop.
+1.  Click the **'New Dashboard'** icon at the bottom of Tableau Desktop.
 
 2.  Drag each of your visualizations (one at a time) to the dashboard window. 
 
 3.  Experiment with moving these visualizations around, resizing them, and editing their titles. 
 
-4.  **Add interactivity 1:** Create a filter based on payment type:
 
--  Select the bar chart
+### Part 3: Add Interactivity 
 
--  Click 'More Options' (the little down arrow on the toolbar next to the graph) 
+1. Filter by payment type:
 
--  Select 'Use as filter'
+-  Select the bar chart.
 
-What did this do?
+-  Click 'More Options' (the small down arrow on the toolbar next to the chart). 
 
-5.  Add **interactivity 2:** Create a filter based on city that applied to both visualizations:
+-  Select 'Use as filter'.
 
--  Go back to the worksheet with your line graph 
+> **Question: What happens when you click different payment types?**
 
--  Drag the field 'City' to the filters card (and select all)
+2.  Filter by city (applied to both visualizations)
 
--  Return to your dashboard
+-  Open the line graph worksheet.
 
--  Select the line chart
+-  Drag 'City' to the Filters card and select all cities.
 
--  Click 'More Options' -> 'Filter' -> 'City'
+-  Return to your dashboard.
 
--  Change the city filters
+-  Select the line chart, then click 'More Options' $\rightarrow$ 'Filter' $\rightarrow$ 'City'
 
-What happens?
+-  Change the city filter and observe the changes.
 
--  Select the new pane with your city filter
+> **Question: What does this filter control?**
 
--  Click 'More Options' -> 'Apply to Worksheets' -> 'Selected Worksheets' (this dropdown appears next to the city filter)
+-  Select the City filter pane.
 
-What did this do?
+-  Click 'More Options' $\rightarrow$ 'Apply to Worksheets' $\rightarrow$ 'Selected Worksheets' (this dropdown appears next to the city filter).
 
-6.  Play around with formatting:
+> **Question: What effect does this have on your dashboard?**
 
--  Try adding text. Can you change the text box so that you can place it on top of your figures?
+### Part 4: Customize Your Dashboard
 
--  Try adding an image from the web.
+1.  **Add text:** Try adding a text box. Can you reposition it on top of your figures?
 
--  Try adding an extension (just pick one that sounds cool)
+2. **Insert an image:** Add an image from the web and adjust its placement.
+
+Take time to explore different formatting options to improve the clarity and appearance of your dashboard.
 
 {{< video https://youtu.be/9XsVbQAfoOE aspect-ratio="16x9" >}}
 
