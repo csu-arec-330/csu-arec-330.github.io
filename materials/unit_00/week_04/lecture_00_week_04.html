@@ -8,7 +8,7 @@
 <link href="lecture_00_week_04_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_00_week_04_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_00_week_04_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Week 4: Question-Focused Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -341,19 +342,34 @@
 <!-- Big Text -->
 <!-- ::: -->
 </section>
+<section id="by-the-end-of-todays-lecture" class="slide level2">
+<h2>By the end of today’s lecture…</h2>
+<p>Selected a scenario (question) that you will answer for project 00 (problem set 4), applying the <strong>D<sup>3</sup>M process</strong>, <strong>principles of data storytelling</strong>, and <strong>guidelines for creating effective data visualizations</strong>.</p>
+<p>We will spend Friday’s lab working on building your data story to answer the question you choose.</p>
+</section>
 <section id="identify-a-question" class="slide level2">
 <h2>Identify a question</h2>
-<p>A question might be driven by a business decision or goal</p>
+<p>A question might be driven by a business decision or goal. Examples:</p>
 <ul>
 <li><p>We need to cut costs. Can we reallocate labor more efficiently?</p></li>
 <li><p>We want to increase profits. Can we increase marketing efforts on profitable product lines?</p></li>
 </ul>
 </section>
-<section id="refine-the-question" class="slide level2">
+<section id="refine-the-question" class="slide level2 scrollable">
 <h2>Refine the question</h2>
-<p>Can we answer the question with the available data?</p>
-<p>Is the question specific enough?</p>
-<p>Will the answer explain a phenomenon?</p>
+<p>Ask yourself:</p>
+<ul>
+<li><strong>Can we answer the question with the available data?</strong> If not, we should adjust the question or collect more data.</li>
+</ul>
+<div class="fragment">
+<ul>
+<li><strong>Is the question specific enough?</strong> Example: Instead of “Is climate change impacting agriculture?”, ask “How are Colorado corn growers adapting to water shortages expected to increase due to climate change?”</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>Will the answer explain a phenomenon?</strong> Example: Are growers adopting more efficient irrigation technologies? Are they selling farmland and exiting agriculture?</li>
+</ul>
 <aside class="notes">
 <ol type="1">
 <li><p>Can we answer the question with the available data? If not, can we adjust the question or do we need to collect more data</p></li>
@@ -371,73 +387,85 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="exercise" class="slide level2">
-<h2>Exercise</h2>
-<p>Are these questions answerable with the <code>supermarket_sales</code> dataset? why?</p>
-<div style="font-size: .7em">
-<ol type="1">
-<li><p>We need to cut costs. Can we reallocate labor more efficiently?</p></li>
-<li><p>We want to increase profits. Can we increase marketing efforts on profitable product lines?</p></li>
-</ol>
 </div>
-
-<img data-src="includes/super_sales.jpg" class="r-stretch"></section>
+</section>
+<section id="what-questions-can-we-answer-with-the-supermarket_sales-dataset" class="slide level2 scrollable">
+<h2>What questions can we answer with the <a href="https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html"><code>supermarket_sales</code></a> dataset?</h2>
+<ol type="1">
+<li><strong>Can we optimize staffing schedules to reduce labor costs?</strong></li>
+</ol>
+<div class="fragment">
+<ul>
+<li><strong>No.</strong> The dataset does not include employee schedules or wages, so we may need additional data.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>However, we <em>can</em> analyze <em>peak sales hours to estimate when more staff may be needed.</em></li>
+</ul>
+</div>
+</section>
+<section id="what-questions-can-we-answer-with-the-supermarket_sales-dataset-1" class="slide level2 scrollable">
+<h2>What questions can we answer with the <a href="https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html"><code>supermarket_sales</code></a> dataset?</h2>
+<ol start="2" type="1">
+<li><strong>Which product lines contribute most to total revenue, and can we improve marketing efforts for them?</strong></li>
+</ol>
+<div class="fragment">
+<ul>
+<li><strong>Yes.</strong> The dataset includes sales by product line, so we can analyze revenue contributions.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>We can also examine purchase trends over time to identify the best periods for targeted marketing campaigns.</li>
+</ul>
+</div>
+</section>
 <section id="develop-a-hypothesis" class="slide level2">
 <h2>Develop a hypothesis</h2>
-<p>What do you think the answer is? Why?</p>
-<p>The <em>Why</em> part of your answer will help guide your analysis of the data</p>
+<p>What do you think the answer is?</p>
+<p>Why? <span class="math inline">\(\rightarrow\)</span> Describe the mechanism.</p>
+<p>The <em>why</em> part of your answer will help guide your analysis of the data.</p>
 </section>
 <section id="let-the-question-drive-the-analysis" class="slide level2">
 <h2>Let the question drive the analysis</h2>
-<p>Think through how you can analyze the data to answer your question</p>
-<p>The evidence should support your conclusions</p>
+<p>Think through how you can analyze the data to answer your question.</p>
+<p>The evidence should support your conclusions.</p>
 </section>
-<section id="example-analysis" class="slide level2">
+<section id="example-analysis" class="slide level2 scrollable">
 <h2>Example Analysis</h2>
-<p>We have a limited budget for a promotion campaign.</p>
-<p><strong>Question</strong>: Which product(s) have a high customer rating by members? What day of the week do members buy those products?</p>
-<p>What kind of visual would help you answer part 1? and part 2?</p>
+<p>We have a limited budget for a promotional campaign.</p>
+<p><strong>Questions</strong>:</p>
+<ol type="1">
+<li><p>Which product(s) have a high customer rating by customer type?</p></li>
+<li><p>What day of the week do <em>members</em> buy those products?</p></li>
+</ol>
+<p>What kind of visuals will help you answer these questions?</p>
 </section>
-<section id="example-analysis-cont." class="slide level2">
-<h2>Example Analysis cont.</h2>
+<section id="example-analysis---data-visuals" class="slide level2">
+<h2>Example Analysis - Data Visuals</h2>
 <div class="columns" style="text-align: center">
 <div class="column" style="width:50%;">
-<p>Which product(s) have a high customer rating by members? <img data-src="includes/rating_by_cust_type.png"></p>
+<p>Which product(s) have a high customer rating by customer type? <img data-src="includes/rating_by_cust_type.png"></p>
 </div><div class="column" style="width:50%;">
 <p>What day of the week do members buy those products? <img data-src="includes/spending_cust_type_dow.png"></p>
-</div>
-</div>
+</div></div>
 </section>
-<section id="example-analysis-cont.-1" class="slide level2">
-<h2>Example Analysis cont.</h2>
-<div class="columns" style="text-align: center">
-<div class="column" style="width:50%;">
-<p><img data-src="includes/rating_by_cust_type.png"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="includes/spending_cust_type_dow.png"></p>
+<section id="further-exploration" class="slide level2">
+<h2>Further exploration</h2>
+<p>What else might you investigate during your <strong>exploratory data analysis</strong> (EDA)?</p>
+<div class="fragment">
+<ul>
+<li><p>Does this vary by city/branch?</p></li>
+<li><p>Does this vary by gender?</p></li>
+<li><p>Does this vary by payment type?</p></li>
+</ul>
 </div>
-</div>
-<p>What else might you investigate during your exploratory data analysis (EDA)?</p>
-<aside class="notes">
-<p>Does this vary by city/branch?</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="keep-a-record-of-your-exploration" class="slide level2">
 <h2>Keep a record of your exploration</h2>
-<p>Keep a notebook as you explore your dataset</p>
-<p>How did you find your insight? <em>Especially important for Tableau</em></p>
-<p>Your process may help you tell your story</p>
+<p>Keep a notebook as you explore your dataset, especially in Tableau.</p>
+<p>Document your thought process–this will help you tell your data story.</p>
 <aside class="notes">
 <p>Walking the audience through your thought process can help them understand your analysis. Here is my question… Then I thought, what does the data look like over time or across cities… Then, I noticed this pattern on Wednesdays…</p>
 <style type="text/css">
@@ -454,15 +482,13 @@
 </section>
 <section id="know-when-to-quit" class="slide level2">
 <h2>Know when to quit</h2>
-<p>Data analysis can be fun</p>
-<p>You may be tempted to “check one more thing”</p>
-<p>Stay focused on your question and quit when you have answered it</p>
+<p>Data analysis can be fun–you may be tempted to keep checking new things.</p>
+<p>Stay focused on your question and quit when you have answered it.</p>
 </section>
 <section id="tell-the-story-with-data" class="slide level2">
 <h2>Tell the story with data</h2>
-<p>Develop a narrative</p>
-<p>Create effective visuals</p>
-<p>Let’s continue with our example analysis</p>
+<p>Develop a <strong>narrative</strong>.</p>
+<p>Create <strong>effective visuals</strong>.</p>
 <aside class="notes">
 <p>For the mini project, the final deliverable will be a report rather than a presentation. You can still use many of the story telling techniques like having a narrative and effective visuals</p>
 <style type="text/css">
@@ -477,25 +503,29 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="story-overview" class="slide level2">
-<h2>Story overview</h2>
-<p>Start with the question<sup>1</sup></p>
-<p>Characters and setting</p>
-<p>Preliminaries</p>
-<p>Answer (or insight)</p>
-<p>Next steps</p>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>Sometimes you won’t have a clear question. You are communicating an insight and you need to get the audience to care.</p></li></ol></aside></section>
+<section id="story-structure" class="slide level2 scrollable">
+<h2>Story structure</h2>
+<ol type="1">
+<li><p><strong>Start with the question</strong>–Sometimes you won’t have a clear question, but you are communicating an insight that requires audience engagement.</p></li>
+<li><p><strong>Characters and setting</strong>–Who and what is involved?</p></li>
+<li><p><strong>Preliminaries</strong>–Provide supporting evidence before revealing the main finding.</p></li>
+<li><p><strong>Answer (or insight)</strong>–Clearly show your main result.</p></li>
+<li><p><strong>Next steps</strong>–Suggest recommendations or further investigation.</p></li>
+<li><p><strong>Limitations</strong>–Understand and communicate the limitations of your analysis.</p></li>
+</ol>
+</section>
+<section id="example-storytelling---our-analysis" class="slide level2">
+<h2>Example Storytelling - Our Analysis</h2>
+</section>
 <section id="question" class="slide level2">
-<h2>Question</h2>
-<p>If given a question, review it and transition into setting<sup>1</sup></p>
-<p>In our example analysis, we were given the questions:</p>
+<h2>1. Question</h2>
 <ul>
-<li><p>Which product(s) have a high customer rating by members?</p></li>
+<li><p>Which product(s) have a high customer rating by customer type?</p></li>
 <li><p>What day of the week do members buy those products?</p></li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn2"><p>If not, you may need to develop the setting a bit</p></li></ol></aside></section>
+</section>
 <section id="characters-and-context" class="slide level2">
-<h2>Characters and context</h2>
+<h2>2. Characters and context</h2>
 <p>Who are the characters?</p>
 <div class="fragment">
 <ul>
@@ -505,29 +535,28 @@
 <p>What is the setting?</p>
 <div class="fragment">
 <ul>
-<li><p>Sales in Q1 2019 at three stores</p></li>
-<li><p>Transaction level data where customers rate the product and buying experience after a purchase</p></li>
+<li><p>Sales in Q1 2019 at three branch locations</p></li>
+<li><p>Transaction-level data, where customers rate the product and buying experience after a purchase</p></li>
 </ul>
 </div>
 </section>
 <section id="preliminaries" class="slide level2">
-<h2>Preliminaries</h2>
-<p>You will often need to set up your main point with supporting evidence (effective visuals)</p>
-<p>A common strategy is to start with the big picture and drill down to the insight or answer to the question</p>
-<p>Where could you start with the example analysis?</p>
-<div class="fragment">
+<h2>3. Preliminaries</h2>
+<p>You will often need to set up your main point with supporting evidence.</p>
 <ul>
-<li>Sales by product category</li>
+<li>Start with a big-picture view.</li>
+<li>In this example, start with a visual depicting <strong>sales by product category</strong></li>
 </ul>
-</div>
-<div class="fragment">
-<p>How would you drill deeper?</p>
-</div>
+<p>Then, drill down into the details.</p>
 </section>
-<section id="key-insight-or-answer" class="slide level2 scrollable">
-<h2>Key insight or answer</h2>
-<p>Your key insights is the most important part of your story</p>
-<p>Make sure the visual is effective (i.e., does it clearly illustrate the point?)</p>
+<section id="key-insight-or-answer" class="slide level2">
+<h2>4. Key insight or answer</h2>
+<p>Your key insights is the most important part of your story.</p>
+<p>Make sure the visual is effective.</p>
+<p>Does your visual clearly illustrate the point?</p>
+</section>
+<section id="section" class="slide level2 scrollable">
+<h2></h2>
 <div style="font-size: .7em;color:coral;text-align: center;background-color: white;opacity:0.9">
 <p><strong>Members rate health and beauty products highest among categories</strong></p>
 <div class="quarto-figure quarto-figure-center" style="color:gray">
@@ -546,40 +575,67 @@
 </div>
 </section>
 <section id="next-steps" class="slide level2 scrollable">
-<h2>Next steps</h2>
-<p>Make recommendations (if appropriate)<sup>1</sup></p>
-<p>Is any additional analysis needed? Briefly describe</p>
-<p>Example analysis:</p>
+<h2>5. Next steps</h2>
+<p>Make recommendations (if appropriate)</p>
+<ul>
+<li>In some cases, it may not be appropriate for you to make direct recommendations. Try to frame the discussion.</li>
+</ul>
+<p>Identify additional analyses if needed.</p>
+<p><strong>Example analysis:</strong></p>
 <div class="fragment">
 <ul>
-<li>Design promotion for health and beauty products on the weekend</li>
+<li>Design promotions for health and beauty products on the weekend.</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>Conduct market survey to better understand why members purchase these items on the weekend</li>
+<li>Conduct market survey to better understand why members purchase these items on the weekend.</li>
 </ul>
 </div>
-<aside><ol class="aside-footnotes"><li id="fn3"><p>It may not be appropriate for you to make direct recommendations. Try to frame the discussion.</p></li></ol></aside></section>
+</section>
+<section id="limitations" class="slide level2 scrollable">
+<h2>6. Limitations</h2>
+<p>Understanding the limitations of your analysis, and communicating them, helps ensure transparency and prevents overgeneralization of your findings.</p>
+<ul>
+<li><p>Are there any <strong>data limitations</strong> (e.g., missing variables, small sample size, outdated information)?</p></li>
+<li><p>Could there be <strong>biases</strong> in the data collection process or analysis?</p></li>
+<li><p>What <strong>external factors</strong> might influence the results that were not accounted for?</p></li>
+</ul>
+</section>
 <section id="brainstorm-project-ideas" class="slide level2 scrollable" style="font-size: .7em">
 <h2>Brainstorm project ideas</h2>
-<p>Understanding customer behavior: analyze customer behavior and preferences, such as the most popular product lines and the average purchase frequency.</p>
-<p>Sales and revenue analysis: analyze sales and revenue trends, such as the average invoice value and the contribution of different branches to the overall revenue.</p>
-<p>Customer segmentation: segment customers based on demographics, such as gender and customer type, to understand their purchasing behavior and tailor marketing campaigns accordingly.</p>
-<p>Pricing strategy: analyze the effect of changes in pricing on product demand and to determine the optimal pricing strategy for different product lines.</p>
-<p>Marketing optimization: evaluate the effectiveness of different marketing channels and optimize marketing spending.</p>
-<p>Operations optimization: analyze the efficiency of operations, including the cost of goods sold, and optimize processes to increase profitability.</p>
-<p>Customer satisfaction analysis: analyze customer satisfaction using the “rating” field and make improvements to the customer experience.</p>
+<p>Here are some example project questions:</p>
+<p><strong>Understanding Customer Behavior</strong></p>
+<ul>
+<li>What are the most popular product lines, and how frequently do customers purchase them?</li>
+</ul>
+<p><strong>Sales &amp; Revenue Analysis</strong></p>
+<ul>
+<li>How do total sales and the share of revenue generated by different store branches change over time?</li>
+</ul>
+<p><strong>Customer Segmentation</strong></p>
+<ul>
+<li>How do purchasing behaviors differ by customer demographics, such as gender and customer type?</li>
+</ul>
+<p><strong>Spending Methods</strong></p>
+<ul>
+<li>Which payment methods are most effective in contributing to sales, and how should payment methods be adjusted?</li>
+</ul>
+<p><strong>Customer Satisfaction Analysis</strong></p>
+<ul>
+<li>How do factors such as product line, time of purchase, payment method, and store location impact customer ratings?</li>
+</ul>
 <!-- ------------------------------------------ -->
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>
 <p>Dykes, B. (2019). Effective Data Storytelling: How to Drive Change with Data, Narrative and Visuals (1st edition). Wiley.</p>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
+</div>
 </section>
-
     </div>
   </div>
 
@@ -606,7 +662,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -823,18 +878,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -866,11 +910,50 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -880,8 +963,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -895,7 +987,11 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

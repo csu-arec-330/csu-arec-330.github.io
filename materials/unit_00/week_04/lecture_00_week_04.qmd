@@ -24,23 +24,33 @@ Brainstorm project ideas
 <!-- Big Text -->
 <!-- ::: -->
 
+## By the end of today's lecture...
 
+Selected a scenario (question) that you will answer for project 00 (problem set 4), applying the **D^3^M process**, **principles of data storytelling**, and **guidelines for creating effective data visualizations**.
+
+We will spend Friday's lab working on building your data story to answer the question you choose.
 
 ## Identify a question
 
-A question might be driven by a business decision or goal
+A question might be driven by a business decision or goal. Examples:
 
 - We need to cut costs. Can we reallocate labor more efficiently?
 
 - We want to increase profits. Can we increase marketing efforts on profitable product lines?
 
-## Refine the question 
+## Refine the question {.scrollable}
 
-Can we answer the question with the available data?
+Ask yourself:
 
-Is the question specific enough? 
+- **Can we answer the question with the available data?** If not, we should adjust the question or collect more data.
 
-Will the answer explain a phenomenon?
+. . .
+
+- **Is the question specific enough?** Example: Instead of "Is climate change impacting agriculture?", ask "How are Colorado corn growers adapting to water shortages expected to increase due to climate change?"
+
+. . .
+
+- **Will the answer explain a phenomenon?** Example: Are growers adopting more efficient irrigation technologies? Are they selling farmland and exiting agriculture?
 
 ::: {.notes}
 1. Can we answer the question with the available data? If not, can we adjust the question or do we need to collect more data
@@ -51,47 +61,66 @@ Will the answer explain a phenomenon?
 
 :::
 
-## Exercise
+## What questions can we answer with the [`supermarket_sales`](https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html) dataset? {.scrollable}
 
-Are these questions answerable with the `supermarket_sales` dataset? why?
+1. **Can we optimize staffing schedules to reduce labor costs?**
 
-::: {style="font-size: .7em"}
+. . . 
 
-1. We need to cut costs. Can we reallocate labor more efficiently?
+- **No.** The dataset does not include employee schedules or wages, so we may need additional data. 
 
-2. We want to increase profits. Can we increase marketing efforts on profitable product lines?
+. . .
 
-:::
+- However, we *can* analyze *peak sales hours to estimate when more staff may be needed.* 
 
-![](includes/super_sales.jpg)
+
+
+## What questions can we answer with the [`supermarket_sales`](https://csu-arec-330.github.io/materials/unit_00/inputs/supermarketdata_describe.html) dataset? {.scrollable}
+
+2. **Which product lines contribute most to total revenue, and can we improve marketing efforts for them?**
+
+. . .
+
+- **Yes.** The dataset includes sales by product line, so we can analyze revenue contributions. 
+
+. . .
+
+- We can also examine purchase trends over time to identify the best periods for targeted marketing campaigns. 
+
 
 ## Develop a hypothesis
 
-What do you think the answer is?  Why?
+What do you think the answer is?  
 
-The *Why* part of your answer will help guide your analysis of the data
+Why? $\rightarrow$ Describe the mechanism.
+
+The *why* part of your answer will help guide your analysis of the data.
 
 
 ## Let the question drive the analysis
 
-Think through how you can analyze the data to answer your question
+Think through how you can analyze the data to answer your question.
 
-The evidence should support your conclusions
+The evidence should support your conclusions.
 
-## Example Analysis 
+## Example Analysis {.scrollable}
 
-We have a limited budget for a promotion campaign.  
+We have a limited budget for a promotional campaign.  
 
-**Question**: Which product(s) have a high customer rating by members?  What day of the week do members buy those products?
+**Questions**: 
 
-What kind of visual would help you answer part 1? and part 2?
+(1) Which product(s) have a high customer rating by customer type?  
 
-## Example Analysis cont.
+(2) What day of the week do *members* buy those products?
+
+What kind of visuals will help you answer these questions?
+
+## Example Analysis - Data Visuals
 
 :::: {.columns style="text-align: center"}
 
 ::: {.column width="50%"}
-Which product(s) have a high customer rating by members?
+Which product(s) have a high customer rating by customer type?
 ![](includes/rating_by_cust_type.png)
 :::
 
@@ -102,33 +131,24 @@ What day of the week do members buy those products?
 
 ::::
 
-## Example Analysis cont.
 
-:::: {.columns style="text-align: center"}
+## Further exploration 
 
-::: {.column width="50%"}
-![](includes/rating_by_cust_type.png)
-:::
+What else might you investigate during your **exploratory data analysis** (EDA)?
 
-::: {.column width="50%"}
-![](includes/spending_cust_type_dow.png)
-:::
+. . .
 
-::::
+- Does this vary by city/branch?
 
-What else might you investigate during your exploratory data analysis (EDA)?
+- Does this vary by gender?
 
-::: {.notes}
-Does this vary by city/branch?
-:::
+- Does this vary by payment type?
 
 ## Keep a record of your exploration
 
-Keep a notebook as you explore your dataset  
+Keep a notebook as you explore your dataset, especially in Tableau.
 
-How did you find your insight?  *Especially important for Tableau*
-
-Your process may help you tell your story
+Document your thought process--this will help you tell your data story.
 
 ::: {.notes}
 Walking the audience through your thought process can help them understand your analysis. Here is my question... Then I thought, what does the data look like over time or across cities... Then, I noticed this pattern on Wednesdays...
@@ -137,47 +157,43 @@ Walking the audience through your thought process can help them understand your 
 
 ## Know when to quit
 
-Data analysis can be fun
+Data analysis can be fun--you may be tempted to keep checking new things.
 
-You may be tempted to "check one more thing"
-
-Stay focused on your question and quit when you have answered it
+Stay focused on your question and quit when you have answered it.
 
 ## Tell the story with data
 
-Develop a narrative
+Develop a **narrative**.
 
-Create effective visuals
-
-Let's continue with our example analysis
+Create **effective visuals**.
 
 ::: {.notes}
 For the mini project, the final deliverable will be a report rather than a presentation.  You can still use many of the story telling techniques like having a narrative and effective visuals
 :::
 
-## Story overview
+## Story structure {.scrollable}
 
-Start with the question^[Sometimes you won't have a clear question.  You are communicating an insight and you need to get the audience to care.]
+1. **Start with the question**--Sometimes you won't have a clear question, but you are communicating an insight that requires audience engagement.
 
-Characters and setting
+2. **Characters and setting**--Who and what is involved?
 
-Preliminaries
+3. **Preliminaries**--Provide supporting evidence before revealing the main finding.
 
-Answer (or insight)
+4. **Answer (or insight)**--Clearly show your main result.
 
-Next steps
+5. **Next steps**--Suggest recommendations or further investigation.
 
-## Question
+6. **Limitations**--Understand and communicate the limitations of your analysis.
 
-If given a question, review it and transition into setting^[If not, you may need to develop the setting a bit]
+## Example Storytelling - Our Analysis
 
-In our example analysis, we were given the questions:
+## 1. Question
 
-- Which product(s) have a high customer rating by members?  
+- Which product(s) have a high customer rating by customer type?  
 
 - What day of the week do members buy those products?
 
-## Characters and context
+## 2. Characters and context
 
 Who are the characters?
 
@@ -188,33 +204,30 @@ Who are the characters?
 What is the setting?
 
 :::{.fragment}
-- Sales in Q1 2019 at three stores
+- Sales in Q1 2019 at three branch locations
 
-- Transaction level data where customers rate the product and buying experience after a purchase
+- Transaction-level data, where customers rate the product and buying experience after a purchase
 :::
 
-## Preliminaries
+## 3. Preliminaries
 
-You will often need to set up your main point with supporting evidence (effective visuals)
+You will often need to set up your main point with supporting evidence.
 
-A common strategy is to start with the big picture and drill down to the insight or answer to the question
+- Start with a big-picture view.
+- In this example, start with a visual depicting **sales by product category**
 
-Where could you start with the example analysis?
+Then, drill down into the details.
 
-:::{.fragment}
-- Sales by product category
-:::
 
-:::{.fragment}
-How would you drill deeper?
-:::
+## 4. Key insight or answer
 
-## Key insight or answer {.scrollable}
+Your key insights is the most important part of your story.
 
-Your key insights is the most important part of your story
+Make sure the visual is effective. 
 
-Make sure the visual is effective (i.e., does it clearly illustrate the point?)
+Does your visual clearly illustrate the point?
 
+##  {.scrollable}
 ::: {style="font-size: .7em;color:coral;text-align: center;background-color: white;opacity:0.9"}
 
 **Members rate health and beauty products highest among categories**
@@ -229,39 +242,58 @@ Make sure the visual is effective (i.e., does it clearly illustrate the point?)
 
 
 
-## Next steps {.scrollable}
+## 5. Next steps {.scrollable}
 
-Make recommendations (if appropriate)^[It may not be appropriate for you to make direct recommendations. Try to frame the discussion.]
+Make recommendations (if appropriate)
 
-Is any additional analysis needed?  Briefly describe
+- In some cases, it may not be appropriate for you to make direct recommendations. Try to frame the discussion.
 
-Example analysis: 
+Identify additional analyses if needed.
+
+**Example analysis:** 
 
 :::{.fragment}
-- Design promotion for health and beauty products on the weekend
+- Design promotions for health and beauty products on the weekend.
 :::
 
 :::{.fragment}
-- Conduct market survey to better understand why members purchase these items on the weekend
+- Conduct market survey to better understand why members purchase these items on the weekend.
 :::
+
+## 6. Limitations {.scrollable}
+
+Understanding the limitations of your analysis, and communicating them, helps ensure transparency and prevents overgeneralization of your findings.
+
+- Are there any **data limitations** (e.g., missing variables, small sample size, outdated information)?
+
+- Could there be **biases** in the data collection process or analysis?
+
+- What **external factors** might influence the results that were not accounted for?
 
 
 ## Brainstorm project ideas {.scrollable style="font-size: .7em"}
 
-Understanding customer behavior: analyze customer behavior and preferences, such as the most popular product lines and the average purchase frequency.
+Here are some example project questions:
 
-Sales and revenue analysis: analyze sales and revenue trends, such as the average invoice value and the contribution of different branches to the overall revenue.
+**Understanding Customer Behavior**
 
-Customer segmentation: segment customers based on demographics, such as gender and customer type, to understand their purchasing behavior and tailor marketing campaigns accordingly.
+- What are the most popular product lines, and how frequently do customers purchase them?
 
-Pricing strategy: analyze the effect of changes in pricing on product demand and to determine the optimal pricing strategy for different product lines.
+**Sales & Revenue Analysis**
 
-Marketing optimization: evaluate the effectiveness of different marketing channels and optimize marketing spending.
+- How do total sales and the share of revenue generated by different store branches change over time?
 
-Operations optimization: analyze the efficiency of operations, including the cost of goods sold, and optimize processes to increase profitability.
+**Customer Segmentation**
 
-Customer satisfaction analysis: analyze customer satisfaction using the "rating" field and make improvements to the customer experience.
+- How do purchasing behaviors differ by customer demographics, such as gender and customer type?
 
+**Spending Methods**
+
+- Which payment methods are most effective in contributing to sales, and how should payment methods be adjusted?
+
+**Customer Satisfaction Analysis**
+
+- How do factors such as product line, time of purchase, payment method, and store location impact customer ratings?
 
 
 <!-- ------------------------------------------ -->
