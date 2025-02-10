@@ -1,0 +1,230 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{setspace}
+\setlength{\parindent}{0pt}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Project 00 (Problem Set 4) Handout},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Project 00 (Problem Set 4) Handout}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\section{Project Overview}\label{project-overview}
+
+In this project, you will apply the D\textsuperscript{3}M process to
+analyze supermarket sales data and develop actionable insights. Your
+goal is to choose a business question, analyze the dataset, create
+compelling visualizations, and present your findings in a structured
+format.
+
+\section{Project Steps}\label{project-steps}
+
+\subsection{1. Choose a Question}\label{choose-a-question}
+
+Select one of the questions below or propose your own (must be
+answerable with the available dataset).
+
+\subsubsection{Example Questions:}\label{example-questions}
+
+\textbf{Sales \& Revenue Analysis}
+
+\begin{itemize}
+\tightlist
+\item
+  How do invoice values and branch contributions to revenue vary over
+  time?
+\end{itemize}
+
+\textbf{Customer Behavior}
+
+\begin{itemize}
+\tightlist
+\item
+  What are the most popular product lines, and how frequently do
+  customers purchase them?
+\end{itemize}
+
+\textbf{Customer Satisfaction}
+
+\begin{itemize}
+\tightlist
+\item
+  How do factors such as product line, time of purchase, payment method,
+  and store location impact customer ratings?
+\end{itemize}
+
+\textbf{Payment Methods}
+
+\begin{itemize}
+\tightlist
+\item
+  Which channels of payment methods contribute most to sales, and how
+  should payment methods be adjusted?
+\end{itemize}
+
+\subsubsection{2. Develop a Hypothesis}\label{develop-a-hypothesis}
+
+What do you expect to find? Why?
+
+Example: ``We hypothesize that electronic accessories have the highest
+total sales, but health and beauty products receive the highest customer
+ratings.''
+
+\subsubsection{3. Explore \& Prepare Data}\label{explore-prepare-data}
+
+\begin{itemize}
+\item
+  Load the \texttt{supermarket\_sales.csv} dataset in R.
+\item
+  Identify relevant variables that relate to your question.
+\item
+  Clean and prepare the data for analysis (e.g., filter, group,
+  aggregate).
+\end{itemize}
+
+\subsubsection{4. Analyze the Data}\label{analyze-the-data}
+
+What patterns and trends emerge?
+
+\begin{itemize}
+\item
+  Use appropriate statistical measures (averages, totals, percentages)
+  to support your findings.
+\item
+  Perform comparisons across different factors (e.g., time, product
+  line, location).
+\end{itemize}
+
+\subsubsection{5. Visualize the Data}\label{visualize-the-data}
+
+Tell a clear story with the visuals. Select the most effective visuals
+to communicate your insights (e.g., bar charts, line graphs, heat maps).
+
+Follow the six guidelines for effective visualizations covered in class:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Identify your objective
+\item
+  Show the data
+\item
+  Reduce the clutter
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Label axes and use appropriate scales
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Integrate the graphics and text
+\end{enumerate}
+
+\begin{itemize}
+\item
+  Use active titles (e.g., ``Weekend Sales Surpass Weekday Sales''
+  instead of ``Sales by Day'')
+\item
+  Use whitespace effectively
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\item
+  Avoid the spaghetti chart
+\item
+  Start with gray
+\end{enumerate}
+
+\subsubsection{6. Interpret Your Results}\label{interpret-your-results}
+
+What do your findings reveal?
+
+\begin{itemize}
+\item
+  Do the results support or contradict your hypothesis?
+\item
+  What are the limitations of your analysis?
+\end{itemize}
+
+\subsubsection{7. Make Recommendations}\label{make-recommendations}
+
+Based on your findings, what actionable steps would you suggest?
+
+Example: ``Since members purchase more health and beauty products on
+weekends, the store should offer weekend promotions for this category.''
+
+\end{document}

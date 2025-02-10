@@ -23,7 +23,8 @@ Your role is to:
 2. Identify a meaningful insight worth sharing with management.
 3. Develop a compelling data story that effectively communicates your findings to the audience.
 
-Once you find an insight, develop your [data story](https://csu-arec-330.github.io/materials/unit_00/week_04/lecture_00_week_04.html#/story-overview).  
+Once you find an insight, develop your [data story](https://csu-arec-330.github.io/materials/unit_00/week_04/lecture_00_week_04.html#/story-overview).
+
 
 ## R: Data Processing
 
@@ -68,7 +69,6 @@ Present your analysis as a comprehensive webpage report. The webpage should:
 - Preliminaries: Important observations or trends leading to your insight.
 - Answer or insight: What is your main finding?
 - Next steps: What can the manager/decision-maker do with this information? What recommendations do you have for further analysis?
-<!-- increase sales, identify underperforming regions -->
 - Limitations of analysis: What are the shortcomings of your analysis?  How might you alter your data collection processes to revisit your question in the future?
 
 Remember: This report is being written for a management team, so be sure to write the report with this audience in mind.

@@ -273,6 +273,8 @@ Understanding the limitations of your analysis, and communicating them, helps en
 
 ## Brainstorm project ideas {.scrollable style="font-size: .7em"}
 
+[Project 00 Handout](project_00_handout.pdf){target=\"_blank\"}
+
 Here are some example project questions:
 
 **Understanding Customer Behavior**
