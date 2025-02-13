@@ -100,6 +100,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <p>Write an R script that completes the following tasks. Make sure you follow best practices, including commenting on your code.</p>
+<p><strong>Note on Log File Output:</strong></p>
+<p>When running your R script, you may notice that some lines in your log file appear with “[TRUNCATED]” comments. This happens when the output exceeds R’s default display limits.</p>
+<p>To minimize truncation, add line breaks before the grey vertical line in the Source Pane to keep lines within the display limit. Additionally, avoid printing large datasets directly—use glimpse() or head() instead of printing entire data frames.</p>
+<p><strong>Response Submissions:</strong> For the responses to the questions that require explanations, please post your responses as text on your Google site. Be sure to clearly indicate which question each response refers to.</p>
 </section>
 <section id="tasks" class="level2">
 <h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
@@ -107,7 +111,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Read in the dataset <code>supermarket_sales.csv</code> using <code>read_csv()</code>.</li>
 </ol>
 <ul>
-<li><strong>Question:</strong> What packages do you need to have installed before loading in the data using this command? Write your response as a comment below the line of code where you load the necessary packages.</li>
+<li><strong>Question:</strong> What packages do you need to have installed before loading in the data using this command?</li>
+<li>Write your response as text on your Google site, indicating which question you are answering.</li>
 </ul>
 <ol start="2" type="1">
 <li>Calculate the total value of the sale using the <code>unit_price</code> and <code>quantity</code> columns.</li>
@@ -126,7 +131,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <ul>
 <li>Compute the rating per unit price for each transaction by creating a new column called <code>rup</code>.</li>
-<li><strong>Explain:</strong> What insights might this performance indicator provide to decision-makers in the company? Write your response as a comment below the line of code where you create the variable <code>rup</code>.</li>
+<li><strong>Explain:</strong> What insights might this performance indicator provide to decision-makers in the company?</li>
+<li>Write your response as text on the Google site, clearly indicating which question you are answering.</li>
 </ul>
 <ol start="8" type="1">
 <li>Summarize <code>rup</code> and <code>unit price</code> <strong>by product line</strong>:</li>
@@ -138,8 +144,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Print the summarized dataframe:</li>
 </ol>
 <ul>
-<li>Use the print() function to display the results</li>
+<li>Use the <code>print()</code> function to display the results</li>
 <li><strong>Explain:</strong> What conclusions can you draw from your analysis?</li>
+<li>Write your response as text on the Google site, clearly indicating which question you are answering.</li>
 </ul>
 <ol start="10" type="1">
 <li>Include the following lines of code to ensure that you have loaded all the necessary packages for this assignment:</li>

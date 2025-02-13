@@ -11,11 +11,21 @@ Link to the description of the supermarket sales data available in the [Supermar
 
 Write an R script that completes the following tasks. Make sure you follow best practices, including commenting on your code.
 
+**Note on Log File Output:**
+
+When running your R script, you may notice that some lines in your log file appear with "[TRUNCATED]" comments. This happens when the output exceeds R’s default display limits.
+
+To minimize truncation, add line breaks before the grey vertical line in the Source Pane to keep lines within the display limit. Additionally, avoid printing large datasets directly—use glimpse() or head() instead of printing entire data frames.
+
+**Response Submissions:**
+For the responses to the questions that require explanations, please post your responses as text on your Google site. Be sure to clearly indicate which question each response refers to.
+
 ## Tasks
 
 1. Read in the dataset `supermarket_sales.csv` using `read_csv()`. 
 
-- **Question:** What packages do you need to have installed before loading in the data using this command? Write your response as a comment below the line of code where you load the necessary packages.
+- **Question:** What packages do you need to have installed before loading in the data using this command? 
+- Write your response as text on your Google site, indicating which question you are answering.
 
 2. Calculate the total value of the sale using the `unit_price` and `quantity` columns.  
 
@@ -34,7 +44,8 @@ Write an R script that completes the following tasks. Make sure you follow best 
 7. Suppose you are asked to develop a new **performance indicator** for the company.  You decide that "rating per unit price" or "rup" would be a helpful metric. 
 
 - Compute the rating per unit price for each transaction by creating a new column called `rup`. 
-- **Explain:** What insights might this performance indicator provide to decision-makers in the company? Write your response as a comment below the line of code where you create the variable `rup`.
+- **Explain:** What insights might this performance indicator provide to decision-makers in the company? 
+- Write your response as text on the Google site, clearly indicating which question you are answering.
 
 8. Summarize `rup` and `unit price` **by product line**:
 
@@ -42,8 +53,9 @@ Write an R script that completes the following tasks. Make sure you follow best 
 
 9. Print the summarized dataframe:
 
-- Use the print() function to display the results
+- Use the `print()` function to display the results
 - **Explain:** What conclusions can you draw from your analysis?
+- Write your response as text on the Google site, clearly indicating which question you are answering.
 
 10. Include the following lines of code to ensure that you have loaded all the necessary packages for this assignment:
 ```{r}
