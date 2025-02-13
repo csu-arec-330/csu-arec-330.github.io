@@ -1146,6 +1146,179 @@ Difference Between <code>bind_rows()</code> and <code>rbind()</code>
 </ul>
 <p>When R encounters an <code>NA</code> value, it treats it differently from regular values. Special functions, such as <code>is.na()</code>, are often used to handle missing data appropriately in analysis.</p>
 <p>Now that you’ve reconstructed the full dataset, you can proceed with company-wide sales analysis!</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Lab Script for Week 3: Data Processing with R">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lab Script for Week 3: Data Processing with R
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LAB 03: Working with Data in R</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This script follows the steps outlined in Lab 03 to import, clean, </span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># modify, and export data using R and the `tidyverse` package.</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. SETUP: Load required packages</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Install required packages if not already installed (comment out after first run)</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c("readr", "dplyr", "janitor"))</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>version</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">.packages</span>())</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. SET WORKING DIRECTORY (if needed)</span></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory (modify the path if needed)</span></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/Documents/arec330/lab_03"</span>)</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm working directory</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. IMPORT DATA</span></span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the CSV file into a dataframe</span></span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>supermarket_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"supermarket_sales.csv"</span>)</span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a><span class="co"># View the first few rows of the dataframe</span></span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1</span></span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(supermarket_raw)</span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2</span></span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(supermarket_raw)</span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 3</span></span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(supermarket_raw)</span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. CLEAN COLUMN NAMES</span></span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-50"><a href="#cb42-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-51"><a href="#cb42-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean column names using `janitor::clean_names()`</span></span>
+<span id="cb42-52"><a href="#cb42-52" aria-hidden="true" tabindex="-1"></a>supermarket_clean <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(supermarket_raw)</span>
+<span id="cb42-53"><a href="#cb42-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-54"><a href="#cb42-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Check column names after cleaning</span></span>
+<span id="cb42-55"><a href="#cb42-55" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(supermarket_clean)</span>
+<span id="cb42-56"><a href="#cb42-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-57"><a href="#cb42-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Check data types</span></span>
+<span id="cb42-58"><a href="#cb42-58" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(supermarket_raw)</span>
+<span id="cb42-59"><a href="#cb42-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-60"><a href="#cb42-60" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-61"><a href="#cb42-61" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. ADDING A NEW COLUMN USING `MUTATE()`</span></span>
+<span id="cb42-62"><a href="#cb42-62" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-63"><a href="#cb42-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-64"><a href="#cb42-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column `total_calc` to calculate total sale per transaction</span></span>
+<span id="cb42-65"><a href="#cb42-65" aria-hidden="true" tabindex="-1"></a>my_super_sales <span class="ot">&lt;-</span> <span class="fu">mutate</span>(supermarket_raw, <span class="at">subtotal =</span> unit_price <span class="sc">*</span> quantity)</span>
+<span id="cb42-66"><a href="#cb42-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-67"><a href="#cb42-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify if `total_calc` matches the existing `total` column</span></span>
+<span id="cb42-68"><a href="#cb42-68" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(my_super_sales<span class="sc">$</span>total_calc, my_super_sales<span class="sc">$</span>total)</span>
+<span id="cb42-69"><a href="#cb42-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-70"><a href="#cb42-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the city variable to market</span></span>
+<span id="cb42-71"><a href="#cb42-71" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">rename</span>(select_super_sales, <span class="at">market =</span> city)</span>
+<span id="cb42-72"><a href="#cb42-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-73"><a href="#cb42-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining select() and rename()</span></span>
+<span id="cb42-74"><a href="#cb42-74" aria-hidden="true" tabindex="-1"></a>select_super_sales <span class="ot">&lt;-</span> <span class="fu">select</span>(my_super_sales, invoice_id, <span class="at">market =</span> city, total, subtotal)</span>
+<span id="cb42-75"><a href="#cb42-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-76"><a href="#cb42-76" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-77"><a href="#cb42-77" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. SUBSETTING DATA USING `FILTER()`</span></span>
+<span id="cb42-78"><a href="#cb42-78" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-79"><a href="#cb42-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-80"><a href="#cb42-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to keep only transactions from "Yangon"</span></span>
+<span id="cb42-81"><a href="#cb42-81" aria-hidden="true" tabindex="-1"></a>yangon_super_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(select_super_sales, market <span class="sc">==</span> <span class="st">"Yangon"</span>)</span>
+<span id="cb42-82"><a href="#cb42-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-83"><a href="#cb42-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where unit_price is greater than 10</span></span>
+<span id="cb42-84"><a href="#cb42-84" aria-hidden="true" tabindex="-1"></a>high_price_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(my_super_sales, unit_price <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb42-85"><a href="#cb42-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-86"><a href="#cb42-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for rows where quantity is less than 5</span></span>
+<span id="cb42-87"><a href="#cb42-87" aria-hidden="true" tabindex="-1"></a>low_quantity_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(my_super_sales, quantity <span class="sc">&lt;</span> <span class="dv">5</span>)</span>
+<span id="cb42-88"><a href="#cb42-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-89"><a href="#cb42-89" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-90"><a href="#cb42-90" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. SORTING DATA USING `ARRANGE()`</span></span>
+<span id="cb42-91"><a href="#cb42-91" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-92"><a href="#cb42-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-93"><a href="#cb42-93" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange rows by `total` in ascending order</span></span>
+<span id="cb42-94"><a href="#cb42-94" aria-hidden="true" tabindex="-1"></a>yangon_super_sales_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(yangon_super_sales, total)</span>
+<span id="cb42-95"><a href="#cb42-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-96"><a href="#cb42-96" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorting by multiple columns: market in ascending order, then total in descending order</span></span>
+<span id="cb42-97"><a href="#cb42-97" aria-hidden="true" tabindex="-1"></a>super_sales_top <span class="ot">&lt;-</span> <span class="fu">arrange</span>(select_super_sales, market, <span class="fu">desc</span>(total))</span>
+<span id="cb42-98"><a href="#cb42-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-99"><a href="#cb42-99" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-100"><a href="#cb42-100" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. SUMMARIZING DATA USING `SUMMARIZE()`</span></span>
+<span id="cb42-101"><a href="#cb42-101" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-102"><a href="#cb42-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-103"><a href="#cb42-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total quantity sold across all transactions</span></span>
+<span id="cb42-104"><a href="#cb42-104" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_summed =</span> <span class="fu">sum</span>(quantity))</span>
+<span id="cb42-105"><a href="#cb42-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-106"><a href="#cb42-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, store it as a data frame</span></span>
+<span id="cb42-107"><a href="#cb42-107" aria-hidden="true" tabindex="-1"></a>total_sold <span class="ot">&lt;-</span> <span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_summed =</span> <span class="fu">sum</span>(quantity))</span>
+<span id="cb42-108"><a href="#cb42-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-109"><a href="#cb42-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of quantity</span></span>
+<span id="cb42-110"><a href="#cb42-110" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">quantity_mean =</span> <span class="fu">mean</span>(quantity))  </span>
+<span id="cb42-111"><a href="#cb42-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-112"><a href="#cb42-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the maximum unit price</span></span>
+<span id="cb42-113"><a href="#cb42-113" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(supermarket_raw, <span class="at">max_price =</span> <span class="fu">max</span>(unit_price))</span>
+<span id="cb42-114"><a href="#cb42-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-115"><a href="#cb42-115" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-116"><a href="#cb42-116" aria-hidden="true" tabindex="-1"></a><span class="co"># 9. GROUPING DATA USING `GROUP_BY()`</span></span>
+<span id="cb42-117"><a href="#cb42-117" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-118"><a href="#cb42-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-119"><a href="#cb42-119" aria-hidden="true" tabindex="-1"></a><span class="co"># Group the data by branch</span></span>
+<span id="cb42-120"><a href="#cb42-120" aria-hidden="true" tabindex="-1"></a>super_sales_grouped_branch <span class="ot">&lt;-</span> <span class="fu">group_by</span>(supermarket_raw, branch)</span>
+<span id="cb42-121"><a href="#cb42-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-122"><a href="#cb42-122" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize total quantity sold by branch</span></span>
+<span id="cb42-123"><a href="#cb42-123" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch <span class="ot">&lt;-</span> <span class="fu">summarize</span>(super_sales_grouped_branch, <span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))</span>
+<span id="cb42-124"><a href="#cb42-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-125"><a href="#cb42-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Your turn: Find the average unit price by product line</span></span>
+<span id="cb42-126"><a href="#cb42-126" aria-hidden="true" tabindex="-1"></a>avg_price_by_product <span class="ot">&lt;-</span> <span class="fu">summarize</span>(<span class="fu">group_by</span>(supermarket_raw, product_line), <span class="at">avg_unit_price =</span> <span class="fu">mean</span>(unit_price))</span>
+<span id="cb42-127"><a href="#cb42-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-128"><a href="#cb42-128" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-129"><a href="#cb42-129" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. PIPING COMMANDS TOGETHER</span></span>
+<span id="cb42-130"><a href="#cb42-130" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-131"><a href="#cb42-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-132"><a href="#cb42-132" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the pipe to group and summarize in one step</span></span>
+<span id="cb42-133"><a href="#cb42-133" aria-hidden="true" tabindex="-1"></a>total_quantity_by_branch_pipe <span class="ot">&lt;-</span> supermarket_raw <span class="sc">%&gt;%</span>  <span class="co"># Start with supermarket_raw</span></span>
+<span id="cb42-134"><a href="#cb42-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(branch) <span class="sc">%&gt;%</span>  <span class="co"># Group by branch</span></span>
+<span id="cb42-135"><a href="#cb42-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total_quantity =</span> <span class="fu">sum</span>(quantity))  <span class="co"># Summarize total quantity by branch</span></span>
+<span id="cb42-136"><a href="#cb42-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-137"><a href="#cb42-137" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-138"><a href="#cb42-138" aria-hidden="true" tabindex="-1"></a><span class="co"># 11. APPENDING DATA</span></span>
+<span id="cb42-139"><a href="#cb42-139" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-140"><a href="#cb42-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-141"><a href="#cb42-141" aria-hidden="true" tabindex="-1"></a>branch_A_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"A"</span>)</span>
+<span id="cb42-142"><a href="#cb42-142" aria-hidden="true" tabindex="-1"></a>branch_B_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"B"</span>)</span>
+<span id="cb42-143"><a href="#cb42-143" aria-hidden="true" tabindex="-1"></a>branch_C_sales <span class="ot">&lt;-</span> <span class="fu">filter</span>(supermarket_raw, branch <span class="sc">==</span> <span class="st">"C"</span>)</span>
+<span id="cb42-144"><a href="#cb42-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-145"><a href="#cb42-145" aria-hidden="true" tabindex="-1"></a>super_reconstruct <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(branch_A_sales, branch_B_sales, branch_C_sales)</span>
+<span id="cb42-146"><a href="#cb42-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-147"><a href="#cb42-147" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-148"><a href="#cb42-148" aria-hidden="true" tabindex="-1"></a><span class="co"># 12. EXPORTING DATA</span></span>
+<span id="cb42-149"><a href="#cb42-149" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-150"><a href="#cb42-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-151"><a href="#cb42-151" aria-hidden="true" tabindex="-1"></a><span class="co"># Save cleaned dataset to CSV</span></span>
+<span id="cb42-152"><a href="#cb42-152" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(supermarket_clean, <span class="st">"supermarket_cleaned.csv"</span>)</span>
+<span id="cb42-153"><a href="#cb42-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-154"><a href="#cb42-154" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span>
+<span id="cb42-155"><a href="#cb42-155" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="re">END</span><span class="co"> OF SCRIPT</span></span>
+<span id="cb42-156"><a href="#cb42-156" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 <hr>
 </section>
 <section id="saving-the-log-file-for-lab_03.r" class="level3">
@@ -1158,9 +1331,9 @@ Difference Between <code>bind_rows()</code> and <code>rbind()</code>
 <li>Run the following commands. <strong>Do not include them in <code>lab_03.R</code> itself.</strong></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>(<span class="st">"lab_03_log.txt"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"lab_03.R"</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sink</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will execute <code>lab_03.R</code> and store its output in <code>lab_03_log.txt</code>. The argument <code>echo = TRUE</code> ensures the log captures the script output as seen in the console.</p>
 <p><strong>Why Use <code>.log</code> or <code>.txt</code> for output?</strong></p>

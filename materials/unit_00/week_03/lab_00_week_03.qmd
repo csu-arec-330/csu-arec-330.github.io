@@ -803,6 +803,169 @@ When R encounters an `NA` value, it treats it differently from regular values. S
 
 Now that you’ve reconstructed the full dataset, you can proceed with company-wide sales analysis!
 
+:::{.callout-tip title="Lab Script for Week 3: Data Processing with R" collapse="true"}
+```{r}
+#| eval: false
+
+# LAB 03: Working with Data in R
+# This script follows the steps outlined in Lab 03 to import, clean, 
+# modify, and export data using R and the `tidyverse` package.
+
+# ---------------------------------------------
+# 1. SETUP: Load required packages
+# ---------------------------------------------
+
+# Install required packages if not already installed (comment out after first run)
+# install.packages(c("readr", "dplyr", "janitor"))
+
+# Load necessary libraries
+library(readr)
+library(dplyr)
+library(janitor)
+
+version
+print(.packages())
+
+# ---------------------------------------------
+# 2. SET WORKING DIRECTORY (if needed)
+# ---------------------------------------------
+
+# Set working directory (modify the path if needed)
+setwd("~/Documents/arec330/lab_03")
+
+# Confirm working directory
+getwd()
+
+# ---------------------------------------------
+# 3. IMPORT DATA
+# ---------------------------------------------
+
+# Read the CSV file into a dataframe
+supermarket_raw <- read_csv("supermarket_sales.csv")
+
+# View the first few rows of the dataframe
+# Option 1
+head(supermarket_raw)
+
+# Option 2
+View(supermarket_raw)
+
+# Option 3
+glimpse(supermarket_raw)
+
+# ---------------------------------------------
+# 4. CLEAN COLUMN NAMES
+# ---------------------------------------------
+
+# Clean column names using `janitor::clean_names()`
+supermarket_clean <- clean_names(supermarket_raw)
+
+# Check column names after cleaning
+colnames(supermarket_clean)
+
+# Check data types
+str(supermarket_raw)
+
+# ---------------------------------------------
+# 5. ADDING A NEW COLUMN USING `MUTATE()`
+# ---------------------------------------------
+
+# Create a new column `total_calc` to calculate total sale per transaction
+my_super_sales <- mutate(supermarket_raw, subtotal = unit_price * quantity)
+
+# Verify if `total_calc` matches the existing `total` column
+identical(my_super_sales$total_calc, my_super_sales$total)
+
+# Rename the city variable to market
+select_super_sales <- rename(select_super_sales, market = city)
+
+# Combining select() and rename()
+select_super_sales <- select(my_super_sales, invoice_id, market = city, total, subtotal)
+
+# ---------------------------------------------
+# 6. SUBSETTING DATA USING `FILTER()`
+# ---------------------------------------------
+
+# Filter to keep only transactions from "Yangon"
+yangon_super_sales <- filter(select_super_sales, market == "Yangon")
+
+# Filter for rows where unit_price is greater than 10
+high_price_sales <- filter(my_super_sales, unit_price > 10)
+
+# Filter for rows where quantity is less than 5
+low_quantity_sales <- filter(my_super_sales, quantity < 5)
+
+# ---------------------------------------------
+# 7. SORTING DATA USING `ARRANGE()`
+# ---------------------------------------------
+
+# Arrange rows by `total` in ascending order
+yangon_super_sales_sorted <- arrange(yangon_super_sales, total)
+
+# Sorting by multiple columns: market in ascending order, then total in descending order
+super_sales_top <- arrange(select_super_sales, market, desc(total))
+
+# ---------------------------------------------
+# 8. SUMMARIZING DATA USING `SUMMARIZE()`
+# ---------------------------------------------
+
+# Calculate total quantity sold across all transactions
+summarize(supermarket_raw, quantity_summed = sum(quantity))
+
+# Now, store it as a data frame
+total_sold <- summarize(supermarket_raw, quantity_summed = sum(quantity))
+
+# Calculate the mean of quantity
+summarize(supermarket_raw, quantity_mean = mean(quantity))  
+
+# Find the maximum unit price
+summarize(supermarket_raw, max_price = max(unit_price))
+
+# ---------------------------------------------
+# 9. GROUPING DATA USING `GROUP_BY()`
+# ---------------------------------------------
+
+# Group the data by branch
+super_sales_grouped_branch <- group_by(supermarket_raw, branch)
+
+# Summarize total quantity sold by branch
+total_quantity_by_branch <- summarize(super_sales_grouped_branch, total_quantity = sum(quantity))
+
+# Your turn: Find the average unit price by product line
+avg_price_by_product <- summarize(group_by(supermarket_raw, product_line), avg_unit_price = mean(unit_price))
+
+# ---------------------------------------------
+# 10. PIPING COMMANDS TOGETHER
+# ---------------------------------------------
+
+# Using the pipe to group and summarize in one step
+total_quantity_by_branch_pipe <- supermarket_raw %>%  # Start with supermarket_raw
+  group_by(branch) %>%  # Group by branch
+  summarize(total_quantity = sum(quantity))  # Summarize total quantity by branch
+
+# ---------------------------------------------
+# 11. APPENDING DATA
+# ---------------------------------------------
+
+branch_A_sales <- filter(supermarket_raw, branch == "A")
+branch_B_sales <- filter(supermarket_raw, branch == "B")
+branch_C_sales <- filter(supermarket_raw, branch == "C")
+
+super_reconstruct <- bind_rows(branch_A_sales, branch_B_sales, branch_C_sales)
+
+# ---------------------------------------------
+# 12. EXPORTING DATA
+# ---------------------------------------------
+
+# Save cleaned dataset to CSV
+write_csv(supermarket_clean, "supermarket_cleaned.csv")
+
+# ---------------------------------------------
+# END OF SCRIPT
+# ---------------------------------------------
+```
+:::
+
 ---
 
 ### Saving the Log File for `lab_03.R`
