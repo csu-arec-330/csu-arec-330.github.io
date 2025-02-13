@@ -96,7 +96,7 @@ Use Tableau to and organize the data before building visualizations.
 Create a data visualization that you will show to the regional manager to provide data-driven insights to help them optimize their staffing needs. For each question, consider the following:
 
 - **Option 1:** Create a line or bar chart to visualize sales by hour.
-- **Option 2:** Create a comparative visualization, such as a stacked bar chart.
+- **Option 2:** Create a comparative visualization, such as a line chart depicting sales over time for each branch.
 - **Option 3:** Create a bar chart to compare total sales by department.
 
 Your visualization should include a clear title, proper formatting, and annotations to explain insights. Be sure to save your visualization to a worksheet with an appropriate name.
