@@ -247,12 +247,12 @@ Note
 <h3 class="anchored" data-anchor-id="exporting-dataframes">Exporting dataframes</h3>
 <p>Once your data is cleaned, export it in a format that can be read into Tableau. The <code>readr</code> package contains <code>write_*()</code> functions for exporting data, which work similarly to <code>read_*()</code> functions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(super_sales_all,<span class="st">"super_sales_all.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(super_sales_clean,<span class="st">"super_sales_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Important:</strong></p>
 <ul>
-<li><p>Specify the dataframe you want to export (e.g., <code>super_sales_all</code>).</p></li>
-<li><p>Choose an appropriate filename (e.g., <code>"supermarket_sales_cleaned.csv"</code>). Check that your punctuation matches the example code!</p></li>
+<li><p>Specify the dataframe you want to export (e.g., <code>super_sales_clean</code>).</p></li>
+<li><p>Choose an appropriate filename (e.g., <code>"super_sales_clean.csv"</code>). Check that your punctuation matches the example code!</p></li>
 <li><p>If needed, specify a different directory for the output file.</p></li>
 </ul>
 <p>Read the documentation for <code>write_csv()</code> to understand additional options for exporting data efficiently.</p>

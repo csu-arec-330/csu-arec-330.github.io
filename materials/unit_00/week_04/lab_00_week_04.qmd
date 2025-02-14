@@ -119,14 +119,14 @@ Once your data is cleaned, export it in a format that can be read into Tableau. 
 ```{r}
 #| eval: false
 
-write_csv(super_sales_all,"super_sales_all.csv")
+write_csv(super_sales_clean,"super_sales_clean.csv")
 ```
 
 **Important:**
 
-- Specify the dataframe you want to export (e.g., `super_sales_all`).
+- Specify the dataframe you want to export (e.g., `super_sales_clean`).
 
-- Choose an appropriate filename (e.g., `"supermarket_sales_cleaned.csv"`). Check that your punctuation matches the example code!
+- Choose an appropriate filename (e.g., `"super_sales_clean.csv"`). Check that your punctuation matches the example code!
 
 - If needed, specify a different directory for the output file.
 
