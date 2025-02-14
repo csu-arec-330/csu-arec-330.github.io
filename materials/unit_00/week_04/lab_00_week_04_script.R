@@ -1,3 +1,4 @@
+# These are the lab notes for Week 04
 
 setwd("C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_00/week_04")
 
@@ -15,14 +16,16 @@ super_2019 <- read_csv("https://csu-arec-330.github.io/materials/unit_00/inputs/
 super_sales_all <- bind_rows(super_2017, super_2018, super_2019)
 
 # Check for missing data: Use the dplyr functions (mutate() and replace_na()) to fill missing values.
+colSums(is.na(super_2017))
 
 # Use mutate_all() to apply replace_na() to all columns. 
-# What does this do? It qutomatically fills numeric columns with 0 and character columns with "Unknown". 
+# What does this do? It automatically fills numeric columns with 0 and character columns with "Unknown". 
 super_sales_clean <- super_sales_all %>%
   mutate_all(~replace_na(.x, ifelse(is.numeric(.x), 0, "Unknown")))
 
 # Check for missing values after filling
 colSums(is.na(super_sales_clean))
+
 
 head(super_sales_clean)
 
