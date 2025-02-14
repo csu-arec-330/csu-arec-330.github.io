@@ -61,6 +61,8 @@ Create a new R script and include the following:
 
 - Load required packages (e.g., `readr`, `dplyr`, etc.)
 
+- Load a new package called `tidyr` which contains the `replace_na()` function we will use.
+
 ### Reading data from a URL
 
 Previously, we downloaded data before reading it into R or Tableau. Understanding how to manage local file paths is important, but R can also read data directly from the web. This is useful for automating updates when datasets change frequently online.
@@ -70,9 +72,9 @@ Use the `read_csv()` function from the `readr` package to read in the datasets:
 ```{r}
 #| eval: false
 
-super_2017 <- read_csv("your_url_here.csv")
-super_2018 <- read_csv("your_url_here.csv")
-super_2019 <- read_csv("your_url_here.csv")
+super_2017 <- read_csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales_2017.csv")
+super_2018 <- read_csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales_2018.csv")
+super_2019 <- read_csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales_2019.csv")
 ```
 
 This method saves time when working with regularly updated datasets hosted online.
@@ -96,16 +98,19 @@ super_sales_all <- bind_rows(super_2017, super_2018, super_2019)
 ```{r}
 #| eval: false
 
-# Example: Replace missing values in a specific column
-super_sales_all <- super_sales_all %>%
-  mutate(column_name = replace_na(column_name, "Default Value"))
+# Use mutate_all() to apply replace_na() to all columns. Automatically fills numeric columns with 0 and character columns with "Unknown". 
+super_sales_clean <- super_sales_all %>%
+  mutate_all(~replace_na(.x, ifelse(is.numeric(.x), 0, "Unknown")))
+
+# Check for missing values after filling
+colSums(is.na(super_sales_clean))
 ```
 
 :::{.callout-note}
 A default value is a value that is automatically assigned to a variable when no other value is provided. In the context of `replace_na(column_name, "Default Value")`, it means that any missing (`NA`) values in column_name will be replaced with `"Default Value"` instead of remaining empty or undefined.
 :::
 
-*Note: Gross margin is calculated as the proportion of revenue that exceeds the cost of goods sold (COGS).*
+<!--*Note: Gross margin is calculated as the proportion of revenue that exceeds the cost of goods sold (COGS).*-->
 
 ### Exporting dataframes
 
@@ -114,7 +119,7 @@ Once your data is cleaned, export it in a format that can be read into Tableau. 
 ```{r}
 #| eval: false
 
-write_csv(your_dataframe,"filename.csv")
+write_csv(super_sales_all,"super_sales_all.csv")
 ```
 
 **Important:**
