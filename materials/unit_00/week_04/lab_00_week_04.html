@@ -114,7 +114,7 @@ window.Quarto = {
   <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a>
   <ul class="collapse">
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
-  <li><a href="#set-up-your-r-script" id="toc-set-up-your-r-script" class="nav-link" data-scroll-target="#set-up-your-r-script">Set Up Your R Script</a></li>
+  <li><a href="#set-up-your-r-script" id="toc-set-up-your-r-script" class="nav-link" data-scroll-target="#set-up-your-r-script">Set up your R script</a></li>
   <li><a href="#reading-data-from-a-url" id="toc-reading-data-from-a-url" class="nav-link" data-scroll-target="#reading-data-from-a-url">Reading data from a URL</a></li>
   <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data processing</a></li>
   <li><a href="#exporting-dataframes" id="toc-exporting-dataframes" class="nav-link" data-scroll-target="#exporting-dataframes">Exporting dataframes</a></li>
@@ -187,12 +187,13 @@ window.Quarto = {
 <p>Before proceeding, check for any inconsistencies or missing values that need to be addressed. Once cleaned, you will export the data for use in Tableau.</p>
 </section>
 <section id="set-up-your-r-script" class="level3">
-<h3 class="anchored" data-anchor-id="set-up-your-r-script">Set Up Your R Script</h3>
+<h3 class="anchored" data-anchor-id="set-up-your-r-script">Set up your R script</h3>
 <p>Create a new R script and include the following:</p>
 <ul>
 <li><p>Write a brief description of the script’s purpose.</p></li>
 <li><p>Set your working directory.</p></li>
 <li><p>Load required packages (e.g., <code>readr</code>, <code>dplyr</code>, etc.)</p></li>
+<li><p>Load a new package called <code>tidyr</code> which contains the <code>replace_na()</code> function we will use.</p></li>
 </ul>
 </section>
 <section id="reading-data-from-a-url" class="level3">
@@ -200,9 +201,9 @@ window.Quarto = {
 <p>Previously, we downloaded data before reading it into R or Tableau. Understanding how to manage local file paths is important, but R can also read data directly from the web. This is useful for automating updates when datasets change frequently online.</p>
 <p>Use the <code>read_csv()</code> function from the <code>readr</code> package to read in the datasets:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>super_2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"your_url_here.csv"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>super_2018 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"your_url_here.csv"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>super_2019 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"your_url_here.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>super_2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales_2017.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>super_2018 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales_2018.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>super_2019 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales_2019.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This method saves time when working with regularly updated datasets hosted online.</p>
 </section>
@@ -220,9 +221,12 @@ window.Quarto = {
 </ol>
 <p><strong>Your Task:</strong> Find which variables contain <code>NA</code> values and replace them the the appropriate default value. <strong>Note the data type</strong>—replace strings with a string and numeric values with a numeric value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Replace missing values in a specific column</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>super_sales_all <span class="ot">&lt;-</span> super_sales_all <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">column_name =</span> <span class="fu">replace_na</span>(column_name, <span class="st">"Default Value"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use mutate_all() to apply replace_na() to all columns. Automatically fills numeric columns with 0 and character columns with "Unknown". </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>super_sales_clean <span class="ot">&lt;-</span> super_sales_all <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="sc">~</span><span class="fu">replace_na</span>(.x, <span class="fu">ifelse</span>(<span class="fu">is.numeric</span>(.x), <span class="dv">0</span>, <span class="st">"Unknown"</span>)))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values after filling</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(super_sales_clean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -237,13 +241,13 @@ Note
 <p>A default value is a value that is automatically assigned to a variable when no other value is provided. In the context of <code>replace_na(column_name, "Default Value")</code>, it means that any missing (<code>NA</code>) values in column_name will be replaced with <code>"Default Value"</code> instead of remaining empty or undefined.</p>
 </div>
 </div>
-<p><em>Note: Gross margin is calculated as the proportion of revenue that exceeds the cost of goods sold (COGS).</em></p>
+<!--*Note: Gross margin is calculated as the proportion of revenue that exceeds the cost of goods sold (COGS).*-->
 </section>
 <section id="exporting-dataframes" class="level3">
 <h3 class="anchored" data-anchor-id="exporting-dataframes">Exporting dataframes</h3>
 <p>Once your data is cleaned, export it in a format that can be read into Tableau. The <code>readr</code> package contains <code>write_*()</code> functions for exporting data, which work similarly to <code>read_*()</code> functions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(your_dataframe,<span class="st">"filename.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(super_sales_all,<span class="st">"super_sales_all.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Important:</strong></p>
 <ul>
