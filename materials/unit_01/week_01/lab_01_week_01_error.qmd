@@ -39,7 +39,7 @@ Time series data is widely used but lacks a standardized format. Importantly, da
 
 You can confirm this by running:
 ```{r}
-#| eval: true
+#| eval: false
 
 #epoch
 as.numeric(as.Date("1970-01-01"))
@@ -63,7 +63,7 @@ Don't forget the steps to starting an R script!
 :::
 
 ```{r}
-#| eval: true
+#| eval: false
 
 #Load necessary libraries
 library(readr)
@@ -77,7 +77,7 @@ egg_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU
 The `read_csv()` function will try to guess the data type. In this case, it correctly identifies the variable `DATE` as a date. Check the data type of the variable by looking at the dataframe:
 
 ```{r}
-#| eval: true
+#| eval: false
 
 #Confirm that R read in the date field as a date
 glimpse(egg_raw)
@@ -87,38 +87,42 @@ glimpse(egg_raw)
 
 Sometimes, date fields are stored as **text** and need to be converted. In these cases, you need to give R some guidance.
 
+We will use functions from the `lubridate` package, designed to help work with dates.
+
 To see this in practice, read in a [modified version of the egg prices data](https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv).
 
 Assign the dataframe to an object called `egg_raw_c` to avoid overwriting the existing data:
 
 ```{r}
-#| eval: true
+#| eval: false
+
+#Load the necessary libraries (and install packages if needed)
+library(lubridate)
 
 #Read in the data
 egg_raw_c <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv")
+```
+
+```{r}
+#| eval: false
 
 #Confirm that R read in the date field as text and *not* a date
 glimpse(egg_raw_c)
 ```
 
-Notice that the date is not recognized as a date type variable. **You can verify this because `CHAR_DATE` is listed as `chr (1)`.**
+Next, we need to tell R how to interpret that date.
 
-Next, we need to tell R how to interpret that date. We will use functions from the `tidyverse` package, specifically the [`lubridate` library](https://lubridate.tidyverse.org/index.html), designed to help work with dates. 
+The [`lubridate` package](https://lubridate.tidyverse.org/index.html) contains many functions to help with this.
 
 ```{r}
 #| eval: false
 
-# The easiest way to get lubridate is to install the whole tidyverse:
-install.packages("tidyverse")
-
-# Alternatively, install just lubridate:
-install.packages("lubridate")
-
-#Load the necessary libraries
-library(lubridate)
-
-#Use the mutate() function along with the mdy() function to convert the text date to a date value
+# Use the mutate() function along with the mdy() function to convert the text date to a date value
 egg_raw_c <- mutate(egg_raw_c,measure_date=mdy(CHAR_DATE))
+```
+
+```{r}
+#| eval: false
 
 #Confirm that you have successfully converted the variable to a date field
 glimpse(egg_raw_c)
@@ -134,9 +138,7 @@ egg_raw_c %>%
   glimpse()
 ```
 
-### Video: Reading in Time Series Data
-
-{{< video https://youtu.be/zpTNJyiPiwE aspect-ratio="16x9" >}}
+<!-- {{< video https://youtu.be/zpTNJyiPiwE aspect-ratio="16x9" >}} -->
 
 ## Accessing data via API
 
@@ -145,7 +147,6 @@ API stands for **Application Programming Interface** and they facilitate much of
 ![API schematic. Source: https://www.altexsoft.com/blog/engineering/what-is-api-definition-types-specifications-documentation/](https://content.altexsoft.com/media/2019/06/1.png)
 
 We use APIs to query data. FRED maintains an API that can be accessed using the library [`tidyquant`](https://business-science.github.io/tidyquant/). This library also has a large array of finance analysis tools.  Right now, we will just use it to access FRED data.  
-
 
 ### Retrieving data via an API
 
@@ -162,7 +163,6 @@ install.packages("tidyquant")
 #Load the library. The library needs to be loaded every time you begin a new instance of R.
 library(tidyquant, quietly = TRUE) #Note: The argument quietly = T in the library() function suppresses messages that would normally be printed when loading a package.
 ```
-
 
 #### Step 2: Retrieve time series data via `tq_get()`
 
@@ -187,7 +187,6 @@ egg_raw_tq <- tq_get(c("APU0000708111"),
 
 glimpse(egg_raw_tq)
 ```
-
 
 #### Step 3: Retrieve multiple time series data using `tq_get()`
 
@@ -253,9 +252,7 @@ Now the dataset is ready for export in .csv format so you can import it into Tab
 write_csv(egg_out, "egg_out.csv")
 ```
 
-### Video: Collecting Data via API
-
-{{< video https://youtu.be/zuDOOmQtnrM aspect-ratio="16x9" >}}
+<!-- {{< video https://youtu.be/zuDOOmQtnrM aspect-ratio="16x9" >}} -->
 
 # Tableau
 
@@ -369,6 +366,5 @@ Many functions and tools in Tableau and R are both designed to work with **long*
 
 4. Rescale one of the series to match the other. You can go back to R to do this or do it in Tableau. In either case, you will want to use if/then logic.
 
-### Video: Using Tableau to Visualize Time Series Data
 
-{{< video https://youtu.be/6oOu5DqtakY aspect-ratio="16x9" >}}
+<!-- {{< video https://youtu.be/6oOu5DqtakY aspect-ratio="16x9" >}} -->
