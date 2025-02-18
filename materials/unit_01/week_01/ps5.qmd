@@ -16,7 +16,6 @@ The objective of this portion of the problem set is to acquire and modify your d
 1. All computer programs track time numerically relative to an epoch.  What is the numeric value of the assignment due date?
 
 2. Use the `tidyquant` package to access the FRED API and download 3 time series datasets.  
-
 3. Use `case_when()` to change the name of the series to something more descriptive.
 
 4. Export the data in .csv format for Tableau
@@ -34,8 +33,8 @@ The objective of this section is to explore the data and think about something t
 
 3. Format your visualization by limiting the time window (to something that helps the audience see differences before and after the event you are highlighting), adding color, a useful title, appropriate marker labels, text annotations, etc. 
 
-4. Finally, write a narrative on a new webpage on your google site. The narrative should include your time series visual from Tableau along with a description of what you are highlighting and why.
+4. Finally, write a narrative on a new webpage on your Google site. The narrative should include your time series visual from Tableau along with a description of what you are highlighting and why.
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 5`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions (place below Part 2). Part 2 should contain your evidence of completing steps 1 & 2 and a link to your Tableau Public site. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your Google site titled `Problem Set 5`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions (place below Part 2). Part 2 should contain your evidence of completing steps 1 & 2 and a link to your Tableau Public site. Submit the link to your Google site webpage in Canvas.

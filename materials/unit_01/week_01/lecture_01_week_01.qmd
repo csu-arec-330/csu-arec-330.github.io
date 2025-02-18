@@ -32,7 +32,7 @@ Project 1 overview
 <!-- ::: {.column width="60%"} -->
 <!-- ::: -->
 <!-- :::: -->
-
+<!--
 ## Cautionary note 
 ::: {.incremental}
 
@@ -41,8 +41,41 @@ Project 1 overview
 - We are introducing you to the tip of the analytical iceberg.  Learn more before you put this into practice.
 
 - Incorrect analysis can lead to worse conclusions than no analysis.
-
 :::
+-->
+
+## Types of Datasets in This Course
+
+## 1. Time Series Data
+
+Time series data consists of observations collected at successive points in time, typically at regular intervals (e.g., daily, monthly, annually). This type of data is useful for identifying trends, seasonality, and making forecasts.
+
+Example: **Monthly sales revenue of a grocery store over five years.**
+
+
+
+
+## 2. Cross-Sectional Data
+
+Cross-sectional data captures information at a single point in time across multiple entities. Unlike time series, this data does not track changes over time but rather compares differences between subjects at a given moment.
+
+Example: **Household income levels surveyed across different cities in a single year.**
+
+
+
+## 3. Panel Data (Longitudinal Data)
+
+Panel data, or longitudinal data, combines elements of both time series and cross-sectional data. It follows the same entities (e.g., individuals, firms, regions) over multiple time periods, allowing for analysis of both individual differences and time-based changes.
+
+Example: **Annual employment records of the same group of workers over a 10-year period.**
+
+## Plot Comparison
+
+::: {style="text-align: center"}
+![](includes/plot_compare.png){width="80%"}
+:::
+
+
 
 # Intro to Time Series Analysis
 
@@ -65,7 +98,7 @@ Time series data is a sequence of data points collected over time.
 
 It typically consists of observations taken at regular intervals (e.g. every hour, every day, every week, etc.) and can be used to study trends and patterns over time.
 
-Example: Store sales volume over time.
+Example: **Store sales volume over time.**
 
 ::: {style="text-align: center"}
 ![](includes/grocery_sales.jpg){width="80%"}
@@ -73,17 +106,19 @@ Example: Store sales volume over time.
 
 ## How is time series data used in business
 
-Time Series Analysis 
+**Time Series Analysis**
 
 - learn about trends 
 
 - compare current period to past periods
 
-Forecasting 
+**Forecasting** 
 
 - make an educated guess about future values
 
 - develop business strategy around forecasts
+
+# Time Series Analysis
 
 ## Time series decomposition
 
@@ -132,25 +167,37 @@ Residual or Noise: This consists of random, unpredictable variations in the time
 
 ## Structural breaks {.scrollable}
 
-Analysts may want to identify changes in the time series that are not just noise.
-
-Structural breaks refer to points in time when there is a *sudden and lasting* change in the behavior of the time series data.
-
-We refer to the "behavior" of any dataset as the "data generating mechanism" (or data generating process).
-
-Statistically identifying these changes can be the goal of the analysis or an exploratory exercise.
-
-Examples of structural breaks: Economic policy changes, technological innovations, natural disasters, or shifts in consumer behavior.
-
 ::: {style="text-align: center"}
 ![Synthetic time series with three data generating mechanisms](includes/structural_break.png){width="70%"}
 :::
 
+Sometimes, data doesn’t follow a smooth pattern—something big happens, and the trend changes suddenly. 
 
-## Exercise
+These major shifts in the data are called **structural breaks**.
 
-Briefly describe one reason for a structural break in a time series.
+A structural break occurs when there is a **sudden and lasting change** in how the data behaves. This means the underlying factors driving the data (also called the data-generating process) have changed.
 
+
+## Why do structural breaks matter?
+
+Identifying these changes helps analysts understand whether a trend is continuing as expected or if something important has altered the pattern.
+
+**Common Causes of Structural Breaks:**
+
+- Economic policy changes (e.g., a new tax law affecting business profits)
+- Technological innovations (e.g., introduction of smartphones disrupting traditional media)
+- Natural disasters (e.g., a drought causing sudden drops in crop yields)
+- Shifts in consumer behavior (e.g., a global pandemic changing travel habits)
+
+
+## Exercise: Time Series Analysis
+
+**Example:** Imagine you are analyzing restaurant sales over time. For years, sales followed a seasonal pattern, with higher sales in summer and lower in winter. Suddenly, in 2020, there was a huge, lasting drop in sales. This was a structural break—caused by the COVID-19 pandemic, which led to lockdowns and changes in consumer habits.
+
+**On your own:** Describe one example of a structural break in a time series.
+
+
+# Forecasting
 
 ## Forecasting examples
 
@@ -161,14 +208,6 @@ We might want to forecast. . .
 - call volumes to schedule staff in call center
 
 - inventory requirements to meet demands
-
-## Exercise
-
-How could you use forecasting to improve decision-making in ag business or environmental and natural resource management? 
-
-Provide an example.
-
-
 
 ## Forecasting overview {.scrollable}
 
@@ -198,6 +237,12 @@ Forecasts are uncertain; we can quantify some of that uncertainty
 Source: [Hyndman & Athanasopoulos (2021)](https://otexts.com/fpp3/basic-steps.html)
 :::
 
+## Exercise: Forecasting
+
+**Example:** A group of farmers in a drought-prone region wants to determine whether they will have enough water for irrigation in the upcoming growing season. They would analyze historical rainfall and reservoir level data from the past 20 years, and use forecasting models to predict water availability for the next six months to help make better decisions about crop selection, irrigation scheduling, and water conservation strategies.
+
+**On your own:** How could you use forecasting to improve decision-making in ag business or environmental and natural resource management? 
+
 ## Summary
 
 Time series data is a common structure of data
@@ -212,65 +257,80 @@ Introductions in this course (see [Hyndman & Athanasopoulos (2021)](https://otex
 
 ## Project 1 overview
 
-Groups of 2
+Form **groups of 2**.
 
-Choose an ag biz or enre management question to answer with time series data
-
-Collect time series data
-
-Analyze trends 
-
-Generate a forecast 
-
-Present results in a recorded video
+- Choose an **agribusiness** or **environmental resource management** question to answer using time series data.
+- Collect relevant time series data.
+- Analyze trends and patterns.
+- Generate a forecast.
+- Present results in a recorded video.
 
 
 ## Example: Corn and Combines {.scrollable}
 
+**Context:** Equipment dealers tend to sell more machinery when agricultural prices rise. Most farmers near Dealer X grow corn.
+
+**Decision:** Dealer X needs to decide whether to increase inventory of new tractors and combines for next year.
+
+**Question:** Will corn prices rise or fall in the next year, and by how much?
+
+**Hypotheses:**
+
+- If corn prices are expected to rise, Dealer X may increase inventory and prepare for higher demand.
+- If prices are expected to fall, they may delay purchases or focus on used equipment sales to reduce risk.
+
+**Approach:** 
+
+- Analyze historical time series data of corn prices (including decomposition).
+- Forecast the corn Producer Price Index (PPI) one year into the future.
+
+**Presentation:**
+
+- Provide context by plotting raw data.
+- Describe decision-making implications.
+- Explain key insights.
+- Use effective graphics and storytelling techniques.
+
+## Example: Corn and Combines {.scrollable}
 
 ::: {style="text-align: center"}
 ![<https://www.farm-equipment.com/articles/5142-historical-corn-prices-provide-look-at-future-equipment-sales>](includes/corn_prices.jpeg){width="70%"}
 :::
 <!-- Historical corn prices and future equipment sales  -->
 
-Context: Equipment dealers sell more when ag prices rise.  Most people grow corn near dealer x.
+**Story:** Corn prices have historically risen in stepwise jumps rather than gradual increases, with structural breaks around 1940, 1970, and 2006. Each break led to a new, higher average price level.
 
-Question: Will corn prices rise or fall in the next year and by how much?
-
-Approach: Analyze time series of corn prices (decomp).  Forecast corn PPI one year.
-
-Present: Provide context (plot raw data) and describe decision. Explain your insights.  Use effective graphics. Tell your data story.
-
+**Result:** If corn prices continue following this pattern, Dealer X should consider **increasing equipment inventory** to meet anticipated higher demand from farmers who will have greater revenues to invest in new machinery.
 
 ## Finding data
 
-Many sources of public data (e.g., [St Louis FED](https://fred.stlouisfed.org/categories/33528), [tidyquant](https://business-science.github.io/tidyquant/), and more on [course website](https://csu-arec-330.github.io/course-materials/))
+- Many sources of public data are available, including:
+  - [St. Louis FED (FRED)](https://fred.stlouisfed.org/categories/33528)
+  - [Tidyquant](https://business-science.github.io/tidyquant/)
+  - More sources on the [course website](https://csu-arec-330.github.io/course-materials/)
+- Choose datasets appropriate for answering your research question.
+- Instructors and TAs are available to assist.
 
-Choose data appropriate to answer the question 
 
-Instructors and TA can help
+## Analysis Requirements
 
+Your project must include:
 
+- **Time series analysis** (covered in Unit 1, Week 2)
+- **Forecasting techniques** (covered in Unit 2, Week 3)
 
-## Analysis
+## Project Steps
 
-Must include some:
+1. Identify an **interesting and relevant question**.
+2. Collect and clean your data.
+3. Develop an analysis strategy, explore, and refine your approach.
+4. Develop a compelling presentation.
 
-- time series analysis (unit 1 week 2)
+**Integration with the D^3^M Framework**
 
-- forecasting (unit 2 week 3)
+- Align your project with the guidelines covered in the **Data-Driven Decision Making (D3M) framework**.
+- Use structured analysis and interpretation to drive insights and decision-making.
 
-## Process
-
-Identify an interesting question
-
-Collect data
-
-Develop analysis strategy, explore, refine
-
-Develop presentation
-
-# Get Started
 
 ## References {.scrollable .smaller}
 

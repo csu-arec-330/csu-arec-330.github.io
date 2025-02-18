@@ -8,7 +8,7 @@
 <link href="lecture_01_week_01_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_01_week_01_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_01_week_01_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Week 5:  Intro to Time Series   and Project 1 Overview</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -346,15 +347,40 @@
 <!-- ::: {.column width="60%"} -->
 <!-- ::: -->
 <!-- :::: -->
+<!--
+## Cautionary note 
+::: {.incremental}
+
+- We will teach you enough to be dangerous
+
+- We are introducing you to the tip of the analytical iceberg.  Learn more before you put this into practice.
+
+- Incorrect analysis can lead to worse conclusions than no analysis.
+:::
+-->
 </section>
-<section id="cautionary-note" class="slide level2">
-<h2>Cautionary note</h2>
-<div>
-<ul>
-<li class="fragment"><p>We will teach you enough to be dangerous</p></li>
-<li class="fragment"><p>We are introducing you to the tip of the analytical iceberg. Learn more before you put this into practice.</p></li>
-<li class="fragment"><p>Incorrect analysis can lead to worse conclusions than no analysis.</p></li>
-</ul>
+<section id="types-of-datasets-in-this-course" class="slide level2">
+<h2>Types of Datasets in This Course</h2>
+</section>
+<section id="time-series-data" class="slide level2">
+<h2>1. Time Series Data</h2>
+<p>Time series data consists of observations collected at successive points in time, typically at regular intervals (e.g., daily, monthly, annually). This type of data is useful for identifying trends, seasonality, and making forecasts.</p>
+<p>Example: <strong>Monthly sales revenue of a grocery store over five years.</strong></p>
+</section>
+<section id="cross-sectional-data" class="slide level2">
+<h2>2. Cross-Sectional Data</h2>
+<p>Cross-sectional data captures information at a single point in time across multiple entities. Unlike time series, this data does not track changes over time but rather compares differences between subjects at a given moment.</p>
+<p>Example: <strong>Household income levels surveyed across different cities in a single year.</strong></p>
+</section>
+<section id="panel-data-longitudinal-data" class="slide level2">
+<h2>3. Panel Data (Longitudinal Data)</h2>
+<p>Panel data, or longitudinal data, combines elements of both time series and cross-sectional data. It follows the same entities (e.g., individuals, firms, regions) over multiple time periods, allowing for analysis of both individual differences and time-based changes.</p>
+<p>Example: <strong>Annual employment records of the same group of workers over a 10-year period.</strong></p>
+</section>
+<section id="plot-comparison" class="slide level2">
+<h2>Plot Comparison</h2>
+<div style="text-align: center">
+<p><img data-src="includes/plot_compare.png" style="width:80.0%"></p>
 </div>
 </section>
 <section id="intro-to-time-series-analysis" class="title-slide slide level1 center">
@@ -380,23 +406,28 @@
 <h2>What is time series data?</h2>
 <p>Time series data is a sequence of data points collected over time.</p>
 <p>It typically consists of observations taken at regular intervals (e.g.&nbsp;every hour, every day, every week, etc.) and can be used to study trends and patterns over time.</p>
-<p>Example: Store sales volume over time.</p>
+<p>Example: <strong>Store sales volume over time.</strong></p>
 <div style="text-align: center">
 <p><img data-src="includes/grocery_sales.jpg" style="width:80.0%"></p>
 </div>
 </section>
 <section id="how-is-time-series-data-used-in-business" class="slide level2">
 <h2>How is time series data used in business</h2>
-<p>Time Series Analysis</p>
+<p><strong>Time Series Analysis</strong></p>
 <ul>
 <li><p>learn about trends</p></li>
 <li><p>compare current period to past periods</p></li>
 </ul>
-<p>Forecasting</p>
+<p><strong>Forecasting</strong></p>
 <ul>
 <li><p>make an educated guess about future values</p></li>
 <li><p>develop business strategy around forecasts</p></li>
 </ul>
+</section></section>
+<section>
+<section id="time-series-analysis" class="title-slide slide level1 center">
+<h1>Time Series Analysis</h1>
+
 </section>
 <section id="time-series-decomposition" class="slide level2">
 <h2>Time series decomposition</h2>
@@ -444,11 +475,6 @@
 </section>
 <section id="structural-breaks" class="slide level2 scrollable">
 <h2>Structural breaks</h2>
-<p>Analysts may want to identify changes in the time series that are not just noise.</p>
-<p>Structural breaks refer to points in time when there is a <em>sudden and lasting</em> change in the behavior of the time series data.</p>
-<p>We refer to the “behavior” of any dataset as the “data generating mechanism” (or data generating process).</p>
-<p>Statistically identifying these changes can be the goal of the analysis or an exploratory exercise.</p>
-<p>Examples of structural breaks: Economic policy changes, technological innovations, natural disasters, or shifts in consumer behavior.</p>
 <div style="text-align: center">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -457,10 +483,30 @@
 </figure>
 </div>
 </div>
+<p>Sometimes, data doesn’t follow a smooth pattern—something big happens, and the trend changes suddenly.</p>
+<p>These major shifts in the data are called <strong>structural breaks</strong>.</p>
+<p>A structural break occurs when there is a <strong>sudden and lasting change</strong> in how the data behaves. This means the underlying factors driving the data (also called the data-generating process) have changed.</p>
 </section>
-<section id="exercise" class="slide level2">
-<h2>Exercise</h2>
-<p>Briefly describe one reason for a structural break in a time series.</p>
+<section id="why-do-structural-breaks-matter" class="slide level2">
+<h2>Why do structural breaks matter?</h2>
+<p>Identifying these changes helps analysts understand whether a trend is continuing as expected or if something important has altered the pattern.</p>
+<p><strong>Common Causes of Structural Breaks:</strong></p>
+<ul>
+<li>Economic policy changes (e.g., a new tax law affecting business profits)</li>
+<li>Technological innovations (e.g., introduction of smartphones disrupting traditional media)</li>
+<li>Natural disasters (e.g., a drought causing sudden drops in crop yields)</li>
+<li>Shifts in consumer behavior (e.g., a global pandemic changing travel habits)</li>
+</ul>
+</section>
+<section id="exercise-time-series-analysis" class="slide level2">
+<h2>Exercise: Time Series Analysis</h2>
+<p><strong>Example:</strong> Imagine you are analyzing restaurant sales over time. For years, sales followed a seasonal pattern, with higher sales in summer and lower in winter. Suddenly, in 2020, there was a huge, lasting drop in sales. This was a structural break—caused by the COVID-19 pandemic, which led to lockdowns and changes in consumer habits.</p>
+<p><strong>On your own:</strong> Describe one example of a structural break in a time series.</p>
+</section></section>
+<section>
+<section id="forecasting" class="title-slide slide level1 center">
+<h1>Forecasting</h1>
+
 </section>
 <section id="forecasting-examples" class="slide level2">
 <h2>Forecasting examples</h2>
@@ -470,11 +516,6 @@
 <li><p>call volumes to schedule staff in call center</p></li>
 <li><p>inventory requirements to meet demands</p></li>
 </ul>
-</section>
-<section id="exercise-1" class="slide level2">
-<h2>Exercise</h2>
-<p>How could you use forecasting to improve decision-making in ag business or environmental and natural resource management?</p>
-<p>Provide an example.</p>
 </section>
 <section id="forecasting-overview" class="slide level2 scrollable">
 <h2>Forecasting overview</h2>
@@ -498,6 +539,11 @@
 <aside><div>
 <p>Source: <a href="https://otexts.com/fpp3/basic-steps.html">Hyndman &amp; Athanasopoulos (2021)</a></p>
 </div></aside></section>
+<section id="exercise-forecasting" class="slide level2">
+<h2>Exercise: Forecasting</h2>
+<p><strong>Example:</strong> A group of farmers in a drought-prone region wants to determine whether they will have enough water for irrigation in the upcoming growing season. They would analyze historical rainfall and reservoir level data from the past 20 years, and use forecasting models to predict water availability for the next six months to help make better decisions about crop selection, irrigation scheduling, and water conservation strategies.</p>
+<p><strong>On your own:</strong> How could you use forecasting to improve decision-making in ag business or environmental and natural resource management?</p>
+</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <p>Time series data is a common structure of data</p>
@@ -512,14 +558,39 @@
 </section>
 <section id="project-1-overview" class="slide level2">
 <h2>Project 1 overview</h2>
-<p>Groups of 2</p>
-<p>Choose an ag biz or enre management question to answer with time series data</p>
-<p>Collect time series data</p>
-<p>Analyze trends</p>
-<p>Generate a forecast</p>
-<p>Present results in a recorded video</p>
+<p>Form <strong>groups of 2</strong>.</p>
+<ul>
+<li>Choose an <strong>agribusiness</strong> or <strong>environmental resource management</strong> question to answer using time series data.</li>
+<li>Collect relevant time series data.</li>
+<li>Analyze trends and patterns.</li>
+<li>Generate a forecast.</li>
+<li>Present results in a recorded video.</li>
+</ul>
 </section>
 <section id="example-corn-and-combines" class="slide level2 scrollable">
+<h2>Example: Corn and Combines</h2>
+<p><strong>Context:</strong> Equipment dealers tend to sell more machinery when agricultural prices rise. Most farmers near Dealer X grow corn.</p>
+<p><strong>Decision:</strong> Dealer X needs to decide whether to increase inventory of new tractors and combines for next year.</p>
+<p><strong>Question:</strong> Will corn prices rise or fall in the next year, and by how much?</p>
+<p><strong>Hypotheses:</strong></p>
+<ul>
+<li>If corn prices are expected to rise, Dealer X may increase inventory and prepare for higher demand.</li>
+<li>If prices are expected to fall, they may delay purchases or focus on used equipment sales to reduce risk.</li>
+</ul>
+<p><strong>Approach:</strong></p>
+<ul>
+<li>Analyze historical time series data of corn prices (including decomposition).</li>
+<li>Forecast the corn Producer Price Index (PPI) one year into the future.</li>
+</ul>
+<p><strong>Presentation:</strong></p>
+<ul>
+<li>Provide context by plotting raw data.</li>
+<li>Describe decision-making implications.</li>
+<li>Explain key insights.</li>
+<li>Use effective graphics and storytelling techniques.</li>
+</ul>
+</section>
+<section id="example-corn-and-combines-1" class="slide level2 scrollable">
 <h2>Example: Corn and Combines</h2>
 <div style="text-align: center">
 <div class="quarto-figure quarto-figure-center">
@@ -530,42 +601,51 @@
 </div>
 </div>
 <!-- Historical corn prices and future equipment sales  -->
-<p>Context: Equipment dealers sell more when ag prices rise. Most people grow corn near dealer x.</p>
-<p>Question: Will corn prices rise or fall in the next year and by how much?</p>
-<p>Approach: Analyze time series of corn prices (decomp). Forecast corn PPI one year.</p>
-<p>Present: Provide context (plot raw data) and describe decision. Explain your insights. Use effective graphics. Tell your data story.</p>
+<p><strong>Story:</strong> Corn prices have historically risen in stepwise jumps rather than gradual increases, with structural breaks around 1940, 1970, and 2006. Each break led to a new, higher average price level.</p>
+<p><strong>Result:</strong> If corn prices continue following this pattern, Dealer X should consider <strong>increasing equipment inventory</strong> to meet anticipated higher demand from farmers who will have greater revenues to invest in new machinery.</p>
 </section>
 <section id="finding-data" class="slide level2">
 <h2>Finding data</h2>
-<p>Many sources of public data (e.g., <a href="https://fred.stlouisfed.org/categories/33528">St Louis FED</a>, <a href="https://business-science.github.io/tidyquant/">tidyquant</a>, and more on <a href="https://csu-arec-330.github.io/course-materials/">course website</a>)</p>
-<p>Choose data appropriate to answer the question</p>
-<p>Instructors and TA can help</p>
-</section>
-<section id="analysis" class="slide level2">
-<h2>Analysis</h2>
-<p>Must include some:</p>
 <ul>
-<li><p>time series analysis (unit 1 week 2)</p></li>
-<li><p>forecasting (unit 2 week 3)</p></li>
+<li>Many sources of public data are available, including:
+<ul>
+<li><a href="https://fred.stlouisfed.org/categories/33528">St.&nbsp;Louis FED (FRED)</a></li>
+<li><a href="https://business-science.github.io/tidyquant/">Tidyquant</a></li>
+<li>More sources on the <a href="https://csu-arec-330.github.io/course-materials/">course website</a></li>
+</ul></li>
+<li>Choose datasets appropriate for answering your research question.</li>
+<li>Instructors and TAs are available to assist.</li>
 </ul>
 </section>
-<section id="process" class="slide level2">
-<h2>Process</h2>
-<p>Identify an interesting question</p>
-<p>Collect data</p>
-<p>Develop analysis strategy, explore, refine</p>
-<p>Develop presentation</p>
-</section></section>
-<section>
-<section id="get-started" class="title-slide slide level1 center">
-<h1>Get Started</h1>
-
+<section id="analysis-requirements" class="slide level2">
+<h2>Analysis Requirements</h2>
+<p>Your project must include:</p>
+<ul>
+<li><strong>Time series analysis</strong> (covered in Unit 1, Week 2)</li>
+<li><strong>Forecasting techniques</strong> (covered in Unit 2, Week 3)</li>
+</ul>
+</section>
+<section id="project-steps" class="slide level2">
+<h2>Project Steps</h2>
+<ol type="1">
+<li>Identify an <strong>interesting and relevant question</strong>.</li>
+<li>Collect and clean your data.</li>
+<li>Develop an analysis strategy, explore, and refine your approach.</li>
+<li>Develop a compelling presentation.</li>
+</ol>
+<p><strong>Integration with the D<sup>3</sup>M Framework</strong></p>
+<ul>
+<li>Align your project with the guidelines covered in the <strong>Data-Driven Decision Making (D3M) framework</strong>.</li>
+<li>Use structured analysis and interpretation to drive insights and decision-making.</li>
+</ul>
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>
 <p>Hyndman, R.J., &amp; Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <a href="https://otexts.com/fpp3/" class="uri">https://otexts.com/fpp3/</a>. Accessed on 02-14-2023.</p>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>
@@ -594,7 +674,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -811,18 +890,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -854,11 +922,50 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -868,8 +975,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -883,7 +999,11 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
