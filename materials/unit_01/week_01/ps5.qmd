@@ -1,40 +1,51 @@
 ---
-title: "Project 1 -- Problem Set 1: Starting Project 1 and Working with time series data"
+title: "Project 1 -- Problem Set 1: Starting Project 1 and Working with Time Series Data"
 format: 
   html:
     theme: zephyr
 ---
 
-The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data.
+The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data. Treat this assignment as the first step of your project—choose time series data that interest you and that you would like to study further. **You may work on this assignment with your partner. However, each person will submit the assignment individually. If one person builds the visualizations in Tableau, use their embed code on your Google site.**
 
-Treat this assignment as the first part of your project. Choose time series that you find interesting and would like to study. 
+## Part 1: R – Acquiring and Preparing Data
 
-## Part 1: R
+The goal of this section is to acquire and modify your data so that it is ready for visualization in Tableau.
 
-The objective of this portion of the problem set is to acquire and modify your data, so that it is ready for visualization in Tableau.
+### **Instructions:**
 
-1. All computer programs track time numerically relative to an epoch.  What is the numeric value of the assignment due date?
+1. All computer programs track time numerically relative to an epoch. What is the numeric value of the assignment due date?
 
-2. Use the `tidyquant` package to access the FRED API and download 3 time series datasets.  
-3. Use `case_when()` to change the name of the series to something more descriptive.
+2. Use the `tidyquant` package to access the FRED API and download **three time series datasets** relevant to your topic of interest.
 
-4. Export the data in .csv format for Tableau
+3. Use `case_when()` to rename the series to more **descriptive** names.
 
+4. Save your dataset in **.csv format** so that it can be used in Tableau.
 
-## Part 2: Tableau
+## Part 2: Tableau – Visualizing and Analyzing Trends
 
-The objective of this section is to explore the data and think about something that influenced the price of the commodity you are studying. You may need to do some research and investigation to see what events influenced your price series.
+The objective of this section is to explore the data and identify external factors that may have influenced price trends in your dataset. You may need to do some **research** to understand events that impacted your price series.
 
-1. In Tableau, connect to the time series dataset you downloaded in part 1 (it should include 3 series). 
+### **Instructions:**
 
-2. Create a visualization that shows monthly prices for your three commodities.
+1. Load the **time series dataset** you prepared in Part 1 into Tableau.
 
-<!-- 3. Include a reference band highlighting a relevant window of time (e.g., financial crisis, COVID). This can be a time period relevant to a single series or all of your price series. -->
+2. Generate a **line chart** showing **monthly prices** for your three selected time series.
 
-3. Format your visualization by limiting the time window (to something that helps the audience see differences before and after the event you are highlighting), adding color, a useful title, appropriate marker labels, text annotations, etc. 
+3. Format your chart according to the guidelines for effective visualizations:
+     - Adjust the time window (e.g., limit to a time window that helps the audience see differences before and after the event you are highlighting)
+     - Use appropriate colors
+     - Add a title, axis labels, and annotations
+     - Include marker labels and relevant text annotations
 
-4. Finally, write a narrative on a new webpage on your Google site. The narrative should include your time series visual from Tableau along with a description of what you are highlighting and why.
-
+4. Write a **narrative** on your Google Site  
+   - Create a new webpage titled **“Problem Set 5”**
+   - Embed your Tableau visualization
+   - Write a short narrative explaining what your visualization highlights and why it is significant
+   
 ## How to Submit
 
-You should create a new webpage on your Google site titled `Problem Set 5`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions (place below Part 2). Part 2 should contain your evidence of completing steps 1 & 2 and a link to your Tableau Public site. Submit the link to your Google site webpage in Canvas.
+1. **Create a new webpage on your Google site** titled `Problem Set 5`.
+2. **Include the following:**
+   - **Part 1**: An R script displaying the code used for data acquisition and modification.
+   - **Part 2**: Your Tableau visualization and written narrative.
+3. **Publish the page and submit the link** to your Google site webpage in Canvas.

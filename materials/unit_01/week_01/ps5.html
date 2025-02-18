@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Problem Set 5: Working with time series data</title>
+<title>Project 1 – Problem Set 1: Starting Project 1 and Working with Time Series Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Problem Set 5: Working with time series data</h1>
+<h1 class="title">Project 1 – Problem Set 1: Starting Project 1 and Working with Time Series Data</h1>
 </div>
 
 
@@ -58,36 +58,59 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
 
-<p>The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data.</p>
-<p>Treat this assignment as the first part of your project. Choose time series that you find interesting and would like to study.</p>
-<section id="part-1-r" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-r">Part 1: R</h2>
-<p>The objective of this portion of the problem set is to acquire and modify your data, so that it is ready for visualization in Tableau.</p>
+
+<p>The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data. Treat this assignment as the first step of your project—choose time series data that interest you and that you would like to study further. <strong>You may work on this assignment with your partner. However, each person will submit the assignment individually. If one person builds the visualizations in Tableau, use their embed code on your Google site.</strong></p>
+<section id="part-1-r-acquiring-and-preparing-data" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-r-acquiring-and-preparing-data">Part 1: R – Acquiring and Preparing Data</h2>
+<p>The goal of this section is to acquire and modify your data so that it is ready for visualization in Tableau.</p>
+<section id="instructions" class="level3">
+<h3 class="anchored" data-anchor-id="instructions"><strong>Instructions:</strong></h3>
 <ol type="1">
 <li><p>All computer programs track time numerically relative to an epoch. What is the numeric value of the assignment due date?</p></li>
-<li><p>Use the <code>tidyquant</code> package to access the FRED API and download 3 time series datasets.</p></li>
-<li><p>Use <code>case_when()</code> to change the name of the series to something more descriptive.</p></li>
-<li><p>Export the data in .csv format for Tableau</p></li>
+<li><p>Use the <code>tidyquant</code> package to access the FRED API and download <strong>three time series datasets</strong> relevant to your topic of interest.</p></li>
+<li><p>Use <code>case_when()</code> to rename the series to more <strong>descriptive</strong> names.</p></li>
+<li><p>Save your dataset in <strong>.csv format</strong> so that it can be used in Tableau.</p></li>
 </ol>
 </section>
-<section id="part-2-tableau" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-tableau">Part 2: Tableau</h2>
-<p>The objective of this section is to explore the data and think about something that influenced the price of the commodity you are studying. You may need to do some research and investigation to see what events influenced your price series.</p>
+</section>
+<section id="part-2-tableau-visualizing-and-analyzing-trends" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-tableau-visualizing-and-analyzing-trends">Part 2: Tableau – Visualizing and Analyzing Trends</h2>
+<p>The objective of this section is to explore the data and identify external factors that may have influenced price trends in your dataset. You may need to do some <strong>research</strong> to understand events that impacted your price series.</p>
+<section id="instructions-1" class="level3">
+<h3 class="anchored" data-anchor-id="instructions-1"><strong>Instructions:</strong></h3>
 <ol type="1">
-<li><p>In Tableau, connect to the time series dataset you downloaded in part 1 (it should include 3 series).</p></li>
-<li><p>Create a visualization that shows monthly prices for your three commodities.</p></li>
+<li><p>Load the <strong>time series dataset</strong> you prepared in Part 1 into Tableau.</p></li>
+<li><p>Generate a <strong>line chart</strong> showing <strong>monthly prices</strong> for your three selected time series.</p></li>
+<li><p>Format your chart according to the guidelines for effective visualizations:</p>
+<ul>
+<li>Adjust the time window (e.g., limit to a time window that helps the audience see differences before and after the event you are highlighting)</li>
+<li>Use appropriate colors</li>
+<li>Add a title, axis labels, and annotations</li>
+<li>Include marker labels and relevant text annotations</li>
+</ul></li>
+<li><p>Write a <strong>narrative</strong> on your Google Site</p>
+<ul>
+<li>Create a new webpage titled <strong>“Problem Set 5”</strong></li>
+<li>Embed your Tableau visualization</li>
+<li>Write a short narrative explaining what your visualization highlights and why it is significant</li>
+</ul></li>
 </ol>
-<!-- 3. Include a reference band highlighting a relevant window of time (e.g., financial crisis, COVID). This can be a time period relevant to a single series or all of your price series. -->
-<ol start="3" type="1">
-<li><p>Format your visualization by limiting the time window (to something that helps the audience see differences before and after the event you are highlighting), adding color, a useful title, appropriate marker labels, text annotations, etc.</p></li>
-<li><p>Finally, write a narrative on a new webpage on your google site. The narrative should include your time series visual from Tableau along with a description of what you are highlighting and why.</p></li>
-</ol>
+</section>
 </section>
 <section id="how-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-submit">How to Submit</h2>
-<p>You should create a new webpage on your google site titled <code>Problem Set 5</code>. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions (place below Part 2). Part 2 should contain your evidence of completing steps 1 &amp; 2 and a link to your Tableau Public site. Submit the link to your google site webpage in Canvas.</p>
+<ol type="1">
+<li><strong>Create a new webpage on your Google site</strong> titled <code>Problem Set 5</code>.</li>
+<li><strong>Include the following:</strong>
+<ul>
+<li><strong>Part 1</strong>: An R script displaying the code used for data acquisition and modification.</li>
+<li><strong>Part 2</strong>: Your Tableau visualization and written narrative.</li>
+</ul></li>
+<li><strong>Publish the page and submit the link</strong> to your Google site webpage in Canvas.</li>
+</ol>
 </section>
 
 </main>
@@ -127,18 +150,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -170,11 +182,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -184,8 +235,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -197,7 +257,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -241,6 +424,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -266,6 +450,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -326,6 +536,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
