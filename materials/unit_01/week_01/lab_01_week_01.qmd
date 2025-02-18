@@ -13,35 +13,34 @@ format:
 This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 :::
 
-## Learning Objectives R
+## Learning Objectives
 
-- Reading in time series data
+### R:
+- Read in time series data
+- Work with dates in R
+- Download data via API
 
-- Understand how to work with dates
-
-- Downloading data via API
-
-
-## Learning Objectives Tableau
-
-- Understand date functions
-
-- Use date functions in calculated fields
-
-- Visualizing time series data 
-
-- Creating and interpreting trend lines
-
-- Visualizing structural breaks 
-
-- Creating panes to visualize mutiple time series
-
-## Unit 1 Project Overview
+### Tableau:
+- Understand and use date functions
+- Create calculated fields using date functions
+- Visualize time series data 
+- Create and interpret trend lines
+- Identify and visualize structural breaks 
+- Use panes to visualize multiple time series
 
 # Time series with R 
 
-The overall objective of this lab is to acquaint you with time series data.  Time series data is very common but not standardized.  Importantly, the notion of a date (and time) is foreign to machines.  They treat dates and times as numbers or counts relative to some start of time (usually called the epoch).  R uses January 1, 1970 as the epoch.  In contrast, MS Excel uses January 1, 1900 as the epoch.^[https://knowledge.broadcom.com/external/article/57052/how-to-convert-unix-epoch-time-values-in.html#:~:text=Epoch%20%2F%20UNIX%20time%20is%20the,on%20the%2070%20years%20difference.]  Prove it to yourself:
+The overall objective of this lab is to acquaint you with **time series data.**  
+
+Time series data is widely used but lacks a standardized format. Importantly, dates and times are not inherently understood by machines—they are stored as numbers relative to a specific starting point (epoch).^[https://knowledge.broadcom.com/external/article/57052/how-to-convert-unix-epoch-time-values-in.html#:~:text=Epoch%20%2F%20UNIX%20time%20is%20the,on%20the%2070%20years%20difference.] 
+
+- **R Epoch:** January 1, 1970
+- **Excel Epoch:** January 1, 1900
+
+You can confirm this by running:
 ```{r}
+#| eval: false
+
 #epoch
 as.numeric(as.Date("1970-01-01"))
 
@@ -51,64 +50,88 @@ as.numeric(as.Date("1970-01-02"))
 
 ## Importing time series data
 
-Importing time series data is similar to other types of data.  However, one needs to be aware of the date (or date and time). We have collected retail egg price data from the [St. Louis FED](https://fred.stlouisfed.org/series/APU0000708111) database called the Federal Reserve Economic Database (FRED).  You can download the data [here](../inputs/APU0000708111.csv), save it to your machine (and upload it to the server), and read it into R. Or, you can put the hyperlink directly into the `read_csv()` function.  Don't forget the steps to starting an R script: description of the script (comment), load (install if necessary) needed packages, set working directory.
+Importing time series data is similar to other types of data, but special attention is needed for date formatting. 
+
+We will use **retail egg price data** from the [St. Louis FED (FRED)](https://fred.stlouisfed.org/series/APU0000708111). You can download the data manually or import it directly via `read_csv()`:
+
+:::{.callout-important}
+Don't forget the steps to starting an R script! 
+
+1. Description of the script (comment)
+2. Load (install if necessary) needed packages
+3. Set working directory
+:::
 
 ```{r}
 #| eval: false
 
-#From your machine or the server
-egg_raw <- read_csv("your_path/APU0000708111.csv")
-
-```
-
-```{r}
-#| include: false
-
+#Load necessary libraries
 library(readr)
 library(dplyr)
 
-#From your machine or the server
+#Read in the data 
 egg_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111.csv")
 
 ```
 
-The `read_csv()` function will try to guess the data type.  In this case, it correctly identifies the variable `DATE` as a date. Check the data type of the variable by looking at the dataframe.
+The `read_csv()` function will try to guess the data type. In this case, it correctly identifies the variable `DATE` as a date. Check the data type of the variable by looking at the dataframe:
 
 ```{r}
 #| eval: false
 
+#Confirm that R read in the date field as a date
 glimpse(egg_raw)
 ```
 
-There are many instances where you collect data that has a date obvious to humans but not machines. In these cases, you need to give R some guidance.  We will use functions from the library called `lubridate`, designed to help work with dates. Read in a modified version of the data that you can download [here](https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv). I assigned the dataframe to an object called `egg_raw_c` to avoid overwriting the existing data.
+## Handling dates in R
+
+Sometimes, date fields are stored as **text** and need to be converted. In these cases, you need to give R some guidance.  
+
+We will use functions from the `lubridate` package, designed to help work with dates. 
+
+To see this in practice, read in a [modified version of the egg prices data](https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv). 
+
+Assign the dataframe to an object called `egg_raw_c` to avoid overwriting the existing data:
 
 ```{r}
-#| include: false
+#| eval: false
 
+#Load the necessary libraries (and install packages if needed)
 library(lubridate)
-library(tidyquant)
 
-#From your machine or the server
+#Read in the data
 egg_raw_c <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv")
-
 ```
 
 ```{r}
+#| eval: false
 
+#Confirm that R read in the date field as text and *not* a date
 glimpse(egg_raw_c)
 ```
 
-We need to tell R how to interpret that date. `lubridate` contains many functions to help with this.  See the [documentation](https://lubridate.tidyverse.org/index.html) for more information and examples. 
+Next, we need to tell R how to interpret that date. 
+
+The [`lubridate` package](https://lubridate.tidyverse.org/index.html) contains many functions to help with this.
 
 ```{r}
+#| eval: false
 
+# Use the mutate() function along with the mdy() function to convert the text date to a date value
 egg_raw_c <- mutate(egg_raw_c,measure_date=mdy(CHAR_DATE))
+```
 
+```{r}
+#| eval: false
+
+#Confirm that you have successfully converted the variable to a date field
+glimpse(egg_raw_c)
 ```
 
 Alternatively, you can chain commands:
 
 ```{r}
+#| eval: false
 
 egg_raw_c %>%
   mutate(measure_date=mdy(CHAR_DATE)) %>%
@@ -119,69 +142,115 @@ egg_raw_c %>%
 
 ## Accessing data via API
 
-API stands for Application Programming Interface and they facilitate much of the communication across the modern web.   
+API stands for **Application Programming Interface** and they facilitate much of the communication across the modern web.   
 
 ![API schematic. Source: https://www.altexsoft.com/blog/engineering/what-is-api-definition-types-specifications-documentation/](https://content.altexsoft.com/media/2019/06/1.png)
 
-We can use APIs to query data. FRED maintains an API that can be accessed using the library `tidyquant`.  This library has a large array of finance analysis tools.  Right now, we will just use it to access FRED data.  `tidyquant` is installed on the server, but you may need to install it on your own machine (e.g., `install.packages("tidyquant")`). Load the library. See the [documentation](https://business-science.github.io/tidyquant/) for information on how to use the functions.  For this exercise, we will use the function `tq_get()` to access the FRED API.  Inspect the help for this particular function to see how to use it. This function can do many things so we need to be specific with some parameters:
+We use APIs to query data. FRED maintains an API that can be accessed using the library [`tidyquant`](https://business-science.github.io/tidyquant/). This library also has a large array of finance analysis tools.  Right now, we will just use it to access FRED data.  
 
-- First, we need to find the unique identifier from FRED that points to the data we want.  In this case, we are going to grab the same data that we downloaded, and the unique identifer happens to be the file name `"APU0000708111"`. Remember the quotes.
+### Retrieving data via an API
 
-- Second, the documentation tells us that to access data from FRED we need to set the `get` parameter to `"economic.data"`
+#### Step 1: Install and load libraries
+
+Install `tidyquant` on your machine (e.g., `install.packages("tidyquant")`) and load the library.
+
+```{r}
+#| eval: false
+
+#Install the package if you have not already done so. Comment this out after you have installed it once on your machine.
+install.packages("tidyquant")
+
+#Load the library. The library needs to be loaded every time you begin a new instance of R.
+library(tidyquant, quietly = TRUE) #Note: The argument quietly = T in the library() function suppresses messages that would normally be printed when loading a package.
+```
+
+#### Step 2: Retrieve time series data via `tq_get()`
+
+For this exercise, we will use the function `tq_get()` to access the FRED API. 
+
+This function can do many things so we need to be specific with some parameters:
+
+- First, we need to find the unique identifier from FRED that points to the data we want  In this case, we are going to grab **retail egg prices** (the same data that we downloaded earlier). The unique identifier is `"APU0000708111"`. **Remember the quotes.**
+
+- Second, the documentation tells us that to access data from FRED we need to set the `get` parameter to `"economic.data"`.
 
 - Third, we can specify the date range with the `from` and `to` parameters.  Remember to use the YYYY-MM-DD format.
 
 ```{r}
+#| eval: false
 
-#install.packages("tidyquant")
-library(tidyquant,quietly = T)
-```
-
-```{r}
-
-egg_raw_tq <- tq_get(c("APU0000708111"),get = "economic.data",from="1990-01-01",to="2023-02-23")
-
-glimpse(egg_raw_tq)
-```
-
-You can download multiple time series at once by using a vector of identifiers. Let's download the producer price index to compare to the retail price of a dozen eggs.  The identifier is `WPU017107`.  Note that I am going to overwrite the existing object `egg_raw_tq` because I am going to download the retail price series as well as the producer price index.
-
-```{r}
-
-egg_raw_tq <- tq_get(c("APU0000708111","WPU017107"),get = "economic.data",from="1990-01-01",to="2023-02-23")
+#Use the tq_get() function to retrieve the time series data
+egg_raw_tq <- tq_get(c("APU0000708111"),
+                     get = "economic.data",
+                     from="1990-01-01",
+                     to="2024-02-28")
 
 glimpse(egg_raw_tq)
 ```
 
-Notice that there are still 3 columns.  The new data is stacked.  We can confirm this a few ways:
+#### Step 3: Retrieve multiple time series data using `tq_get()`
+
+You can download multiple time series at once by using a vector of identifiers. 
+
+Let's download the **producer price index** to compare to the retail price of a dozen eggs.  The identifier is `WPU017107`.  Note that I am going to overwrite the existing object `egg_raw_tq` because I am going to download the retail price series as well as the producer price index.
+
+```{r}
+#| eval: false
+
+#Use the tq_get() function to retrieve two time series datasets
+egg_raw_tq <- tq_get(c("APU0000708111","WPU017107"),
+                     get = "economic.data",
+                     from="1990-01-01",
+                     to="2024-02-28")
+
+glimpse(egg_raw_tq)
+```
+
+#### Step 4: Rename variables for clarity
+
+Notice that there are **3 columns** in **egg_raw_tq** but we downloaded two time series. Why aren't there **4 columns**?  
+
+**Answer:** The new data is stacked.  We can confirm this a few ways:
 
 1. Use the `unique()` function to see what values for symbol are in the dataset
 ```{r}
+#| eval: false
 
 unique(egg_raw_tq$symbol)
 ```
 
 2. Use `table()` to see the counts by each value
 ```{r}
+#| eval: false
 
 table(egg_raw_tq$symbol)
 ```
 
 >Why does the retail series `APU0000708111` have more observations?
 
-## Replacing values based on a criteria
+3. Use `case_when()` to replacing values based on a criteria
 
-The time series are currently identified by the variable `symbol`.  These codes are not informative.  Let's replace them with better labels.  There is a function in the `dplyr` package called `case_when()` designed for this purpose.
+The time series are currently identified by the variable `symbol`.  These codes are not informative.  Let's replace them with better labels.  
+
+We will use the `case_when()` function in the `dplyr` package to replace the symbol with a more descriptive name.
 ```{r}
+#| eval: false
 
 egg_out <- egg_raw_tq %>%
   mutate(description=case_when(
-    symbol == "APU0000708111" ~ "Egg Retail Price", #if symbol equals APU0000708111, then replace value with Retail Price
-    symbol == "WPU017107" ~ "Egg Producer Price"
+    symbol == "APU0000708111" ~ "Egg Retail Price", #if symbol equals APU0000708111, then replace value with Egg Retail Price
+    symbol == "WPU017107" ~ "Egg Producer Price" #if symbol equals WPU017107, then replace value with Egg Producer Price
   ))
 ```
 
+4. Use `write_csv()` to write the dataset to a csv file.
+
 Now the dataset is ready for export in .csv format so you can import it into Tableau.
+```{r}
+#| eval: false
+
+write_csv(egg_out, "egg_out.csv")
+```
 
 {{< video https://youtu.be/zuDOOmQtnrM aspect-ratio="16x9" >}}
 
