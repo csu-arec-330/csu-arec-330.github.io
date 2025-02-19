@@ -1,0 +1,79 @@
+
+> setwd("C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_00/week_03")
+
+> ### Load necessary libraries
+> library(dplyr)
+
+> library(readr)
+
+> # 1. Read in the dataset
+> supermarket_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_00/inputs/supermarket_sales.csv")
+indexed 0B in  0s, 0B/sindexed 2.15GB in  0s, 2.15GB/s                                                                                                                  
+> # 2. Calculate total value of sale and verify tax
+> super_sales <- supermarket_raw %>%
++   mutate(
++     subtotal = unit_price * quantity,
++     tax .... [TRUNCATED] 
+
+> # 3. Filter dataset for "Food and beverages"
+> food_sales <- super_sales %>%
++   filter(product_line == "Food and beverages")
+
+> # 4. Select relevant columns
+> food_sales_selected <- food_sales %>%
++   select(city, product_line, unit_price, quantity, total, rating)
+
+> # 5. Sort by quantity in descending order
+> food_sales_sorted <- food_sales_selected %>%
++   arrange(desc(quantity))
+
+> # 6. Calculate median sales by payment type
+> median_sales <- super_sales %>%
++   group_by(payment_type) %>%
++   summarise(median_total = median(tot .... [TRUNCATED] 
+
+> # 7. Compute rating per unit price (rup) and explain its insights
+> super_sales_rup <- super_sales %>%
++   mutate(rup = rating / unit_price)
+
+> # 8. Summarize rup and unit_price by product line
+> summary_stats <- super_sales_rup %>%
++   group_by(product_line) %>%
++   summarise(
++     mean_ru .... [TRUNCATED] 
+
+> # 9. Print summarized dataframe
+> print(summary_stats)
+# A tibble: 6 × 3
+  product_line           mean_rup mean_unit_price
+  <chr>                     <dbl>           <dbl>
+1 Electronic accessories    0.188            53.6
+2 Fashion accessories       0.170            57.2
+3 Food and beverages        0.176            56.0
+4 Health and beauty         0.182            54.9
+5 Home and lifestyle        0.175            55.3
+6 Sports and travel         0.170            57.0
+
+> # 10. Display version and loaded packages
+> version
+               _                                
+platform       x86_64-w64-mingw32               
+arch           x86_64                           
+os             mingw32                          
+crt            ucrt                             
+system         x86_64, mingw32                  
+status                                          
+major          4                                
+minor          4.0                              
+year           2024                             
+month          04                               
+day            24                               
+svn rev        86474                            
+language       R                                
+version.string R version 4.4.0 (2024-04-24 ucrt)
+nickname       Puppy Cup                        
+
+> print(.packages())
+[1] "readr"     "dplyr"     "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     
+list(value = c("readr", "dplyr", "stats", "graphics", "grDevices", 
+"utils", "datasets", "methods", "base"), visible = FALSE)

@@ -82,16 +82,40 @@ You should create a new webpage on your Google site titled `Unit 0 Mini Project`
 
 - Title your webpage Unit 0 Mini Project.
 - Include the following:
-  - A write-up of your analysis with a brief description of the data processing steps.
+  - A write-up of your analysis with a brief description of the data processing steps. **Note: This should not be your R script. This should be a technical description of your analysis.**
   - Embedded Tableau visualizations.
   - Your narrative (500–750 words).
+- On a separate page, titled Unit 0 Mini Project Appendix, include the R script used to generate your data file used to create your visualizations.
 
 2. **Generate a Log File:**
 
 - Use the `sink()` command in R to create a log file that demonstrates your script ran successfully.
 
+**Alternative Process:**
+
+*Given the truncation issues with generating log files, here is an alternative solution. Please use this method going forward.*
+
+{{< video https://youtu.be/B2AchbhnFTo aspect-ratio="16x9" >}}
+
+- Under the File menu, select **Compile Report...**
+- The default under "Report output format" is HTML. 
+- Select **Compile**
+- Along the tool bar, select **Open in Browser**
+- Hover your cursor over white space and **right click**.
+- Select **View page source**.
+- A new screen will appear with HTML code. (Don't worry, this might look like gibberish, but it's not!)
+- Using your keyboard, click **`CTRL`+`A`**. This will highlight all of the HTML code.
+- While the HTML code is highlighted, **right click** and select **Copy**.
+- Go to your Google website. 
+- Similar to as you would embed your Tableau visualization, select **Embed** under Insert.
+- Then, select **Embed code**.
+- Paste your embed code from your clipboard by either right-clicking and selecting **Paste** or `CTRL`+`V`.
+- Select **Next**.
+- **Resize** the image of your R script by expanding the window to fit the entire script.  
+
+Following these steps will display your entire code and output without truncation. 
+
 3. **Submit via Canvas:**
 
 - Submit the link to your Google Site webpage in Canvas.
-- Upload your R log file as a separate submission.
 

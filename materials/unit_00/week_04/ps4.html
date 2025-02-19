@@ -133,10 +133,11 @@ ul.task-list li input[type="checkbox"] {
 <li>Title your webpage Unit 0 Mini Project.</li>
 <li>Include the following:
 <ul>
-<li>A write-up of your analysis with a brief description of the data processing steps.</li>
+<li>A write-up of your analysis with a brief description of the data processing steps. <strong>Note: This should not be your R script. This should be a technical description of your analysis.</strong></li>
 <li>Embedded Tableau visualizations.</li>
 <li>Your narrative (500–750 words).</li>
 </ul></li>
+<li>On a separate page, titled Unit 0 Mini Project Appendix, include the R script used to generate your data file used to create your visualizations.</li>
 </ul>
 <ol start="2" type="1">
 <li><strong>Generate a Log File:</strong></li>
@@ -144,12 +145,32 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Use the <code>sink()</code> command in R to create a log file that demonstrates your script ran successfully.</li>
 </ul>
+<p><strong>Alternative Process:</strong></p>
+<p><em>Given the truncation issues with generating log files, here is an alternative solution. Please use this method going forward.</em></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B2AchbhnFTo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ul>
+<li>Under the File menu, select <strong>Compile Report…</strong></li>
+<li>The default under “Report output format” is HTML.</li>
+<li>Select <strong>Compile</strong></li>
+<li>Along the tool bar, select <strong>Open in Browser</strong></li>
+<li>Hover your cursor over white space and <strong>right click</strong>.</li>
+<li>Select <strong>View page source</strong>.</li>
+<li>A new screen will appear with HTML code. (Don’t worry, this might look like gibberish, but it’s not!)</li>
+<li>Using your keyboard, click <strong><code>CTRL</code>+<code>A</code></strong>. This will highlight all of the HTML code.</li>
+<li>While the HTML code is highlighted, <strong>right click</strong> and select <strong>Copy</strong>.</li>
+<li>Go to your Google website.</li>
+<li>Similar to as you would embed your Tableau visualization, select <strong>Embed</strong> under Insert.</li>
+<li>Then, select <strong>Embed code</strong>.</li>
+<li>Paste your embed code from your clipboard by either right-clicking and selecting <strong>Paste</strong> or <code>CTRL</code>+<code>V</code>.</li>
+<li>Select <strong>Next</strong>.</li>
+<li><strong>Resize</strong> the image of your R script by expanding the window to fit the entire script.</li>
+</ul>
+<p>Following these steps will display your entire code and output without truncation.</p>
 <ol start="3" type="1">
 <li><strong>Submit via Canvas:</strong></li>
 </ol>
 <ul>
 <li>Submit the link to your Google Site webpage in Canvas.</li>
-<li>Upload your R log file as a separate submission.</li>
 </ul>
 </section>
 
