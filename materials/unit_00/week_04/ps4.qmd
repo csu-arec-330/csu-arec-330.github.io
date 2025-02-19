@@ -85,10 +85,10 @@ You should create a new webpage on your Google site titled `Unit 0 Mini Project`
   - A write-up of your analysis with a brief description of the data processing steps. **Note: This should not be your R script. This should be a technical description of your analysis.**
   - Embedded Tableau visualizations.
   - Your narrative (500–750 words).
-- On a separate page, titled Unit 0 Mini Project Appendix, include the R script used to generate your data file used to create your visualizations.
 
 2. **Generate a Log File:**
 
+- On a separate page, titled Unit 0 Mini Project Appendix, include the R log file used to generate your data file used to create your visualizations.
 - Use the `sink()` command in R to create a log file that demonstrates your script ran successfully.
 
 **Alternative Process:**
