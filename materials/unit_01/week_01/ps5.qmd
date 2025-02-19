@@ -5,7 +5,13 @@ format:
     theme: zephyr
 ---
 
-The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data. Treat this assignment as the first step of your project—choose time series data that interest you and that you would like to study further. **You may work on this assignment with your partner. However, each person will submit the assignment individually. If one person builds the visualizations in Tableau, use their embed code on your Google site.**
+## Overview
+
+The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data. 
+
+Treat this assignment as the first step of your project—choose time series data that interest you and that you would like to study further. 
+
+**You may work on this assignment with your partner. However, each person will submit the assignment individually. If one person builds the visualizations in Tableau, use their embed code on your Google site.**
 
 ## Part 1: R – Acquiring and Preparing Data
 
@@ -21,9 +27,11 @@ The goal of this section is to acquire and modify your data so that it is ready 
 
 4. Save your dataset in **.csv format** so that it can be used in Tableau.
 
+**Note:** *If you choose to use an alternative dataset, not from FRED, please get approval from the instructor.*
+
 ## Part 2: Tableau – Visualizing and Analyzing Trends
 
-The objective of this section is to explore the data and identify external factors that may have influenced price trends in your dataset. You may need to do some **research** to understand events that impacted your price series.
+The objective of this section is to explore the data and identify external factors that may have influenced price trends in your dataset. You may need to do some **research** to understand events that impacted your time series.
 
 ### **Instructions:**
 
