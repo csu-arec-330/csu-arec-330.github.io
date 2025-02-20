@@ -41,7 +41,7 @@ The objective of this section is to explore the data and identify external facto
 
 1. Load the **time series dataset** you prepared in Part 1 into Tableau.
 
-2. Generate a **line chart** showing **monthly prices** for your three selected time series.
+2. Generate a **line chart** showing **monthly prices** for your three selected time series. What is the best way to visualize the three time series? Note: Review the video from [Lab 05](https://csu-arec-330.github.io/materials/unit_01/week_01/lab_01_week_01.html#video-using-tableau-to-visualize-time-series-data) and the lab notes on [creating panes to visualize multiple time series](https://csu-arec-330.github.io/materials/unit_01/week_01/lab_01_week_01.html#creating-panes-to-visualize-mutiple-time-series).
 
 3. Format your chart according to the guidelines for effective visualizations:
      - Adjust the time window (e.g., limit to a time window that helps the audience see differences before and after the event you are highlighting)
@@ -52,12 +52,12 @@ The objective of this section is to explore the data and identify external facto
 4. Write a **narrative** on your Google Site  
    - Create a new webpage titled **“Problem Set 5”**
    - Embed your Tableau visualization
-   - Write a short narrative explaining what your visualization highlights and why it is significant
+   - Write a short narrative explaining what your visualization highlights and why it is significant. In your narrative, formulate a question that you would like to answer for [Project 01](https://https//csu-arec-330.github.io/materials/unit_01/project/project_1_instructions.html). 
    
 ## How to Submit
 
 1. **Create a new webpage on your Google site** titled `Problem Set 5`.
 2. **Include the following:**
    - **Part 1**: An R script displaying the code used for data acquisition and modification.
-   - **Part 2**: Your Tableau visualization and written narrative.
+   - **Part 2**: Your Tableau visualization and a written narrative.
 3. **Publish the page and submit the link** to your Google site webpage in Canvas.
