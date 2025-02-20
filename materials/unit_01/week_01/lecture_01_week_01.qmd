@@ -72,7 +72,7 @@ Example: **Annual employment records of the same group of workers over a 10-year
 ## Plot Comparison
 
 ::: {style="text-align: center"}
-![](includes/plot_compare.png){width="80%"}
+![](includes/plot_compare.PNG){width="80%"}
 :::
 
 

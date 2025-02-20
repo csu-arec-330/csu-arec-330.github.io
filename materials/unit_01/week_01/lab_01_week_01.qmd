@@ -52,16 +52,9 @@ as.numeric(as.Date("1970-01-02"))
 
 Importing time series data is similar to other types of data, but special attention is needed for date formatting.
 
-We will use **retail egg price data** from the [St. Louis FED (FRED)](https://fred.stlouisfed.org/series/APU0000708111). You can download the data manually or import it directly via `read_csv()`:
+We will use [**retail egg price data** from the St. Louis FED (FRED)](https://fred.stlouisfed.org/series/APU0000708111). 
 
-:::{.callout-important}
-Don't forget the steps to starting an R script!
-
-1. Description of the script (comment)
-2. Load (install if necessary) needed packages
-3. Set working directory
-:::
-
+You can download the data manually or import it directly via `read_csv()`:
 ```{r}
 #| eval: true
 
@@ -74,8 +67,17 @@ egg_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU
 
 ```
 
-The `read_csv()` function will try to guess the data type. In this case, it correctly identifies the variable `DATE` as a date. Check the data type of the variable by looking at the dataframe:
+:::{.callout-important}
+Don't forget the steps to starting an R script!
 
+1. Description of the script (comment)
+2. Load (install if necessary) needed packages
+3. Set working directory
+:::
+
+The `read_csv()` function will try to guess the data type. In this case, it correctly identifies the variable `DATE` as a date. 
+
+Review the data type of the variable directly by looking at the dataframe:
 ```{r}
 #| eval: true
 
@@ -129,6 +131,7 @@ Alternatively, you can chain commands:
 ```{r}
 #| eval: false
 
+#Chaining commands to produce the same data frame
 egg_raw_c %>%
   mutate(measure_date=mdy(CHAR_DATE)) %>%
   glimpse()
@@ -149,6 +152,32 @@ We use APIs to query data. FRED maintains an API that can be accessed using the 
 
 ### Retrieving data via an API
 
+The API we will use retrieves data from the FRED. Specifically, we will retrieve price series data, [available here](https://fred.stlouisfed.org/categories/32455). 
+
+#### Before you begin
+
+Before you begin, explore the FRED website.
+
+1. Go to https://fred.stlouisfed.org/categories/32455. What do you see?
+
+2. Select **Commodities.**
+
+3. Use the **Filter by** navigation bar to filter concepts. Select **Retail**. What changes?
+
+4. The default list of tables is sorted by popularity. Currently, the average price of eggs is the most popular. Select that table.
+
+Now, let's deconstruct the image you see.
+
+![](includes/egg_series.png){width="80%"}
+
+1. This is the unique identifier from FRED that is specific to the data series.
+
+2. This is the date range underlying the data series.
+
+3. This is the actual data series, not seasonally adjusted.
+
+Now that we are familiar with this layout, let's use an API to retreive the data and save it as a data frame in R.
+
 #### Step 1: Install and load libraries
 
 Install `tidyquant` on your machine (e.g., `install.packages("tidyquant")`) and load the library.
@@ -168,9 +197,32 @@ library(tidyquant, quietly = TRUE) #Note: The argument quietly = T in the librar
 
 For this exercise, we will use the function `tq_get()` to access the FRED API. 
 
+:::{.callout-note title="Understanding `tq_get()` Syntax" collapse=true}
+
+The `tq_get()` function is used to retrieve time series data from sources such as FRED, stock prices, and exchange rates.
+
+```{r}
+#| eval: false
+data <- tq_get("symbol", 
+               get = "data_source", 
+               from = "YYYY-MM-DD", 
+               to = "YYYY-MM-DD")
+```
+
+- "symbol" $\rightarrow$ The unique identifier for the data series (e.g., "AAPL" for Apple stock, "GDP" for U.S. GDP from FRED).
+- `get` $\rightarrow$ The data source, such as:
+  - "economic.data" for macroeconomic data from FRED.
+  - "stock.prices" for historical stock prices.
+  - "dividends" for dividend data.
+  - "exchange.rates" for currency exchange rates.
+- `from` and `to` $\rightarrow$ Defines the date range for the retrieved data in YYYY-MM-DD format.
+- `data` $\rightarrow$ The resulting dataframe containing the retrieved time series.
+
+:::
+
 This function can do many things so we need to be specific with some parameters:
 
-- First, we need to find the unique identifier from FRED that points to the data we want  In this case, we are going to grab **retail egg prices** (the same data that we downloaded earlier). The unique identifier is `"APU0000708111"`. **Remember the quotes.**
+- First, we need to find the unique identifier from FRED that points to the data we want. In this case, we are going to grab **retail egg prices** (the same data that we downloaded earlier). The unique identifier is `"APU0000708111"`. **Remember the quotes.**
 
 - Second, the documentation tells us that to access data from FRED we need to set the `get` parameter to `"economic.data"`.
 
@@ -180,10 +232,10 @@ This function can do many things so we need to be specific with some parameters:
 #| eval: false
 
 #Use the tq_get() function to retrieve the time series data
-egg_raw_tq <- tq_get(c("APU0000708111"),
-                     get = "economic.data",
-                     from="1990-01-01",
-                     to="2024-02-28")
+egg_raw_tq <- tq_get("APU0000708111", # This is the symbol for retail egg prices
+                     get = "economic.data", # This is the data source
+                     from="1990-01-01", # This is the start of our time range
+                     to="2024-02-28") # This is the end of our time range
 
 glimpse(egg_raw_tq)
 ```
@@ -207,6 +259,16 @@ egg_raw_tq <- tq_get(c("APU0000708111","WPU017107"),
 glimpse(egg_raw_tq)
 ```
 
+:::{.callout-important title="Using `c()` to Retrieve Multiple Series"}
+
+When retrieving multiple time series, use `c()` to pass multiple symbols into `tq_get()`. What this code does is:
+
+- `c("APU0000708111", "WPU017107")` $\rightarrow$ A vector containing multiple FRED series.
+- This retrieves both retail egg prices (APU0000708111) and the producer price index for eggs (WPU017107).
+- The resulting dataframe will contain stacked time series, with an identifier column (symbol) to distinguish them.
+
+:::
+
 #### Step 4: Rename variables for clarity
 
 Notice that there are **3 columns** in **egg_raw_tq** but we downloaded two time series. Why aren't there **4 columns**?  
@@ -217,6 +279,7 @@ Notice that there are **3 columns** in **egg_raw_tq** but we downloaded two time
 ```{r}
 #| eval: false
 
+#Display the unique values of the variable symbol
 unique(egg_raw_tq$symbol)
 ```
 
@@ -224,6 +287,7 @@ unique(egg_raw_tq$symbol)
 ```{r}
 #| eval: false
 
+#Count the number of observations associated with each value of symbol
 table(egg_raw_tq$symbol)
 ```
 
@@ -237,6 +301,7 @@ We will use the `case_when()` function in the `dplyr` package to replace the sym
 ```{r}
 #| eval: false
 
+#Use the FRED API to retrieve two data series and rename them the series with a more descriptive name
 egg_out <- egg_raw_tq %>%
   mutate(description=case_when(
     symbol == "APU0000708111" ~ "Egg Retail Price", #if symbol equals APU0000708111, then replace value with Egg Retail Price
@@ -250,12 +315,100 @@ Now the dataset is ready for export in .csv format so you can import it into Tab
 ```{r}
 #| eval: false
 
+#Write the dataset to a csv file
 write_csv(egg_out, "egg_out.csv")
 ```
 
 ### Video: Collecting Data via API
 
 {{< video https://youtu.be/zuDOOmQtnrM aspect-ratio="16x9" >}}
+
+:::{.callout-tip title="Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)" collapse="true"}
+
+```{r}
+#| eval: false
+# This is the scipt for lab 05.
+
+#Load necessary libraries
+library(readr)
+library(dplyr)
+
+#epoch
+as.numeric(as.Date("1970-01-01"))
+
+#add one day to see how dates are tracked
+as.numeric(as.Date("1970-01-02"))
+
+#Read in the data
+egg_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111.csv")
+
+#Confirm that R read in the date field as a date
+glimpse(egg_raw)
+
+#Read in the data
+egg_raw_c <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv")
+
+#Confirm that R read in the date field as text and *not* a date
+glimpse(egg_raw_c)
+
+# The easiest way to get lubridate is to install the whole tidyverse:
+install.packages("tidyverse")
+
+# Alternatively, install just lubridate:
+install.packages("lubridate")
+
+#Load the necessary libraries
+library(lubridate)
+
+#Use the mutate() function along with the mdy() function to convert the text date to a date value
+egg_raw_c <- mutate(egg_raw_c,measure_date=mdy(CHAR_DATE))
+
+#Confirm that you have successfully converted the variable to a date field
+glimpse(egg_raw_c)
+
+egg_raw_c %>%
+  mutate(measure_date=mdy(CHAR_DATE)) %>%
+  glimpse()
+
+#Install the package if you have not already done so. Comment this out after you have installed it once on your machine.
+install.packages("tidyquant")
+
+#Load the library. The library needs to be loaded every time you begin a new instance of R.
+library(tidyquant, quietly = TRUE) #Note: The argument quietly = T in the library() function suppresses messages that would normally be printed when loading a package.
+
+#Use the tq_get() function to retrieve the time series data
+egg_raw_tq <- tq_get("APU0000708111",
+                     get = "economic.data",
+                     from="1990-01-01",
+                     to="2024-02-28")
+
+glimpse(egg_raw_tq)
+
+#Use the tq_get() function to retrieve two time series datasets
+egg_raw_tq <- tq_get(c("APU0000708111","WPU017107"),
+                     get = "economic.data",
+                     from="1990-01-01",
+                     to="2024-02-28")
+
+glimpse(egg_raw_tq)
+
+#Display the unique values of the variable symbol
+unique(egg_raw_tq$symbol)
+
+#Count the number of observations associated with each value of symbol
+table(egg_raw_tq$symbol)
+
+#Use the FRED API to retrieve two data series and rename them the series with a more descriptive name
+egg_out <- egg_raw_tq %>%
+  mutate(description=case_when(
+    symbol == "APU0000708111" ~ "Egg Retail Price", #if symbol equals APU0000708111, then replace value with Egg Retail Price
+    symbol == "WPU017107" ~ "Egg Producer Price" #if symbol equals WPU017107, then replace value with Egg Producer Price
+  ))
+
+#Write the dataset to a csv file
+write_csv(egg_out, "egg_out.csv")
+```
+:::
 
 # Tableau
 

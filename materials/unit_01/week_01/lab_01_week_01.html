@@ -68,6 +68,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="lab_01_week_01_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="lab_01_week_01_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -178,25 +207,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="importing-time-series-data" class="level2">
 <h2 class="anchored" data-anchor-id="importing-time-series-data">Importing time series data</h2>
 <p>Importing time series data is similar to other types of data, but special attention is needed for date formatting.</p>
-<p>We will use <strong>retail egg price data</strong> from the <a href="https://fred.stlouisfed.org/series/APU0000708111">St.&nbsp;Louis FED (FRED)</a>. You can download the data manually or import it directly via <code>read_csv()</code>:</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Don’t forget the steps to starting an R script!</p>
-<ol type="1">
-<li>Description of the script (comment)</li>
-<li>Load (install if necessary) needed packages</li>
-<li>Set working directory</li>
-</ol>
-</div>
-</div>
+<p>We will use <a href="https://fred.stlouisfed.org/series/APU0000708111"><strong>retail egg price data</strong> from the St.&nbsp;Louis FED (FRED)</a>.</p>
+<p>You can download the data manually or import it directly via <code>read_csv()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load necessary libraries</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -236,7 +248,26 @@ date (1): DATE
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>The <code>read_csv()</code> function will try to guess the data type. In this case, it correctly identifies the variable <code>DATE</code> as a date. Check the data type of the variable by looking at the dataframe:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Don’t forget the steps to starting an R script!</p>
+<ol type="1">
+<li>Description of the script (comment)</li>
+<li>Load (install if necessary) needed packages</li>
+<li>Set working directory</li>
+</ol>
+</div>
+</div>
+<p>The <code>read_csv()</code> function will try to guess the data type. In this case, it correctly identifies the variable <code>DATE</code> as a date.</p>
+<p>Review the data type of the variable directly by looking at the dataframe:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Confirm that R read in the date field as a date</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -295,9 +326,10 @@ $ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/198
 </div>
 <p>Alternatively, you can chain commands:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>egg_raw_c <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">mdy</span>(CHAR_DATE)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Chaining commands to produce the same data frame</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>egg_raw_c <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">mdy</span>(CHAR_DATE)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="video-reading-in-time-series-data" class="level3">
 <h3 class="anchored" data-anchor-id="video-reading-in-time-series-data">Video: Reading in Time Series Data</h3>
@@ -316,6 +348,25 @@ $ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/198
 <p>We use APIs to query data. FRED maintains an API that can be accessed using the library <a href="https://business-science.github.io/tidyquant/"><code>tidyquant</code></a>. This library also has a large array of finance analysis tools. Right now, we will just use it to access FRED data.</p>
 <section id="retrieving-data-via-an-api" class="level3">
 <h3 class="anchored" data-anchor-id="retrieving-data-via-an-api">Retrieving data via an API</h3>
+<p>The API we will use retrieves data from the FRED. Specifically, we will retrieve price series data, <a href="https://fred.stlouisfed.org/categories/32455">available here</a>.</p>
+<section id="before-you-begin" class="level4">
+<h4 class="anchored" data-anchor-id="before-you-begin">Before you begin</h4>
+<p>Before you begin, explore the FRED website.</p>
+<ol type="1">
+<li><p>Go to https://fred.stlouisfed.org/categories/32455. What do you see?</p></li>
+<li><p>Select <strong>Commodities.</strong></p></li>
+<li><p>Use the <strong>Filter by</strong> navigation bar to filter concepts. Select <strong>Retail</strong>. What changes?</p></li>
+<li><p>The default list of tables is sorted by popularity. Currently, the average price of eggs is the most popular. Select that table.</p></li>
+</ol>
+<p>Now, let’s deconstruct the image you see.</p>
+<p><img src="includes/egg_series.png" class="img-fluid" style="width:80.0%"></p>
+<ol type="1">
+<li><p>This is the unique identifier from FRED that is specific to the data series.</p></li>
+<li><p>This is the date range underlying the data series.</p></li>
+<li><p>This is the actual data series, not seasonally adjusted.</p></li>
+</ol>
+<p>Now that we are familiar with this layout, let’s use an API to retreive the data and save it as a data frame in R.</p>
+</section>
 <section id="step-1-install-and-load-libraries" class="level4">
 <h4 class="anchored" data-anchor-id="step-1-install-and-load-libraries">Step 1: Install and load libraries</h4>
 <p>Install <code>tidyquant</code> on your machine (e.g., <code>install.packages("tidyquant")</code>) and load the library.</p>
@@ -330,20 +381,54 @@ $ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/198
 <section id="step-2-retrieve-time-series-data-via-tq_get" class="level4">
 <h4 class="anchored" data-anchor-id="step-2-retrieve-time-series-data-via-tq_get">Step 2: Retrieve time series data via <code>tq_get()</code></h4>
 <p>For this exercise, we will use the function <code>tq_get()</code> to access the FRED API.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Understanding `tq_get()` Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding <code>tq_get()</code> Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>tq_get()</code> function is used to retrieve time series data from sources such as FRED, stock prices, and exchange rates.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">"symbol"</span>, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">get =</span> <span class="st">"data_source"</span>, </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">from =</span> <span class="st">"YYYY-MM-DD"</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">to =</span> <span class="st">"YYYY-MM-DD"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>“symbol” <span class="math inline">\(\rightarrow\)</span> The unique identifier for the data series (e.g., “AAPL” for Apple stock, “GDP” for U.S. GDP from FRED).</li>
+<li><code>get</code> <span class="math inline">\(\rightarrow\)</span> The data source, such as:
+<ul>
+<li>“economic.data” for macroeconomic data from FRED.</li>
+<li>“stock.prices” for historical stock prices.</li>
+<li>“dividends” for dividend data.</li>
+<li>“exchange.rates” for currency exchange rates.</li>
+</ul></li>
+<li><code>from</code> and <code>to</code> <span class="math inline">\(\rightarrow\)</span> Defines the date range for the retrieved data in YYYY-MM-DD format.</li>
+<li><code>data</code> <span class="math inline">\(\rightarrow\)</span> The resulting dataframe containing the retrieved time series.</li>
+</ul>
+</div>
+</div>
+</div>
 <p>This function can do many things so we need to be specific with some parameters:</p>
 <ul>
-<li><p>First, we need to find the unique identifier from FRED that points to the data we want In this case, we are going to grab <strong>retail egg prices</strong> (the same data that we downloaded earlier). The unique identifier is <code>"APU0000708111"</code>. <strong>Remember the quotes.</strong></p></li>
+<li><p>First, we need to find the unique identifier from FRED that points to the data we want. In this case, we are going to grab <strong>retail egg prices</strong> (the same data that we downloaded earlier). The unique identifier is <code>"APU0000708111"</code>. <strong>Remember the quotes.</strong></p></li>
 <li><p>Second, the documentation tells us that to access data from FRED we need to set the <code>get</code> parameter to <code>"economic.data"</code>.</p></li>
 <li><p>Third, we can specify the date range with the <code>from</code> and <code>to</code> parameters. Remember to use the YYYY-MM-DD format.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the tq_get() function to retrieve the time series data</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"APU0000708111"</span>),</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">from=</span><span class="st">"1990-01-01"</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">to=</span><span class="st">"2024-02-28"</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the tq_get() function to retrieve the time series data</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">"APU0000708111"</span>, <span class="co"># This is the symbol for retail egg prices</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">get =</span> <span class="st">"economic.data"</span>, <span class="co"># This is the data source</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">from=</span><span class="st">"1990-01-01"</span>, <span class="co"># This is the start of our time range</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">to=</span><span class="st">"2024-02-28"</span>) <span class="co"># This is the end of our time range</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-3-retrieve-multiple-time-series-data-using-tq_get" class="level4">
@@ -351,13 +436,31 @@ $ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/198
 <p>You can download multiple time series at once by using a vector of identifiers.</p>
 <p>Let’s download the <strong>producer price index</strong> to compare to the retail price of a dozen eggs. The identifier is <code>WPU017107</code>. Note that I am going to overwrite the existing object <code>egg_raw_tq</code> because I am going to download the retail price series as well as the producer price index.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the tq_get() function to retrieve two time series datasets</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"APU0000708111"</span>,<span class="st">"WPU017107"</span>),</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">from=</span><span class="st">"1990-01-01"</span>,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">to=</span><span class="st">"2024-02-28"</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the tq_get() function to retrieve two time series datasets</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"APU0000708111"</span>,<span class="st">"WPU017107"</span>),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">from=</span><span class="st">"1990-01-01"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">to=</span><span class="st">"2024-02-28"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled" title="Using `c()` to Retrieve Multiple Series">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Using <code>c()</code> to Retrieve Multiple Series
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When retrieving multiple time series, use <code>c()</code> to pass multiple symbols into <code>tq_get()</code>. What this code does is:</p>
+<ul>
+<li><code>c("APU0000708111", "WPU017107")</code> <span class="math inline">\(\rightarrow\)</span> A vector containing multiple FRED series.</li>
+<li>This retrieves both retail egg prices (APU0000708111) and the producer price index for eggs (WPU017107).</li>
+<li>The resulting dataframe will contain stacked time series, with an identifier column (symbol) to distinguish them.</li>
+</ul>
+</div>
 </div>
 </section>
 <section id="step-4-rename-variables-for-clarity" class="level4">
@@ -368,13 +471,15 @@ $ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/198
 <li>Use the <code>unique()</code> function to see what values for symbol are in the dataset</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(egg_raw_tq<span class="sc">$</span>symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Display the unique values of the variable symbol</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(egg_raw_tq<span class="sc">$</span>symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Use <code>table()</code> to see the counts by each value</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(egg_raw_tq<span class="sc">$</span>symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Count the number of observations associated with each value of symbol</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(egg_raw_tq<span class="sc">$</span>symbol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>Why does the retail series <code>APU0000708111</code> have more observations?</p>
@@ -385,24 +490,123 @@ $ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/198
 <p>The time series are currently identified by the variable <code>symbol</code>. These codes are not informative. Let’s replace them with better labels.</p>
 <p>We will use the <code>case_when()</code> function in the <code>dplyr</code> package to replace the symbol with a more descriptive name.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>egg_out <span class="ot">&lt;-</span> egg_raw_tq <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">description=</span><span class="fu">case_when</span>(</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"APU0000708111"</span> <span class="sc">~</span> <span class="st">"Egg Retail Price"</span>, <span class="co">#if symbol equals APU0000708111, then replace value with Egg Retail Price</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"WPU017107"</span> <span class="sc">~</span> <span class="st">"Egg Producer Price"</span> <span class="co">#if symbol equals WPU017107, then replace value with Egg Producer Price</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the FRED API to retrieve two data series and rename them the series with a more descriptive name</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>egg_out <span class="ot">&lt;-</span> egg_raw_tq <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">description=</span><span class="fu">case_when</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"APU0000708111"</span> <span class="sc">~</span> <span class="st">"Egg Retail Price"</span>, <span class="co">#if symbol equals APU0000708111, then replace value with Egg Retail Price</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"WPU017107"</span> <span class="sc">~</span> <span class="st">"Egg Producer Price"</span> <span class="co">#if symbol equals WPU017107, then replace value with Egg Producer Price</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li>Use <code>write_csv()</code> to write the dataset to a csv file.</li>
 </ol>
 <p>Now the dataset is ready for export in .csv format so you can import it into Tableau.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(egg_out, <span class="st">"egg_out.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Write the dataset to a csv file</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(egg_out, <span class="st">"egg_out.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="video-collecting-data-via-api" class="level3">
 <h3 class="anchored" data-anchor-id="video-collecting-data-via-api">Video: Collecting Data via API</h3>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/zuDOOmQtnrM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the scipt for lab 05.</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Load necessary libraries</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#epoch</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.Date</span>(<span class="st">"1970-01-01"</span>))</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#add one day to see how dates are tracked</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.Date</span>(<span class="st">"1970-01-02"</span>))</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in the data</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>egg_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111.csv"</span>)</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Confirm that R read in the date field as a date</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in the data</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>egg_raw_c <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111_cdate.csv"</span>)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="co">#Confirm that R read in the date field as text and *not* a date</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_c)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="co"># The easiest way to get lubridate is to install the whole tidyverse:</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, install just lubridate:</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lubridate"</span>)</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="co">#Load the necessary libraries</span></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the mutate() function along with the mdy() function to convert the text date to a date value</span></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>egg_raw_c <span class="ot">&lt;-</span> <span class="fu">mutate</span>(egg_raw_c,<span class="at">measure_date=</span><span class="fu">mdy</span>(CHAR_DATE))</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="co">#Confirm that you have successfully converted the variable to a date field</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_c)</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>egg_raw_c <span class="sc">%&gt;%</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">mdy</span>(CHAR_DATE)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a><span class="co">#Install the package if you have not already done so. Comment this out after you have installed it once on your machine.</span></span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyquant"</span>)</span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a><span class="co">#Load the library. The library needs to be loaded every time you begin a new instance of R.</span></span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant, <span class="at">quietly =</span> <span class="cn">TRUE</span>) <span class="co">#Note: The argument quietly = T in the library() function suppresses messages that would normally be printed when loading a package.</span></span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the tq_get() function to retrieve the time series data</span></span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">"APU0000708111"</span>,</span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>                     <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
+<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>                     <span class="at">from=</span><span class="st">"1990-01-01"</span>,</span>
+<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a>                     <span class="at">to=</span><span class="st">"2024-02-28"</span>)</span>
+<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span>
+<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-58"><a href="#cb31-58" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the tq_get() function to retrieve two time series datasets</span></span>
+<span id="cb31-59"><a href="#cb31-59" aria-hidden="true" tabindex="-1"></a>egg_raw_tq <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"APU0000708111"</span>,<span class="st">"WPU017107"</span>),</span>
+<span id="cb31-60"><a href="#cb31-60" aria-hidden="true" tabindex="-1"></a>                     <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
+<span id="cb31-61"><a href="#cb31-61" aria-hidden="true" tabindex="-1"></a>                     <span class="at">from=</span><span class="st">"1990-01-01"</span>,</span>
+<span id="cb31-62"><a href="#cb31-62" aria-hidden="true" tabindex="-1"></a>                     <span class="at">to=</span><span class="st">"2024-02-28"</span>)</span>
+<span id="cb31-63"><a href="#cb31-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-64"><a href="#cb31-64" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_raw_tq)</span>
+<span id="cb31-65"><a href="#cb31-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-66"><a href="#cb31-66" aria-hidden="true" tabindex="-1"></a><span class="co">#Display the unique values of the variable symbol</span></span>
+<span id="cb31-67"><a href="#cb31-67" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(egg_raw_tq<span class="sc">$</span>symbol)</span>
+<span id="cb31-68"><a href="#cb31-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-69"><a href="#cb31-69" aria-hidden="true" tabindex="-1"></a><span class="co">#Count the number of observations associated with each value of symbol</span></span>
+<span id="cb31-70"><a href="#cb31-70" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(egg_raw_tq<span class="sc">$</span>symbol)</span>
+<span id="cb31-71"><a href="#cb31-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-72"><a href="#cb31-72" aria-hidden="true" tabindex="-1"></a><span class="co">#Use the FRED API to retrieve two data series and rename them the series with a more descriptive name</span></span>
+<span id="cb31-73"><a href="#cb31-73" aria-hidden="true" tabindex="-1"></a>egg_out <span class="ot">&lt;-</span> egg_raw_tq <span class="sc">%&gt;%</span></span>
+<span id="cb31-74"><a href="#cb31-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">description=</span><span class="fu">case_when</span>(</span>
+<span id="cb31-75"><a href="#cb31-75" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"APU0000708111"</span> <span class="sc">~</span> <span class="st">"Egg Retail Price"</span>, <span class="co">#if symbol equals APU0000708111, then replace value with Egg Retail Price</span></span>
+<span id="cb31-76"><a href="#cb31-76" aria-hidden="true" tabindex="-1"></a>    symbol <span class="sc">==</span> <span class="st">"WPU017107"</span> <span class="sc">~</span> <span class="st">"Egg Producer Price"</span> <span class="co">#if symbol equals WPU017107, then replace value with Egg Producer Price</span></span>
+<span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb31-78"><a href="#cb31-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-79"><a href="#cb31-79" aria-hidden="true" tabindex="-1"></a><span class="co">#Write the dataset to a csv file</span></span>
+<span id="cb31-80"><a href="#cb31-80" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(egg_out, <span class="st">"egg_out.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
