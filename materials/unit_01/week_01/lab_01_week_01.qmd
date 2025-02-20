@@ -15,18 +15,33 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 ## Learning Objectives
 
-### R:
+### Learning Objectives in R
 - Read in time series data
 - Work with dates in R
 - Download data via API
 
-### Tableau:
+### Learning Objectives in Tableau
 - Understand and use date functions
 - Create calculated fields using date functions
 - Visualize time series data
 - Create and interpret trend lines
 - Identify and visualize structural breaks
 - Use panes to visualize multiple time series
+
+# Before you begin
+
+1. Create a new sub-folder called `lab_05` under your `arec_330` folder.
+
+- This is the folder where you will save all of the files we will download during this lab.
+
+2. Open a new R script and save it as `lab_05_script.R`.
+
+3. Add a description of the script as a comment.
+
+4. Set your working directory as `arec_330/lab_05`.
+
+5. Load (install if necessary) needed packages.
+
 
 # Time series with R
 
@@ -66,14 +81,6 @@ library(dplyr)
 egg_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_01/inputs/APU0000708111.csv")
 
 ```
-
-:::{.callout-important}
-Don't forget the steps to starting an R script!
-
-1. Description of the script (comment)
-2. Load (install if necessary) needed packages
-3. Set working directory
-:::
 
 The `read_csv()` function will try to guess the data type. In this case, it correctly identifies the variable `DATE` as a date. 
 
@@ -316,8 +323,29 @@ Now the dataset is ready for export in .csv format so you can import it into Tab
 #| eval: false
 
 #Write the dataset to a csv file
-write_csv(egg_out, "egg_out.csv")
+write_csv(egg_prices, "egg_prices.csv")
 ```
+
+:::{.callout-note title="You do it"}
+
+1. Download the following data series using `tq_get()` as **separate data frames**:
+
+- Producer Price Index: Carrots, symbol = "WPU01130212"
+- Producer Price Index: Tomatoes, symbol = "WPU01130217"
+- Producer Price Index: Corn, symbol = "WPS012202"
+
+2. Rename the symbols to a more descriptive name.
+
+- Carrot Producer Price
+- Tomato Producer Price
+- Corn Producer Price
+
+3. Write each data frame as separate csv files:
+
+- carrot_prices.csv
+- tomato_prices.csv
+- corn_prices.csv
+:::
 
 ### Video: Collecting Data via API
 
@@ -327,7 +355,7 @@ write_csv(egg_out, "egg_out.csv")
 
 ```{r}
 #| eval: false
-# This is the scipt for lab 05.
+# This is the script for lab 05.
 
 #Load necessary libraries
 library(readr)
@@ -406,7 +434,7 @@ egg_out <- egg_raw_tq %>%
   ))
 
 #Write the dataset to a csv file
-write_csv(egg_out, "egg_out.csv")
+write_csv(egg_prices, "egg_prices.csv")
 ```
 :::
 
@@ -414,9 +442,11 @@ write_csv(egg_out, "egg_out.csv")
 
 A key attribute of time series data is that we observe values of variables across **time**. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.  
 
-### 1. Date functions
+### Before you begin
 
-Connect to the `eggs_out.csv` data.
+Connect to the folder where you have saved `carrot_prices.csv`, and the three other commodity price series data.
+
+### 1. Date functions
 
 Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.
 
@@ -456,10 +486,23 @@ Here are some handy definitions for date_time arguments:
 
 ![](includes/date_args.png)
 
+:::{.callout-note title="You do it"}
+
+1. Create a calculated field named `months_ago` that determines the number of months between the commodity price data and today.
+
+2. Create a calculated field named `first_date` that determines the earliest date in the data.
+
+3. Create a calculated field named `last_date` that determines the last date that the carrot price index was less than 135.
+
+4. Create a new variable called `month` that only includes the month.
+
+5. Create a new variable called `year` that only includes the year.
+
+6. Create a new date variable called `my_date` that assigns a new date using your `month` and `year` variables and sets the day as 15.
+
+:::
 
 ### 2. Visualize time series data
-
-Connect to the `carrots_prices.csv` data and use the expressions above to do the following:
 
 What types of visualizations are most appropriate for time series data?  
 
@@ -485,6 +528,7 @@ Let's experiment with creating these visualizations for time series:
 
 6.  Change the markers in your chart from dots to a different shape (use the drop down menu on the `Marks` card, then use the `Shape` icons)
 
+#### Modifying Data Display in Charts
 Now let's experiment with changing what data is shown in your chart:  
 
 1.  Change your x-axis to annual
@@ -493,26 +537,80 @@ Now let's experiment with changing what data is shown in your chart:
 
 3.  Restrict your date ranges so that your visualization only shows the last 20 years of data (use the `Filters` card)
 
+### 3. Creating and interpreting trend lines
 
-### 3. Creating panes to visualize mutiple time series
+Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know *how* they are created? Let’s start with a linear trend line...
 
-Sometimes we might want to view multiple time series in separate figures. There are two ways to do this depending on the structure of your data. Let's consider **wide** data first:
+- What does a linear trend line tell you about your time series data?
+- How is this trend line estimated? (conceptually... we will go through some equations in lecture)
 
-Let's start by bringing in some price data for a few new commodities.
+#### Trend Lines in Tableau
 
-1.  On the `Data Source` page connect to the following data sources `corn_prices.csv` and `tomatoes_prices.csv`
+1. Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022.
 
-2.  We are going to create a `relationship` between these data sources and our current working file
+2. Add a trend line to your chart.
 
-3.  With the carrot data in the `canvas`, drag one of the other data sources next to it in the canvas. Do the same with the other data source.
+3. When you click on the trend line, what information does Tableau give you about it? What does this information mean?
 
-4.  Now go to a new worksheet, what do you see? What did we just accomplish?
+4. When you click on `describe trend model` what information does Tableau give you about it?
+
+5. Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn’t the trend line change when you changed the date aggregation?
+
+### 4. Visualizing structural breaks
+
+Usually, in long time series data, we can see distinct points where trends change. These are called structural breaks. There are ways to *test* for structural breaks, but for now, let’s visually inspect them.
+
+1. Looking at your visualization of monthly carrot prices and the linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?
+
+2. Identify a month-year where it appears that trends in your data changed.
+
+3. Add a **reference line** at this month-year. (Right-click on the x-axis and select `Reference Line`) Does anything happen to your trend line?
+
+#### Methods for Highlighting Structural Breaks
+
+**Method 1:** Separate Your Time Series by Adding Color
+
+1. Create a new calculated field named `before_after_break`. Use the `IF` and `THEN` functions and an appropriate `Date` function to populate this variable with “after” if the date is after the break and “before” if the date is before the break.
+
+2. Drag this variable to the `Color` card.
+
+3. Add trend lines to your visualization. What happens?
+
+**Method 2:** Separate Your Time Series by Segmenting the X-Axis
+
+1. Drag your new variable from the `Marks` card to the `Columns` shelf.
+
+2. Sort your variable so that the “after” time period is shown following the “before” time period.
+
+3. In the x-axis Edit Axis menu, select `independent axis ranges for each row or column` (right-click on the x-axis to access this menu).
+
+4. Note: Typically, Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.
+
+### 5. Creating panes to visualize mutiple time series
+
+Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.
+
+Let’s start by bringing in some price data for a few new commodities.
+
+1. On the `Data Source` page, connect to the following data sources: `corn_prices.csv` and `tomatoes_prices.csv`.
+
+2. We are going to create a `relationship` between these data sources and our current working file.
+
+3. With the carrot data in the `canvas`, drag one of the other data sources next to it in the canvas. Do the same with the other data source.
+
+4. Now go to a new worksheet, what do you see? What did we just accomplish?
 
 Now that we have all these data sources in a single file and they are structured in a "wide" format, we are going to construct time series plots that let us compare trends in these commodity prices across time.
 
- > Open a new worksheet and create a line plot of the prices over time for each commodity
+#### Comparing Trends Across Commodities
 
-Many functions and tools in Tableau and R are both designed to work with **long** data, where each row specifies the most granular unit in the data and the variables or fields describe the data elements (e.g., price). 
+1. Open a new worksheet and create a line plot of the prices over time for each commodity.
+
+2. Try formatting your figure: change colors, adjust sizes, etc.
+
+3. Use your `before_after_break` variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.
+
+:::{.callout-note title="You do it"}
 
 1. Connect to the egg data that we assembled in R. 
 
@@ -521,6 +619,7 @@ Many functions and tools in Tableau and R are both designed to work with **long*
 3. Differentiate the price series by dragging `Description` (a dimension) to the color under Marks. You should see two lines but the scales are off. What's wrong?
 
 4. Rescale one of the series to match the other. You can go back to R to do this or do it in Tableau. In either case, you will want to use if/then logic.
+:::
 
 ### Video: Using Tableau to Visualize Time Series Data
 

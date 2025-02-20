@@ -7,7 +7,11 @@ format:
 
 ## Overview
 
-The objective of this assignment is to explore a dataset and become familiar with tools to obtain and visualize data. 
+The objective of this assignment is to explore time series datasets and become familiar with tools to obtain and visualize time series data. 
+
+## Before you begin
+
+Review the [Project 01 instructions](https://https//csu-arec-330.github.io/materials/unit_01/project/project_1_instructions.html). 
 
 Treat this assignment as the first step of your project—choose time series data that interest you and that you would like to study further. 
 

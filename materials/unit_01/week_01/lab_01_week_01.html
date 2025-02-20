@@ -110,9 +110,10 @@ window.Quarto = {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a>
   <ul class="collapse">
-  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R:</a></li>
-  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau:</a></li>
+  <li><a href="#learning-objectives-in-r" id="toc-learning-objectives-in-r" class="nav-link" data-scroll-target="#learning-objectives-in-r">Learning Objectives in R</a></li>
+  <li><a href="#learning-objectives-in-tableau" id="toc-learning-objectives-in-tableau" class="nav-link" data-scroll-target="#learning-objectives-in-tableau">Learning Objectives in Tableau</a></li>
   </ul></li>
+  <li><a href="#before-you-begin" id="toc-before-you-begin" class="nav-link" data-scroll-target="#before-you-begin">Before you begin</a></li>
   <li><a href="#time-series-with-r" id="toc-time-series-with-r" class="nav-link" data-scroll-target="#time-series-with-r">Time series with R</a>
   <ul class="collapse">
   <li><a href="#importing-time-series-data" id="toc-importing-time-series-data" class="nav-link" data-scroll-target="#importing-time-series-data">Importing time series data</a></li>
@@ -126,11 +127,14 @@ window.Quarto = {
   <li><a href="#video-collecting-data-via-api" id="toc-video-collecting-data-via-api" class="nav-link" data-scroll-target="#video-collecting-data-via-api">Video: Collecting Data via API</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#tableau-1" id="toc-tableau-1" class="nav-link" data-scroll-target="#tableau-1">Tableau</a>
+  <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
   <ul class="collapse">
+  <li><a href="#before-you-begin-2" id="toc-before-you-begin-2" class="nav-link" data-scroll-target="#before-you-begin-2">Before you begin</a></li>
   <li><a href="#date-functions" id="toc-date-functions" class="nav-link" data-scroll-target="#date-functions">1. Date functions</a></li>
   <li><a href="#visualize-time-series-data" id="toc-visualize-time-series-data" class="nav-link" data-scroll-target="#visualize-time-series-data">2. Visualize time series data</a></li>
-  <li><a href="#creating-panes-to-visualize-mutiple-time-series" id="toc-creating-panes-to-visualize-mutiple-time-series" class="nav-link" data-scroll-target="#creating-panes-to-visualize-mutiple-time-series">3. Creating panes to visualize mutiple time series</a></li>
+  <li><a href="#creating-and-interpreting-trend-lines" id="toc-creating-and-interpreting-trend-lines" class="nav-link" data-scroll-target="#creating-and-interpreting-trend-lines">3. Creating and interpreting trend lines</a></li>
+  <li><a href="#visualizing-structural-breaks" id="toc-visualizing-structural-breaks" class="nav-link" data-scroll-target="#visualizing-structural-breaks">4. Visualizing structural breaks</a></li>
+  <li><a href="#creating-panes-to-visualize-mutiple-time-series" id="toc-creating-panes-to-visualize-mutiple-time-series" class="nav-link" data-scroll-target="#creating-panes-to-visualize-mutiple-time-series">5. Creating panes to visualize mutiple time series</a></li>
   <li><a href="#video-using-tableau-to-visualize-time-series-data" id="toc-video-using-tableau-to-visualize-time-series-data" class="nav-link" data-scroll-target="#video-using-tableau-to-visualize-time-series-data">Video: Using Tableau to Visualize Time Series Data</a></li>
   </ul></li>
   </ul>
@@ -163,16 +167,16 @@ window.Quarto = {
 </div>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<section id="r" class="level3">
-<h3 class="anchored" data-anchor-id="r">R:</h3>
+<section id="learning-objectives-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-in-r">Learning Objectives in R</h3>
 <ul>
 <li>Read in time series data</li>
 <li>Work with dates in R</li>
 <li>Download data via API</li>
 </ul>
 </section>
-<section id="tableau" class="level3">
-<h3 class="anchored" data-anchor-id="tableau">Tableau:</h3>
+<section id="learning-objectives-in-tableau" class="level3">
+<h3 class="anchored" data-anchor-id="learning-objectives-in-tableau">Learning Objectives in Tableau</h3>
 <ul>
 <li>Understand and use date functions</li>
 <li>Create calculated fields using date functions</li>
@@ -182,6 +186,21 @@ window.Quarto = {
 <li>Use panes to visualize multiple time series</li>
 </ul>
 </section>
+</section>
+<section id="before-you-begin" class="level1">
+<h1>Before you begin</h1>
+<ol type="1">
+<li>Create a new sub-folder called <code>lab_05</code> under your <code>arec_330</code> folder.</li>
+</ol>
+<ul>
+<li>This is the folder where you will save all of the files we will download during this lab.</li>
+</ul>
+<ol start="2" type="1">
+<li><p>Open a new R script and save it as <code>lab_05_script.R</code>.</p></li>
+<li><p>Add a description of the script as a comment.</p></li>
+<li><p>Set your working directory as <code>arec_330/lab_05</code>.</p></li>
+<li><p>Load (install if necessary) needed packages.</p></li>
+</ol>
 </section>
 <section id="time-series-with-r" class="level1">
 <h1>Time series with R</h1>
@@ -246,24 +265,6 @@ date (1): DATE
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Don’t forget the steps to starting an R script!</p>
-<ol type="1">
-<li>Description of the script (comment)</li>
-<li>Load (install if necessary) needed packages</li>
-<li>Set working directory</li>
-</ol>
 </div>
 </div>
 <p>The <code>read_csv()</code> function will try to guess the data type. In this case, it correctly identifies the variable <code>DATE</code> as a date.</p>
@@ -349,8 +350,8 @@ $ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/198
 <section id="retrieving-data-via-an-api" class="level3">
 <h3 class="anchored" data-anchor-id="retrieving-data-via-an-api">Retrieving data via an API</h3>
 <p>The API we will use retrieves data from the FRED. Specifically, we will retrieve price series data, <a href="https://fred.stlouisfed.org/categories/32455">available here</a>.</p>
-<section id="before-you-begin" class="level4">
-<h4 class="anchored" data-anchor-id="before-you-begin">Before you begin</h4>
+<section id="before-you-begin-1" class="level4">
+<h4 class="anchored" data-anchor-id="before-you-begin-1">Before you begin</h4>
 <p>Before you begin, explore the FRED website.</p>
 <ol type="1">
 <li><p>Go to https://fred.stlouisfed.org/categories/32455. What do you see?</p></li>
@@ -382,7 +383,7 @@ $ CHAR_DATE     &lt;chr&gt; "01/01/1980", "02/01/1980", "03/01/1980", "04/01/198
 <h4 class="anchored" data-anchor-id="step-2-retrieve-time-series-data-via-tq_get">Step 2: Retrieve time series data via <code>tq_get()</code></h4>
 <p>For this exercise, we will use the function <code>tq_get()</code> to access the FRED API.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Understanding `tq_get()` Syntax">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -391,7 +392,7 @@ Understanding <code>tq_get()</code> Syntax
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The <code>tq_get()</code> function is used to retrieve time series data from sources such as FRED, stock prices, and exchange rates.</p>
 <div class="cell">
@@ -503,7 +504,43 @@ Using <code>c()</code> to Retrieve Multiple Series
 <p>Now the dataset is ready for export in .csv format so you can import it into Tableau.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Write the dataset to a csv file</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(egg_out, <span class="st">"egg_out.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(egg_prices, <span class="st">"egg_prices.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="You do it">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+You do it
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Download the following data series using <code>tq_get()</code> as <strong>separate data frames</strong>:</li>
+</ol>
+<ul>
+<li>Producer Price Index: Carrots, symbol = “WPU01130212”</li>
+<li>Producer Price Index: Tomatoes, symbol = “WPU01130217”</li>
+<li>Producer Price Index: Corn, symbol = “WPS012202”</li>
+</ul>
+<ol start="2" type="1">
+<li>Rename the symbols to a more descriptive name.</li>
+</ol>
+<ul>
+<li>Carrot Producer Price</li>
+<li>Tomato Producer Price</li>
+<li>Corn Producer Price</li>
+</ul>
+<ol start="3" type="1">
+<li>Write each data frame as separate csv files:</li>
+</ol>
+<ul>
+<li>carrot_prices.csv</li>
+<li>tomato_prices.csv</li>
+<li>corn_prices.csv</li>
+</ul>
+</div>
 </div>
 </section>
 </section>
@@ -523,7 +560,7 @@ Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the scipt for lab 05.</span></span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the script for lab 05.</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Load necessary libraries</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
@@ -602,7 +639,7 @@ Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)
 <span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a>  ))</span>
 <span id="cb31-78"><a href="#cb31-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-79"><a href="#cb31-79" aria-hidden="true" tabindex="-1"></a><span class="co">#Write the dataset to a csv file</span></span>
-<span id="cb31-80"><a href="#cb31-80" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(egg_out, <span class="st">"egg_out.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-80"><a href="#cb31-80" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(egg_prices, <span class="st">"egg_prices.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -610,12 +647,15 @@ Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)
 </section>
 </section>
 </section>
-<section id="tableau-1" class="level1">
+<section id="tableau" class="level1">
 <h1>Tableau</h1>
 <p>A key attribute of time series data is that we observe values of variables across <strong>time</strong>. Effective analysis of time series data in Tableau thus begins with understanding date variables and functions. Next, we want to understand what visualizations are most appropriate for time series analysis. Finally we want to understand how to make these visualizations as effective as possible.</p>
+<section id="before-you-begin-2" class="level3">
+<h3 class="anchored" data-anchor-id="before-you-begin-2">Before you begin</h3>
+<p>Connect to the folder where you have saved <code>carrot_prices.csv</code>, and the three other commodity price series data.</p>
+</section>
 <section id="date-functions" class="level3">
 <h3 class="anchored" data-anchor-id="date-functions">1. Date functions</h3>
-<p>Connect to the <code>eggs_out.csv</code> data.</p>
 <p>Date functions are Tableau functions that use a date or a date-time field in some way, whether it’s part of the input to perform the calculation or whether the output is a date-time field. Let’s learn about different date functions, their expressions, and their use in Tableau.</p>
 <p>You can explore these functions by going to <code>Create calculated field</code> (drop down menu in the data field pane). You can filter on date functions by choosing <code>Date</code> from the library of functions. This will list only the functions that are classified as Date functions.</p>
 <p>You can look through these on your own, but I will highlight a few here.</p>
@@ -651,10 +691,29 @@ Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)
 </ul>
 <p>Here are some handy definitions for date_time arguments:</p>
 <p><img src="includes/date_args.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled" title="You do it">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+You do it
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Create a calculated field named <code>months_ago</code> that determines the number of months between the commodity price data and today.</p></li>
+<li><p>Create a calculated field named <code>first_date</code> that determines the earliest date in the data.</p></li>
+<li><p>Create a calculated field named <code>last_date</code> that determines the last date that the carrot price index was less than 135.</p></li>
+<li><p>Create a new variable called <code>month</code> that only includes the month.</p></li>
+<li><p>Create a new variable called <code>year</code> that only includes the year.</p></li>
+<li><p>Create a new date variable called <code>my_date</code> that assigns a new date using your <code>month</code> and <code>year</code> variables and sets the day as 15.</p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="visualize-time-series-data" class="level3">
 <h3 class="anchored" data-anchor-id="visualize-time-series-data">2. Visualize time series data</h3>
-<p>Connect to the <code>carrots_prices.csv</code> data and use the expressions above to do the following:</p>
 <p>What types of visualizations are most appropriate for time series data?</p>
 <ul>
 <li><p>Line graphs</p></li>
@@ -671,6 +730,8 @@ Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)
 <li><p>Change the size, colors, and opacity of the dots in your dot plot (use the <code>Size</code> and <code>Color</code> icons)</p></li>
 <li><p>Change the markers in your chart from dots to a different shape (use the drop down menu on the <code>Marks</code> card, then use the <code>Shape</code> icons)</p></li>
 </ol>
+<section id="modifying-data-display-in-charts" class="level4">
+<h4 class="anchored" data-anchor-id="modifying-data-display-in-charts">Modifying Data Display in Charts</h4>
 <p>Now let’s experiment with changing what data is shown in your chart:</p>
 <ol type="1">
 <li><p>Change your x-axis to annual</p></li>
@@ -678,27 +739,87 @@ Lab Script for Week 5: Time Series Exploratory Data Analysis (EDA)
 <li><p>Restrict your date ranges so that your visualization only shows the last 20 years of data (use the <code>Filters</code> card)</p></li>
 </ol>
 </section>
+</section>
+<section id="creating-and-interpreting-trend-lines" class="level3">
+<h3 class="anchored" data-anchor-id="creating-and-interpreting-trend-lines">3. Creating and interpreting trend lines</h3>
+<p>Now we are going to add a trend line to our visualization. I am sure you are all familiar with trend lines, but do you know <em>how</em> they are created? Let’s start with a linear trend line…</p>
+<ul>
+<li>What does a linear trend line tell you about your time series data?</li>
+<li>How is this trend line estimated? (conceptually… we will go through some equations in lecture)</li>
+</ul>
+<section id="trend-lines-in-tableau" class="level4">
+<h4 class="anchored" data-anchor-id="trend-lines-in-tableau">Trend Lines in Tableau</h4>
+<ol type="1">
+<li><p>Open a new worksheet and create a line chart showing the monthly values of the commodity from 1990 through 2022.</p></li>
+<li><p>Add a trend line to your chart.</p></li>
+<li><p>When you click on the trend line, what information does Tableau give you about it? What does this information mean?</p></li>
+<li><p>When you click on <code>describe trend model</code> what information does Tableau give you about it?</p></li>
+<li><p>Change your x-axis to annual. Did your trend line change? How do you know? Why did or didn’t the trend line change when you changed the date aggregation?</p></li>
+</ol>
+</section>
+</section>
+<section id="visualizing-structural-breaks" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-structural-breaks">4. Visualizing structural breaks</h3>
+<p>Usually, in long time series data, we can see distinct points where trends change. These are called structural breaks. There are ways to <em>test</em> for structural breaks, but for now, let’s visually inspect them.</p>
+<ol type="1">
+<li><p>Looking at your visualization of monthly carrot prices and the linear trend line, does your trend line accurately reflect trends in the data for the entire period from 1990 to 2022?</p></li>
+<li><p>Identify a month-year where it appears that trends in your data changed.</p></li>
+<li><p>Add a <strong>reference line</strong> at this month-year. (Right-click on the x-axis and select <code>Reference Line</code>) Does anything happen to your trend line?</p></li>
+</ol>
+<section id="methods-for-highlighting-structural-breaks" class="level4">
+<h4 class="anchored" data-anchor-id="methods-for-highlighting-structural-breaks">Methods for Highlighting Structural Breaks</h4>
+<p><strong>Method 1:</strong> Separate Your Time Series by Adding Color</p>
+<ol type="1">
+<li><p>Create a new calculated field named <code>before_after_break</code>. Use the <code>IF</code> and <code>THEN</code> functions and an appropriate <code>Date</code> function to populate this variable with “after” if the date is after the break and “before” if the date is before the break.</p></li>
+<li><p>Drag this variable to the <code>Color</code> card.</p></li>
+<li><p>Add trend lines to your visualization. What happens?</p></li>
+</ol>
+<p><strong>Method 2:</strong> Separate Your Time Series by Segmenting the X-Axis</p>
+<ol type="1">
+<li><p>Drag your new variable from the <code>Marks</code> card to the <code>Columns</code> shelf.</p></li>
+<li><p>Sort your variable so that the “after” time period is shown following the “before” time period.</p></li>
+<li><p>In the x-axis Edit Axis menu, select <code>independent axis ranges for each row or column</code> (right-click on the x-axis to access this menu).</p></li>
+<li><p>Note: Typically, Tableau automatically adjusts these panes to be the same size, but you can set them to be different sizes based on the windows you have set by toggling back and forth in your date variable aggregation.</p></li>
+</ol>
+</section>
+</section>
 <section id="creating-panes-to-visualize-mutiple-time-series" class="level3">
-<h3 class="anchored" data-anchor-id="creating-panes-to-visualize-mutiple-time-series">3. Creating panes to visualize mutiple time series</h3>
-<p>Sometimes we might want to view multiple time series in separate figures. There are two ways to do this depending on the structure of your data. Let’s consider <strong>wide</strong> data first:</p>
+<h3 class="anchored" data-anchor-id="creating-panes-to-visualize-mutiple-time-series">5. Creating panes to visualize mutiple time series</h3>
+<p>Sometimes we might want to view multiple time series in separate figures. We can do this with panes in our visualizations.</p>
 <p>Let’s start by bringing in some price data for a few new commodities.</p>
 <ol type="1">
-<li><p>On the <code>Data Source</code> page connect to the following data sources <code>corn_prices.csv</code> and <code>tomatoes_prices.csv</code></p></li>
-<li><p>We are going to create a <code>relationship</code> between these data sources and our current working file</p></li>
+<li><p>On the <code>Data Source</code> page, connect to the following data sources: <code>corn_prices.csv</code> and <code>tomatoes_prices.csv</code>.</p></li>
+<li><p>We are going to create a <code>relationship</code> between these data sources and our current working file.</p></li>
 <li><p>With the carrot data in the <code>canvas</code>, drag one of the other data sources next to it in the canvas. Do the same with the other data source.</p></li>
 <li><p>Now go to a new worksheet, what do you see? What did we just accomplish?</p></li>
 </ol>
 <p>Now that we have all these data sources in a single file and they are structured in a “wide” format, we are going to construct time series plots that let us compare trends in these commodity prices across time.</p>
-<blockquote class="blockquote">
-<p>Open a new worksheet and create a line plot of the prices over time for each commodity</p>
-</blockquote>
-<p>Many functions and tools in Tableau and R are both designed to work with <strong>long</strong> data, where each row specifies the most granular unit in the data and the variables or fields describe the data elements (e.g., price).</p>
+<section id="comparing-trends-across-commodities" class="level4">
+<h4 class="anchored" data-anchor-id="comparing-trends-across-commodities">Comparing Trends Across Commodities</h4>
+<ol type="1">
+<li><p>Open a new worksheet and create a line plot of the prices over time for each commodity.</p></li>
+<li><p>Try formatting your figure: change colors, adjust sizes, etc.</p></li>
+<li><p>Use your <code>before_after_break</code> variable to examine whether all the commodities appear to have a structural break at the time you identified for the first commodity.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="You do it">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+You do it
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li><p>Connect to the egg data that we assembled in R.</p></li>
 <li><p>Create a time series of the price. How many lines are there? What is the default calculation doing?</p></li>
 <li><p>Differentiate the price series by dragging <code>Description</code> (a dimension) to the color under Marks. You should see two lines but the scales are off. What’s wrong?</p></li>
 <li><p>Rescale one of the series to match the other. You can go back to R to do this or do it in Tableau. In either case, you will want to use if/then logic.</p></li>
 </ol>
+</div>
+</div>
+</section>
 </section>
 <section id="video-using-tableau-to-visualize-time-series-data" class="level3">
 <h3 class="anchored" data-anchor-id="video-using-tableau-to-visualize-time-series-data">Video: Using Tableau to Visualize Time Series Data</h3>

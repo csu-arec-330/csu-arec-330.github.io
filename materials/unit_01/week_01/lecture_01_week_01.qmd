@@ -317,7 +317,7 @@ Form **groups of 2**.
 Your project must include:
 
 - **Time series analysis** (covered in Unit 1, Week 2)
-- **Forecasting techniques** (covered in Unit 2, Week 3)
+- **Forecasting techniques** (covered in Unit 1, Week 3)
 
 ## Project Steps
 
