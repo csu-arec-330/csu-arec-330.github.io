@@ -328,7 +328,7 @@ Now the dataset is ready for export in .csv format so you can import it into Tab
 #| eval: false
 
 #Write the dataset to a csv file
-write_csv(egg_prices, "egg_prices.csv")
+write_csv(egg_out, "egg_prices.csv")
 ```
 
 :::{.callout-note title="You do it"}
@@ -439,7 +439,7 @@ egg_out <- egg_raw_tq %>%
   ))
 
 #Write the dataset to a csv file
-write_csv(egg_prices, "egg_prices.csv")
+write_csv(egg_out, "egg_prices.csv")
 ```
 :::
 

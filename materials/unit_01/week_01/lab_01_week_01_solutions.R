@@ -1,4 +1,4 @@
-# This is the scipt for lab 05.
+# This is the script for lab 05.
 
 #Load necessary libraries
 library(readr)
@@ -76,5 +76,15 @@ egg_out <- egg_raw_tq %>%
     symbol == "WPU017107" ~ "Egg Producer Price" #if symbol equals WPU017107, then replace value with Egg Producer Price
   ))
 
+glimpse(egg_out)
+
+# Filter only retail prices
+egg_retail_prices <- egg_out %>%
+  filter(symbol == "APU0000708111")
+
+# Filter only producer prices
+egg_ppi <- egg_out %>%
+  filter(symbol == "WPU017107")
+
 #Write the dataset to a csv file
-write_csv(egg_out, "egg_out.csv")
+write_csv(egg_out, "egg_prices.csv")
