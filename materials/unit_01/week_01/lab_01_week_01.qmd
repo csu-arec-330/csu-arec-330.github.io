@@ -28,6 +28,11 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 - Identify and visualize structural breaks
 - Use panes to visualize multiple time series
 
+## [Download Lab Handout Here](lab_01_week_05_handout.pdf)
+
+<embed src="lab_01_week_05_handout.pdf" width="100%" height="600px" type="application/pdf">
+
+
 # Before you begin
 
 1. Create a new sub-folder called `lab_05` under your `arec_330` folder.

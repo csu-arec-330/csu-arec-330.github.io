@@ -1,0 +1,86 @@
+---
+title: "Lab 01 Week 05 Worksheet"
+output: 
+  pdf_document:
+    keep_tex: true
+geometry: margin=1in
+fontsize: 11pt
+header-includes:
+  - \usepackage{setspace}
+  - \setlength{\parindent}{0pt}
+---
+
+# **R Functions Glossary**
+
+This glossary provides an overview of key R functions used in **Week 5 Lab**, explaining their **purpose** and **general use** in handling time series data.
+
+---
+
+## **1. Downloading Data**
+
+### **`tq_get(symbol, get = "data_source", from = "YYYY-MM-DD", to = "YYYY-MM-DD")`**  
+**Purpose:** Retrieves time series data from FRED, Yahoo Finance, or other sources.  
+**Example:**  
+```{r}
+#| eval: false
+data <- tq_get("AAPL", get = "stock.prices", from = "2020-01-01", to = "2024-02-28")
+```
+
+---
+
+## **2. Handling Dates**
+
+### **`as.numeric(Sys.Date())`**  
+**Purpose:** Converts the current date into a numeric value based on the R epoch (January 1, 1970).  
+**Example:**  
+```{r}
+#| eval: false
+as.numeric(Sys.Date())
+```
+
+### **`ymd("YYYY-MM-DD")`**  
+**Purpose:** Converts a character string into a date format.  
+**Example:**  
+```{r}
+#| eval: false
+date <- ymd("2024-02-28")
+```
+
+---
+
+## **3. Modifying Data**
+
+### **`mutate(dataframe, new_column = operation)`**  
+**Purpose:** Adds or transforms columns in a dataframe.  
+**Example:**  
+```{r}
+#| eval: false
+data <- mutate(data, price_change = price - lag(price))
+```
+
+### **`case_when()`**  
+**Purpose:** Recodes values based on conditions.  
+**Example:**  
+```{r}
+#| eval: false
+data <- mutate(data, category = case_when(price > 100 ~ "High", TRUE ~ "Low"))
+```
+
+---
+
+## **4. Exporting Data**
+
+### **`write_csv(dataframe, "filename.csv")`**  
+**Purpose:** Saves a dataframe as a CSV file for use in Tableau.  
+**Example:**  
+```{r}
+#| eval: false
+write_csv(data, "time_series_data.csv")
+```
+
+---
+
+## **Using This Glossary**
+- Reference this list while working through Week 5 Lab.
+- Experiment with each function in R to understand how it works.
+- Use piping (`%>%`) to combine multiple functions and streamline analysis.
