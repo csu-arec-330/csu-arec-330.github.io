@@ -68,6 +68,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="lab_01_week_02_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="lab_01_week_02_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -87,12 +116,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-2-convert-your-data-into-a-time-series-object" id="toc-step-2-convert-your-data-into-a-time-series-object" class="nav-link" data-scroll-target="#step-2-convert-your-data-into-a-time-series-object">Step 2: Convert your data into a time series object</a></li>
   <li><a href="#step-3-decompose-your-time-series-data" id="toc-step-3-decompose-your-time-series-data" class="nav-link" data-scroll-target="#step-3-decompose-your-time-series-data">Step 3: Decompose your time series data</a></li>
   <li><a href="#step-4-examine-the-results-of-the-decomposition" id="toc-step-4-examine-the-results-of-the-decomposition" class="nav-link" data-scroll-target="#step-4-examine-the-results-of-the-decomposition">Step 4: Examine the results of the decomposition</a></li>
+  <li><a href="#step-5-storing-the-decomposed-data-in-a-dataframe" id="toc-step-5-storing-the-decomposed-data-in-a-dataframe" class="nav-link" data-scroll-target="#step-5-storing-the-decomposed-data-in-a-dataframe">Step 5: Storing the Decomposed Data in a DataFrame</a></li>
   </ul></li>
   <li><a href="#r-forecasting" id="toc-r-forecasting" class="nav-link" data-scroll-target="#r-forecasting">R: Forecasting</a>
   <ul class="collapse">
   <li><a href="#step-1-extract-the-trend-seasonal-and-residual-components" id="toc-step-1-extract-the-trend-seasonal-and-residual-components" class="nav-link" data-scroll-target="#step-1-extract-the-trend-seasonal-and-residual-components">Step 1: Extract the trend, seasonal, and residual components</a></li>
   <li><a href="#step-2-forecast-the-trend-seasonal-and-residual-components" id="toc-step-2-forecast-the-trend-seasonal-and-residual-components" class="nav-link" data-scroll-target="#step-2-forecast-the-trend-seasonal-and-residual-components">Step 2: Forecast the trend, seasonal, and residual components</a></li>
   <li><a href="#step-3-combine-the-forecasted-components-to-obtain-the-final-forecast" id="toc-step-3-combine-the-forecasted-components-to-obtain-the-final-forecast" class="nav-link" data-scroll-target="#step-3-combine-the-forecasted-components-to-obtain-the-final-forecast">Step 3: Combine the forecasted components to obtain the final forecast</a></li>
+  <li><a href="#step-4-merge-forecasted-data-with-observed-data" id="toc-step-4-merge-forecasted-data-with-observed-data" class="nav-link" data-scroll-target="#step-4-merge-forecasted-data-with-observed-data">Step 4: Merge Forecasted Data with Observed Data</a></li>
+  <li><a href="#step-5-export-data-for-tableau" id="toc-step-5-export-data-for-tableau" class="nav-link" data-scroll-target="#step-5-export-data-for-tableau">Step 5: Export Data for Tableau</a></li>
   </ul></li>
   <li><a href="#tableau" id="toc-tableau" class="nav-link" data-scroll-target="#tableau">Tableau</a>
   <ul class="collapse">
@@ -135,11 +167,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="learning-objectives-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-tableau">Learning Objectives Tableau</h2>
-<!-- - Apply Tableau's default forecasting -->
-<!-- - Customize Tableau's forecasting -->
 <ul>
 <li>Visualize decompositions and forecasts created in R</li>
 </ul>
+<!-- - Apply Tableau's default forecasting -->
+<!-- - Customize Tableau's forecasting -->
 <!-- - Create advanced visualizations to demonstrate seasonality and overall trends in time series data -->
 <!---
 ## Unit 1 Project Overview
@@ -149,141 +181,403 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>R: Time Series Decomposition</h1>
 <section id="step-1-load-your-data" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-load-your-data">Step 1: Load your data</h3>
-<p>First, you need to load your time series data into R and set up your script (description, working directory, load packages).</p>
+<p>First, load your time series data into R and set up your script (description, working directory, load packages).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This lab...</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This lab...</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">from=</span><span class="st">"2007-08-01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"Write the path to your working directory for arec330/lab06"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"forecast"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                 <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                 <span class="at">from=</span><span class="st">"2007-08-01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2-convert-your-data-into-a-time-series-object" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-convert-your-data-into-a-time-series-object">Step 2: Convert your data into a time series object</h3>
-<p>Next, you need to convert your data into a time series object that R can work with. To do this, you can use the <code>ts()</code> function in R. The <code>ts()</code> function takes two arguments: <code>data</code> and <code>frequency.</code> <code>data</code> is a vector or matrix of your time series data, and <code>frequency</code> is the number of observations per unit time (e.g., the number of observations per year, per month, etc.). In the case of the carrots dataset, the frequency is 12 (since there are 12 observations per year).</p>
+<p>Next, convert your data into a time series object that R can work with. To do this, you can use the <code>ts()</code> function in R.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Understanding `ts()` Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding <code>ts()</code> Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>ts()</code> function is used to create time series objects in R, which allow for time-based analysis and modeling.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ts_object <span class="ot">&lt;-</span> <span class="fu">ts</span>(data, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">start =</span> <span class="fu">c</span>(year, period), </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">frequency =</span> freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>data</code> <span class="math inline">\(\rightarrow\)</span> The numeric vector containing time series values.</li>
+<li><code>start</code> <span class="math inline">\(\rightarrow\)</span> The <strong>start time</strong> of the series, defined as <code>c(year, period)</code> where <code>period</code> represents the sub-time unit (e.g., month, quarter).</li>
+<li><code>frequency</code> <span class="math inline">\(\rightarrow\)</span> Specifies the number of observations per unit of time:
+<ul>
+<li><code>12</code> for <strong>monthly</strong> data (12 months per year).</li>
+<li><code>4</code> for <strong>quarterly</strong> data (4 quarters per year).</li>
+<li><code>1</code> for <strong>annual</strong> data (1 observation per year).</li>
+</ul></li>
+<li><code>ts_object</code> <span class="math inline">\(\rightarrow\)</span> The resulting time series object that can be analyzed and decomposed.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>The <code>ts()</code> function takes two arguments: <code>data</code> and <code>frequency.</code></p>
+<ul>
+<li><code>data</code> is a vector or matrix of your time series data, and</li>
+<li><code>frequency</code> is the number of observations per unit time (e.g., the number of observations per year, per month, etc.).</li>
+</ul>
+<p>In the case of the carrots dataset, the frequency is 12 (since there are 12 observations per year).</p>
 <p>To convert the <code>carrot</code> dataset into a time series object, run the following command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>carrot_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot<span class="sc">$</span>price,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">frequency =</span> <span class="dv">12</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">start=</span><span class="fu">c</span>(<span class="dv">2007</span>,<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>carrot_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot<span class="sc">$</span>price,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">start=</span><span class="fu">c</span>(<span class="dv">2007</span>,<span class="dv">8</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">frequency =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will create a new time series object called <code>carrot_ts.</code></p>
 </section>
 <section id="step-3-decompose-your-time-series-data" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-decompose-your-time-series-data">Step 3: Decompose your time series data</h3>
-<p>Now that you have your time series data in a format that R can work with, you can use the <code>decompose()</code> function to decompose it into its underlying components. The <code>decompose()</code> function takes one argument: <code>x</code>, which is the time series object you want to decompose.</p>
+<p>Now that you have your time series data in a format that R can work with, use the <code>decompose()</code> function to decompose it into its underlying components.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Understanding `decompose()` Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding <code>decompose()</code> Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>decompose()</code> function is used to break down a time series into its trend, seasonal, and residual components.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>decomposed_ts <span class="ot">&lt;-</span> <span class="fu">decompose</span>(ts_object, <span class="at">type =</span> <span class="st">"additive"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>ts_object</code> <span class="math inline">\(rightarrow\)</span> A time series object created using <code>ts()</code>.</li>
+<li><code>type</code> <span class="math inline">\(rightarrow\)</span> Specifies whether the decomposition should be:
+<ul>
+<li><strong>“additive”</strong> if seasonal variations remain constant over time.</li>
+<li><strong>“multiplicative”</strong> if seasonal variations scale with the trend level.</li>
+</ul></li>
+<li><code>decomposed_ts</code> <span class="math inline">\(rightarrow\)</span> The resulting decomposed time series object containing trend, seasonal, and residual components.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>The <code>decompose()</code> function takes one argument: <code>x</code>, which is the time series object you want to decompose.</p>
 <p>To decompose the <code>carrot_ts</code> time series object, run the following command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>carrot_decomp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(carrot_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>carrot_decomp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(carrot_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will create a new object called <code>carrot_decomp</code> that contains the decomposed components of the <code>carrot_ts</code> time series object.</p>
 </section>
 <section id="step-4-examine-the-results-of-the-decomposition" class="level3">
 <h3 class="anchored" data-anchor-id="step-4-examine-the-results-of-the-decomposition">Step 4: Examine the results of the decomposition</h3>
-<p>Finally, you can examine the results of the time series decomposition by plotting the decomposed components. The <code>carrot_decomp</code> object contains four components: <code>trend</code>, <code>seasonal</code>, <code>random</code>, and <code>figure</code>. You can access each of these components using the <code>$</code> operator.</p>
+<p>Finally, examine the results of the time series decomposition by plotting the decomposed components. The <code>carrot_decomp</code> object contains four components:</p>
+<ol type="1">
+<li><code>trend</code></li>
+<li><code>seasonal</code></li>
+<li><code>random</code></li>
+<li><code>figure</code></li>
+</ol>
+<p>You can access each of these components using the <code>$</code> operator.</p>
 <p>To plot the decomposed components, run the following command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>trend)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>seasonal)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>trend)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>seasonal)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will create three separate plots that show the trend, seasonal, and random components of the time series data. You can use these plots to better understand the underlying patterns in your data.</p>
-<p>Let’s store this all in a dataframe. For this operation, you will need to load the packages: <code>readr</code>and <code>dplyr</code>.</p>
+</section>
+<section id="step-5-storing-the-decomposed-data-in-a-dataframe" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-storing-the-decomposed-data-in-a-dataframe">Step 5: Storing the Decomposed Data in a DataFrame</h3>
+<p>To work with the decomposed time series components in further analysis or visualization, we need to store them in a structured dataframe. This allows us to manipulate, export, and integrate the data into other tools like Tableau.</p>
+<p>For this operation, you will need to load the packages: <code>readr</code>and <code>dplyr</code>.</p>
+<p>Let’s extract the first four components of the decomposition output and format them into a tidy dataframe:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>carrot_decomp_out <span class="ot">&lt;-</span> carrot_decomp[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">price=</span>x) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span>carrot<span class="sc">$</span>date,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">forecast=</span><span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>carrot_decomp_out <span class="ot">&lt;-</span> carrot_decomp[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span>            <span class="co"># Convert to a tibble for better readability</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">price =</span> x) <span class="sc">%&gt;%</span>      <span class="co"># Rename 'x' to 'price' for clarity</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date =</span> carrot<span class="sc">$</span>date,  <span class="co"># Add a measure_date column from the original dataset</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">forecast =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span>        <span class="co"># Add a column to indicate actual vs. forecasted data</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()                  <span class="co"># Remove any rows with missing values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Check Your Understanding">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check Your Understanding
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>What data type is the variable <code>measure_date</code> in the new data frame?</li>
+</ol>
+<blockquote class="blockquote">
+<p>The data type of measure_date depends on how it was stored in the original dataset (<code>carrot$date</code>). You can check the data type by running:</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(carrot_decomp_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p><em>Check your understanding:</em> What data type is the variable `measure_date’ in the new data frame? What is the function you would need to execute if you need to convert a character (chr) to a date?</p>
+<p>If <code>measure_date</code> was originally read in as a character (chr), it will remain a character in the new dataframe. Otherwise, it may already be recognized as a Date object.</p>
 </blockquote>
+<ol start="2" type="1">
+<li>If <code>measure_date</code> is stored as a character (chr) instead of a date, which function would you use to convert it to a proper date format?</li>
+</ol>
+<blockquote class="blockquote">
+<p>You can use the <code>as.Date()</code> function from base R or either the <code>ymd()</code> function from the lubridate package.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>carrot_decomp_out <span class="ot">&lt;-</span> carrot_decomp_out <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date =</span> <span class="fu">ymd</span>(measure_date))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>If your date format is different (e.g., “MM/DD/YYYY”), use <code>mdy(measure_date)</code> or <code>dmy(measure_date)</code> accordingly.</p>
+</blockquote>
+<ol start="3" type="1">
+<li>Why is it important to remove missing values <code>drop_na()</code> in time series analysis?</li>
+</ol>
+<blockquote class="blockquote">
+<p>Missing values can disrupt time series analysis and forecasting models, leading to inaccurate results.Many time series functions in R, such as <code>forecast()</code> or <code>decompose()</code>, require complete time series data to function correctly. Removing missing values ensures that the trend, seasonal, and residual components are correctly estimated without gaps in the data.</p>
+</blockquote>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Recall: Tibbles vs. Data Frames">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Recall: Tibbles vs.&nbsp;Data Frames
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Go back to the <a href="https://csu-arec-330.github.io/materials/unit_00/week_03/lab_00_week_03.html#read-the-data-into-r">Lab Notes for Week 3</a> to review the differences between a data frame and a tibble.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="r-forecasting" class="level1">
 <h1>R: Forecasting</h1>
-<p>Make sure to add the library <code>forecast</code> where you load packages.</p>
+<p>Forecasting allows us to extend our time series into the future by predicting trends, seasonal patterns, and random fluctuations. We will build our forecast by separately modeling the trend, seasonality, and residual (random) components extracted from the decomposition.</p>
+<p>Before proceeding with forecasting in R, make sure that the <code>forecast</code> package is loaded.</p>
 <section id="step-1-extract-the-trend-seasonal-and-residual-components" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-extract-the-trend-seasonal-and-residual-components">Step 1: Extract the trend, seasonal, and residual components</h3>
-<p>Next, we’ll extract the estimated trend, seasonal, and residual components from the decompose object using the <code>$</code> operator:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the trend, seasonal, and residual components</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>carrot_trend <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>trend)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>carrot_seasonal <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>seasonal)[<span class="dv">7</span><span class="sc">:</span>(<span class="fu">length</span>(carrot_ts)<span class="sc">-</span><span class="dv">6</span>)] <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(.,<span class="at">start=</span><span class="fu">c</span>(<span class="dv">2008</span>,<span class="dv">2</span>),<span class="at">frequency =</span> <span class="dv">12</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>carrot_residuals <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>decompose()</code> function breaks a time series into three key components:</p>
+<ol type="1">
+<li>Trend: The long-term upward or downward movement in the data.</li>
+<li>Seasonality: The repeating patterns at fixed intervals (e.g., monthly, quarterly).</li>
+<li>Residual (Random Noise): The part of the time series that is unexplained after removing the trend and seasonality.</li>
+</ol>
+<p>We extract these components from the decomposition object using the <code>$</code> operator and remove any missing values with <code>na.omit()</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Understanding na.omit() Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Understanding na.omit() Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>na.omit()</code> function removes missing values (NAs) from a dataset or vector. This is especially useful in time series analysis, where missing values can interfere with forecasting models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(original_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>original_data <span class="math inline">\(\rightarrow\)</span> The vector, dataframe, or time series from which to remove missing values.</li>
+<li>clean_data <span class="math inline">\(\rightarrow\)</span> The resulting dataset with all NAs removed.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the trend, seasonal, and residual components</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>carrot_trend <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>trend) <span class="co"># Extract trend component and remove NAs</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>carrot_seasonal <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>seasonal)[<span class="dv">7</span><span class="sc">:</span>(<span class="fu">length</span>(carrot_ts)<span class="sc">-</span><span class="dv">6</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(.,<span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2008</span>,<span class="dv">2</span>), <span class="at">frequency =</span> <span class="dv">12</span>) <span class="co"># Extract and convert seasonality into a time series</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>carrot_residuals <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>random) <span class="co"># Extract residual component and remove NAs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Why Remove Missing Values?</strong></p>
+<ul>
+<li>Missing values can cause errors in forecasting models that require a continuous time series.</li>
+<li>Functions like <code>forecast()</code> and <code>arima()</code> do not work well with missing values.</li>
+<li>Removing NAs ensures that only complete data is used for trend, seasonal, and residual modeling.</li>
+</ul>
+<p>Now that we have extracted and cleaned these components, we are ready to forecast each one separately in the next step.</p>
 </section>
 <section id="step-2-forecast-the-trend-seasonal-and-residual-components" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-forecast-the-trend-seasonal-and-residual-components">Step 2: Forecast the trend, seasonal, and residual components</h3>
-<p>To forecast each component, we’ll use the <code>forecast()</code> function from the <code>forecast</code> package in R. For the trend and seasonal components, we can simply use the <code>forecast()</code> function on the corresponding time series objects:</p>
+<p>To forecast each component, we use the <code>forecast()</code> function from the <code>forecast</code> package in R.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Understanding `forecast()` Syntax">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Understanding <code>forecast()</code> Syntax
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <code>forecast()</code> function is used to generate future values of a time series based on past observations and trends.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the trend component for the next 12 months</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>carrot_trend_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_trend,<span class="at">level =</span> <span class="dv">95</span>, <span class="at">h=</span><span class="dv">60</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_trend_forecast)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the seasonal component for the next 12 months</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>carrot_seasonal_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_seasonal,<span class="at">level =</span> <span class="dv">95</span>, <span class="at">h=</span><span class="dv">60</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_seasonal_forecast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>forecasted_ts <span class="ot">&lt;-</span> <span class="fu">forecast</span>(model_or_ts, <span class="at">h =</span> forecast_horizon, <span class="at">level =</span> confidence_interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>model_or_ts</code> <span class="math inline">\(rightarrow\)</span> A time series object or fitted model (such as ARIMA or ETS) used for forecasting.</li>
+<li><code>h</code> <span class="math inline">\(rightarrow\)</span> The number of future periods to forecast (e.g., <code>h = 12</code> for 12 months ahead).</li>
+<li><code>level</code> <span class="math inline">\(rightarrow\)</span> The confidence level for the prediction intervals (e.g., <code>level = 95</code> for 95% confidence intervals).</li>
+<li><code>forecasted_ts</code> <span class="math inline">\(rightarrow\)</span> The resulting forecast object containing predicted values, confidence intervals, and model details.</li>
+</ul>
+</div>
+</div>
+</div>
+<section id="forecasting-trend-and-seasonal-components" class="level4">
+<h4 class="anchored" data-anchor-id="forecasting-trend-and-seasonal-components">Forecasting Trend and Seasonal Components</h4>
+<p>To project future values, we use the <code>forecast()</code> function on the trend and seasonal components separately.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the trend component for the next 12 months</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>carrot_trend_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_trend, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_trend_forecast)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the seasonal component for the next 12 months</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>carrot_seasonal_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_seasonal, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_seasonal_forecast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Did you get a warning? What does the warning message tell you? <!---
-Because the decomposition 
----> For the residual component, we’ll need to create a model to forecast the residuals. There are many possible approaches to modeling the residuals, but a simple one is to use a moving average model (MA model). Here’s an example of how to create a simple MA(1) model for the residuals:</p>
+<p>Check your output: Did you get a warning? If so, what does the warning message indicate? This may be due to <code>decompose()</code> treating seasonality as a deterministic component, meaning it assumes seasonality repeats exactly. Since there’s no inherent randomness, confidence intervals may not be meaningful.</p>
 </blockquote>
+</section>
+<section id="forecasting-residuals" class="level4">
+<h4 class="anchored" data-anchor-id="forecasting-residuals">Forecasting Residuals</h4>
+<p>The residual component captures the random variation left after accounting for trend and seasonality. Unlike trend and seasonal components, residuals require a statistical model to forecast. One common approach is to use a <strong>Moving Average (MA) model</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series object for the residuals</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>carrot_residuals_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot_residuals, <span class="at">frequency=</span><span class="dv">12</span>, <span class="at">start=</span><span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">8</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an MA(1) model to the residuals</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>carrot_residuals_model <span class="ot">&lt;-</span> <span class="fu">arima</span>(carrot_residuals_ts, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the residuals for the next 12 months</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>carrot_residuals_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_residuals_model,<span class="at">level =</span> <span class="dv">95</span>, <span class="at">h=</span><span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a time series object for the residuals</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>carrot_residuals_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot_residuals, <span class="at">frequency=</span><span class="dv">12</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">8</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an MA(1) model to the residuals</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>carrot_residuals_model <span class="ot">&lt;-</span> <span class="fu">arima</span>(carrot_residuals_ts, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast the residuals for the next 12 months</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>carrot_residuals_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_residuals_model, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<blockquote class="blockquote">
+<p>Why do we model the residuals separately? Unlike the trend and seasonal components, the residuals are unpredictable and must be modeled probabilistically rather than simply extended forward.</p>
+</blockquote>
+<p><strong>This approach ensures that our final forecast accounts for all key components of the time series: trend, seasonality, and random variation.</strong></p>
+</section>
 </section>
 <section id="step-3-combine-the-forecasted-components-to-obtain-the-final-forecast" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-combine-the-forecasted-components-to-obtain-the-final-forecast">Step 3: Combine the forecasted components to obtain the final forecast</h3>
-<p>Finally, we can combine the forecasted trend, seasonal, and residual components to obtain the final forecast for the time series:</p>
+<p>Now that we have separate forecasts for the trend, seasonal, and residual components, we need to combine them to generate the final forecasted values for the time series.</p>
+<section id="compute-the-final-forecast" class="level4">
+<h4 class="anchored" data-anchor-id="compute-the-final-forecast">1. Compute the Final Forecast</h4>
+<p>The final forecast is the sum of the forecasted trend, seasonal, and residual components.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the forecasted components to obtain the final forecast</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>mean <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>mean <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>mean</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>carrot_forecast_upper <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>upper <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>upper <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>upper</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>carrot_forecast_lower <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>lower <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>lower <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>lower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the forecasted components to obtain the final forecast</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>mean <span class="sc">+</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                    carrot_seasonal_forecast<span class="sc">$</span>mean <span class="sc">+</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                    carrot_residuals_forecast<span class="sc">$</span>mean</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute upper bound for confidence interval</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>carrot_forecast_upper <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>upper <span class="sc">+</span> </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                          carrot_seasonal_forecast<span class="sc">$</span>upper <span class="sc">+</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                          carrot_residuals_forecast<span class="sc">$</span>upper</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute lower bound for confidence interval</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>carrot_forecast_lower <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>lower <span class="sc">+</span> </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                          carrot_seasonal_forecast<span class="sc">$</span>lower <span class="sc">+</span> </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                          carrot_residuals_forecast<span class="sc">$</span>lower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This creates the forecast, which is just the future values. We want to append this to the existing time series. First, we will convert this vector into a data frame (a special one called a tibble).</p>
+<p>At this point, <code>carrot_forecast</code> contains the predicted future values, while <code>carrot_forecast_upper</code> and <code>carrot_forecast_lower</code> provide confidence intervals around those predictions.</p>
+</section>
+<section id="convert-forecasted-values-into-a-data-frame" class="level4">
+<h4 class="anchored" data-anchor-id="convert-forecasted-values-into-a-data-frame">2. Convert Forecasted Values into a Data Frame</h4>
+<p>Since <code>forecast()</code> returns a special object, we need to convert the results into a standard data frame (a tibble in this case) before merging it with the original dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">price=</span>carrot_forecast,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">upper=</span>carrot_forecast_upper[,<span class="dv">1</span>],</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">lower=</span>carrot_forecast_lower[,<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">seq</span>(<span class="fu">as_date</span>(<span class="st">"2023-08-01"</span>), <span class="at">by=</span><span class="st">"months"</span>, <span class="at">length.out=</span><span class="fu">nrow</span>(.))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert forecasted values into a tibble with corresponding dates</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price=</span>carrot_forecast,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper=</span>carrot_forecast_upper[,<span class="dv">1</span>],</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower=</span>carrot_forecast_lower[,<span class="dv">1</span>]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date=</span><span class="fu">seq</span>(<span class="fu">as_date</span>(<span class="st">"2023-08-01"</span>), <span class="at">by =</span> <span class="st">"months"</span>, <span class="at">length.out=</span><span class="fu">nrow</span>(.))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, we need to append it to our current data. However, there is some overlap with the actual observed data because some data was lost in the moving average calculation in the decomposition. For the overlapping data, we could either keep both, just the forecast, or just the observed. Let’s just keep the observed and append the remainder of the forecast to <code>carrot_decomp_out</code>.</p>
+<p><strong>Why Do We Convert to a Data Frame?</strong></p>
+<ul>
+<li>The forecasted values from <code>forecast()</code> are not in a standard tabular format, so we need to reshape them.</li>
+<li>We assign a corresponding date (<code>measure_date</code>) to each forecasted value, ensuring alignment with the original time series.</li>
+<li>The confidence intervals (<code>upper</code> and <code>lower</code>) allow us to quantify forecast uncertainty.</li>
+</ul>
+<p>At this stage, we have a clean forecast dataset that is ready to be appended to the existing observed data. The next step is to merge this with the original time series data and prepare it for visualization in Tableau.</p>
+</section>
+</section>
+<section id="step-4-merge-forecasted-data-with-observed-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-merge-forecasted-data-with-observed-data">Step 4: Merge Forecasted Data with Observed Data</h3>
+<p>Now that we have created our forecasted values, we need to append them to the original dataset. However, there is a slight complication:</p>
+<ul>
+<li>Some of the original observed data overlaps with the beginning of the forecasted period.</li>
+<li>This occurs because some data points were lost during the decomposition process (e.g., due to moving averages used in decompose()).</li>
+<li>We have three options for handling this overlap:
+<ol type="1">
+<li>Keep both the forecasted and observed data.</li>
+<li>Keep only the forecasted values in the overlapping period.</li>
+<li>Keep only the observed values in the overlapping period.</li>
+</ol></li>
+</ul>
+<p>For this analysis, we will follow option #3 (keep only the observed values in the overlapping period) and append the remaining forecasted values to the dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> carrot_forecast_df <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(measure_date <span class="sc">&gt;</span> <span class="fu">max</span>(carrot_decomp_out<span class="sc">$</span>measure_date)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">forecast=</span>T)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>final_out <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_decomp_out,carrot_forecast_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only forecasted data that occurs after the last observed date</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> carrot_forecast_df <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(measure_date <span class="sc">&gt;</span> <span class="fu">max</span>(carrot_decomp_out<span class="sc">$</span>measure_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">forecast =</span> <span class="cn">TRUE</span>) <span class="co"># Mark these as forecasted values</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Append forecasted data to the original dataset</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>final_out <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_decomp_out,carrot_forecast_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now you can export this data for Tableau:</p>
+</section>
+<section id="step-5-export-data-for-tableau" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-export-data-for-tableau">Step 5: Export Data for Tableau</h3>
+<p>To prepare for visualization in Tableau, we need to export the final dataset as a CSV file.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(final_out,<span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the final dataset as a CSV file</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(final_out,<span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>This CSV file will contain:</p>
+<ul>
+<li>Original observed prices</li>
+<li>Decomposed trend, seasonality, and residual components</li>
+<li>Forecasted values for future months</li>
+<li>A <strong>forecast</strong> indicator column to distinguish real vs.&nbsp;predicted data</li>
+</ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Lab Script for Week 6: Time Series Decomposition and Forecasting">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -292,83 +586,100 @@ Lab Script for Week 6: Time Series Decomposition and Forecasting
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the script for lab 05.</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve time series data for carrots</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">from =</span> <span class="st">"2007-08-01"</span>)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data into a time series object</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>carrot_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot<span class="sc">$</span>price,</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">frequency =</span> <span class="dv">12</span>,</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">8</span>))</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Decompose the time series</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>carrot_decomp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(carrot_ts)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot decomposed components</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>trend)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>seasonal)</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>random)</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Store decomposition results into a dataframe</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>carrot_decomp_out <span class="ot">&lt;-</span> carrot_decomp[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="sc">%&gt;%</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">price =</span> x) <span class="sc">%&gt;%</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date =</span> carrot<span class="sc">$</span>date,</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>         <span class="at">forecast =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract trend, seasonal, and residual components</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>carrot_trend <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>trend)</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>carrot_seasonal <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>seasonal)[<span class="dv">7</span><span class="sc">:</span>(<span class="fu">length</span>(carrot_ts) <span class="sc">-</span> <span class="dv">6</span>)] <span class="sc">%&gt;%</span></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(., <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2008</span>, <span class="dv">2</span>), <span class="at">frequency =</span> <span class="dv">12</span>)</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>carrot_residuals <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>random)</span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast trend and seasonal components</span></span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>carrot_trend_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_trend, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_trend_forecast)</span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>carrot_seasonal_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_seasonal, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_seasonal_forecast)</span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an MA(1) model for residuals and forecast</span></span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>carrot_residuals_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot_residuals, <span class="at">frequency =</span> <span class="dv">12</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">8</span>))</span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>carrot_residuals_model <span class="ot">&lt;-</span> <span class="fu">arima</span>(carrot_residuals_ts, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>carrot_residuals_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_residuals_model, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine forecasted components</span></span>
-<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>mean <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>mean <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>mean</span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>carrot_forecast_upper <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>upper <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>upper <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>upper</span>
-<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>carrot_forecast_lower <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>lower <span class="sc">+</span> carrot_seasonal_forecast<span class="sc">$</span>lower <span class="sc">+</span> carrot_residuals_forecast<span class="sc">$</span>lower</span>
-<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert forecast into a dataframe</span></span>
-<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">price =</span> carrot_forecast,</span>
-<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>                             <span class="at">upper =</span> carrot_forecast_upper[,<span class="dv">1</span>],</span>
-<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>                             <span class="at">lower =</span> carrot_forecast_lower[,<span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date =</span> <span class="fu">seq</span>(<span class="fu">as_date</span>(<span class="st">"2023-08-01"</span>), <span class="at">by =</span> <span class="st">"months"</span>, <span class="at">length.out =</span> <span class="fu">nrow</span>(.)))</span>
-<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Append forecasted data to the existing decomposition dataset</span></span>
-<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> carrot_forecast_df <span class="sc">%&gt;%</span></span>
-<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(measure_date <span class="sc">&gt;</span> <span class="fu">max</span>(carrot_decomp_out<span class="sc">$</span>measure_date)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">forecast =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>final_out <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_decomp_out, carrot_forecast_df)</span>
-<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Export data for Tableau</span></span>
-<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(final_out, <span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the script for lab 05.</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Comment out the following line if you have already installed the forecast package.</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"forecast"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 1: Time Series Decomposition</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve time series data for carrots</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>                 <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>                 <span class="at">from =</span> <span class="st">"2007-08-01"</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data into a time series object</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>carrot_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot<span class="sc">$</span>price,</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">frequency =</span> <span class="dv">12</span>,</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>                <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">8</span>))</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Decompose the time series</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>carrot_decomp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(carrot_ts)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot decomposed components</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>trend)</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>seasonal)</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_decomp<span class="sc">$</span>random)</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Store decomposition results into a dataframe</span></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>carrot_decomp_out <span class="ot">&lt;-</span> carrot_decomp[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">price =</span> x) <span class="sc">%&gt;%</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date =</span> carrot<span class="sc">$</span>date,</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">forecast =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract trend, seasonal, and residual components</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>carrot_trend <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>trend)</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>carrot_seasonal <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>seasonal)[<span class="dv">7</span><span class="sc">:</span>(<span class="fu">length</span>(carrot_ts) <span class="sc">-</span> <span class="dv">6</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts</span>(., <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2008</span>, <span class="dv">2</span>), <span class="at">frequency =</span> <span class="dv">12</span>)</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>carrot_residuals <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(carrot_decomp<span class="sc">$</span>random)</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 2: Forecasting</span></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast trend and seasonal components</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>carrot_trend_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_trend, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_trend_forecast)</span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>carrot_seasonal_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_seasonal, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(carrot_seasonal_forecast)</span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit an MA(1) model for residuals and forecast</span></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>carrot_residuals_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(carrot_residuals, <span class="at">frequency =</span> <span class="dv">12</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">8</span>))</span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>carrot_residuals_model <span class="ot">&lt;-</span> <span class="fu">arima</span>(carrot_residuals_ts, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>carrot_residuals_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(carrot_residuals_model, <span class="at">level =</span> <span class="dv">95</span>, <span class="at">h =</span> <span class="dv">60</span>)</span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine forecasted components</span></span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>mean <span class="sc">+</span> </span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>  carrot_seasonal_forecast<span class="sc">$</span>mean <span class="sc">+</span> </span>
+<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a>  carrot_residuals_forecast<span class="sc">$</span>mean</span>
+<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>carrot_forecast_upper <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>upper <span class="sc">+</span> </span>
+<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>  carrot_seasonal_forecast<span class="sc">$</span>upper <span class="sc">+</span> </span>
+<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>  carrot_residuals_forecast<span class="sc">$</span>upper</span>
+<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>carrot_forecast_lower <span class="ot">&lt;-</span> carrot_trend_forecast<span class="sc">$</span>lower <span class="sc">+</span> </span>
+<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>  carrot_seasonal_forecast<span class="sc">$</span>lower <span class="sc">+</span> </span>
+<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>  carrot_residuals_forecast<span class="sc">$</span>lower</span>
+<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert forecast into a dataframe</span></span>
+<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> carrot_forecast,</span>
+<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper =</span> carrot_forecast_upper[,<span class="dv">1</span>],</span>
+<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower =</span> carrot_forecast_lower[,<span class="dv">1</span>]</span>
+<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date =</span> <span class="fu">seq</span>(<span class="fu">as_date</span>(<span class="st">"2023-08-01"</span>), <span class="at">by =</span> <span class="st">"months"</span>, <span class="at">length.out =</span> <span class="fu">nrow</span>(.)))</span>
+<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Append forecasted data to the existing decomposition dataset</span></span>
+<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a>carrot_forecast_df <span class="ot">&lt;-</span> carrot_forecast_df <span class="sc">%&gt;%</span></span>
+<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(measure_date <span class="sc">&gt;</span> <span class="fu">max</span>(carrot_decomp_out<span class="sc">$</span>measure_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">forecast =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a>final_out <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_decomp_out, carrot_forecast_df)</span>
+<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Export data for Tableau</span></span>
+<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(final_out, <span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
