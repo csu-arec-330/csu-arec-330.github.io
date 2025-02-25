@@ -7,575 +7,286 @@ format:
     width: 1400
     # logo: path.png
     # center: TRUE
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-## Agenda 
+## Agenda
 
-Linear regression/trend analysis
+-   Understanding time series decomposition
+-   Components of time series
+-   Interpreting decomposition results
+-   Applications in forecasting
+-   Interactive group exercises
 
-Interpreting trend analysis
+<!-- ============================= -->
 
-Forecasting using trends
+<!-- (4-22-2024) Lauren moved material in from Week 06 (Lecture 01 Week 02) For next year, plan is to re-do Week 06 lecture to be more about forecasting and decomposition. I left the content in there for Week 05 (commented out) for now. -->
 
-Motivation for structural breaks
+<!-- ============================= -->
 
-Project 1 reminder
+# Time Series Decomposition
 
+## Why decompose a time series?
 
-<!-- example of big text fit to slide width -->
+Time series data often contain patterns that we can break down into
+different components.
 
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
+**Decomposition** allows us to separate these components to better
+understand underlying trends and improve forecasting.
 
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
+## Components of Time Series
 
+Recall that a time series is often composed of:
 
-# Intro to Linear Regressions
+1.  **Trend (T)** – The long-term pattern of increase or decrease.
+2.  **Seasonality (S)** – Regularly repeating patterns over time.
+3.  **Residual (R)** – Random noise or unexplained variation.
 
-# 
-::: {.r-fit-text }
-**The objective:** <br>
-We want to understand the <br> 
-relationship between two variables
-:::
-#
+## {.scrollable}
 
-::: {.r-fit-text }
-**The simple solution:** <br> 
-Assume the relationship is linear <br> 
-and estimate the "average" trend
-:::
+[![](includes/egg_prices.PNG){fig-align="center"}](https://www.nytimes.com/2025/02/25/business/egg-prices-bird-flu-producers.html)
 
+## Example: Why Decomposition Matters {.scrollable}
 
-## Linear regression: The intuition {.scrollable}
+Consider monthly **egg prices** over several years. Prices fluctuate due
+to multiple factors:
 
-Imagine you have been tracking carrot prices for several years and you want to make a prediction about what carrot prices will look like in the future.
+-   A long-term **trend**: We expect a gradual increase in price.
+-   A **seasonal pattern**: We expect prices rise before holidays and drop
+    afterward.
+-   **Random variations**: We expect random market disruptions or supply chain issues to affect prices.
 
-You plotted your data on carrot prices, and you want to know: Does the price of carrots relate to how many months have passed since the financial crisis?
+By decomposing the time series, we can isolate these effects and make better predictions.
 
-::: {.notes}
-The financial crisis was a major event that we can expect had a significant effect on food prices. We want to understand if carrot prices increase (or decrease) as more time passes, as this can indicate changes in the cost of production.
+# Example: Egg Price Decomposition
 
-:::
-
-::: {style="text-align: center"}
-![](includes/carrot_scatter.png){width="80%"}
-::: 
-
-## Linear regression: The intuition {.scrollable}
-
-We can use statistical tools to determine the relationship between "Months since financial crisis" and "Carrot price" to answer questions that cannot always be determined by simply looking at a data plot.
-
-The tool is linear regression, or *regression analysis*.
-
-::: {.notes}
-
-:::
-
-::: {style="text-align: center"}
-![](includes/carrot_scatter.png){width="80%"}
-::: 
-
-## Equation of a line {.scrollable}
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-Quick review: The equation of a line plotting the relationship between $y$ and $x$ is,
-$$y=mx+b $$
-
-Which variable represents the slope?
-
-Which variable represents the intercept?
-
-:::
-
-::: {.column width="50%"}
+##  {.scrollable}
 
 ```{r}
-#| fig-width: 5
+#| eval: true
 
-library(ggplot2,quietly = T)
-data.frame(x=seq.int(0,10,1),
-           y=seq(3,23,length.out=11)) |>
-  ggplot(aes(x,y)) + 
-    geom_line() +
-    scale_y_continuous(breaks = seq.int(0,24,2),limits = c(0,24)) +
-    scale_x_continuous(breaks = seq.int(0,10,2)) 
+# Load necessary libraries
+library(tidyquant)
+library(ggplot2)
+library(forecast)
+
+# Retrieve time series data
+egg_data <- tq_get("APU0000708111", get = "economic.data", from = "2010-01-01", to = "2024-02-28")
+
+# Convert to time series object
+egg_ts <- ts(egg_data$price, start = c(2010, 1), frequency = 12)
+
+# Apply decomposition
+egg_decomp <- decompose(egg_ts, type = "multiplicative")
+
+# Plot decomposition
+plot(egg_decomp)
 ```
+This plot helps us:
+
+-   Identify long-term trends in egg prices.
+-   Recognize seasonal price spikes.
+-   Spot unexpected deviations that might indicate market disruptions.
+
+
+## How Decomposition Works
+
+We assume that a time series can be expressed as either an **additive**
+or **multiplicative** model.
+
+The outcome we are modeling is the observed value of a time series at a specific point in time.
+
+## Additive Model (when variations remain constant) {.scrollable}
+
+$Y_t = T_t + S_t + R_t$
+
+Where:
+
+- $Y_t$ is the recorded data at a given time
+- $T_t$ is the trend component
+- $S_t$ is the seasonal component
+- $R_t$ is the random component
+
+Decomposition helps us break down the value of $Y_t$ into meaningful components.
+
+## Example: Additive Model
+
+Suppose we analyze monthly sales of a product: 
+
+- Sales have been increasing by **\$1,000** per month. 
+- A **holiday effect** adds **\$500** in December and subtracts **\$300** in January. 
+- Random variations range between **-\$200** and **\$200**.
+
+**Question:** If the baseline sales in January 2023 were **\$10,000**, what would the expected sales be in **December 2023**? 
+
+## Example: Additive Model {.scrollable}
+
+Using the given trend and seasonal components, we can write our time series decomposition as:
+
+$Y_{Dec} = 10,000 + (1,000 \times 11) + 500 + R$
+
+:::{.incremental}
+- $10,000 is the baseline sales in January 2023. *This is included because it is the initial sales before any trend, seasonal, or random effects are applied.*
+- ($1,000 \times 11$) is the increase of $1,000 per month for 11 months (from February to December). *This is the trend accumulation.*
+- 500 is a holiday seasonal effect that increases sales in December. *This is the seasonal effect for December.*
+- $R$ is a random variation (which we assume is 0 for now).
 :::
+. . .
 
-::::
+**Answer:** $Y_{Dec} = \$21,500$
 
+## Egg Example: Revisited (Additive Model)
+```{r}
+#| eval: true
 
+# Load necessary libraries
+library(tidyquant)
+library(ggplot2)
+library(forecast)
 
-## Regression analysis {.scrollable}
+# Retrieve time series data
+egg_data <- tq_get("APU0000708111", get = "economic.data", from = "2010-01-01", to = "2024-02-28")
 
-**Regression analysis** is a tool that examines the average relationship between two (or more) variables.
+# Convert to time series object
+egg_ts <- ts(egg_data$price, start = c(2010, 1), frequency = 12)
 
-It helps us understand:
+# Apply decomposition
+egg_decomp_add <- decompose(egg_ts, type = "additive")
 
-- How an outcome, or the "dependent" variable, (carrot price) changes when one or more "independent" variables (months since the financial crisis) change.
+# Plot decomposition
+plot(egg_decomp_add)
+```
 
-<!-- - What factors predict a change in an outcome, given a change in an independent variable. -->
+## Multiplicative Model (when variations scale with the trend level) {.scrollable}
 
-We use regression analysis to:
+$Y_t = T_t \times S_t \times R_t$
 
-- Forecast future values of the dependent variable (e.g., what carrot prices might be in the future, given past responses to economic events).
+Where:
 
-- Evaluate the strength of each predictor, i.e., which independent variables are most strongly correlated with changes in carrot prices.
+- $Y_t$ is the recorded data at a given time
+- $T_t$ is the trend component
+- $S_t$ is the seasonal component
+- $R_t$ is the random component
 
-::: {.notes}
+The multiplicative model is often used when seasonality effects **increase proportionally** with the trend.
 
-How an outcome changes in response to an ind. var change: Since the model is specifying the relationship between independent (RHS vars) and an outcome (y or dependent vars), new observed independent vars + the model can predict new outcomes.
+## Example: Multiplicative Model
 
+Suppose a company’s revenue...
+
+- grows **5% each month** (trend), and 
+- there is a **seasonal multiplier** of **1.2** in December and **0.9** in January.
+
+**Question:** If the baseline revenue in January 2023 was **\$10,000**, what would the expected revenue be in **December 2023**? 
+
+## Example: Multiplicative Model {.scrollable}
+
+Using the given trend and seasonal components, we can write our time series decomposition as:
+
+$Y_{Dec} = (10,000 \times 1.05^{11}) \times 1.2 \times R$
+
+:::{.incremental}
+- $10,000 is the baseline sales in January 2023. *This is included because it is the initial sales before any trend, seasonal, or random effects are applied.*
+- ($1.05^{11}$) represents the compounded growth over 11 months. *Each month, the revenue increases by 5%, so we apply this growth rate cumulatively.*
+- 1.2 is the seasonal effect for December. *December sees a 20% increase due to seasonality.*
+- $R$ is a random variation (which we assume is 1 for now).
 :::
+. . .
 
-## Regression analysis, applied {.scrollable}
+**Answer:** $Y_{Dec} = \$20,524.07$
 
-We use linear regression, along with our data, to answer:
+## Egg Example: Revisited (Multiplicative Model)
+```{r}
+#| eval: true
 
-1.  Are carrot prices, *on average*, increasing or decreasing?
+# Load necessary libraries
+library(tidyquant)
+library(ggplot2)
+library(forecast)
 
-2.  How much of the observed variation in carrot prices can be explained by a simple time-trend line?
+# Retrieve time series data
+egg_data <- tq_get("APU0000708111", get = "economic.data", from = "2010-01-01", to = "2024-02-28")
 
-3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
+# Convert to time series object
+egg_ts <- ts(egg_data$price, start = c(2010, 1), frequency = 12)
 
-## Exercise 1: Which trend line fits the data best? {.scrollable}
-![](includes/carrot_trend2.png){width="45%"}![](includes/carrot_trend3.png){width="45%"}
-![](includes/carrot_trend1.png){width="45%"}![](includes/carrot_trend4.png){width="45%"}
+# Apply decomposition
+egg_decomp_mult <- decompose(egg_ts, type = "multiplicative")
 
+# Plot decomposition
+plot(egg_decomp_mult)
+```
 
-## Exercise 1: Which trend line fits the data best? {.scrollable}
+## Egg Example: Revisited (Takeaways)
 
-It is not easy to eyeball a trend line. 
+Additive versus Multiplicative?
 
-Regression analysis is useful to determine the best-fitting line.
+- If egg prices increase over time due to inflation or demand shifts, seasonal peaks and troughs will likely **grow proportionally** rather than stay constant. A multiplicative model would be more appropriate.
 
-In simple terms, a "best-fitting" line is one that goes through, or is closest to, most of the data points in the chart.
+- If the seasonal effect **remained constant** over time, an additive model would be more appropriate.
 
-![](includes/carrot_trend2.png){width="45%"}![](includes/carrot_trend3.png){width="45%"}
-![](includes/carrot_trend1.png){width="45%"}![](includes/carrot_trend4.png){width="45%"}
+## Interpreting the Results
 
-<!---
-#
-::: {.r-fit-text }
-**Which trend line fits the data best?** <br> 
-Why?<br> 
-:::
---->
+-   **Trend Component**: The overall direction of the data (upward/downward).
+-   **Seasonal Component**: Repeating patterns within a year.
+-   **Random/Residual Component**: What remains after removing trend and seasonality.
 
-<!---
-## Regression analysis {.scrollable}
+## Using `decompose()` in R {.scrollable}
 
-![](includes/carrot_ols1.png){width="80%"}
---->
+Now that we understand the components of a time series, how do we extract them from real-world data? 
 
-## Regression analysis, applied {.scrollable}
+In this week's lab, we will use R's `decompose()` function to break down a time series into its trend, seasonal, and residual components.
 
-We use can use linear regression, along with our data, to answer:
+## Discussion Questions (Partner Activity):
 
-1.  **Are carrot prices, on average, increasing or decreasing?**
+1. In pairs, choose a time series from your group project.
+2. Think about what question you want to answer with your data.
+  - Which time series dataset would be most useful for your group's research question?
+  - How would time series decomposition help you analyze the dataset to answer your question?
 
-    - **Increasing (slightly)**
+When choosing your time series data for the project, consider the type of **decision-makers** who would benefit from your analysis. 
 
-2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
+## Here is a scenario to help guide your choice
 
-3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
+**Context:** Suppose you are advising a **grain processing company** that wants to maintain a stable supply of raw materials for the next five years. 
 
-## The Ordinary Least Squares Regression 
+**Decision To-Be-Made:** They need to decide **which grain (corn, wheat, or soybeans) to invest in** based on future price trends.
 
-Ordinary Least Squares (OLS) is the most common estimation method for linear models.
+## Possible time series choices {.scrollable}
 
-For a good reason: As long as your model satisfies the certain assumptions, you're getting the BEST possible estimates.
+1. **Historical Corn Prices (Monthly, FRED Database)**
+   - Used to track long-term price trends and forecast future prices.
+   - Helps the company decide if corn is a stable and profitable investment.
+   
+2. **Soybean Export Volumes (USDA Reports, Quarterly)**
+   - Can indicate global demand trends and potential supply chain risks.
+   - Helps in assessing whether soybeans will remain a competitive option.
+   
+3. **Wheat Production Forecasts (FAO, Annual Reports)**
+   - Provides data on expected future supply based on weather and policy conditions.
+   - Helps the company determine if wheat will face shortages or surpluses in the coming years.
 
-<!---
-BEST = accurate (unbiased) + most precise (best)
---->
+## Recap
 
-Tableau, Excel, and other programs use OLS to estimate trend lines.
+-   Decomposition separates time series into **trend, seasonality, and residuals**.
+-   Understanding these components improves forecasting accuracy.
+-   Discuss how these insights apply to your group project.
 
-<!---
-## OLS: Unbiased {.scrollable}
-
-What do we mean by "unbiased"?
-
-- predictions are correct on average
-
-- the average value of errors (the distance between observations and predictions) equals zero
-
-# 
-![](includes/estimates_bias.png){width="100%"}
-
-::: {style="font-size: 80%;"}
-*Source:* [Statistics by Jim](https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/)
-
-:::
-
-## OLS: Best {.scrollable}
-
-What do we mean by "best"?
-
-- predictions have the smallest possible variance
-
-- larger variance = larger probability that our estimates are further away from the correct/true/observed value
-
-# 
-![](includes/estimates_precision.png){width="100%"}
-
-::: {style="font-size: 80%;"}
-*Source:* [Statistics by Jim](https://statisticsbyjim.com/regression/gauss-markov-theorem-ols-blue/)
-
-:::
-
---->
-
-## The OLS regression equation {.scrollable}
-
-The following equation represents the mathematical relationship between an independent variable and a dependent variable. 
-![](includes/reg_eq.png){width="80%"}
-
-The $\beta_1$ coefficient:
-
-- Acts as the "weight" that the independent variable has in predicting the dependent variable.
-
-- Tells you how much the dependent variable is expected to increase (or decrease) when the independent variable increases by one unit.
-
-The $\beta_0$ coefficient:
-
-- This is our intercept term.
-
-- It is the value of the dependent variable when all the independent variables are zero.
-
-- It represents the expected value of the outcome you're interested in predicting when all of your predictor variables are zero.
-
-::: {.notes}
-Beta 1: If you're looking at the relationship between hours studied (independent variable) and exam score (dependent variable), the coefficient of the hours studied tells you how many points you'd expect the exam score to increase for every additional hour studied. If the coefficient is 2, it means that for each additional hour studied, the exam score is expected to increase by 2 points, holding all else constant.
-
-The coefficient essentially acts as a weight that quantifies the impact of one unit change in the independent variable on the dependent variable.
-
-Beta 0: In the same study examining the relationship between hours studied and test scores, the intercept would indicate the predicted test score for a student who did not study at all (zero hours). If the intercept is 50, it suggests that a student is expected to score 50 on the test without studying, assuming the model holds true and all other factors are constant.
-:::
-
-<!---
-## OLS Estimation {.scrollable}
-
-**Problem:** 
-
-We need to estimate $\beta_0$ and $\beta_1$ using observed values of $Y_i$ and $X_i$
-
-**Solution:** 
-
-$$
-\widehat{\beta}_0 = \bar{Y} - \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}\cdot \bar{X}
-$$
-
-$$
-\widehat{\beta}_1 = \frac{\sum_{i=1}^n\left(Y_i-\bar{Y}\right)\left(X_i-\bar{X}\right)}{\sum_{i=1}^n\left( X_i-\bar{X} \right)^2}
-$$
---->
-
-## Interpretting Tableau regression output
-
-![](includes/carrot_trend_desc.png){width="100%"}
-
-## Q: What is the dependent ("Y") variable?
-
-![](includes/tableau_reg.png){width="100%"}
-
-
-A. `months_since_crisis`
-
-B. `0.0728323`
-
-C. `Avg. Carrot price`
-
-D. `189.513`
-
-## Q: What is the independent ("X") variable?
-
-![](includes/tableau_reg.png){width="100%"}
-
-A. `months_since_crisis`
-
-B. `0.0728323`
-
-C. `Avg. Carrot price`
-
-D. `189.513`
-
-
-## Q: What is our estimate of $\beta_0$?
-
-![](includes/tableau_reg.png){width="100%"}
-
-
-A. `months_since_crisis`
-
-B. `0.0728323`
-
-C. `Avg. Carrot price`
-
-D. `189.513`
-
-## Q: What is our estimate of $\beta_1$?
-
-![](includes/tableau_reg.png){width="100%"}
-
-A. `months_since_crisis`
-
-B. `0.0728323`
-
-C. `Avg. Carrot price`
-
-D. `189.513`
-
-## Discussion: Interpretting Tableau output
-
-![](includes/tableau_reg.png){width="100%"}
-
-$$
-Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
-$$
-
-What is does $\beta_0$ represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?
-
-## Discussion: Interpretting Tableau output
-
-![](includes/tableau_reg.png){width="100%"}
-
-$$
-Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i
-$$
-
-What is does $\beta_1$ represent? How can we interpret it? What does it mean for how the trend line will appear in our visualization?
-
-
-## Interpretting Tableau output: What is $R^2$? {.scrollable}
-
-- A statistical measure of how well the model "fits" the data.
-
-- It tells us how much variation of the $Y$ variable is explained by the $X$ variable(s)
-
-- Higher $R^2$ =  better fit; $R^2$ = 1 $\Rightarrow$ all variation is explained. [(More info)](https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/statistics/regression-and-correlation/coefficient-of-determination-r-squared.html)
-![](includes/tableau_reg.png){width="100%"}
-Why is this important?
-
-- If you are trying to predict carrot prices based on the number of months since the financial crisis, the $R^2$ will tell us how well our predictions match up with the actual prices.
-
-- If the $R^2$ is 2%, it means that 2% of the reasons why carrot prices change can be figured out just by looking at how many months have passed since the financial crisis. 
-
-::: {.notes}
-A low $R^2$ means there's a lot happening with the prices that our model (based on months elapsed alone) can't capture. The higher $R^2$, the more it explains the variation.
-:::
-
-<!---
-## 
-
-![](includes/r_sq.png){width="100%"}
---->
-
-## Regression analysis, applied {.scrollable}
-
-We use can use linear regression, along with our data, to answer:
-
-1.  Are carrot prices, on average, increasing or decreasing?
-
-    - Increasing (slightly)
-
-2.  **How much of the observed variation in carrot prices can be explained by a simple trend line?**
-
-    - **Not much!**
-
-3.  What is the most reasonable prediction of carrot prices 250 months after the financial crisis?
-
-## Interpretting output: What is P-value? {.scrollable}
-
-- Tableau's default P-value is a measure of the significance for slope parameter $\beta_1$
-
-- A p-value measures how surprising your data is under the assumption that there is no effect or no relationship. 
-
-- Smaller p-value = better 
-
-- A p-value of 0.05 or less is often considered statistically significant $\Rightarrow$ statistically significantly different from 0. [(More info)](https://www.w3schools.com/datascience/ds_linear_regression_pvalue.asp)
-![](includes/tableau_reg.png){width="100%"}
-
-- In this example, a p-value of 0.02 means that there is a 2% chance of observing these data simply by chance. We have strong evidence *against* the assumption that there is no relationship.
-
-## Interpretting: What is P-value?
-
-Note that clicking "describe trend line" will also give you a p-value for the intercept parameter.
-
-![](includes/tableau_describe.png){width="100%"}
-
-
-## Q: How well does the model fit the data?
-
-![](includes/exercise.png){width="100%"}
-
-
-A. Extremely well
-
-B. Decent
-
-C. Not well
-
-## Q: How confident are you that the estimated slope is different from zero?
-
-![](includes/exercise.png){width="100%"}
-
-
-A. Very
-
-B. Somewhat
-
-C. Not at all
-
-## Using OLS regressions to forecast
-
-::: {style="text-align: center"}
-![](includes/forecast.jpeg){width="75%"}
-
-::: 
-
-## Using OLS regressions to forecast
-
-**How?**
-
-- Continue/extend your trend beyond your time series
-
-- Tableau and other programs can do this for you automatically
-
-- You can also do this manually by plugging in values of your $X$ variable(s)...
-
-## Using OLS regressions to forecast
-
-**What is the most reasonable prediction of carrot prices 250 months after the financial crisis?**
-
-![](includes/tableau_reg.png){width="100%"}
-
-$$
-\hat{Y} = 189.513 + 0.0728323*(250) = 207.721
-$$
-
-
-##
-::: {style="text-align: center"}
-![](includes/linear_forecast.png){width="75%"}
-
-::: 
-
-## Regression analysis, applied {.scrollable}
-
-How could we use these data to answer:
-
-1.  Are carrot prices, on average, increasing or decreasing?
-
-    - Increasing (slightly)
-
-2.  How much of the observed variation in carrot prices can be explained by a simple trend line?
-
-    - Not much!
-
-3.  **What is the most reasonable prediction of carrot prices 250 months after the financial crisis?**
-
-    - **BEST estimate: 207**
-
-<!---
-## Considerations when using OLS to forecast
-
-1. Is your relationship linear?
-
-## 
-::: {style="text-align: center"}
-![](includes/nonlinear_trend.webp){width="80%"}
-
-::: 
-
-## Considerations when using OLS to forecast
-
-1. Is your relationship linear?
-
-    - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
-
-2. What time period should you use to estimate the trend?
-
-## 
-::: {style="text-align: center"}
-![](includes/carrot_longtrend.png){width="70%"}
-
-::: 
---->
-<!---
-## Considerations when using OLS to forecast
-
-1. Is your relationship linear?
-
-  - Consider including a non-linear transformation of your X variable, e.g., $Y_i = \beta_0 +\beta_1 X_i +\beta_2 X_i^2 +\varepsilon_i$
-
-2. What time period should you use to estimate the trend?
-
-  - Choose a window of time relevant to the time you are predicting
-  
-  - Long run trends are slow moving so longer time window
-  
-  - Short run trends might vary by season
-
-<!--     - Test for structural breaks -->
-
-<!--     - Decide how to account for structural breaks -->
-
-<!--     - E.g., Are structural breaks regularly occuring? (perhaps prices jump every 20 years) -->
-
-## Cautionary note 
-
-- We will teach you enough to be dangerous.
-
-- We are introducing you to the tip of the analytical iceberg.  Learn more before you put this into practice.
-
-- Incorrect analysis can lead to worse conclusions than no analysis.
-
-::: {.incremental}
-
-- Be wary of causal conclusions!
-
-:::
-
-<!---
-## The "effect" of education on income?
-
-::: {style="text-align: center"}
-![](includes/income_educ.png){width="60%"}
-
-:::
-
---->
-
-# 
-::: {.r-fit-text }
-CORRELATION $\neq$ CAUSATION
-
-:::
-
-
+**Next:** Implement decomposition in this week's lab!
 
 ## REMINDER: Project 1
 
-Groups of 2
+Groups of 2 (Sign up for your Project 1 group on Canvas)
 
-Choose an ag biz or enre management question to answer with time series data
+Choose an ag biz or enre management question to answer with time series
+data
 
 Collect time series data
 
-Analyze trends 
+Analyze trends
 
-Generate a forecast 
+Generate a forecast
 
 Present results in a recorded video

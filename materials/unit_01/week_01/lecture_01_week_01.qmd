@@ -139,9 +139,7 @@ Decomposition statistically deconstructs a time series into several components:
 
 2. trend
 
-3. cyclical
-
-4. residual or "noise"
+3. residual or "noise"
 
 [Hyndman & Athanasopoulos (2021)](https://otexts.com/fpp3/decomposition.html)
 
