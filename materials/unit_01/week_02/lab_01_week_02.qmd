@@ -56,6 +56,7 @@ library(readr)
 library(lubridate)
 library(forecast)
 
+# Retrieve time series data
 carrot <- tq_get(c("WPU01130212"),
                  get = "economic.data",
                  from="2007-08-01")
@@ -97,6 +98,8 @@ To convert the `carrot` dataset into a time series object, run the following com
 
 ```{r}
 #| eval: false
+
+# Convert to time series object
 carrot_ts <- ts(carrot$price,
                 start=c(2007,8),
                 frequency = 12)
@@ -120,7 +123,7 @@ decomposed_ts <- decompose(ts_object, type = "additive")
 
 - `ts_object` $rightarrow$ A time series object created using `ts()`.
 - `type` $rightarrow$ Specifies whether the decomposition should be:
-  - **"additive"** if seasonal variations remain constant over time.
+  - **"additive"** if seasonal variations remain constant over time (the default if not specified).
   - **"multiplicative"** if seasonal variations scale with the trend level.
 - `decomposed_ts` $rightarrow$ The resulting decomposed time series object containing trend, seasonal, and residual components.
 :::
@@ -131,10 +134,42 @@ To decompose the `carrot_ts` time series object, run the following command:
 
 ```{r}
 #| eval: false
+
+# Perform time series decomposition
 carrot_decomp <- decompose(carrot_ts)
 ```
 
 This will create a new object called `carrot_decomp` that contains the decomposed components of the `carrot_ts` time series object.
+
+::: {.callout-note title="Creating a Seasonally Adjusted Price in R"}
+After using the `decompose()` function, you can extract the seasonal component and subtract it from the original price series to obtain the seasonally adjusted price.
+
+```{r}
+#| eval: false
+
+# Compute seasonally adjusted price
+carrot_sa_price <- carrot_ts - carrot_decomp$seasonal
+
+# Convert to a tibble for easier handling
+carrot_decomp_sa <- tibble(
+  measure_date = carrot$date,
+  price = carrot$price,
+  trend = carrot_decomp$trend,
+  seasonal = carrot_decomp$seasonal,
+  residual = carrot_decomp$random,
+  sa_price = carrot_sa_price # Seasonally adjusted price
+  ) %>%
+  drop_na()
+```
+
+**Why Do We Use Seasonally Adjusted Prices?**
+
+- Removes regular seasonal patterns to better observe long-term trends.
+- Helps in forecasting by isolating the trend and residual components.
+- Useful for economic and business analysis, where seasonal cycles might mask underlying changes.
+
+Now, the `sa_price` column represents the seasonally adjusted price, which can be visualized in Tableau or used in further analysis.
+:::
 
 ### Step 4: Examine the results of the decomposition
 
@@ -446,6 +481,20 @@ carrot_ts <- ts(carrot$price,
 # Decompose the time series
 carrot_decomp <- decompose(carrot_ts)
 
+# Compute seasonally adjusted price
+carrot_sa_price <- carrot_ts - carrot_decomp$seasonal
+
+# Convert to a tibble for easier handling
+carrot_decomp_sa <- tibble(
+  measure_date = carrot$date,
+  price = carrot$price,
+  trend = carrot_decomp$trend,
+  seasonal = carrot_decomp$seasonal,
+  residual = carrot_decomp$random,
+  sa_price = carrot_sa_price # Seasonally adjusted price
+  ) %>%
+  drop_na()
+
 # Plot decomposed components
 plot(carrot_decomp$trend)
 plot(carrot_decomp$seasonal)
@@ -512,13 +561,99 @@ write_csv(final_out, "carrot_forecast.csv")
 ```
 :::
 
+
+# Tableau
+
+Now we will use Tableau to visualize the **forecasted time series** and its **decomposed components** from **R** using `carrot_forecast.csv`. 
+
+## Step 1: Connect Your Data in Tableau
+
+1. Open **Tableau** and connect to the **CSV file** you exported from R (`carrot_forecast.csv`).  
+   - This file contains:
+     - **Observed carrot prices** (`price`)
+     - **Forecasted values** (`forecast`)
+     - **Three decomposition components** (`trend`, `seasonality`, `random`)
+
+2. Make sure the `measure_date` field is correctly formatted as a **Date** in Tableau.
+   - If necessary, change the **data type** of `measure_date` to **Date**.
+
+3. If needed, **filter** the `measure_date` field so that all worksheets begin at the relevant **start date** for your analysis.
+
+## Step 2: Visualizing Time Series Decomposition
+
+1. **Plot the raw price data** (`price` column) as a **line chart**.  
+2. **Add the trend component** (`trend` column) to a new **pane below** the raw price data.  
+3. **Show the seasonality component** (`seasonal` column) in another **pane below** the trend.  
+4. **Display the residuals** (`random` column) in a final **pane below** the seasonality.  
+5. Consider **overlaying** the **trend line** onto the raw data for better visualization.  
+6. **Experiment with Tableau's built-in smoothing**:  
+   - Convert the raw price data to a **moving average** using **Quick Table Calculation**.  
+   - Compare Tableau's moving average to the one calculated in R.  
+   - **Discussion:** Why do they differ?  
+
+## Step 3: Forecasting in Tableau
+
+1. **Use the observed price data (`price`)** to create a new forecast in Tableau.  
+   - Select an **additive trend line** and **additive seasonality**.  
+   - Ensure that forecasted values from R (`forecast` = TRUE) are **filtered out** when generating the Tableau forecast.  
+
+2. **Compare Tableau's forecast with R's forecast**:  
+   - Create a **new visualization** that displays:
+     - **The forecast generated in R** (`forecast` = TRUE)
+     - **The forecast generated in Tableau**
+   - Combine both forecasts into a **dashboard**.  
+
+3. **Add a text box** to explain forecast differences:  
+   - Why do the R and Tableau forecasts differ?  
+   - Which model appears more accurate?  
+   - How does seasonality impact the predictions?  
+
+4. **Hide unnecessary worksheets**:  
+   - Right-click the worksheet tab → Select `Hide`.  
+
+## Step 4: Analyzing Decomposed Time Series Components in Tableau
+
+1. Create a **new worksheet** that displays the three decomposition components:
+   - **Trend** (`trend` column)  
+   - **Seasonality** (`seasonal` column)  
+   - **Residuals** (`random` column)  
+
+2. **Add a caption** describing key insights:
+   - What are the **overall trends** in the data?  
+   - Which seasons have **higher or lower prices**?  
+   - How much variation remains **unexplained** after removing trend and seasonality?  
+
+## Step 5: Identifying Seasonal Trends 
+
+1. **Create a dashboard** to analyze **seasonal trends**.
+   - Compare **price patterns by month vs. quarter**.  
+   - Use **any visualization type** that effectively highlights seasonal variations (e.g., line charts, bar charts, heatmaps).  
+
+2. **Add a text box** with key takeaways:
+   - Are trends more apparent when comparing **months vs. quarters**?  
+   - Are there **notable differences** in annual trends within a given month or quarter?  
+   - Do these trends align with the **seasonal decomposition** from R?  
+
+## Final Step: Publish to Tableau Public 
+
+1. **Format your workbook for clarity**:  
+   - Add **color**, **titles**, and **labels** to improve readability.  
+   - Make sure that all charts effectively communicate key insights.  
+
+2. **Publish your workbook to Tableau Public**.  
+   - Your workbook should include:  
+     - **Two dashboards** (Forecasting & Seasonal Trends)  
+     - **One worksheet** (Time Series Decomposition from R)  
+   - Submit the **link to your Tableau Public workbook** as part of your assignment.  
+
+<!--
 # Tableau
 
 We will use Tableau to visualize your R forecasts.
 
 ## Visualizing R Forecasts in Tableau
 
-First, let’s visualize our decomposition:
+First, let's visualize our decomposition:
 
 1. Connect to the carrot price forecast data you exported in R. To keep everything in the same workbook, create a connection between these data and your original carrot price data (using the Date) variable
 
@@ -532,7 +667,9 @@ First, let’s visualize our decomposition:
 
 6. You can also play with combining these figures as you see appropriate (e.g., I like to look at the trend line in the same pane as the actual data)
 
-7. As an aside - let’s change the raw price data to a “moving average” using Tableau’s quick table calculation. Why is this moving average different from the one you calculated in R?
+7. As an aside - let's change the raw price data to a “moving average” using Tableau's quick table calculation. Why is this moving average different from the one you calculated in R?
+-->
+
 
 <!-- ## Tableau’s Forecasting -->
 

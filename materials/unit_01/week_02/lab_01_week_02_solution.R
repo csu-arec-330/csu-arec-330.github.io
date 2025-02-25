@@ -24,6 +24,20 @@ carrot_ts <- ts(carrot$price,
 # Decompose the time series
 carrot_decomp <- decompose(carrot_ts)
 
+# Compute seasonally adjusted price
+carrot_sa_price <- carrot_ts - carrot_decomp$seasonal
+
+# Convert to a tibble for easier handling
+carrot_decomp_sa <- tibble(
+  measure_date = carrot$date,
+  price = carrot$price,
+  trend = carrot_decomp$trend,
+  seasonal = carrot_decomp$seasonal,
+  residual = carrot_decomp$random,
+  sa_price = carrot_sa_price # Seasonally adjusted price
+  ) %>%
+  drop_na()
+
 # Plot decomposed components
 plot(carrot_decomp$trend)
 plot(carrot_decomp$seasonal)

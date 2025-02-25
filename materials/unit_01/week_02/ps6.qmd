@@ -17,11 +17,11 @@ Treat this assignment as another step of your project.
 
 1. Complete a time series decomposition using the time series that you collect for your project.
 
-2. Generate a "[seasonally-adjusted](https://otexts.com/fpp3/components.html#seasonally-adjusted-data)" time series of your observed data. Make note of this variable since you will need to export it with your other data.
+2. Generate a "[seasonally-adjusted](https://otexts.com/fpp3/components.html#seasonally-adjusted-data)" time series of your observed data. Call this object `sa_price.` Make note of this variable since you will need to export it with your other data.
 
 3. Use R to create a 3 year forecast of your chosen time series. Follow the steps we went through in lab.  Create a new variable that indicates the new data you have created is a forecast.
 
-4. Create a dataframe with the following variables: `measure_date`, `price`, `trend`, `seasonal`, `residual`, `sa_price`, `forecast` (indicator of forecasted data). 
+4. Create a dataframe with the following variables: `measure_date`, `price`, `trend`, `seasonal`, `randome``, `sa_price`, `forecast` (indicator of forecasted data). 
 
 
 ## Part 2: Tableau
