@@ -5,6 +5,14 @@ format:
     theme: zephyr
 ---
 
+## Before you begin
+
+Review the [Project 01 instructions](https://https//csu-arec-330.github.io/materials/unit_01/project/project_1_instructions.html). 
+
+Treat this assignment as another step of your project. 
+
+**You may work on this assignment with your partner. However, each person will submit the assignment individually. If one person builds the visualizations in Tableau, use their embed code on your Google site.**
+
 ## Part 1: R
 
 1. Complete a time series decomposition using the time series that you collect for your project.
@@ -18,17 +26,46 @@ format:
 
 ## Part 2: Tableau
 
-1.  In Tableau, connect to the file you exported from R with your original price time series data, the forecast, and the (three) components of your decomposition. If needed for your analysis, filter your data on the `Date` field so that all worksheets in your workbook start at the date you want to begin your analysis. 
+1. Open Tableau and connect to the **CSV file** you exported from R. This file should include:
+  - Your original price time series data for all three series
+  - The forecasted values
+  - The three components of your decomposition (trend, seasonality, and residuals)
+- If necessary, filter the `Date` field so that all worksheets in your workbook begin at the relevant start date for your analysis. 
 
-2. Use observed prices to create a forecast in Tableau that uses an additive trend line and additive seasonality. Recall that you will need to filter these data on your indicator variable for whether the price values are forecasted or not (in lab we named this variable `Forecast`)
+2. Use **observed price data** for each of your three time series to create **forecasts** in Tableau.
+- Select an **additive trend line** and **additive seasonality**.
+- Recall that you will need to **filter out** the forecasted values from your observed data. In the lab, we used an indicator variable (`Forecast`) to distinguish between observed and forecasted values.
 
-3.  Create a new visualization that shows the forecasts you created in R. Combine this and the Tableau forecast into a data dashboard. Add a text box to your dashboard and explain any differences between the forecasted estimates and explain why you think the forecasts are different. Once you have created this dashboard you can `hide` your worksheets you used to create this dashboard by right clicking on them and selecting `Hide`. This will clean up your workbook.
+3. Create a **new visualization** that shows:
+  - The **forecast you created in Tableau** for each time series
+  - The **forecast you generated in R** for each time series
+- Combine these forecasts into a **dashboard**.
+- Add a **text box** to explain any differences between the two forecasts and discuss why they might differ.
+- Once completed, **hide** any worksheets used to create this dashboard:
+  - Right-click on the worksheet tab → Select `Hide`
+  - This helps keep your workbook organized.
 
-4. Next create a new worksheet that shows each of the components of your forecast decomposition (the one you did in R). Add a discussion of each of these components as a caption in your worksheet -- what are the overall trends in the data? Which seasons have higher or lower prices? How much variation is unexplained by the trend and seasonality components?
+4. Create a **new worksheet** displaying the three components of your decomposition from R for each of your time series:
+  - **Trend** (long-term direction of prices)
+  - **Seasonality** (repeating patterns within a year)
+  - **Residual** (unexplained variation)
+- **Add a caption** to describe:
+  - Overall trends in the data
+  - Which seasons have higher or lower prices
+  - How much variation remains unexplained by trend and seasonality
+  
+5.  Create a **dashboard** that shows seasonal trends in your data **by month and by quarter** for all three time series.
+- Use **any visualization type** that effectively represents these seasonal patterns.
+- Add a **text box** with key takeaways, answering:
+  - Are trends more apparent when comparing **months vs. quarters**?
+  - Are there **notable differences** in the annual trends within a given month or quarter?
+  - Do these trends align with the **seasonal decomposition** from your R analysis?
 
-5.  Finally, create a dashboard that shows seasonal trends in your data by month and by quarter. You can use any visualization(s) of your choosing in this dashboard. Add a text box that describes key take-aways from your analysis and that answers the following questions: Are there more apparent trends in your data when comparing across months or across quarters? Are there noteable differences in the annual trends within a given month or quarter? Do these trends align with the seasonal decomposition you found in your R analysis?
-
-6.  Once you have created your dashboard you can `hide` your worksheets you used to create the dashboards by right clicking on them and selecting `Hide`. This will clean up your workbook. The final workbook you publish should include your two data dashboards and your single worksheet with the R decomposition.
+6.  Once you have created your dashboard, finalize your workbook.
+- **Hide unnecessary worksheets** (Right-click → `Hide`).
+- Your final **Tableau Public workbook** should contain:
+  1. **Two dashboards** (Forecast Comparison + Seasonal Trends)
+  2. **Three worksheets** (R Decomposition Components for each time series)
 
 7. Format your visualizations by adding color, useful titles, appropriate marker labels, text annotations, etc. that help your audience understand your analysis.
 
@@ -37,4 +74,33 @@ format:
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Problem Set 6`. This webpage should include your responses to both Parts 1 and Parts 2 of the problem set. Part 1 should contain an R script with the code used to answer the questions. Part 2 should include an embedded version of your Tableau dashboards and worksheets (you should be able to toggle between dashboards and worksheets by using tabs in this embedded view, but email Ali if you need help getting this to work). Submit the link to your google site webpage in Canvas.
+1. **Create a new webpage on your Google site** titled `Problem Set 6`.
+2. **Include the following:**
+   - **Part 1**: An R script displaying the code used for data acquisition and modification.
+   - **Part 2**: Your Tableau dashboards and worksheets (you should be able to toggle between dashboards and worksheets by using tabs in this embedded view).
+3. **Publish the page and submit the link** to your Google site webpage in Canvas.
+
+
+## Reminder: How to Use "Compile Report" Option in R
+
+*Given the truncation issues with generating log files with the "sink-source-sink" process, here is an alternative solution. Please use this method going forward.*
+
+{{< video https://youtu.be/B2AchbhnFTo aspect-ratio="16x9" >}}
+
+- Under the File menu, select **Compile Report...**
+- The default under "Report output format" is HTML. 
+- Select **Compile**
+- Along the tool bar, select **Open in Browser**
+- Hover your cursor over white space and **right click**.
+- Select **View page source**.
+- A new screen will appear with HTML code. (Don't worry, this might look like gibberish, but it's not!)
+- Using your keyboard, click **`CTRL`+`A`**. This will highlight all of the HTML code.
+- While the HTML code is highlighted, **right click** and select **Copy**.
+- Go to your Google website. 
+- Similar to as you would embed your Tableau visualization, select **Embed** under Insert.
+- Then, select **Embed code**.
+- Paste your embed code from your clipboard by either right-clicking and selecting **Paste** or `CTRL`+`V`.
+- Select **Next**.
+- **Resize** the image of your R script by expanding the window to fit the entire script.  
+
+Following these steps will display your entire code and output without truncation. 
