@@ -1,4 +1,4 @@
-# This is the script for lab 05.
+# This is the script for lab 06.
 
 setwd("C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_01/week_02")
 
