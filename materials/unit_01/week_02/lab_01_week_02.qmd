@@ -65,7 +65,7 @@ library(forecast)
 ```{r}
 #| eval: false
 
-# This is the script for lab 05.
+# This is the script for lab 06.
 
 setwd("Set your working directory")
 
