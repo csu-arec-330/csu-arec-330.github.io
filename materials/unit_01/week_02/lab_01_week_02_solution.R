@@ -1,5 +1,7 @@
 # This is the script for lab 05.
 
+setwd("C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_01/week_02")
+
 # Comment out the following line if you have already installed the forecast package.
 install.packages("forecast")
 
@@ -8,6 +10,7 @@ library(tidyquant)
 library(dplyr)
 library(tidyr)
 library(readr)
+library(ggplot2)
 library(lubridate)
 library(forecast)
 
@@ -34,9 +37,20 @@ carrot_decomp_sa <- tibble(
   trend = carrot_decomp$trend,
   seasonal = carrot_decomp$seasonal,
   residual = carrot_decomp$random,
-  sa_price = carrot_sa_price # Seasonally adjusted price
-  ) %>%
+  sa_price = as.numeric(carrot_sa_price) # Seasonally adjusted price converted to numeric for plotting
+) %>%
   drop_na()
+
+# Plot original prices vs. seasonally adjusted prices
+sa_plot <- ggplot(carrot_decomp_sa, aes(x = measure_date)) +
+  geom_line(aes(y = price, color = "Original Price"), size = 1) +
+  geom_line(aes(y = sa_price, color = "Seasonally Adjusted Price"), linewidth = 1, linetype = "dashed") +
+  labs(title = "Carrot Prices vs. Seasonally Adjusted Prices",
+       x = "Date", y = "Price",
+       color = "Legend") +
+  theme_minimal()
+
+print(sa_plot)
 
 # Plot decomposed components
 plot(carrot_decomp$trend)
@@ -76,28 +90,35 @@ carrot_forecast <- carrot_trend_forecast$mean +
   carrot_seasonal_forecast$mean + 
   carrot_residuals_forecast$mean
 
+View(carrot_forecast)
+
 carrot_forecast_upper <- carrot_trend_forecast$upper + 
   carrot_seasonal_forecast$upper + 
   carrot_residuals_forecast$upper
+
+View(carrot_forecast_upper)
 
 carrot_forecast_lower <- carrot_trend_forecast$lower + 
   carrot_seasonal_forecast$lower + 
   carrot_residuals_forecast$lower
 
-# Convert forecast into a dataframe
-carrot_forecast_df <- tibble(
-  price = carrot_forecast,
-  upper = carrot_forecast_upper[,1],
-  lower = carrot_forecast_lower[,1]
-  ) %>%
-  mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.)))
+View(carrot_forecast_lower)
 
-# Append forecasted data to the existing decomposition dataset
+# Convert forecasted values into a tibble with corresponding dates
+carrot_forecast_df <- tibble( # Create a tibble (a modern dataframe in R)
+  price = carrot_forecast, # Stores the forecasted price values
+  upper = carrot_forecast_upper[,1], # Extracts the upper confidence interval for the forecast
+  lower = carrot_forecast_lower[,1] # Extracts the lower confidence interval for the forecast
+  ) %>%
+  mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.))) # Add a variable called measure_date
+
+# Keep only forecasted data that occurs after the last observed date
 carrot_forecast_df <- carrot_forecast_df %>%
   filter(measure_date > max(carrot_decomp_out$measure_date)) %>%
-  mutate(forecast = TRUE)
+  mutate(forecast = TRUE) # Mark these as forecasted values
 
-final_out <- bind_rows(carrot_decomp_out, carrot_forecast_df)
+# Append forecasted data to the original dataset
+final_out <- bind_rows(carrot_decomp_out,carrot_forecast_df)
 
-# Export data for Tableau
-write_csv(final_out, "carrot_forecast.csv")
+# Save the final dataset as a CSV file
+write_csv(final_out,"carrot_forecast.csv")

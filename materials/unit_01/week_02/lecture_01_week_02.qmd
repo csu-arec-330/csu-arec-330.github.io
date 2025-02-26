@@ -241,10 +241,10 @@ In this week's lab, we will use R's `decompose()` function to break down a time 
 
 ## Discussion Questions (Partner Activity):
 
-1. In pairs, choose a time series from your group project.
-2. Think about what question you want to answer with your data.
-  - Which time series dataset would be most useful for your group's research question?
+In pairs, think about what question you want to answer with time series decomposition and forecasting.
+  - Which time series datasets would be most useful for your group's research question?
   - How would time series decomposition help you analyze the dataset to answer your question?
+  - How would forecasting provide data-driven insight for the decision-maker?
 
 When choosing your time series data for the project, consider the type of **decision-makers** who would benefit from your analysis. 
 

@@ -7,7 +7,7 @@ format:
 
 ## Before you begin
 
-Review the [Project 01 instructions](https://https//csu-arec-330.github.io/materials/unit_01/project/project_1_instructions.html). 
+Review the [Project 01 instructions](https://csu-arec-330.github.io/materials/unit_01/project/project_1_instructions.html). 
 
 Treat this assignment as another step of your project. 
 

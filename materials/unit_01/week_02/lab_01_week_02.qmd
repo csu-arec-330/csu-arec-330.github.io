@@ -38,23 +38,52 @@ This Lab Contributes to Course Objectives: 1, 2, 3, 4, 7, 8
 
 ### Step 1: Load your data
 
-First, load your time series data into R and set up your script (description, working directory, load packages).
+First, set up your script (description, working directory, load packages).
 
 ```{r}
-#| eval: false
+#| eval: true
+#| include: false
 
-# This lab...
+# This is the script for lab 05.
 
-setwd("Write the path to your working directory for arec330/lab06")
+setwd("C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_01/week_02")
 
-install.packages("forecast")
+# Comment out the following line if you have already installed the forecast package.
+# install.packages("forecast")
 
+# Load necessary libraries
 library(tidyquant)
 library(dplyr)
 library(tidyr)
 library(readr)
+library(ggplot2)
 library(lubridate)
 library(forecast)
+```
+
+
+```{r}
+#| eval: false
+
+# This is the script for lab 05.
+
+setwd("Set your working directory")
+
+# Comment out the following line if you have already installed the forecast package.
+install.packages("forecast")
+
+# Load necessary libraries
+library(tidyquant)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+library(lubridate)
+library(forecast)
+```
+Then, load your time series data into R.
+```{r}
+#| eval: true
 
 # Retrieve time series data
 carrot <- tq_get(c("WPU01130212"),
@@ -72,6 +101,8 @@ The `ts()` function is used to create time series objects in R, which allow for 
 
 ```{r}
 #| eval: false
+
+# Convert data into a time series object
 ts_object <- ts(data, 
                 start = c(year, period), 
                 frequency = freq)
@@ -97,7 +128,7 @@ In the case of the carrots dataset, the frequency is 12 (since there are 12 obse
 To convert the `carrot` dataset into a time series object, run the following command:
 
 ```{r}
-#| eval: false
+#| eval: true
 
 # Convert to time series object
 carrot_ts <- ts(carrot$price,
@@ -133,7 +164,7 @@ The `decompose()` function takes one argument: `x`, which is the time series obj
 To decompose the `carrot_ts` time series object, run the following command:
 
 ```{r}
-#| eval: false
+#| eval: true
 
 # Perform time series decomposition
 carrot_decomp <- decompose(carrot_ts)
@@ -142,10 +173,12 @@ carrot_decomp <- decompose(carrot_ts)
 This will create a new object called `carrot_decomp` that contains the decomposed components of the `carrot_ts` time series object.
 
 ::: {.callout-note title="Creating a Seasonally Adjusted Price in R"}
-After using the `decompose()` function, you can extract the seasonal component and subtract it from the original price series to obtain the seasonally adjusted price.
+After using the `decompose()` function, you can extract the seasonal component and subtract it from the original price series to obtain the **seasonally adjusted price**.
+
+> Seasonally adjusted prices are prices that have had their seasonal component removed, allowing us to better observe underlying trends and long-term changes without regular fluctuations.
 
 ```{r}
-#| eval: false
+#| eval: true
 
 # Compute seasonally adjusted price
 carrot_sa_price <- carrot_ts - carrot_decomp$seasonal
@@ -157,9 +190,20 @@ carrot_decomp_sa <- tibble(
   trend = carrot_decomp$trend,
   seasonal = carrot_decomp$seasonal,
   residual = carrot_decomp$random,
-  sa_price = carrot_sa_price # Seasonally adjusted price
+  sa_price = as.numeric(carrot_sa_price) # Seasonally adjusted price converted to numeric for plotting
   ) %>%
   drop_na()
+
+# Plot original prices vs. seasonally adjusted prices
+sa_plot <- ggplot(carrot_decomp_sa, aes(x = measure_date)) +
+  geom_line(aes(y = price, color = "Original Price"), size = 1) +
+  geom_line(aes(y = sa_price, color = "Seasonally Adjusted Price"), linewidth = 1, linetype = "dashed") +
+  labs(title = "Carrot Prices vs. Seasonally Adjusted Prices",
+       x = "Date", y = "Price",
+       color = "Legend") +
+  theme_minimal()
+
+print(sa_plot)
 ```
 
 **Why Do We Use Seasonally Adjusted Prices?**
@@ -193,7 +237,7 @@ plot(carrot_decomp$random)
 
 This will create three separate plots that show the trend, seasonal, and random components of the time series data. You can use these plots to better understand the underlying patterns in your data.
 
-### Step 5: Storing the Decomposed Data in a DataFrame
+### Step 5: Store the Decomposed Data in a Data Frame
 
 To work with the decomposed time series components in further analysis or visualization, we need to store them in a structured dataframe. This allows us to manipulate, export, and integrate the data into other tools like Tableau.
 
@@ -277,6 +321,7 @@ clean_data <- na.omit(original_data)
 
 ```{r}
 #| eval: false
+
 # Extract the trend, seasonal, and residual components
 carrot_trend <- na.omit(carrot_decomp$trend) # Extract trend component and remove NAs
 
@@ -368,15 +413,21 @@ carrot_forecast <- carrot_trend_forecast$mean +
                     carrot_seasonal_forecast$mean + 
                     carrot_residuals_forecast$mean
 
+View(carrot_forecast)
+
 # Compute upper bound for confidence interval
 carrot_forecast_upper <- carrot_trend_forecast$upper + 
                           carrot_seasonal_forecast$upper + 
                           carrot_residuals_forecast$upper
 
+View(carrot_forecast_upper)
+
 # Compute lower bound for confidence interval
 carrot_forecast_lower <- carrot_trend_forecast$lower + 
                           carrot_seasonal_forecast$lower + 
                           carrot_residuals_forecast$lower
+
+View(carrot_forecast_lower)
 ```
 
 At this point, `carrot_forecast` contains the predicted future values, while `carrot_forecast_upper` and `carrot_forecast_lower` provide confidence intervals around those predictions.
@@ -389,19 +440,38 @@ Since `forecast()` returns a special object, we need to convert the results into
 #| eval: false
 
 # Convert forecasted values into a tibble with corresponding dates
-carrot_forecast_df <- tibble(
-  price=carrot_forecast,
-  upper=carrot_forecast_upper[,1],
-  lower=carrot_forecast_lower[,1]
+carrot_forecast_df <- tibble( # Create a tibble (a modern dataframe in R)
+  price = carrot_forecast, # Stores the forecasted price values
+  upper = carrot_forecast_upper[,1], # Extracts the upper confidence interval for the forecast
+  lower = carrot_forecast_lower[,1] # Extracts the lower confidence interval for the forecast
   ) %>%
-  mutate(measure_date=seq(as_date("2023-08-01"), by = "months", length.out=nrow(.))) 
+  mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.))) # Add a variable called measure_date
+
 ```
 
-**Why Do We Convert to a Data Frame?**
+**What This Block of Code Does**
 
 - The forecasted values from `forecast()` are not in a standard tabular format, so we need to reshape them.
 - We assign a corresponding date (`measure_date`) to each forecasted value, ensuring alignment with the original time series.
 - The confidence intervals (`upper` and `lower`) allow us to quantify forecast uncertainty.
+
+::: {.callout-note title="Why is `[,1]` used in `carrot_forecast_upper[,1]` and `carrot_forecast_lower[,1]`?"}
+
+The `forecast()` function returns **confidence intervals as matrices**, with each column representing different confidence levels (e.g., 80%, 95%). The `[,1]` indexing extracts the **first column**, which typically corresponds to the **80% confidence interval**.
+
+#### Breakdown:
+- `forecast_object$upper` and `forecast_object$lower` are **matrices**, not vectors.
+- **First column (`[,1]`)** $\rightarrow$ Usually the **80% confidence interval**.
+- **Second column (`[,2]`)** $\rightarrow$ Typically the **95% confidence interval** (if available).
+
+#### Example:
+```{r}
+#| eval: false
+
+carrot_forecast_upper[,1]  # Extracts 80% confidence level upper bound
+carrot_forecast_lower[,1]  # Extracts 80% confidence level lower bound
+```
+:::
 
 At this stage, we have a clean forecast dataset that is ready to be appended to the existing observed data. The next step is to merge this with the original time series data and prepare it for visualization in Tableau.
 
@@ -455,6 +525,8 @@ This CSV file will contain:
 
 # This is the script for lab 05.
 
+setwd("Set your working directory")
+
 # Comment out the following line if you have already installed the forecast package.
 install.packages("forecast")
 
@@ -463,6 +535,7 @@ library(tidyquant)
 library(dplyr)
 library(tidyr)
 library(readr)
+library(ggplot2)
 library(lubridate)
 library(forecast)
 
@@ -475,8 +548,8 @@ carrot <- tq_get(c("WPU01130212"),
 
 # Convert data into a time series object
 carrot_ts <- ts(carrot$price,
-                frequency = 12,
-                start = c(2007, 8))
+                start = c(2007,8),
+                frequency = 12)
 
 # Decompose the time series
 carrot_decomp <- decompose(carrot_ts)
@@ -491,9 +564,20 @@ carrot_decomp_sa <- tibble(
   trend = carrot_decomp$trend,
   seasonal = carrot_decomp$seasonal,
   residual = carrot_decomp$random,
-  sa_price = carrot_sa_price # Seasonally adjusted price
-  ) %>%
+  sa_price = as.numeric(carrot_sa_price) # Seasonally adjusted price converted to numeric for plotting
+) %>%
   drop_na()
+
+# Plot original prices vs. seasonally adjusted prices
+sa_plot <- ggplot(carrot_decomp_sa, aes(x = measure_date)) +
+  geom_line(aes(y = price, color = "Original Price"), size = 1) +
+  geom_line(aes(y = sa_price, color = "Seasonally Adjusted Price"), linewidth = 1, linetype = "dashed") +
+  labs(title = "Carrot Prices vs. Seasonally Adjusted Prices",
+       x = "Date", y = "Price",
+       color = "Legend") +
+  theme_minimal()
+
+print(sa_plot)
 
 # Plot decomposed components
 plot(carrot_decomp$trend)
@@ -508,13 +592,15 @@ carrot_decomp_out <- carrot_decomp[1:4] %>%
          forecast = FALSE) %>%
   drop_na()
 
+# Part 2: Forecasting
+
 # Extract trend, seasonal, and residual components
 carrot_trend <- na.omit(carrot_decomp$trend)
+
 carrot_seasonal <- na.omit(carrot_decomp$seasonal)[7:(length(carrot_ts) - 6)] %>%
   ts(., start = c(2008, 2), frequency = 12)
-carrot_residuals <- na.omit(carrot_decomp$random)
 
-# Part 2: Forecasting
+carrot_residuals <- na.omit(carrot_decomp$random)
 
 # Forecast trend and seasonal components
 carrot_trend_forecast <- forecast(carrot_trend, level = 95, h = 60)
@@ -533,31 +619,38 @@ carrot_forecast <- carrot_trend_forecast$mean +
   carrot_seasonal_forecast$mean + 
   carrot_residuals_forecast$mean
 
+View(carrot_forecast)
+
 carrot_forecast_upper <- carrot_trend_forecast$upper + 
   carrot_seasonal_forecast$upper + 
   carrot_residuals_forecast$upper
+
+View(carrot_forecast_upper)
 
 carrot_forecast_lower <- carrot_trend_forecast$lower + 
   carrot_seasonal_forecast$lower + 
   carrot_residuals_forecast$lower
 
-# Convert forecast into a dataframe
-carrot_forecast_df <- tibble(
-  price = carrot_forecast,
-  upper = carrot_forecast_upper[,1],
-  lower = carrot_forecast_lower[,1]
-  ) %>%
-  mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.)))
+View(carrot_forecast_lower)
 
-# Append forecasted data to the existing decomposition dataset
+# Convert forecasted values into a tibble with corresponding dates
+carrot_forecast_df <- tibble( # Create a tibble (a modern dataframe in R)
+  price = carrot_forecast, # Stores the forecasted price values
+  upper = carrot_forecast_upper[,1], # Extracts the upper confidence interval for the forecast
+  lower = carrot_forecast_lower[,1] # Extracts the lower confidence interval for the forecast
+  ) %>%
+  mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.))) # Add a variable called measure_date
+
+# Keep only forecasted data that occurs after the last observed date
 carrot_forecast_df <- carrot_forecast_df %>%
   filter(measure_date > max(carrot_decomp_out$measure_date)) %>%
-  mutate(forecast = TRUE)
+  mutate(forecast = TRUE) # Mark these as forecasted values
 
-final_out <- bind_rows(carrot_decomp_out, carrot_forecast_df)
+# Append forecasted data to the original dataset
+final_out <- bind_rows(carrot_decomp_out,carrot_forecast_df)
 
-# Export data for Tableau
-write_csv(final_out, "carrot_forecast.csv")
+# Save the final dataset as a CSV file
+write_csv(final_out,"carrot_forecast.csv")
 ```
 :::
 
