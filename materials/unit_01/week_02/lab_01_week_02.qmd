@@ -681,94 +681,92 @@ If you are working with multiple time series data, **filter** the `measure_date`
 In **Sheet 1**:
 
 1. Plot the raw price data as a line chart. 
-  - Add `price` to the row shelf. Display as AVG(Price). 
-  - Add `measure_date` to the column shelf. Display `measure_date` as Measure > MONTH().
+   - Add `price` to the row shelf. Display as AVG(Price). 
+   - Add `measure_date` to the column shelf. Display `measure_date` as Measure > MONTH().
   
 2. Make sure forecasted values (`forecast` = TRUE) are **filtered out** when generating the line graph. 
-  - Drag `forecast` into the Filters card. Check the box next to True. Click OK. 
+   - Drag `forecast` to the Filters card. Check the box next to True. Click OK. 
   
 3. Add the trend, seasonal, and random components as new panes below the price line. 
-  - Add `trend` to the row shelf. Display as AVG(Trend). 
-  - Add `seasonal` to the row shelf. Display as AVG(Seasonal). 
-  - Add `random`` to the row shelf. Display as AVG(Random). 
+   - Add `trend` to the row shelf. Display as AVG(Trend). 
+   - Add `seasonal` to the row shelf. Display as AVG(Seasonal). 
+   - Add `random` to the row shelf. Display as AVG(Random). 
 
 4. Experiment with Tableau's built-in smoothing:  
    - Convert the raw price data to a **moving average** using **Quick Table Calculation**.  
-   - Compare Tableau's moving average to the one calculated in R.  
+   - Compare Tableau's moving average to the one calculated in R.
+   
+5. Add a caption answering the following questions:
+   - What are the **overall trends** in the data?  
+   - Which seasons have **higher or lower prices**?  
+   - How much variation remains **unexplained** after removing trend and seasonality?  
 
 ## Step 3: Forecasting in Tableau
 
 In **Sheet 2**:
 
 1. Create a new calculated field called `observed_price`.
-  - `IF [Forecast]=FALSE THEN [Price] ELSE NULL END`
+   - `IF [Forecast]=FALSE THEN [Price] ELSE NULL END`
   
-2. Create a new calculated field called `forecasted_price`.
-  - `IF [Forecast]=TRUE THEN [Price] ELSE NULL END`
-  
-3. Plot the both observed and forecasted prices as a line chart. 
-  - Add `measure_date` to the column shelf. Display `measure_date` as Measure > MONTH().
-  - Add `observed_price` to the row shelf. Display as AVG(observed_price). 
-  - Add `forecasted_price` to the row shelf. Display as AVG(forecasted_price). 
-  - Right click AVG(forecasted_price) and select **Dual Axis**.
+2. Plot the observed prices as a line chart. 
+   - Add `measure_date` to the column shelf. Display `measure_date` as Measure > MONTH().
+   - Add `observed_price` to the row shelf. Display as AVG(observed_price). 
+   - Drag `forecast` to the Filters card. Check the box next to True. Click OK. 
 
-4. Plot the raw price data as a line chart. 
-  - Add `observed_price` to the row shelf. Display as AVG(observed_price).
-  
-5. Use the second (stand-alone) observed price data (`observed_price`) to create a new forecast in Tableau.  
-  - Switch to the Analytics tab from the Data tab. In the Analytics tab, there is a Forecast option under the Model section.
-  - To add a forecast to this plot, hold the Forecast option and drag it on to the scatter plot (or visualization area). You will see that it gives us one option that we can add to our graph. 
-  - To change the forecast, right click on the confidence interval around the forecasted values. Select Forecast > Forecast Options...
-  - **What do you notice?**
+3. Create a forecast in Tableau.  
+   - Switch to the Analytics tab from the Data tab. In the Analytics tab, there is a Forecast option under the Model section.
+   - To add a forecast to this plot, hold the Forecast option and drag it on to the scatter plot (or visualization area). You will see that it gives us one option that we can add to our graph. 
+   - To change the forecast, right click on the confidence interval around the forecasted values. Select Forecast > Forecast Options...
+   - **What do you notice?**
 
-4. **Compare Tableau's forecast with R's forecast**:  
-   - Create a **new visualization** that displays:
-     - **The forecast generated in R** (`forecast` = TRUE)
-     - **The forecast generated in Tableau**
-   - Combine both forecasts into a **dashboard**.  
+## Step 4: Compare Tableau's forecast with R's forecast
 
-3. **Add a text box** to explain forecast differences:  
+In **Sheet 3**:
+
+1. Plot the raw price data as a line chart. 
+   - Add `price` to the row shelf. Display as AVG(Price). 
+   - Add `measure_date` to the column shelf. Display `measure_date` as Measure > MONTH().
+
+2. Drag `forecast` to the Color Marks Card.
+
+3. Plot the upper and lower bounds of the confidence interval of the forecasted values. 
+   - Add `upper` to the row shelf. Display as AVG(upper). 
+   - Right click `upper` and select Dual Axis.
+   - Hover over the secondary axis that corresponds with Avg. Upper. Right click it. Select Synchronize Axis.
+   - Drag `lower` to the secondary axis. You will need to reset the axis.
+   - Hover over the axis that corresponds with Avg. Upper. Right click it. Select Synchronize Axis.
+   - Now you will see all lines: observed prices, forecasted prices, the upper bound, the lower bound.
+
+4. Create a **new dashboard** that combines both forecasts:
+   - **The forecast generated in R** (`forecast` = TRUE)
+   - **The forecast generated in Tableau**
+
+5. Add a text box to explain forecast differences:  
    - Why do the R and Tableau forecasts differ?  
    - Which model appears more accurate?  
    - How does seasonality impact the predictions?  
 
-4. **Hide unnecessary worksheets**:  
+6. **Hide unnecessary worksheets**:  
    - Right-click the worksheet tab → Select `Hide`.  
-
-## Step 4: Analyzing Decomposed Time Series Components in Tableau
-
-1. Create a **new worksheet** that displays the three decomposition components:
-   - **Trend** (`trend` column)  
-   - **Seasonality** (`seasonal` column)  
-   - **Residuals** (`random` column)  
-
-2. **Add a caption** describing key insights:
-   - What are the **overall trends** in the data?  
-   - Which seasons have **higher or lower prices**?  
-   - How much variation remains **unexplained** after removing trend and seasonality?  
 
 ## Step 5: Identifying Seasonal Trends 
 
-1. **Create a dashboard** to analyze **seasonal trends**.
-   - Compare **price patterns by month vs. quarter**.  
-   - Use **any visualization type** that effectively highlights seasonal variations (e.g., line charts, bar charts, heatmaps).  
+1. Create a dashboard to analyze seasonal trends.
+   - Compare price patterns by **month** (as we did in Step 2) vs. **quarter**. Go through the same process as we did for Step 2, but display `measure_date` as Measure > QUARTER(). 
 
-2. **Add a text box** with key takeaways:
-   - Are trends more apparent when comparing **months vs. quarters**?  
-   - Are there **notable differences** in annual trends within a given month or quarter?  
-   - Do these trends align with the **seasonal decomposition** from R?  
+2. Add a text box describing important takeaways:
+   - Are trends more apparent when comparing months vs. quarters?  
+   - Are there **notable differences** in annual trends within a given month or quarter?
 
 ## Final Step: Publish to Tableau Public 
 
-1. **Format your workbook for clarity**:  
+1. Format your workbook following the guidelines for effective visualizations:  
    - Add **color**, **titles**, and **labels** to improve readability.  
-   - Make sure that all charts effectively communicate key insights.  
+   - Make sure that all charts effectively communicate your insights.  
 
-2. **Publish your workbook to Tableau Public**.  
-   - Your workbook should include:  
-     - **Two dashboards** (Forecasting & Seasonal Trends)  
-     - **One worksheet** (Time Series Decomposition from R)  
-   - Submit the **link to your Tableau Public workbook** as part of your assignment.  
+2. Publish your workbook to Tableau Public. Your workbook should include:  
+   - **One worksheet** (Step 2 - Time Series Decomposition from R)  
+   - **Two dashboards** (Step 3 - Forecasting & Step 4 - Seasonal Trends)  
 
 <!--
 # Tableau
