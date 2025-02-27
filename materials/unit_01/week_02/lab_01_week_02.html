@@ -845,45 +845,101 @@ Lab Script for Week 6: Time Series Decomposition and Forecasting
 <li><strong>Three decomposition components</strong> (<code>trend</code>, <code>seasonality</code>, <code>random</code>)</li>
 </ul></li>
 </ul></li>
-<li>Make sure the <code>measure_date</code> field is correctly formatted as a <strong>Date</strong> in Tableau.
+<li>Make sure the fields are correctly formatted in Tableau. If necessary, change the data types so each variable is formatted correctly:
 <ul>
-<li>If necessary, change the <strong>data type</strong> of <code>measure_date</code> to <strong>Date</strong>.</li>
+<li><code>measure_date</code> = <strong>Date</strong></li>
+<li><code>price</code>, <code>seasonal</code>, <code>trend</code>, <code>random</code>, <code>upper</code>, <code>lower</code> = <strong>Number (decimal)</strong></li>
+<li><code>forecast</code> = <strong>Boolean</strong></li>
 </ul></li>
-<li>If needed, <strong>filter</strong> the <code>measure_date</code> field so that all worksheets begin at the relevant <strong>start date</strong> for your analysis.</li>
 </ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are working with multiple time series data, <strong>filter</strong> the <code>measure_date</code> field so that all worksheets begin at the relevant <strong>start date</strong> for your analysis.</p>
+</div>
+</div>
 </section>
 <section id="step-2-visualizing-time-series-decomposition" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-visualizing-time-series-decomposition">Step 2: Visualizing Time Series Decomposition</h2>
+<p>In <strong>Sheet 1</strong>:</p>
 <ol type="1">
-<li><strong>Plot the raw price data</strong> (<code>price</code> column) as a <strong>line chart</strong>.<br>
-</li>
-<li><strong>Add the trend component</strong> (<code>trend</code> column) to a new <strong>pane below</strong> the raw price data.<br>
-</li>
-<li><strong>Show the seasonality component</strong> (<code>seasonal</code> column) in another <strong>pane below</strong> the trend.<br>
-</li>
-<li><strong>Display the residuals</strong> (<code>random</code> column) in a final <strong>pane below</strong> the seasonality.<br>
-</li>
-<li>Consider <strong>overlaying</strong> the <strong>trend line</strong> onto the raw data for better visualization.<br>
-</li>
-<li><strong>Experiment with Tableau’s built-in smoothing</strong>:
+<li>Plot the raw price data as a line chart.</li>
+</ol>
+<ul>
+<li>Add <code>price</code> to the row shelf. Display as AVG(Price).</li>
+<li>Add <code>measure_date</code> to the column shelf. Display <code>measure_date</code> as Measure &gt; MONTH().</li>
+</ul>
+<ol start="2" type="1">
+<li>Make sure forecasted values (<code>forecast</code> = TRUE) are <strong>filtered out</strong> when generating the line graph.</li>
+</ol>
+<ul>
+<li>Drag <code>forecast</code> into the Filters card. Check the box next to True. Click OK.</li>
+</ul>
+<ol start="3" type="1">
+<li>Add the trend, seasonal, and random components as new panes below the price line.</li>
+</ol>
+<ul>
+<li>Add <code>trend</code> to the row shelf. Display as AVG(Trend).</li>
+<li>Add <code>seasonal</code> to the row shelf. Display as AVG(Seasonal).</li>
+<li>Add `random`` to the row shelf. Display as AVG(Random).</li>
+</ul>
+<ol start="4" type="1">
+<li>Experiment with Tableau’s built-in smoothing:
 <ul>
 <li>Convert the raw price data to a <strong>moving average</strong> using <strong>Quick Table Calculation</strong>.<br>
 </li>
-<li>Compare Tableau’s moving average to the one calculated in R.<br>
-</li>
-<li><strong>Discussion:</strong> Why do they differ?</li>
+<li>Compare Tableau’s moving average to the one calculated in R.</li>
 </ul></li>
 </ol>
 </section>
 <section id="step-3-forecasting-in-tableau" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-forecasting-in-tableau">Step 3: Forecasting in Tableau</h2>
+<p>In <strong>Sheet 2</strong>:</p>
 <ol type="1">
-<li><strong>Use the observed price data (<code>price</code>)</strong> to create a new forecast in Tableau.
+<li>Create a new calculated field called <code>observed_price</code>.</li>
+</ol>
 <ul>
-<li>Select an <strong>additive trend line</strong> and <strong>additive seasonality</strong>.<br>
+<li><code>IF [Forecast]=FALSE THEN [Price] ELSE NULL END</code></li>
+</ul>
+<ol start="2" type="1">
+<li>Create a new calculated field called <code>forecasted_price</code>.</li>
+</ol>
+<ul>
+<li><code>IF [Forecast]=TRUE THEN [Price] ELSE NULL END</code></li>
+</ul>
+<ol start="3" type="1">
+<li>Plot the both observed and forecasted prices as a line chart.</li>
+</ol>
+<ul>
+<li>Add <code>measure_date</code> to the column shelf. Display <code>measure_date</code> as Measure &gt; MONTH().</li>
+<li>Add <code>observed_price</code> to the row shelf. Display as AVG(observed_price).</li>
+<li>Add <code>forecasted_price</code> to the row shelf. Display as AVG(forecasted_price).</li>
+<li>Right click AVG(forecasted_price) and select <strong>Dual Axis</strong>.</li>
+</ul>
+<ol start="4" type="1">
+<li>Plot the raw price data as a line chart.</li>
+</ol>
+<ul>
+<li>Add <code>observed_price</code> to the row shelf. Display as AVG(observed_price).</li>
+</ul>
+<ol start="5" type="1">
+<li>Use the second (stand-alone) observed price data (<code>observed_price</code>) to create a new forecast in Tableau.<br>
 </li>
-<li>Ensure that forecasted values from R (<code>forecast</code> = TRUE) are <strong>filtered out</strong> when generating the Tableau forecast.</li>
-</ul></li>
+</ol>
+<ul>
+<li>Switch to the Analytics tab from the Data tab. In the Analytics tab, there is a Forecast option under the Model section.</li>
+<li>To add a forecast to this plot, hold the Forecast option and drag it on to the scatter plot (or visualization area). You will see that it gives us one option that we can add to our graph.</li>
+<li>To change the forecast, right click on the confidence interval around the forecasted values. Select Forecast &gt; Forecast Options…</li>
+<li><strong>What do you notice?</strong></li>
+</ul>
+<ol start="4" type="1">
 <li><strong>Compare Tableau’s forecast with R’s forecast</strong>:
 <ul>
 <li>Create a <strong>new visualization</strong> that displays:
