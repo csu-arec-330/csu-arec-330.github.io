@@ -118,9 +118,10 @@ ts_object <- ts(data,
 
 :::
 
-The `ts()` function takes two arguments: `data` and `frequency.` 
+The `ts()` function takes three arguments: `data`, `start`, and `frequency.` 
 
-- `data` is a vector or matrix of your time series data, and 
+- `data` is a vector or matrix of your time series data,  
+- `start` is the start time of the series, and
 - `frequency` is the number of observations per unit time (e.g., the number of observations per year, per month, etc.). 
 
 In the case of the carrots dataset, the frequency is 12 (since there are 12 observations per year).
@@ -152,11 +153,11 @@ The `decompose()` function is used to break down a time series into its trend, s
 decomposed_ts <- decompose(ts_object, type = "additive")
 ```
 
-- `ts_object` $rightarrow$ A time series object created using `ts()`.
-- `type` $rightarrow$ Specifies whether the decomposition should be:
+- `ts_object` $\rightarrow$ A time series object created using `ts()`.
+- `type` $\rightarrow$ Specifies whether the decomposition should be:
   - **"additive"** if seasonal variations remain constant over time (the default if not specified).
   - **"multiplicative"** if seasonal variations scale with the trend level.
-- `decomposed_ts` $rightarrow$ The resulting decomposed time series object containing trend, seasonal, and residual components.
+- `decomposed_ts` $\rightarrow$ The resulting decomposed time series object containing trend, seasonal, and residual components.
 :::
 
 The `decompose()` function takes one argument: `x`, which is the time series object you want to decompose.
@@ -179,6 +180,7 @@ After using the `decompose()` function, you can extract the seasonal component a
 
 ```{r}
 #| eval: true
+#| include: false
 
 # Compute seasonally adjusted price
 carrot_sa_price <- carrot_ts - carrot_decomp$seasonal
@@ -202,9 +204,22 @@ sa_plot <- ggplot(carrot_decomp_sa, aes(x = measure_date)) +
        x = "Date", y = "Price",
        color = "Legend") +
   theme_minimal()
+```
 
+```{r}
+#| eval: true
+
+# Compute seasonally adjusted price
+carrot_sa_price <- carrot_ts - carrot_decomp$seasonal
+```
+
+```{r}
+#| eval: true
+#| include: true
 print(sa_plot)
 ```
+
+
 
 **Why Do We Use Seasonally Adjusted Prices?**
 
@@ -241,19 +256,31 @@ This will create three separate plots that show the trend, seasonal, and random 
 
 To work with the decomposed time series components in further analysis or visualization, we need to store them in a structured dataframe. This allows us to manipulate, export, and integrate the data into other tools like Tableau.
 
-For this operation, you will need to load the packages: `readr`and `dplyr`. 
-
 Let's extract the first four components of the decomposition output and format them into a tidy dataframe:
 
 ```{r}
 #| eval: false
-carrot_decomp_out <- carrot_decomp[1:4] %>%
+carrot_decomp_out <- carrot_decomp[1:4] %>% # Extract the first four components of the decomposition output
   as_tibble() %>%            # Convert to a tibble for better readability
   rename(price = x) %>%      # Rename 'x' to 'price' for clarity
   mutate(measure_date = carrot$date,  # Add a measure_date column from the original dataset
          forecast = FALSE) %>%        # Add a column to indicate actual vs. forecasted data
   drop_na()                  # Remove any rows with missing values
 ```
+
+:::{.callout-note title="How does `mutate(measure_date = carrot$date)` work without a join?"}
+
+This works due to **positional matching**:
+
+- **`carrot_decomp[1:4]`** keeps the same row order as `carrot_ts`, which was built from `carrot$price`.
+- **`carrot$date`** retains the original timestamps, allowing direct assignment **row by row** in `mutate()`.
+- Since lengths align, `measure_date` correctly maps to each observation.
+
+**Potential issue:** If missing values disrupt alignment, incorrect dates may be assigned. `drop_na()` helps prevent this.
+
+:::  
+
+
 
 ::: {.callout-tip title="Check Your Understanding"}
 
@@ -352,10 +379,10 @@ The `forecast()` function is used to generate future values of a time series bas
 forecasted_ts <- forecast(model_or_ts, h = forecast_horizon, level = confidence_interval)
 ```
 
-- `model_or_ts` $rightarrow$ A time series object or fitted model (such as ARIMA or ETS) used for forecasting.
-- `h` $rightarrow$ The number of future periods to forecast (e.g., `h = 12` for 12 months ahead).
-- `level` $rightarrow$ The confidence level for the prediction intervals (e.g., `level = 95` for 95% confidence intervals).
-- `forecasted_ts` $rightarrow$ The resulting forecast object containing predicted values, confidence intervals, and model details.
+- `model_or_ts` $\rightarrow$ A time series object or fitted model (such as ARIMA or ETS) used for forecasting.
+- `h` $\rightarrow$ The number of future periods to forecast (e.g., `h = 12` for 12 months ahead).
+- `level` $\rightarrow$ The confidence level for the prediction intervals (e.g., `level = 95` for 95% confidence intervals).
+- `forecasted_ts` $\rightarrow$ The resulting forecast object containing predicted values, confidence intervals, and model details.
 :::
 
 #### Forecasting Trend and Seasonal Components
@@ -394,6 +421,30 @@ carrot_residuals_forecast <- forecast(carrot_residuals_model, level = 95, h = 60
 
 > Why do we model the residuals separately?
 Unlike the trend and seasonal components, the residuals are unpredictable and must be modeled probabilistically rather than simply extended forward.
+
+:::{.callout-note title="Understanding `arima()` Syntax" collapse=true}
+
+The `arima()` function fits an **Autoregressive Integrated Moving Average (ARIMA)** model to a time series for forecasting.
+
+```{r}
+#| eval: false
+model <- arima(ts_object, order = c(p, d, q))
+```
+
+- `ts_object` $\rightarrow$ The time series data.
+- `order = c(p, d, q)`:
+  - `p` (autoregressive order) $\rightarrow$ Number of lagged observations used as predictors.
+  - `d` (differencing order) $\rightarrow$ Number of times the data is differenced to make it stationary.
+  - `q` (moving average order) $\rightarrow$ Number of past forecast errors used in the model.
+
+Example: Fit an ARIMA(1,0,1) model (AR(1) + MA(1)) to a time series:
+
+```{r}
+#| eval: false
+carrot_arima <- arima(carrot_ts, order = c(1, 0, 1))
+```
+This model uses one lagged value and one past error term to make predictions.
+:::
 
 **This approach ensures that our final forecast accounts for all key components of the time series: trend, seasonality, and random variation.**
 
@@ -457,20 +508,34 @@ carrot_forecast_df <- tibble( # Create a tibble (a modern dataframe in R)
 
 ::: {.callout-note title="Why is `[,1]` used in `carrot_forecast_upper[,1]` and `carrot_forecast_lower[,1]`?"}
 
-The `forecast()` function returns **confidence intervals as matrices**, with each column representing different confidence levels (e.g., 80%, 95%). The `[,1]` indexing extracts the **first column**, which typically corresponds to the **80% confidence interval**.
+The `forecast()` function returns **confidence intervals as matrices**, with each column representing different confidence levels (e.g., 80%, 95%).  
+
+However, if only **one confidence level** is specified in `forecast()`, the matrix will only contain **one column**.
 
 #### Breakdown:
 - `forecast_object$upper` and `forecast_object$lower` are **matrices**, not vectors.
-- **First column (`[,1]`)** $\rightarrow$ Usually the **80% confidence interval**.
-- **Second column (`[,2]`)** $\rightarrow$ Typically the **95% confidence interval** (if available).
+- If **one confidence level** is specified (e.g., `level = 95`), the matrix will have only **one column**, and `[,1]` is required to extract the values.
+- If **multiple confidence levels** are specified (e.g., `level = c(80, 95)`), the matrix will have **two columns**, where `[,1]` corresponds to the 80% interval and `[,2]` corresponds to the 95% interval.
 
-#### Example:
+#### Example using `carrot_forecast`:
 ```{r}
 #| eval: false
 
-carrot_forecast_upper[,1]  # Extracts 80% confidence level upper bound
-carrot_forecast_lower[,1]  # Extracts 80% confidence level lower bound
+# Forecasting with a single confidence level (e.g., 95%)
+carrot_trend_forecast <- forecast(carrot_trend, level = 95, h = 60)
+
+# Check the structure of the confidence interval matrix
+dim(carrot_trend_forecast$upper)  # Output: [1:60, 1] → 60 time steps, 1 confidence level
+
+# Extract the only available confidence interval
+carrot_forecast_upper <- carrot_trend_forecast$upper[,1]  
+carrot_forecast_lower <- carrot_trend_forecast$lower[,1]
 ```
+
+In this case, because we only specified one confidence level (`level = 95`), the output matrix has only one column, and `[,1]` is needed to extract the values.
+
+If we had specified multiple levels (`level = c(80, 95)`), we would need to use `[,2]` to extract the 95% confidence interval.
+
 :::
 
 At this stage, we have a clean forecast dataset that is ready to be appended to the existing observed data. The next step is to merge this with the original time series data and prepare it for visualization in Tableau.

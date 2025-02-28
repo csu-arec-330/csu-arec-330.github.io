@@ -15,69 +15,54 @@ Treat this assignment as another step of your project.
 
 ## Part 1: R
 
-1. Complete a time series decomposition using the time series that you collect for your project.
+1. Complete a time series decomposition for *each* of the three time series datasets that you collected for your project following the steps from [Lab 06](lab_01_week_02.qmd):
 
-2. Generate a "[seasonally-adjusted](https://otexts.com/fpp3/components.html#seasonally-adjusted-data)" time series of your observed data. Call this object `sa_price.` Make note of this variable since you will need to export it with your other data.
+  - Load your data into R.
+  - Convert to a time series object.
+  - Perform the time series decomposition.
+  - Generate a "[seasonally-adjusted](https://otexts.com/fpp3/components.html#seasonally-adjusted-data)" time series of your observed data. Call this object `sa_price` (if you are working with price data; if you are working with other data, please add the prefix `sa_` to the appropriate name).
+  - Add a new variable called `forecast` that takes a value of `FALSE` to indicate that the data are observed values.
+  - Add a new variable called `measure_date` following the steps in the lab notes.
+  - Store the decomposed data as a data frame. **Note:** One for each time series decomposition.
 
-3. Use R to create a 3 year forecast of your chosen time series. Follow the steps we went through in lab.  Create a new variable that indicates the new data you have created is a forecast.
+3. Use R to create a 3 year forecast for *each* chosen time series. Follow the steps we went through in lab.  
 
-4. Create a dataframe with the following variables: `measure_date`, `price`, `trend`, `seasonal`, `randome``, `sa_price`, `forecast` (indicator of forecasted data). 
+  - Keep only forecasted data that occurs after the last observed date. 
+  - Create a new variable that indicates the new data you have created is a forecast (`forecast = TRUE`).
+
+4. Create a dataframe for *each* time series using `bind_rows`, then write them to a csv file. You will end up with three csv files with the following variables: `measure_date`, `price`, `sa_price`, `trend`, `seasonal`, `random`, `forecast`, `upper`, `lower`. 
 
 
 ## Part 2: Tableau
 
-1. Open Tableau and connect to the **CSV file** you exported from R. This file should include:
-  - Your original price time series data for all three series
+1. Open Tableau and connect to the csv you exported from R. This file should include:
+  - Your original price time series data for *each time series*
   - The forecasted values
   - The three components of your decomposition (trend, seasonality, and residuals)
-- If necessary, filter the `Date` field so that all worksheets in your workbook begin at the relevant start date for your analysis. 
 
-2. Use **observed price data** for each of your three time series to create **forecasts** in Tableau.
-- Select an **additive trend line** and **additive seasonality**.
-- Recall that you will need to **filter out** the forecasted values from your observed data. In the lab, we used an indicator variable (`Forecast`) to distinguish between observed and forecasted values.
+**Note:** If necessary, filter the `measure_date` field so that all worksheets in your workbook begin at the relevant start date for your analysis. 
 
-3. Create a **new visualization** that shows:
-  - The **forecast you created in Tableau** for each time series
-  - The **forecast you generated in R** for each time series
-- Combine these forecasts into a **dashboard**.
-- Add a **text box** to explain any differences between the two forecasts and discuss why they might differ.
-- Once completed, **hide** any worksheets used to create this dashboard:
-  - Right-click on the worksheet tab → Select `Hide`
-  - This helps keep your workbook organized.
+2. For each time series:
 
-4. Create a **new worksheet** displaying the three components of your decomposition from R for each of your time series:
-  - **Trend** (long-term direction of prices)
-  - **Seasonality** (repeating patterns within a year)
-  - **Residual** (unexplained variation)
-- **Add a caption** to describe:
-  - Overall trends in the data
-  - Which seasons have higher or lower prices
-  - How much variation remains unexplained by trend and seasonality
-  
-5.  Create a **dashboard** that shows seasonal trends in your data **by month and by quarter** for all three time series.
-- Use **any visualization type** that effectively represents these seasonal patterns.
-- Add a **text box** with key takeaways, answering:
-  - Are trends more apparent when comparing **months vs. quarters**?
-  - Are there **notable differences** in the annual trends within a given month or quarter?
-  - Do these trends align with the **seasonal decomposition** from your R analysis?
+  - Plot the raw price data as a line chart. 
+  - Make sure forecasted values (`forecast = TRUE`) are **filtered out** when generating the line graph. 
+  - Add the trend, seasonal, and random components as new panes below the price line. 
+  - Add a caption answering the following questions:
+    - What are the **overall trends** in the data?  
+    - Which seasons have **higher or lower prices**?  
+    - How much variation remains **unexplained** after removing trend and seasonality?  
 
-6.  Once you have created your dashboard, finalize your workbook.
-- **Hide unnecessary worksheets** (Right-click → `Hide`).
-- Your final **Tableau Public workbook** should contain:
-  1. **Two dashboards** (Forecast Comparison + Seasonal Trends)
-  2. **Three worksheets** (R Decomposition Components for each time series)
+3. Format your visualizations by adding color, useful titles, appropriate marker labels, text annotations, etc. that help your audience understand your analysis.
 
-7. Format your visualizations by adding color, useful titles, appropriate marker labels, text annotations, etc. that help your audience understand your analysis.
-
-8. Publish this workbook on Tableau public.
+4. Publish each time series decomposition worksheet on Tableau public.
 
 
 ## How to Submit
 
 1. **Create a new webpage on your Google site** titled `Problem Set 6`.
 2. **Include the following:**
-   - **Part 1**: An R script displaying the code used for data acquisition and modification.
-   - **Part 2**: Your Tableau dashboards and worksheets (you should be able to toggle between dashboards and worksheets by using tabs in this embedded view).
+   - **Part 1**: An R script displaying the code used for data acquisition, time series decomposition, and forecasting.
+   - **Part 2**: Your Tableau worksheets.
 3. **Publish the page and submit the link** to your Google site webpage in Canvas.
 
 

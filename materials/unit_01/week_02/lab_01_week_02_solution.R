@@ -3,7 +3,7 @@
 setwd("C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_01/week_02")
 
 # Comment out the following line if you have already installed the forecast package.
-install.packages("forecast")
+# install.packages("forecast")
 
 # Load necessary libraries
 library(tidyquant)
@@ -65,6 +65,8 @@ carrot_decomp_out <- carrot_decomp[1:4] %>%
          forecast = FALSE) %>%
   drop_na()
 
+# Part 2: Forecasting
+
 # Extract trend, seasonal, and residual components
 carrot_trend <- na.omit(carrot_decomp$trend)
 
@@ -111,6 +113,8 @@ carrot_forecast_df <- tibble( # Create a tibble (a modern dataframe in R)
   lower = carrot_forecast_lower[,1] # Extracts the lower confidence interval for the forecast
   ) %>%
   mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.))) # Add a variable called measure_date
+
+View(carrot_forecast_df)
 
 # Keep only forecasted data that occurs after the last observed date
 carrot_forecast_df <- carrot_forecast_df %>%
