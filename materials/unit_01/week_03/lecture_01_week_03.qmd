@@ -7,158 +7,202 @@ format:
     width: 1400
     # logo: path.png
     # center: TRUE
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-## Agenda 
+## Agenda
 
-Review regression analysis
+Review of forecasting
 
-Forecast prediction intervals
+Understanding prediction intervals
 
-Advanced forecasting I: Additive vs. Multiplicative models
-
-Advanced forecasting II: Cross-validation
+Time-series cross-validation
 
 Project 1 reminder and details
 
+## Review: Forecasting and Decomposition {.scrollable}
 
-<!-- example of big text fit to slide width -->
+Let's recall the process of breaking down time series data.
 
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
+1.  We separated (through time-series decomposition) a times series
+    into:
 
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
+-   Trend: long-term direction
+-   Seasonality: repeating patterns
+-   Residual: unexplained variation
 
+2.  We used forecasting to predict trend and seasonality into the
+    future.
 
+3.  We modeled residuals separately using an ARIMA model.
 
-# A review question {.scrollable .smaller}
-
-![](includes/tableau_reg.png){width="100%"}
-
-
-Which value indicates whether the estimated relationship between carrot prices and time is statistically significantly different from zero?
-
-A. 0.0728323  
-
-B. 189.513  
-
-C. 0.0288396  
-
-D. 0.0204868  
+4.  Final forecast = Trend + Seasonality + Residual Model
 
 # Intro to Prediction Intervals
 
 # 
-::: {.r-fit-text }
-**What are *prediction intervals*?** <br> <br>
-The interval within which we expect  <br> 
-values of our $y$ variable to lie at <br> 
-a future point in time.
+
+::: r-fit-text
+**What are *prediction intervals*?** <br> <br> The interval within which
+we expect <br> values of our $y$ variable to lie at <br> a future point
+in time.
 :::
 
-## Prediction intervals: An example 
+## Prediction intervals: An example {.scrollable}
 
-- Our forecast from last week predicted that carrot prices will be 207.721 *250 months* after the financial crisis.
+Last week, we forecasted carrot prices from August 2024 to January 2028.
 
-- We recognize that it is incredibly unlikely for us to perfectly predict carrot prices in twenty years...
+The predicted price for:
 
-- Instead, what if we construct a *range* of estimates that we are pretty confident encompasses the true value of carrot prices?
+-   April 2025 is *\$261.5564*
+-   January 2028 is *\$255.9185*
 
-- Perhaps we are reasonably sure the true price will be between 160 and 280...
+But how confident are we? Instead of a single value, we might say:
 
-## Prediction intervals: The intuition {.scrollable}
+-   We are 95% confident that the April 2025 price will be between
+    \$142.30237 and \$380.8104.
+-   We are 95% confident that the January 2028 price will be between
+    \$28.73887 and \$483.0982.
 
-The intuition for prediction intervals begins with understanding *confidence intervals*:
+These are our **prediction intervals**.
 
-1. What are confidence intervals (CIs)?
+-   Prediction intervals increase as we forecast further into the
+    future.
+-   Prediction intervals capture both model uncertainty and random
+    fluctuations.
+-   Wider intervals = more uncertainty in the forecast.
 
-    - A range of values that describe the uncertainty of an estimate of a parameter ($\beta_1$). Recall the regression equation: $Y_i = \beta_0 + \beta_1X_i + \varepsilon_i$
+# Before we introduce prediction intervals, let's first understand *confidence intervals* (CIs).
 
-    - Similarly to p-values, CIs give us information on whether estimates are statistically significantly different from zero: Does the interval include 0?
+## What are confidence intervals? {.scrollable}
 
-    - CIs go beyond p-values and give us the range of possible values representing the correlation between $X$ and $Y$.
+-   A CI is a range of values that express uncertainty in an estimate.
+-   In forecasting, a CI tells us the range where the true trend or
+    seasonal effect is likely to fall.
+-   If we estimate a trend in carrot prices, a CI might say:
 
-## Prediction intervals: The intuition 
+> *"We are 95% confident that the true price trend is between \$0.05 and
+> \$0.10 per month."*
 
-2. How are confidence intervals calculated?
-
-    - Using the estimate, its standard error, the sample size, critical values, and an assumption about the distribution of your data.
-
-![](includes/tableau_describe.png){width="100%"}
-
+```{=html}
 <!--
-    - The 95% CI for the relationship between our time variable and carrot prices is 
+Recall the regression equation: $Y_i = \beta_0 + \beta_1X_i + \varepsilon_i$
+
+- CIs give us information on whether estimates are statistically significantly different from zero: Does the interval include 0?
+
+- CIs give us the range of possible values representing the correlation between $X$ and $Y$.
 -->
+```
 
-## Prediction intervals: The intuition 
+## How are confidence intervals calculated?
 
-3. How are confidence intervals different from prediction intervals?
+CIs are calculated using:
 
-    - Prediction intervals are concerned with bounding our *predictions*.
+-   The estimate itself (e.g., the trend or seasonal component),
+-   The standard error (how much the estimate varies),
+-   The sample size (more data = narrower intervals),
+-   A multiplier (critical value) (based on the confidence level).
 
-    - Prediction intervals are always wider than CIs because of the added uncertainty involved in predicting a single response versus estimating the mean response.
+<!-- ![](includes/tableau_describe.png){width="100%"} -->
 
-    - Prediction intervals increase as we try to forecast further in the future.
+## How are prediction intervals different? {.scrollable}
 
+-   Confidence intervals apply to estimates like trends or seasonal
+    effects.
+-   Prediction intervals apply to individual future values of a time
+    series.
 
-## Prediction intervals: The intuition 
+**Example:**
+
+-   A confidence interval might tell us how uncertain we are about the
+    trend in carrot prices.
+-   A prediction interval tells us how uncertain we are about the actual
+    price of carrots next year.
+
+Prediction intervals are always wider than confidence intervals because
+they capture both:
+
+-   Uncertainty in the estimate (trend, seasonality, etc.).
+-   Uncertainty in future random fluctuations (residuals).
+
+## Interpreting prediction intervals
 
 The most frequently used prediction (and confidence) interval is 95%.
 
-**The intuitive interpretation**: We are 95% confident that our prediction interval contains the value of our outcome variable that will be realized.
+**The intuitive interpretation**: We are 95% confident that our
+prediction interval contains the value of our outcome variable that will
+be realized.
 
-In Tableau (and most other software) prediction intervals are shown with shaded regions around the prediction.
+In Tableau (and most other software) prediction intervals are shown with
+shaded regions around the prediction.
 
-# 
+## 
+
 ::: {style="text-align: center"}
 ![](includes/Tableau_forecast.png){width="80%"}
 :::
 
-
-
+```{=html}
 <!---
 # 
 ::: {style="text-align: center"}
 ![100 possible future paths of 5 year forecast with 95% prediction intervals](includes/carrot_price_spaghetti.png){width="100%"}
 :::
 --->
+```
 
-## Review Question 1 
+## Review Question 1
 
 **Which of the following best defines confidence intervals?**
 
-A. A range of values that is likely to contain an unknown population parameter with a specified level of confidence.
+A. A range of values that is likely to contain an unknown population
+parameter with a specified level of confidence.
 
 B. A range of values that represents the mean of a sample.
 
-C. A range of values used to estimate a future value of a variable with a specified level of confidence.
+C. A range of values used to estimate a future value of a variable with
+a specified level of confidence.
 
-D. A range of values that is used to test a hypothesis about a population parameter.
+D. A range of values that is used to test a hypothesis about a
+population parameter.
 
-::: {.notes}
-Answer: A. CIs are a statistical technique used to infer the possible range of values an unknown population parameter (like the mean or proportion) is likely to fall within, based on sample data. The "specified level of confidence" is a pre-chosen probability, often expressed as a percentage (e.g., 95% or 99%), which indicates how confident we are that the parameter lies within this range. If we were to repeat the sampling process numerous times, we expect that the confidence interval would contain the true parameter value in the percentage of times indicated by the confidence level.
+::: notes
+Answer: A. CIs are a statistical technique used to infer the possible
+range of values an unknown population parameter (like the mean or
+proportion) is likely to fall within, based on sample data. The
+"specified level of confidence" is a pre-chosen probability, often
+expressed as a percentage (e.g., 95% or 99%), which indicates how
+confident we are that the parameter lies within this range. If we were
+to repeat the sampling process numerous times, we expect that the
+confidence interval would contain the true parameter value in the
+percentage of times indicated by the confidence level.
 :::
 
-## Review Question 2 
+## Review Question 2
 
 **Which of the following best defines prediction intervals?**
 
-A. A range of values that is likely to contain an unknown population parameter with a specified level of confidence.
+A. A range of values that is likely to contain an unknown population
+parameter with a specified level of confidence.
 
 B. A range of values that represents the mean of a sample.
 
-C. A range of values used to estimate a future value of a variable with a specified level of confidence.
+C. A range of values used to estimate a future value of a variable with
+a specified level of confidence.
 
-D. A range of values that is used to test a hypothesis about a population parameter.
+D. A range of values that is used to test a hypothesis about a
+population parameter.
 
-::: {.notes}
-Answer: C. Unlike a confidence interval, which is used to estimate a range within which an unknown population parameter is expected to lie, a prediction interval provides a range within which we expect a future observation or value of a variable to fall, given a specified level of confidence. This is particularly useful in forecasting where we're interested in predicting individual outcomes rather than estimating population parameters.
+::: notes
+Answer: C. Unlike a confidence interval, which is used to estimate a
+range within which an unknown population parameter is expected to lie, a
+prediction interval provides a range within which we expect a future
+observation or value of a variable to fall, given a specified level of
+confidence. This is particularly useful in forecasting where we're
+interested in predicting individual outcomes rather than estimating
+population parameters.
 :::
 
 <!-- ## Review Question 3 {.smaller} -->
@@ -176,152 +220,258 @@ Answer: C. Unlike a confidence interval, which is used to estimate a range withi
 <!-- E. Confidence intervals and prediction intervals are the same thing. -->
 
 <!-- ::: {.notes} -->
+
 <!-- Answer: B. Confidence intervals are used to estimate the range within which a population parameter (such as the mean or proportion) is likely to lie with a specified level of confidence. On the other hand, prediction intervals provide a range within which we expect future observations of a variable to fall, also with a specified level of confidence. -->
+
 <!-- ::: -->
 
-## Prediction intervals: Estimation {.scrollable}
+## Prediction intervals in R {.scrollable}
 
-Prediction intervals require a few inputs and assumptions.
+Last week, we generated forecasts using `forecast()` in R.
+
+Let's look at the prediction interval for the carrot forecast:
+
+```{r}
+#| eval: false
+#| include: true
+
+# Generate a forecast with a 95% prediction interval
+carrot_forecast <- forecast(carrot_trend, h = 60, level = 95)
+
+# Extract forecast values and confidence intervals
+forecast_mean  <- carrot_forecast$mean
+forecast_upper <- carrot_forecast$upper[,1]  # 95% upper bound
+forecast_lower <- carrot_forecast$lower[,1]  # 95% lower bound
+
+# Visualize the forecast with prediction intervals
+plot(carrot_forecast)
+```
+
+The shaded region shows the prediction interval range.
+
+How are prediction intervals calculated?
+
+## How are prediction intervals computed (95% level) {.scrollable}
 
 The formula for a 95% prediction interval for the $h$-step forecast is:
 
-
 $$\text{Prediction Interval for }{y}_{T+h|T} = \widehat{y}_{T+h|T} \pm 1.96 \cdot \widehat{\sigma}_h$$
 
-where 
+where
 
-$\widehat{y}_{T+h|T}$ is our prediction of $y$, $h$ periods into the future
+$\widehat{y}_{T+h|T}$ is our prediction of $y$ at time $T$, $h$ periods
+into the future
 
-$h$ represents the forecast horizon, or the specific number of intervals (e.g., days, months, years) from the last observed data point 
+$h$ represents the forecast horizon, or the specific number of intervals
+(e.g., days, months, years) from the last observed data point
 
-1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal
+1.96 is the multiplier for a 95% prediction interval assuming that our
+sampling distribution of future observations is normal
 
-$\widehat{\sigma}_h$ is an estimate of the standard deviation for the $h$-step forecast
+$\widehat{\sigma}_h$ is an estimate of the standard deviation for the
+$h$-step forecast
 
+## Understanding the multiplier in prediction intervals {.scrollable}
 
+We adjust the interval width based on how confident we want to be:
 
-## Prediction intervals: The multiplier {.scrollable}
+| **Confidence Level** | **Multiplier** |
+|----------------------|----------------|
+| 80%                  | 1.28           |
+| 85%                  | 1.44           |
+| 90%                  | 1.64           |
+| 95%                  | 1.96           |
+| 99%                  | 2.58           |
+
+-   Higher confidence $\rightarrow$ wider prediction intervals
+-   Lower confidence $\rightarrow$ narrower intervals
+
+## How are prediction intervals computed (general form) {.scrollable}
 
 The equation for a prediction interval can be written more generally as:
 $$
 \widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
 $$
 
-where the multiplier $c$ depends on the prediction interval you desire:
-
-| Percentage  | Multiplier  |
-|:------:|:------:|
-| 80  | 1.28  |
-| 85  | 1.44  |
-| 90 | 1.64  |
-| 95 | 1.96   |
-| 99 | 2.58   |
+where the multiplier $c$ depends on the prediction interval you desire.
 
 ::: {style="font-size: 80%;"}
 Note that these all assume a normal distribution of future observations.
 :::
 
-## Prediction intervals: Standard deviation {.scrollable}
+## Why does standard deviation matter for prediction intervals?
 
-When forecasting 1 step ahead ($h=1$), we will estimate the standard deviation of the forecast distribution according to:
+-   The standard deviation of the forecast errors measures **how much
+    our predicted values tend to vary from actual observations.**
+
+-   The further we forecast into the future, the greater this
+    uncertainty becomes.
+
+-   We adjust our prediction intervals based on the standard deviation
+    of the forecast distribution.
+
+Let’s look at how this is done mathematically.
+
+## Prediction interval formula: Standard deviation {.scrollable}
+
+When forecasting 1 step ahead ($h=1$), we will estimate the standard
+deviation of the forecast distribution according to:
 
 $$
 \widehat{\sigma} = \sqrt{\frac{1}{T-K}\sum^T_{t=1}e^2_t}
 $$
 
-where,
+where
 
 $T$ is the number of data points in the time series
 
 $K$ is the number of parameters estimated in the forecasting method
 
-$e_t$ is the residual at time $t$ (recall your decomposition...) 
+$e_t$ is the residual at time $t$
 
-## Prediction intervals: Standard deviation {.scrollable}
+## A note on residuals {.scrollable}
 
-When forecasting $h$ steps ahead ($h\geq 1$), we can estimate the standard deviation of the forecast distribution according to:
+The residual $e_t$ in the equation of the standard error is not the same
+as the residual $R_t$ from the time series decomposition.
+
+**Residuals ($R_t$) in Time Series Decomposition**
+
+-   Represent the portion of the data that is not explained by the trend
+    and seasonal components.
+-   Captures random fluctuations or noise in the observed time series.
+
+**Residuals ($e_t$) in Forecasting & Prediction Intervals**
+
+-   Represent the errors between predicted and actual values when making
+    forecasts.
+-   Measure how much a model’s predictions deviate from reality.
+-   Used to estimate the uncertainty in future forecasts.
+
+## Prediction interval formula: Standard deviation {.scrollable}
+
+When forecasting $h$ steps ahead ($h\geq 1$), we can estimate the
+standard deviation of the forecast distribution according to:
 
 $$
 \widehat{\sigma}_h = \widehat{\sigma}\sqrt{h}
 $$
 
-Note that there are many other methods for estimating the standard deviation of the forecasting distribution.
+This formula highlights how *uncertainty grows over time*.
 
-This formula is for the Na&iuml;ve method, and is among the simplest.[^1]
+Note that there are many other methods for estimating the standard
+deviation of the forecasting distribution. This formula is for the Naïve method, and is among the simplest.[^1]
 
-[^1]: This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html>
+[^1]: This is a useful resource for more information on these methods
+    and others: <https://otexts.com/fpp3/classical-decomposition.html>
 
 
 ## Prediction intervals: Application
 
-In lab this week, we will show you how to estimate prediction intervals in R and plot them in Tableau. 
-
-<!-- # Additive vs. Multiplicative Models -->
-
-<!-- ## Additive vs. Multiplicative Decompositions {.scrollable} -->
-<!-- There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative. -->
-
-<!-- These are known as classical decomposition methods, and are estimated according to: -->
-
-<!-- 1. Additive: $y_t = T_t + S_t + R_t$ -->
-
-<!-- 2. Multiplicative: $y_t = T_t \times S_t \times R_t$ -->
-
-<!-- ::: {style="font-size: 80%;"} -->
-<!-- Note there are a few other options for forecasting using decompositions, but we won't cover them in this class. -->
-
-<!-- This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html> -->
-<!-- ::: -->
-
+In lab this week, we will show you how to estimate prediction intervals
+in R and plot them in Tableau.
 
 # Validating Predictions
 
 # 
-::: {.r-fit-text }
-**The objective:** <br>
-We want to show our audience <br> 
-that they should trust our predictions.
+
+::: r-fit-text
+How do we **validate** <br> our forecast model?
 :::
 
+# 
 
-#
-::: {.r-fit-text }
-**The solution:** <br> 
-Time series cross-validation 
+::: r-fit-text
+**The objective:** <br> We want to show our audience <br> that they
+should trust our predictions.
 :::
 
+# 
 
-## Time series cross-validation: The intuition
+::: r-fit-text
+**The solution:** <br> Time series cross-validation <br> *evaluates*
+forecasting accuracy.
+:::
+
+## The process
+
+Train-Test Splits
+
+-   Use historical data to train a forecast model.
+-   Compare predictions to held-out test data.
+
+Measure Accuracy
+
+-   Compute Mean Absolute Error (MAE), Root Mean Square Error (RMSE),
+    etc.
+
+## Train-test splits
 
 Construct a series of "training" and "test" sets of data.
 
-Use your "training" set to construct a forecast (following the same methods in your main forecast).
+Use your "training" set to construct a forecast (following the same
+methods in your main forecast).
 
 Evaluate the accuracy of your forecast using your "test" set.
 
-## Time series cross-validation: Test set 1 {.scrollable}
+## Example: Train-test splits {.scrollable}
 
-Training data =  blue
+Training data = blue
 
-Test data =  orange
+Test data = orange
 
 ::: {style="text-align: center"}
 ![](includes/train_test1.png){width="75%"}
 :::
 
-## Time series cross-validation: Test set 2 {.scrollable}
+:::{.notes}
+This image illustrates rolling-origin time series cross-validation, a method for train-test splitting in forecasting. Here’s how to explain it:
 
-Training data =  blue
+1. Each row represents a different train-test split over time.
+2. Blue dots (leftmost section in each row) represent the training set, which grows over time as more data becomes available.
+3. Orange dots represent the test set, which consists of future observations that the model is tested on.
+4. Gray dots (rightmost section) are future data points that have not yet been included in the analysis.
+5. The diagonal pattern shows how the test set is progressively shifted forward, allowing multiple evaluations of the model at different time points.
+:::
 
-Test data =  orange
+## Analogy: Predicting the Weather with a Growing Diary {.scrollable}
+
+Imagine you’re keeping a diary of the daily high temperature in your town.
+
+- At first, you have only a few days recorded (blue dots), so you try to predict tomorrow’s temperature (orange dot) based on what you’ve seen so far.
+- Each day (each additional row), you update your diary by adding yesterday’s temperature and then make a new prediction for today (the previous row's orange dot).
+- As time passes, your diary grows, and you always use all past records to make the best possible guess for the next day.
+
+$\rightarrow$ Each day, you train a model on all previous days and test your prediction on the next.
+
+$\rightarrow$ Over time, your predictions (hopefully) get better as you learn from more past observations!
+
+That’s exactly how **rolling-origin cross-validation** works in time series forecasting. 
+
+<!--
+## Example: Train-test splits {.scrollable}
+
+Training data = blue
+
+Test data = orange
 
 ::: {style="text-align: center"}
 ![](includes/train_test2.png){width="75%"}
 :::
+-->
 
-## Time series cross-validation: Evaluating? {.scrollable}
+## Measure accuracy {.scrollable}
 
-Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:
+How do we measure how well our model predicts future values?
+
+| **Metric** | **Formula** | **Interpretation** |
+|------------------|----------------------------|--------------------------|
+| **Mean Forecast Error (MFE)** | $\sum_{t=1}^{H} \frac{\hat{y}_t - y_t}{H}$ | Average difference between predictions & actual values. |
+| **Mean Absolute Error (MAE)** | $\sum_{t=1}^{H} \frac{| \hat{y}_t - y_t | }{H}$ | Measures average absolute error size. |
+| **Root Mean Squared Error (RMSE)** | $\sqrt{\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )^2 }{H}}$ | Penalizes larger errors more heavily. |
+| **Mean Absolute Percentage Error (MAPE)** | $\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )/y_t }{H}$ | Expresses error as a percentage of actual values. |
+
+```{=html}
+<!-- Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:
 
 - Mean Forecast Error (MFE): average difference between prediction and observed $\sum_{t=1}^{H} \frac{\hat{y}_t - y_t}{H}$
 
@@ -331,25 +481,29 @@ Once you have constructed estimates for your series of test and training data, y
 
 - Mean Absolute Percentage Error (MAPE): average of the difference between prediction and observed as a fraction of observed
 $\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )/y_t }{H}$
+-->
+```
 
-Choose the forecasting model that minimizes prediction error according to these measures.
+Choose the forecasting model that minimizes prediction error according
+to these measures.
 
 ::: {style="font-size: 80%;"}
-This is a useful resource for these evaluation methods: <https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>
+This is a useful resource for these evaluation methods:
+<https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>
 :::
-
 
 ## REMINDER: Project 1 {.scrollable}
 
 Groups of 2
 
-Choose an ag biz or enre management question to answer with time series data
+Choose an ag biz or enre management question to answer with time series
+data
 
 Collect time series data
 
-Analyze trends 
+Analyze trends
 
-Generate a forecast 
+Generate a forecast
 
 $\rightarrow$ Generate prediction intervals
 
@@ -357,13 +511,16 @@ Present results in a recorded video
 
 ## EXAMPLE: The Question
 
-I am currently growing almonds and walnuts, and in the coming season I will plant a new orchard. 
+I am currently growing almonds and walnuts, and in the coming season I
+will plant a new orchard.
 
-- Almond trees need to mature for 3-4 years before they are ready for harvest.
+-   Almond trees need to mature for 3-4 years before they are ready for
+    harvest.
 
-- Walnut trees need to mature for 4-7 years before they are ready for harvest.
+-   Walnut trees need to mature for 4-7 years before they are ready for
+    harvest.
 
-- Both trees will continue producing for roughly 25 years.
+-   Both trees will continue producing for roughly 25 years.
 
 How will I decide which trees to plant?
 
@@ -371,60 +528,76 @@ How will I decide which trees to plant?
 
 **DATA:** Time series data on almond and walnut prices.
 
-**ANALYSIS:** Forecast prices for the next 10 years (really 25 would better answer your Q, but is probably too long of a prediction period)
+**ANALYSIS:** Forecast prices for the next 10 years (really 25 would
+better answer your Q, but is probably too long of a prediction period)
 
-**ANSWER:** I will plant walnuts because over a 10 year horizon they would yield higher revenues than almond trees, even though I would have to wait longer before selling them.
+**ANSWER:** I will plant walnuts because over a 10 year horizon they
+would yield higher revenues than almond trees, even though I would have
+to wait longer before selling them.
 
 ## Presentation Overview {.scrollable}
 
-Your presentation videos should be roughly 8 minutes. (Minimum: 6 min, Maximum 9 min)
+Your presentation videos should be roughly 8 minutes. (Minimum: 6 min,
+Maximum 9 min)
 
-You should begin your presentation with the following: 
+You should begin your presentation with the following:
 
-- Who are you? (what business, organization, etc. wants an answer to your question?)
+-   Who are you? (what business, organization, etc. wants an answer to
+    your question?)
 
-- Who is your audience? (business executive team, policy makers, consumers?)
+-   Who is your audience? (business executive team, policy makers,
+    consumers?)
 
 You should then:
 
-- Give us any relevant background info that is necessary to understanding your question
+-   Give us any relevant background info that is necessary to
+    understanding your question
 
-- State your question
+-   State your question
 
 ## Presentation Content {.scrollable}
 
 Data:
 
-- Describe where your data is from
+-   Describe where your data is from
 
-- Provide summary statistics and visualizations
+-   Provide summary statistics and visualizations
 
 Analysis:
 
-- What forecasting model did you use? Why?
+-   What forecasting model did you use? Why?
 
-- Show your forecast and prediction intervals
+-   Show your forecast and prediction intervals
 
 Discussion/Conclusion:
 
-- How did you use your forecast to answer your question?
+-   How did you use your forecast to answer your question?
 
-- What are the key take-aways for your intended audience?
+-   What are the key take-aways for your intended audience?
 
-- What are limitations to your analysis?
+-   What are limitations to your analysis?
 
 ## Final Project Submission {.scrollable}
 
 The video presentation is part 1 of the project.
 
-A report summarizing the presentation content is part 2 of the project. Your report should summarize the same information as your presentation, and can include additional information and visualizations if they are helpful for answering your question.
+A report summarizing the presentation content is part 2 of the project.
+Your report should summarize the same information as your presentation,
+and can include additional information and visualizations if they are
+helpful for answering your question.
 
-Each group member will be responsible for uploading the report onto their Google site. You can both have an identical report, but must post it to your personal webpage.
+Each group member will be responsible for uploading the report onto
+their Google site. You can both have an identical report, but both must
+post it to your personal webpage.
 
 ## References {.scrollable .smaller}
 
-Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <https://otexts.com/fpp3/>. Accessed on 02-28-2023.
+Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and
+practice, 3rd edition, OTexts: Melbourne, Australia.
+<https://otexts.com/fpp3/>. Accessed on 02-28-2023.
 
-A useful blog post: <https://mins.space/blog/2020-07-30-forecasting-through-decomposition/>
+A useful blog post:
+<https://mins.space/blog/2020-07-30-forecasting-through-decomposition/>
 
-Another useful blog post: <https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>
+Another useful blog post:
+<https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b>

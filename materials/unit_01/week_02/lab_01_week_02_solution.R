@@ -124,5 +124,7 @@ carrot_forecast_df <- carrot_forecast_df %>%
 # Append forecasted data to the original dataset
 final_out <- bind_rows(carrot_decomp_out,carrot_forecast_df)
 
+View(final_out)
+
 # Save the final dataset as a CSV file
 write_csv(final_out,"carrot_forecast.csv")

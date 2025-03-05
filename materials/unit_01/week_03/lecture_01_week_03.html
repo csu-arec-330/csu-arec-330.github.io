@@ -8,7 +8,7 @@
 <link href="lecture_01_week_03_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_01_week_03_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_01_week_03_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Week 7:  Prediction Intervals and Advanced Forecasting Options </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -332,32 +333,28 @@
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<p>Review regression analysis</p>
-<p>Forecast prediction intervals</p>
-<p>Advanced forecasting I: Additive vs.&nbsp;Multiplicative models</p>
-<p>Advanced forecasting II: Cross-validation</p>
+<p>Review of forecasting</p>
+<p>Understanding prediction intervals</p>
+<p>Time-series cross-validation</p>
 <p>Project 1 reminder and details</p>
-<!-- example of big text fit to slide width -->
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
 </section>
-<section id="a-review-question" class="title-slide slide level1 scrollable smaller center">
-<h1>A review question</h1>
-
-<img data-src="includes/tableau_reg.png" style="width:100.0%" class="r-stretch"><p>Which value indicates whether the estimated relationship between carrot prices and time is statistically significantly different from zero?</p>
-<p>A. 0.0728323</p>
-<p>B. 189.513</p>
-<p>C. 0.0288396</p>
-<p>D. 0.0204868</p>
+<section id="review-forecasting-and-decomposition" class="slide level2 scrollable">
+<h2>Review: Forecasting and Decomposition</h2>
+<p>Let’s recall the process of breaking down time series data.</p>
+<ol type="1">
+<li>We separated (through time-series decomposition) a times series into:</li>
+</ol>
+<ul>
+<li>Trend: long-term direction</li>
+<li>Seasonality: repeating patterns</li>
+<li>Residual: unexplained variation</li>
+</ul>
+<ol start="2" type="1">
+<li><p>We used forecasting to predict trend and seasonality into the future.</p></li>
+<li><p>We modeled residuals separately using an ARIMA model.</p></li>
+<li><p>Final forecast = Trend + Seasonality + Residual Model</p></li>
+</ol>
 </section>
-
 <section id="intro-to-prediction-intervals" class="title-slide slide level1 center">
 <h1>Intro to Prediction Intervals</h1>
 
@@ -370,60 +367,85 @@
 <p><strong>What are <em>prediction intervals</em>?</strong> <br> <br> The interval within which we expect <br> values of our <span class="math inline">\(y\)</span> variable to lie at <br> a future point in time.</p>
 </div>
 </section>
-<section id="prediction-intervals-an-example" class="slide level2">
+<section id="prediction-intervals-an-example" class="slide level2 scrollable">
 <h2>Prediction intervals: An example</h2>
+<p>Last week, we forecasted carrot prices from August 2024 to January 2028.</p>
+<p>The predicted price for:</p>
 <ul>
-<li><p>Our forecast from last week predicted that carrot prices will be 207.721 <em>250 months</em> after the financial crisis.</p></li>
-<li><p>We recognize that it is incredibly unlikely for us to perfectly predict carrot prices in twenty years…</p></li>
-<li><p>Instead, what if we construct a <em>range</em> of estimates that we are pretty confident encompasses the true value of carrot prices?</p></li>
-<li><p>Perhaps we are reasonably sure the true price will be between 160 and 280…</p></li>
+<li>April 2025 is <em>$261.5564</em></li>
+<li>January 2028 is <em>$255.9185</em></li>
+</ul>
+<p>But how confident are we? Instead of a single value, we might say:</p>
+<ul>
+<li>We are 95% confident that the April 2025 price will be between $142.30237 and $380.8104.</li>
+<li>We are 95% confident that the January 2028 price will be between $28.73887 and $483.0982.</li>
+</ul>
+<p>These are our <strong>prediction intervals</strong>.</p>
+<ul>
+<li>Prediction intervals increase as we forecast further into the future.</li>
+<li>Prediction intervals capture both model uncertainty and random fluctuations.</li>
+<li>Wider intervals = more uncertainty in the forecast.</li>
+</ul>
+</section></section>
+<section>
+<section id="before-we-introduce-prediction-intervals-lets-first-understand-confidence-intervals-cis." class="title-slide slide level1 center">
+<h1>Before we introduce prediction intervals, let’s first understand <em>confidence intervals</em> (CIs).</h1>
+
+</section>
+<section id="what-are-confidence-intervals" class="slide level2 scrollable">
+<h2>What are confidence intervals?</h2>
+<ul>
+<li>A CI is a range of values that express uncertainty in an estimate.</li>
+<li>In forecasting, a CI tells us the range where the true trend or seasonal effect is likely to fall.</li>
+<li>If we estimate a trend in carrot prices, a CI might say:</li>
+</ul>
+<blockquote>
+<p><em>“We are 95% confident that the true price trend is between $0.05 and $0.10 per month.”</em></p>
+</blockquote>
+<!--
+Recall the regression equation: $Y_i = \beta_0 + \beta_1X_i + \varepsilon_i$
+
+- CIs give us information on whether estimates are statistically significantly different from zero: Does the interval include 0?
+
+- CIs give us the range of possible values representing the correlation between $X$ and $Y$.
+-->
+</section>
+<section id="how-are-confidence-intervals-calculated" class="slide level2">
+<h2>How are confidence intervals calculated?</h2>
+<p>CIs are calculated using:</p>
+<ul>
+<li>The estimate itself (e.g., the trend or seasonal component),</li>
+<li>The standard error (how much the estimate varies),</li>
+<li>The sample size (more data = narrower intervals),</li>
+<li>A multiplier (critical value) (based on the confidence level).</li>
+</ul>
+<!-- ![](includes/tableau_describe.png){width="100%"} -->
+</section>
+<section id="how-are-prediction-intervals-different" class="slide level2 scrollable">
+<h2>How are prediction intervals different?</h2>
+<ul>
+<li>Confidence intervals apply to estimates like trends or seasonal effects.</li>
+<li>Prediction intervals apply to individual future values of a time series.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<ul>
+<li>A confidence interval might tell us how uncertain we are about the trend in carrot prices.</li>
+<li>A prediction interval tells us how uncertain we are about the actual price of carrots next year.</li>
+</ul>
+<p>Prediction intervals are always wider than confidence intervals because they capture both:</p>
+<ul>
+<li>Uncertainty in the estimate (trend, seasonality, etc.).</li>
+<li>Uncertainty in future random fluctuations (residuals).</li>
 </ul>
 </section>
-<section id="prediction-intervals-the-intuition" class="slide level2 scrollable">
-<h2>Prediction intervals: The intuition</h2>
-<p>The intuition for prediction intervals begins with understanding <em>confidence intervals</em>:</p>
-<ol type="1">
-<li><p>What are confidence intervals (CIs)?</p>
-<ul>
-<li><p>A range of values that describe the uncertainty of an estimate of a parameter (<span class="math inline">\(\beta_1\)</span>). Recall the regression equation: <span class="math inline">\(Y_i = \beta_0 + \beta_1X_i + \varepsilon_i\)</span></p></li>
-<li><p>Similarly to p-values, CIs give us information on whether estimates are statistically significantly different from zero: Does the interval include 0?</p></li>
-<li><p>CIs go beyond p-values and give us the range of possible values representing the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p></li>
-</ul></li>
-</ol>
-</section>
-<section id="prediction-intervals-the-intuition-1" class="slide level2">
-<h2>Prediction intervals: The intuition</h2>
-<ol start="2" type="1">
-<li><p>How are confidence intervals calculated?</p>
-<ul>
-<li>Using the estimate, its standard error, the sample size, critical values, and an assumption about the distribution of your data.</li>
-</ul></li>
-</ol>
-
-<!--
-    - The 95% CI for the relationship between our time variable and carrot prices is 
--->
-<img data-src="includes/tableau_describe.png" style="width:100.0%" class="r-stretch"></section>
-<section id="prediction-intervals-the-intuition-2" class="slide level2">
-<h2>Prediction intervals: The intuition</h2>
-<ol start="3" type="1">
-<li><p>How are confidence intervals different from prediction intervals?</p>
-<ul>
-<li><p>Prediction intervals are concerned with bounding our <em>predictions</em>.</p></li>
-<li><p>Prediction intervals are always wider than CIs because of the added uncertainty involved in predicting a single response versus estimating the mean response.</p></li>
-<li><p>Prediction intervals increase as we try to forecast further in the future.</p></li>
-</ul></li>
-</ol>
-</section>
-<section id="prediction-intervals-the-intuition-3" class="slide level2">
-<h2>Prediction intervals: The intuition</h2>
+<section id="interpreting-prediction-intervals" class="slide level2">
+<h2>Interpreting prediction intervals</h2>
 <p>The most frequently used prediction (and confidence) interval is 95%.</p>
 <p><strong>The intuitive interpretation</strong>: We are 95% confident that our prediction interval contains the value of our outcome variable that will be realized.</p>
 <p>In Tableau (and most other software) prediction intervals are shown with shaded regions around the prediction.</p>
-</section></section>
-<section>
-<section id="section-1" class="title-slide slide level1 center">
-<h1></h1>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 <div style="text-align: center">
 <p><img data-src="includes/Tableau_forecast.png" style="width:80.0%"></p>
 </div>
@@ -486,91 +508,118 @@
 <!-- Answer: B. Confidence intervals are used to estimate the range within which a population parameter (such as the mean or proportion) is likely to lie with a specified level of confidence. On the other hand, prediction intervals provide a range within which we expect future observations of a variable to fall, also with a specified level of confidence. -->
 <!-- ::: -->
 </section>
-<section id="prediction-intervals-estimation" class="slide level2 scrollable">
-<h2>Prediction intervals: Estimation</h2>
-<p>Prediction intervals require a few inputs and assumptions.</p>
+<section id="prediction-intervals-in-r" class="slide level2 scrollable">
+<h2>Prediction intervals in R</h2>
+<p>Last week, we generated forecasts using <code>forecast()</code> in R.</p>
+<p>Let’s look at the prediction interval for the carrot forecast:</p>
+<p>The shaded region shows the prediction interval range.</p>
+<p>How are prediction intervals calculated?</p>
+</section>
+<section id="how-are-prediction-intervals-computed-95-level" class="slide level2 scrollable">
+<h2>How are prediction intervals computed (95% level)</h2>
 <p>The formula for a 95% prediction interval for the <span class="math inline">\(h\)</span>-step forecast is:</p>
 <p><span class="math display">\[\text{Prediction Interval for }{y}_{T+h|T} = \widehat{y}_{T+h|T} \pm 1.96 \cdot \widehat{\sigma}_h\]</span></p>
 <p>where</p>
-<p><span class="math inline">\(\widehat{y}_{T+h|T}\)</span> is our prediction of <span class="math inline">\(y\)</span>, <span class="math inline">\(h\)</span> periods into the future</p>
+<p><span class="math inline">\(\widehat{y}_{T+h|T}\)</span> is our prediction of <span class="math inline">\(y\)</span> at time <span class="math inline">\(T\)</span>, <span class="math inline">\(h\)</span> periods into the future</p>
 <p><span class="math inline">\(h\)</span> represents the forecast horizon, or the specific number of intervals (e.g., days, months, years) from the last observed data point</p>
 <p>1.96 is the multiplier for a 95% prediction interval assuming that our sampling distribution of future observations is normal</p>
 <p><span class="math inline">\(\widehat{\sigma}_h\)</span> is an estimate of the standard deviation for the <span class="math inline">\(h\)</span>-step forecast</p>
 </section>
-<section id="prediction-intervals-the-multiplier" class="slide level2 scrollable">
-<h2>Prediction intervals: The multiplier</h2>
-<p>The equation for a prediction interval can be written more generally as: <span class="math display">\[
-\widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
-\]</span></p>
-<p>where the multiplier <span class="math inline">\(c\)</span> depends on the prediction interval you desire:</p>
-<table>
+<section id="understanding-the-multiplier-in-prediction-intervals" class="slide level2 scrollable">
+<h2>Understanding the multiplier in prediction intervals</h2>
+<p>We adjust the interval width based on how confident we want to be:</p>
+<table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: center;">Percentage</th>
-<th style="text-align: center;">Multiplier</th>
+<th><strong>Confidence Level</strong></th>
+<th><strong>Multiplier</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">80</td>
-<td style="text-align: center;">1.28</td>
+<td>80%</td>
+<td>1.28</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">85</td>
-<td style="text-align: center;">1.44</td>
+<td>85%</td>
+<td>1.44</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">90</td>
-<td style="text-align: center;">1.64</td>
+<td>90%</td>
+<td>1.64</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">95</td>
-<td style="text-align: center;">1.96</td>
+<td>95%</td>
+<td>1.96</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">99</td>
-<td style="text-align: center;">2.58</td>
+<td>99%</td>
+<td>2.58</td>
 </tr>
 </tbody>
 </table>
+<ul>
+<li>Higher confidence <span class="math inline">\(\rightarrow\)</span> wider prediction intervals</li>
+<li>Lower confidence <span class="math inline">\(\rightarrow\)</span> narrower intervals</li>
+</ul>
+</section>
+<section id="how-are-prediction-intervals-computed-general-form" class="slide level2 scrollable">
+<h2>How are prediction intervals computed (general form)</h2>
+<p>The equation for a prediction interval can be written more generally as: <span class="math display">\[
+\widehat{y}_{T+h|T} \pm c\cdot \widehat{\sigma}_h
+\]</span></p>
+<p>where the multiplier <span class="math inline">\(c\)</span> depends on the prediction interval you desire.</p>
 <div style="font-size: 80%;">
 <p>Note that these all assume a normal distribution of future observations.</p>
 </div>
 </section>
-<section id="prediction-intervals-standard-deviation" class="slide level2 scrollable">
-<h2>Prediction intervals: Standard deviation</h2>
+<section id="why-does-standard-deviation-matter-for-prediction-intervals" class="slide level2">
+<h2>Why does standard deviation matter for prediction intervals?</h2>
+<ul>
+<li><p>The standard deviation of the forecast errors measures <strong>how much our predicted values tend to vary from actual observations.</strong></p></li>
+<li><p>The further we forecast into the future, the greater this uncertainty becomes.</p></li>
+<li><p>We adjust our prediction intervals based on the standard deviation of the forecast distribution.</p></li>
+</ul>
+<p>Let’s look at how this is done mathematically.</p>
+</section>
+<section id="prediction-interval-formula-standard-deviation" class="slide level2 scrollable">
+<h2>Prediction interval formula: Standard deviation</h2>
 <p>When forecasting 1 step ahead (<span class="math inline">\(h=1\)</span>), we will estimate the standard deviation of the forecast distribution according to:</p>
 <p><span class="math display">\[
 \widehat{\sigma} = \sqrt{\frac{1}{T-K}\sum^T_{t=1}e^2_t}
 \]</span></p>
-<p>where,</p>
+<p>where</p>
 <p><span class="math inline">\(T\)</span> is the number of data points in the time series</p>
 <p><span class="math inline">\(K\)</span> is the number of parameters estimated in the forecasting method</p>
-<p><span class="math inline">\(e_t\)</span> is the residual at time <span class="math inline">\(t\)</span> (recall your decomposition…)</p>
+<p><span class="math inline">\(e_t\)</span> is the residual at time <span class="math inline">\(t\)</span></p>
 </section>
-<section id="prediction-intervals-standard-deviation-1" class="slide level2 scrollable">
-<h2>Prediction intervals: Standard deviation</h2>
+<section id="a-note-on-residuals" class="slide level2 scrollable">
+<h2>A note on residuals</h2>
+<p>The residual <span class="math inline">\(e_t\)</span> in the equation of the standard error is not the same as the residual <span class="math inline">\(R_t\)</span> from the time series decomposition.</p>
+<p><strong>Residuals (<span class="math inline">\(R_t\)</span>) in Time Series Decomposition</strong></p>
+<ul>
+<li>Represent the portion of the data that is not explained by the trend and seasonal components.</li>
+<li>Captures random fluctuations or noise in the observed time series.</li>
+</ul>
+<p><strong>Residuals (<span class="math inline">\(e_t\)</span>) in Forecasting &amp; Prediction Intervals</strong></p>
+<ul>
+<li>Represent the errors between predicted and actual values when making forecasts.</li>
+<li>Measure how much a model’s predictions deviate from reality.</li>
+<li>Used to estimate the uncertainty in future forecasts.</li>
+</ul>
+</section>
+<section id="prediction-interval-formula-standard-deviation-1" class="slide level2 scrollable">
+<h2>Prediction interval formula: Standard deviation</h2>
 <p>When forecasting <span class="math inline">\(h\)</span> steps ahead (<span class="math inline">\(h\geq 1\)</span>), we can estimate the standard deviation of the forecast distribution according to:</p>
 <p><span class="math display">\[
 \widehat{\sigma}_h = \widehat{\sigma}\sqrt{h}
 \]</span></p>
-<p>Note that there are many other methods for estimating the standard deviation of the forecasting distribution.</p>
-<p>This formula is for the Naïve method, and is among the simplest.<sup>1</sup></p>
+<p>This formula highlights how <em>uncertainty grows over time</em>.</p>
+<p>Note that there are many other methods for estimating the standard deviation of the forecasting distribution. This formula is for the Naïve method, and is among the simplest.<sup>1</sup></p>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>This is a useful resource for more information on these methods and others: <a href="https://otexts.com/fpp3/classical-decomposition.html" class="uri">https://otexts.com/fpp3/classical-decomposition.html</a></p></li></ol></aside></section>
 <section id="prediction-intervals-application" class="slide level2">
 <h2>Prediction intervals: Application</h2>
 <p>In lab this week, we will show you how to estimate prediction intervals in R and plot them in Tableau.</p>
-<!-- # Additive vs. Multiplicative Models -->
-<!-- ## Additive vs. Multiplicative Decompositions {.scrollable} -->
-
-<!-- There are two types of forecasting methods you can use to construct forecasts in Tableau: Additive and Mutliplicative. -->
-<!-- These are known as classical decomposition methods, and are estimated according to: -->
-<!-- 1. Additive: $y_t = T_t + S_t + R_t$ -->
-<!-- 2. Multiplicative: $y_t = T_t \times S_t \times R_t$ -->
-<!-- ::: {style="font-size: 80%;"} -->
-<!-- Note there are a few other options for forecasting using decompositions, but we won't cover them in this class. -->
-<!-- This is a useful resource for more information on these methods and others: <https://otexts.com/fpp3/classical-decomposition.html> -->
-<!-- ::: -->
 </section></section>
 <section id="validating-predictions" class="title-slide slide level1 center">
 <h1>Validating Predictions</h1>
@@ -580,48 +629,143 @@
 <section id="section-2" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
+<p>How do we <strong>validate</strong> <br> our forecast model?</p>
+</div>
+</section>
+
+<section id="section-3" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
 <p><strong>The objective:</strong> <br> We want to show our audience <br> that they should trust our predictions.</p>
 </div>
 </section>
 
 <section>
-<section id="section-3" class="title-slide slide level1 center">
+<section id="section-4" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p><strong>The solution:</strong> <br> Time series cross-validation</p>
+<p><strong>The solution:</strong> <br> Time series cross-validation <br> <em>evaluates</em> forecasting accuracy.</p>
 </div>
 </section>
-<section id="time-series-cross-validation-the-intuition" class="slide level2">
-<h2>Time series cross-validation: The intuition</h2>
+<section id="the-process" class="slide level2">
+<h2>The process</h2>
+<p>Train-Test Splits</p>
+<ul>
+<li>Use historical data to train a forecast model.</li>
+<li>Compare predictions to held-out test data.</li>
+</ul>
+<p>Measure Accuracy</p>
+<ul>
+<li>Compute Mean Absolute Error (MAE), Root Mean Square Error (RMSE), etc.</li>
+</ul>
+</section>
+<section id="train-test-splits" class="slide level2">
+<h2>Train-test splits</h2>
 <p>Construct a series of “training” and “test” sets of data.</p>
 <p>Use your “training” set to construct a forecast (following the same methods in your main forecast).</p>
 <p>Evaluate the accuracy of your forecast using your “test” set.</p>
 </section>
-<section id="time-series-cross-validation-test-set-1" class="slide level2 scrollable">
-<h2>Time series cross-validation: Test set 1</h2>
+<section id="example-train-test-splits" class="slide level2 scrollable">
+<h2>Example: Train-test splits</h2>
 <p>Training data = blue</p>
 <p>Test data = orange</p>
 <div style="text-align: center">
 <p><img data-src="includes/train_test1.png" style="width:75.0%"></p>
 </div>
+<aside class="notes">
+<p>This image illustrates rolling-origin time series cross-validation, a method for train-test splitting in forecasting. Here’s how to explain it:</p>
+<ol type="1">
+<li>Each row represents a different train-test split over time.</li>
+<li>Blue dots (leftmost section in each row) represent the training set, which grows over time as more data becomes available.</li>
+<li>Orange dots represent the test set, which consists of future observations that the model is tested on.</li>
+<li>Gray dots (rightmost section) are future data points that have not yet been included in the analysis.</li>
+<li>The diagonal pattern shows how the test set is progressively shifted forward, allowing multiple evaluations of the model at different time points.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="time-series-cross-validation-test-set-2" class="slide level2 scrollable">
-<h2>Time series cross-validation: Test set 2</h2>
-<p>Training data = blue</p>
-<p>Test data = orange</p>
-<div style="text-align: center">
-<p><img data-src="includes/train_test2.png" style="width:75.0%"></p>
-</div>
-</section>
-<section id="time-series-cross-validation-evaluating" class="slide level2 scrollable">
-<h2>Time series cross-validation: Evaluating?</h2>
-<p>Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:</p>
+<section id="analogy-predicting-the-weather-with-a-growing-diary" class="slide level2 scrollable">
+<h2>Analogy: Predicting the Weather with a Growing Diary</h2>
+<p>Imagine you’re keeping a diary of the daily high temperature in your town.</p>
 <ul>
-<li><p>Mean Forecast Error (MFE): average difference between prediction and observed <span class="math inline">\(\sum_{t=1}^{H} \frac{\hat{y}_t - y_t}{H}\)</span></p></li>
-<li><p>Mean Absolute Error (MAE): average absolute value of the difference between the prediction and observed <span class="math inline">\(\sum_{t=1}^{H} \frac{| \hat{y}_t - y_t | }{H}\)</span></p></li>
-<li><p>Root Mean Square Error (RMSE): square root of the average of the squared difference between the prediction and observed <span class="math inline">\(\sqrt{\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )^2 }{H}}\)</span></p></li>
-<li><p>Mean Absolute Percentage Error (MAPE): average of the difference between prediction and observed as a fraction of observed <span class="math inline">\(\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )/y_t }{H}\)</span></p></li>
+<li>At first, you have only a few days recorded (blue dots), so you try to predict tomorrow’s temperature (orange dot) based on what you’ve seen so far.</li>
+<li>Each day (each additional row), you update your diary by adding yesterday’s temperature and then make a new prediction for today (the previous row’s orange dot).</li>
+<li>As time passes, your diary grows, and you always use all past records to make the best possible guess for the next day.</li>
 </ul>
+<p><span class="math inline">\(\rightarrow\)</span> Each day, you train a model on all previous days and test your prediction on the next.</p>
+<p><span class="math inline">\(\rightarrow\)</span> Over time, your predictions (hopefully) get better as you learn from more past observations!</p>
+<p>That’s exactly how <strong>rolling-origin cross-validation</strong> works in time series forecasting.</p>
+<!--
+## Example: Train-test splits {.scrollable}
+
+Training data = blue
+
+Test data = orange
+
+::: {style="text-align: center"}
+![](includes/train_test2.png){width="75%"}
+:::
+-->
+</section>
+<section id="measure-accuracy" class="slide level2 scrollable">
+<h2>Measure accuracy</h2>
+<p>How do we measure how well our model predicts future values?</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 38%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Metric</strong></th>
+<th><strong>Formula</strong></th>
+<th><strong>Interpretation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Mean Forecast Error (MFE)</strong></td>
+<td><span class="math inline">\(\sum_{t=1}^{H} \frac{\hat{y}_t - y_t}{H}\)</span></td>
+<td>Average difference between predictions &amp; actual values.</td>
+</tr>
+<tr class="even">
+<td><strong>Mean Absolute Error (MAE)</strong></td>
+<td><span class="math inline">\(\sum_{t=1}^{H} \frac{| \hat{y}_t - y_t | }{H}\)</span></td>
+<td>Measures average absolute error size.</td>
+</tr>
+<tr class="odd">
+<td><strong>Root Mean Squared Error (RMSE)</strong></td>
+<td><span class="math inline">\(\sqrt{\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )^2 }{H}}\)</span></td>
+<td>Penalizes larger errors more heavily.</td>
+</tr>
+<tr class="even">
+<td><strong>Mean Absolute Percentage Error (MAPE)</strong></td>
+<td><span class="math inline">\(\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )/y_t }{H}\)</span></td>
+<td>Expresses error as a percentage of actual values.</td>
+</tr>
+</tbody>
+</table>
+<!-- Once you have constructed estimates for your series of test and training data, you can measure/summarize forecast accuracy using:
+
+- Mean Forecast Error (MFE): average difference between prediction and observed $\sum_{t=1}^{H} \frac{\hat{y}_t - y_t}{H}$
+
+- Mean Absolute Error (MAE): average absolute value of the difference between the prediction and observed $\sum_{t=1}^{H} \frac{| \hat{y}_t - y_t | }{H}$
+
+- Root Mean Square Error (RMSE): square root of the average of the squared difference between the prediction and observed $\sqrt{\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )^2 }{H}}$
+
+- Mean Absolute Percentage Error (MAPE): average of the difference between prediction and observed as a fraction of observed
+$\sum_{t=1}^{H} \frac{ (\hat{y}_t - y_t )/y_t }{H}$
+-->
 <p>Choose the forecasting model that minimizes prediction error according to these measures.</p>
 <div style="font-size: 80%;">
 <p>This is a useful resource for these evaluation methods: <a href="https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b" class="uri">https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b</a></p>
@@ -690,15 +834,17 @@
 <h2>Final Project Submission</h2>
 <p>The video presentation is part 1 of the project.</p>
 <p>A report summarizing the presentation content is part 2 of the project. Your report should summarize the same information as your presentation, and can include additional information and visualizations if they are helpful for answering your question.</p>
-<p>Each group member will be responsible for uploading the report onto their Google site. You can both have an identical report, but must post it to your personal webpage.</p>
+<p>Each group member will be responsible for uploading the report onto their Google site. You can both have an identical report, but both must post it to your personal webpage.</p>
 </section>
 <section id="references" class="slide level2 scrollable smaller">
 <h2>References</h2>
 <p>Hyndman, R.J., &amp; Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. <a href="https://otexts.com/fpp3/" class="uri">https://otexts.com/fpp3/</a>. Accessed on 02-28-2023.</p>
 <p>A useful blog post: <a href="https://mins.space/blog/2020-07-30-forecasting-through-decomposition/" class="uri">https://mins.space/blog/2020-07-30-forecasting-through-decomposition/</a></p>
 <p>Another useful blog post: <a href="https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b" class="uri">https://medium.com/analytics-vidhya/basics-of-forecast-accuracy-db704b0b001b</a></p>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
 
@@ -728,7 +874,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -913,6 +1058,82 @@
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -945,18 +1166,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -988,11 +1198,50 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1002,8 +1251,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1017,7 +1275,11 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

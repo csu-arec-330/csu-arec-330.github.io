@@ -12,6 +12,8 @@ editor:
     wrap: 72
 ---
 
+
+
 ## Agenda
 
 -   Understanding time series decomposition
@@ -64,6 +66,8 @@ By decomposing the time series, we can isolate these effects and make better pre
 
 ##  {.scrollable}
 
+
+
 ```{r}
 #| eval: true
 
@@ -84,6 +88,8 @@ egg_decomp <- decompose(egg_ts, type = "multiplicative")
 # Plot decomposition
 plot(egg_decomp)
 ```
+
+
 This plot helps us:
 
 -   Identify long-term trends in egg prices.
@@ -138,6 +144,8 @@ $Y_{Dec} = 10,000 + (1,000 \times 11) + 500 + R$
 **Answer:** $Y_{Dec} = \$21,500$
 
 ## Egg Example: Revisited (Additive Model)
+
+
 ```{r}
 #| eval: true
 
@@ -158,6 +166,8 @@ egg_decomp_add <- decompose(egg_ts, type = "additive")
 # Plot decomposition
 plot(egg_decomp_add)
 ```
+
+
 
 ## Multiplicative Model (when variations scale with the trend level) {.scrollable}
 
@@ -198,6 +208,8 @@ $Y_{Dec} = (10,000 \times 1.05^{11}) \times 1.2 \times R$
 **Answer:** $Y_{Dec} = \$20,524.07$
 
 ## Egg Example: Revisited (Multiplicative Model)
+
+
 ```{r}
 #| eval: true
 
@@ -218,6 +230,8 @@ egg_decomp_mult <- decompose(egg_ts, type = "multiplicative")
 # Plot decomposition
 plot(egg_decomp_mult)
 ```
+
+
 
 ## Egg Example: Revisited (Takeaways)
 
@@ -308,3 +322,4 @@ Analyze trends
 Generate a forecast
 
 Present results in a recorded video
+
