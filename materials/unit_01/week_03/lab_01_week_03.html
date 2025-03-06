@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -83,21 +83,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#learning-objectives-tableau" id="toc-learning-objectives-tableau" class="nav-link" data-scroll-target="#learning-objectives-tableau">Learning Objectives Tableau</a></li>
   <li><a href="#r-time-series-forecast-and-prediction-interval" id="toc-r-time-series-forecast-and-prediction-interval" class="nav-link" data-scroll-target="#r-time-series-forecast-and-prediction-interval">R: Time Series Forecast and Prediction Interval</a>
   <ul class="collapse">
+  <li><a href="#review-from-last-week" id="toc-review-from-last-week" class="nav-link" data-scroll-target="#review-from-last-week">Review from last week</a></li>
+  <li><a href="#introduction-to-fpp3" id="toc-introduction-to-fpp3" class="nav-link" data-scroll-target="#introduction-to-fpp3">Introduction to <code>fpp3</code></a></li>
   <li><a href="#step-1-load-your-data" id="toc-step-1-load-your-data" class="nav-link" data-scroll-target="#step-1-load-your-data">Step 1: Load your data</a></li>
   <li><a href="#step-2-convert-your-data-into-a-time-series-object" id="toc-step-2-convert-your-data-into-a-time-series-object" class="nav-link" data-scroll-target="#step-2-convert-your-data-into-a-time-series-object">Step 2: Convert your data into a time series object</a></li>
-  <li><a href="#step-3-tidy-forecast-workflow" id="toc-step-3-tidy-forecast-workflow" class="nav-link" data-scroll-target="#step-3-tidy-forecast-workflow">Step 3: Tidy forecast workflow</a></li>
-  <li><a href="#step-4-generating-prediction-intervals" id="toc-step-4-generating-prediction-intervals" class="nav-link" data-scroll-target="#step-4-generating-prediction-intervals">Step 4: Generating prediction intervals</a></li>
-  <li><a href="#step-5-preparing-to-export" id="toc-step-5-preparing-to-export" class="nav-link" data-scroll-target="#step-5-preparing-to-export">Step 5: Preparing to export</a></li>
+  <li><a href="#step-3-build-a-forecast-workflow" id="toc-step-3-build-a-forecast-workflow" class="nav-link" data-scroll-target="#step-3-build-a-forecast-workflow">Step 3: Build a forecast workflow</a>
+  <ul class="collapse">
+  <li><a href="#part-1-define-the-model" id="toc-part-1-define-the-model" class="nav-link" data-scroll-target="#part-1-define-the-model">Part 1: Define the model</a></li>
+  <li><a href="#part-2-generate-a-forecast" id="toc-part-2-generate-a-forecast" class="nav-link" data-scroll-target="#part-2-generate-a-forecast">Part 2: Generate a forecast</a></li>
+  <li><a href="#part-3-visualize-the-forecast" id="toc-part-3-visualize-the-forecast" class="nav-link" data-scroll-target="#part-3-visualize-the-forecast">Part 3: Visualize the forecast</a></li>
+  </ul></li>
+  <li><a href="#step-4-extract-prediction-intervals" id="toc-step-4-extract-prediction-intervals" class="nav-link" data-scroll-target="#step-4-extract-prediction-intervals">Step 4: Extract prediction intervals</a></li>
+  <li><a href="#step-5-export-data-for-tableau" id="toc-step-5-export-data-for-tableau" class="nav-link" data-scroll-target="#step-5-export-data-for-tableau">Step 5: Export data for Tableau</a></li>
   </ul></li>
   <li><a href="#tableau-plotting-prediction-intervals" id="toc-tableau-plotting-prediction-intervals" class="nav-link" data-scroll-target="#tableau-plotting-prediction-intervals">Tableau: Plotting prediction intervals</a>
   <ul class="collapse">
   <li><a href="#option-1-simple-line-graphs-no-shading" id="toc-option-1-simple-line-graphs-no-shading" class="nav-link" data-scroll-target="#option-1-simple-line-graphs-no-shading">Option 1: Simple line graphs, no shading</a></li>
   <li><a href="#option-2-adding-shading" id="toc-option-2-adding-shading" class="nav-link" data-scroll-target="#option-2-adding-shading">Option 2: Adding shading</a></li>
+  </ul></li>
   <li><a href="#presenting-in-tableau" id="toc-presenting-in-tableau" class="nav-link" data-scroll-target="#presenting-in-tableau">Presenting in Tableau</a>
   <ul class="collapse">
   <li><a href="#option-1-stories" id="toc-option-1-stories" class="nav-link" data-scroll-target="#option-1-stories">Option 1: Stories</a></li>
   <li><a href="#option-2-embed-in-powerpoint" id="toc-option-2-embed-in-powerpoint" class="nav-link" data-scroll-target="#option-2-embed-in-powerpoint">Option 2: Embed in Powerpoint</a></li>
-  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -119,7 +126,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p><img src="includes/generic_forecasting.webp" class="img-fluid"></p>
 <div style="font-size: 1.5em">
@@ -142,65 +151,100 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="r-time-series-forecast-and-prediction-interval" class="level1">
 <h1>R: Time Series Forecast and Prediction Interval</h1>
-<p><strong>Last week:</strong></p>
+<section id="review-from-last-week" class="level2">
+<h2 class="anchored" data-anchor-id="review-from-last-week">Review from last week</h2>
 <ul>
-<li><p>We learned how to build a forecast from the components of the time series decomposition (Trend, Seasonality, and Residual).</p></li>
+<li><p>We built a forecast from time series decomposition components (Trend, Seasonality, and Residual).</p></li>
 <li><p>We made some relatively simple assumptions about how these components would behave in the future.</p></li>
 </ul>
-<p>R has many time series analysis and forecasting tools. Because the libraries containing the tools are open source and written by R users, the structure of the functions and object created by them may vary.</p>
-<p><strong>This week:</strong></p>
-<p>We are going to start using a new library called <code>fpp3</code> that you will need to install if it isn’t already installed.</p>
+<p><strong>This week</strong>, we will explore a different way to determine prediction intervals and quantify the uncertainty in our forecasts.</p>
+</section>
+<section id="introduction-to-fpp3" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-fpp3">Introduction to <code>fpp3</code></h2>
+<p>We will use the <code>fpp3</code> package, which simplifies time series analysis by integrating several useful libraries that make time series analysis and forecasting much easier:</p>
 <ul>
-<li><code>fpp3</code> is a meta-library that loads a series of time series forecasting libraries that make time series analysis and forecasting much easier. The library <code>fpp3</code> was created as the companion to the textbook <a href="https://otexts.com/fpp3/">Forecasting: Principles and Practice (3rd ed)</a>.</li>
+<li><p><code>fable</code>: Contains models for time series forecasting.</p></li>
+<li><p><code>feasts</code>: Provides <code>dplyr</code>-like tools for working with time series data.</p></li>
 </ul>
-<p>The main libraries we will be using are <code>fable</code> and <code>feasts</code>:</p>
-<ul>
-<li><p><code>fable</code> contains many time series models that you might want to use to understand and forecast data.</p></li>
-<li><p><code>feasts</code> contains a set of <code>dplyr</code>-like tools to work with time series data. This set of packages makes it <em>very easy</em> to run models and extract the information you want.</p></li>
-</ul>
+<p>The library <code>fpp3</code> was created as the companion to the textbook <a href="https://otexts.com/fpp3/">Forecasting: Principles and Practice (3rd ed)</a>.</p>
 <p>The goal today is to look at prediction intervals, which are related to confidence intervals but pertain to your forecast.</p>
-<section id="step-1-load-your-data" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-load-your-data">Step 1: Load your data</h3>
-<p>First, let’s load the time series data into R and set up your script (description, working directory, load packages). We will continue using the carrot price data.</p>
+</section>
+<section id="step-1-load-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-load-your-data">Step 1: Load your data</h2>
+<p>First, set up your script (description, working directory, load packages).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This lab...</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the script for lab 07.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),<span class="at">get =</span> <span class="st">"economic.data"</span>,<span class="at">from=</span><span class="st">"2007-08-01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"Set your working directory"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Comment out the following line if you have already installed the forecast package.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"fpp3"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="step-2-convert-your-data-into-a-time-series-object" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-convert-your-data-into-a-time-series-object">Step 2: Convert your data into a time series object</h3>
-<p>Like last week, we need to convert our data into a time series dataframe called a <code>tsibble</code>:</p>
+<p>We will continue using the carrot price data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Prep data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>carrot_ts <span class="ot">&lt;-</span> carrot <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date,price) <span class="sc">%&gt;%</span> <span class="co">#select only the date and price variables</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date=</span><span class="fu">yearmonth</span>(date)) <span class="sc">%&gt;%</span> <span class="co">#convert the date into yearmonth format so the models understand the unit of observation</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>() <span class="co">#convert the data to a tsibble object - similar to a tibble or data.frame but for time series data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve time series data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>carrot <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="fu">c</span>(<span class="st">"WPU01130212"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">get =</span> <span class="st">"economic.data"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">from=</span><span class="st">"2007-08-01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This will create a new time series <code>tibble</code> object called <code>carrot_ts.</code></p>
 </section>
-<section id="step-3-tidy-forecast-workflow" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-tidy-forecast-workflow">Step 3: Tidy forecast workflow</h3>
-<p>Our objective is to build a forecast model and extract the key pieces of information, so that we can send them to Tableau.</p>
+<section id="step-2-convert-your-data-into-a-time-series-object" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-convert-your-data-into-a-time-series-object">Step 2: Convert your data into a time series object</h2>
+<p>Like last week, we need to convert our data into a time series object. We will use a new type of dataframe called a <code>tsibble</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="`ts()` versus `as_tsibble()`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>ts()</code> versus <code>as_tsibble()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>ts()</code> creates a standard time series object in R, which is limited in flexibility for modern time series analysis.</p>
+<p><code>as_tsibble()</code> converts data into a tibble-like time series format, allowing for easier manipulation and compatibility with <code>fpp3</code>.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Prep data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>carrot_ts <span class="ot">&lt;-</span> carrot <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date,price) <span class="sc">%&gt;%</span> <span class="co"># Select only the date and price variables</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date=</span><span class="fu">yearmonth</span>(date)) <span class="sc">%&gt;%</span> <span class="co"># Convert the date into "yearmonth" format so the models understand the unit of observation</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>() <span class="co"># Convert the data to a tsibble object. Similar to a tibble or data.frame but for time series data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Using `date` as index variable.</code></pre>
+</div>
+</div>
+<p>This will create a new time series <strong>tibble</strong> object called <code>carrot_ts.</code></p>
+</section>
+<section id="step-3-build-a-forecast-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-build-a-forecast-workflow">Step 3: Build a forecast workflow</h2>
+<p>Our objective is to build a forecast model and extract the key pieces of information, so that we can export them to Tableau.</p>
 <p>One of the benefits of the <code>fpp3</code> package is that it simplifies model building process in a structure that is compatible with the pipe, <code>%&gt;%</code>.</p>
-<p>We will recreate the forecasting model that we built in parts last week:</p>
+<p>Recall the steps we followed in week 06’s lab<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <ol type="1">
-<li><p>Recall that we first decomposed the carrot price time series into <code>trend</code>, <code>seasonal</code>, and <code>random</code> components, and built a forecasting model based on each component.</p></li>
-<li><p>Then we put it all back together.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
+<li><p>Decomposed the carrot price time series into <code>trend</code>, <code>seasonal</code>, and <code>random</code> components.</p></li>
+<li><p>Built a forecasting model based on each component. We defined individual forecasts for each of the three components. We used the function, <code>forecast</code>, to forecast each component separately.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
+<li><p>Put them back together.</p></li>
 </ol>
-<p>This process is called a <em>workflow</em>: a set of steps for completing a task. We will translate the workflow we built into the structure of the new package.</p>
-<section id="a-define-the-model" class="level4">
-<h4 class="anchored" data-anchor-id="a-define-the-model">3a: Define the model</h4>
+<p>We will translate the workflow we built into the structure of the new package. This process is called a <em>workflow</em>: A set of steps for completing a task.</p>
+<section id="part-1-define-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-define-the-model">Part 1: Define the model</h3>
 <p>We have the time series data, <code>carrot_ts</code>, prepared for modeling. Now, we need to define the model.</p>
-<p>We defined individual forecasts for each of the three components in week 2. We used the function, <code>forecast</code>, which uses an <strong>exponential smoothing</strong> method by default. We can be more explicit in defining an exponential smoothing model of each component.</p>
+<p>Let’s fit an <strong>Exponential Smoothing (ETS) model</strong>, specifying that trend, seasonality, and error components should be <strong>additive</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Fit the model</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> carrot_ts <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">my_ets=</span><span class="fu">ETS</span>(price <span class="sc">~</span> <span class="fu">trend</span>(<span class="at">method=</span><span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="at">method=</span><span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">error</span>(<span class="at">method=</span><span class="st">"A"</span>))) <span class="co">#fit model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the model</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> carrot_ts <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(<span class="at">my_ets =</span> <span class="fu">ETS</span>(price <span class="sc">~</span> <span class="fu">trend</span>(<span class="at">method=</span><span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="at">method=</span><span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">error</span>(<span class="at">method=</span><span class="st">"A"</span>))) <span class="co"># Fit model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function <code>model()</code> is used to define the forecasting model. In this code, we have done the following:</p>
 <ul>
@@ -208,85 +252,164 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Told the model that we want those components to be <em>additive</em> rather than multiplicative. (The argument <code>method="A"</code> represents additive.)</p></li>
 <li><p>We have defined the model as <code>my_ets</code>.</p></li>
 </ul>
-<p>In short, this defines the model that we built in parts in week 2. Inspecting the data frame <code>fit</code> shows us that this simply defines the model but doesn’t do anything with it.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Note that <code>model()</code> is a powerful function capable of specifying many models at once. You may want to compare model fits or estimate models on several price series simultaneously. See more information <a href="https://fable.tidyverts.org/articles/fable.html">here</a>.</p>
-</section>
-<section id="b-forecast-the-model" class="level4">
-<h4 class="anchored" data-anchor-id="b-forecast-the-model">3b: Forecast the model</h4>
-<p>Now that we have specified the model, we need to actually run the forecast.</p>
-<p>We will use a function called <code>forecast()</code> from the <code>fabletools</code> library (related to <code>fable</code>). However, this function is different from the previously used forecast function. When there are potential conflicts between functions with the same name from different libraries, you can specify the library, so R does not try to use the wrong one.</p>
-<p>We will specify that we want to forecast our <code>ETS</code> model for 5 years. The function understands that you want 5 years worth of monthly forecasts (remember the data is stored as monthly data); this is equivalent to <code>h=60</code> because 60 months is 5 years.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Forecast the model</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> fit <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  fabletools<span class="sc">::</span><span class="fu">forecast</span>(<span class="at">h=</span><span class="st">"5 years"</span>) <span class="co">#forecast model for 5 years</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In short, this defines the model that we built in parts in week 06.</p>
+<p>Inspecting the data frame <code>fit</code> shows us that this simply defines the model but doesn’t do anything with it.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>Inspect <code>carrot_forecast</code> and you will see that it contains mean and variance information for each month of the 5 year forecast.</p>
-</section>
-<section id="c-plot-the-forecast" class="level4">
-<h4 class="anchored" data-anchor-id="c-plot-the-forecast">3c: Plot the forecast</h4>
-<p>Finally, you want to visualize your forecast.</p>
-<p>You can pass <code>carrot_forecast</code> into the function <code>autoplot()</code> which understands how to read forecast output. Note that <code>autoplot()</code> plots only the forecast by default. Adding the observed data <code>carrot_ts</code> tells the function to include the observed data in the plot.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the forecast</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(carrot_forecast,carrot_ts) <span class="co">#forecast model for 5 years</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-title-container flex-fill">
+Note
 </div>
-<p>You can see that the mean, the 80%, and the 90% prediction intervals are included.</p>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>model()</code> is a powerful function capable of specifying many models at once. You may want to compare model fits or estimate models on several price series simultaneously. See more information <a href="https://fable.tidyverts.org/articles/fable.html">here</a>.</p>
+</div>
+</div>
+</section>
+<section id="part-2-generate-a-forecast" class="level3">
+<h3 class="anchored" data-anchor-id="part-2-generate-a-forecast">Part 2: Generate a forecast</h3>
+<p>Now that we have specified the model, we need to run the forecast.</p>
+<p>We will use a function called <code>forecast()</code> <strong>BUT</strong> we want the <code>forecast()</code> function from the <code>fabletools</code> library (related to <code>fable</code>).</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Different versions of `forecast()`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Different versions of <code>forecast()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>forecast()</code> function in <code>fabletools</code> is different from the <code>forecast()</code> function from the <code>forecast</code> package. When functions share the same name across different packages, you can specify the library explicitly (e.g., <code>fabletools::forecast()</code>) so R does not try to use the wrong one.</p>
+<p>In <code>forecast::forecast()</code>, we must specify the horizon (<code>h</code>) using the same time units as our data. Since our data is monthly, a 5-year forecast requires <code>h=60</code> (because 5 years × 12 months = 60).</p>
+<p>In <code>fabletools::forecast()</code>, the function automatically recognizes the time units from the <code>tsibble</code> object. Instead of manually converting to months, we can simply write <code>h="5 years"</code>, and it will handle the conversion.</p>
+<p>This makes <code>fabletools::forecast()</code> more intuitive and easier to use when working with time series data in <code>fpp3</code>.</p>
+</div>
+</div>
+<p>We will specify that we want to forecast our <code>ETS</code> model for <strong>5 years</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate forecast</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast <span class="ot">&lt;-</span> fit <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  fabletools<span class="sc">::</span><span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"5 years"</span>) <span class="co"># Forecast model for 5 years</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Inspect <code>carrot_forecast</code> and you will see that it contains mean price (called <strong>.mean</strong>) and prediction intervals (<strong>price</strong>) for each month of the 5-year forecast.</p>
+</section>
+<section id="part-3-visualize-the-forecast" class="level3">
+<h3 class="anchored" data-anchor-id="part-3-visualize-the-forecast">Part 3: Visualize the forecast</h3>
+<p>To visualize the forecast alongside the actual data, you can pass <code>carrot_forecast</code> into the function <code>autoplot()</code> which understands how to read forecast output. Note that <code>autoplot()</code> plots only the forecast by default. Adding the observed data <code>carrot_ts</code> tells the function to include the observed data in the plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the forecast</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(carrot_forecast, carrot_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The plot includes the mean forecast, the 80%, and the 90% prediction intervals.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="A note about `autoplot()` arguments">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A note about <code>autoplot()</code> arguments
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The order of arguments in <code>autoplot(carrot_forecast, carrot_ts)</code> is intentional because:</p>
+<ol type="1">
+<li><p><strong>Forecast first:</strong> <code>carrot_forecast</code> contains both the predicted values and the prediction intervals. By placing it first, <code>autoplot()</code> ensures that the forecasted values and confidence intervals are drawn before the actual time series.</p></li>
+<li><p><strong>Observed data second:</strong> <code>carrot_ts</code> is the historical data. Adding it second ensures it overlays correctly on the forecast, providing a clear comparison between past observations and future predictions.</p></li>
+</ol>
+</div>
+</div>
 <p>See <a href="https://otexts.com/fpp3/a-tidy-forecasting-workflow.html">Hyndman and Athanasopoulos</a> for more information on developing a workflow with these time series tools.</p>
 </section>
 </section>
-<section id="step-4-generating-prediction-intervals" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-generating-prediction-intervals">Step 4: Generating prediction intervals</h3>
-<p>The plot generated by <code>autoplot()</code> indicates that the model is estimating prediction intervals. There is a function <code>hilo()</code> from the <code>fable</code> library to extract them. However, this function creates a column with both upper and lower prediction intervals packed into a single variable. There are two options to separate the min and max of the 95% confidence interval:</p>
-<p>The first option is to use the <code>mutate()</code> function:</p>
+<section id="step-4-extract-prediction-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-extract-prediction-intervals">Step 4: Extract prediction intervals</h2>
+<p>The plot generated by <code>autoplot()</code> indicates that the model is estimating prediction intervals.</p>
+<p>To extract prediction intervals from the forecast object, use <code>hilo()</code> from the <code>fable</code> library. This function stores intervals in a compact format, so we must unpack them (i.e., change them from a single variable, currently called <strong>price</strong>, to two separate variables called <strong>upper</strong> and <strong>lower</strong>).</p>
+<p>There are two options to separate the min and max of the 95% confidence interval:</p>
+<section id="option-1-use-unpack_hilo" class="level4">
+<h4 class="anchored" data-anchor-id="option-1-use-unpack_hilo">Option 1: Use <code>unpack_hilo()</code></h4>
+<p>Specify the name of the variable; in this case <code>"95%"</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract prediction interval using mutate()</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_out <span class="ot">&lt;-</span> carrot_forecast <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co">#extract 95% prediction interval</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span><span class="sc">$</span>lower,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span><span class="sc">$</span>upper</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co">#generate own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The second option is to use a function called <code>unpack_hilo()</code> to separate the values into their own variables. You need to specify the name of the variable; in this case <code>"95%"</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract prediction interval using unpack_hilo()</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_out <span class="ot">&lt;-</span> carrot_forecast <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co">#extract 95% prediction interval</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unpack_hilo</span>(<span class="at">cols =</span> <span class="st">"95%"</span>) <span class="co">#unpack into own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract 95% prediction interval</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_pi <span class="ot">&lt;-</span> carrot_forecast <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co"># Extract 95% prediction interval</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unpack_hilo</span>(<span class="at">cols =</span> <span class="st">"95%"</span>) <span class="co"># Unpack into own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="step-5-preparing-to-export" class="level3">
-<h3 class="anchored" data-anchor-id="step-5-preparing-to-export">Step 5: Preparing to export</h3>
+<section id="option-2-use-mutate" class="level4">
+<h4 class="anchored" data-anchor-id="option-2-use-mutate">Option 2: Use <code>mutate()</code></h4>
+<p>Alternatively, extract intervals manually using <code>mutate()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract prediction interval manually</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_pi <span class="ot">&lt;-</span> carrot_forecast <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hilo</span>(<span class="at">level =</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co"># Extract 95% prediction interval</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"95%_lower"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span><span class="sc">$</span>lower,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"95%_upper"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">95%</span><span class="st">`</span><span class="sc">$</span>upper</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co"># Generate own columns named lower and upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Difference between `forecast` and `fabletools` prediction intervals">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Difference between <code>forecast</code> and <code>fabletools</code> prediction intervals
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The key difference between the prediction intervals in this lab and those from the <code>forecast()</code> function in the <code>forecast</code> package last week is how they are generated and what assumptions they make:</p>
+<p><strong>Last Week (<code>forecast()</code> from <code>forecast</code> package):</strong></p>
+<ul>
+<li>Used classical decomposition with separate forecasts for trend, seasonality, and residual components.</li>
+<li>The prediction intervals were derived from individual component forecasts, which were then summed to get the final forecast.</li>
+<li>The intervals were typically based on assumed normality of residuals and used a fixed standard error estimate.</li>
+</ul>
+<p><strong>This Week (<code>fabletools::forecast()</code> from <code>fpp3</code>):</strong></p>
+<ul>
+<li>Uses an Exponential Smoothing State Space Model (ETS) directly on the time series data.</li>
+<li>The prediction intervals are generated from the model’s inherent error structure, which accounts for uncertainty in a more integrated way.</li>
+<li>This approach better reflects how errors accumulate over time rather than summing separate component forecasts.</li>
+</ul>
+<p><strong>Takeaway:</strong></p>
+<p>The <code>fpp3</code> approach provides a more statistically robust way to estimate prediction intervals by treating the forecast holistically, rather than adding separate component forecasts.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-5-export-data-for-tableau" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-export-data-for-tableau">Step 5: Export data for Tableau</h2>
 <p>Finally, we want to prepare the data for export to Tableau.</p>
 <p>Recall that our original time series data, <code>carrot_ts</code>, has two variables: <code>date</code> and <code>price</code>.</p>
 <p>Our tsibble <code>carrot_forecast_out</code> has <code>date</code> and <code>price</code>, but the <code>price</code> variable is a distribution rather than a value. The variable <code>.mean</code> contains the forecast mean, so we can remove <code>price</code> and rename <code>.mean</code>. Remember that you can rename and select variables in the same command.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Prepare data for export</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>part2 <span class="ot">&lt;-</span> carrot_forecast_out <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date,<span class="at">price=</span>.mean,<span class="st">`</span><span class="at">lower</span><span class="st">`</span><span class="ot">=</span><span class="st">"95%_lower"</span>,<span class="st">`</span><span class="at">upper</span><span class="st">`</span><span class="ot">=</span><span class="st">"95%_upper"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>to_export <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_ts,part2)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(to_export,<span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for export</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>carrot_forecast_out <span class="ot">&lt;-</span> carrot_forecast_pi <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">price =</span> .mean, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">lower =</span> <span class="st">"95%_lower"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">upper =</span> <span class="st">"95%_upper"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>to_export <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(carrot_ts, carrot_forecast_out)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(to_export,<span class="st">"carrot_forecast.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<blockquote class="blockquote">
-<p>Note: If you used the code with <code>mutate</code> then you do not need to rename “95%_lower” and “95%_upper” in this code block.</p>
-</blockquote>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/KMrGAUcnM00" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 </section>
 <section id="tableau-plotting-prediction-intervals" class="level1">
 <h1>Tableau: Plotting prediction intervals</h1>
-
 <!---
 Last time we showed that if you apply Tableau's forecasting features, Tableau will automatically plot prediction intervals for you. But what if you want to plot the prediction intervals you created in R instead?
 --->
 <p>Using the data we exported from R, we will plot the prediction intervals.</p>
-<section id="option-1-simple-line-graphs-no-shading" class="level3">
-<h3 class="anchored" data-anchor-id="option-1-simple-line-graphs-no-shading">Option 1: Simple line graphs, no shading</h3>
+<section id="option-1-simple-line-graphs-no-shading" class="level2">
+<h2 class="anchored" data-anchor-id="option-1-simple-line-graphs-no-shading">Option 1: Simple line graphs, no shading</h2>
 <ol type="1">
-<li><p>Connect to the <code>carrot_forecast</code> dataset you just exported from R.</p></li>
+<li><p>Connect to the <code>carrot_forecast.csv</code> dataset you just exported from R. Make sure that the <code>date</code> field is correctly recognized as a date in Tableau.</p></li>
 <li><p>Create two new calculated fields. One called <code>Observed Price</code> and one called <code>Forecasted Price</code>. You can create both of these using an IF THEN ELSE statement:</p></li>
 </ol>
 <ul>
@@ -310,8 +433,8 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 <li>Change the colors to something useful. Use the same gray shade for both upper and lower.</li>
 </ol>
 </section>
-<section id="option-2-adding-shading" class="level3">
-<h3 class="anchored" data-anchor-id="option-2-adding-shading">Option 2: Adding shading</h3>
+<section id="option-2-adding-shading" class="level2">
+<h2 class="anchored" data-anchor-id="option-2-adding-shading">Option 2: Adding shading</h2>
 <ol type="1">
 <li><p>Duplicate your previous worksheet.</p></li>
 <li><p>In the Marks card, change your chart to an Area Chart.</p></li>
@@ -330,10 +453,11 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 <li><p>Finally, go back to your last sheet. Notice that the colors between your sheets are linked. Tableau does this to ensure your sheets are cohesive, but sometimes we want different colors for the same variable. The workaround for this is to duplicate each of the variables you want to assign a different color and use those in this sheet instead of the original variables.</p></li>
 </ol>
 </section>
-<section id="presenting-in-tableau" class="level2">
-<h2 class="anchored" data-anchor-id="presenting-in-tableau">Presenting in Tableau</h2>
-<section id="option-1-stories" class="level3">
-<h3 class="anchored" data-anchor-id="option-1-stories">Option 1: Stories</h3>
+</section>
+<section id="presenting-in-tableau" class="level1">
+<h1>Presenting in Tableau</h1>
+<section id="option-1-stories" class="level2">
+<h2 class="anchored" data-anchor-id="option-1-stories">Option 1: Stories</h2>
 <p>Tableau Desktop includes its own method for presenting your analyses. These are called stories. This tutorial will show you how to put together a simple story.</p>
 <ol type="1">
 <li><p>Create a new story by clicking the <code>New Story</code> tab at the bottom of the window. Change the size to PowerPoint.</p></li>
@@ -344,12 +468,11 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 <li><p>Note that if you like the formatting features of PowerPoint for text slides, you can also create these slides in power point, export them as images and then add those images to Dashboards.</p></li>
 </ol>
 </section>
-<section id="option-2-embed-in-powerpoint" class="level3">
-<h3 class="anchored" data-anchor-id="option-2-embed-in-powerpoint">Option 2: Embed in Powerpoint</h3>
+<section id="option-2-embed-in-powerpoint" class="level2">
+<h2 class="anchored" data-anchor-id="option-2-embed-in-powerpoint">Option 2: Embed in Powerpoint</h2>
 <p>You can also embed interactive Tableau dashboards from your Tableau Public account directly into PowerPoint. This will require you to install the Web Viewer Add-in. Follow these instructions to set this up: <a href="https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp">Instructions</a></p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/U2oDUOeDHI8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>Now get together with your teammate and spend some time on your project!</p>
-</section>
 </section>
 </section>
 
@@ -357,8 +480,9 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>I’ve included more information about the model in <a href="../week_02/lab_01_week_02.html">week 2</a> of this unit lab notes.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>You can extract model coefficient estimates using the command <code>tidy(fit)</code> if you need to extract them.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Refer back to <a href="../week_02/lab_01_week_02.html">these lab notes</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Specifically, <code>forecast()</code> uses an <strong>exponential smoothing</strong> method by default.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>You can extract model coefficient estimates using the command <code>tidy(fit)</code> if you need to extract them.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
@@ -397,18 +521,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -440,11 +553,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -454,8 +606,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -467,7 +628,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -511,6 +795,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -536,6 +821,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -596,6 +907,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
