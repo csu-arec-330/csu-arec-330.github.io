@@ -320,15 +320,15 @@ Using the data we exported from R, we will plot the prediction intervals.
 
 2. Create two new calculated fields. One called `Observed Price` and one called `Forecasted Price`. You can create both of these using an IF THEN ELSE statement: 
 
-- `Observed Price`: We want all prices through the end of our observed data (January 1, 2023)
+- `Observed Price`: We want all prices through the end of our observed data (determine the end date of our data). For example, if the observed (i.e., actual) price series ends on January 1, 2025, then the calculated field would be expressed as:
 
-`IF [Date] <= #January 1, 2024# THEN [Price] ELSE NULL END`
+`IF [Date] <= #January 1, 2025# THEN [Price] ELSE NULL END`
 
-- `Forecasted Price`: We want all forecasted prices (after and including February 1, 2023)  
+- `Forecasted Price`: We want all forecasted prices in a separate calculated field. For our example, these would be prices after and including February 1, 2025:  
 
-`IF [Date] > #January 1, 2024# THEN [Price] ELSE NULL END`
+`IF [Date] > #January 1, 2025# THEN [Price] ELSE NULL END`
 
-> Note: What error message are you seeing when you try to create the two new calculated fields? What do you need to do to fix the error?
+> Note: Do you get any error messages when you try to create the two new calculated fields? What do you need to do to fix the error?
 
 3. Create a line chart that includes `Observed Price`, `Forecasted Price`, `Upper`, and `Lower`.
 
@@ -340,9 +340,9 @@ Using the data we exported from R, we will plot the prediction intervals.
 
 1. Duplicate your previous worksheet.
 
-2. In the Marks card, change your chart to an Area Chart.
+2. In the **Marks** card, change your chart to an **Area Chart**.
 
-3. Unstack your lines by going to `Analysis` -> `Stack Marks` -> `Off`
+3. Unstack your lines by going to **Analysis** -> **Stack Marks** -> **Off**
 
 4. Rearrange the order of your forecast and prediction intervals in the Measure card: Lower, Forecasted, Observed, Upper. 
 
@@ -352,15 +352,16 @@ Using the data we exported from R, we will plot the prediction intervals.
 
 7. Change this new pane to a line chart.
 
-8. Change the colors to reflect forecasted and original prices by creating a new calculated field that equals "Forecasted Price" after January 1, 2023, and that equals "Observed Price" before then. Drag this calculated field to the Colors Card.
+8. Change the colors to reflect forecasted and original prices by creating a new calculated field that equals "Forecasted Price" after January 1, 2025, and that equals "Observed Price" before then. Drag this calculated field to the Colors Card
 
-`IF [Date] <= #January 1, 2024# THEN "Observed Price" ELSE "Forecasted Price" END`
+`IF [Date] <= #January 1, 2025# THEN "Observed Price" ELSE "Forecasted Price" END`
 
 9. Combine your charts by creating a dual axis. Right click the Y-axis of the Price line graph -> Select `Dual Axis`
 
-10. Synchronize your axes. Right click the second Y-axis -> Select `Synchronize Axis`. You can then hide this axis. Right click -> Click `Show Header` to de-select it.
+10. Synchronize your axes. **Right click** the second Y-axis -> Select **Synchronize Axis**. You can then hide this axis. **Right click** -> Click **Show Header** to de-select it.
 
-11. Notice that the area under the Price line no longer has your y-axis gridlines. Let's just get rid of all the gridlines to make this look a bit nicer. Right click on your chart -> select `Format`. In the format pane, navigate to the lines icon, change Grid Lines to `None`.
+11. Notice that the area under the Price line no longer has your y-axis grid lines. Let's get rid of all the grid lines to make this look a bit nicer. 
+- **Right click** on your chart -> Select **Format**. In the format pane, navigate to the lines icon, change Grid Lines to **None**.
 
 12. Finally, go back to your last sheet. Notice that the colors between your sheets are linked. Tableau does this to ensure your sheets are cohesive, but sometimes we want different colors for the same variable. The workaround for this is to duplicate each of the variables you want to assign a different color and use those in this sheet instead of the original variables. 
 
@@ -370,9 +371,9 @@ Using the data we exported from R, we will plot the prediction intervals.
 
 Tableau Desktop includes its own method for presenting your analyses. These are called stories. This tutorial will show you how to put together a simple story.
 
-1. Create a new story by clicking the `New Story` tab at the bottom of the window. Change the size to PowerPoint.
+1. Create a new story by clicking the **New Story** tab at the bottom of the window. Change the size to PowerPoint.
 
-2. Let's create an Intro slide with text by creating a new Dashboard. Add a background image and a text box.
+2. Create an Intro slide with text by creating a new Dashboard. Add a background image and a text box.
 
 3. Add your Intro slide to your story.
 

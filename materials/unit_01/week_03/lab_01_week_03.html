@@ -413,15 +413,15 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 <li><p>Create two new calculated fields. One called <code>Observed Price</code> and one called <code>Forecasted Price</code>. You can create both of these using an IF THEN ELSE statement:</p></li>
 </ol>
 <ul>
-<li><code>Observed Price</code>: We want all prices through the end of our observed data (January 1, 2023)</li>
+<li><code>Observed Price</code>: We want all prices through the end of our observed data (determine the end date of our data). For example, if the observed (i.e., actual) price series ends on January 1, 2025, then the calculated field would be expressed as:</li>
 </ul>
-<p><code>IF [Date] &lt;= #January 1, 2024# THEN [Price] ELSE NULL END</code></p>
+<p><code>IF [Date] &lt;= #January 1, 2025# THEN [Price] ELSE NULL END</code></p>
 <ul>
-<li><code>Forecasted Price</code>: We want all forecasted prices (after and including February 1, 2023)</li>
+<li><code>Forecasted Price</code>: We want all forecasted prices in a separate calculated field. For our example, these would be prices after and including February 1, 2025:</li>
 </ul>
-<p><code>IF [Date] &gt; #January 1, 2024# THEN [Price] ELSE NULL END</code></p>
+<p><code>IF [Date] &gt; #January 1, 2025# THEN [Price] ELSE NULL END</code></p>
 <blockquote class="blockquote">
-<p>Note: What error message are you seeing when you try to create the two new calculated fields? What do you need to do to fix the error?</p>
+<p>Note: Do you get any error messages when you try to create the two new calculated fields? What do you need to do to fix the error?</p>
 </blockquote>
 <ol start="3" type="1">
 <li>Create a line chart that includes <code>Observed Price</code>, <code>Forecasted Price</code>, <code>Upper</code>, and <code>Lower</code>.</li>
@@ -437,20 +437,25 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 <h2 class="anchored" data-anchor-id="option-2-adding-shading">Option 2: Adding shading</h2>
 <ol type="1">
 <li><p>Duplicate your previous worksheet.</p></li>
-<li><p>In the Marks card, change your chart to an Area Chart.</p></li>
-<li><p>Unstack your lines by going to <code>Analysis</code> -&gt; <code>Stack Marks</code> -&gt; <code>Off</code></p></li>
+<li><p>In the <strong>Marks</strong> card, change your chart to an <strong>Area Chart</strong>.</p></li>
+<li><p>Unstack your lines by going to <strong>Analysis</strong> -&gt; <strong>Stack Marks</strong> -&gt; <strong>Off</strong></p></li>
 <li><p>Rearrange the order of your forecast and prediction intervals in the Measure card: Lower, Forecasted, Observed, Upper.</p></li>
 <li><p>Change your colors: White for <code>Observed Price</code> and <code>Lower</code>, Gray for <code>Upper</code> and <code>Forecasted Price</code>. Make sure the opacity is set to 100%.</p></li>
 <li><p>Create a new line graph by dragging the original <code>Price</code> field to the Rows Shelf.</p></li>
 <li><p>Change this new pane to a line chart.</p></li>
-<li><p>Change the colors to reflect forecasted and original prices by creating a new calculated field that equals “Forecasted Price” after January 1, 2023, and that equals “Observed Price” before then. Drag this calculated field to the Colors Card.</p></li>
+<li><p>Change the colors to reflect forecasted and original prices by creating a new calculated field that equals “Forecasted Price” after January 1, 2025, and that equals “Observed Price” before then. Drag this calculated field to the Colors Card</p></li>
 </ol>
-<p><code>IF [Date] &lt;= #January 1, 2024# THEN "Observed Price" ELSE "Forecasted Price" END</code></p>
+<p><code>IF [Date] &lt;= #January 1, 2025# THEN "Observed Price" ELSE "Forecasted Price" END</code></p>
 <ol start="9" type="1">
 <li><p>Combine your charts by creating a dual axis. Right click the Y-axis of the Price line graph -&gt; Select <code>Dual Axis</code></p></li>
-<li><p>Synchronize your axes. Right click the second Y-axis -&gt; Select <code>Synchronize Axis</code>. You can then hide this axis. Right click -&gt; Click <code>Show Header</code> to de-select it.</p></li>
-<li><p>Notice that the area under the Price line no longer has your y-axis gridlines. Let’s just get rid of all the gridlines to make this look a bit nicer. Right click on your chart -&gt; select <code>Format</code>. In the format pane, navigate to the lines icon, change Grid Lines to <code>None</code>.</p></li>
-<li><p>Finally, go back to your last sheet. Notice that the colors between your sheets are linked. Tableau does this to ensure your sheets are cohesive, but sometimes we want different colors for the same variable. The workaround for this is to duplicate each of the variables you want to assign a different color and use those in this sheet instead of the original variables.</p></li>
+<li><p>Synchronize your axes. <strong>Right click</strong> the second Y-axis -&gt; Select <strong>Synchronize Axis</strong>. You can then hide this axis. <strong>Right click</strong> -&gt; Click <strong>Show Header</strong> to de-select it.</p></li>
+<li><p>Notice that the area under the Price line no longer has your y-axis grid lines. Let’s get rid of all the grid lines to make this look a bit nicer.</p></li>
+</ol>
+<ul>
+<li><strong>Right click</strong> on your chart -&gt; Select <strong>Format</strong>. In the format pane, navigate to the lines icon, change Grid Lines to <strong>None</strong>.</li>
+</ul>
+<ol start="12" type="1">
+<li>Finally, go back to your last sheet. Notice that the colors between your sheets are linked. Tableau does this to ensure your sheets are cohesive, but sometimes we want different colors for the same variable. The workaround for this is to duplicate each of the variables you want to assign a different color and use those in this sheet instead of the original variables.</li>
 </ol>
 </section>
 </section>
@@ -460,8 +465,8 @@ Last time we showed that if you apply Tableau's forecasting features, Tableau wi
 <h2 class="anchored" data-anchor-id="option-1-stories">Option 1: Stories</h2>
 <p>Tableau Desktop includes its own method for presenting your analyses. These are called stories. This tutorial will show you how to put together a simple story.</p>
 <ol type="1">
-<li><p>Create a new story by clicking the <code>New Story</code> tab at the bottom of the window. Change the size to PowerPoint.</p></li>
-<li><p>Let’s create an Intro slide with text by creating a new Dashboard. Add a background image and a text box.</p></li>
+<li><p>Create a new story by clicking the <strong>New Story</strong> tab at the bottom of the window. Change the size to PowerPoint.</p></li>
+<li><p>Create an Intro slide with text by creating a new Dashboard. Add a background image and a text box.</p></li>
 <li><p>Add your Intro slide to your story.</p></li>
 <li><p>Add a new (blank) story point and bring in one of your worksheets. Give this story point a useful title.</p></li>
 <li><p>See what your story looks like in presentation mode. Note that you can hide the story title to make this look a bit nicer.</p></li>
