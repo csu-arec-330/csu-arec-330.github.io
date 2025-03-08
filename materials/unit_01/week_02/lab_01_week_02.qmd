@@ -487,17 +487,22 @@ At this point, `carrot_forecast` contains the predicted future values, while `ca
 
 Since `forecast()` returns a special object, we need to convert the results into a standard data frame (a tibble in this case) before merging it with the original dataset.
 
+**Important:** The date inside `as_date()` should be set to the **first forecasted date**, which is the month immediately following your last observed data point. We can code this dynamically.
+
 ```{r}
 #| eval: false
 
 # Convert forecasted values into a tibble with corresponding dates
+max(carrot_decomp_out$measure_date) # Determine the last date of the time series decomposition to determine which was the first forecasted date
+
 carrot_forecast_df <- tibble( # Create a tibble (a modern dataframe in R)
   price = carrot_forecast, # Stores the forecasted price values
   upper = carrot_forecast_upper[,1], # Extracts the upper confidence interval for the forecast
   lower = carrot_forecast_lower[,1] # Extracts the lower confidence interval for the forecast
   ) %>%
-  mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.))) # Add a variable called measure_date
-
+  mutate(measure_date = seq(as_date(max(carrot_decomp_out$measure_date)) + months(1), 
+                            by = "months", 
+                            length.out = nrow(.)))
 ```
 
 **What This Block of Code Does**
@@ -595,6 +600,7 @@ setwd("Set your working directory")
 # Comment out the following line if you have already installed the forecast package.
 install.packages("forecast")
 
+
 # Load necessary libraries
 library(tidyquant)
 library(dplyr)
@@ -622,6 +628,28 @@ carrot_decomp <- decompose(carrot_ts)
 # Compute seasonally adjusted price
 carrot_sa_price <- carrot_ts - carrot_decomp$seasonal
 
+# Convert to a tibble for easier handling
+carrot_decomp_sa <- tibble(
+  measure_date = carrot$date,
+  price = carrot$price,
+  trend = carrot_decomp$trend,
+  seasonal = carrot_decomp$seasonal,
+  residual = carrot_decomp$random,
+  sa_price = as.numeric(carrot_sa_price) # Seasonally adjusted price converted to numeric for plotting
+) %>%
+  drop_na()
+
+# Plot original prices vs. seasonally adjusted prices
+sa_plot <- ggplot(carrot_decomp_sa, aes(x = measure_date)) +
+  geom_line(aes(y = price, color = "Original Price"), size = 1) +
+  geom_line(aes(y = sa_price, color = "Seasonally Adjusted Price"), linewidth = 1, linetype = "dashed") +
+  labs(title = "Carrot Prices vs. Seasonally Adjusted Prices",
+       x = "Date", y = "Price",
+       color = "Legend") +
+  theme_minimal()
+
+print(sa_plot)
+
 # Plot decomposed components
 plot(carrot_decomp$trend)
 plot(carrot_decomp$seasonal)
@@ -638,11 +666,14 @@ carrot_decomp_out <- carrot_decomp[1:4] %>%
 # Part 2: Forecasting
 
 # Extract trend, seasonal, and residual components
+which(is.na(carrot_decomp$trend)) # Determine which values are missing
 carrot_trend <- na.omit(carrot_decomp$trend)
 
+which(is.na(carrot_decomp$seasonal))
 carrot_seasonal <- na.omit(carrot_decomp$seasonal)[7:(length(carrot_ts) - 6)] %>%
   ts(., start = c(2008, 2), frequency = 12)
 
+which(is.na(carrot_decomp$residuals)) # Determine which values are missing
 carrot_residuals <- na.omit(carrot_decomp$random)
 
 # Forecast trend and seasonal components
@@ -677,12 +708,18 @@ carrot_forecast_lower <- carrot_trend_forecast$lower +
 View(carrot_forecast_lower)
 
 # Convert forecasted values into a tibble with corresponding dates
+max(carrot_decomp_out$measure_date) # Determine the last date of the time series decomposition to determine which was the first forecasted date
+
 carrot_forecast_df <- tibble( # Create a tibble (a modern dataframe in R)
   price = carrot_forecast, # Stores the forecasted price values
   upper = carrot_forecast_upper[,1], # Extracts the upper confidence interval for the forecast
   lower = carrot_forecast_lower[,1] # Extracts the lower confidence interval for the forecast
   ) %>%
-  mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.))) # Add a variable called measure_date
+  mutate(measure_date = seq(as_date(max(carrot_decomp_out$measure_date)) + months(1), 
+                            by = "months", 
+                            length.out = nrow(.)))
+
+View(carrot_forecast_df)
 
 # Keep only forecasted data that occurs after the last observed date
 carrot_forecast_df <- carrot_forecast_df %>%
@@ -691,6 +728,8 @@ carrot_forecast_df <- carrot_forecast_df %>%
 
 # Append forecasted data to the original dataset
 final_out <- bind_rows(carrot_decomp_out,carrot_forecast_df)
+
+View(final_out)
 
 # Save the final dataset as a CSV file
 write_csv(final_out,"carrot_forecast.csv")

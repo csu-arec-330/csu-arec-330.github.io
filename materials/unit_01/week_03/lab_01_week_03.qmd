@@ -306,6 +306,68 @@ write_csv(to_export,"carrot_forecast.csv")
 
 {{< video https://youtu.be/KMrGAUcnM00 aspect-ratio="16x9" >}}
 
+:::{.callout-tip title="Lab Script for Week 7: Forecasting and Prediction Intervals" collapse="true"}
+
+```{r}
+#| eval: false
+
+# This is the script for lab 07.
+
+setwd("Set your working directory")
+
+# Comment out the following line if you have already installed the forecast package.
+install.packages("fpp3")
+
+# Load necessary libraries
+library(dplyr)
+library(readr)
+library(tidyr)
+library(lubridate)
+library(tidyquant)
+library(forecast)
+library(fpp3)
+
+# Retrieve time series data
+carrot <- tq_get(c("WPU01130212"),
+                 get = "economic.data",
+                 from="2007-08-01")
+
+#Prep data
+carrot_ts <- carrot %>%
+  select(date,price) %>% # Select only the date and price variables
+  mutate(date=yearmonth(date)) %>% # Convert the date into "yearmonth" format so the models understand the unit of observation
+  as_tsibble() # Convert the data to a tsibble object. Similar to a tibble or data.frame but for time series data
+
+# Define the model
+fit <- carrot_ts %>%
+  model(my_ets = ETS(price ~ trend(method="A") + season(method="A") + error(method="A"))) # Fit model
+
+# Generate forecast
+carrot_forecast <- fit %>%
+  fabletools::forecast(h = "5 years") # Forecast model for 5 years
+
+# Plot the forecast
+autoplot(carrot_forecast, carrot_ts)
+
+# Extract 95% prediction interval
+carrot_forecast_pi <- carrot_forecast %>%
+  hilo(level = 95) %>% # Extract 95% prediction interval
+  unpack_hilo(cols = "95%") # Unpack into own columns named lower and upper
+
+
+# Prepare data for export
+carrot_forecast_out <- carrot_forecast_pi %>%
+  select(date, 
+         price = .mean, 
+         lower = "95%_lower",
+         upper = "95%_upper")
+
+to_export <- bind_rows(carrot_ts, carrot_forecast_out)
+
+write_csv(to_export,"carrot_forecast.csv")
+```
+:::
+
 # Tableau: Plotting prediction intervals
 
 <!---

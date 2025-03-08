@@ -14,6 +14,8 @@ library(ggplot2)
 library(lubridate)
 library(forecast)
 
+# Part 1: Time Series Decomposition
+
 # Retrieve time series data for carrots
 carrot <- tq_get(c("WPU01130212"),
                  get = "economic.data",
@@ -68,11 +70,14 @@ carrot_decomp_out <- carrot_decomp[1:4] %>%
 # Part 2: Forecasting
 
 # Extract trend, seasonal, and residual components
+which(is.na(carrot_decomp$trend)) # Determine which values are missing
 carrot_trend <- na.omit(carrot_decomp$trend)
 
+which(is.na(carrot_decomp$seasonal))
 carrot_seasonal <- na.omit(carrot_decomp$seasonal)[7:(length(carrot_ts) - 6)] %>%
   ts(., start = c(2008, 2), frequency = 12)
 
+which(is.na(carrot_decomp$residuals)) # Determine which values are missing
 carrot_residuals <- na.omit(carrot_decomp$random)
 
 # Forecast trend and seasonal components
@@ -107,12 +112,16 @@ carrot_forecast_lower <- carrot_trend_forecast$lower +
 View(carrot_forecast_lower)
 
 # Convert forecasted values into a tibble with corresponding dates
+max(carrot_decomp_out$measure_date) # Determine the last date of the time series decomposition to determine which was the first forecasted date
+
 carrot_forecast_df <- tibble( # Create a tibble (a modern dataframe in R)
   price = carrot_forecast, # Stores the forecasted price values
   upper = carrot_forecast_upper[,1], # Extracts the upper confidence interval for the forecast
   lower = carrot_forecast_lower[,1] # Extracts the lower confidence interval for the forecast
   ) %>%
-  mutate(measure_date = seq(as_date("2023-08-01"), by = "months", length.out = nrow(.))) # Add a variable called measure_date
+  mutate(measure_date = seq(as_date(max(carrot_decomp_out$measure_date)) + months(1), 
+                            by = "months", 
+                            length.out = nrow(.)))
 
 View(carrot_forecast_df)
 

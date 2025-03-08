@@ -51,7 +51,12 @@ Our expectation is that you will use time series data from any of the above sour
 
 2. Plot the decomposition, forecast, and prediction intervals in Tableau 
 
-3. Discuss any assumptions you made in your analysis - did you account for structural breaks? Did you use your full time series? What model did you use and why? Did you need to interpolate any missing values in your data?
+3. Discuss any assumptions you made in your analysis 
+
+- Did you account for structural breaks? 
+- Did you use your full time series? 
+- What model did you use and why? 
+- Did you need to interpolate any missing values in your data?
 
 4. Identify limitations to your analysis (are you certain you are using the best forecasting method?)
 
