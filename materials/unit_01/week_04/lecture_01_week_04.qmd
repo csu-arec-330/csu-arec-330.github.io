@@ -9,13 +9,11 @@ format:
     # center: TRUE
 ---
 
-
-
 ## Agenda 
 
 Project 1 reminder and details
 
-Example project
+Example project walk-through using carrot price data
 
 ```{r}
 #| echo: false
@@ -55,26 +53,35 @@ Three parts:
 
 3. Peer evaluation
 
-Make sure you tell a story with your data
+Your project should tell a **data-driven story.**
 
-Have a hook to grab the audience attention, give your audience context, pose your question, then answer it
+- Grab audience with a hook 
+- Provide context and pose a question
+- Answer the question using your analysis
 
-[Project Instructions](../week_03/ps7.html)
+[Project Instructions](https://csu-arec-330.github.io/materials/unit_01/project/project_1_instructions.html)
+
+
+# Example Project: Will Carrot Prices Continue to Rise?
 
 ## Context {.scrollable}
 
-We are analysts at The Carrot Project; you are growers attending a workshop
+We are analysts at **The Carrot Project.**
+
+You are growers attending a workshop.
 
 ```{=html}
-<iframe width="80%" height="500" src="https://www.thecarrotproject.org/"></iframe>
+<iframe width="60%" height="500" src="https://www.thecarrotproject.org/"></iframe>
 ```
 
+## Carrots are delicious, versatile, and a healthy source of Vitamin A
 
-# Example project: Will carrot prices continue to rise?
+![](https://cdn.shopify.com/s/files/1/0562/5266/1910/files/21_480x480.jpg?v=1683198343)
 
-## Carrots are delicious and people buy them (you should provide more context)
 
-<!-- Briefly introduce the recent rise in food prices and its impact on carrot prices -->
+
+## Carrots are a major specialty crop with the majority produced in California  
+
 :::: {.columns}
 
 ::: {.column width="50%" style='justify-content:center'}
@@ -89,11 +96,7 @@ We are analysts at The Carrot Project; you are growers attending a workshop
 :::
 
 ::::
-
-
-
-## Carrot prices have been growing
-
+## However, carrot prices have been rising
 
 ```{r}
 #| echo: false
@@ -114,15 +117,69 @@ carrot_ts %>%
 
 # Will prices continue to rise or will they return to past trends?
 
+## Objective
+
+We will evaluate trends and possible causes.
+
+We will use decomposition to separate trends, seasonality, and residuals.
+
+We will forecast future prices using a statistical model.
 
 ## Analysis plan
 
-Decompose carrot prices to understand fundamentals
+1. Explore the data by visualizing trends and identifying structural breaks
 
-Forecast carrot prices over the next 5 years
+2. **Decompose** carrot prices to understand underlying factors contributing to changing prices, specifically trends, seasonality, and residuals.
+
+3. **Forecast** carrot prices over the next 5 years to predict trends.
+
+4. Interpret **prediction intervals** to evaluate the uncertainty in the forecast.
+
+5. Connect our findings to industry decisions.
+
+# Step 1: Exploratory Data Analysis
+
+## Carrot prices over time
+
+- Our data come from the Federal Reserve of Kansas (FRED) Economic Data, accessed via API.
+
+- The data report historical prices for carrots from 1980 to 2023.
+
+- To understand our data, we calculate summary statistics (mean, standard deviation, range) of our data.
+
+```{r}
+#| echo: false
+#| include: false
+summary(carrot_ts$price)
+```
+
+## Summary Statistics for Carrot Prices {.scrollable}
+
+| Statistic  | Value  |
+|------------|--------|
+| **Min**    | 65.0   |
+| **1st Quartile** | 98.9   |
+| **Median** | 134.3  |
+| **Mean**   | 145.4  |
+| **3rd Quartile** | 186.8  |
+| **Max**    | 311.9  |
+
+- The lowest recorded carrot price in the dataset is $65.00. 
+- The value at the 25th percentile is $98.90, meaning that 25% of the recorded prices are below this level.
+- The median of the dataset is $134.30, meaning that half of the data points fall below and half above this price.
+- The average carrot price is $145.40.
+- The value at the 75th percentile is $186.80, meaning that 75% of the recorded prices are below this level.
+- The highest recorded carrot price is $311.90.
+
+## Carrot Price Index jumped 45% between July 2006 and September 2006
+
+<iframe src="https://public.tableau.com/views/project_01_structural_break/Sheet1?:showVizHome=no&:embed=true" 
+        width="100%" height="600px"></iframe>
 
 
-## Is it just seasonality?
+# Step 2: Decomposition
+
+## What is driving the increase in carrot prices? {.scrollable}
 
 ```{r}
 #| echo: false
@@ -138,6 +195,14 @@ carrot_ts %>%
   labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
   theme_bw(base_size = 13)
 ```
+
+## What is driving the increase in carrot prices? {.scrollable}
+
+- Does the seasonal pattern dominate price fluctuations? **No, even though seasonality is present, long-term trends appear more influential.**
+
+- Is there a clear long-term trend? **Yes, prices exhibit a steady upward trend over time.**
+
+- Are there notable deviations in the residuals? **Yes, suggesting external shocks or irregular price movements.**
 
 ## Is it input prices? {.scrollable}
 
@@ -155,9 +220,20 @@ carrot_inputs %>%
 
 ```
 
-# Will prices continue to rise?
+## Evidence of a structural break in fertilizer prices, same time as carrot prices
 
-## Forecast Scenario: high prices persist
+<iframe src="https://public.tableau.com/views/project_01_structural_break_inputs/Sheet2?:embed=yes&:showVizHome=no&:toolbar=yes" width="100%" height="600px"></iframe>
+
+
+# Step 3: Forecast
+
+## Will prices continue to rise?
+
+- We will use an Exponential Smoothing (ETS) model
+
+- We will forecast prices for 5 years
+
+## Visualizing the forecast
 
 ```{r}
 #| echo: false
@@ -178,73 +254,45 @@ carrot_ts %>%
 
 ```
 
-
-## Forecast from Jan 2023 (for Bekzat)
-
-```{r}
-#| echo: false
-#| fig-width: 10
-#| fig-align: center
-#| fig-cap: "Same ETS forecast based on data truncated at January 2023"
-
-#Forecast
-carrot_ts %>%
-  filter(date<yearmonth("2023 Jan")) %>%
-  model(
-    additive = ETS(price ~ error("A") + trend("A") + season("A"))
-  ) %>%
-  forecast(h = "5 years") %>%
-  mutate(date=date) %>%
-  autoplot(carrot_ts %>% filter(date>yearmonth("2000 Jan")),level=80) +
-  labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") +
-  theme_bw(base_size = 13)
-
-```
+# Step 4: Prediction Intervals
 
 
-## Conclusion 
+## How certain are we in our estimates?
 
-Carrot prices are near all time highs
+- Extract and visualize uncertainty in the forecast
 
-If current prices remain high, the price index is expected to reach nearly 350
+- Interpret how external factors could impact the forecast range
 
-Our guess: Carrot prices continue to grow but at a slower rate
+##
 
-# Questions
-
-## Conclusion (from last year)
-
-Carrot prices are near all time highs
-
-If current prices remain high, the price index is expected to reach nearly 300
-
-If current prices subside, the price index is expected to remain below 250
-
-Our guess: Carrot prices subside then gradually increase because of declining trend in fertilizer 
+<iframe src="https://public.tableau.com/views/project_01_forecast_pi/Sheet3?:embed=yes&:showVizHome=no&:toolbar=yes" width="100%" height="600px"></iframe>
 
 
+# Step 5: Discussion
 
+## Important Takeaways for Industry
 
-<!-- ## Other forecasts -->
+Carrot prices are near all time highs.
 
-<!-- ```{r} -->
-<!-- #| echo: false -->
-<!-- #| fig-width: 10 -->
-<!-- #| fig-align: center -->
-<!-- #| fig-cap: "Same ETS forecast based on data truncated at January 2023" -->
+If current trends continue, prices could rise further.
 
-<!-- #Forecast -->
-<!-- carrot_ts %>% -->
-<!--   filter(date>yearmonth("2010 Jan")) %>% -->
-<!--   model( -->
-<!--     #additive = ETS(price ~ error("A") + trend("A") + season("A")), -->
-<!--     NN = NNETAR(price,n_networks = 5) -->
-<!--   ) %>% -->
-<!--   forecast(h = "1 years") %>% -->
-<!--   mutate(date=date) %>% -->
-<!--   autoplot(carrot_ts %>% filter(date>yearmonth("2000 Jan")),level=80) + -->
-<!--   labs(y=NULL,x=NULL,title = "Carrot Producer Price Index 1982=100") + -->
-<!--   theme_bw(base_size = 13) -->
+If trends stabilize, prices may level off but remain high.
 
-<!-- ``` -->
+External factors like fertilizer cost, demand, and seasonality are important factors contributing to price movements.
+
+## How This Connects to Project 1
+
+Present summary statistics of your data
+
+Use decomposition to analyze trends and seasonality
+
+Construct a forecast and estimate prediction intervals
+
+Interpret the results and discuss assumptions
+
+Use the forecast to answer your research question
+
+Make sure your final presentation includes a clear narrative, data visuals, and well-explained conclusions
+
+# Questions?
 

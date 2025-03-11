@@ -447,7 +447,10 @@ Tableau Desktop includes its own method for presenting your analyses. These are 
 
 ## Option 2: Embed in Powerpoint
 
-You can also embed interactive Tableau dashboards from your Tableau Public account directly into PowerPoint. This will require you to install the Web Viewer Add-in. Follow these instructions to set this up: [Instructions](<https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp>)
+You can also embed interactive Tableau dashboards from your Tableau Public account directly into PowerPoint. This will require you to install the Web Viewer Add-in. Follow these instructions to set this up: [Watch this Video](https://www.youtube.com/watch?v=nrIyK9zKLF0) or [Read this Blog Post](https://community.tableau.com/s/question/0D54T00000aVKm6SAG/how-do-i-embed-an-animated-line-graph-into-powerpoint)
+
+<!-- No longer active as of 3-11-2025
+(<https://vizartpandey.com/how-to-embed-tableau-dashboard-in-a-powerpoint-presentation/?amp>) -->
 
 {{< video https://youtu.be/U2oDUOeDHI8 aspect-ratio="16x9" >}}
 
