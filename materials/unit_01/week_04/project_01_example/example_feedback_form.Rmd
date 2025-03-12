@@ -1,0 +1,97 @@
+---
+title: "Peer Evaluation Worksheet"
+output: pdf_document
+---
+
+Please evaluate the presentation using the criteria below. For each category, check the box that best describes your evaluation.
+
+---
+
+## **Structure and Cohesion**
+Does the presentation follow a clear, engaging, and logical structure?
+
+- [ ] **Exceeds Requirements**: The presentation has a clear and creative structure that tells a compelling and cohesive story that answers the stated question.
+- [ ] **Meets Requirements**: The presentation is fairly clear and tells a story that answers the stated question.
+- [ ] **Nearly Meets Requirements**: The presentation lacks a clear structure and does not tell a cohesive story that answers the stated question.
+
+---
+
+## **Visualizations**
+Are the visualizations well-designed, clear, and effective?
+
+- [ ] **Exceeds Requirements**: The visualizations are well formatted, appropriate for the analysis, and visually engaging.
+- [ ] **Meets Requirements**: The visualizations are well formatted and appropriate for the analysis but may be slightly lacking in detail or creativity.
+- [ ] **Nearly Meets Requirements**: The visualizations are poorly formatted and/or inappropriate for the analysis.
+
+---
+
+## **Creativity**
+Was the presentation engaging and innovative in its approach?
+
+- [ ] **Exceeds Requirements**: The presentation is highly original, using unique and innovative approaches that significantly enhance engagement and understanding.
+- [ ] **Meets Requirements**: Includes creative elements that make the presentation more interesting and engaging, though less innovative than top-tier examples.
+- [ ] **Nearly Meets Requirements**: Attempts at creativity are minimal and do not significantly improve engagement or understanding.
+
+---
+
+## **Introduction**
+Did the presentation clearly introduce the topic, purpose, and audience?
+
+- [ ] **Exceeds Requirements**: The introduction clearly identifies the business/organization and the audience, provides relevant background information, and is engaging.
+- [ ] **Meets Requirements**: The introduction identifies the audience and provides some relevant background information.
+- [ ] **Nearly Meets Requirements**: The introduction does not clearly identify the business/organization or the audience and does not provide relevant background information.
+
+---
+
+## **Question**
+Was the research question clear and relevant?
+
+- [ ] **Exceeds Requirements**: The question is realistic, clearly stated, and answerable with a time series forecasting analysis.
+- [ ] **Meets Requirements**: The question is somewhat realistic and answerable with a time series forecasting analysis.
+- [ ] **Nearly Meets Requirements**: The question is not realistic, clearly stated, or answerable with a time series forecasting analysis.
+
+---
+
+## **Data Description**
+Did the presentation clearly describe the data source, summary statistics, and visuals?
+
+- [ ] **Exceeds Requirements**: The description of the data source, summary statistics, and visuals are clear and complete.
+- [ ] **Meets Requirements**: The description of the data source, summary statistics, and visuals are complete but not entirely clear.
+- [ ] **Nearly Meets Requirements**: The description of the data source is incomplete or unclear. Summary statistics and visuals are incomplete or unclear.
+
+---
+
+## **Analysis**
+Was the forecasting process clearly explained?
+
+- [ ] **Exceeds Requirements**: The forecasting model is identified, assumptions and limitations are clearly discussed, and the decomposition, forecast, and prediction intervals are plotted and described in a clear and creative way.
+- [ ] **Meets Requirements**: The forecasting model is described, assumptions and limitations are mentioned, and the decomposition, forecast, and prediction intervals are plotted and described.
+- [ ] **Nearly Meets Requirements**: The forecasting model is not clearly explained, assumptions and limitations are not discussed, and/or the decomposition, forecast, and prediction intervals are not plotted or described.
+
+---
+
+## **Discussion & Conclusion**
+Did the presentation provide meaningful insights and a strong conclusion?
+
+- [ ] **Exceeds Requirements**: The forecast is used to answer the question in a clear and creative way, and the key takeaways for the audience are clear and engaging. The next steps for further analysis are discussed.
+- [ ] **Meets Requirements**: The forecast is used to answer the question, and the key takeaways for the audience are clear.
+- [ ] **Nearly Meets Requirements**: The forecast is not used to answer the question, or the key takeaways for the audience are not clear.
+
+---
+
+## **Open-Ended Feedback**
+
+**1. What did you like about the presentation?**  
+_(What was particularly effective or engaging?)_  
+
+___________________________________________________________________________________
+___________________________________________________________________________________
+___________________________________________________________________________________
+
+
+**2. What questions do you have after the presentation?**  
+_(Was anything unclear or in need of further explanation?)_  
+
+___________________________________________________________________________________
+___________________________________________________________________________________
+___________________________________________________________________________________
