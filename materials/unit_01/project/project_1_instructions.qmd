@@ -108,6 +108,11 @@ Analysis:
 
 - What are the key take-aways for your intended audience?
 
+**How to Record and Submit Your Videos**
+
+{{< video "https://youtu.be/izir9epun4U" aspect-ratio="16x9" >}}
+
+[Link to Video Recording]("https://youtu.be/izir9epun4U")
 
 ### The Write-up/Online Submission (40 points)
 
