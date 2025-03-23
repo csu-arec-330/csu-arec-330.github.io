@@ -4,42 +4,51 @@ format:
   html:
     theme: zephyr
 ---
+<!-- AS OF SPRING 2025, LAUREN COMBINED PROBLEM SETS 2 AND 3 FOR PROJECT 02 (UNIT 02) -->
 ## Problem Set Overview
 
-This problem set is designed to get you started analyzing the data for your project.
+This problem set helps you continue analyzing your data and prepares you for your final Project 2 deliverables by guiding you through exploratory visualizations, cluster analysis, and interpreting results.
 
-## Part 1: R
+## Part 1: More Exploratory Data Analysis in R
 
-<!--
-### Exploratory Data Analysis (EDA)
--->
-The purpose of this step is to gain familiarity with your data and identify any issues (e.g., missing data, outliers).  Complete the following steps with the convenience store transactions data.
+Complete the following steps using your merged convenience store datasets (shopper_info.csv, gtin.csv, and store_info.csv):
 
-1. Specify your research question. Review the data dictionary accompanying the three data files and articulate the research question that you will seek to answer for Project 2.
+1. Clearly document and justify **any further processing steps** you performed (e.g., handling missing data, dropping observations, transformations, aggregations) since project 02 - problem set 01. Write a concise narrative describing your decisions. A reader should be able to reproduce your steps based solely on your description.
 
-2. Generate a table of summary statistics. The table should include at least: variable names, mean (average), standard deviation, min, and max.
+2. Generate a `ggpairs` plot (i.e., the density and scatter plots) of your quantitative measures. Note that the visuals may be different for qualitative data. Interpret these visualizations clearly. Describe patterns, correlations, or other notable features you observe and explain their relevance to your analysis.
 
-3. Generate a `ggpairs` plot (i.e., the density and scatter plots) of your quantitative measures. Note that the visuals may be different for qualitative data.
+## Part 2: K-Means Cluster Analysis in R
 
-4. Perform any necessary data processing. For instance, did you drop any observations? Did you have to transform any variables? Write a narrative of your processing steps justifying your decisions. 
+Using your processed dataset, perform a K-means cluster analysis appropriate for your research question. Follow these steps clearly:
 
-5. Write a narrative for your webpage describing your EDA and provide an interpretation of your data. (Tip: If someone were to read your narrative, would they be able to reproduce your steps?)
+1. Explain which variables you chose for clustering and why these dimensions help answer your research question. Clearly interpret your resulting clusters. What insights or patterns do the clusters reveal?
 
-<!--
-### Explanatory Data Analysis
+2. Provide evidence supporting your choice of K (number of clusters). Include either a silhouette plot or elbow plot and explain your decision.
 
-5. Choose one supervised learning technique (regression, classification) that you can apply to answer your primary question. Write a narrative of the procedure (what the method is doing) and the results. You should include either a regression table or confusion matrix.
--->
+3. Summarize the variables you included in your cluster analysis for each cluster. Clearly discuss notable differences in variable means or distributions across clusters.
 
-## Part 2: Tableau
+4. Export a dataset containing all variables used in your cluster analysis along with each observation's assigned cluster. Provide a narrative explaining your cluster analysis clearly on your webpage.
 
-1. In Tableau, produce an effective visualization to accompany the results from your explanatory data analysis. 
+## Part 2: Tableau Visualizations
 
-<!--
-If you performed a regression analysis, this will involve creating a visualization that plots the regression line from your (multivariate) R analysis and comparing this with the line from the single-variate regression (the default trend line in Tableau). 
--->
-2. In Tableau, demonstrate that you can integrate summary statistics into your map Tooltip. 
+1. Create at least one Tableau visualization clearly illustrating insights from your exploratory analysis. Integrate relevant summary statistics directly into your Tableau visualization using the map Tooltip. 
+
+2. Create TWO visualizations that show your clusters, exploring the underlying meaning of your clusters by seeing how clusters compare across the variables you used to define them (create scatter plots to show this). Use these visuals to support a description of each cluster. 
+
+2. Discuss the practical takeaways for your research question based on your Tableau visualizations and clustering analysis. Clearly describe what your analysis uncovered.
 
 ## How to Submit
 
-You should create a new webpage on your Google site titled `Project 2 Problem Set 2`. Submit the link to your Google site webpage in Canvas.
+Create a webpage titled `Project 2 Problem Set 2` on your Google site. Include:
+
+- Data processing narrative
+
+- `ggpairs()` visualizations and interpretation
+
+- Cluster analysis narrative, plots (silhouette or elbow), and cluster summary
+
+- Tableau visualizations (EDA visualization + 2 cluster visualizations) with accompanying descriptions
+
+- Clear takeaways related to your research question
+
+Submit your webpage link on Canvas.

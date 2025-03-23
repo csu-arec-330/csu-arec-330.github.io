@@ -6,34 +6,79 @@ format:
 ---
 ## Problem Set Overview
 
-This problem set is designed to get you started analyzing the data for your project.
+This problem set is designed to help you start your [Project 2](../week_04/project_2.qmd) analysis by gaining familiarity with the convenience store datasets provided. You will perform exploratory data analysis (EDA) and begin initial clustering to identify patterns in your data.
 
+## Data for this Problem Set
 
-## Exploratory Data Analysis (EDA)
+You will use the following datasets:
 
-Explore the data from lab, [Arizona Grocery Store](https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv). The purpose of this step is to gain familiarity with your data and identify any issues (e.g., missing data, outliers).  Complete the following steps with your data.
+**<a  href="../inputs/shopper_info.csv" download>shopper_info.csv</a>**: This file contains transaction-level data, including information about the shopper, the store where the purchase was made, the products purchased (identified by GTIN), and the quantities and prices.
 
-1. Generate a table of summary statistics.  The table should include at least: variable names, mean (average), standard deviation, min, and max.
+**<a  href="../inputs/gtin.csv" download>gtin.csv</a>**: This file provides additional details about the products, which can be linked to the shopper_info.csv file using the GTIN (Global Trade Item Number) variable.
 
-2. Perform any necessary processing (e.g., removing outliers). Write a narrative of your processing steps justifying your decisions. 
+**<a  href="../inputs/store_info.csv" download>store_info.csv</a>**: This file includes information about the stores, such as location, size, and other characteristics, which can be linked to the shopper_info.csv file using the store_id variable.
 
-3. Write a narrative for your webpage describing your EDA and providing an interpretation of your data. Describe your data so that readers understand what is measured. See the Canvas assignment for a codebook describing the data. Here are some prompt questions for your narrative:
+See the Canvas assignment for a downloadable codebook describing the data files.
 
-    - Which grocery store has the most foot traffic in AZ? Is it the same with the most unique visitors?
-  
-    - What is the most common store type (in your data) in AZ?
-  
-    - Which city has the most stores?
-  
-    - Which store do people travel the farthest to visit?
-  
-  
+## Part 1: Specify Your Research Question
 
-## Cluster Analysis
+1. Review [Project 2 Instructions](../week_04/project_2.qmd). Then, clearly outline the segmentation and question you will analyze:
 
-4. Use K-means clustering to cluster on multiple numeric dimensions in your data. Note that this does not mean run the clustering algorithm multiple times. Explain why you clustered on the dimensions you chose and what the clusters tell you. Try a few different cluster sizes and choose one that makes sense. Write a narrative in your webpage explaining your cluster analysis and what you learned.
+- Specify **one segmentation area** you have chosen for the analysis (customers, stores, or products).
 
+- Clearly articulate your research question.
+
+- Explain why answering this question is valuable and specify who will benefit from the insights (e.g., business executives, store managers, marketers).
+
+## Part 2: Exploratory Data Analysis (EDA)
+
+Complete the following steps using the provided datasets (shopper_info.csv, gtin.csv, and store_info.csv):
+
+2. Depending on the segment you have chosen, merge the relevant datasets appropriately. Clearly document and justify all processing steps, such as:
+
+- Handling missing data
+
+- Removing outliers
+
+- Dropping observations
+
+- Transforming or aggregating variables
+
+Write a narrative clearly explaining and justifying your decisions. 
+
+3. Using your merged dataset, generate a table of summary statistics. The table should include at least: variable names, mean (average), standard deviation, min, and max.
+
+4. Write a narrative for your webpage describing your EDA and providing an interpretation of your data. Describe your data so that readers understand what is measured. Answer the following prompts based on your chosen segmentation:
+
+**If you chose Customer Segmentation:**
+
+- Who are the highest-spending customers?
+
+- Are there clear differences in customer preferences across stores?
+
+**If you chose Store Segmentation:**
+
+- Which stores have the highest total sales?
+
+- Which regions or cities have the most stores?
+
+**If you chose Product Segmentation:**
+
+- What are the top-selling products?
+
+- Are there clear differences in product popularity by region or store type?
+
+## Part 3: Initial Cluster Analysis
+
+5. Conduct an initial K-means clustering analysis:
+
+- Select relevant numeric variables based on your segmentation choice (customer, store, or product).
+
+- Perform cluster analysis using different cluster sizes (e.g., 3-5 clusters) and explain your choice clearly.
+
+- Write a narrative explaining your initial clustering results, including what the clusters indicate about the dataset.
 
 ## How to Submit
 
-You should create a new webpage on your google site titled `Project 2 Problem Set 1`. Submit the link to your google site webpage in Canvas.
+You should create a new webpage on your Google Site titled `Project 2 Problem Set 1`.  Post your analysis (including summary statistics, narrative, cluster results, and any relevant visualizations) and submit the link to your webpage on Canvas. *Remember: Add this as a **new page** to your existing website. Do not create a new website.*
+

@@ -11,10 +11,9 @@ title: "Week 11: Connecting Analysis to Your Objectives"
 
 <b>Lab: Apr 11</b> <br>
 
-<!--
 <a  href="/materials/unit_02/week_03/lab_02_week_03.html" target="_blank">Week 11 Lab Notes</a> <br> 
 
-
+<!--
 <a  href="/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv" download>Download arizona_grocery_foot_traffic.csv</a> <br>
 
 <a  href="/materials/unit_02/inputs/hauer_county_totpop_SSPs.csv" download>Download hauer_county_totpop_SSPs.csv</a> <br>
@@ -37,7 +36,9 @@ title: "Week 11: Connecting Analysis to Your Objectives"
 
 <b>Video Presentation - Due WEDNESDAY Apr 16 at 11:59 PM</b> <br>
 <a  href="/materials/unit_02/week_04/project_2.html" target="_blank">Project 2 Instructions</a> <br> 
-<a  href="/materials/unit_02/week_04/project_2_rubric.html" target="_blank">Project 2 Rubric</a> <br> <br> 
+<a  href="/materials/unit_02/week_04/project_2_rubric.html" target="_blank">Project 2 Rubric</a> <br> 
+
+<b>Peer Evaluation - Due FRIDAY Apr 18 at 1:00 PM</b> <br>
 
 <!--
 <b>Problem Set Materials - Due Friday, April 12 by 11:59 PM:</b> <br>
