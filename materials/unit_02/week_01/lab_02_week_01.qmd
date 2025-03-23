@@ -6,7 +6,6 @@ format:
     toc: true
 ---
 
-
 ![](includes/cross-sectional.png)
 
 ::: {style="font-size: 1.5em"}
@@ -14,161 +13,364 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 :::
 
 
+
 ## Learning Objectives R
 
-- Conduct exploratory data analysis 
-
-- Conduct cluster analysis
-
+- Conduct exploratory data analysis on your convenience store datasets
+- Conduct basic cluster analysis using R
 
 
+## Getting Started
 
-# R
-
-This lab will use the cross-sectional data set Arizona Grocery Store visitation data to introduce *cluster analysis* using R.  First, we will explore these data to become familiar with the data and remove outliers.
-
-## Exploratory Data Analysis
-
-We will use a dataset of grocery store locations in the United States that contains information about the number of visitors, the distance (meters) from visitors' home, and the median time (minutes) visitors spend in the store. The dataset is provided at <https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv>.  First, set your directory and load the following packages: `tidyverse,ggplot2,skimr,GGally,broom,ranger,rsample,caret`
+Set your working directory and load necessary packages:
 
 ```{r}
 #| eval: false
 
-# This script 
+# This is the script for Lab Week 09
+
+setwd("Replace with the path to your working directory")
+getwd() # Confirm I am working in the proper directory.
 
 # load packages
 library(pacman)
 p_load(tidyverse,ggplot2,modelsummary,GGally,factoextra)
-
-# read in dataset
-raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv")
 ```
 
-The package `modelsummary` provides some handy utilities for easily generating summary statistics. We will use `datasummary_skim()` to get a quick overview of the data. First, we will look at the numeric data by specifying `type="numeric"`.  What do you notice? Do the same for categorical data by specifying `type="categorical"`.
+## Data Description and Documentation
+
+We will use the following datasets for Project 2:
+
+**<a  href="../inputs/shopper_info.csv" download>shopper_info.csv</a>**: This file contains transaction-level data, including information about the shopper, the store where the purchase was made, the products purchased (identified by GTIN), and the quantities and prices.
+
+**<a  href="../inputs/gtin.csv" download>gtin.csv</a>**: This file provides additional details about the products, which can be linked to the shopper_info.csv file using the GTIN (Global Trade Item Number) variable.
+
+**<a  href="../inputs/store_info.csv" download>store_info.csv</a>**: This file includes information about the stores, such as location, size, and other characteristics, which can be linked to the shopper_info.csv file using the store_id variable.
+
+::: {.panel-tabset}
+### shopper_info.csv
+
+**This is the core file that contains information about the shopper and each transaction they made during the month of July 2023.**
+
+| Column Name         | Description                                                                                                                                              | Type | Example                      |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|------|------------------------------|
+| shopper_id          | A unique identifier for the shopper, used to track customer behavior or purchases without revealing personal information.                                 | chr  | 1b66d0b8c61be4cfee253597e3ccbf7f |
+| transaction_set_id  | A unique identifier for a group of transactions, which may represent a shopping basket or an entire shopping session.                                     | num  | 2041514888493873e21          |
+| store_id            | A numeric identifier representing a specific store location where the transaction took place.                                                             | num  | 25585                        |
+| transaction_item_id | A unique numeric identifier for each item within a transaction, distinguishing different items in a single transaction.                                   | num  | 204151488849387e22           |
+| gtin                | Global Trade Item Number, a unique number assigned to products for identification in a retail setting.                                                    | chr  | 00043300109264               |
+| unit_price          | The price of a single unit of the product.                                                                                                                | num  | 7.07                         |
+| unit_quantity       | The quantity of the product units purchased in the transaction.                                                                                           | num  | 1                            |
+
+### gtin.csv
+
+**You will link this file with "shopper_info" based on the variable gtin. GTIN stands for "Global Trade Item Number" and is similar to an SKU or UPC (i.e., barcode).**
+
+| Column Name         | Description                                                                                                                                             | Type | Example                              |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------|--------------------------------------|
+| gtin            | Global Trade Item Number, a unique identifier for products used to look up item information in a database.                                              | chr  | 06937643571427                       |
+| category        | The general classification of the product, indicating the broad market segment to which it belongs.                                                     | chr  | Other Tobacco Products               |
+| subcategory     | A more specific classification within the general category, detailing the type of product.                                                              | chr  | Vaping Products                      |
+| manufacturer_name | The company that manufactures or produces the product.                                                                                                  | chr  | Mi-One Brands                        |
+| brand           | The brand name under which the product is marketed and sold.                                                                                            | chr  | Elf Bar                             |
+| product_type    | The form or variety of the product, indicating if it is a singular item, bundle, service, etc.                                                          | chr  | Disposable                           |
+| sub_product_type| A further division within the product type, providing additional specificity.                                                                           | chr  | Rechargeable                         |
+| flavor          | The designated taste profile or flavoring of the product.                                                                                               | chr  | Watermelon Cherry                    |
+| unit_size       | The amount or quantity of use a product provides, often referring to consumable products.                                                               | chr  | 5000 Puffs                           |
+| pack_size       | The number of individual items within a single packaged product.                                                                                        | chr  | Single                               |
+| package         | The type of packaging used for the product.                                                                                                             | chr  | NA                                   |
+| skupos_description | A descriptive line combining several product attributes for inventory and sales purposes, typically used in POS (Point of Sale) systems.                | chr  | LOST MARY MO5000 WATERMELON CHERRY   |
+
+
+### store_info.csv
+
+**This file contains the store details and can be linked with the "shopper_info" using the variable store_id.**
+
+| Column Name      | Description                                                                                                                                                 | Type | Example        |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|------|----------------|
+| store_id         | A numeric identifier assigned to a store for internal tracking and database management.                                                                     | num  | 31056          |
+| store_name       | The name of the store as it is known publicly and used for branding.                                                                                        | chr  | Kwik Stop      |
+| store_chain_id   | A unique numeric identifier assigned to the store chain for internal tracking and differentiation from other chains.                                        | num  | 16665          |
+| store_chain_name | The name of the store chain to which the store belongs, used for branding and corporate identity.                                                           | chr  | Kwik Stop      |
+| street_address   | The street location of the store, used for mail and geographical identification.                                                                            | chr  | 1118 W Main St |
+| city             | The city in which the store is located.                                                                                                                     | chr  | Olney          |
+| zip_code         | The postal code for the area where the store is located, used for mail delivery and geographical segmentation.                                              | chr  | 76374          |
+| latitude         | The geographical coordinate that specifies the north-south position of the store on the Earth's surface.                                                    | num  | 33.3712        |
+| longitude        | The geographical coordinate that specifies the east-west position of the store on the Earth's surface.                                                      | num  | -98.7681       |
+| chain_size       | A numeric value representing the number of stores in the chain, which could indicate the size of the store network within the corporation.                   | num  | 1              |
+
+:::
+
+
+![](includes/data_schema.png)
+
+
+## Exploratory Data Analysis (EDA)
+
+Our goal in this section is to become familiar with each dataset, understand the distributions, check for missing values, and identify any outliers.
+
+### Step 1: Load Your Datasets
 
 ```{r}
 #| eval: false
 
-datasummary_skim(raw,type = "numeric")
-datasummary_skim(raw,type = "categorical")
+# Load required libraries using pacman for convenience
+# pacman will check if the package is installed, install it if not, and then load it for use
+library(pacman)
+p_load(dplyr,readr,tidyverse,ggplot2,modelsummary,GGally,factoextra)
 
+# Read in the shopper_info dataset
+# This dataset contains detailed information on shoppers and their transactions for July 2023
+shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_info.csv")
+
+# Read in the GTIN dataset
+# This file links products to their Global Trade Item Numbers, akin to SKUs or UPCs
+gtin <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/gtin.csv")
+
+# Read in the store_info dataset
+# Contains details about each store, linkable to shopper_info via store_id
+store_info <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/store_info.csv")
 ```
 
-You can customize this summary statistics table and output the result to a docx file (see the other options in the documentation). In the following example, we are creating a table with `raw_visitor_counts`, `distance_from_home`, `median_dwell` as the rows and `Mean`, `SD`, `Min`, and `Max` as the columns. The character string as the output argument defines the file name in the current working directory.
+Inspect datasets:
+
+```{r}
+#| eval: false
+head(shopper_info)
+head(gtin)
+head(store_info)
+```
+
+Do they contain all the variables that are in the data dictionary?
+
+### Step 2: Join the Data
+
+In R, particularly within the `dplyr` package, **join** functions are used to merge two data frames by one or more common key variables. Each type of join function serves a different purpose, allowing for various ways of combining data based on the presence or absence of matching key values in the two data frames. Here's an overview of the different types of join functions provided by `dplyr`, along with examples for each.
+
+![](includes/joins.png)
+
+
+1. **Inner Join** 
+
+The `inner_join()` function merges rows from two data frames where there are matching values in the specified key columns. It returns only the rows with matching keys in both data frames.
+
+Example:
 
 ```{r}
 #| eval: false
 
-datasummary(raw_visitor_counts + distance_from_home + median_dwell ~ Mean + SD + Min + Max,
-            data=raw,
+# Join shopper_info and store_info by the common key "store_id"
+shopper_store_inner <- inner_join(shopper_info, store_info, by = "store_id")
+
+```
+
+
+2. **Left Join** 
+
+The `left_join()` function returns all rows from the left data frame, along with matching rows from the right data frame. If there's no match, the result will contain NA for the missing values from the right data frame.
+
+Example:
+
+```{r}
+#| eval: false
+
+# Keeping all rows from shopper_info and adding information from store_info where possible
+shopper_store_left <- left_join(shopper_info, store_info, by = "store_id")
+
+```
+
+
+3. **Right Join**
+
+Conversely, `right_join()` returns all rows from the right data frame, along with matching rows from the left data frame. Rows in the right data frame with no match in the left data frame will have NA for the missing values from the left data frame.
+
+Example:
+
+```{r}
+#| eval: false
+
+# Keeping all rows from store_info and adding information from shopper_info where possible
+store_shopper_right <- right_join(shopper_info, store_info, by = "store_id")
+
+```
+
+
+4. **Full Join**
+
+The `full_join()` function combines all rows from both data frames, inserting `NA` for missing matches on either side.
+
+Example:
+
+```{r}
+#| eval: false
+
+# Combining all information from both shopper_info and store_info
+shopper_store_full <- full_join(shopper_info, store_info, by = "store_id")
+
+```
+
+Other types of joins that we will not cover include `semi_join()` and `anti_join()`.
+
+#### You Do It
+
+Join the `shopper_info.csv` file with the `store_info.csv` file so that you keep all transaction information, even if there is no store match.
+
+> What join function should you use? How many observations do you expect to retain?
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+shopper_store_left <- left_join(shopper_info, store_info, by = "store_id")
+
+```
+
+> How many observations should you have? In other words, what are the dimensions of your joined data frame?
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+total_observations <- nrow(shopper_store_left)
+
+print(total_observations)
+
+```
+
+Write the data frame to a csv file called `shopper_store_join.csv`.
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+write_csv(shopper_store_left, "shopper_store_join.csv") 
+```
+
+:::{.callout-note}
+Depending on your research question (customers, stores, or products) for project 2, you may have to merge two or three datasets. 
+:::
+
+
+### Step 3: Summary Statistics and Data Cleaning
+
+The package `modelsummary` provides some handy utilities for easily generating summary statistics. We will use `datasummary_skim()` to get a quick overview of the data. 
+
+First, we will look at the numeric data by specifying `type="numeric"`. Then do the same for categorical data by specifying `type="categorical"`.
+
+```{r}
+#| eval: false
+
+# Using our dataframe 'shopper_store_full'
+datasummary_skim(shopper_store_full, type = "numeric")
+datasummary_skim(shopper_store_full, type = "categorical")
+```
+
+Evaluate your summary statistics. 
+
+- What do you notice? 
+- Do you see unusual values or missing data?
+
+You can customize this summary statistics table and output the result to a docx file (see the other options in the documentation). 
+
+In the following example, we are creating a table with `unit_price`, `unit_quantity`, `chain_size` as the rows and `Mean`, `SD`, `Min`, and `Max` as the columns. The character string as the output argument defines the file name in the current working directory.
+
+```{r}
+#| eval: false
+
+datasummary(unit_price + unit_quantity + chain_size ~ Mean + SD + Min + Max,
+            data=shopper_store_full,
             output = "sumstats.docx")
 ```
+
+
+### Step 4: `ggpairs()` Visualizations
 
 The package `GGally` provides helpful EDA visualizations using `ggplot2`.  Use `ggpairs` to visualize density plots and scatter plots to better understand correlation. What do you notice?
 
 ```{r}
 #| eval: false
-
-ggpairs(raw,columns = c("raw_visitor_counts","distance_from_home","median_dwell")) 
+# Example: choose numeric variables relevant to your research question
+shopper_store_full %>%
+  select(unit_price, unit_quantity, chain_size) %>% 
+  mutate(total_sales = unit_price*unit_quantity) %>%
+  select(tota_sales, chain_size) %>% 
+  ggpairs()
 ```
 
-The data are heavily skewed and all of the variables have very few observations of very high values (called fat tails). This suggests that we may want to log the data. Let's take a peak at what the pairs plot would look like if the data were logged. Note that we can use a utility called `across()` from dplyr to perform the same operation on multiple columns at once.
+### Step 5: Data Cleaning and Transformation
+
+Document clearly any data cleaning decisions (e.g., removing outliers, transforming variables). Provide justification for your decisions.
+
+Example:
 
 ```{r}
 #| eval: false
-raw %>%
-  select(raw_visitor_counts,distance_from_home,median_dwell) %>% #subset only our variables of interest
-  mutate(across(everything(),log)) %>% #log transform each of the variables. 
-  ggpairs() #plot the tranformed variables
+clean_data <- shopper_store_full %>%
+  mutate(total_sales = unit_price*unit_quantity) %>%
+  filter(unit_price < 100, unit_quantity < 20) %>% # example conditions
+  mutate(log_price = log(unit_price + 1)) # example transformation
 ```
 
-The log transform helped correct the skew but not the fat tails in `distance_from_home` and `median_dwell`. The very large values in `distance_from_home` may be visitors to the area with low visitation rate, and the very long dwell times may be employees. Let's simply remove these very large values for this analysis.  
+## Cluster Analysis: An Introductory Example
+
+### Step 1: Select Variables for Clustering
+
+Choose variables relevant for an initial cluster analysis. For instance, store characteristics might include size and average sales:
 
 ```{r}
 #| eval: false
-raw %>%
-  filter(distance_from_home<48000,median_dwell<90) %>% #keep only stores with median distance from home <48km and median dwell less than 90 minutes
-  select(raw_visitor_counts,distance_from_home,median_dwell) %>% #subset only our variables of interest
-  mutate(across(everything(),log)) %>% #log transform each of the variables. 
-  ggpairs() #plot the tranformed variables
+cluster_data <- clean_data %>%
+  select(chain_size, total_sales) %>%
+  drop_na()
 ```
 
-This looks better. Let's keep only those stores labeled as grocery stores, and apply the filter criteria from above.
+### Step 2: Scale the Data
+Scaling ensures variables have comparable units:
 
 ```{r}
 #| eval: false
-
-# select relevant columns and scrub outliers
-data <- raw %>% 
-  dplyr::filter(top_category=="Grocery Stores", #focus on those classified as grocery stores
-                distance_from_home<48000,median_dwell<90) %>% #apply outlier filter
-  select(placekey,raw_visitor_counts,distance_from_home,median_dwell) %>%
-  mutate(across(c(2:4),log)) %>% #log transform
-  drop_na() #drop any observations with missing values
+cluster_scaled <- scale(cluster_data)
 ```
 
-
-{{< video https://youtu.be/Fdbcx02cgFo aspect-ratio="16x9" >}}
-
-## Clustering Analysis
-
-We will cluster the observations based on `distance_from_home`. Our first step will be to standardize the data so the units of the variables do not affect the clustering.  Use the function `scale()` to transform each variable by first subtracting the mean, then dividing by the standard deviation. 
+### Step 3: Perform K-means Clustering
+Perform clustering, starting with an initial choice (e.g., k = 3):
 
 ```{r}
 #| eval: false
-
-# scale data
-data_scaled <- data %>%
-  select(distance_from_home) %>% 
-  scale()
-
-
+set.seed(123)
+kmeans_fit <- kmeans(cluster_scaled, centers = 3, nstart = 25)
 ```
 
-Now, we can estimate the `kmeans` clustering algorithm with 3 clusters.
-```{r}
-#| eval: false
-# perform k-means clustering with k=3
-set.seed(123) # for reproducibility
-kmeans_fit <- kmeans(data_scaled, 
-                     centers=3,  #the number of clusters
-                     nstart = 25) #the number of random starts
-```
-
-The `kmeans` algorithm needs you to specify the number of clusters. There are some helpful visuals that can guide your choice of cluster. One is known as the silhouette plot. See an explanation of the silhouette coefficient [here](https://www.baeldung.com/cs/silhouette-values-clustering). The other is the elbow plot, which involves calculating the "within sum of squares" for different numbers of clusters. As you increase the number of clusters, the within sum of squares declines. Stop when an increase in the number of clusters only marginally decreases the within sum of squares.
+### Step 4: Evaluate Number of Clusters (k)
+Use silhouette and elbow plots to determine the optimal number of clusters:
 
 ```{r}
 #| eval: false
-# Create silhouette plot
-fviz_nbclust(data_scaled, kmeans, method = "silhouette")
-
-fviz_nbclust(data_scaled, kmeans, method = "wss")
-
+fviz_nbclust(cluster_scaled, kmeans, method = "silhouette")
+fviz_nbclust(cluster_scaled, kmeans, method = "wss")
 ```
 
-> Adjust your number of clusters if necessary and rerun kmeans.
+Adjust your clusters based on this analysis.
 
-Assign the clusters back to the data and merge (join) the data back with other store level attributes.
+### Step 5: Examine and Interpret Clusters
+Join cluster labels back to the main data for interpretation:
 
 ```{r}
 #| eval: false
-#create a dataframe with the store level attribute data not included in the clustering
-location_info <- raw %>%
-  select(placekey,location_name,top_category,sub_category,latitude,longitude,city,region)
-
-# add cluster labels to dataset and join to location info
-data_clustered <- data %>% 
-  mutate(cluster = kmeans_fit$cluster) %>%
-  inner_join(location_info,by="placekey")
+final_clusters <- clean_data %>%
+  mutate(cluster = kmeans_fit$cluster)
 ```
 
-> Do your clusters based on travel distance seem reasonable? What are the cluster means of another variable?
+Explore cluster differences:
 
+```{r}
+#| eval: false
+final_clusters %>%
+  group_by(cluster) %>%
+  summarise(across(c(store_size, total_sales), mean))
+```
 
-{{< video https://youtu.be/XpBwDJRhqSg aspect-ratio="16x9" >}}
-
-
-
-
-
-
+This lab provides foundational skills in EDA and clustering, directly setting you up for your Project 2 analysis.

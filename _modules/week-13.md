@@ -27,9 +27,9 @@ title: "Week 13: Project 3 Overview and Intro to Panel Data"
  <a  href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/EgFfaomIJ8VOoPLiTz6YXfEBXQqoY1eiOuDmpPpur7f9Ow?e=zDMuWi" target="_blank">Lab Datasets</a> <br>
 -->
 
-<b> Problem Set 11: Due May 2 at 11:59 PM</b> <br>
+<b> Problem Set: Due May 2 at 11:59 PM</b> <br>
 
-<a  href="/materials/unit_03/week_01/ps_03_week_01.html" target="_blank">Problem Set 11 Instructions</a> <br>  
+<a  href="/materials/unit_03/week_01/ps_03_week_01.html" target="_blank">Project 03 - Problem Set 1 Instructions</a> <br>  
 <!--
 <a  href="https://colostate-my.sharepoint.com/:f:/g/personal/jbayham_colostate_edu/Ene2gKXT9QBMr5Zb383dEeYBmvLFvFZR6PTwxUcGNza_0g?e=gwtVHm" target="_blank">Treatment datasets</a> <br> 
 

@@ -1,0 +1,299 @@
+---
+title: "Week 09 Lab: Intro to Analyzing Cross-Sectional Data"
+format: 
+  html:
+    theme: zephyr
+    toc: true
+---
+
+![](includes/cross-sectional.png)
+
+::: {style="font-size: 1.5em"}
+This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
+:::
+
+
+## Learning Objectives R
+
+- Conduct exploratory data analysis on your convenience store datasets
+- Conduct basic cluster analysis using R
+
+
+## Getting Started
+
+Set your working directory and load necessary packages:
+
+```{r}
+#| eval: false
+
+# This script
+
+# load packages
+library(pacman)
+p_load(tidyverse,ggplot2,modelsummary,GGally,factoextra)
+```
+
+## Data Description and Documentation
+
+We will use the following datasets for Project 2:
+
+**<a  href="../inputs/shopper_info.csv" download>shopper_info.csv</a>**: This file contains transaction-level data, including information about the shopper, the store where the purchase was made, the products purchased (identified by GTIN), and the quantities and prices.
+
+**<a  href="../inputs/gtin.csv" download>gtin.csv</a>**: This file provides additional details about the products, which can be linked to the shopper_info.csv file using the GTIN (Global Trade Item Number) variable.
+
+**<a  href="../inputs/store_info.csv" download>store_info.csv</a>**: This file includes information about the stores, such as location, size, and other characteristics, which can be linked to the shopper_info.csv file using the store_id variable.
+
+
+## Exploratory Data Analysis (EDA)
+
+Our goal in this section is to become familiar with each dataset, understand the distributions, check for missing values, and identify any outliers.
+
+### Step 1: Load Your Datasets
+
+```{r}
+#| eval: false
+shopper <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_info.csv")
+gtin <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/gtin.csv")
+store <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/store_info.csv")
+```
+
+Inspect datasets:
+
+```{r}
+#| eval: false
+head(shopper)
+head(gtin)
+head(store)
+```
+
+Do they contain all the variables that are in the data dictionary?
+
+### Step 2: Merge the Datasets
+
+Depending on your research question (customers, stores, or products), merge relevant datasets. Below is a generic example of merging all three:
+
+```{r}
+#| eval: false
+# Example of merging shopper_info with gtin and store_info
+merged_data <- shopper %>%
+  left_join(gtin, by = "GTIN") %>%
+  left_join(store, by = "store_id")
+```
+
+### Step 3: Summary Statistics and Data Cleaning
+
+The package `modelsummary` provides some handy utilities for easily generating summary statistics. We will use `datasummary_skim()` to get a quick overview of the data. First, we will look at the numeric data by specifying `type="numeric"`.  What do you notice? Do the same for categorical data by specifying `type="categorical"`.
+
+```{r}
+#| eval: false
+datasummary_skim(merged_data, type = "numeric")
+datasummary_skim(merged_data, type = "categorical")
+```
+
+Evaluate your summary statistics. Do you see unusual values or missing data?
+
+You can customize this summary statistics table and output the result to a docx file (see the other options in the documentation). In the following example, we are creating a table with `raw_visitor_counts`, `distance_from_home`, `median_dwell` as the rows and `Mean`, `SD`, `Min`, and `Max` as the columns. The character string as the output argument defines the file name in the current working directory.
+
+```{r}
+#| eval: false
+
+datasummary(raw_visitor_counts + distance_from_home + median_dwell ~ Mean + SD + Min + Max,
+            data=raw,
+            output = "sumstats.docx")
+```
+
+### Step 4: `ggpairs()` Visualizations
+
+The package `GGally` provides helpful EDA visualizations using `ggplot2`.  Use `ggpairs` to visualize density plots and scatter plots to better understand correlation. What do you notice?
+
+```{r}
+#| eval: false
+# Example: choose numeric variables relevant to your research question
+merged_data %>%
+  select(price, quantity, store_size) %>% 
+  ggpairs()
+```
+
+### Step 5: Data Cleaning and Transformation
+
+Document clearly any data cleaning decisions (e.g., removing outliers, transforming variables). Provide justification for your decisions.
+
+Example:
+
+```{r}
+#| eval: false
+clean_data <- merged_data %>%
+  filter(price < 100, quantity < 20) %>% # example conditions
+  mutate(log_price = log(price + 1)) # example transformation
+```
+
+## Cluster Analysis: An Introductory Example
+
+### Step 1: Select Variables for Clustering
+
+Choose variables relevant for an initial cluster analysis. For instance, store characteristics might include size and average sales:
+
+```{r}
+#| eval: false
+cluster_data <- clean_data %>%
+  select(store_size, total_sales) %>%
+  drop_na()
+```
+
+### Step 2: Scale the Data
+Scaling ensures variables have comparable units:
+
+```{r}
+#| eval: false
+cluster_scaled <- scale(cluster_data)
+```
+
+### Step 3: Perform K-means Clustering
+Perform clustering, starting with an initial choice (e.g., k = 3):
+
+```{r}
+#| eval: false
+set.seed(123)
+kmeans_fit <- kmeans(cluster_scaled, centers = 3, nstart = 25)
+```
+
+### Step 4: Evaluate Number of Clusters (k)
+Use silhouette and elbow plots to determine the optimal number of clusters:
+
+```{r}
+#| eval: false
+fviz_nbclust(cluster_scaled, kmeans, method = "silhouette")
+fviz_nbclust(cluster_scaled, kmeans, method = "wss")
+```
+
+Adjust your clusters based on this analysis.
+
+### Step 5: Examine and Interpret Clusters
+Join cluster labels back to the main data for interpretation:
+
+```{r}
+#| eval: false
+final_clusters <- clean_data %>%
+  mutate(cluster = kmeans_fit$cluster)
+```
+
+Explore cluster differences:
+
+```{r}
+#| eval: false
+final_clusters %>%
+  group_by(cluster) %>%
+  summarise(across(c(store_size, total_sales), mean))
+```
+
+This lab provides foundational skills in EDA and clustering, directly setting you up for your Project 2 analysis.
+
+
+
+<!-- FROM SPRING 2024 -->
+<!-- # R -->
+
+<!-- This lab will use the cross-sectional data set Arizona Grocery Store visitation data to introduce *cluster analysis* using R.  First, we will explore these data to become familiar with the data and remove outliers. -->
+
+<!-- ## Exploratory Data Analysis -->
+
+<!-- We will use a dataset of grocery store locations in the United States that contains information about the number of visitors, the distance (meters) from visitors' home, and the median time (minutes) visitors spend in the store. The dataset is provided at <https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv>.  First, set your directory and load the following packages: `tidyverse,ggplot2,skimr,GGally,broom,ranger,rsample,caret` -->
+
+<!-- The data are heavily skewed and all of the variables have very few observations of very high values (called fat tails). This suggests that we may want to log the data. Let's take a peak at what the pairs plot would look like if the data were logged. Note that we can use a utility called `across()` from dplyr to perform the same operation on multiple columns at once. -->
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- raw %>% -->
+<!--   select(raw_visitor_counts,distance_from_home,median_dwell) %>% #subset only our variables of interest -->
+<!--   mutate(across(everything(),log)) %>% #log transform each of the variables. -->
+<!--   ggpairs() #plot the tranformed variables -->
+<!-- ``` -->
+
+<!-- The log transform helped correct the skew but not the fat tails in `distance_from_home` and `median_dwell`. The very large values in `distance_from_home` may be visitors to the area with low visitation rate, and the very long dwell times may be employees. Let's simply remove these very large values for this analysis. -->
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- raw %>% -->
+<!--   filter(distance_from_home<48000,median_dwell<90) %>% #keep only stores with median distance from home <48km and median dwell less than 90 minutes -->
+<!--   select(raw_visitor_counts,distance_from_home,median_dwell) %>% #subset only our variables of interest -->
+<!--   mutate(across(everything(),log)) %>% #log transform each of the variables. -->
+<!--   ggpairs() #plot the tranformed variables -->
+<!-- ``` -->
+
+<!-- This looks better. Let's keep only those stores labeled as grocery stores, and apply the filter criteria from above. -->
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+
+<!-- # select relevant columns and scrub outliers -->
+<!-- data <- raw %>% -->
+<!--   dplyr::filter(top_category=="Grocery Stores", #focus on those classified as grocery stores -->
+<!--                 distance_from_home<48000,median_dwell<90) %>% #apply outlier filter -->
+<!--   select(placekey,raw_visitor_counts,distance_from_home,median_dwell) %>% -->
+<!--   mutate(across(c(2:4),log)) %>% #log transform -->
+<!--   drop_na() #drop any observations with missing values -->
+<!-- ``` -->
+
+<!-- {{< video https://youtu.be/Fdbcx02cgFo aspect-ratio="16x9" >}} -->
+
+<!-- ## Cluster Analysis -->
+
+<!-- We will cluster the observations based on `distance_from_home`. Our first step will be to standardize the data so the units of the variables do not affect the clustering.  Use the function `scale()` to transform each variable by first subtracting the mean, then dividing by the standard deviation.  -->
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+
+<!-- # scale data -->
+<!-- data_scaled <- data %>% -->
+<!--   select(distance_from_home) %>%  -->
+<!--   scale() -->
+
+
+<!-- ``` -->
+
+<!-- Now, we can estimate the `kmeans` clustering algorithm with 3 clusters. -->
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- # perform k-means clustering with k=3 -->
+<!-- set.seed(123) # for reproducibility -->
+<!-- kmeans_fit <- kmeans(data_scaled,  -->
+<!--                      centers=3,  #the number of clusters -->
+<!--                      nstart = 25) #the number of random starts -->
+<!-- ``` -->
+
+<!-- The `kmeans` algorithm needs you to specify the number of clusters. There are some helpful visuals that can guide your choice of cluster. One is known as the silhouette plot. See an explanation of the silhouette coefficient [here](https://www.baeldung.com/cs/silhouette-values-clustering). The other is the elbow plot, which involves calculating the "within sum of squares" for different numbers of clusters. As you increase the number of clusters, the within sum of squares declines. Stop when an increase in the number of clusters only marginally decreases the within sum of squares. -->
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- # Create silhouette plot -->
+<!-- fviz_nbclust(data_scaled, kmeans, method = "silhouette") -->
+
+<!-- fviz_nbclust(data_scaled, kmeans, method = "wss") -->
+
+<!-- ``` -->
+
+<!-- > Adjust your number of clusters if necessary and rerun kmeans. -->
+
+<!-- Assign the clusters back to the data and merge (join) the data back with other store level attributes. -->
+
+<!-- ```{r} -->
+<!-- #| eval: false -->
+<!-- #create a dataframe with the store level attribute data not included in the clustering -->
+<!-- location_info <- raw %>% -->
+<!--   select(placekey,location_name,top_category,sub_category,latitude,longitude,city,region) -->
+
+<!-- # add cluster labels to dataset and join to location info -->
+<!-- data_clustered <- data %>%  -->
+<!--   mutate(cluster = kmeans_fit$cluster) %>% -->
+<!--   inner_join(location_info,by="placekey") -->
+<!-- ``` -->
+
+<!-- > Do your clusters based on travel distance seem reasonable? What are the cluster means of another variable? -->
+
+<!-- {{< video https://youtu.be/XpBwDJRhqSg aspect-ratio="16x9" >}} -->
+
+
+
+
+
+

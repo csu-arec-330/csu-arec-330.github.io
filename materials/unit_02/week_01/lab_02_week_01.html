@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -80,10 +80,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
-  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#data-description-and-documentation" id="toc-data-description-and-documentation" class="nav-link" data-scroll-target="#data-description-and-documentation">Data Description and Documentation</a></li>
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a>
   <ul class="collapse">
-  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
-  <li><a href="#clustering-analysis" id="toc-clustering-analysis" class="nav-link" data-scroll-target="#clustering-analysis">Clustering Analysis</a></li>
+  <li><a href="#step-1-load-your-datasets" id="toc-step-1-load-your-datasets" class="nav-link" data-scroll-target="#step-1-load-your-datasets">Step 1: Load Your Datasets</a></li>
+  <li><a href="#step-2-join-the-data" id="toc-step-2-join-the-data" class="nav-link" data-scroll-target="#step-2-join-the-data">Step 2: Join the Data</a></li>
+  <li><a href="#step-3-summary-statistics-and-data-cleaning" id="toc-step-3-summary-statistics-and-data-cleaning" class="nav-link" data-scroll-target="#step-3-summary-statistics-and-data-cleaning">Step 3: Summary Statistics and Data Cleaning</a></li>
+  <li><a href="#step-4-ggpairs-visualizations" id="toc-step-4-ggpairs-visualizations" class="nav-link" data-scroll-target="#step-4-ggpairs-visualizations">Step 4: <code>ggpairs()</code> Visualizations</a></li>
+  <li><a href="#step-5-data-cleaning-and-transformation" id="toc-step-5-data-cleaning-and-transformation" class="nav-link" data-scroll-target="#step-5-data-cleaning-and-transformation">Step 5: Data Cleaning and Transformation</a></li>
+  </ul></li>
+  <li><a href="#cluster-analysis-an-introductory-example" id="toc-cluster-analysis-an-introductory-example" class="nav-link" data-scroll-target="#cluster-analysis-an-introductory-example">Cluster Analysis: An Introductory Example</a>
+  <ul class="collapse">
+  <li><a href="#step-1-select-variables-for-clustering" id="toc-step-1-select-variables-for-clustering" class="nav-link" data-scroll-target="#step-1-select-variables-for-clustering">Step 1: Select Variables for Clustering</a></li>
+  <li><a href="#step-2-scale-the-data" id="toc-step-2-scale-the-data" class="nav-link" data-scroll-target="#step-2-scale-the-data">Step 2: Scale the Data</a></li>
+  <li><a href="#step-3-perform-k-means-clustering" id="toc-step-3-perform-k-means-clustering" class="nav-link" data-scroll-target="#step-3-perform-k-means-clustering">Step 3: Perform K-means Clustering</a></li>
+  <li><a href="#step-4-evaluate-number-of-clusters-k" id="toc-step-4-evaluate-number-of-clusters-k" class="nav-link" data-scroll-target="#step-4-evaluate-number-of-clusters-k">Step 4: Evaluate Number of Clusters (k)</a></li>
+  <li><a href="#step-5-examine-and-interpret-clusters" id="toc-step-5-examine-and-interpret-clusters" class="nav-link" data-scroll-target="#step-5-examine-and-interpret-clusters">Step 5: Examine and Interpret Clusters</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -105,7 +118,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p><img src="includes/cross-sectional.png" class="img-fluid"></p>
 <div style="font-size: 1.5em">
@@ -114,110 +129,486 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="learning-objectives-r" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives-r">Learning Objectives R</h2>
 <ul>
-<li><p>Conduct exploratory data analysis</p></li>
-<li><p>Conduct cluster analysis</p></li>
+<li>Conduct exploratory data analysis on your convenience store datasets</li>
+<li>Conduct basic cluster analysis using R</li>
 </ul>
 </section>
-<section id="r" class="level1">
-<h1>R</h1>
-<p>This lab will use the cross-sectional data set Arizona Grocery Store visitation data to introduce <em>cluster analysis</em> using R. First, we will explore these data to become familiar with the data and remove outliers.</p>
-<section id="exploratory-data-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
-<p>We will use a dataset of grocery store locations in the United States that contains information about the number of visitors, the distance (meters) from visitors’ home, and the median time (minutes) visitors spend in the store. The dataset is provided at <a href="https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv" class="uri">https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv</a>. First, set your directory and load the following packages: <code>tidyverse,ggplot2,skimr,GGally,broom,ranger,rsample,caret</code></p>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<p>Set your working directory and load necessary packages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This script </span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the script for Lab Week 09</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse,ggplot2,modelsummary,GGally,factoextra)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># read in dataset</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"Replace with the path to your working directory"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co"># Confirm I am working in the proper directory.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(tidyverse,ggplot2,modelsummary,GGally,factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The package <code>modelsummary</code> provides some handy utilities for easily generating summary statistics. We will use <code>datasummary_skim()</code> to get a quick overview of the data. First, we will look at the numeric data by specifying <code>type="numeric"</code>. What do you notice? Do the same for categorical data by specifying <code>type="categorical"</code>.</p>
+</section>
+<section id="data-description-and-documentation" class="level2">
+<h2 class="anchored" data-anchor-id="data-description-and-documentation">Data Description and Documentation</h2>
+<p>We will use the following datasets for Project 2:</p>
+<p><strong><a href="../inputs/shopper_info.csv" download="">shopper_info.csv</a></strong>: This file contains transaction-level data, including information about the shopper, the store where the purchase was made, the products purchased (identified by GTIN), and the quantities and prices.</p>
+<p><strong><a href="../inputs/gtin.csv" download="">gtin.csv</a></strong>: This file provides additional details about the products, which can be linked to the shopper_info.csv file using the GTIN (Global Trade Item Number) variable.</p>
+<p><strong><a href="../inputs/store_info.csv" download="">store_info.csv</a></strong>: This file includes information about the stores, such as location, size, and other characteristics, which can be linked to the shopper_info.csv file using the store_id variable.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">shopper_info.csv</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">gtin.csv</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">store_info.csv</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><strong>This is the core file that contains information about the shopper and each transaction they made during the month of July 2023.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 72%">
+<col style="width: 2%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>shopper_id</td>
+<td>A unique identifier for the shopper, used to track customer behavior or purchases without revealing personal information.</td>
+<td>chr</td>
+<td>1b66d0b8c61be4cfee253597e3ccbf7f</td>
+</tr>
+<tr class="even">
+<td>transaction_set_id</td>
+<td>A unique identifier for a group of transactions, which may represent a shopping basket or an entire shopping session.</td>
+<td>num</td>
+<td>2041514888493873e21</td>
+</tr>
+<tr class="odd">
+<td>store_id</td>
+<td>A numeric identifier representing a specific store location where the transaction took place.</td>
+<td>num</td>
+<td>25585</td>
+</tr>
+<tr class="even">
+<td>transaction_item_id</td>
+<td>A unique numeric identifier for each item within a transaction, distinguishing different items in a single transaction.</td>
+<td>num</td>
+<td>204151488849387e22</td>
+</tr>
+<tr class="odd">
+<td>gtin</td>
+<td>Global Trade Item Number, a unique number assigned to products for identification in a retail setting.</td>
+<td>chr</td>
+<td>00043300109264</td>
+</tr>
+<tr class="even">
+<td>unit_price</td>
+<td>The price of a single unit of the product.</td>
+<td>num</td>
+<td>7.07</td>
+</tr>
+<tr class="odd">
+<td>unit_quantity</td>
+<td>The quantity of the product units purchased in the transaction.</td>
+<td>num</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><strong>You will link this file with “shopper_info” based on the variable gtin. GTIN stands for “Global Trade Item Number” and is similar to an SKU or UPC (i.e., barcode).</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 70%">
+<col style="width: 2%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>gtin</td>
+<td>Global Trade Item Number, a unique identifier for products used to look up item information in a database.</td>
+<td>chr</td>
+<td>06937643571427</td>
+</tr>
+<tr class="even">
+<td>category</td>
+<td>The general classification of the product, indicating the broad market segment to which it belongs.</td>
+<td>chr</td>
+<td>Other Tobacco Products</td>
+</tr>
+<tr class="odd">
+<td>subcategory</td>
+<td>A more specific classification within the general category, detailing the type of product.</td>
+<td>chr</td>
+<td>Vaping Products</td>
+</tr>
+<tr class="even">
+<td>manufacturer_name</td>
+<td>The company that manufactures or produces the product.</td>
+<td>chr</td>
+<td>Mi-One Brands</td>
+</tr>
+<tr class="odd">
+<td>brand</td>
+<td>The brand name under which the product is marketed and sold.</td>
+<td>chr</td>
+<td>Elf Bar</td>
+</tr>
+<tr class="even">
+<td>product_type</td>
+<td>The form or variety of the product, indicating if it is a singular item, bundle, service, etc.</td>
+<td>chr</td>
+<td>Disposable</td>
+</tr>
+<tr class="odd">
+<td>sub_product_type</td>
+<td>A further division within the product type, providing additional specificity.</td>
+<td>chr</td>
+<td>Rechargeable</td>
+</tr>
+<tr class="even">
+<td>flavor</td>
+<td>The designated taste profile or flavoring of the product.</td>
+<td>chr</td>
+<td>Watermelon Cherry</td>
+</tr>
+<tr class="odd">
+<td>unit_size</td>
+<td>The amount or quantity of use a product provides, often referring to consumable products.</td>
+<td>chr</td>
+<td>5000 Puffs</td>
+</tr>
+<tr class="even">
+<td>pack_size</td>
+<td>The number of individual items within a single packaged product.</td>
+<td>chr</td>
+<td>Single</td>
+</tr>
+<tr class="odd">
+<td>package</td>
+<td>The type of packaging used for the product.</td>
+<td>chr</td>
+<td>NA</td>
+</tr>
+<tr class="even">
+<td>skupos_description</td>
+<td>A descriptive line combining several product attributes for inventory and sales purposes, typically used in POS (Point of Sale) systems.</td>
+<td>chr</td>
+<td>LOST MARY MO5000 WATERMELON CHERRY</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><strong>This file contains the store details and can be linked with the “shopper_info” using the variable store_id.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 79%">
+<col style="width: 3%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>store_id</td>
+<td>A numeric identifier assigned to a store for internal tracking and database management.</td>
+<td>num</td>
+<td>31056</td>
+</tr>
+<tr class="even">
+<td>store_name</td>
+<td>The name of the store as it is known publicly and used for branding.</td>
+<td>chr</td>
+<td>Kwik Stop</td>
+</tr>
+<tr class="odd">
+<td>store_chain_id</td>
+<td>A unique numeric identifier assigned to the store chain for internal tracking and differentiation from other chains.</td>
+<td>num</td>
+<td>16665</td>
+</tr>
+<tr class="even">
+<td>store_chain_name</td>
+<td>The name of the store chain to which the store belongs, used for branding and corporate identity.</td>
+<td>chr</td>
+<td>Kwik Stop</td>
+</tr>
+<tr class="odd">
+<td>street_address</td>
+<td>The street location of the store, used for mail and geographical identification.</td>
+<td>chr</td>
+<td>1118 W Main St</td>
+</tr>
+<tr class="even">
+<td>city</td>
+<td>The city in which the store is located.</td>
+<td>chr</td>
+<td>Olney</td>
+</tr>
+<tr class="odd">
+<td>zip_code</td>
+<td>The postal code for the area where the store is located, used for mail delivery and geographical segmentation.</td>
+<td>chr</td>
+<td>76374</td>
+</tr>
+<tr class="even">
+<td>latitude</td>
+<td>The geographical coordinate that specifies the north-south position of the store on the Earth’s surface.</td>
+<td>num</td>
+<td>33.3712</td>
+</tr>
+<tr class="odd">
+<td>longitude</td>
+<td>The geographical coordinate that specifies the east-west position of the store on the Earth’s surface.</td>
+<td>num</td>
+<td>-98.7681</td>
+</tr>
+<tr class="even">
+<td>chain_size</td>
+<td>A numeric value representing the number of stores in the chain, which could indicate the size of the store network within the corporation.</td>
+<td>num</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><img src="includes/data_schema.png" class="img-fluid"></p>
+</section>
+<section id="exploratory-data-analysis-eda" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h2>
+<p>Our goal in this section is to become familiar with each dataset, understand the distributions, check for missing values, and identify any outliers.</p>
+<section id="step-1-load-your-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-load-your-datasets">Step 1: Load Your Datasets</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_skim</span>(raw,<span class="at">type =</span> <span class="st">"numeric"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_skim</span>(raw,<span class="at">type =</span> <span class="st">"categorical"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries using pacman for convenience</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pacman will check if the package is installed, install it if not, and then load it for use</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(dplyr,readr,tidyverse,ggplot2,modelsummary,GGally,factoextra)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the shopper_info dataset</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This dataset contains detailed information on shoppers and their transactions for July 2023</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>shopper_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_info.csv"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the GTIN dataset</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># This file links products to their Global Trade Item Numbers, akin to SKUs or UPCs</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>gtin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/gtin.csv"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the store_info dataset</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Contains details about each store, linkable to shopper_info via store_id</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>store_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/store_info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can customize this summary statistics table and output the result to a docx file (see the other options in the documentation). In the following example, we are creating a table with <code>raw_visitor_counts</code>, <code>distance_from_home</code>, <code>median_dwell</code> as the rows and <code>Mean</code>, <code>SD</code>, <code>Min</code>, and <code>Max</code> as the columns. The character string as the output argument defines the file name in the current working directory.</p>
+<p>Inspect datasets:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(raw_visitor_counts <span class="sc">+</span> distance_from_home <span class="sc">+</span> median_dwell <span class="sc">~</span> Mean <span class="sc">+</span> SD <span class="sc">+</span> Min <span class="sc">+</span> Max,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>raw,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">output =</span> <span class="st">"sumstats.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(shopper_info)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gtin)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(store_info)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Do they contain all the variables that are in the data dictionary?</p>
+</section>
+<section id="step-2-join-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-join-the-data">Step 2: Join the Data</h3>
+<p>In R, particularly within the <code>dplyr</code> package, <strong>join</strong> functions are used to merge two data frames by one or more common key variables. Each type of join function serves a different purpose, allowing for various ways of combining data based on the presence or absence of matching key values in the two data frames. Here’s an overview of the different types of join functions provided by <code>dplyr</code>, along with examples for each.</p>
+<p><img src="includes/joins.png" class="img-fluid"></p>
+<ol type="1">
+<li><strong>Inner Join</strong></li>
+</ol>
+<p>The <code>inner_join()</code> function merges rows from two data frames where there are matching values in the specified key columns. It returns only the rows with matching keys in both data frames.</p>
+<p>Example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join shopper_info and store_info by the common key "store_id"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>shopper_store_inner <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(shopper_info, store_info, <span class="at">by =</span> <span class="st">"store_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><strong>Left Join</strong></li>
+</ol>
+<p>The <code>left_join()</code> function returns all rows from the left data frame, along with matching rows from the right data frame. If there’s no match, the result will contain NA for the missing values from the right data frame.</p>
+<p>Example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keeping all rows from shopper_info and adding information from store_info where possible</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>shopper_store_left <span class="ot">&lt;-</span> <span class="fu">left_join</span>(shopper_info, store_info, <span class="at">by =</span> <span class="st">"store_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li><strong>Right Join</strong></li>
+</ol>
+<p>Conversely, <code>right_join()</code> returns all rows from the right data frame, along with matching rows from the left data frame. Rows in the right data frame with no match in the left data frame will have NA for the missing values from the left data frame.</p>
+<p>Example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keeping all rows from store_info and adding information from shopper_info where possible</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>store_shopper_right <span class="ot">&lt;-</span> <span class="fu">right_join</span>(shopper_info, store_info, <span class="at">by =</span> <span class="st">"store_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li><strong>Full Join</strong></li>
+</ol>
+<p>The <code>full_join()</code> function combines all rows from both data frames, inserting <code>NA</code> for missing matches on either side.</p>
+<p>Example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining all information from both shopper_info and store_info</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>shopper_store_full <span class="ot">&lt;-</span> <span class="fu">full_join</span>(shopper_info, store_info, <span class="at">by =</span> <span class="st">"store_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Other types of joins that we will not cover include <code>semi_join()</code> and <code>anti_join()</code>.</p>
+<section id="you-do-it" class="level4">
+<h4 class="anchored" data-anchor-id="you-do-it">You Do It</h4>
+<p>Join the <code>shopper_info.csv</code> file with the <code>store_info.csv</code> file so that you keep all transaction information, even if there is no store match.</p>
+<blockquote class="blockquote">
+<p>What join function should you use? How many observations do you expect to retain?</p>
+</blockquote>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>shopper_store_left <span class="ot">&lt;-</span> <span class="fu">left_join</span>(shopper_info, store_info, <span class="at">by =</span> <span class="st">"store_id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<blockquote class="blockquote">
+<p>How many observations should you have? In other words, what are the dimensions of your joined data frame?</p>
+</blockquote>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>total_observations <span class="ot">&lt;-</span> <span class="fu">nrow</span>(shopper_store_left)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_observations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Write the data frame to a csv file called <code>shopper_store_join.csv</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(shopper_store_left, <span class="st">"shopper_store_join.csv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depending on your research question (customers, stores, or products) for project 2, you may have to merge two or three datasets.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-3-summary-statistics-and-data-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-summary-statistics-and-data-cleaning">Step 3: Summary Statistics and Data Cleaning</h3>
+<p>The package <code>modelsummary</code> provides some handy utilities for easily generating summary statistics. We will use <code>datasummary_skim()</code> to get a quick overview of the data.</p>
+<p>First, we will look at the numeric data by specifying <code>type="numeric"</code>. Then do the same for categorical data by specifying <code>type="categorical"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using our dataframe 'shopper_store_full'</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_skim</span>(shopper_store_full, <span class="at">type =</span> <span class="st">"numeric"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_skim</span>(shopper_store_full, <span class="at">type =</span> <span class="st">"categorical"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Evaluate your summary statistics.</p>
+<ul>
+<li>What do you notice?</li>
+<li>Do you see unusual values or missing data?</li>
+</ul>
+<p>You can customize this summary statistics table and output the result to a docx file (see the other options in the documentation).</p>
+<p>In the following example, we are creating a table with <code>unit_price</code>, <code>unit_quantity</code>, <code>chain_size</code> as the rows and <code>Mean</code>, <code>SD</code>, <code>Min</code>, and <code>Max</code> as the columns. The character string as the output argument defines the file name in the current working directory.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary</span>(unit_price <span class="sc">+</span> unit_quantity <span class="sc">+</span> chain_size <span class="sc">~</span> Mean <span class="sc">+</span> SD <span class="sc">+</span> Min <span class="sc">+</span> Max,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>shopper_store_full,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">output =</span> <span class="st">"sumstats.docx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-4-ggpairs-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-ggpairs-visualizations">Step 4: <code>ggpairs()</code> Visualizations</h3>
 <p>The package <code>GGally</code> provides helpful EDA visualizations using <code>ggplot2</code>. Use <code>ggpairs</code> to visualize density plots and scatter plots to better understand correlation. What do you notice?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(raw,<span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"raw_visitor_counts"</span>,<span class="st">"distance_from_home"</span>,<span class="st">"median_dwell"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: choose numeric variables relevant to your research question</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>shopper_store_full <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(unit_price, unit_quantity, chain_size) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_sales =</span> unit_price<span class="sc">*</span>unit_quantity) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tota_sales, chain_size) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The data are heavily skewed and all of the variables have very few observations of very high values (called fat tails). This suggests that we may want to log the data. Let’s take a peak at what the pairs plot would look like if the data were logged. Note that we can use a utility called <code>across()</code> from dplyr to perform the same operation on multiple columns at once.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>raw <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(raw_visitor_counts,distance_from_home,median_dwell) <span class="sc">%&gt;%</span> <span class="co">#subset only our variables of interest</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(),log)) <span class="sc">%&gt;%</span> <span class="co">#log transform each of the variables. </span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>() <span class="co">#plot the tranformed variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The log transform helped correct the skew but not the fat tails in <code>distance_from_home</code> and <code>median_dwell</code>. The very large values in <code>distance_from_home</code> may be visitors to the area with low visitation rate, and the very long dwell times may be employees. Let’s simply remove these very large values for this analysis.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>raw <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(distance_from_home<span class="sc">&lt;</span><span class="dv">48000</span>,median_dwell<span class="sc">&lt;</span><span class="dv">90</span>) <span class="sc">%&gt;%</span> <span class="co">#keep only stores with median distance from home &lt;48km and median dwell less than 90 minutes</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(raw_visitor_counts,distance_from_home,median_dwell) <span class="sc">%&gt;%</span> <span class="co">#subset only our variables of interest</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(),log)) <span class="sc">%&gt;%</span> <span class="co">#log transform each of the variables. </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>() <span class="co">#plot the tranformed variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This looks better. Let’s keep only those stores labeled as grocery stores, and apply the filter criteria from above.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select relevant columns and scrub outliers</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(top_category<span class="sc">==</span><span class="st">"Grocery Stores"</span>, <span class="co">#focus on those classified as grocery stores</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                distance_from_home<span class="sc">&lt;</span><span class="dv">48000</span>,median_dwell<span class="sc">&lt;</span><span class="dv">90</span>) <span class="sc">%&gt;%</span> <span class="co">#apply outlier filter</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(placekey,raw_visitor_counts,distance_from_home,median_dwell) <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>),log)) <span class="sc">%&gt;%</span> <span class="co">#log transform</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="co">#drop any observations with missing values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/Fdbcx02cgFo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
-<section id="clustering-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="clustering-analysis">Clustering Analysis</h2>
-<p>We will cluster the observations based on <code>distance_from_home</code>. Our first step will be to standardize the data so the units of the variables do not affect the clustering. Use the function <code>scale()</code> to transform each variable by first subtracting the mean, then dividing by the standard deviation.</p>
+<section id="step-5-data-cleaning-and-transformation" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-data-cleaning-and-transformation">Step 5: Data Cleaning and Transformation</h3>
+<p>Document clearly any data cleaning decisions (e.g., removing outliers, transforming variables). Provide justification for your decisions.</p>
+<p>Example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># scale data</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data_scaled <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(distance_from_home) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> shopper_store_full <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_sales =</span> unit_price<span class="sc">*</span>unit_quantity) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(unit_price <span class="sc">&lt;</span> <span class="dv">100</span>, unit_quantity <span class="sc">&lt;</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="co"># example conditions</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_price =</span> <span class="fu">log</span>(unit_price <span class="sc">+</span> <span class="dv">1</span>)) <span class="co"># example transformation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, we can estimate the <code>kmeans</code> clustering algorithm with 3 clusters.</p>
+</section>
+</section>
+<section id="cluster-analysis-an-introductory-example" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-analysis-an-introductory-example">Cluster Analysis: An Introductory Example</h2>
+<section id="step-1-select-variables-for-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-select-variables-for-clustering">Step 1: Select Variables for Clustering</h3>
+<p>Choose variables relevant for an initial cluster analysis. For instance, store characteristics might include size and average sales:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perform k-means clustering with k=3</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>kmeans_fit <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data_scaled, </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">centers=</span><span class="dv">3</span>,  <span class="co">#the number of clusters</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nstart =</span> <span class="dv">25</span>) <span class="co">#the number of random starts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cluster_data <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(chain_size, total_sales) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>kmeans</code> algorithm needs you to specify the number of clusters. There are some helpful visuals that can guide your choice of cluster. One is known as the silhouette plot. See an explanation of the silhouette coefficient <a href="https://www.baeldung.com/cs/silhouette-values-clustering">here</a>. The other is the elbow plot, which involves calculating the “within sum of squares” for different numbers of clusters. As you increase the number of clusters, the within sum of squares declines. Stop when an increase in the number of clusters only marginally decreases the within sum of squares.</p>
+</section>
+<section id="step-2-scale-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-scale-the-data">Step 2: Scale the Data</h3>
+<p>Scaling ensures variables have comparable units:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create silhouette plot</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(data_scaled, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(data_scaled, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cluster_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(cluster_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<blockquote class="blockquote">
-<p>Adjust your number of clusters if necessary and rerun kmeans.</p>
-</blockquote>
-<p>Assign the clusters back to the data and merge (join) the data back with other store level attributes.</p>
+</section>
+<section id="step-3-perform-k-means-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-perform-k-means-clustering">Step 3: Perform K-means Clustering</h3>
+<p>Perform clustering, starting with an initial choice (e.g., k = 3):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a dataframe with the store level attribute data not included in the clustering</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>location_info <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(placekey,location_name,top_category,sub_category,latitude,longitude,city,region)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add cluster labels to dataset and join to location info</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>data_clustered <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cluster =</span> kmeans_fit<span class="sc">$</span>cluster) <span class="sc">%&gt;%</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(location_info,<span class="at">by=</span><span class="st">"placekey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>kmeans_fit <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(cluster_scaled, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<blockquote class="blockquote">
-<p>Do your clusters based on travel distance seem reasonable? What are the cluster means of another variable?</p>
-</blockquote>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/XpBwDJRhqSg" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="step-4-evaluate-number-of-clusters-k" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-evaluate-number-of-clusters-k">Step 4: Evaluate Number of Clusters (k)</h3>
+<p>Use silhouette and elbow plots to determine the optimal number of clusters:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Adjust your clusters based on this analysis.</p>
+</section>
+<section id="step-5-examine-and-interpret-clusters" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-examine-and-interpret-clusters">Step 5: Examine and Interpret Clusters</h3>
+<p>Join cluster labels back to the main data for interpretation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>final_clusters <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cluster =</span> kmeans_fit<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Explore cluster differences:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>final_clusters <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(store_size, total_sales), mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This lab provides foundational skills in EDA and clustering, directly setting you up for your Project 2 analysis.</p>
 </section>
 </section>
 
@@ -258,18 +649,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -301,11 +681,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -315,8 +734,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -328,7 +756,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -372,6 +923,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -397,6 +949,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -457,6 +1035,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

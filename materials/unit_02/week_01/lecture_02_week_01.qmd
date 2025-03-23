@@ -33,7 +33,7 @@ Project 2 overview and example
 <!-- ::: -->
 <!-- :::: -->
 
-## Data Types
+## Data Types (Recall)
 
 ![](https://static.vecteezy.com/system/resources/previews/031/089/964/non_2x/the-relational-model-usually-operates-on-cross-sectional-or-time-series-data-while-the-sequential-model-works-with-more-complex-panel-data-which-combines-bot-vector.jpg)
 
@@ -91,16 +91,6 @@ Project 2 overview and example
 
 - Country-level data
 
-
-
-## Common types of cross-sectional data
-
-- Individual-level data
-
-- Business or point of interest-level data
-
-- Country-level data
-
 - Region-level data
 
 - Spatial data
@@ -115,74 +105,119 @@ Project 2 overview and example
 
 
 
-## Analyzing Cross-Sectional Data
+## Analyzing Cross-Sectional Data {.scrollable}
 
-- Cross-section data analysis typically involves studying: 
-  
-  - similarities or differences among subjects
-  
-  - trends and associations in the population
+Cross-sectional analysis typically involves:
 
+- **Frequency:**  
+  - How common is a certain outcome?  
+  - How many individuals or units are impacted?
 
-![](https://media.istockphoto.com/id/1128971953/vector/modern-multicultural-society-concept-with-crowd-of-people.jpg?s=612x612&w=0&k=20&c=OiUCmzDfI6C9MbEO-D9tOSUL2OOcMFofJXsiLka7Jic=)
+- **Associations:**  
+  - What factors (age, income, location, etc.) are associated with specific outcomes?
 
+- **Similarities or Differences:**  
+  - Identifying meaningful groups or patterns in data.  
 
-    
+One powerful method to uncover these groups is **Cluster Analysis**, which we introduce next.
 
-## Analyzing Cross-Sectional Data cont.
-
-
-- Questions about frequency: 
-
-    - how common is the outcome? 
-
-    - how many people are impacted? 
-<br>
-![](https://media.istockphoto.com/id/1128971953/vector/modern-multicultural-society-concept-with-crowd-of-people.jpg?s=612x612&w=0&k=20&c=OiUCmzDfI6C9MbEO-D9tOSUL2OOcMFofJXsiLka7Jic=)
-    
-
-## Analyzing Cross-Sectional Data cont.
+<!-- ![](https://media.istockphoto.com/id/1128971953/vector/modern-multicultural-society-concept-with-crowd-of-people.jpg?s=612x612&w=0&k=20&c=OiUCmzDfI6C9Mb -->
 
 
-- Questions about associations:
+## Why Cluster Analysis? {.scrollable}
 
-    - what factors are associated with the outcome (age, gender, income, pollution, health, etc.)?
-    
-![](https://media.istockphoto.com/id/1128971953/vector/modern-multicultural-society-concept-with-crowd-of-people.jpg?s=612x612&w=0&k=20&c=OiUCmzDfI6C9MbEO-D9tOSUL2OOcMFofJXsiLka7Jic=)
+Cluster analysis helps businesses, policymakers, and organizations group similar observations to better understand their characteristics, behaviors, and needs.
 
-## Analyzing Cross-Sectional Data cont.
+For example:
 
+- **Retailers** use cluster analysis to group similar **stores**, **customers**, or **products** to improve targeting and increase sales efficiency.
+- **Customers**: Segment shoppers by purchasing behavior.
+- **Stores:** Identify which stores perform similarly.
+- **Products:** Group similar products based on performance or consumer preferences.
 
-- Questions about similarity or dissimilarity among units
+## How does K-means clustering work? {.scrollable}
 
-  - Cluster Analysis - a systematic method to look for patterns in data
-
-## Customer segmentation analysis
-
-Use sales data to divide your customers into groups to better target marketing
-
-![](includes/customer_segmentation.png)
-
-
-## How does cluster analysis work? {.scrollable}
-
-[K-means clustering](https://youtu.be/4b5d3muPQmA)
+- The algorithm finds groups ("clusters") within data by minimizing the distance between observations in each cluster.
 
 1. Choose the number of clusters (k) that you want to identify in the data.
-
 2. Randomly initialize the k cluster centroids (points in space) within the data range.
-
 3. Assign each data point to the nearest centroid, based on the Euclidean distance between the point and each centroid.
-
 4. Calculate the mean (centroid) of each cluster based on the data points assigned to it.
-
 5. Update the cluster centroids to be the means of the data points assigned to them.
-
 6. Repeat steps 3-5 until convergence (when the cluster assignments no longer change or a maximum number of iterations is reached).
 
 Usually, we repeat this whole process a number of times and choose the group assignment that minimizes the overall variance.
 
 After clustering, summarize attributes of the clusters to understand the groups.
+
+[Watch this video on K-means clustering](https://youtu.be/4b5d3muPQmA)
+
+## Choosing the Optimal Number of Clusters (k)  {.scrollable}
+
+Two common methods for selecting the right number of clusters:
+
+- **Elbow Method:**  
+  - Measures within-cluster sum of squares (WSS).  
+  - Choose k at the "elbow" where additional clusters don't substantially improve fit.
+
+- **Silhouette Method:**  
+  - Evaluates cohesion within clusters and separation between clusters.  
+  - Choose k with the highest average silhouette score.
+
+
+##
+
+![](includes/elbow_example.png)
+
+##
+
+![](includes/silhouette_example.png)
+
+## Example: Customer Segmentation  {.scrollable}
+
+Suppose you manage convenience stores and want to segment your customers based on purchasing behavior:
+
+- **Variables to cluster on might include:**  
+  - Total spending per visit  
+  - Average number of items per basket  
+  - Frequency of visits to stores
+
+Example clusters could reveal insights like:
+
+- "Budget-conscious shoppers"
+- "Premium buyers"
+- "Frequent small-purchase customers"
+
+Goal: Use sales data to divide your customers into groups to better tailor promotions for each customer segment.
+
+##
+
+![](includes/customer_segmentation.png)
+
+
+## Example of Cluster Analysis Application {.scrollable}
+
+After doing the cluster analysis, you identify three clusters:
+
+| Cluster | Avg. spending | Most frequent purchase | Avg. visits per month |
+|---------|---------------|------------------------|-----------------------|
+| 1       | \$15          | Soft Drinks            | 8                     |
+| 2       | \$45          | Snacks                 | 4                     |
+| 3       | \$25           | Energy drinks          | 10                    |
+
+**Insights:**
+
+- Cluster 1 (high spending) could receive loyalty rewards.
+- Cluster 2 (frequent but small purchases) might respond to small discounts.
+- Cluster 3 (budget-conscious) targeted with bulk-buy promotions.
+
+## Connection to Your Project
+
+In your analysis, you'll:
+
+1. Identify segments clearly from cross-sectional convenience store data.
+2. Characterize each cluster to understand customer/store/product groups.
+3. Use clusters as a foundation for deeper analysis in Unit 3, where we'll track these segments over time to see how membership predicts future behavior.
 
 
 <!-- Make these clicker questions -->
@@ -193,11 +228,11 @@ After clustering, summarize attributes of the clusters to understand the groups.
 
 <!-- - How could I use cross-sectional data to decide where to open a new grocery store?  -->
 
-## Analyzing Cross-Sectional Data
+<!-- ## Analyzing Cross-Sectional Data -->
 
-How might you use cross-sectional data to decide where to open a new grocery store?
+<!-- How might you use cross-sectional data to decide where to open a new grocery store? -->
 
-*Take a minute to write out what information you would need in a dataset to apply cluster analysis.*
+<!-- *Take a minute to write out what information you would need in a dataset to apply cluster analysis.* -->
 
 
 ## Project 2: Overview {.scrollable}
@@ -206,25 +241,27 @@ Form groups of 2 (THIS WEEK)
 
 We will provide convenience store data on shoppers, stores, and purchases
 
-Perform an exploratory data analysis and assemble summary statistics; analyze spatial patterns, correlations, etc.; and construct visualizations to answer your research question.
+Steps of the project include:
 
-Conduct market segmentation analysis via clustering
+- Perform an exploratory data analysis and assemble summary statistics.
+- Analyze spatial patterns, correlations, etc.
+- Construct visualizations to answer your research question.
+- Conduct market segmentation analysis via clustering
+- Label clusters based on characteristics
+- Develop simple marketing strategy to target clusters
 
-Label clusters based on characteristics
 
-Develop simple marketing strategy to target clusters
+<!-- ## Project 2: Example -->
 
-## Project 2: Example
+<!-- **Research Objective:** -->
 
-**Research Objective:**
+<!-- - Develop wildfire mitigation recommendations for at-risk communities -->
 
-- Develop wildfire mitigation recommendations for at-risk communities
+<!-- **Important background details:** -->
 
-**Important background details:**
+<!-- - Wildfire mitigation: community fuel treatments, grant programs to help offset costs, regulations and enforcement -->
 
-- Wildfire mitigation: community fuel treatments, grant programs to help offset costs, regulations and enforcement
-
-- Some communities already do wildfire risk mitigation. Does one size fit all, or are there certain strategies that work better in certain communities?
+<!-- - Some communities already do wildfire risk mitigation. Does one size fit all, or are there certain strategies that work better in certain communities? -->
 
 <!--
 ## Example: ESRI Tapestry
@@ -232,18 +269,18 @@ Develop simple marketing strategy to target clusters
 ![](includes/esri_tapestry.jpeg)
 -->
 
-## Project 2: Example
+<!-- ## Project 2: Example -->
 
-- Collect data on community characteristics (socioeconomic and demographics from census) and wildfire risk 
+<!-- - Collect data on community characteristics (socioeconomic and demographics from census) and wildfire risk  -->
 
-- Use clustering to identify which communities are similar to each other
+<!-- - Use clustering to identify which communities are similar to each other -->
 
-- Name the clusters
+<!-- - Name the clusters -->
 
-- Characterize the wildfire risk mitigation approaches that worked within clusters
+<!-- - Characterize the wildfire risk mitigation approaches that worked within clusters -->
 
-## Project 2: Example
+<!-- ## Project 2: Example -->
 
-```{=html}
-<iframe width="100%" height="100%" src="includes/WiRe_meeting.html"></iframe>
-```
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="includes/WiRe_meeting.html"></iframe> -->
+<!-- ``` -->
