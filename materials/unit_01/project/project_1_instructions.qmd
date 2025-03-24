@@ -120,7 +120,7 @@ You and your partner should also produce a written version of this analysis to p
 
 Because much of the presentation grade is tied to the content of your report, grading for the report will be based on: 
 
-1. Is your code correct and well-explained? Use comments to explain what you do at each step! Produce an R log.txt file using the `sink()` command and include it as an appendix to your write up. (15 points)
+1. Is your code correct and well-explained? Use comments to explain what you do at each step! Produce an R log.txt file using the `sink()` command, OR by compiling a report, and include it as an appendix to your write up. (15 points)
 
 2. Is your report readable and useful? We will not assess the quality of your research question, but we will assess whether your report is something you could hand out to your intended audience and have them understand what you did, why you did it, and what they should do with the information. (15 points)
 
