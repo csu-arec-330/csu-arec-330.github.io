@@ -109,6 +109,16 @@ A `gtin` = `NA` means that this purchase was **FUEL**.
 
 ![](includes/data_schema.png)
 
+## Example: Customer Segmentation
+
+<div style="background-color: #f9f5d7; padding: 10px; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 0;">
+<strong> Goal for the exercises in this lab: </strong><br> Suppose you manage convenience stores and want to segment your customers based on purchasing behavior.</div><br> 
+
+![](includes/customer_segmentation.png)
+
+Clusters will reveal insights about the types of shoppers, i.e., *customer segments*.
+
+We will use the convenience store sales data to divide your customers into groups to better tailor marketing strategies for each customer segment.
 
 ## Exploratory Data Analysis (EDA)
 
@@ -147,7 +157,9 @@ Do they contain all the variables that are in the data dictionary?
 In R, particularly within the `dplyr` package, **join** functions are used to merge two data frames by one or more common key variables. Each type of join function serves a different purpose, allowing for various ways of combining data based on the presence or absence of matching key values in the two data frames. Here's an overview of the different types of join functions provided by `dplyr`, along with examples for each.
 
 ![](includes/joins.png)
-
+:::{.callout-note title="Check Your Understanding"}
+Where have you used joins before? Was it in R or Tableau?
+:::
 
 1. **Inner Join** 
 
@@ -212,7 +224,7 @@ Other types of joins that we will not cover include `semi_join()` and `anti_join
 
 #### You Do It
 
-Join the `shopper_info.csv` file with the `store_info.csv` file so that you keep all transaction information, even if there is no store match.
+1. Join the **shopper_info** data frame with the **store_info** data frame so that you *keep all transaction information*, even if there is no store match.
 
 > What join function should you use? How many observations do you expect to retain?
 
@@ -235,17 +247,50 @@ shopper_store_left <- left_join(shopper_info, store_info, by = "store_id")
 total_observations <- nrow(shopper_store_left)
 
 print(total_observations)
-
 ```
 
-Write the data frame to a csv file called `shopper_store_join.csv`.
+2. Next, join the **gtin** data frame with the new data frame you created in the previous step so you *keep all transaction information*, even if there is no gtin match.
+
+> What join function should you use? How many observations do you expect to retain?
 
 ```{r}
 #| eval: false
 #| include: true
 #| code-fold: true
 
-write_csv(shopper_store_left, "shopper_store_left.csv") 
+shopper_store_gtin_left <- left_join(shopper_store_left, gtin, by = "gtin")
+```
+
+> How many observations should you have? In other words, what are the dimensions of your joined data frame?
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+total_observations <- nrow(shopper_store_gtin_left)
+
+print(total_observations)
+```
+
+> How many distinct shoppers appear in the sales data for having made a transaction in July 2023?
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+length(unique(shopper_store_gtin_left$shopper_id))
+```
+
+Write the data frame to a csv file called `shopper_store_gtin_left.csv`.
+
+```{r}
+#| eval: false
+#| include: true
+#| code-fold: true
+
+write_csv(shopper_store_gtin_left, "shopper_store_gtin_left.csv") 
 ```
 
 :::{.callout-note}
@@ -262,9 +307,9 @@ First, we will look at the numeric data by specifying `type="numeric"`. Then do 
 ```{r}
 #| eval: false
 
-# Using our dataframe 'shopper_store_full'
-datasummary_skim(shopper_store_full, type = "numeric")
-datasummary_skim(shopper_store_full, type = "categorical")
+# Using our dataframe 'shopper_store_gtin_left'
+datasummary_skim(shopper_store_gtin_left, type = "numeric")
+datasummary_skim(shopper_store_gtin_left, type = "categorical")
 ```
 
 Evaluate your summary statistics. 
@@ -272,20 +317,112 @@ Evaluate your summary statistics.
 - What do you notice? 
 - Do you see unusual values or missing data?
 
-You can customize this summary statistics table and output the result to a docx file (see the other options in the documentation). 
+::: {.callout-note title="Output Select Summary Statistics to Word Doc"}
+You can customize this summary statistics table and output the result to a docx file using the `datasummary()` function (see the other options in the documentation). 
 
-In the following example, we are creating a table with `unit_price`, `unit_quantity`, `chain_size` as the rows and `Mean`, `SD`, `Min`, and `Max` as the columns. The character string as the output argument defines the file name in the current working directory.
+In the following example, create a table with `unit_price`, `unit_quantity`, `chain_size` as the rows and `Mean`, `SD`, `Min`, and `Max` as the columns. The character string as the output argument defines the file name in the current working directory.
 
 ```{r}
 #| eval: false
 
 datasummary(unit_price + unit_quantity + chain_size ~ Mean + SD + Min + Max,
-            data=shopper_store_full,
+            data=shopper_store_gtin_left,
             output = "sumstats.docx")
 ```
+:::
 
+### Step 4: Data Cleaning and Transformation
 
-### Step 4: `ggpairs()` Visualizations
+Next, recall our objective: We will use the convenience store sales data to divide your customers into groups to better tailor marketing strategies for each customer segment.
+
+In this step, we must manipulate our joined data frame `shopper_store_gtin_left` so we can perform our cluster analysis.
+
+Let's build a dataset with the following variables:  
+  - Total spent per visit  
+  - Average number of items per basket  
+  - Frequency of visits to stores
+
+Make sure to document clearly any data cleaning decisions (e.g., removing outliers, transforming variables). Provide justification for your decisions.
+
+### Clean raw data and remove outliers
+
+```{r}
+#| eval: false
+
+# Clean and transform the raw data
+clean_data <- shopper_store_gtin_left %>%
+  # Remove observations with negative or zero unit price (e.g., returns or invalid entries)
+  filter(unit_price > 0) %>% 
+  
+  # Drop observations with missing or invalid GTINs (e.g., fuel purchases or non-product transactions)
+  filter(!is.na(gtin), gtin != 0) %>%
+  
+  # Calculate total spending per line item
+  mutate(total = unit_price * unit_quantity) %>%
+  
+  # Log-transform chain size to reduce skewness and interpret relative differences
+  mutate(log_chain_size = log(chain_size + 1)) %>%
+  
+  # Arrange data to ensure proper ordering of transactions
+  arrange(shopper_id, store_id, transaction_set_id) %>%
+  
+  # Drop remaining rows with NA values across key variables
+  drop_na()
+```
+
+### Create a visit summary data frame
+
+```{r}
+#| eval: false
+
+# Create visit-level summaries (per shopper-store-visit)
+visit_summary <- clean_data %>%
+  group_by(shopper_id, store_id, transaction_set_id) %>%
+  summarise(
+    total_spent = sum(total, na.rm = TRUE),         # Total spending per visit
+    avg_items = mean(unit_quantity, na.rm = TRUE),  # Average items per basket (per GTIN)
+    .groups = "drop"
+  ) %>%
+  # Optional: Remove extreme outliers in total_spent (e.g., top 0.1%) to avoid skewing summaries
+  filter(total_spent < quantile(total_spent, 0.999))
+```
+
+### Create a visit frequency data frame
+
+```{r}
+#| eval: false
+
+# Create shopper-level summary of store visit frequency
+visit_frequency <- clean_data %>%
+  distinct(shopper_id, store_id, transaction_set_id) %>%
+  group_by(shopper_id, store_id) %>%
+  summarise(
+    num_visits = n(),  # Frequency of visits to each store
+    .groups = "drop"
+  )
+
+```
+
+### Join and inspect the data frames
+
+```{r}
+#| eval: false
+
+# Final dataset: merge summaries if desired
+final_dataset <- visit_summary %>%
+  left_join(visit_frequency, by = c("shopper_id", "store_id")) %>%
+  left_join(store_info, by = "store_id") %>%
+  arrange(shopper_id, store_id)
+
+length(unique(shopper_store_gtin_left$shopper_id))
+length(unique(final_dataset$shopper_id))
+
+View(final_dataset) 
+```
+
+> Why did I include `length(unique(shopper_store_gtin_left$shopper_id))` and `length(unique(final_dataset$shopper_id))` in the R script? Do they reveal the same number of shoppers? Why or why not?
+
+### Step 5: `ggpairs()` Visualizations
 
 The package `GGally` provides helpful EDA visualizations using `ggplot2`.  Use `ggpairs` to visualize density plots and scatter plots to better understand correlation. What do you notice?
 
@@ -301,22 +438,6 @@ shopper_store_left %>%
   ggpairs()
 ```
 
-### Step 5: Data Cleaning and Transformation
-
-Document clearly any data cleaning decisions (e.g., removing outliers, transforming variables). Provide justification for your decisions.
-
-Example:
-
-```{r}
-#| eval: false
-clean_data <- shopper_store_left %>%
-  filter(unit_price > 0) %>% # Drop observations where unit price is negative (these are returns)
-  filter(!is.na(gtin), gtin!=0) %>% # Drop observations where gtin is NA (which means fuel purchases) or gtin = 0
-  mutate(total = unit_price*unit_quantity) %>%
-  mutate(log_chain_size = log(chain_size + 1)) %>% # example transformation
-  arrange(shopper_id, store_id, transaction_set_id) %>%
-  drop_na() 
-```
 
 ## Cluster Analysis: An Introductory Example
 
