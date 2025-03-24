@@ -34,7 +34,7 @@ See the Canvas assignment for a downloadable codebook describing the data files.
 
 Complete the following steps using the provided datasets (shopper_info.csv, gtin.csv, and store_info.csv):
 
-2. Depending on the segment you have chosen, merge the relevant datasets appropriately. Clearly document and justify all processing steps, such as:
+2. Depending on the segment you have chosen, merge the relevant datasets appropriately - these might be two or all three datasets - and clean the dataset. Clearly document and justify all processing steps, such as:
 
 - Handling missing data
 
@@ -44,17 +44,19 @@ Complete the following steps using the provided datasets (shopper_info.csv, gtin
 
 - Transforming or aggregating variables
 
-Write a narrative clearly explaining and justifying your decisions. 
+- Creating new variables
 
-3. Using your merged dataset, generate a table of summary statistics. The table should include at least: variable names, mean (average), standard deviation, min, and max.
+Write a narrative clearly explaining the steps you took to merge and clean your data. 
 
-4. Write a narrative for your webpage describing your EDA and providing an interpretation of your data. Describe your data so that readers understand what is measured. Answer the following prompts based on your chosen segmentation:
+3. Using your merged and cleaned dataset, generate a table of summary statistics. The table should include at least: variable names, mean (average), standard deviation, min, and max.
+
+4. Write a narrative for your webpage describing your EDA and providing an interpretation of your data. Describe your data so that readers understand what is measured. Examples of questions to answer, depending on your chosen segmentation, include:
 
 **If you chose Customer Segmentation:**
 
 - Who are the highest-spending customers?
 
-- Are there clear differences in customer preferences across stores?
+- Are there differences in what products customers purchase across stores?
 
 **If you chose Store Segmentation:**
 

@@ -65,19 +65,6 @@ length(unique(shopper_store_gtin_left$shopper_id))
 write_csv(shopper_store_gtin_left, "shopper_store_gtin_left.csv") 
 
 # =======================================================
-# SUMMARY STATISTICS
-# =======================================================
-
-# Using our dataframe 'shopper_store_gtin_left'
-datasummary_skim(shopper_store_gtin_left, type = "numeric")
-datasummary_skim(shopper_store_gtin_left, type = "categorical")
-
-datasummary(unit_price + unit_quantity + chain_size ~ Mean + SD + Min + Max,
-            data=shopper_store_gtin_left,
-            output = "sumstats.docx")
-
-
-# =======================================================
 # CLEAN DATA
 # =======================================================
 
@@ -132,26 +119,35 @@ length(unique(final_dataset$shopper_id))
 
 View(final_dataset)
 
+
+# =======================================================
+# SUMMARY STATISTICS
+# =======================================================
+
+# Using our dataframe 'final_dataset'
+datasummary_skim(final_dataset, type = "numeric")
+datasummary_skim(final_dataset, type = "categorical")
+
+datasummary(total_spent + avg_items + num_visits ~ Mean + SD + Min + Max,
+            data=final_dataset,
+            output = "sumstats.docx")
+
 # =======================================================
 # GGPLOT
 # =======================================================
 
 # Example: choose numeric variables relevant to your research question
-shopper_store_left %>%
-  filter(unit_price > 0) %>% # Drop observations where unit price is negative (these are returns)
-  filter(!is.na(gtin), gtin!=0) %>% # Drop observations where gtin is NA (which means fuel purchases) or gtin = 0
-  select(unit_price, unit_quantity, chain_size) %>% 
-  mutate(total = unit_price*unit_quantity) %>% # Create a "total" variable using `mutate()` 
-  select(total, chain_size) %>% 
+# These will be `total_spent`, `avg_items`, and `num_visits`
+final_dataset %>%
+  select(total_spent, avg_items, num_visits) %>% 
   ggpairs()
-
 
 # =======================================================
 # CLUSTER ANALYSIS
 # =======================================================
 
-cluster_data <- clean_data %>%
-  select(log_chain_size, total) 
+cluster_data <- final_dataset %>%
+  select(total_spent, avg_items, num_visits) 
 
 cluster_scaled <- scale(cluster_data)
 
@@ -165,10 +161,41 @@ fviz_nbclust(cluster_scaled, kmeans, method = "wss")
 set.seed(123)
 kmeans_fit <- kmeans(cluster_scaled, centers = 3, nstart = 25)
 
-final_clusters <- clean_data %>%
+final_clusters <- final_dataset %>%
   mutate(cluster = kmeans_fit$cluster)
 
 final_clusters %>%
   group_by(cluster) %>%
-  summarise(across(c(chain_size, total), mean))
+  summarise(across(c(total_spent, avg_items, num_visits), mean))
+
+View(final_clusters)
+
+# =======================================================
+# WHAT DO YOUR CLUSTERS REVEAL?
+# =======================================================
+
+# Join cluster labels to shopper_info (keeping only cluster info)
+most_frequent_purchase <- shopper_info %>%
+  # Join cluster info only
+  left_join(final_clusters %>% select(shopper_id, store_id, transaction_set_id, cluster),
+            by = c("shopper_id", "store_id", "transaction_set_id")) %>%
+  
+  # Filter out rows with missing/invalid gtin or missing cluster
+  filter(!is.na(gtin), gtin != 0, !is.na(cluster)) %>%
+  
+  # Join in product info
+  left_join(gtin, by = "gtin") %>%
+  
+  # Count purchases by cluster and subcategory
+  group_by(cluster, gtin, subcategory) %>%
+  filter(!is.na(subcategory)) %>%
+  summarize(purchase_count = n(), .groups = "drop") %>%
+  
+  # Get the top subcategory in each cluster
+  group_by(cluster) %>%
+  filter(purchase_count == max(purchase_count)) %>%
+  ungroup() %>%
+  select(-gtin)
+
+View(most_frequent_purchase)
 

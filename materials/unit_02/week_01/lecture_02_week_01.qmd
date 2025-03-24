@@ -201,15 +201,15 @@ After doing the cluster analysis, you identify three clusters:
 
 | Cluster | Avg. spending | Most frequent purchase | Avg. visits per month |
 |---------|---------------|------------------------|-----------------------|
-| 1       | \$15          | Soft Drinks            | 8                     |
-| 2       | \$45          | Snacks                 | 4                     |
-| 3       | \$25           | Energy drinks          | 10                    |
+| 1       | \$4.37          | Cigars            | 27                     |
+| 2       | \$16.20          |  Water                | 6                     |
+| 3       | \$4.25           | Carbonated Soft Drinks          | 4                    |
 
 **Insights:**
 
-- Cluster 1 (high spending) could receive loyalty rewards.
-- Cluster 2 (frequent but small purchases) might respond to small discounts.
-- Cluster 3 (budget-conscious) targeted with bulk-buy promotions.
+- Cluster 1: Frequent, low-spend trips for cigars. Use bundle deals to grow baskets.
+- Cluster 2: Infrequent but high-spend visits. Target with loyalty rewards.
+- Cluster 3: Rare, low-spend visits for soft drinks. Use promos to drive return trips.
 
 ## Connection to Your Project
 

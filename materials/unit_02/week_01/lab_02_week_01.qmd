@@ -297,41 +297,7 @@ write_csv(shopper_store_gtin_left, "shopper_store_gtin_left.csv")
 Depending on your research question (customers, stores, or products) for project 2, you may have to merge two or three datasets. 
 :::
 
-
-### Step 3: Summary Statistics and Data Cleaning
-
-The package `modelsummary` provides some handy utilities for easily generating summary statistics. We will use `datasummary_skim()` to get a quick overview of the data. 
-
-First, we will look at the numeric data by specifying `type="numeric"`. Then do the same for categorical data by specifying `type="categorical"`.
-
-```{r}
-#| eval: false
-
-# Using our dataframe 'shopper_store_gtin_left'
-datasummary_skim(shopper_store_gtin_left, type = "numeric")
-datasummary_skim(shopper_store_gtin_left, type = "categorical")
-```
-
-Evaluate your summary statistics. 
-
-- What do you notice? 
-- Do you see unusual values or missing data?
-
-::: {.callout-note title="Output Select Summary Statistics to Word Doc"}
-You can customize this summary statistics table and output the result to a docx file using the `datasummary()` function (see the other options in the documentation). 
-
-In the following example, create a table with `unit_price`, `unit_quantity`, `chain_size` as the rows and `Mean`, `SD`, `Min`, and `Max` as the columns. The character string as the output argument defines the file name in the current working directory.
-
-```{r}
-#| eval: false
-
-datasummary(unit_price + unit_quantity + chain_size ~ Mean + SD + Min + Max,
-            data=shopper_store_gtin_left,
-            output = "sumstats.docx")
-```
-:::
-
-### Step 4: Data Cleaning and Transformation
+### Step 3: Data Cleaning and Transformation
 
 Next, recall our objective: We will use the convenience store sales data to divide your customers into groups to better tailor marketing strategies for each customer segment.
 
@@ -344,7 +310,7 @@ Let's build a dataset with the following variables:
 
 Make sure to document clearly any data cleaning decisions (e.g., removing outliers, transforming variables). Provide justification for your decisions.
 
-### Clean raw data and remove outliers
+#### Clean raw data and remove outliers
 
 ```{r}
 #| eval: false
@@ -370,7 +336,7 @@ clean_data <- shopper_store_gtin_left %>%
   drop_na()
 ```
 
-### Create a visit summary data frame
+#### Create a visit summary data frame
 
 ```{r}
 #| eval: false
@@ -387,7 +353,7 @@ visit_summary <- clean_data %>%
   filter(total_spent < quantile(total_spent, 0.999))
 ```
 
-### Create a visit frequency data frame
+#### Create a visit frequency data frame
 
 ```{r}
 #| eval: false
@@ -403,7 +369,7 @@ visit_frequency <- clean_data %>%
 
 ```
 
-### Join and inspect the data frames
+#### Join and inspect the data frames
 
 ```{r}
 #| eval: false
@@ -422,6 +388,42 @@ View(final_dataset)
 
 > Why did I include `length(unique(shopper_store_gtin_left$shopper_id))` and `length(unique(final_dataset$shopper_id))` in the R script? Do they reveal the same number of shoppers? Why or why not?
 
+### Step 4: Summary Statistics and Data Cleaning
+
+Consider it a best practice to run your summary statistics before *and* after you clean your data. Today, we will just run our summary statistics on the cleaned dataset.
+
+The package `modelsummary` provides some handy utilities for easily generating summary statistics. We will use `datasummary_skim()` to get a quick overview of the data. 
+
+First, we will look at the numeric data by specifying `type="numeric"`. Then do the same for categorical data by specifying `type="categorical"`.
+
+```{r}
+#| eval: false
+
+# Using our dataframe 'final_dataset'
+datasummary_skim(final_dataset, type = "numeric")
+datasummary_skim(final_dataset, type = "categorical")
+```
+
+Evaluate your summary statistics. 
+
+- What do you notice? 
+- Do you see unusual values or missing data?
+
+::: {.callout-note title="Output Select Summary Statistics to Word Doc"}
+You can customize this summary statistics table and output the result to a docx file using the `datasummary()` function (see the other options in the documentation). 
+
+In the following example, create a table with `unit_price`, `unit_quantity`, `chain_size` as the rows and `Mean`, `SD`, `Min`, and `Max` as the columns. The character string as the output argument defines the file name in the current working directory.
+
+```{r}
+#| eval: false
+
+datasummary(total_spent + avg_items + num_visits ~ Mean + SD + Min + Max,
+            data=final_dataset,
+            output = "sumstats.docx")
+
+```
+:::
+
 ### Step 5: `ggpairs()` Visualizations
 
 The package `GGally` provides helpful EDA visualizations using `ggplot2`.  Use `ggpairs` to visualize density plots and scatter plots to better understand correlation. What do you notice?
@@ -429,17 +431,15 @@ The package `GGally` provides helpful EDA visualizations using `ggplot2`.  Use `
 ```{r}
 #| eval: false
 # Example: choose numeric variables relevant to your research question
-shopper_store_left %>%
-  filter(unit_price > 0) %>% # Drop observations where unit price is negative (these are returns)
-  filter(!is.na(gtin), gtin!=0) %>% # Drop observations where gtin is NA (which means fuel purchases) or gtin = 0
-  select(unit_price, unit_quantity, chain_size) %>% 
-  mutate(total = unit_price*unit_quantity) %>% # Create a "total" variable using `mutate()` 
-  select(total, chain_size) %>% 
+# These will be `total_spent`, `avg_items`, and `num_visits`
+final_dataset %>%
+  select(total_spent, avg_items, num_visits) %>% 
   ggpairs()
+
 ```
 
 
-## Cluster Analysis: An Introductory Example
+## Cluster Analysis
 
 ### Step 1: Select Variables for Clustering
 
@@ -447,8 +447,8 @@ Choose variables relevant for an initial cluster analysis. For instance, store c
 
 ```{r}
 #| eval: false
-cluster_data <- clean_data %>%
-  select(log_chain_size, total) 
+cluster_data <- final_dataset %>%
+  select(total_spent, avg_items, num_visits) 
 ```
 
 ### Step 2: Scale the Data
@@ -500,7 +500,42 @@ Explore cluster differences:
 #| eval: false
 final_clusters %>%
   group_by(cluster) %>%
-  summarise(across(c(chain_size, total), mean))
+  summarise(across(c(total_spent, avg_items, num_visits), mean))
+
+View(final_clusters)
+```
+
+### Step 6: Learn about Your Clusters
+
+Finally, let's learn more about our clusters. Notice that we will have to use our knowledge of joins, filters, group_by, and summarize to create a data frame called `most_frequent_purchase` that identifies the most frequently purchased item, by cluster, within the month.
+
+```{r}
+#| eval: false
+
+# Join cluster labels to shopper_info (keeping only cluster info)
+most_frequent_purchase <- shopper_info %>%
+  # Join cluster info only
+  left_join(final_clusters %>% select(shopper_id, store_id, transaction_set_id, cluster),
+            by = c("shopper_id", "store_id", "transaction_set_id")) %>%
+  
+  # Filter out rows with missing/invalid gtin or missing cluster
+  filter(!is.na(gtin), gtin != 0, !is.na(cluster)) %>%
+  
+  # Join in product info
+  left_join(gtin, by = "gtin") %>%
+  
+  # Count purchases by cluster and subcategory
+  group_by(cluster, gtin, subcategory) %>%
+  filter(!is.na(subcategory)) %>%
+  summarize(purchase_count = n(), .groups = "drop") %>%
+  
+  # Get the top subcategory in each cluster
+  group_by(cluster) %>%
+  filter(purchase_count == max(purchase_count)) %>%
+  ungroup() %>%
+  select(-gtin)
+
+View(most_frequent_purchase)
 ```
 
 This lab provides foundational skills in EDA and clustering, directly setting you up for your Project 2 analysis.
@@ -566,18 +601,82 @@ total_observations <- nrow(shopper_store_left)
 
 print(total_observations)
 
-write_csv(shopper_store_left, "shopper_store_left.csv") 
+shopper_store_gtin_left <- left_join(shopper_store_left, gtin, by = "gtin")
+
+total_observations <- nrow(shopper_store_gtin_left)
+
+print(total_observations)
+
+length(unique(shopper_store_gtin_left$shopper_id))
+
+write_csv(shopper_store_gtin_left, "shopper_store_gtin_left.csv") 
+
+# =======================================================
+# CLEAN DATA
+# =======================================================
+
+# Clean and transform the raw data
+clean_data <- shopper_store_gtin_left %>%
+  # Remove observations with negative or zero unit price (e.g., returns or invalid entries)
+  filter(unit_price > 0) %>% 
+  
+  # Drop observations with missing or invalid GTINs (e.g., fuel purchases or non-product transactions)
+  filter(!is.na(gtin), gtin != 0) %>%
+  
+  # Calculate total spending per line item
+  mutate(total = unit_price * unit_quantity) %>%
+  
+  # Log-transform chain size to reduce skewness and interpret relative differences
+  mutate(log_chain_size = log(chain_size + 1)) %>%
+  
+  # Arrange data to ensure proper ordering of transactions
+  arrange(shopper_id, store_id, transaction_set_id) %>%
+  
+  # Drop remaining rows with NA values across key variables
+  drop_na()
+
+# Create visit-level summaries (per shopper-store-visit)
+visit_summary <- clean_data %>%
+  group_by(shopper_id, store_id, transaction_set_id) %>%
+  summarise(
+    total_spent = sum(total, na.rm = TRUE),         # Total spending per visit
+    avg_items = mean(unit_quantity, na.rm = TRUE),  # Average items per basket (per GTIN)
+    .groups = "drop"
+  ) %>%
+  # Optional: Remove extreme outliers in total_spent (e.g., top 0.1%) to avoid skewing summaries
+  filter(total_spent < quantile(total_spent, 0.999))
+
+# Create shopper-level summary of store visit frequency
+visit_frequency <- clean_data %>%
+  distinct(shopper_id, store_id, transaction_set_id) %>%
+  group_by(shopper_id, store_id) %>%
+  summarise(
+    num_visits = n(),  # Frequency of visits to each store
+    .groups = "drop"
+  )
+
+# Final dataset: merge summaries if desired
+final_dataset <- visit_summary %>%
+  left_join(visit_frequency, by = c("shopper_id", "store_id")) %>%
+  left_join(store_info, by = "store_id") %>%
+  arrange(shopper_id, store_id)
+
+length(unique(shopper_store_gtin_left$shopper_id))
+length(unique(final_dataset$shopper_id))
+
+View(final_dataset)
+
 
 # =======================================================
 # SUMMARY STATISTICS
 # =======================================================
 
-# Using our dataframe 'shopper_store_full'
-datasummary_skim(shopper_store_full, type = "numeric")
-datasummary_skim(shopper_store_full, type = "categorical")
+# Using our dataframe 'final_dataset'
+datasummary_skim(final_dataset, type = "numeric")
+datasummary_skim(final_dataset, type = "categorical")
 
-datasummary(unit_price + unit_quantity + chain_size ~ Mean + SD + Min + Max,
-            data=shopper_store_full,
+datasummary(total_spent + avg_items + num_visits ~ Mean + SD + Min + Max,
+            data=final_dataset,
             output = "sumstats.docx")
 
 # =======================================================
@@ -585,28 +684,17 @@ datasummary(unit_price + unit_quantity + chain_size ~ Mean + SD + Min + Max,
 # =======================================================
 
 # Example: choose numeric variables relevant to your research question
-shopper_store_left %>%
-  filter(unit_price > 0) %>% # Drop observations where unit price is negative (these are returns)
-  filter(!is.na(gtin), gtin!=0) %>% # Drop observations where gtin is NA (which means fuel purchases) or gtin = 0
-  select(unit_price, unit_quantity, chain_size) %>% 
-  mutate(total = unit_price*unit_quantity) %>% # Create a "total" variable using `mutate()` 
-  select(total, chain_size) %>% 
+# These will be `total_spent`, `avg_items`, and `num_visits`
+final_dataset %>%
+  select(total_spent, avg_items, num_visits) %>% 
   ggpairs()
 
 # =======================================================
 # CLUSTER ANALYSIS
 # =======================================================
 
-clean_data <- shopper_store_left %>%
-  filter(unit_price > 0) %>% # Drop observations where unit price is negative (these are returns)
-  filter(!is.na(gtin), gtin!=0) %>% # Drop observations where gtin is NA (which means fuel purchases) or gtin = 0
-  mutate(total = unit_price*unit_quantity) %>%
-  mutate(log_chain_size = log(chain_size + 1)) %>% # example transformation
-  arrange(shopper_id, store_id, transaction_set_id) %>%
-  drop_na() 
-  
-cluster_data <- clean_data %>%
-  select(log_chain_size, total) 
+cluster_data <- final_dataset %>%
+  select(total_spent, avg_items, num_visits) 
 
 cluster_scaled <- scale(cluster_data)
 
@@ -620,10 +708,41 @@ fviz_nbclust(cluster_scaled, kmeans, method = "wss")
 set.seed(123)
 kmeans_fit <- kmeans(cluster_scaled, centers = 3, nstart = 25)
 
-final_clusters <- clean_data %>%
+final_clusters <- final_dataset %>%
   mutate(cluster = kmeans_fit$cluster)
 
 final_clusters %>%
   group_by(cluster) %>%
-  summarise(across(c(chain_size, total), mean))
+  summarise(across(c(total_spent, avg_items, num_visits), mean))
+
+View(final_clusters)
+
+# =======================================================
+# WHAT DO YOUR CLUSTERS REVEAL?
+# =======================================================
+
+# Join cluster labels to shopper_info (keeping only cluster info)
+most_frequent_purchase <- shopper_info %>%
+  # Join cluster info only
+  left_join(final_clusters %>% select(shopper_id, store_id, transaction_set_id, cluster),
+            by = c("shopper_id", "store_id", "transaction_set_id")) %>%
+  
+  # Filter out rows with missing/invalid gtin or missing cluster
+  filter(!is.na(gtin), gtin != 0, !is.na(cluster)) %>%
+  
+  # Join in product info
+  left_join(gtin, by = "gtin") %>%
+  
+  # Count purchases by cluster and subcategory
+  group_by(cluster, gtin, subcategory) %>%
+  filter(!is.na(subcategory)) %>%
+  summarize(purchase_count = n(), .groups = "drop") %>%
+  
+  # Get the top subcategory in each cluster
+  group_by(cluster) %>%
+  filter(purchase_count == max(purchase_count)) %>%
+  ungroup() %>%
+  select(-gtin)
+
+View(most_frequent_purchase)
 ```
