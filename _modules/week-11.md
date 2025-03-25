@@ -27,18 +27,18 @@ title: "Week 11: Connecting Analysis to Your Objectives"
 <a  href="/materials/unit_02/week_03/grocery_store_analysis.R" download>Download grocery_store_analysis.R</a> <br>  <br>
 -->
 <a  href="/materials/unit_02/inputs/shopper_info.csv" download>Download shopper_info.csv</a> <br>
-
 <a  href="/materials/unit_02/inputs/gtin.csv" download>Download gtin.csv</a> <br>
-
 <a  href="/materials/unit_02/inputs/store_info.csv" download>Download store_info.csv</a> <br><br>
 
-<b>Project 2 (Problem Set 10):</b> <br>
-
-<b>Video Presentation - Due WEDNESDAY Apr 16 at 11:59 PM</b> <br>
+<b>Project 2:</b> <br>
 <a  href="/materials/unit_02/week_04/project_2.html" target="_blank">Project 2 Instructions</a> <br> 
 <a  href="/materials/unit_02/week_04/project_2_rubric.html" target="_blank">Project 2 Rubric</a> <br> 
 
+<b>Video Presentation - Due WEDNESDAY Apr 16 at 11:59 PM</b> <br>
+
 <b>Peer Evaluation - Due FRIDAY Apr 18 at 1:00 PM</b> <br>
+
+<b>Report - Due SUNDAY Apr 20 at 11:59 PM</b> <br>
 
 <!--
 <b>Problem Set Materials - Due Friday, April 12 by 11:59 PM:</b> <br>
