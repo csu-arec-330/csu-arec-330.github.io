@@ -4,27 +4,24 @@ title: "Week 15: Regression Analysis Project"
 
 <div style="background-color:rgba(0, 0, 0, 0.0470588); text-align:left; vertical-align: middle; padding:10px 0;">
 
-<b>Final Meeting: May 7</b> <br>
+<b>Lecture: May 7</b> <br>
 
-*Note: We will meet on Wednesday, May 07 (8:00 am) in Nutrien 103 for student presentation summaries.* <br><br>
-
-<!--
-<a  href="/materials/unit_03/week_03/lecture_03_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
+<a  href="/materials/unit_03/week_02/lecture_03_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
 
 <b>Lab: May 9</b> <br>
-Lab Notes <br> <br>
--->
+*Note: We will meet on Wednesday, May 14 (8:00 am) in Nutrien 103 for student presentation summaries.* <br><br>
+
 
 <b>Project 3:</b> <br>
 
-<b>Video Presentation - Due SUNDAY May 4 at 11:59 PM</b> <br>
+<b>Video Presentation - Due SUNDAY May 11 at 11:59 PM</b> <br>
 
 <a  href="/materials/unit_03/week_03/project_3.html" target="_blank">Project 3 Instructions</a> <br> 
 <a  href="/materials/unit_03/week_03/project_3_rubric.html" target="_blank">Project 3 Rubric</a> <br>
 
-<b>Peer Evaluation - Due WEDNESDAY May 7 at 8:00 AM</b>
+<b>Peer Evaluation - Due WEDNESDAY May 14 at 8:00 AM</b>
 
-<b>Report - Due FRIDAY May 9 at 11:59 PM</b> <br> <br>
+<b>Report - Due WEDNESDAY May 14 at 11:59 PM</b> <br> <br>
 
 
 
