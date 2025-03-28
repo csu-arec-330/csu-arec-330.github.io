@@ -80,6 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-objectives-r" id="toc-learning-objectives-r" class="nav-link active" data-scroll-target="#learning-objectives-r">Learning Objectives R</a></li>
+  <li><a href="#download-lab-handout-here" id="toc-download-lab-handout-here" class="nav-link" data-scroll-target="#download-lab-handout-here">Download Lab Handout Here</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
   <li><a href="#data-description-and-documentation" id="toc-data-description-and-documentation" class="nav-link" data-scroll-target="#data-description-and-documentation">Data Description and Documentation</a></li>
   <li><a href="#example-customer-segmentation" id="toc-example-customer-segmentation" class="nav-link" data-scroll-target="#example-customer-segmentation">Example: Customer Segmentation</a></li>
@@ -134,6 +135,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Conduct exploratory data analysis on your convenience store datasets</li>
 <li>Conduct basic cluster analysis using R</li>
 </ul>
+</section>
+<section id="download-lab-handout-here" class="level2">
+<h2 class="anchored" data-anchor-id="download-lab-handout-here"><a href="lab_02_week_01_handout.pdf">Download Lab Handout Here</a></h2>
+<embed src="lab_02_week_01_handout.pdf" width="100%" height="600px" type="application/pdf">
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
@@ -608,7 +613,7 @@ Note
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create visit-level summaries (per shopper-store-visit)</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>visit_summary <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(shopper_id, store_id, transaction_set_id) <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_spent =</span> <span class="fu">sum</span>(total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),         <span class="co"># Total spending per visit</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_items =</span> <span class="fu">mean</span>(unit_quantity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  <span class="co"># Average items per basket (per GTIN)</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
@@ -624,7 +629,7 @@ Note
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>visit_frequency <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(shopper_id, store_id, transaction_set_id) <span class="sc">%&gt;%</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(shopper_id, store_id) <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_visits =</span> <span class="fu">n</span>(),  <span class="co"># Frequency of visits to each store</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -700,23 +705,50 @@ Output Select Summary Statistics to Word Doc
 <h2 class="anchored" data-anchor-id="cluster-analysis">Cluster Analysis</h2>
 <section id="step-1-select-variables-for-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-select-variables-for-clustering">Step 1: Select Variables for Clustering</h3>
-<p>Choose variables relevant for an initial cluster analysis. For instance, store characteristics might include size and average sales:</p>
+<p>Choose variables relevant for an initial cluster analysis. In our example, we choose the variables that we want to use for grouping customers, chosing variables that reflect meaningful differences in behaviors or characteristics.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cluster_data <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_spent, avg_items, num_visits) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the numeric variables to use for clustering:</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - total_spent: how much each shopper spends</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - avg_items: average number of items per visit</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - num_visits: how often each shopper visits</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>cluster_data <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_spent, avg_items, num_visits) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2-scale-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-scale-the-data">Step 2: Scale the Data</h3>
-<p>Scaling ensures variables have comparable units:</p>
+<p>Variables like spending and visit frequency are on different scales. Scaling puts them on the same scale so they are in comparable units and one doesn’t overpower the others in clustering.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cluster_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(cluster_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize (scale) the selected variables</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This gives each variable a mean of 0 and a standard deviation of 1</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Helps make clustering results more balanced and fair</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>cluster_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(cluster_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-3-evaluate-number-of-clusters-k" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-evaluate-number-of-clusters-k">Step 3: Evaluate Number of Clusters (k)</h3>
-<p>There are some helpful visuals that can guide your choice of cluster. One is known as the silhouette plot. See an explanation of the silhouette coefficient <a href="https://www.baeldung.com/cs/silhouette-values-clustering">here</a>. The other is the elbow plot, which involves calculating the “within sum of squares” for different numbers of clusters. As you increase the number of clusters, the within sum of squares declines. Stop when an increase in the number of clusters only marginally decreases the within sum of squares.</p>
-<p>Use silhouette and elbow plots to determine the optimal number of clusters:</p>
+<p>In this step, we will use two methods to help us determine the optimal number of clusters.</p>
+<ul>
+<li>Method 1: the <strong>silhouette plot</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+<ul>
+<li>This method checks how well each item fits in its group.</li>
+<li>It gives a score from -1 to 1.
+<ul>
+<li>Closer to 1 = items are in the “right” group</li>
+<li>Closer to 0 or negative = not a good fit</li>
+</ul></li>
+<li>Try different numbers of clusters and pick the one with the <strong>highest</strong> score.</li>
+</ul></li>
+<li>Method 2: the <strong>elbow plot</strong>.
+<ul>
+<li>This method helps you decide how many clusters to use by looking at how much error decreases as you add more clusters.</li>
+<li>It calculates the “within sum of squares” (WSS) for different numbers of clusters.</li>
+<li>The plot shows how much error goes down as you add more clusters.</li>
+<li>At first, adding more clusters improves the fit a lot.</li>
+<li>But at some point, adding more doesn’t help much—that’s the “elbow” of the curve.</li>
+<li>Pick the number of clusters where the curve bends. That’s usually a good choice.</li>
+</ul></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -724,29 +756,37 @@ Output Select Summary Statistics to Word Doc
 </section>
 <section id="step-4-perform-k-means-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="step-4-perform-k-means-clustering">Step 4: Perform K-means Clustering</h3>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/4b5d3muPQmA?si=KHRVfKKzLIXLzook" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>We will use the function <code>kmeans()</code> for the cluster analysis. The <code>kmeans</code> algorithm needs you to specify the number of clusters. Your analysis in the previous step will provide you with an optimal number of clusters.</p>
 <p>Perform clustering, starting with an initial choice (e.g., k = 3):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>kmeans_fit <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(cluster_scaled, </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">centers =</span> <span class="dv">3</span>, <span class="co">#the number of clusters</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nstart =</span> <span class="dv">25</span>) <span class="co">#the number of random starts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed so results are reproducible (you get the same results each time)</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run k-means clustering on the scaled data</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>kmeans_fit <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(cluster_scaled, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">centers =</span> <span class="dv">3</span>, <span class="co">#the number of clusters</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nstart =</span> <span class="dv">25</span>) <span class="co">#the number of random starts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-5-examine-and-interpret-clusters" class="level3">
 <h3 class="anchored" data-anchor-id="step-5-examine-and-interpret-clusters">Step 5: Examine and Interpret Clusters</h3>
 <p>Assign the clusters back to the main data frame and interpret your results:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>final_clusters <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cluster =</span> kmeans_fit<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the cluster assignments from the k-means model to the clean_data dataframe</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Each row (i.e., transaction) now gets a new column called 'cluster' indicating which group it belongs to</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>final_clusters <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cluster =</span> kmeans_fit<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Explore cluster differences:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>final_clusters <span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(total_spent, avg_items, num_visits), mean))</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(final_clusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group the data by cluster and calculate the average values for each cluster</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This helps you compare spending, basket size, and visit frequency across clusters</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>final_clusters <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">c</span>(total_spent, avg_items, num_visits), mean))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(final_clusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-6-learn-about-your-clusters" class="level3">
@@ -885,7 +925,7 @@ Lab Script for Week 9: Intro to Analyzing Cross-Sectional Data
 <span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a><span class="co"># Create visit-level summaries (per shopper-store-visit)</span></span>
 <span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a>visit_summary <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
 <span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(shopper_id, store_id, transaction_set_id) <span class="sc">%&gt;%</span></span>
-<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb28-95"><a href="#cb28-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_spent =</span> <span class="fu">sum</span>(total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),         <span class="co"># Total spending per visit</span></span>
 <span id="cb28-96"><a href="#cb28-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_items =</span> <span class="fu">mean</span>(unit_quantity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  <span class="co"># Average items per basket (per GTIN)</span></span>
 <span id="cb28-97"><a href="#cb28-97" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
@@ -897,7 +937,7 @@ Lab Script for Week 9: Intro to Analyzing Cross-Sectional Data
 <span id="cb28-103"><a href="#cb28-103" aria-hidden="true" tabindex="-1"></a>visit_frequency <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
 <span id="cb28-104"><a href="#cb28-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(shopper_id, store_id, transaction_set_id) <span class="sc">%&gt;%</span></span>
 <span id="cb28-105"><a href="#cb28-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(shopper_id, store_id) <span class="sc">%&gt;%</span></span>
-<span id="cb28-106"><a href="#cb28-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb28-106"><a href="#cb28-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb28-107"><a href="#cb28-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_visits =</span> <span class="fu">n</span>(),  <span class="co"># Frequency of visits to each store</span></span>
 <span id="cb28-108"><a href="#cb28-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
 <span id="cb28-109"><a href="#cb28-109" aria-hidden="true" tabindex="-1"></a>  )</span>
@@ -960,7 +1000,7 @@ Lab Script for Week 9: Intro to Analyzing Cross-Sectional Data
 <span id="cb28-166"><a href="#cb28-166" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-167"><a href="#cb28-167" aria-hidden="true" tabindex="-1"></a>final_clusters <span class="sc">%&gt;%</span></span>
 <span id="cb28-168"><a href="#cb28-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
-<span id="cb28-169"><a href="#cb28-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(total_spent, avg_items, num_visits), mean))</span>
+<span id="cb28-169"><a href="#cb28-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">c</span>(total_spent, avg_items, num_visits), mean))</span>
 <span id="cb28-170"><a href="#cb28-170" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-171"><a href="#cb28-171" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(final_clusters)</span>
 <span id="cb28-172"><a href="#cb28-172" aria-hidden="true" tabindex="-1"></a></span>
@@ -999,7 +1039,13 @@ Lab Script for Week 9: Intro to Analyzing Cross-Sectional Data
 </section>
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>See an explanation of the silhouette coefficient <a href="https://www.baeldung.com/cs/silhouette-values-clustering">here</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

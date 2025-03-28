@@ -39,16 +39,49 @@ Using your processed dataset, perform a K-means cluster analysis appropriate for
 
 ## How to Submit
 
-Create a webpage titled `Project 2 Problem Set 2` on your Google site. Include:
+Create a new page on your Google Site titled `Project 2 Problem Set 2`. *Remember: Add this as a **new page** to your existing website. Do not create a new website.* 
 
-- Data processing narrative
+This assignment has two components:
 
-- `ggpairs()` visualizations and interpretation
+1. R code 
 
-- Cluster analysis narrative, plots (silhouette or elbow), and cluster summary
+- Start with your R code from Problem Set 1. 
+- Make any changes you to your code from Problem Set 1 based on feedback you received from Problem Set 1
+- Add the `ggpairs()` visualizations and interpretation 
+- Include comments throughout your code that describe each step
 
-- Tableau visualizations (EDA visualization + 2 cluster visualizations) with accompanying descriptions
+2. Tableau visualizations 
 
+- EDA visualization 
+- Two cluster visualizations with accompanying descriptions
 - Clear takeaways related to your research question
 
 Submit your webpage link on Canvas.
+
+::: {.callout-important}
+
+## Reminder: How to Use "Compile Report" Option in R
+
+*Going going forward, please use the "Compile Report" process to submit your R code. We will no longer use "sink-source-sink".*
+
+{{< video https://youtu.be/B2AchbhnFTo aspect-ratio="16x9" >}}
+
+- Under the File menu, select **Compile Report...**
+- The default under "Report output format" is HTML. 
+- Select **Compile**
+- Along the tool bar, select **Open in Browser**
+- Hover your cursor over white space and **right click**.
+- Select **View page source**.
+- A new screen will appear with HTML code. (Don't worry, this might look like gibberish, but it's not!)
+- Using your keyboard, click **`CTRL`+`A`**. This will highlight all of the HTML code.
+- While the HTML code is highlighted, **right click** and select **Copy**.
+- Go to your Google website. 
+- Similar to as you would embed your Tableau visualization, select **Embed** under Insert.
+- Then, select **Embed code**.
+- Paste your embed code from your clipboard by either right-clicking and selecting **Paste** or `CTRL`+`V`.
+- Select **Next**.
+- **Resize** the image of your R script by expanding the window to fit the entire script.  
+
+Following these steps will display your entire code and output without truncation. 
+
+:::

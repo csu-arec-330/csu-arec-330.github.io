@@ -91,7 +91,7 @@ clean_data <- shopper_store_gtin_left %>%
 # Create visit-level summaries (per shopper-store-visit)
 visit_summary <- clean_data %>%
   group_by(shopper_id, store_id, transaction_set_id) %>%
-  summarise(
+  summarize(
     total_spent = sum(total, na.rm = TRUE),         # Total spending per visit
     avg_items = mean(unit_quantity, na.rm = TRUE),  # Average items per basket (per GTIN)
     .groups = "drop"
@@ -103,7 +103,7 @@ visit_summary <- clean_data %>%
 visit_frequency <- clean_data %>%
   distinct(shopper_id, store_id, transaction_set_id) %>%
   group_by(shopper_id, store_id) %>%
-  summarise(
+  summarize(
     num_visits = n(),  # Frequency of visits to each store
     .groups = "drop"
   )
@@ -166,7 +166,7 @@ final_clusters <- final_dataset %>%
 
 final_clusters %>%
   group_by(cluster) %>%
-  summarise(across(c(total_spent, avg_items, num_visits), mean))
+  summarize(across(c(total_spent, avg_items, num_visits), mean))
 
 View(final_clusters)
 

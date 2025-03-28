@@ -1,0 +1,304 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{setspace}
+\setlength{\parindent}{0pt}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Lab 02 Week 01 Worksheet},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Lab 02 Week 01 Worksheet}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\section{\texorpdfstring{\textbf{R Functions
+Glossary}}{R Functions Glossary}}\label{r-functions-glossary}
+
+This glossary provides an overview of key R functions used in
+\textbf{Lab 09}, explaining their \textbf{purpose} and \textbf{general
+use} in data processing and manipulation.
+
+\subsection{Data Import \& Management}\label{data-import-management}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2903}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4194}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2903}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{read\_csv()} & Reads a CSV file into a tibble &
+\texttt{read\_csv("data.csv")} \\
+\texttt{setwd()} / \texttt{getwd()} & Sets or gets the working directory
+& \texttt{setwd("path/to/folder")} \\
+\texttt{write\_csv()} & Writes a data frame to a CSV file &
+\texttt{write\_csv(df,\ "output.csv")} \\
+\end{longtable}
+
+\subsection{Data Wrangling (dplyr)}\label{data-wrangling-dplyr}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4062}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2812}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{filter()} & Filters rows based on condition(s) &
+\texttt{filter(unit\_price\ \textgreater{}\ 0)} \\
+\texttt{mutate()} & Adds or transforms variables &
+\texttt{mutate(total\ =\ unit\_price\ *\ unit\_quantity)} \\
+\texttt{arrange()} & Sorts rows by variables &
+\texttt{arrange(shopper\_id)} \\
+\texttt{drop\_na()} & Removes rows with missing values &
+\texttt{drop\_na()} \\
+\texttt{group\_by()} + \texttt{summarize()} & Groups data and summarizes
+it &
+\texttt{group\_by(shopper\_id)\ \%\textgreater{}\%\ summarize(avg\_items\ =\ mean(unit\_quantity))} \\
+\texttt{distinct()} & Selects distinct rows &
+\texttt{distinct(shopper\_id,\ store\_id)} \\
+\texttt{select()} & Selects columns &
+\texttt{select(total\_spent,\ avg\_items)} \\
+\end{longtable}
+
+\subsection{Joins}\label{joins}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4062}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2812}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{inner\_join()} & Keeps only matching rows from both tables &
+\texttt{inner\_join(df1,\ df2,\ by\ =\ "key")} \\
+\texttt{left\_join()} & Keeps all rows from the left table &
+\texttt{left\_join(df1,\ df2,\ by\ =\ "key")} \\
+\texttt{right\_join()} & Keeps all rows from the right table &
+\texttt{right\_join(df1,\ df2,\ by\ =\ "key")} \\
+\texttt{full\_join()} & Combines all rows from both tables &
+\texttt{full\_join(df1,\ df2,\ by\ =\ "key")} \\
+\end{longtable}
+
+\subsection{Summary Statistics}\label{summary-statistics}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4062}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2812}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{datasummary\_skim()} & Summary of numeric or categorical data &
+\texttt{datasummary\_skim(df,\ type\ =\ "numeric")} \\
+\texttt{datasummary()} & Custom summary table &
+\texttt{datasummary(var1\ +\ var2\ \textasciitilde{}\ Mean\ +\ SD,\ data\ =\ df)} \\
+\end{longtable}
+
+\subsection{Visualizations}\label{visualizations}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4062}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2812}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{ggpairs()} & Pairwise scatter/density plots &
+\texttt{ggpairs(df\ \%\textgreater{}\%\ select(x,\ y,\ z))} \\
+\texttt{fviz\_nbclust()} & Plots to determine number of clusters &
+\texttt{fviz\_nbclust(scaled\_data,\ kmeans,\ method\ =\ "wss")} \\
+\end{longtable}
+
+\subsection{Clustering}\label{clustering}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4062}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2812}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{scale()} & Standardizes variables & \texttt{scale(df)} \\
+\texttt{kmeans()} & Performs k-means clustering &
+\texttt{kmeans(data,\ centers\ =\ 3,\ nstart\ =\ 25)} \\
+\end{longtable}
+
+\subsection{Other Tools \& Utilities}\label{other-tools-utilities}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4062}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2812}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Description
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{length(unique())} & Counts distinct elements &
+\texttt{length(unique(df\$shopper\_id))} \\
+\texttt{quantile()} & Returns quantiles &
+\texttt{quantile(df\$total\_spent,\ 0.999)} \\
+\texttt{set.seed()} & Use this with \texttt{kmeans()} so you can
+reproduce your results & \texttt{set.seed(123)} \\
+\end{longtable}
+
+\subsection{Helpful Tips}\label{helpful-tips}
+
+\begin{itemize}
+\tightlist
+\item
+  Use \texttt{left\_join()} when you want to \emph{keep all rows} from
+  your base dataset.
+\item
+  Use \texttt{group\_by()} with \texttt{summarise()} to collapse and
+  summarize grouped data.
+\item
+  Standardize your variables before clustering using \texttt{scale()}.
+\item
+  Use \texttt{fviz\_nbclust()} to help determine the best number of
+  clusters.
+\item
+  Always inspect your summary statistics and visualize your data before
+  running models.
+\end{itemize}
+
+\textbf{Remember}: Each step in data cleaning, joining, and clustering
+depends on your research question. Document your decisions clearly!
+
+\end{document}

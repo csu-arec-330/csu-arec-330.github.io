@@ -30,7 +30,31 @@ See the Canvas assignment for a downloadable codebook describing the data files.
 
 - Explain why answering this question is valuable and specify who will benefit from the insights (e.g., business executives, store managers, marketers).
 
-## Part 2: Exploratory Data Analysis (EDA)
+::: {.callout-note}
+
+## Three Options for This Project
+
+**Customer Segmentation:**
+
+- Who are the highest-spending customers?
+
+- Are there differences in what products customers purchase across stores?
+
+**Store Segmentation:**
+
+- Which stores have the highest total sales?
+
+- Which regions or cities have the most stores?
+
+**Product Segmentation:**
+
+- What are the top-selling products?
+
+- Are there clear differences in product popularity by region or store type?
+
+:::
+
+## Part 2: R
 
 Complete the following steps using the provided datasets (shopper_info.csv, gtin.csv, and store_info.csv):
 
@@ -46,41 +70,64 @@ Complete the following steps using the provided datasets (shopper_info.csv, gtin
 
 - Creating new variables
 
-Write a narrative clearly explaining the steps you took to merge and clean your data. 
-
 3. Using your merged and cleaned dataset, generate a table of summary statistics. The table should include at least: variable names, mean (average), standard deviation, min, and max.
 
-4. Write a narrative for your webpage describing your EDA and providing an interpretation of your data. Describe your data so that readers understand what is measured. Examples of questions to answer, depending on your chosen segmentation, include:
+4. Write a narrative for explaining the steps you took to merge and clean your data and providing an interpretation of your data. Describe your data so that readers understand what is measured.
 
-**If you chose Customer Segmentation:**
+5. Conduct an *initial* K-means clustering analysis:
 
-- Who are the highest-spending customers?
-
-- Are there differences in what products customers purchase across stores?
-
-**If you chose Store Segmentation:**
-
-- Which stores have the highest total sales?
-
-- Which regions or cities have the most stores?
-
-**If you chose Product Segmentation:**
-
-- What are the top-selling products?
-
-- Are there clear differences in product popularity by region or store type?
-
-## Part 3: Initial Cluster Analysis
-
-5. Conduct an initial K-means clustering analysis:
-
-- Select relevant numeric variables based on your segmentation choice (customer, store, or product).
+- Select relevant numeric variables based on your segmentation choice. These variables may be ones that you had to create in answering question #2.
 
 - Perform cluster analysis using different cluster sizes (e.g., 3-5 clusters) and explain your choice clearly.
 
-- Write a narrative explaining your initial clustering results, including what the clusters indicate about the dataset.
+Note: You will come back to this R script in problem set 2.
+
+6. Write a narrative explaining your initial clustering results, including what the clusters indicate about the dataset.
 
 ## How to Submit
 
-You should create a new webpage on your Google Site titled `Project 2 Problem Set 1`.  Post your analysis (including summary statistics, narrative, cluster results, and any relevant visualizations) and submit the link to your webpage on Canvas. *Remember: Add this as a **new page** to your existing website. Do not create a new website.*
+Create a new page on your Google Site titled `Project 2 Problem Set 1`. *Remember: Add this as a **new page** to your existing website. Do not create a new website.*
 
+This assignment has three components:
+
+1. Your Research Question
+
+- On your webpage for this assignment, describe the segmentations you have chosen, the research question, and who will benefit from the insights.
+
+2. R code 
+
+- Comment each step of your code, including summary statistics, cluster results, and any relevant visualizations (e.g., the elbow and silhouette plots).
+
+3. Your Narrative
+
+- On your webpage for this assignment, write a narrative that corresponds with questions 4 and 6. 
+
+Submit the link to your webpage on Canvas. 
+
+::: {.callout-important}
+
+## Reminder: How to Use "Compile Report" Option in R
+
+*Going going forward, please use the "Compile Report" process to submit your R code. We will no longer use "sink-source-sink".*
+
+{{< video https://youtu.be/B2AchbhnFTo aspect-ratio="16x9" >}}
+
+- Under the File menu, select **Compile Report...**
+- The default under "Report output format" is HTML. 
+- Select **Compile**
+- Along the tool bar, select **Open in Browser**
+- Hover your cursor over white space and **right click**.
+- Select **View page source**.
+- A new screen will appear with HTML code. (Don't worry, this might look like gibberish, but it's not!)
+- Using your keyboard, click **`CTRL`+`A`**. This will highlight all of the HTML code.
+- While the HTML code is highlighted, **right click** and select **Copy**.
+- Go to your Google website. 
+- Similar to as you would embed your Tableau visualization, select **Embed** under Insert.
+- Then, select **Embed code**.
+- Paste your embed code from your clipboard by either right-clicking and selecting **Paste** or `CTRL`+`V`.
+- Select **Next**.
+- **Resize** the image of your R script by expanding the window to fit the entire script.  
+
+Following these steps will display your entire code and output without truncation. 
+
+:::

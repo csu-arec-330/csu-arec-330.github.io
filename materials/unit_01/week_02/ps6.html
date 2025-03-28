@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="part-1-r" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-r">Part 1: R</h2>
 <ol type="1">
-<li>Complete a time series decomposition for <em>each</em> of the three time series datasets that you collected for your project following the steps from <a href="lab_01_week_02.qmd">Lab 06</a>:</li>
+<li>Complete a <strong>time series decomposition</strong> for <em>each</em> of the three time series datasets that you collected for your project following the steps from <a href="lab_01_week_02.qmd">Lab 06</a>:</li>
 </ol>
 <ul>
 <li>Load your data into R.</li>
@@ -82,14 +82,14 @@ ul.task-list li input[type="checkbox"] {
 <li>Add a new variable called <code>measure_date</code> following the steps in the lab notes.</li>
 <li>Store the decomposed data as a data frame. <strong>Note:</strong> One for each time series decomposition.</li>
 </ul>
-<ol start="3" type="1">
-<li>Use R to create a 3 year forecast for <em>each</em> chosen time series. Follow the steps we went through in lab.</li>
+<ol start="2" type="1">
+<li>Use R to create a <strong>3-year forecast</strong> for <em>each</em> chosen time series. Follow the steps we went through in lab.</li>
 </ol>
 <ul>
 <li>Keep only forecasted data that occurs after the last observed date.</li>
 <li>Create a new variable that indicates the new data you have created is a forecast (<code>forecast = TRUE</code>).</li>
 </ul>
-<ol start="4" type="1">
+<ol start="3" type="1">
 <li>Create a dataframe for <em>each</em> time series using <code>bind_rows</code>, then write them to a csv file. You will end up with three csv files with the following variables: <code>measure_date</code>, <code>price</code>, <code>sa_price</code>, <code>trend</code>, <code>seasonal</code>, <code>random</code>, <code>forecast</code>, <code>upper</code>, <code>lower</code>.</li>
 </ol>
 </section>

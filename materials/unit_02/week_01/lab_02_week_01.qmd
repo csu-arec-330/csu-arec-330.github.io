@@ -19,6 +19,9 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 - Conduct exploratory data analysis on your convenience store datasets
 - Conduct basic cluster analysis using R
 
+## [Download Lab Handout Here](lab_02_week_01_handout.pdf)
+
+<embed src="lab_02_week_01_handout.pdf" width="100%" height="600px" type="application/pdf">
 
 ## Getting Started
 
@@ -344,7 +347,7 @@ clean_data <- shopper_store_gtin_left %>%
 # Create visit-level summaries (per shopper-store-visit)
 visit_summary <- clean_data %>%
   group_by(shopper_id, store_id, transaction_set_id) %>%
-  summarise(
+  summarize(
     total_spent = sum(total, na.rm = TRUE),         # Total spending per visit
     avg_items = mean(unit_quantity, na.rm = TRUE),  # Average items per basket (per GTIN)
     .groups = "drop"
@@ -362,7 +365,7 @@ visit_summary <- clean_data %>%
 visit_frequency <- clean_data %>%
   distinct(shopper_id, store_id, transaction_set_id) %>%
   group_by(shopper_id, store_id) %>%
-  summarise(
+  summarize(
     num_visits = n(),  # Frequency of visits to each store
     .groups = "drop"
   )
@@ -443,27 +446,50 @@ final_dataset %>%
 
 ### Step 1: Select Variables for Clustering
 
-Choose variables relevant for an initial cluster analysis. For instance, store characteristics might include size and average sales:
+Choose variables relevant for an initial cluster analysis. In our example, we choose the variables that we want to use for grouping customers, chosing variables that reflect meaningful differences in behaviors or characteristics. 
 
 ```{r}
 #| eval: false
+
+# Select the numeric variables to use for clustering:
+# - total_spent: how much each shopper spends
+# - avg_items: average number of items per visit
+# - num_visits: how often each shopper visits
 cluster_data <- final_dataset %>%
   select(total_spent, avg_items, num_visits) 
 ```
 
 ### Step 2: Scale the Data
-Scaling ensures variables have comparable units:
+
+Variables like spending and visit frequency are on different scales. Scaling puts them on the same scale so they are in comparable units and one doesn’t overpower the others in clustering.
 
 ```{r}
 #| eval: false
+
+# Standardize (scale) the selected variables
+# This gives each variable a mean of 0 and a standard deviation of 1
+# Helps make clustering results more balanced and fair
 cluster_scaled <- scale(cluster_data)
 ```
 
 ### Step 3: Evaluate Number of Clusters (k)
 
-There are some helpful visuals that can guide your choice of cluster. One is known as the silhouette plot. See an explanation of the silhouette coefficient [here](https://www.baeldung.com/cs/silhouette-values-clustering). The other is the elbow plot, which involves calculating the "within sum of squares" for different numbers of clusters. As you increase the number of clusters, the within sum of squares declines. Stop when an increase in the number of clusters only marginally decreases the within sum of squares.
+In this step, we will use two methods to help us determine the optimal number of clusters.
 
-Use silhouette and elbow plots to determine the optimal number of clusters:
+- Method 1: the **silhouette plot**^[See an explanation of the silhouette coefficient [here](https://www.baeldung.com/cs/silhouette-values-clustering).]
+  - This method checks how well each item fits in its group.
+  - It gives a score from -1 to 1.
+    - Closer to 1 = items are in the "right" group
+    - Closer to 0 or negative = not a good fit
+  - Try different numbers of clusters and pick the one with the **highest** score.
+  
+- Method 2: the **elbow plot**. 
+  - This method helps you decide how many clusters to use by looking at how much error decreases as you add more clusters.
+  - It calculates the "within sum of squares" (WSS) for different numbers of clusters.
+  - The plot shows how much error goes down as you add more clusters.
+  - At first, adding more clusters improves the fit a lot.
+  - But at some point, adding more doesn’t help much—that’s the "elbow" of the curve.
+  - Pick the number of clusters where the curve bends. That’s usually a good choice.
 
 ```{r}
 #| eval: false
@@ -473,13 +499,18 @@ fviz_nbclust(cluster_scaled, kmeans, method = "wss")
 
 ### Step 4: Perform K-means Clustering
 
+{{< video https://youtu.be/4b5d3muPQmA?si=KHRVfKKzLIXLzook aspect-ratio="16x9" >}}
+
 We will use the function `kmeans()` for the cluster analysis. The `kmeans` algorithm needs you to specify the number of clusters. Your analysis in the previous step will provide you with an optimal number of clusters. 
 
 Perform clustering, starting with an initial choice (e.g., k = 3):
 
 ```{r}
 #| eval: false
+# Set a random seed so results are reproducible (you get the same results each time)
 set.seed(123)
+
+# Run k-means clustering on the scaled data
 kmeans_fit <- kmeans(cluster_scaled, 
                      centers = 3, #the number of clusters
                      nstart = 25) #the number of random starts
@@ -490,6 +521,9 @@ Assign the clusters back to the main data frame and interpret your results:
 
 ```{r}
 #| eval: false
+
+# Add the cluster assignments from the k-means model to the clean_data dataframe
+# Each row (i.e., transaction) now gets a new column called 'cluster' indicating which group it belongs to
 final_clusters <- clean_data %>%
   mutate(cluster = kmeans_fit$cluster)
 ```
@@ -498,9 +532,12 @@ Explore cluster differences:
 
 ```{r}
 #| eval: false
+
+# Group the data by cluster and calculate the average values for each cluster
+# This helps you compare spending, basket size, and visit frequency across clusters
 final_clusters %>%
   group_by(cluster) %>%
-  summarise(across(c(total_spent, avg_items, num_visits), mean))
+  summarize(across(c(total_spent, avg_items, num_visits), mean))
 
 View(final_clusters)
 ```
@@ -638,7 +675,7 @@ clean_data <- shopper_store_gtin_left %>%
 # Create visit-level summaries (per shopper-store-visit)
 visit_summary <- clean_data %>%
   group_by(shopper_id, store_id, transaction_set_id) %>%
-  summarise(
+  summarize(
     total_spent = sum(total, na.rm = TRUE),         # Total spending per visit
     avg_items = mean(unit_quantity, na.rm = TRUE),  # Average items per basket (per GTIN)
     .groups = "drop"
@@ -650,7 +687,7 @@ visit_summary <- clean_data %>%
 visit_frequency <- clean_data %>%
   distinct(shopper_id, store_id, transaction_set_id) %>%
   group_by(shopper_id, store_id) %>%
-  summarise(
+  summarize(
     num_visits = n(),  # Frequency of visits to each store
     .groups = "drop"
   )
@@ -713,7 +750,7 @@ final_clusters <- final_dataset %>%
 
 final_clusters %>%
   group_by(cluster) %>%
-  summarise(across(c(total_spent, avg_items, num_visits), mean))
+  summarize(across(c(total_spent, avg_items, num_visits), mean))
 
 View(final_clusters)
 

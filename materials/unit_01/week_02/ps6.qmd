@@ -15,7 +15,7 @@ Treat this assignment as another step of your project.
 
 ## Part 1: R
 
-1. Complete a time series decomposition for *each* of the three time series datasets that you collected for your project following the steps from [Lab 06](lab_01_week_02.qmd):
+1. Complete a **time series decomposition** for *each* of the three time series datasets that you collected for your project following the steps from [Lab 06](lab_01_week_02.qmd):
 
   - Load your data into R.
   - Convert to a time series object.
@@ -25,12 +25,12 @@ Treat this assignment as another step of your project.
   - Add a new variable called `measure_date` following the steps in the lab notes.
   - Store the decomposed data as a data frame. **Note:** One for each time series decomposition.
 
-3. Use R to create a 3 year forecast for *each* chosen time series. Follow the steps we went through in lab.  
+2. Use R to create a **3-year forecast** for *each* chosen time series. Follow the steps we went through in lab.  
 
   - Keep only forecasted data that occurs after the last observed date. 
   - Create a new variable that indicates the new data you have created is a forecast (`forecast = TRUE`).
 
-4. Create a dataframe for *each* time series using `bind_rows`, then write them to a csv file. You will end up with three csv files with the following variables: `measure_date`, `price`, `sa_price`, `trend`, `seasonal`, `random`, `forecast`, `upper`, `lower`. 
+3. Create a dataframe for *each* time series using `bind_rows`, then write them to a csv file. You will end up with three csv files with the following variables: `measure_date`, `price`, `sa_price`, `trend`, `seasonal`, `random`, `forecast`, `upper`, `lower`. 
 
 
 ## Part 2: Tableau
