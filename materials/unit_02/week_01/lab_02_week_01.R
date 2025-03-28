@@ -5,6 +5,7 @@ getwd() # Confirm I am working in the proper directory.
 
 # Load required libraries using pacman for convenience
 # pacman will check if the package is installed, install it if not, and then load it for use
+install.packages("pacman")
 library(pacman)
 p_load(dplyr,readr,tidyverse,ggplot2,modelsummary,GGally,factoextra,pandoc)
 

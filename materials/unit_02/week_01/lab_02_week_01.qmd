@@ -524,7 +524,7 @@ Assign the clusters back to the main data frame and interpret your results:
 
 # Add the cluster assignments from the k-means model to the clean_data dataframe
 # Each row (i.e., transaction) now gets a new column called 'cluster' indicating which group it belongs to
-final_clusters <- clean_data %>%
+final_clusters <- final_dataset %>%
   mutate(cluster = kmeans_fit$cluster)
 ```
 
