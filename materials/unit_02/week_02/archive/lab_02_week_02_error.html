@@ -57,16 +57,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="lab_02_week_02_files/libs/clipboard/clipboard.min.js"></script>
-<script src="lab_02_week_02_files/libs/quarto-html/quarto.js"></script>
-<script src="lab_02_week_02_files/libs/quarto-html/popper.min.js"></script>
-<script src="lab_02_week_02_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="lab_02_week_02_files/libs/quarto-html/anchor.min.js"></script>
-<link href="lab_02_week_02_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="lab_02_week_02_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="lab_02_week_02_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="lab_02_week_02_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="lab_02_week_02_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="lab_02_week_02_error_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab_02_week_02_error_files/libs/quarto-html/quarto.js"></script>
+<script src="lab_02_week_02_error_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab_02_week_02_error_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab_02_week_02_error_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab_02_week_02_error_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab_02_week_02_error_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab_02_week_02_error_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab_02_week_02_error_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab_02_week_02_error_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -262,25 +262,24 @@ Why This Matters
 <h2 class="anchored" data-anchor-id="step-5-create-store-level-summary">Step 5: Create Store-Level Summary</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>store_summary <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(store_id) <span class="sc">%&gt;%</span>  <span class="co"># Group the data by store</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(store_id) <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_sales =</span> <span class="fu">sum</span>(unit_price <span class="sc">*</span> unit_quantity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),         <span class="co"># Total sales across all transactions</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">unique_customers =</span> <span class="fu">n_distinct</span>(shopper_id),                           <span class="co"># Number of unique shoppers</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">product_diversity =</span> <span class="fu">n_distinct</span>(gtin),                                <span class="co"># Number of unique products sold</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fuel_transactions =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(gtin) <span class="sc">|</span> gtin <span class="sc">==</span> <span class="dv">0</span>),                    <span class="co"># Count of fuel transactions (gtin is NA or 0)</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_transactions =</span> <span class="fu">n_distinct</span>(transaction_set_id),                <span class="co"># Total number of transactions (visits)</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fuel_share =</span> fuel_transactions <span class="sc">/</span> total_transactions,                <span class="co"># Share of transactions that are fuel-only</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>                                                    <span class="co"># Drop grouping structure from output</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_sales =</span> <span class="fu">sum</span>(unit_price <span class="sc">*</span> unit_quantity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">unique_customers =</span> <span class="fu">n_distinct</span>(shopper_id),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">product_diversity =</span> <span class="fu">n_distinct</span>(gtin),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fuel_transactions =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(gtin) <span class="sc">|</span> gtin <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_transactions =</span> <span class="fu">n_distinct</span>(transaction_set_id),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fuel_share =</span> fuel_transactions <span class="sc">/</span> total_transactions,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(store_info <span class="sc">%&gt;%</span> <span class="fu">select</span>(store_id, chain_size), <span class="at">by =</span> <span class="st">"store_id"</span>) <span class="sc">%&gt;%</span>  <span class="co"># Add chain size from store_info</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(chain_size))  <span class="co"># Keep only rows with valid chain_size (required for clustering later)</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(store_info <span class="sc">%&gt;%</span> <span class="fu">select</span>(store_id, chain_size), <span class="at">by =</span> <span class="st">"store_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(chain_size))</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge store summary with the full store_info (excluding duplicate chain_size column)</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>final_dataset <span class="ot">&lt;-</span> store_summary <span class="sc">%&gt;%</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(store_info <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>chain_size), <span class="at">by =</span> <span class="st">"store_id"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(store_id, zip_code)  <span class="co"># Arrange for easier viewing</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(final_dataset)  <span class="co"># Inspect the final dataset of store-level characteristics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>final_dataset <span class="ot">&lt;-</span> store_summary <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(store_info <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>chain_size), <span class="at">by =</span> <span class="st">"store_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(store_id, zip_code)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(final_dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled" title="Check Your Understanding">
 <div class="callout-header d-flex align-content-center">

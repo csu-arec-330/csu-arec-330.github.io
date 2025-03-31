@@ -120,26 +120,24 @@ We remove negative or zero prices (likely errors), and keep fuel purchases (`gti
 #| eval: false
 
 store_summary <- clean_data %>%
-  group_by(store_id) %>%  # Group the data by store
+  group_by(store_id) %>%
   summarise(
-    total_sales = sum(unit_price * unit_quantity, na.rm = TRUE),         # Total sales across all transactions
-    unique_customers = n_distinct(shopper_id),                           # Number of unique shoppers
-    product_diversity = n_distinct(gtin),                                # Number of unique products sold
-    fuel_transactions = sum(is.na(gtin) | gtin == 0),                    # Count of fuel transactions (gtin is NA or 0)
-    total_transactions = n_distinct(transaction_set_id),                # Total number of transactions (visits)
-    fuel_share = fuel_transactions / total_transactions,                # Share of transactions that are fuel-only
-    .groups = "drop"                                                    # Drop grouping structure from output
+    total_sales = sum(unit_price * unit_quantity, na.rm = TRUE),
+    unique_customers = n_distinct(shopper_id),
+    product_diversity = n_distinct(gtin),
+    fuel_transactions = sum(is.na(gtin) | gtin == 0),
+    total_transactions = n_distinct(transaction_set_id),
+    fuel_share = fuel_transactions / total_transactions,
+    .groups = "drop"
   ) %>%
-  left_join(store_info %>% select(store_id, chain_size), by = "store_id") %>%  # Add chain size from store_info
-  filter(!is.na(chain_size))  # Keep only rows with valid chain_size (required for clustering later)
+  left_join(store_info %>% select(store_id, chain_size), by = "store_id") %>%
+  filter(!is.na(chain_size))
 
-# Merge store summary with the full store_info (excluding duplicate chain_size column)
 final_dataset <- store_summary %>%
   left_join(store_info %>% select(-chain_size), by = "store_id") %>%
-  arrange(store_id, zip_code)  # Arrange for easier viewing
+  arrange(store_id, zip_code)
 
-View(final_dataset)  # Inspect the final dataset of store-level characteristics
-
+View(final_dataset)
 ```
 
 ::: {.callout-important title="Check Your Understanding"}

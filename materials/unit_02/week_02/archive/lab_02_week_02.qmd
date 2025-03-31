@@ -6,13 +6,14 @@ format:
     toc: true
 ---
 
+
 ![](includes/cross-sectional.png)
 
 ::: {style="font-size: 1.5em"}
 This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 :::
 
-## Learning Objectives: R
+## Learning Objectives R
 
 - Practice joining and cleaning cross-sectional datasets
 
@@ -24,7 +25,7 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 
 - Apply k-means clustering and interpret results
 
-## Learning Objectives: Tableau
+## Learning Objectives Tableau
 
 - Understand Tableau geocoding capabilities
 
@@ -120,26 +121,24 @@ We remove negative or zero prices (likely errors), and keep fuel purchases (`gti
 #| eval: false
 
 store_summary <- clean_data %>%
-  group_by(store_id) %>%  # Group the data by store
+  group_by(store_id) %>%
   summarise(
-    total_sales = sum(unit_price * unit_quantity, na.rm = TRUE),         # Total sales across all transactions
-    unique_customers = n_distinct(shopper_id),                           # Number of unique shoppers
-    product_diversity = n_distinct(gtin),                                # Number of unique products sold
-    fuel_transactions = sum(is.na(gtin) | gtin == 0),                    # Count of fuel transactions (gtin is NA or 0)
-    total_transactions = n_distinct(transaction_set_id),                # Total number of transactions (visits)
-    fuel_share = fuel_transactions / total_transactions,                # Share of transactions that are fuel-only
-    .groups = "drop"                                                    # Drop grouping structure from output
+    total_sales = sum(unit_price * unit_quantity, na.rm = TRUE),
+    unique_customers = n_distinct(shopper_id),
+    product_diversity = n_distinct(gtin),
+    fuel_transactions = sum(is.na(gtin) | gtin == 0),
+    total_transactions = n_distinct(transaction_set_id),
+    fuel_share = fuel_transactions / total_transactions,
+    .groups = "drop"
   ) %>%
-  left_join(store_info %>% select(store_id, chain_size), by = "store_id") %>%  # Add chain size from store_info
-  filter(!is.na(chain_size))  # Keep only rows with valid chain_size (required for clustering later)
+  left_join(store_info %>% select(store_id, chain_size), by = "store_id") %>%
+  filter(!is.na(chain_size))
 
-# Merge store summary with the full store_info (excluding duplicate chain_size column)
 final_dataset <- store_summary %>%
   left_join(store_info %>% select(-chain_size), by = "store_id") %>%
-  arrange(store_id, zip_code)  # Arrange for easier viewing
+  arrange(store_id, zip_code)
 
-View(final_dataset)  # Inspect the final dataset of store-level characteristics
-
+View(final_dataset)
 ```
 
 ::: {.callout-important title="Check Your Understanding"}
@@ -197,7 +196,7 @@ final_dataset %>%
 
 ## Step 9: Cluster Analysis
 
-**1. Scale the Data**
+1. Scale the Data
 
 ```{r}
 #| eval: false
@@ -215,7 +214,7 @@ cluster_data <- final_dataset %>%
 cluster_scaled <- scale(cluster_data)
 ```
 
-**2. Determine the Optimal Number of Clusters**
+2. Determine the Optimal Number of Clusters
 
 ```{r}
 #| eval: false
@@ -229,7 +228,7 @@ fviz_nbclust(cluster_scaled, kmeans, method = "wss")
 What number of clusters seems most appropriate based on the plots? Why?
 :::
 
-**3. Run K-Means**
+3. Run K-Means
 
 ```{r}
 #| eval: false
@@ -241,7 +240,7 @@ final_clusters <- final_dataset %>%
   mutate(cluster = kmeans_fit$cluster)
 ```
 
-**4. Compare Cluster Averages**
+4. Compare Cluster Averages
 
 ```{r}
 #| eval: false
@@ -347,7 +346,9 @@ These types of files include detailed geographic information that enables us to 
 A symbol map visualizes quantitative data across geographic locations and is particularly effective for displaying variations or patterns across different areas. This type of map can highlight individual store locations, distribution points, or any geographical data point associated with numeric values.
 
 ![](includes/Sheet1.png)
-You might want to highlight which stores have higher spending [like this example](https://www.safegraph.com/data-examples/ohio-grocery-spend).
+<!--
+You might want to highlight which stores have [higher spending](https://www.safegraph.com/data-examples/ohio-grocery-spend).
+-->
 
 #### Data Requirements for Symbol Maps
 
@@ -455,6 +456,7 @@ Knowledge Check 2: Suppose we have gas station-level data on gas prices yesterda
 
 3. Change Aggregation: Modify the aggregation of `Raw Visit Counts` from sum to average by right-clicking on the field in the Marks card and choosing Measure(Sum) > Average. This adjustment shows the average number of visits per store within each city or map symbol, offering insights into typical store performance rather than total visits.
 
+<!--
 Let's create a symbol map using the provided latitudes and longitudes of these stores.
 
 1. Drag `Longitude` to the Columns Shelf and `Latitude` to the Rows Shelf. (You will likely have to change these fields to `Dimensions`)
@@ -469,11 +471,12 @@ Which type of store appears to have the most visitors?
 
 4. Now, let's add each store's name to the tooltip. Drag `Location Name` to the Tooltip card.
 
-5. Make a new symbol map using each store's latitude and longitude, and choosing what information you want to include as colors, size, and in the tooltip. What did you uncover?
+**You Do It:** Make a new symbol map using each store's latitude and longitude, and choosing what information you want to include as colors, size, and in the tooltip. What did you uncover?
 
-> what happens if we select a different geographical field to make our map? Select the fields `City` and `Raw Visit Counts` and select the Symbol Map in the Show Me Menu. What is this map showing?
+Now, let's see what happens if we select a different geographical field to make our map. Select the fields `City` and `Raw Visit Counts` and select the Symbol Map in the Show Me Menu. What is this map showing?
 
-> What if we change the aggregation of `Raw Visit Counts` to average instead of sum?
+What if we change the aggregation of `Raw Visit Counts` to average instead of sum?
+-->
 
 ### 2. Creating a Filled Map
 
@@ -495,6 +498,17 @@ Filled maps provide a powerful way to visualize data that varies across geograph
 Does the symbol map or filled map provide a clearer understanding of the data? 
 
 >  Filled maps are great for showing density or intensity over areas, while symbol maps are better for exact locations and attributes of individual points.
+
+
+<!--
+Let's start this exercise with using the same cell phone data. Select the fields `Postal Code` and `Raw Visit Counts` and go to the Show Me Menu. Now you should see that you can use either a symbol or filled map. Let's select the filled map.
+
+What is this showing you? Are you able to map multiple store attributes using this feature? Do you think the filled map or symbol map are better for these data?
+
+Connect to the dataset `rent_income_county.csv` and create one filled map that shows the median income in each county and one map that shows the median rent in each county.
+
+Now, create a new calculated field called `income to rent ratio` that equal income divided by rent for each county. Plot this new field on a map and filter your data so that your map only includes Arizona (hint: Arizona's FIPS code is 4). Which Arizona county has the highest income to rent ratio?
+-->
 
 ### 3. Customizing Your Map
 
@@ -530,7 +544,87 @@ Tableau offers powerful customization options for maps, including background lay
 
 > **Interpretation**: This combined map offers a comprehensive view of customer behavior, highlighting areas with high visit counts and distinguishing stores by category and customer travel distance. It allows for spatial analysis of store popularity and accessibility, providing valuable insights into consumer preferences and mobility patterns.
 
-# On Your Own: Plotting Results from a Cluster Analysis
+# Part 2: More Exploratory Data Analysis in R
+
+The second part of the lab is to acquaint you with the three datasets that you will be using for Project 2.
+
+Using the same steps as Part 1 of lab, connect to `shopper_store_join.csv` and create a symbol map plotting the locations of the convenience stores.
+
+You will continue to explore these data in your next problem set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ################ END HERE ####################
+Tableau includes a variety of features you can include in your maps if you desire. Right click on your map and select `Background Layers...`
+
+Click through some of the map layer options until you find a combination you like.
+
+Now... let's add some of Tableau's more recent and VERY COOL integrated data sources. Select the drop down menu next to Data Layer and choose one. Change the geographic level this information is shown for.
+
+Next let's combine a symbol and filled map:
+
+1. Go back to your Tableau window with the cell phone data analysis.
+
+2. Create a new worksheet with a filled map showing total visit counts by postal code.
+
+3. Command-click (or Control-click on Windows) the latitude measure on the rows shelf and drag it to the right (this copies the value)
+
+4. Navigate to the Marks card for the second pane in your figure. Remove the Postal Code field from this map.
+
+5. Select both the `Latitude` and `Longitude` fields and drag them to the details card.
+
+6. Drag `Top Category` to the colors card. And drag `Distance from Home` (this is the median travel distance for customers in meters) to the Size card.
+
+7. Right click the second `Latitude` field on the Rows shelf and select `Dual Axis`.
+
+Now you can add whatever custom formatting you desire!
+
+What is this combined map showing?
+-->
+
+
+<!-- ### 7. Working with Individual-level data -->
+
+<!-- Next let's connect to the dataset `acs_sample.csv`. These data come from the American Community Survey and include all Arizona households interviewed in 2021. I have included only a few of the many variables you can find in the ACS data. If you are interested in seeing the full variable options, I recommend looking at the [IPUMS website](https://www.ipums.org). -->
+
+<!-- Create a filled map that shows average household income (in colors) by county. -->
+
+<!-- Let's add a pie chart that shows the percentage of households that report receiving food stamps in each county. -->
+
+<!-- 1. Drag `County Fip` over the map and drop it on `Add a Marks Layer` -->
+
+<!-- 2. Navigate to the new Marks card for this second graph and select Pie Chart. -->
+
+<!-- 3. Drag the `County Fip` field to the detail card. -->
+
+<!-- 4. Drag the `Foodstmp` (this field is equal to 0 if the household did not receive Food Stamp benefits and is equal to 1 if they did) field to the color card and change it to a dimension.  -->
+
+<!-- 5. Then drag the `Foodstmp` field to the angle card and change it to a count. -->
+
+<!-- 6. Now create use a quick table calculation to change this to a percent of total, calculated over the Foodstmp field. -->
+
+<!-- What is this figure showing? -->
+
+<!-- Which county has the highest average income? -->
+
+<!-- Which county has the highest food stamp usage? -->
+
+<!-- Using individual-level (or in this case, household-level) data, you might also be interested in comparing outcomes across dimensions other than geography. For example, how might we show how income and rent compare for AZ households participating in Food Stamps versus for those who do not? -->
+
+<!--
+## 4. Plotting Results from a Cluster Analysis
 
 If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let's do this now.
 
@@ -547,3 +641,5 @@ If you want to show results from your cluster analysis in Tableau, a simple way 
 6. Let's add some more detail to the tooltip. I would like to know the location name, top category, and cluster when I hover over each point on the map.
 
 {{< video https://youtu.be/lXloWsi7hZQ aspect-ratio="16x9" >}}
+
+-->

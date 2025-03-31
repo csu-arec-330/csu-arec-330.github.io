@@ -8,7 +8,7 @@
 <link href="lecture_02_week_02_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_02_week_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_02_week_02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Week 10:  Cross-Sectional Data Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -333,8 +334,9 @@
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <p>Exploring your data</p>
-<p>A deeper dive into customer segmentation</p>
-<p>Review Project 2 datasets</p>
+<p>Store segmentation example</p>
+<p>Customer segmentation and mapping</p>
+<p>Project 2 overview</p>
 <!-- example of big text fit to slide width -->
 <!-- ::: {.r-fit-text} -->
 <!-- Big Text -->
@@ -358,15 +360,10 @@
 <p><span class="math inline">\(\rightarrow\)</span> Identify questions that can be answered with the data</p>
 <p><span class="math inline">\(\rightarrow\)</span> Generate summary statistics (average, variance, min, max)</p>
 <p><span class="math inline">\(\rightarrow\)</span> Plot distributions and correlations between variables</p>
-</section></section>
-<section>
-<section id="lets-look-at-an-example-grocery-visitation-data" class="title-slide slide level1 center">
-<h1>Let’s look at an example: Grocery visitation data</h1>
-
 </section>
 <section id="gain-familiarity-with-your-data" class="slide level2 scrollable">
 <h2>Gain familiarity with your data</h2>
-<p>A good data source will provide information about a dataset in the form of a data dictionary.</p>
+<p>A good data source will provide information about a dataset in the form of a <strong>data dictionary</strong>.</p>
 <p>A data dictionary is a comprehensive guide that provides detailed information to the data analyst about the dataset being analyzed.</p>
 <p>Can include:</p>
 <ul>
@@ -375,7 +372,7 @@
 <li><p>Descriptions</p></li>
 <li><p>Possible values</p></li>
 <li><p>Missing value indication</p></li>
-<li><p>Source</p></li>
+<li><p>Data source</p></li>
 </ul>
 </section>
 <section id="section" class="slide level2">
@@ -397,30 +394,354 @@
 <h2>Summary statistics</h2>
 <p>Summary statistics provide an overview of the data’s main characteristics.</p>
 <p>They are important for understanding the data’s scope and identifying possible outliers.</p>
-<p>What summary statistics would we want to report if we were to answer the following question: <strong>How far do shoppers travel to a store during a weekday?</strong></p>
+<p>What summary statistics would we want to report if we were to answer the following question:</p>
+<p><strong>How do stores vary in terms of customer traffic and product diversity?</strong></p>
+</section>
+<section id="summary-statistics-1" class="slide level2 scrollable">
+<h2>Summary statistics</h2>
+<p><strong>How do stores vary in terms of customer traffic and product diversity?</strong></p>
 <ol type="1">
-<li><p><strong>Average distance (mean)</strong>: Calculate the average distance traveled by all shoppers, conditioning on weekdays.</p></li>
-<li><p><strong>Range of distances (min and max)</strong>: Find the shortest and longest distances traveled by shoppers, conditioning on weekdays.</p></li>
-<li><p><strong>Variation of distance traveled (standard deviation)</strong>: This measures the amount of dispersion in the distances. A high standard deviation means that the distances vary widely from the mean, while low standard deviation means that the distances traveled are clustered closely around the mean.</p></li>
+<li><p><strong>Average number of unique customers (mean)</strong>: Shows how many individual shoppers typically visit a store during the month. Stores with higher values likely serve a broader customer base or higher-traffic locations.</p></li>
+<li><p><strong>Average product diversity (mean)</strong>: Reflects the average number of distinct products sold per store. A higher number suggests broader assortments, while lower numbers could signal specialization (e.g., fuel-focused or small-format stores).</p></li>
 </ol>
 </section>
-<section id="plotting-distributions-and-correlations" class="slide level2">
-<h2>Plotting distributions and correlations</h2>
+<section id="summary-statistics-2" class="slide level2 scrollable">
+<h2>Summary statistics</h2>
+<p><strong>How do stores vary in terms of customer traffic and product diversity?</strong></p>
+<ol start="3" type="1">
+<li><strong>Range of unique customers and product diversity (min and max)</strong>:</li>
+</ol>
+<ul>
+<li><p>Minimums may represent underperforming or rural locations.</p></li>
+<li><p>Maximums could indicate high-volume stores or those in dense areas.</p></li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Standard deviation (variation)</strong>: For both variables, this tells us how much stores differ from one another:</li>
+</ol>
+<ul>
+<li><p>A high standard deviation in unique customers suggests variation in store foot traffic — some serve many more shoppers than others.</p></li>
+<li><p>A high standard deviation in product diversity suggests variation in assortment strategy — from limited selection stores to large-format or multi-category stores.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="plotting-distributions-and-correlations" class="title-slide slide level1 center">
+<h1>Plotting distributions and correlations</h1>
 
-<img data-src="includes/ggpairs.png" class="r-stretch quarto-figure-center"></section>
-<section id="plotting-distributions-and-correlations-1" class="slide level2 scrollable">
-<h2>Plotting distributions and correlations</h2>
+</section>
+<section id="distributions" class="slide level2 scrollable">
+<h2>Distributions</h2>
 <p>Plotting data allows you to see relationships in the data that cannot be easily identified with summary statistics.</p>
 <p>We plot <em>distributions</em> for a single variable:</p>
 <ul>
 <li><p>Allows you to see patterns, anomalies, and spot outliers in the data</p></li>
 <li><p>The shape of the distribution informs whether you will need to transform the data (e.g., take the log)</p></li>
 </ul>
+</section>
+<section id="correlations" class="slide level2">
+<h2>Correlations</h2>
 <p>We plot <em>correlations</em> between two variables:</p>
 <ul>
 <li><p>Discover relationships between two variables and use this to inform a hypothesis</p></li>
 <li><p>Highly correlated data can be problematic and plotting correlations can detect these relationships</p></li>
 </ul>
+</section>
+<section id="what-is-ggpairs" class="slide level2">
+<h2>What is <code>ggpairs()</code>?</h2>
+<p>The <code>ggpairs()</code> function comes from the <code>GGally</code> package in R and is a powerful tool for visualizing relationships between multiple variables at once.</p>
+<p>Think of it as a matrix of plots that lets you:</p>
+<ul>
+<li><p>Quickly explore distributions of individual variables</p></li>
+<li><p>See pairwise relationships between variables</p></li>
+<li><p>Identify potential correlations, outliers, and redundancy</p></li>
+</ul>
+</section>
+<section id="example-store-segmentation" class="slide level2 scrollable">
+<h2>Example: Store Segmentation</h2>
+<p>I’m interested in using cluster analysis to segment the sales data by stores.</p>
+<p>I believe the following variables capture differences in store behavior.</p>
+<ul>
+<li><strong>Unique visitors</strong> (<code>customers</code>)</li>
+<li><strong>Total sales</strong> (<code>sales</code>)</li>
+<li><strong>Product mix</strong> (<code>products</code>)</li>
+<li><strong>Store scale</strong> (<code>chain_size</code>)</li>
+<li><strong>Store type/specialization</strong> (<code>fuel_share</code>)</li>
+</ul>
+<p>I want to visualize these variables to see if they adequately capture differences between the stores.</p>
+</section>
+<section id="i-use-ggpairs-to-visualize-the-relationships-between-the-variables" class="slide level2 scrollable">
+<h2>I use <code>ggpairs()</code> to visualize the relationships between the variables</h2>
+<p><code>library(GGally)</code></p>
+<p><code>ggpairs(final_dataset %&gt;% select(customers, sales, products, chain_size, fuel_share))</code></p>
+</section>
+<section id="it-produces-a-grid-with-the-following-structure" class="slide level2 smaller">
+<h2>It produces a grid with the following structure</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th><code>customers</code></th>
+<th><code>sales</code></th>
+<th><code>products</code></th>
+<th>…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>customers</code></td>
+<td>Histogram</td>
+<td>Correlation</td>
+<td>Correlation</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td><code>sales</code></td>
+<td>Scatterplot</td>
+<td>Histogram</td>
+<td>Correlation</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td><code>products</code></td>
+<td>Scatterplot</td>
+<td>Scatterplot</td>
+<td>Histogram</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Diagonal: Histograms or density plots for each individual variable</p></li>
+<li><p>Lower triangle: Scatterplots showing relationships between variable pairs</p></li>
+<li><p>Upper triangle: Correlation coefficients between each variable pair</p></li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/ggpairs_store_segment_levels.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="how-to-read-this-output" class="slide level2 scrollable">
+<h2>How to read this output</h2>
+<p>The first thing I look at are the diagonals: How are my variables distributed?</p>
+<ul>
+<li>I see that the variables are skewed right<sup>1</sup></li>
+<li>I decide to “log transform” the variables (except fuel share)</li>
+</ul>
+<p>My new set of potential cluster variables is now:</p>
+<ul>
+<li><strong>Unique visitors</strong> (<code>log_customers</code>)</li>
+<li><strong>Total sales</strong> (<code>log_sales</code>)</li>
+<li><strong>Product mix</strong> (<code>log_products</code>)</li>
+<li><strong>Store scale</strong> (<code>log_chain_size</code>)</li>
+<li><strong>Store type/specialization</strong> (<code>fuel_share</code>)</li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>A right-skewed or positive distribution means its tail is more pronounced on the right side than on the left.</p></li></ol></aside></section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/ggpairs_store_segment.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/ggpairs_store_segment.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="how-to-read-correlation-coefficients" class="slide level2 smaller">
+<h2>How to read correlation coefficients</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 7%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable Pair</th>
+<th>Corr</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>log_customers</code> ~ <code>log_sales</code></td>
+<td>0.741</td>
+<td>Strong positive relationship. Stores with more customers tend to generate more total sales (as expected).</td>
+</tr>
+<tr class="even">
+<td><code>log_customers</code> ~ <code>log_products</code></td>
+<td>0.453</td>
+<td>Stores with more product variety attract more customers.</td>
+</tr>
+<tr class="odd">
+<td><code>log_customers</code> ~ <code>log_chain_size</code></td>
+<td>0.335</td>
+<td>Bigger chains tend to have more customers per store.</td>
+</tr>
+<tr class="even">
+<td><code>log_sales ~ log_products</code></td>
+<td>0.44</td>
+<td>Stores with more diverse products tend to sell more overall. Suggests product variety drives revenue.</td>
+</tr>
+<tr class="odd">
+<td><code>log_sales ~ fuel_share</code></td>
+<td>0.413</td>
+<td>Stores with higher sales also have higher share coming from fuel.</td>
+</tr>
+<tr class="even">
+<td><code>log_products</code> ~ <code>fuel_share</code></td>
+<td>-0.114</td>
+<td>Slightly negative: stores that sell mostly fuel may offer fewer product types.</td>
+</tr>
+</tbody>
+</table>
+<p>We want to make sure none of our correlations are close to 1, as that would indicate <em>collinearity</em>. If you find a perfectly collinear variable (or close to +/- 1), remove one.</p>
+</section>
+<section id="overall-takaways" class="slide level2 smaller">
+<h2>Overall takaways</h2>
+<ul>
+<li>Log transformations helped reduce extreme skew and made relationships between variables easier to see.</li>
+<li>Still a bit right-skewed even after log transformation.</li>
+<li>Most correlations are moderate and positive — indicating your clustering variables are related but not redundant.</li>
+<li>No obvious collinearity problems (no correlations near 1).</li>
+<li>No variable appears redundant — good news for clustering.</li>
+<li>There’s decent variation across stores, which is ideal for segmentation.</li>
+</ul>
+</section>
+<section id="why-this-matters" class="slide level2">
+<h2>Why this matters</h2>
+<p>Before running a segmentation algorithm like K-means, you want to:</p>
+<ul>
+<li>Check for multicollinearity — avoid overly redundant inputs</li>
+<li>Make sure variables are on similar scales (e.g., using log or standardization)</li>
+<li>Choose variables that add unique information about store behavior</li>
+</ul>
+</section></section>
+<section>
+<section id="customer-segmentation" class="title-slide slide level1 center">
+<h1>Customer segmentation</h1>
+
+</section>
+<section id="esri-tapestry-segmentation" class="slide level2">
+<h2><a href="https://doc.arcgis.com/en/esri-demographics/latest/regional-data/tapestry-segmentation.htm">ESRI Tapestry Segmentation</a></h2>
+<p>Uses cluster analysis on census demographic data (+ others) to define groups</p>
+
+<img data-src="includes/esri_tapestry.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="why-segment-your-customers" class="slide level2">
+<h2>Why segment your customers?</h2>
+<p>We live in a noisy world and crowded marketplace</p>
+<p>People are getting better at ignoring and there are more niches</p>
+<p>Increase the chances of of reaching the right customers with the right message at the right time</p>
+<p>Increase sales, revenue, and hopefully profit</p>
+</section>
+<section id="dimensions-of-customer-segmentation" class="slide level2">
+<h2>Dimensions of customer segmentation</h2>
+<p>Identify customer personas</p>
+<p>Customer stage - leads, prospects, existing customers</p>
+<p>Customer demographics - age, gender, income, location, occupation</p>
+<p>Customer behaviors - purchase history, web browsing activity</p>
+</section>
+<section id="customer-segmentation-analysis" class="slide level2">
+<h2>Customer segmentation analysis</h2>
+<p>A common application of cluster analysis is to use sales data to divide customers into groups to improve target marketing.</p>
+<p>Let’s look at a case study. . .</p>
+</section>
+<section id="metlife-case-study" class="slide level2">
+<h2>MetLife case study</h2>
+<iframe width="100%" height="500" src="https://d3.harvard.edu/platform-rctom/submission/metlife-a-case-study-in-customer-segmentation/"></iframe>
+<!-- ## How do you know if you are achieving your goal? -->
+<!-- ::: .columns -->
+<!-- ::: {.column width="45%"} -->
+<!-- Measuring Key Performance Indicators (KPIs) -->
+<!-- Conversion rates - online click through -->
+<!-- Customer loyalty - rates of repeat purchases -->
+<!-- ::: -->
+<!-- ::: {.column width="50%"} -->
+<!-- ![](https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2023_02_Clickthrough-rate-1.jpg) -->
+<!-- ::: -->
+<!-- ::: -->
+</section>
+<section id="in-lab-this-week" class="slide level2">
+<h2>In lab this week</h2>
+<ul>
+<li><p>Perform cluster analysis by stores in R</p></li>
+<li><p>Map store location data in Tableau and assign cluster information</p></li>
+</ul>
+</section></section>
+<section>
+<section id="project-2" class="title-slide slide level1 center">
+<h1>Project 2</h1>
+
+</section>
+<section id="project-2-overview" class="slide level2 scrollable">
+<h2>Project 2: Overview</h2>
+<p>Use the data provided to:</p>
+<ul>
+<li><p>Perform an exploratory data analysis</p></li>
+<li><p>Assemble summary statistics</p></li>
+<li><p>Analyze spatial patterns, correlations, etc.</p></li>
+<li><p>Construct visualizations</p></li>
+</ul>
+<p>You must:</p>
+<ul>
+<li><p>Conduct market segmentation analysis via clustering (customer, store, or product)</p></li>
+<li><p>Label clusters based on characteristics</p></li>
+<li><p>Develop a simple marketing strategy to target clusters</p></li>
+</ul>
+</section>
+<section id="project-2-data" class="slide level2">
+<h2>Project 2: Data</h2>
+<p>Overview: Transaction-level data from convenience stores across the U.S. during July of 2023</p>
+<p>A <em>transaction</em> is defined as a purchase incident made by a shopper. (Think: receipt)</p>
+<p>Transaction-level data includes information about the store where they made the purchase, the price and quantity of the products they purchased, and details about the items they purchased.</p>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+
+<img data-src="includes/data_schema.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="project-2-data-1" class="slide level2 scrollable">
+<h2>Project 2: Data</h2>
+<p>“shopper_info.csv”</p>
+<ul>
+<li>This is the core file that contains information about the shopper and each transaction they made during the month of July 2023.</li>
+</ul>
+<p>“gtin.csv”</p>
+<ul>
+<li><p>You will link this file with “shopper_info” based on the variable gtin.</p></li>
+<li><p>GTIN stands for “Global Trade Item Number” and is similar to an SKU or UPC (i.e., barcode).</p></li>
+</ul>
+<p>“store_info.csv”</p>
+<ul>
+<li>This file contains the store details and can be linked with the “shopper_info” using the variable store_id.</li>
+</ul>
+</section>
+<section id="project-2-types-of-segmentations" class="slide level2">
+<h2>Project 2: Types of segmentations</h2>
+<div class=".columns">
+<div class="column" style="width:45%;">
+<p>By store:</p>
+<ul>
+<li><p>Which stores are similar by mix of products sold?</p></li>
+<li><p>Which stores are similar by sales?</p></li>
+</ul>
+<p>By product:</p>
+<ul>
+<li>Which products are similar?</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p>By shopper:</p>
+<ul>
+<li><p>Which shoppers are similar based on where they shop?</p></li>
+<li><p>Which shoppers are similar based on what they purchase?</p></li>
+</ul>
+</div></div>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p>Explore your data: understanding your data, identifying questions, descriptive statistics, plotting distributions, plotting correlations</p>
 <!--
 ## Methods overview
 
@@ -469,126 +790,6 @@ C) To maximize the distance between each data point and all other data points.
 D) To maximize the distance between each data point and its assigned centroid.
 
 -->
-</section></section>
-<section>
-<section id="customer-segmentation" class="title-slide slide level1 center">
-<h1>Customer segmentation</h1>
-
-</section>
-<section id="esri-tapestry-segmentation" class="slide level2">
-<h2><a href="https://doc.arcgis.com/en/esri-demographics/latest/regional-data/tapestry-segmentation.htm">ESRI Tapestry Segmentation</a></h2>
-<p>Uses cluster analysis on census demographic data (+ others) to define groups</p>
-
-<img data-src="includes/esri_tapestry.jpeg" class="r-stretch quarto-figure-center"></section>
-<section id="why-segment-your-customers" class="slide level2">
-<h2>Why segment your customers?</h2>
-<p>We live in a noisy world and crowded marketplace</p>
-<p>People are getting better at ignoring and there are more niches</p>
-<p>Increase the chances of of reaching the right customers with the right message at the right time</p>
-<p>Increase sales, revenue, and hopefully profit</p>
-</section>
-<section id="how-do-you-know-if-you-are-achieving-your-goal" class="slide level2">
-<h2>How do you know if you are achieving your goal?</h2>
-<div class=".columns">
-<div class="column" style="width:45%;">
-<p>Measuring Key Performance Indicators (KPIs)</p>
-<p>Conversion rates - online click through</p>
-<p>Customer loyalty - rates of repeat purchases</p>
-</div>
-<div class="column" style="width:50%;">
-<p><img data-src="https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2023_02_Clickthrough-rate-1.jpg"></p>
-</div>
-</div>
-</section>
-<section id="dimensions-of-customer-segmentation" class="slide level2">
-<h2>Dimensions of customer segmentation</h2>
-<p>Identify customer personas</p>
-<p>Customer stage - leads, prospects, existing customers</p>
-<p>Customer demographics - age, gender, income, location, occupation</p>
-<p>Customer behaviors - purchase history, web browsing activity</p>
-</section>
-<section id="customer-segmentation-analysis" class="slide level2">
-<h2>Customer segmentation analysis</h2>
-<p>A common application of cluster analysis is to use sales data to divide customers into groups to improve target marketing.</p>
-<p>Let’s look at a case study. . .</p>
-</section>
-<section id="metlife-case-study" class="slide level2">
-<h2>MetLife case study</h2>
-<iframe width="100%" height="500" src="https://d3.harvard.edu/platform-rctom/submission/metlife-a-case-study-in-customer-segmentation/"></iframe>
-</section></section>
-<section>
-<section id="project-2" class="title-slide slide level1 center">
-<h1>Project 2</h1>
-
-</section>
-<section id="project-2-overview" class="slide level2 scrollable">
-<h2>Project 2: Overview</h2>
-<p>Use the data provided to:</p>
-<ul>
-<li><p>Perform an exploratory data analysis</p></li>
-<li><p>Assemble summary statistics</p></li>
-<li><p>Analyze spatial patterns, correlations, etc.</p></li>
-<li><p>Construct visualizations</p></li>
-</ul>
-<p>You must:</p>
-<ul>
-<li><p>Conduct market segmentation analysis via clustering</p></li>
-<li><p>Label clusters based on characteristics</p></li>
-<li><p>Develop a simple marketing strategy to target clusters</p></li>
-</ul>
-</section>
-<section id="project-2-data" class="slide level2">
-<h2>Project 2: Data</h2>
-<p>Overview: Transaction-level data from convenience stores across the U.S. during July of 2023</p>
-<p>A <em>transaction</em> is defined as a purchase incident made by a shopper. (Think: receipt)</p>
-<p>Transaction-level data includes information about the store where they made the purchase, the price and quantity of the products they purchased, and details about the items they purchased.</p>
-</section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-
-<img data-src="includes/data_schema.png" class="r-stretch quarto-figure-center"></section>
-<section id="project-2-data-1" class="slide level2 scrollable">
-<h2>Project 2: Data</h2>
-<p>“shopper_info.csv”</p>
-<ul>
-<li>This is the core file that contains information about the shopper and each transaction they made during the month of July 2023.</li>
-</ul>
-<p>“gtin.csv”</p>
-<ul>
-<li><p>You will link this file with “shopper_info” based on the variable gtin.</p></li>
-<li><p>GTIN stands for “Global Trade Item Number” and is similar to an SKU or UPC (i.e., barcode).</p></li>
-</ul>
-<p>“store_info.csv”</p>
-<ul>
-<li>This file contains the store details and can be linked with the “shopper_info” using the variable store_id.</li>
-</ul>
-</section>
-<section id="project-2-types-of-segmentations" class="slide level2">
-<h2>Project 2: Types of segmentations</h2>
-<div class=".columns">
-<div class="column" style="width:45%;">
-<p>By store:</p>
-<ul>
-<li><p>Which stores are similar by mix of products sold?</p></li>
-<li><p>Which stores are similar by sales?</p></li>
-</ul>
-<p>By product:</p>
-<ul>
-<li>Which products are similar?</li>
-</ul>
-</div>
-<div class="column" style="width:45%;">
-<p>By shopper:</p>
-<ul>
-<li><p>Which shoppers are similar based on where they shop?</p></li>
-<li><p>Which shoppers are similar based on what they purchase?</p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="summary" class="slide level2">
-<h2>Summary</h2>
-<p>Explore your data: understanding your data, identifying questions, descriptive statistics, plotting distributions, plotting correlations</p>
 <!-- OLD SLIDES THAT HAVE BEEN COMMENTED OUT OR MOVED TO UNIT 02 WEEK 01
 ![](includes/customer_segmentation.png)
 
@@ -687,10 +888,13 @@ Unsupervised learning methods like clustering can help you learn about patterns 
 Supervised learning methods like regression and classification can help you explain relationships and predict outcomes of new data
 
 -->
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
+</div>
 </section></section>
+
     </div>
   </div>
 
@@ -717,7 +921,6 @@ Supervised learning methods like regression and classification can help you expl
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -934,18 +1137,7 @@ Supervised learning methods like regression and classification can help you expl
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -977,11 +1169,50 @@ Supervised learning methods like regression and classification can help you expl
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -991,8 +1222,17 @@ Supervised learning methods like regression and classification can help you expl
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1006,7 +1246,11 @@ Supervised learning methods like regression and classification can help you expl
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

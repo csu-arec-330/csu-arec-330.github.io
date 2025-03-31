@@ -11,12 +11,13 @@ format:
 
 ## Agenda 
 
-Exploring your data
+Exploring your data 
 
-A deeper dive into customer segmentation
+Store segmentation example
 
-Review Project 2 datasets
+Customer segmentation and mapping
 
+Project 2 overview
 
 <!-- example of big text fit to slide width -->
 
@@ -45,11 +46,9 @@ $\rightarrow$ Generate summary statistics (average, variance, min, max)
 
 $\rightarrow$ Plot distributions and correlations between variables
 
-# Let's look at an example: Grocery visitation data
-
 ## Gain familiarity with your data {.scrollable}
 
-A good data source will provide information about a dataset in the form of a data dictionary.
+A good data source will provide information about a dataset in the form of a **data dictionary**.
 
 A data dictionary is a comprehensive guide that provides detailed information to the data analyst about the dataset being analyzed.
 
@@ -65,7 +64,7 @@ Can include:
 
 - Missing value indication
 
-- Source
+- Data source
 
 ## 
 
@@ -83,27 +82,44 @@ Can include:
 
 - What time of day is the busiest time to shop on a Saturday and a Sunday?  
 
-
 ## Summary statistics {.scrollable}
 
 Summary statistics provide an overview of the data's main characteristics.
 
 They are important for understanding the data's scope and identifying possible outliers.
 
-What summary statistics would we want to report if we were to answer the following question: **How far do shoppers travel to a store during a weekday?**
+What summary statistics would we want to report if we were to answer the following question: 
 
-1. **Average distance (mean)**: Calculate the average distance traveled by all shoppers, conditioning on weekdays.
+**How do stores vary in terms of customer traffic and product diversity?**
 
-2. **Range of distances (min and max)**: Find the shortest and longest distances traveled by shoppers, conditioning on weekdays.
+## Summary statistics {.scrollable}
 
-3. **Variation of distance traveled (standard deviation)**: This measures the amount of dispersion in the distances. A high standard deviation means that the distances vary widely from the mean, while low standard deviation means that the distances traveled are clustered closely around the mean.
+**How do stores vary in terms of customer traffic and product diversity?**
+
+1. **Average number of unique customers (mean)**: Shows how many individual shoppers typically visit a store during the month. Stores with higher values likely serve a broader customer base or higher-traffic locations.
+
+2. **Average product diversity (mean)**: Reflects the average number of distinct products sold per store. A higher number suggests broader assortments, while lower numbers could signal specialization (e.g., fuel-focused or small-format stores).
+
+## Summary statistics {.scrollable}
+
+**How do stores vary in terms of customer traffic and product diversity?**
+
+3. **Range of unique customers and product diversity (min and max)**:
+
+- Minimums may represent underperforming or rural locations.
+
+- Maximums could indicate high-volume stores or those in dense areas.
+
+4. **Standard deviation (variation)**: For both variables, this tells us how much stores differ from one another:
+
+- A high standard deviation in unique customers suggests variation in store foot traffic — some serve many more shoppers than others.
+
+- A high standard deviation in product diversity suggests variation in assortment strategy — from limited selection stores to large-format or multi-category stores.
 
 
-## Plotting distributions and correlations
+# Plotting distributions and correlations
 
-![](includes/ggpairs.png){fig-align="center"}
-
-## Plotting distributions and correlations {.scrollable}
+## Distributions {.scrollable}
 
 Plotting data allows you to see relationships in the data that cannot be easily identified with summary statistics.
 
@@ -113,61 +129,122 @@ We plot *distributions* for a single variable:
 
 - The shape of the distribution informs whether you will need to transform the data (e.g., take the log)
 
+## Correlations
+
 We plot *correlations* between two variables:
 
 - Discover relationships between two variables and use this to inform a hypothesis
 
 - Highly correlated data can be problematic and plotting correlations can detect these relationships
 
+## What is `ggpairs()`?
 
-<!--
-## Methods overview
+The `ggpairs()` function comes from the `GGally` package in R and is a powerful tool for visualizing relationships between multiple variables at once.
 
-:::: {.columns style="text-align: left"}
-::: {.column width="50%"}
-**Unsupervised Learning**
+Think of it as a matrix of plots that lets you:
 
-To discover hidden patterns and relationships within the data
+- Quickly explore distributions of individual variables
 
-Identify structure or patterns on its own given an unlabeled dataset
+- See pairwise relationships between variables
 
-Good for exploring relationships and generating explanatory questions
-:::
-::: {.column width="50%"}
-**Supervised Learning**
+- Identify potential correlations, outliers, and redundancy
 
-To explain relationships between inputs and outputs
+## Example: Store Segmentation {.scrollable}
 
-Models are trained on labeled data (outputs and inputs known)
+I'm interested in using cluster analysis to segment the sales data by stores.
 
-Good for explaining relationships and predicting new outcomes
+I believe the following variables capture differences in store behavior.
 
-:::
-::::
+- **Unique visitors** (`customers`)
+- **Total sales** (`sales`)
+- **Product mix** (`products`)
+- **Store scale** (`chain_size`)
+- **Store type/specialization** (`fuel_share`)
 
-# Cross-Sectional Data Analysis
+I want to visualize these variables to see if they adequately capture differences between the stores. 
 
-## Cluster analysis
+## I use `ggpairs()` to visualize the relationships between the variables {.scrollable}
 
-Last week, we discussed **cluster analysis** 
+`library(GGally)`
 
-Cluster analysis is a form of *unsupervised learning* 
+`ggpairs(final_dataset %>% select(customers, sales, products, chain_size, fuel_share))`
 
-It provides a systematic method to look for patterns in data.
+## It produces a grid with the following structure {.smaller}
 
-## Knowledge check
+|         | `customers` | `sales` | `products` | ... |
+|----------|----------|----------|----------|----------|
+`customers` | Histogram | Correlation | Correlation | ... |
+`sales`| Scatterplot | Histogram | Correlation | ... |
+`products` | Scatterplot | Scatterplot | Histogram | ... |
+... | ... | ... | ... | ... | 
 
-We discussed k-means clustering in class, and in lab. What is the main goal of the k-means clustering algorithm?
+- Diagonal: Histograms or density plots for each individual variable
 
-A) To minimize the distance between all data points in the dataset.
+- Lower triangle: Scatterplots showing relationships between variable pairs
 
-B) To minimize the distance between each data point and its assigned centroid.
+- Upper triangle: Correlation coefficients between each variable pair
 
-C) To maximize the distance between each data point and all other data points.
+##
 
-D) To maximize the distance between each data point and its assigned centroid.
+![](includes/ggpairs_store_segment_levels.png){fig-align="center"}
 
--->
+## How to read this output {.scrollable}
+
+The first thing I look at are the diagonals: How are my variables distributed?
+
+- I see that the variables are skewed right^[A right-skewed or positive distribution means its tail is more pronounced on the right side than on the left.]
+- I decide to "log transform" the variables (except fuel share)
+
+My new set of potential cluster variables is now:
+
+  - **Unique visitors** (`log_customers`)
+  - **Total sales** (`log_sales`)
+  - **Product mix** (`log_products`)
+  - **Store scale** (`log_chain_size`)
+  - **Store type/specialization** (`fuel_share`)
+
+
+## 
+
+![](includes/ggpairs_store_segment.png){fig-align="center"}
+
+
+## 
+
+![](includes/ggpairs_store_segment.png){fig-align="center"}
+
+## How to read correlation coefficients {.smaller}
+
+| Variable Pair                    | Corr    | Interpretation                                                                 |
+|----------------------------------|---------|---------------------------------------------------------------------------------|
+| `log_customers` ~ `log_sales`    | 0.741    | Strong positive relationship. Stores with more customers tend to generate more total sales (as expected). |
+| `log_customers` ~ `log_products` | 0.453    | Stores with more product variety attract more customers.                        |
+| `log_customers` ~ `log_chain_size` | 0.335  | Bigger chains tend to have more customers per store.                            |
+| `log_sales ~ log_products`     | 0.44    | Stores with more diverse products tend to sell more overall. Suggests product variety drives revenue. |
+| `log_sales ~ fuel_share`     | 0.413    | Stores with higher sales also have higher share coming from fuel. |
+| `log_products` ~ `fuel_share`    | -0.114   | Slightly negative: stores that sell mostly fuel may offer fewer product types.  |
+
+We want to make sure none of our correlations are close to 1, as that would indicate *collinearity*. If you find a perfectly collinear variable (or close to +/- 1), remove one. 
+
+## Overall takaways {.smaller}
+
+- Log transformations helped reduce extreme skew and made relationships between variables easier to see.
+- Still a bit right-skewed even after log transformation.
+- Most correlations are moderate and positive — indicating your clustering variables are related but not redundant.
+- No obvious collinearity problems (no correlations near 1).
+- No variable appears redundant — good news for clustering.
+- There’s decent variation across stores, which is ideal for segmentation.
+
+## Why this matters
+
+Before running a segmentation algorithm like K-means, you want to:
+
+- Check for multicollinearity — avoid overly redundant inputs
+- Make sure variables are on similar scales (e.g., using log or standardization)
+- Choose variables that add unique information about store behavior
+
+
+
 
 # Customer segmentation
 
@@ -176,7 +253,6 @@ D) To maximize the distance between each data point and its assigned centroid.
 Uses cluster analysis on census demographic data (+ others) to define groups
 
 ![](includes/esri_tapestry.jpeg){fig-align="center"}
-
 
 
 ## Why segment your customers?
@@ -188,27 +264,6 @@ People are getting better at ignoring and there are more niches
 Increase the chances of of reaching the right customers with the right message at the right time
 
 Increase sales, revenue, and hopefully profit
-
-
-## How do you know if you are achieving your goal?
-
-::: .columns
-
-::: {.column width="45%"}
-Measuring Key Performance Indicators (KPIs)
-
-Conversion rates - online click through
-
-Customer loyalty - rates of repeat purchases
-
-:::
-
-::: {.column width="50%"}
-
-![](https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2023_02_Clickthrough-rate-1.jpg)
-
-:::
-:::
 
 
 ## Dimensions of customer segmentation
@@ -233,6 +288,31 @@ Let's look at a case study. . .
 <iframe width="100%" height="500" src="https://d3.harvard.edu/platform-rctom/submission/metlife-a-case-study-in-customer-segmentation/"></iframe>
 ```
 
+<!-- ## How do you know if you are achieving your goal? -->
+
+<!-- ::: .columns -->
+
+<!-- ::: {.column width="45%"} -->
+<!-- Measuring Key Performance Indicators (KPIs) -->
+
+<!-- Conversion rates - online click through -->
+
+<!-- Customer loyalty - rates of repeat purchases -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+
+<!-- ![](https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2023_02_Clickthrough-rate-1.jpg) -->
+
+<!-- ::: -->
+<!-- ::: -->
+
+## In lab this week
+
+- Perform cluster analysis by stores in R
+
+- Map store location data in Tableau and assign cluster information
 
 # Project 2
 
@@ -250,7 +330,7 @@ Use the data provided to:
 
 You must:
 
-- Conduct market segmentation analysis via clustering
+- Conduct market segmentation analysis via clustering (customer, store, or product)
 
 - Label clusters based on characteristics
 
@@ -313,12 +393,60 @@ By shopper:
 :::
 
 
-
 ## Summary
 
 Explore your data: understanding your data, identifying questions, descriptive statistics, plotting distributions, plotting correlations
 
 
+
+<!--
+## Methods overview
+
+:::: {.columns style="text-align: left"}
+::: {.column width="50%"}
+**Unsupervised Learning**
+
+To discover hidden patterns and relationships within the data
+
+Identify structure or patterns on its own given an unlabeled dataset
+
+Good for exploring relationships and generating explanatory questions
+:::
+::: {.column width="50%"}
+**Supervised Learning**
+
+To explain relationships between inputs and outputs
+
+Models are trained on labeled data (outputs and inputs known)
+
+Good for explaining relationships and predicting new outcomes
+
+:::
+::::
+
+# Cross-Sectional Data Analysis
+
+## Cluster analysis
+
+Last week, we discussed **cluster analysis** 
+
+Cluster analysis is a form of *unsupervised learning* 
+
+It provides a systematic method to look for patterns in data.
+
+## Knowledge check
+
+We discussed k-means clustering in class, and in lab. What is the main goal of the k-means clustering algorithm?
+
+A) To minimize the distance between all data points in the dataset.
+
+B) To minimize the distance between each data point and its assigned centroid.
+
+C) To maximize the distance between each data point and all other data points.
+
+D) To maximize the distance between each data point and its assigned centroid.
+
+-->
 
 <!-- OLD SLIDES THAT HAVE BEEN COMMENTED OUT OR MOVED TO UNIT 02 WEEK 01
 ![](includes/customer_segmentation.png)

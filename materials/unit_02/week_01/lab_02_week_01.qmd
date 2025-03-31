@@ -67,7 +67,7 @@ We will use the following datasets for Project 2:
 | unit_quantity       | The quantity of the product units purchased in the transaction.                                                                                           | num  | 1                            |
 
 ::: {.callout-note}
-A `gtin` = `NA` means that this purchase was **FUEL**.
+A `gtin` = `NA` or `gtin` = `0` means that this purchase was **FUEL**.
 :::
 
 
