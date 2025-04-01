@@ -194,3 +194,8 @@ most_frequent_purchase <- store_info %>%
 
 View(most_frequent_purchase)
 
+# Join most_frequent_purchase with final_clusters and then write to csv
+final_clusters_out <- final_clusters %>%
+  left_join(most_frequent_purchase, by = "cluster")
+
+write_csv(final_clusters_out, "final_clusters_out.csv")
