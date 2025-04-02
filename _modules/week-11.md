@@ -27,6 +27,7 @@ title: "Week 11: Connecting Analysis to Your Objectives"
 <a  href="/materials/unit_02/week_03/grocery_store_analysis.R" download>Download grocery_store_analysis.R</a> <br>  <br>
 -->
 <a  href="/materials/unit_02/inputs/shopper_info.csv" download>Download shopper_info.csv</a> <br>
+<a  href="/materials/unit_02/inputs/shopper_zip.csv" download>Download shopper_zip.csv</a> <br>
 <a  href="/materials/unit_02/inputs/gtin.csv" download>Download gtin.csv</a> <br>
 <a  href="/materials/unit_02/inputs/store_info.csv" download>Download store_info.csv</a> <br><br>
 

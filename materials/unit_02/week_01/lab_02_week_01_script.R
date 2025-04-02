@@ -17,6 +17,9 @@ p_load(dplyr,readr,tidyverse,ggplot2,modelsummary,GGally,factoextra,pandoc)
 # This dataset contains detailed information on shoppers and their transactions for July 2023
 shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_info.csv")
 
+# Separate data file with shopper ID and their zipcode
+shopper_zip <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_zip.csv")
+
 # Read in the GTIN dataset
 # This file links products to their Global Trade Item Numbers, akin to SKUs or UPCs
 gtin <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/gtin.csv")

@@ -15,6 +15,8 @@ title: "Week 10: Intro to Mapping and Visualizing Cross-Sectional Data"
 
 <a  href="/materials/unit_02/inputs/shopper_info.csv" download>Download shopper_info.csv</a> <br>
 
+<a  href="/materials/unit_02/inputs/shopper_zip.csv" download>Download shopper_zip.csv</a> <br>
+
 <a  href="/materials/unit_02/inputs/gtin.csv" download>Download gtin.csv</a> <br>
 
 <a  href="/materials/unit_02/inputs/store_info.csv" download>Download store_info.csv</a> <br><br>

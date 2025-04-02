@@ -17,6 +17,9 @@ p_load(dplyr,readr,tidyverse,ggplot2,modelsummary,GGally,factoextra,pandoc)
 # This dataset contains detailed information on shoppers and their transactions for July 2023
 shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_info.csv")
 
+# Separate data file with shopper ID and their zipcode
+shopper_zip <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_zip.csv")
+
 # Read in the GTIN dataset
 # This file links products to their Global Trade Item Numbers, akin to SKUs or UPCs
 gtin <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/gtin.csv")
@@ -56,19 +59,20 @@ clean_data <- store_shopper_gtin_left %>%
   # Remove observations with negative or zero unit price (e.g., returns or invalid entries)
   filter(unit_price > 0) %>% 
   
-  # Drop observations with missing or GTIN==0, but I want to KEEP the fuel purchases, so I will keep the "NA" values
+  # Remove observations of stores missing shopper IDs
   filter(!is.na(shopper_id)) %>%
   
   # Calculate total spending per line item
   mutate(total = unit_price * unit_quantity) %>%
   
+  # Convert transaction_set_id and transaction_item_id to integers without decimals
+  mutate(transaction_set_id = format(transaction_set_id, scientific = FALSE, trim = TRUE), transaction_item_id = format(transaction_item_id, scientific = FALSE, trim = TRUE)) %>%
+  
   # Arrange data by store_id and zip_code
   arrange(store_id, zip_code)
 
+# Check how many distinct shoppers are in the clean dataset
 length(unique(clean_data$store_id))
-
-unique(clean_data$category)
-unique(clean_data$subcategory)
 
 # Summarize metrics at the store level
 store_summary <- clean_data %>%
@@ -202,3 +206,26 @@ final_clusters_out <- final_clusters %>%
   left_join(most_frequent_purchase, by = "cluster")
 
 write_csv(final_clusters_out, "final_clusters_out.csv")
+
+
+# =================================================== #
+shopper_zip <- clean_data %>%
+  select(shopper_id, zip_code) %>%
+  distinct() %>%
+  filter(!is.na(zip_code)) %>%         # remove NAs
+  group_by(shopper_id, zip_code) %>%
+  summarise(
+    count = n(), 
+    .groups = "drop"
+    ) %>%
+  group_by(shopper_id) %>%
+  filter(count == max(count)) %>%      # keep the most frequent zip_code
+  slice(1) %>%                         # if there's a tie, just take the first one
+  ungroup() %>%
+  select(shopper_id, zip_code) %>%        # drop count column
+  mutate(shopper_zip = substr(zip_code, 1, 5)) %>%
+  arrange(shopper_zip) %>%
+  select(-zip_code)
+
+write_csv(shopper_zip, "../inputs/shopper_zip.csv")
+
