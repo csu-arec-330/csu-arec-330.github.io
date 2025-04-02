@@ -67,6 +67,9 @@ clean_data <- store_shopper_gtin_left %>%
 
 length(unique(clean_data$store_id))
 
+unique(clean_data$category)
+unique(clean_data$subcategory)
+
 # Summarize metrics at the store level
 store_summary <- clean_data %>%
   group_by(store_id) %>%

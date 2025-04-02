@@ -1,0 +1,275 @@
+---
+title: "Project 2 Helper Guide: Cluster Analysis Workflow"
+format: 
+  pdf:
+    documentclass: article
+    number-sections: true
+    toc: false
+    keep-tex: true
+    geometry: margin=0.75in
+fontsize: 11pt
+---
+<!-- tinytex::install_tinytex() -->
+
+# Overview {.unnumbered}
+
+This guide will help you plan and run your cluster analysis for Project 2. Use it to:
+
+- Choose a *clear* and *specific* research question
+- Select and prepare relevant variables
+- Clean and summarize your data
+- Use cluster analysis to segment your data
+- Interpret your results
+
+---
+
+# Step 1: Choose a Question You Want to Answer {.unnumbered}
+
+Think about **who** or **what** you want to cluster.
+
+- Are you clustering **customers**, **stores**, or **products**?
+\vspace{2em}
+
+- What is the goal of your analysis? (e.g., segmenting high vs. low activity stores, grouping customers by shopping behavior, high-selling vs. low-selling brands)
+\vspace{2em}
+
+**Write your question here:**
+
+> _My research question is:_
+
+\vspace{2em}
+
+
+> _What types of [X] exist based on [Y]?_ ("X" = the thing you are clustering (store, customer, or product segments); "Y" = spending habits, product diversity, visit frequency, etc.)
+
+\newpage
+# Step 2: Identify Your Unit of Analysis {.unnumbered}
+
+What are the rows in your final dataset?
+
+> _I am clustering:_
+
+- [ ] Stores  
+- [ ] Customers  
+- [ ] Products  
+- [ ] Something else: ____________________
+
+
+# Step 3: Join and Clean Your Data {.unnumbered}
+
+Join the datasets you need to build the variables for your clustering question.
+
+- shopper_info  
+- store_info  
+- gtin  
+
+> _What is my unit of analysis? (from Step 2)_
+
+\vspace{2em}
+
+> _What tables will I join and why?_
+
+\vspace{3em}
+
+**Filter or transform your data:**
+
+- Remove invalid prices (e.g., `unit_price <= 0`)
+- Keep or remove `gtin = NA` and `gtin = 0` (fuel) depending on your question
+- Create total spending: `unit_price * unit_quantity`
+
+> _What cleaning steps did you take and why?_
+
+
+\newpage
+# Step 4: Build Your Summary Dataset {.unnumbered}
+
+Now summarize your data to create one row per unit (store, customer, or product).
+
+\vspace{2em}
+
+**Write down 3–5 variables that might be useful for clustering:**
+
+| Variable Name      | What It Measures                        | Notes / Formula |
+|--------------------|-----------------------------------------|------------------|
+|                    |                                         |                  |
+|                    |                                         |                  |
+|                    |                                         |                  |
+|                    |                                         |                  |
+|                    |                                         |                  |
+
+> Are these numeric variables?  
+
+\vspace{2em}
+
+> Are they all available in the data?  
+
+\vspace{2em}
+
+> Do you need to aggregate them (e.g., total sales per store, average items per visit)?
+
+
+\newpage
+# Step 5: Explore Your Variables {.unnumbered}
+
+Use `ggpairs()` to check for skew and correlation.
+
+```{r}
+#| eval: false
+
+library(GGally)
+
+your_data %>%
+  select(var1, var2, var3, ...) %>%
+  ggpairs()
+```
+
+> What do you notice?
+
+- Are any variables very skewed?
+
+\vspace{2em}
+
+- Are any variables highly correlated?
+
+\vspace{2em}
+
+- Do any variables need to be log-transformed?
+
+\vspace{2em}
+
+> Make a list of any variables you want to log-transform:
+
+\newpage
+# Step 6: Transform and Scale Your Data {.unnumbered}
+
+## Log-transform skewed variables (add +1 to avoid log(0)) {.unnumbered}
+
+```{r}
+#| eval: false
+
+your_data <- your_data %>%
+  mutate(
+    log_var1 = log(var1 + 1),
+    log_var2 = log(var2 + 1)
+  )
+
+## Create the dataset you'll use for clustering {.unnumbered}
+cluster_data <- your_data %>%
+  select(log_var1, log_var2, var3, ...) %>%
+  drop_na()
+```
+
+## Scale the data {.unnumbered}
+
+```{r}
+#| eval: false
+
+cluster_scaled <- scale(cluster_data)
+```
+
+> Which variables are in your scaled clustering data?
+
+\vspace{2em}
+
+# Step 7: Determine the Number of Clusters {.unnumbered}
+
+Use these plots to decide on an optimal number of clusters:
+
+```{r}
+#| eval: false
+
+fviz_nbclust(cluster_scaled, kmeans, method = "wss")
+fviz_nbclust(cluster_scaled, kmeans, method = "silhouette")
+```
+
+> What does the elbow plot suggest?
+
+\vspace{2em}
+
+> What does the silhouette plot suggest?
+
+\vspace{2em}
+
+> How many clusters will you use? Why?
+
+\newpage
+# Step 8: Run the Clustering Algorithm {.unnumbered}
+
+```{r}
+#| eval: false
+
+set.seed(123)
+kmeans_fit <- kmeans(cluster_scaled, centers = X, nstart = 25)
+
+final_clusters <- your_data %>%
+  mutate(cluster = kmeans_fit$cluster)
+```
+
+
+```{r}
+#| eval: false
+
+final_clusters %>%
+  group_by(cluster) %>%
+  summarise(across(everything(), mean))
+```
+
+> How many observations are in each cluster?
+
+\vspace{2em}
+
+> What patterns do you notice when you group by cluster?
+
+\vspace{2em}
+
+# Step 9: Interpret and Visualize Clusters {.unnumbered}
+
+Now use your original variables (not log-transformed) to summarize each cluster.
+
+> What makes each cluster different?
+
+\vspace{2em}
+
+> Do the results support your original question?
+
+\vspace{2em}
+
+> How would you describe each cluster in plain language?
+
+\vspace{2em}
+
+\newpage
+# Step 10: Add Context from Other Tables {.unnumbered}
+
+Join back to gtin or shopper_info to see what’s driving patterns.
+
+Example: Most purchased subcategory by cluster.
+
+```{r}
+#| eval: false
+
+your_data %>%
+  left_join(cluster_info, by = "id") %>%
+  group_by(cluster, subcategory) %>%
+  summarise(count = n()) %>%
+  filter(count == max(count))  # most common
+```
+
+---
+
+# Final Checklist {.unnumbered}
+- [ ] I have a clear and specific research question
+
+- [ ] I created a clean dataset at the right level of analysis
+
+- [ ] I chose 3–5 good variables for clustering
+
+- [ ] I transformed and scaled the data
+
+- [ ] I chose an appropriate number of clusters
+
+- [ ] I interpreted each cluster in context
+
+- [ ] I documented my decisions throughout
+
+

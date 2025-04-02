@@ -329,13 +329,10 @@ clean_data <- shopper_store_gtin_left %>%
   # Calculate total spending per line item
   mutate(total = unit_price * unit_quantity) %>%
   
-  # Log-transform chain size to reduce skewness and interpret relative differences
-  mutate(log_chain_size = log(chain_size + 1)) %>%
-  
   # Arrange data to ensure proper ordering of transactions
   arrange(shopper_id, store_id, transaction_set_id) %>%
   
-  # Drop remaining rows with NA values across key variables
+  # Drop remaining rows with NA values across key variable. This will drop any observation where at least one value is missing. I recommend removing this line for most analyses
   drop_na()
 ```
 

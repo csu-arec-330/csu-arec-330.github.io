@@ -36,6 +36,10 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 
 - Aggregate individual-level data by geographic region
 
+## [Download Lab Handout Here](project_02_helper.pdf)
+
+<embed src="project_02_helper.pdf" width="100%" height="600px" type="application/pdf">
+
 # Part 1: R
 
 We’ll use store-level data to group similar stores into **clusters** using k-means clustering. This process will help us segment stores based on customer behavior and sales performance.
