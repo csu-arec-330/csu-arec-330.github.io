@@ -936,11 +936,23 @@ Tips for Effective Filled Maps
 <ul>
 <li>For more detailed information about each store, add the <code>Store Name</code> to the Tooltip card. Then, when you hover over any symbol on the map, you can see the store’s name along with other data you’ve chosen to include.</li>
 </ul>
-<p>::: {.callout-note title=“Other Options for Creating Symbol Maps} 1. Follow the initial steps to set up another symbol map. This time, experiment with different attributes for colors, size, and tooltips. For instance, you might choose to visualize the <strong>Product Diversity</strong> using the size of the symbols, or the <strong>Chain Size</strong> as the color.</p>
-<ol start="2" type="1">
+<div class="callout callout-style-default callout-note callout-titled" title="Other Options for Creating Symbol Maps">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Other Options for Creating Symbol Maps
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Follow the initial steps to set up another symbol map. This time, experiment with different attributes for colors, size, and tooltips. For instance, you might choose to visualize the <strong>Product Diversity</strong> using the size of the symbols, or the <strong>Chain Size</strong> as the color.</p></li>
 <li><p>Instead of using precise longitude and latitude, try creating a map based on <code>City</code> and associate it with <code>Unique Customers</code> by dragging <code>City</code> to the Columns Shelf and <code>Unique Customers</code> to the Rows Shelf. Use the Show Me menu to select Symbol Map. This visualization will provide a more aggregated view, showing visitor counts per city.</p></li>
-<li><p>Modify the aggregation of <code>Unique Customers</code> from SUM to AVG by right-clicking on the field in the Marks card and choosing Measure(Sum) &gt; Average. This adjustment shows the average number of visits per store within each city or map symbol, offering insights into typical store performance rather than total visits. :::</p></li>
+<li><p>Modify the aggregation of <code>Unique Customers</code> from SUM to AVG by right-clicking on the field in the Marks card and choosing Measure(Sum) &gt; Average. This adjustment shows the average number of visits per store within each city or map symbol, offering insights into typical store performance rather than total visits.</p></li>
 </ol>
+</div>
+</div>
 </section>
 <section id="you-do-it-create-a-filled-map" class="level3">
 <h3 class="anchored" data-anchor-id="you-do-it-create-a-filled-map">You Do It: Create a Filled Map</h3>
@@ -990,7 +1002,7 @@ Symbol vs.&nbsp;Filled Maps
 <li><p>Create a new worksheet.</p></li>
 <li><p>Show unique customers by postal code using a filled map.</p></li>
 <li><p>Copy Latitude measure. Command-click (Mac) or Control-click (Windows) the <code>Latitude</code> measure on the Rows shelf and <strong>drag it</strong> to the right to duplicate it.</p></li>
-<li><p>For the second map pane, remove the <code>Postal Code</code> field. Then, drag both the <code>Latitude</code> and <code>Longitude</code> fields to the Details card on the Marks card. Change them to <strong>Dimensions</strong>.</p></li>
+<li><p>For the second map pane, remove the <code>Zip Code</code> field. Then, drag both the <code>Latitude</code> and <code>Longitude</code> fields to the Details card on the Marks card. Change them to <strong>Dimensions</strong>.</p></li>
 <li><p>Add <code>Store Chain Name</code> to the Color card to differentiate store types and <code>Product Diversity</code> (or choose something else that you think works) to the Size card to represent differences across product mix.</p></li>
 <li><p>Enable Dual Axes. Right-click the second <code>Latitude</code> field on the Rows shelf and choose Dual Axis.</p></li>
 <li><p>Apply any additional custom formatting to your map as desired.</p></li>

@@ -733,7 +733,7 @@ Knowledge Check 2: Suppose we have county-level data on average gas prices last 
 
 - For more detailed information about each store, add the `Store Name` to the Tooltip card. Then, when you hover over any symbol on the map, you can see the store's name along with other data you've chosen to include.
 
-::: {.callout-note title="Other Options for Creating Symbol Maps}
+::: {.callout-note title="Other Options for Creating Symbol Maps"}
 1. Follow the initial steps to set up another symbol map. This time, experiment with different attributes for colors, size, and tooltips. For instance, you might choose to visualize the **Product Diversity** using the size of the symbols, or the **Chain Size** as the color. 
 
 2. Instead of using precise longitude and latitude, try creating a map based on `City` and associate it with `Unique Customers` by dragging `City` to the Columns Shelf and `Unique Customers` to the Rows Shelf. Use the Show Me menu to select Symbol Map. This visualization will provide a more aggregated view, showing visitor counts per city.
@@ -779,7 +779,7 @@ Filled maps are great for showing density or intensity over areas, while symbol 
 
 3. Copy Latitude measure. Command-click (Mac) or Control-click (Windows) the `Latitude` measure on the Rows shelf and **drag it** to the right to duplicate it.
 
-4. For the second map pane, remove the `Postal Code` field. Then, drag both the `Latitude` and `Longitude` fields to the Details card on the Marks card. Change them to **Dimensions**.
+4. For the second map pane, remove the `Zip Code` field. Then, drag both the `Latitude` and `Longitude` fields to the Details card on the Marks card. Change them to **Dimensions**.
 
 5. Add `Store Chain Name` to the Color card to differentiate store types and `Product Diversity` (or choose something else that you think works) to the Size card to represent differences across product mix.
 
