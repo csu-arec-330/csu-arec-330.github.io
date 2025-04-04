@@ -789,7 +789,7 @@ Filled maps are great for showing density or intensity over areas, while symbol 
 
 > **Interpretation**: This combined map offers a comprehensive view of customer behavior, highlighting areas with high visit counts and distinguishing stores by chain and product mix. It allows for spatial analysis of store popularity and accessibility, providing valuable insights into consumer preferences and mobility patterns.
 
-## On Your Own: Plotting Results from a Cluster Analysis
+### On Your Own: Plotting Results from a Cluster Analysis
 
 If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let's do this now.
 
@@ -820,6 +820,14 @@ Tableau offers powerful customization options for maps, including background lay
 - Select Integrated Data Source: Click the drop-down menu under to `Data Layer` and choose one of Tableau's integrated data sources.
 
 - Adjust Geographic Level: Change the geographic level at which this information is displayed, tailoring it to the scale of your analysis.
+
+## Geocoding Application Video
+
+**Watch this video to go through the geocoding application.**
+
+{{< video https://youtu.be/XqBKGPyGrSU aspect-ratio="16x9" >}}
+
+### Other Useful Video Resource
 
 {{< video https://youtu.be/lXloWsi7hZQ aspect-ratio="16x9" >}}
 

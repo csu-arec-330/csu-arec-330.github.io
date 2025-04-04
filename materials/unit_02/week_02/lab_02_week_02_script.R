@@ -169,6 +169,8 @@ final_clusters %>%
 
 View(final_clusters)
 
+length(unique(final_clusters$store_id))
+nrow(final_clusters)
 # =======================================================
 # WHAT DO YOUR CLUSTERS REVEAL?
 # =======================================================
@@ -207,6 +209,8 @@ final_clusters_out <- final_clusters %>%
 
 write_csv(final_clusters_out, "final_clusters_out.csv")
 
+length(unique(final_clusters_out$store_id))
+nrow(final_clusters_out)
 
 # =================================================== #
 shopper_zip <- clean_data %>%

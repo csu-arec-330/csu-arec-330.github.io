@@ -106,10 +106,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#you-do-it-create-a-new-symbol-map" id="toc-you-do-it-create-a-new-symbol-map" class="nav-link" data-scroll-target="#you-do-it-create-a-new-symbol-map">You Do It: Create a New Symbol Map</a></li>
   <li><a href="#you-do-it-create-a-filled-map" id="toc-you-do-it-create-a-filled-map" class="nav-link" data-scroll-target="#you-do-it-create-a-filled-map">You Do It: Create a Filled Map</a></li>
   <li><a href="#you-do-it-combine-symbol-and-filled-maps" id="toc-you-do-it-combine-symbol-and-filled-maps" class="nav-link" data-scroll-target="#you-do-it-combine-symbol-and-filled-maps">You Do It: Combine Symbol and Filled Maps</a></li>
-  </ul></li>
-  <li><a href="#on-your-own-plotting-results-from-a-cluster-analysis" id="toc-on-your-own-plotting-results-from-a-cluster-analysis" class="nav-link" data-scroll-target="#on-your-own-plotting-results-from-a-cluster-analysis">On Your Own: Plotting Results from a Cluster Analysis</a>
-  <ul class="collapse">
+  <li><a href="#on-your-own-plotting-results-from-a-cluster-analysis" id="toc-on-your-own-plotting-results-from-a-cluster-analysis" class="nav-link" data-scroll-target="#on-your-own-plotting-results-from-a-cluster-analysis">On Your Own: Plotting Results from a Cluster Analysis</a></li>
   <li><a href="#extra-feature-in-tableau-customizing-your-map" id="toc-extra-feature-in-tableau-customizing-your-map" class="nav-link" data-scroll-target="#extra-feature-in-tableau-customizing-your-map">Extra Feature in Tableau: Customizing Your Map</a></li>
+  </ul></li>
+  <li><a href="#geocoding-application-video" id="toc-geocoding-application-video" class="nav-link" data-scroll-target="#geocoding-application-video">Geocoding Application Video</a>
+  <ul class="collapse">
+  <li><a href="#other-useful-video-resource" id="toc-other-useful-video-resource" class="nav-link" data-scroll-target="#other-useful-video-resource">Other Useful Video Resource</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -1011,9 +1013,8 @@ Symbol vs.&nbsp;Filled Maps
 <p><strong>Interpretation</strong>: This combined map offers a comprehensive view of customer behavior, highlighting areas with high visit counts and distinguishing stores by chain and product mix. It allows for spatial analysis of store popularity and accessibility, providing valuable insights into consumer preferences and mobility patterns.</p>
 </blockquote>
 </section>
-</section>
-<section id="on-your-own-plotting-results-from-a-cluster-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="on-your-own-plotting-results-from-a-cluster-analysis">On Your Own: Plotting Results from a Cluster Analysis</h2>
+<section id="on-your-own-plotting-results-from-a-cluster-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="on-your-own-plotting-results-from-a-cluster-analysis">On Your Own: Plotting Results from a Cluster Analysis</h3>
 <p>If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let’s do this now.</p>
 <ol type="1">
 <li><p>Connect to the dataset with the results from the store-level cluster analysis (<code>final_clusters_out.csv</code>).</p></li>
@@ -1031,6 +1032,7 @@ Symbol vs.&nbsp;Filled Maps
 <ol start="4" type="1">
 <li>Add some more detail to the Tooltip. I would like to know the city name, store chain name, and cluster when I hover over each point on the map.</li>
 </ol>
+</section>
 <section id="extra-feature-in-tableau-customizing-your-map" class="level3">
 <h3 class="anchored" data-anchor-id="extra-feature-in-tableau-customizing-your-map">Extra Feature in Tableau: Customizing Your Map</h3>
 <p>Tableau offers powerful customization options for maps, including background layers and integrated data sources. Follow these specific steps to enhance your map and explore a combination of symbol and filled map layers.</p>
@@ -1048,6 +1050,14 @@ Symbol vs.&nbsp;Filled Maps
 <li><p>Select Integrated Data Source: Click the drop-down menu under to <code>Data Layer</code> and choose one of Tableau’s integrated data sources.</p></li>
 <li><p>Adjust Geographic Level: Change the geographic level at which this information is displayed, tailoring it to the scale of your analysis.</p></li>
 </ul>
+</section>
+</section>
+<section id="geocoding-application-video" class="level2">
+<h2 class="anchored" data-anchor-id="geocoding-application-video">Geocoding Application Video</h2>
+<p><strong>Watch this video to go through the geocoding application.</strong></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/XqBKGPyGrSU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<section id="other-useful-video-resource" class="level3">
+<h3 class="anchored" data-anchor-id="other-useful-video-resource">Other Useful Video Resource</h3>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/lXloWsi7hZQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>Note: This video uses a different dataset than in our lab, however, it is helpful to see Tableau’s functionality in practice.</p>
 </section>
