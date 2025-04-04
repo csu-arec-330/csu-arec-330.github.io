@@ -99,14 +99,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#symbol-vs.-filled-maps" id="toc-symbol-vs.-filled-maps" class="nav-link" data-scroll-target="#symbol-vs.-filled-maps">Symbol vs.&nbsp;Filled Maps</a>
   <ul class="collapse">
-  <li><a href="#symbol-maps" id="toc-symbol-maps" class="nav-link" data-scroll-target="#symbol-maps">Symbol Maps</a></li>
-  <li><a href="#filled-maps" id="toc-filled-maps" class="nav-link" data-scroll-target="#filled-maps">Filled Maps</a></li>
   <li><a href="#knowledge-checks" id="toc-knowledge-checks" class="nav-link" data-scroll-target="#knowledge-checks">Knowledge Checks</a></li>
   </ul></li>
   <li><a href="#geocoding-application" id="toc-geocoding-application" class="nav-link" data-scroll-target="#geocoding-application">Geocoding Application</a>
   <ul class="collapse">
-  <li><a href="#creating-a-symbol-map" id="toc-creating-a-symbol-map" class="nav-link" data-scroll-target="#creating-a-symbol-map">1. Creating a Symbol Map</a></li>
-  <li><a href="#creating-a-filled-map" id="toc-creating-a-filled-map" class="nav-link" data-scroll-target="#creating-a-filled-map">2. Creating a Filled Map</a></li>
+  <li><a href="#you-do-it-create-a-new-symbol-map" id="toc-you-do-it-create-a-new-symbol-map" class="nav-link" data-scroll-target="#you-do-it-create-a-new-symbol-map">You Do It: Create a New Symbol Map</a></li>
+  <li><a href="#you-do-it-create-a-filled-map" id="toc-you-do-it-create-a-filled-map" class="nav-link" data-scroll-target="#you-do-it-create-a-filled-map">You Do It: Create a Filled Map</a></li>
+  <li><a href="#you-do-it-combine-symbol-and-filled-maps" id="toc-you-do-it-combine-symbol-and-filled-maps" class="nav-link" data-scroll-target="#you-do-it-combine-symbol-and-filled-maps">You Do It: Combine Symbol and Filled Maps</a></li>
   </ul></li>
   <li><a href="#on-your-own-plotting-results-from-a-cluster-analysis" id="toc-on-your-own-plotting-results-from-a-cluster-analysis" class="nav-link" data-scroll-target="#on-your-own-plotting-results-from-a-cluster-analysis">On Your Own: Plotting Results from a Cluster Analysis</a>
   <ul class="collapse">
@@ -730,8 +729,10 @@ Lab Script for Week 10: Visualizing and Exploring Cross-Sectional Data in Tablea
 </div>
 <section id="symbol-vs.-filled-maps" class="level2">
 <h2 class="anchored" data-anchor-id="symbol-vs.-filled-maps">Symbol vs.&nbsp;Filled Maps</h2>
-<section id="symbol-maps" class="level3">
-<h3 class="anchored" data-anchor-id="symbol-maps">Symbol Maps</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Symbol Maps</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Filled Maps</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>A symbol map visualizes quantitative data across geographic locations and is particularly effective for displaying variations or patterns across different areas. This type of map can highlight individual store locations, distribution points, or any geographical data point associated with numeric values.</p>
 <p><img src="includes/Sheet1.png" class="img-fluid"> You might want to highlight which stores have higher spending <a href="https://www.safegraph.com/data-examples/ohio-grocery-spend">like this example</a>.</p>
 <section id="data-requirements-for-symbol-maps" class="level4">
@@ -745,12 +746,38 @@ Lab Script for Week 10: Visualizing and Exploring Cross-Sectional Data in Tablea
 <section id="steps-to-create-a-symbol-map-in-tableau" class="level4">
 <h4 class="anchored" data-anchor-id="steps-to-create-a-symbol-map-in-tableau">Steps to Create a Symbol Map in Tableau</h4>
 <ol type="1">
-<li><p>Connect Your Data: Start Tableau and connect to your data source.</p></li>
-<li><p>Prepare Your Data: Ensure your geographic fields (e.g., latitude and longitude) are recognized by Tableau. If necessary, you might need to set the geographic role of your fields by right-clicking the field name in the Data pane and selecting “Geographic Role.”</p></li>
-<li><p>Create the Map: Drag your geographic field to the Rows or Columns shelf. Tableau automatically creates a map view. If using latitude and longitude, drag them to the respective shelves.</p></li>
-<li><p>Add Your Data Layer: Drag the field representing your quantitative values to the “Size” mark or “Color” mark in the Marks card. Adjust the size and color to reflect the data accurately.</p></li>
-<li><p>Customize Your Map: Use the “Map” menu to adjust the map’s background, borders, and labels for better readability and impact. Consider adding filters or additional layers for interactivity and deeper analysis.</p></li>
+<li>Connect your data.</li>
 </ol>
+<ul>
+<li>Start Tableau and connect to your data source.</li>
+</ul>
+<ol start="2" type="1">
+<li>Prepare your data.</li>
+</ol>
+<ul>
+<li>Make sure your geographic fields (e.g., latitude and longitude) are recognized by Tableau.</li>
+<li>If necessary, you might need to set the geographic role of your fields by right-clicking the field name in the Data pane and selecting “Geographic Role.”</li>
+</ul>
+<ol start="3" type="1">
+<li>Create the map.</li>
+</ol>
+<ul>
+<li>Drag your geographic field to the Rows or Columns shelf. Tableau automatically creates a map view.</li>
+<li>If using latitude and longitude, drag them to the respective shelves.</li>
+</ul>
+<ol start="4" type="1">
+<li>Add your data layer.</li>
+</ol>
+<ul>
+<li>Drag the field representing your quantitative values to the “Size” mark or “Color” mark in the Marks card. Adjust the size and color to reflect the data accurately.</li>
+</ul>
+<ol start="5" type="1">
+<li>Customize your map.</li>
+</ol>
+<ul>
+<li>Use the “Map” menu to adjust the map’s background, borders, and labels for better readability and impact.</li>
+<li>Consider adding filters or additional layers for interactivity and showing additional details.</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Tips for Effective Symbol Maps">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -770,10 +797,9 @@ Tips for Effective Symbol Maps
 </div>
 </div>
 </section>
-</section>
-<section id="filled-maps" class="level3">
-<h3 class="anchored" data-anchor-id="filled-maps">Filled Maps</h3>
-<p>Filled maps, also known as choropleth maps, are powerful visual tools for displaying how quantitative or qualitative values vary across geographic regions. They color-code regions (such as countries, states, or counties) based on the data values they represent, making it easy to see relative differences in data distribution spatially. For instance, to analyze and compare rental rates across Colorado counties, a filled map provides a clear visual representation of spatial comparisons.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Filled maps, also known as <strong>choropleth maps</strong>, are powerful visual tools for displaying how quantitative or qualitative values vary across geographic regions. They color-code regions (such as countries, states, or counties) based on the data values they represent, making it easy to see relative differences in data distribution spatially. For instance, to analyze and compare rental rates across Colorado counties, a filled map provides a clear visual representation of spatial comparisons.</p>
 <p><img src="includes/Sheet3.png" class="img-fluid"></p>
 <section id="data-requirements-for-filled-maps" class="level4">
 <h4 class="anchored" data-anchor-id="data-requirements-for-filled-maps">Data Requirements for Filled Maps</h4>
@@ -786,11 +812,41 @@ Tips for Effective Symbol Maps
 <section id="steps-to-create-a-filled-map-in-tableau" class="level4">
 <h4 class="anchored" data-anchor-id="steps-to-create-a-filled-map-in-tableau">Steps to Create a Filled Map in Tableau</h4>
 <ol type="1">
-<li><p>Prepare Your Data: Ensure geographic location fields in your dataset are correctly identified by Tableau. You may need to set or verify the geographic role for these fields in the Data pane.</p></li>
-<li><p>Drag and Drop to Create the Map: Double-click on the geographic field in your data pane. Tableau automatically creates a map based on the location data.</p></li>
-<li><p>Encode Data with Color: Drag the field representing the values you wish to visualize onto the “Color” mark on the Marks card. Tableau will apply a color scheme to the map regions based on these values.</p></li>
-<li><p>Adjust Color Palette: Customize the color palette to enhance readability and effectively communicate the data story. Use diverging color schemes for qualitative data and sequential schemes for quantitative data.</p></li>
-<li><p>Refine and Customize: Use the “Map” options to adjust map features, such as borders and labels. Add legends, annotations, and tooltips to make your map more informative and interactive.</p></li>
+<li>Connect your data.</li>
+</ol>
+<ul>
+<li>Start Tableau and connect to your data source.</li>
+</ul>
+<ol start="2" type="1">
+<li>Prepare your data.</li>
+</ol>
+<ul>
+<li>Make sure the geographic location fields in your dataset are correctly identified by Tableau.</li>
+<li>You may need to set or verify the geographic role for these fields in the Data pane.</li>
+</ul>
+<ol start="3" type="1">
+<li>Drag and drop to create the map.</li>
+</ol>
+<ul>
+<li>Double-click on the geographic field in your data pane.</li>
+<li>Tableau automatically creates a map based on the location data.</li>
+</ul>
+<ol start="4" type="1">
+<li>Encode data with color.</li>
+</ol>
+<ul>
+<li>Drag the field representing the values you wish to visualize onto the “Color” mark on the Marks card.</li>
+<li>Tableau will apply a color scheme to the map regions based on these values.</li>
+</ul>
+<ol start="5" type="1">
+<li>Adjust the color palette.</li>
+</ol>
+<ul>
+<li>Customize the color palette to enhance readability and effectively communicate the data story.</li>
+<li>Use different color schemes for qualitative data and sequential schemes for quantitative data.</li>
+</ul>
+<ol start="6" type="1">
+<li>Refine and Customize: Use the “Map” options to adjust map features, such as borders and labels. Add legends, annotations, and tooltips to make your map more informative and interactive.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Tips for Effective Filled Maps">
 <div class="callout-header d-flex align-content-center">
@@ -812,7 +868,9 @@ Tips for Effective Filled Maps
 </div>
 </div>
 </section>
-</section>
+</div>
+</div>
+</div>
 <section id="knowledge-checks" class="level3">
 <h3 class="anchored" data-anchor-id="knowledge-checks">Knowledge Checks</h3>
 <p>Knowledge Check 1: Suppose we have gas station-level data on gas prices yesterday. What type of map would you use to show this information?</p>
@@ -827,80 +885,119 @@ Tips for Effective Filled Maps
 </section>
 <section id="geocoding-application" class="level2">
 <h2 class="anchored" data-anchor-id="geocoding-application">Geocoding Application</h2>
-<section id="creating-a-symbol-map" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-symbol-map">1. Creating a Symbol Map</h3>
+<section id="you-do-it-create-a-new-symbol-map" class="level3">
+<h3 class="anchored" data-anchor-id="you-do-it-create-a-new-symbol-map">You Do It: Create a New Symbol Map</h3>
 <ol type="1">
-<li><p>Connect to <code>final_clusters_out.csv</code>: Start Tableau and connect to the dataset.</p></li>
-<li><p>Prepare the Data: Check that <code>Longitude</code> and <code>Latitude</code> are recognized by Tableau as geographic fields. If not, set their geographic roles appropriately by right-clicking each field in the Data pane and selecting Geographic Role &gt; Longitude or Latitude.</p></li>
-<li><p>Drag Longitude and Latitude: Move the <code>Longitude</code> field to the Columns Shelf and the <code>Latitude</code> field to the Rows Shelf to initiate the creation of a map. If Tableau does not automatically recognize them as geographic fields, you might need to change their data type to dimensions.</p></li>
-</ol>
-<!-- > Note: This file is a very very VERY small slice of cell phone visit data from the company [Safegraph](https://www.safegraph.com). The slice includes all grocery retail stores in Arizona with a sufficiently large number of visitors in September of 2021. Visitors (including you if you happened to be in Arizona at that time...) are tracked via their cell phones. The data includes information on the store (name, location, NAICS code, etc.), the number of visits, visitors (unique cell phones), the median distance traveled to shop there, and the median amount of time spent there. -->
-<ol start="4" type="1">
-<li><p>Visualize Store Types: To explore the variety of chain stores, drag the <code>store_chain_name</code> field onto the Color card. This action will color-code the map symbols according to the type of chain store, allowing you to quickly see which category is most prevalent across the dataset.</p></li>
-<li><p>Analyze Visitor Counts: To understand the popularity of these stores, drag the <code>unique_customers</code> field onto the Size card. This will adjust the size of each symbol on the map based on the number of unique shoppers, making it easy to identify which stores attract the most visitors.</p></li>
-<li><p>Enhance Tooltips: For more detailed information about each store, add the <code>store_name</code> to the Tooltip card. This ensures that when you hover over any symbol on the map, you can see the store’s name along with other data you’ve chosen to include.</p></li>
-</ol>
-<section id="you-do-it-create-a-new-symbol-map" class="level4">
-<h4 class="anchored" data-anchor-id="you-do-it-create-a-new-symbol-map">You Do It: Create a New Symbol Map</h4>
-<p>Let’s create a symbol map using the provided latitudes and longitudes of these stores.</p>
-<ol type="1">
-<li><p>Drag <code>Longitude</code> to the Columns Shelf and <code>Latitude</code> to the Rows Shelf. (You will likely have to change these fields to <code>Dimensions</code>)</p></li>
-<li><p>Drag <code>store_chain_name</code> to the colors card.</p></li>
-</ol>
-<p>Which type of store appears to be the most prevalent?</p>
-<ol start="3" type="1">
-<li>Now, let’s drag <code>unique_customers</code> to the size card.</li>
-</ol>
-<p>Which type of store appears to have the most visitors?</p>
-<ol start="4" type="1">
-<li><p>Now, let’s add each store’s name to the tooltip. Drag <code>Location Name</code> to the Tooltip card.</p></li>
-<li><p>Make a new symbol map using each store’s latitude and longitude, and choosing what information you want to include as colors, size, and in the tooltip. What did you uncover?</p></li>
-</ol>
-<blockquote class="blockquote">
-<p>what happens if we select a different geographical field to make our map? Select the fields <code>City</code> and <code>unique_customers</code> and select the Symbol Map in the Show Me Menu. What is this map showing?</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>What if we change the aggregation of <code>unique_customers</code> to average instead of sum?</p>
-</blockquote>
-<p>::: {.callout-note title=“Other Options for Creating Symbol Maps} 1. Follow the initial steps to set up another symbol map. This time, experiment with different attributes for colors, size, and tooltips. For instance, you might choose to visualize the <strong>product diversity</strong> using the size of the symbols, or the <strong>chain size</strong> as the color.</p>
-<ol start="2" type="1">
-<li><p>Instead of using precise longitude and latitude, try creating a map based on <code>City</code> and associate it with <code>unique_customers</code> by dragging <code>City</code> to the Columns Shelf and <code>unique_customers</code> to the Rows Shelf. Use the Show Me menu to select Symbol Map. This visualization will provide a more aggregated view, showing visitor counts per city.</p></li>
-<li><p>Modify the aggregation of <code>unique_customers</code> from sum to average by right-clicking on the field in the Marks card and choosing Measure(Sum) &gt; Average. This adjustment shows the average number of visits per store within each city or map symbol, offering insights into typical store performance rather than total visits. :::</p></li>
-</ol>
-</section>
-</section>
-<section id="creating-a-filled-map" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-filled-map">2. Creating a Filled Map</h3>
-<p>Filled maps provide a powerful way to visualize data that varies across geographic regions, using color to represent the intensity or magnitude of a variable within predefined areas like postal codes, counties, or countries. Let’s apply this to our cell phone data.</p>
-<ol type="1">
-<li><p>Select the <code>zip_code</code> and move it to the Columns Shelf, and <code>unique_customers</code> and move it to the Rows Shelf.</p></li>
-<li><p>Navigate to the Show Me Menu; you should have the option to select either a symbol map or a filled map. Choose the filled map.</p></li>
-<li><p>Analyze the Visualization:</p></li>
+<li>Connect to <code>final_clusters_out.csv</code>.</li>
 </ol>
 <ul>
-<li><p>Understanding the Map: This map colors each postal code area based on the <code>unique_customers</code>, showing where grocery stores receive higher or lower volumes of traffic.</p></li>
-<li><p>Multiple Attributes: While filled maps are excellent for visualizing one main attribute per geographic area, layering multiple store attributes directly on the map might be challenging.</p></li>
-<li><p>Add Store Information: To provide context on the types of stores within each postal code, drag the <code>store_chain_name</code> field into the Tooltip editor. Use the Insert button in the editor or type in the field name surrounded by <code>&lt; &gt;</code>, like <code>&lt;store_chain_name&gt;</code>.</p></li>
+<li>Start Tableau and connect to the dataset.</li>
 </ul>
-<p>Does the symbol map or filled map provide a clearer understanding of the data?</p>
+<ol start="2" type="1">
+<li>Prepare the data.</li>
+</ol>
+<ul>
+<li>Check that <code>Longitude</code> and <code>Latitude</code> are recognized by Tableau as geographic fields.</li>
+<li>If not, set their geographic roles appropriately by right-clicking each field in the Data pane and selecting Geographic Role &gt; Longitude or Latitude.</li>
+</ul>
+<ol start="3" type="1">
+<li>Drag Longitude and Latitude into the Columns and Rows shelf.</li>
+</ol>
+<ul>
+<li>Move the <code>Longitude</code> field to the Columns Shelf and the <code>Latitude</code> field to the Rows Shelf to initiate the creation of a map.</li>
+<li>Make sure to switch the <code>Longitude</code> and <code>Latitude</code> fields to <em>Dimensions</em>, or you will get a single point for all locations.</li>
+<li>If Tableau does not automatically recognize them as geographic fields, go back to Step 2. You might need to change their data type to dimensions.</li>
+</ul>
+<!-- > Note: This file is a very very VERY small slice of cell phone visit data from the company [Safegraph](https://www.safegraph.com). The slice includes all grocery retail stores in Arizona with a sufficiently large number of visitors in September of 2021. Visitors (including you if you happened to be in Arizona at that time...) are tracked via their cell phones. The data includes information on the store (name, location, NAICS code, etc.), the number of visits, visitors (unique cell phones), the median distance traveled to shop there, and the median amount of time spent there. -->
+<ol start="4" type="1">
+<li>Visualize store types.</li>
+</ol>
+<ul>
+<li>Drag the <code>Store Chain Name</code> field onto the Color card. This action will color-code the map symbols according to the type of chain store, allowing you to quickly see which category is most prevalent across the dataset.</li>
+</ul>
 <blockquote class="blockquote">
-<p>Filled maps are great for showing density or intensity over areas, while symbol maps are better for exact locations and attributes of individual points.</p>
+<p>Which type of store brands appear to be the most prevalent?</p>
 </blockquote>
-<section id="you-do-it-combine-symbol-and-filled-maps" class="level4">
-<h4 class="anchored" data-anchor-id="you-do-it-combine-symbol-and-filled-maps">You Do It: Combine Symbol and Filled Maps</h4>
+<ol start="5" type="1">
+<li>Analyze visitor counts.</li>
+</ol>
+<ul>
+<li>Drag the <code>Unique Customers</code> field onto the Size card. This will adjust the size of each symbol on the map based on the number of unique shoppers, making it easy to identify which stores attract the most visitors.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Which type of store appears to have the most visitors?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>What if we change the aggregation of <code>Unique Customers</code> to AVG instead of SUM?</p>
+</blockquote>
+<ol start="6" type="1">
+<li>Add information to the Tooltips.</li>
+</ol>
+<ul>
+<li>For more detailed information about each store, add the <code>Store Name</code> to the Tooltip card. Then, when you hover over any symbol on the map, you can see the store’s name along with other data you’ve chosen to include.</li>
+</ul>
+<p>::: {.callout-note title=“Other Options for Creating Symbol Maps} 1. Follow the initial steps to set up another symbol map. This time, experiment with different attributes for colors, size, and tooltips. For instance, you might choose to visualize the <strong>Product Diversity</strong> using the size of the symbols, or the <strong>Chain Size</strong> as the color.</p>
+<ol start="2" type="1">
+<li><p>Instead of using precise longitude and latitude, try creating a map based on <code>City</code> and associate it with <code>Unique Customers</code> by dragging <code>City</code> to the Columns Shelf and <code>Unique Customers</code> to the Rows Shelf. Use the Show Me menu to select Symbol Map. This visualization will provide a more aggregated view, showing visitor counts per city.</p></li>
+<li><p>Modify the aggregation of <code>Unique Customers</code> from SUM to AVG by right-clicking on the field in the Marks card and choosing Measure(Sum) &gt; Average. This adjustment shows the average number of visits per store within each city or map symbol, offering insights into typical store performance rather than total visits. :::</p></li>
+</ol>
+</section>
+<section id="you-do-it-create-a-filled-map" class="level3">
+<h3 class="anchored" data-anchor-id="you-do-it-create-a-filled-map">You Do It: Create a Filled Map</h3>
+<p>Filled maps provide a powerful way to visualize data that varies across geographic regions, using color to represent the intensity or magnitude of a variable within predefined areas like postal codes, counties, or countries. Let’s apply this to our data.</p>
 <ol type="1">
-<li><p>In your Tableau workspace with the cell phone data, create a new worksheet.</p></li>
+<li><p>Create a new worksheet.</p></li>
+<li><p>Select the <code>Zip Code</code> and move it to the Columns Shelf, and <code>Unique Customers</code> and move it to the Rows Shelf. (Make sure <code>Zip Code</code> is set as a Geographic Role.)</p></li>
+<li><p>Navigate to the Show Me Menu.</p></li>
+</ol>
+<ul>
+<li>You should have the option to select either a symbol map (left) or a filled map (right). Choose the <strong>filled map.</strong></li>
+</ul>
+<ol start="4" type="1">
+<li>Analyze the visualization.</li>
+</ol>
+<ul>
+<li><p>This map colors each postal code area based on the <code>Unique Customers</code>, showing only zip codes where stores have shoppers.</p></li>
+<li><p>While filled maps are excellent for visualizing one main attribute per geographic area, layering multiple store attributes directly on the map might be challenging.</p></li>
+</ul>
+<ol start="5" type="1">
+<li>Add more data.</li>
+</ol>
+<ul>
+<li><p>To provide context on the diversity of products sold at stores within each postal code, drag the <code>Product Diversity</code> field into the Tooltip editor.</p></li>
+<li><p>Alternatively: Open the Tooltip. Use the Insert button in the editor, selecting <strong>SUM(Product Diversity)</strong> or type in the field name surrounded by <code>&lt; &gt;</code>, like <code>&lt;Product Diversity&gt;</code>.</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>Does the symbol map or filled map provide a clearer understanding of the data?</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled" title="Symbol vs. Filled Maps">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Symbol vs.&nbsp;Filled Maps
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Filled maps are great for showing density or intensity over areas, while symbol maps are better for exact locations and attributes of individual points.</p>
+</div>
+</div>
+</section>
+<section id="you-do-it-combine-symbol-and-filled-maps" class="level3">
+<h3 class="anchored" data-anchor-id="you-do-it-combine-symbol-and-filled-maps">You Do It: Combine Symbol and Filled Maps</h3>
+<ol type="1">
+<li><p>Create a new worksheet.</p></li>
 <li><p>Show unique customers by postal code using a filled map.</p></li>
-<li><p>Copy Latitude Measure: Command-click (Mac) or Control-click (Windows) the <code>Latitude</code> measure on the Rows shelf and drag it to the right to duplicate it.</p></li>
-<li><p>Adjust Marks Card: For the second map pane, remove the <code>Postal Code</code> field. Then, drag both the <code>Latitude</code> and <code>Longitude</code> fields to the Details card on the Marks card.</p></li>
-<li><p>Customize with Data: Add <code>store_chain_name</code> to the Color card to differentiate store types and <code>product_diversity</code> (or choose something else that you think works) to the Size card to represent differences across product mix.</p></li>
-<li><p>Enable Dual Axes: Right-click the second <code>Latitude</code> field on the Rows shelf and choose Dual Axis.</p></li>
-<li><p>Finalize Formatting: Apply any additional custom formatting to your map as desired.</p></li>
+<li><p>Copy Latitude measure. Command-click (Mac) or Control-click (Windows) the <code>Latitude</code> measure on the Rows shelf and <strong>drag it</strong> to the right to duplicate it.</p></li>
+<li><p>For the second map pane, remove the <code>Postal Code</code> field. Then, drag both the <code>Latitude</code> and <code>Longitude</code> fields to the Details card on the Marks card. Change them to <strong>Dimensions</strong>.</p></li>
+<li><p>Add <code>Store Chain Name</code> to the Color card to differentiate store types and <code>Product Diversity</code> (or choose something else that you think works) to the Size card to represent differences across product mix.</p></li>
+<li><p>Enable Dual Axes. Right-click the second <code>Latitude</code> field on the Rows shelf and choose Dual Axis.</p></li>
+<li><p>Apply any additional custom formatting to your map as desired.</p></li>
 </ol>
 <blockquote class="blockquote">
 <p><strong>Interpretation</strong>: This combined map offers a comprehensive view of customer behavior, highlighting areas with high visit counts and distinguishing stores by chain and product mix. It allows for spatial analysis of store popularity and accessibility, providing valuable insights into consumer preferences and mobility patterns.</p>
 </blockquote>
-</section>
 </section>
 </section>
 <section id="on-your-own-plotting-results-from-a-cluster-analysis" class="level2">
@@ -908,11 +1005,19 @@ Tips for Effective Filled Maps
 <p>If you want to show results from your cluster analysis in Tableau, a simple way is to associate each cluster with a specific color. Let’s do this now.</p>
 <ol type="1">
 <li><p>Connect to the dataset with the results from the store-level cluster analysis (<code>final_clusters_out.csv</code>).</p></li>
-<li><p>Select <code>Latitude</code>, <code>Longitude</code>, and <code>Cluster</code> and select the Symbol Map from <code>Show Me</code>.</p></li>
-<li><p>Recall you will need to change the <code>Latitude</code> and <code>Longitude</code> fields to Dimensions for this to display correctly.</p></li>
-<li><p>Let’s also change <code>Cluster</code> to be associated with a color (rather than size) by dragging it to the <code>Color</code> card.</p></li>
-<li><p>Finally, let’s change <code>Cluster</code> to a Dimension and tell Tableau that it is Discrete.</p></li>
-<li><p>Let’s add some more detail to the tooltip. I would like to know the location name, store chain name, and cluster when I hover over each point on the map.</p></li>
+<li><p>Move <code>Longitude</code> to the Columns shelf and <code>Latitude</code> to the Rows shelf.</p></li>
+</ol>
+<ul>
+<li>Recall you will need to change the <code>Latitude</code> and <code>Longitude</code> fields to Dimensions for this to display correctly.</li>
+</ul>
+<ol start="3" type="1">
+<li>Move <code>Cluster</code> to the Colors card to be associated with a color.</li>
+</ol>
+<ul>
+<li>Change <code>Cluster</code> to a <strong>Discrete</strong> (rather than Continuous) measure so the colors are distinct.</li>
+</ul>
+<ol start="4" type="1">
+<li>Add some more detail to the Tooltip. I would like to know the city name, store chain name, and cluster when I hover over each point on the map.</li>
 </ol>
 <section id="extra-feature-in-tableau-customizing-your-map" class="level3">
 <h3 class="anchored" data-anchor-id="extra-feature-in-tableau-customizing-your-map">Extra Feature in Tableau: Customizing Your Map</h3>
