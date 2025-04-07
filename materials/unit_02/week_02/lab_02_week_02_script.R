@@ -212,24 +212,3 @@ write_csv(final_clusters_out, "final_clusters_out.csv")
 length(unique(final_clusters_out$store_id))
 nrow(final_clusters_out)
 
-# =================================================== #
-shopper_zip <- clean_data %>%
-  select(shopper_id, zip_code) %>%
-  distinct() %>%
-  filter(!is.na(zip_code)) %>%         # remove NAs
-  group_by(shopper_id, zip_code) %>%
-  summarise(
-    count = n(), 
-    .groups = "drop"
-    ) %>%
-  group_by(shopper_id) %>%
-  filter(count == max(count)) %>%      # keep the most frequent zip_code
-  slice(1) %>%                         # if there's a tie, just take the first one
-  ungroup() %>%
-  select(shopper_id, zip_code) %>%        # drop count column
-  mutate(shopper_zip = substr(zip_code, 1, 5)) %>%
-  arrange(shopper_zip) %>%
-  select(-zip_code)
-
-write_csv(shopper_zip, "../inputs/shopper_zip.csv")
-
