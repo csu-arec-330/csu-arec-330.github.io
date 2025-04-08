@@ -8,7 +8,7 @@
 <link href="lecture_02_week_03_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_02_week_03_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_02_week_03_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Week 11:  Data Analysis in Practice</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="lecture_02_week_03_files/libs/revealjs/dist/theme/quarto.css">
   <link href="lecture_02_week_03_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -155,7 +220,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -339,129 +405,445 @@
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
-<p>Finding patterns in grocery store location</p>
-<p>Identifying target markets</p>
+<p>Finding patterns in convenience store sales</p>
 <p>Project 2: Q&amp;A</p>
-<!-- image -->
-<!-- ![](includes/ggpairs.png) -->
-<!-- example of big text fit to slide width -->
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
 </section>
-<section id="where-should-we-open-a-grocery-store-in-az" class="slide level2 scrollable">
-<h2>Where should we open a grocery store in AZ?</h2>
-<p>From Chat GPT</p>
-<p>The ideal location for a grocery store in Arizona depends on various factors such as population density, demographics, competition, accessibility, and local zoning laws. Here are a few things to consider when choosing a location for a grocery store in Arizona:</p>
-<p>Population density: Look for areas with a high population density, as this is likely to increase foot traffic to the store.</p>
-<p>Demographics: Consider the demographics of the area you are targeting, such as age, income, and household size. These factors will affect what types of products will sell well in your store.</p>
-<p>Competition: Analyze the competition in the area, including the number and types of grocery stores, to determine the level of demand for a new store in the area.</p>
-<p>Accessibility: Consider the accessibility of the location, such as its proximity to major roads and public transportation. This can affect the convenience of shopping for customers.</p>
-<p>Local zoning laws: Check local zoning laws to ensure that the location you choose is zoned for commercial use and that there are no restrictions on operating a grocery store in the area.</p>
-<p>Some potential locations to consider for a grocery store in Arizona could include areas with growing populations, such as Phoenix, Tucson, and Mesa, or areas with a high concentration of college students, such as Tempe. Ultimately, conducting thorough research and analyzing the factors above can help you make an informed decision about the best location for your grocery store in Arizona.</p>
+<section>
+<section id="project-context" class="title-slide slide level1 center">
+<h1>Project Context</h1>
+
 </section>
-<section id="refining-the-question" class="slide level2 scrollable">
-<h2>Refining the question</h2>
-<p>Our current question: ``Where should we open a grocery store in AZ?’’</p>
-<p>Normative. Can we clarify our objective? <!-- Where would opening a grocery store in AZ most likely generate the most profit in 30 years? --></p>
-<p>Spatial scope. Can we clarify the spatial unit of analysis? <!-- In which county would opening a grocery store in AZ generate the most profit in 30 years? --></p>
-<p>Store format. Can we clarify the type of grocery store? <!-- What type of grocery store format (e.g., supermarket, discount, specialty) would be most suitable in different areas of AZ? --></p>
+<section id="who-am-i" class="slide level2 scrollable">
+<h2>Who am I?</h2>
+<p>I’m a researcher interested in <strong>store-level variation</strong> in product offerings, consumer behavior, and store performance across the U.S. convenience store sector.</p>
+<p>I focus on how retail format, customer base, and product mix interact across locations.</p>
 </section>
-<section id="refining-the-question-1" class="slide level2 scrollable">
-<h2>Refining the question</h2>
-<p>Normative. Can we clarify our objective?</p>
-<ul>
-<li>Where would opening a grocery store in AZ most likely generate the most profit in 30 years?</li>
-</ul>
-<p>Spatial scope. Can we clarify the spatial unit of analysis?</p>
-<ul>
-<li>In which county would opening a grocery store in AZ generate the most profit in 30 years?</li>
-</ul>
-<p>Store format. Can we clarify the type of grocery store?</p>
-<ul>
-<li>What type of grocery store format (e.g., supermarket, discount, specialty) would be most suitable in different areas of AZ?</li>
-</ul>
-<!--
-## Conceptual framework 
-
-:::{.incremental}
-
-How do the economics work in this context?  What should influence grocery store profitability?
-
-- Profit = Revenue - Costs
-
-- Sales/revenue: people shop for groceries where convenient; they may be willing to travel further or pay more for specialty items; groceries are generally normal goods so more income -> more sales
-
-- Cost: labor costs may be higher in higher income areas; land/building rental rates, taxes and operating expenses (power, water)
-
-:::
--->
+<section id="who-are-you" class="slide level2">
+<h2>Who are you?</h2>
+<p><strong>Scenario</strong>: A supplier of packaged snacks or beverages wants to know which types of stores would be best targets for a new product line.</p>
 </section>
-<section id="data" class="slide level2">
-<h2>Data</h2>
+<section id="what-is-my-research-question" class="slide level2 scrollable">
+<h2>What is my research question?</h2>
+<p><strong>Can we identify meaningful segments of convenience stores based on transaction-level data?</strong></p>
+<p>This leads to sub-questions like:</p>
 <ul>
-<li><p>Grocery stores</p></li>
-<li><p>Population</p></li>
-<li><p>Income</p></li>
-<li><p>Unemployment rate</p></li>
-<li><p>Land area</p></li>
+<li><p>Are there distinguishable store clusters based on number of customers, product diversity, and fuel share?</p></li>
+<li><p>How do consumer shopping patterns vary across those clusters?</p></li>
+<li><p>How are clusters positioned across the United States?</p></li>
 </ul>
 </section>
-<section id="eda-cluster-analysis" class="slide level2">
-<h2>EDA (Cluster Analysis)</h2>
-<p>Let’s explore the data with a cluster analysis</p>
-<p>Also, if the market is not in (or close) to equilibrium, cluster analysis may help identify areas with opportunities</p>
-<p>3 clusters on: stores, population, income, land area, unemployment</p>
-</section>
-<section id="store-number-and-population" class="slide level2">
-<h2>Store Number and Population</h2>
-
-<img data-src="includes/Store%20Number%20x%20Pop%202020.png" class="r-stretch"></section>
-<section id="store-number-and-unemployment" class="slide level2">
-<h2>Store Number and Unemployment</h2>
-
-<img data-src="includes/Store%20Number%20x%20Unemployment%20percent.png" class="r-stretch"></section>
-<section id="store-number-and-land-area" class="slide level2">
-<h2>Store Number and Land Area</h2>
-
-<img data-src="includes/Store%20Number%20x%20Land%20Area%20sq%20mi.png" class="r-stretch"></section>
-<section id="additional-clustering-analysis" class="slide level2">
-<h2>Additional Clustering Analysis</h2>
-<div>
+<section id="why-does-it-matter" class="slide level2 scrollable">
+<h2>Why does it matter?</h2>
+<p>Understanding store segments helps us:</p>
 <ul>
-<li class="fragment"><p>Perform additional clustering analysis using other relevant variables (e.g., demographics, competition, accessibility)</p></li>
-<li class="fragment"><p>Interpret the clusters and identify potential opportunities for new grocery store locations</p></li>
-<li class="fragment"><p>Use visualization techniques (e.g., scatter plots, maps) to explore the clusters and their characteristics</p></li>
+<li><p>Identify business strategies that different store types pursue (e.g., fuel-heavy vs.&nbsp;product-diverse)</p></li>
+<li><p>Highlight variation in access to different products, which matters for consumer choice</p></li>
+<li><p>Support targeted business decisions, like vendor partnerships or tailored promotions</p></li>
+<li><p>Potentially link to spatial inequities in access to goods and services</p></li>
 </ul>
+</section>
+<section id="how-do-i-answer-it" class="slide level2 scrollable">
+<h2>How do I answer it?</h2>
+<p>I use a cluster analysis of national convenience store data:</p>
+<ul>
+<li><p><strong>Data</strong>: Transaction-level data linked to store and product characteristics</p></li>
+<li><p><strong>Variables</strong>: Total sales, unique customers, product diversity, fuel share, and chain size</p></li>
+<li><p><strong>Method</strong>: K-means clustering on log-transformed and scaled variables</p></li>
+<li><p><strong>Interpretation</strong>: Examine features of each cluster to understand differences in store types</p></li>
+</ul>
+</section></section>
+<section>
+<section id="eda-cluster-analysis" class="title-slide slide level1 center">
+<h1>EDA (Cluster Analysis)</h1>
+
+</section>
+<section id="read-in-data" class="slide level2 scrollable">
+<h2>Read In Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co"># Read in the shopper_info dataset</span></span>
+<span id="cb1-2"><a href=""></a><span class="co"># This dataset contains detailed information on shoppers and their transactions for July 2023</span></span>
+<span id="cb1-3"><a href=""></a>shopper_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_info.csv"</span>)</span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a><span class="co"># Separate data file with shopper ID and their zipcode</span></span>
+<span id="cb1-6"><a href=""></a>shopper_zip <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_zip.csv"</span>)</span>
+<span id="cb1-7"><a href=""></a></span>
+<span id="cb1-8"><a href=""></a><span class="co"># Read in the GTIN dataset</span></span>
+<span id="cb1-9"><a href=""></a><span class="co"># This file links products to their Global Trade Item Numbers, akin to SKUs or UPCs</span></span>
+<span id="cb1-10"><a href=""></a>gtin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/gtin.csv"</span>)</span>
+<span id="cb1-11"><a href=""></a></span>
+<span id="cb1-12"><a href=""></a><span class="co"># Read in the store_info dataset</span></span>
+<span id="cb1-13"><a href=""></a><span class="co"># Contains details about each store, linkable to shopper_info via store_id</span></span>
+<span id="cb1-14"><a href=""></a>store_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_02/inputs/store_info.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="clustering-interpretation-and-recommendations" class="slide level2">
-<h2>Clustering Interpretation and Recommendations</h2>
-<div>
-<ul>
-<li class="fragment"><p>Summarize the key findings from the clustering analysis</p></li>
-<li class="fragment"><p>Discuss which clusters or areas appear to be underserved or have potential for a new grocery store</p></li>
-<li class="fragment"><p>Provide recommendations on potential locations based on the clustering results and other factors considered</p></li>
-<li class="fragment"><p>Highlight any limitations or caveats of the analysis</p></li>
-</ul>
+<section id="clean-the-data" class="slide level2 scrollable">
+<h2>Clean the Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Join the data frames together</span></span>
+<span id="cb2-2"><a href=""></a>store_shopper_gtin_left <span class="ot">&lt;-</span> <span class="fu">left_join</span>(store_info, shopper_info, <span class="at">by =</span> <span class="st">"store_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href=""></a>  <span class="fu">left_join</span>(gtin, <span class="at">by =</span> <span class="st">"gtin"</span>)</span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a><span class="co"># Look at the raw count of observations after join</span></span>
+<span id="cb2-6"><a href=""></a>total_observations <span class="ot">&lt;-</span> <span class="fu">nrow</span>(store_shopper_gtin_left)</span>
+<span id="cb2-7"><a href=""></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Total observations of raw data: "</span>, total_observations))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Total observations of raw data: 161906"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Look at the number of distinct store id's prior to cleaning the data</span></span>
+<span id="cb4-2"><a href=""></a>store_count_raw <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(store_shopper_gtin_left<span class="sc">$</span>store_id))</span>
+<span id="cb4-3"><a href=""></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Count of distinct stores in raw data: "</span>, store_count_raw))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Count of distinct stores in raw data: 23570"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># Clean and transform the raw data</span></span>
+<span id="cb6-2"><a href=""></a>clean_data <span class="ot">&lt;-</span> store_shopper_gtin_left <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a>    <span class="co"># Remove observations with negative or zero unit price (e.g., returns or invalid entries)</span></span>
+<span id="cb6-5"><a href=""></a>  <span class="fu">filter</span>(unit_price <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-6"><a href=""></a>  </span>
+<span id="cb6-7"><a href=""></a>  <span class="co"># Remove observations of stores missing shopper IDs</span></span>
+<span id="cb6-8"><a href=""></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(shopper_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-9"><a href=""></a>  </span>
+<span id="cb6-10"><a href=""></a>  <span class="co"># Calculate total spending per line item</span></span>
+<span id="cb6-11"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">total =</span> unit_price <span class="sc">*</span> unit_quantity) <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href=""></a>  </span>
+<span id="cb6-13"><a href=""></a>  <span class="co"># Convert transaction_set_id and transaction_item_id to integers without decimals</span></span>
+<span id="cb6-14"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">transaction_set_id =</span> <span class="fu">format</span>(transaction_set_id, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb6-15"><a href=""></a>         <span class="at">transaction_item_id =</span> <span class="fu">format</span>(transaction_item_id, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-16"><a href=""></a>  </span>
+<span id="cb6-17"><a href=""></a>  <span class="co"># Arrange data by store_id and zip_code</span></span>
+<span id="cb6-18"><a href=""></a>  <span class="fu">arrange</span>(store_id, zip_code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="project-2-qa" class="slide level2">
-<h2>Project 2: Q&amp;A</h2>
-<p>Let’s discuss your ideas and approaches for Project 2:</p>
+<section id="what-is-my-unit-of-analysis" class="slide level2 scrollable">
+<h2>What is my Unit of Analysis?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># Check how many distinct shoppers are in the clean dataset</span></span>
+<span id="cb7-2"><a href=""></a>unit_of_analysis <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(clean_data<span class="sc">$</span>store_id))</span>
+<span id="cb7-3"><a href=""></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Unit of analysis (store-level): "</span>, unit_of_analysis))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Unit of analysis (store-level): 6750"</code></pre>
+</div>
+</div>
+</section>
+<section id="cluster-analysis-setup" class="slide level2 scrollable">
+<h2>Cluster Analysis Setup</h2>
+<p>I want to analyze stores using:</p>
 <ul>
-<li><p>Summarizing data and visualizing patterns</p></li>
-<li><p>Conducting cluster analysis</p></li>
-<li><p>Communicating cluster analysis</p></li>
+<li>Unique customers<br>
+</li>
+<li>Total sales<br>
+</li>
+<li>Product diversity<br>
+</li>
+<li>Fuel share<br>
+</li>
+<li>Chain size</li>
+</ul>
+<p>I need to summarize these metrics to the <strong>store-level</strong> as this is my unit of analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="co"># Summarize metrics at the store level</span></span>
+<span id="cb9-2"><a href=""></a>store_summary <span class="ot">&lt;-</span> clean_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href=""></a>  <span class="fu">group_by</span>(store_id) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href=""></a>  <span class="fu">summarise</span>(</span>
+<span id="cb9-5"><a href=""></a>    <span class="at">total_sales =</span> <span class="fu">sum</span>(unit_price <span class="sc">*</span> unit_quantity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),               <span class="co"># Total revenue</span></span>
+<span id="cb9-6"><a href=""></a>    <span class="at">unique_customers =</span> <span class="fu">n_distinct</span>(shopper_id),                                 <span class="co"># Number of unique customers</span></span>
+<span id="cb9-7"><a href=""></a>    <span class="at">product_diversity =</span> <span class="fu">n_distinct</span>(gtin),                                      <span class="co"># Number of unique products sold</span></span>
+<span id="cb9-8"><a href=""></a>    <span class="at">fuel_transactions =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(gtin) <span class="sc">|</span> gtin <span class="sc">==</span> <span class="dv">0</span>),                          <span class="co"># Number of fuel transactions</span></span>
+<span id="cb9-9"><a href=""></a>    <span class="at">total_transactions =</span> <span class="fu">n_distinct</span>(transaction_set_id),                       <span class="co"># Total number of transactions</span></span>
+<span id="cb9-10"><a href=""></a>    <span class="at">fuel_share =</span> fuel_transactions <span class="sc">/</span> total_transactions,                       <span class="co"># Fuel share of transactions</span></span>
+<span id="cb9-11"><a href=""></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb9-12"><a href=""></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href=""></a>  <span class="fu">left_join</span>(store_info <span class="sc">%&gt;%</span> <span class="fu">select</span>(store_id, chain_size), <span class="at">by =</span> <span class="st">"store_id"</span>) <span class="sc">%&gt;%</span>      <span class="co"># Add chain size</span></span>
+<span id="cb9-14"><a href=""></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(chain_size))</span>
+<span id="cb9-15"><a href=""></a></span>
+<span id="cb9-16"><a href=""></a><span class="co"># Final dataset: merge summaries if desired</span></span>
+<span id="cb9-17"><a href=""></a>final_dataset <span class="ot">&lt;-</span> store_summary <span class="sc">%&gt;%</span></span>
+<span id="cb9-18"><a href=""></a>  <span class="fu">left_join</span>(store_info <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>chain_size), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"store_id"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-19"><a href=""></a>  <span class="fu">arrange</span>(store_id, zip_code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="log-transformations" class="slide level2 scrollable">
+<h2>Log-Transformations</h2>
+<p>Because these variables are very skewed, I log-transform <code>unique_customers</code>, <code>total_sales</code>, <code>product_diversity</code>, and <code>chain_size</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="co"># I noticed that the distribution of my store attributes is very skewed, so I want to rescale them.</span></span>
+<span id="cb10-2"><a href=""></a>final_dataset <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-4"><a href=""></a>    <span class="at">log_customers =</span> <span class="fu">log</span>(unique_customers <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb10-5"><a href=""></a>    <span class="at">log_sales =</span> <span class="fu">log</span>(total_sales <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb10-6"><a href=""></a>    <span class="at">log_products =</span> <span class="fu">log</span>(product_diversity <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb10-7"><a href=""></a>    <span class="at">log_chain_size =</span> <span class="fu">log</span>(chain_size <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb10-8"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ggpairs-plot" class="slide level2">
+<h2>GGPairs Plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="co"># Run the ggpairs() command</span></span>
+<span id="cb11-2"><a href=""></a>final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href=""></a>  <span class="fu">select</span>(log_customers, log_sales, log_products, fuel_share, log_chain_size) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href=""></a>  <span class="fu">ggpairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="almost-there-need-to-rescale-variables" class="slide level2 scrollable">
+<h2>Almost there… Need to rescale variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="co"># Prepare data for clustering</span></span>
+<span id="cb12-2"><a href=""></a>cluster_data <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href=""></a>  <span class="fu">select</span>(log_customers, log_sales, log_products, fuel_share, log_chain_size)</span>
+<span id="cb12-4"><a href=""></a></span>
+<span id="cb12-5"><a href=""></a>cluster_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(cluster_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="choosing-the-number-of-clusters" class="slide level2 scrollable">
+<h2>Choosing the Number of Clusters</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># Use two common methods to help choose the number of clusters.</span></span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a><span class="co"># Elbow Method</span></span>
+<span id="cb13-4"><a href=""></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="co"># Silhouette Method</span></span>
+<span id="cb14-2"><a href=""></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-9-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="perform-clustering-and-add-to-data" class="slide level2 scrollable">
+<h2>Perform Clustering and Add to Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="co"># Perform k-means clustering on logged and scaled data</span></span>
+<span id="cb15-2"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb15-3"><a href=""></a>kmeans_fit <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(cluster_scaled, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span>
+<span id="cb15-4"><a href=""></a></span>
+<span id="cb15-5"><a href=""></a><span class="co"># Add cluster to dataset</span></span>
+<span id="cb15-6"><a href=""></a>final_dataset<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(kmeans_fit<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualizing-the-clusters" class="slide level2 scrollable">
+<h2>Visualizing the Clusters</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">fviz_cluster</span>(kmeans_fit, <span class="at">data =</span> cluster_scaled, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">ellipse.type =</span> <span class="st">"norm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="cluster-summary-stats" class="slide level2 scrollable">
+<h2>Cluster Summary Stats</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">print</span>(sumstats, <span class="at">n =</span> <span class="cn">Inf</span>, <span class="at">width =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+  cluster mean_customers mean_sales mean_products mean_fuel_share
+  &lt;fct&gt;            &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
+1 1                 1.94      267.           1.55          1.01  
+2 2                 1.27       20.7          2.51          0.0707
+3 3                11.7      2855.           7.47          0.906 
+  mean_chain_size
+            &lt;dbl&gt;
+1            16.5
+2            27.1
+3           105. </code></pre>
+</div>
+</div>
+</section>
+<section id="most-frequent-city-by-cluster" class="slide level2 scrollable">
+<h2>Most Frequent City by Cluster</h2>
+<p><strong>What are the top 5 cities where stores of each cluster are located?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href=""></a>  <span class="fu">select</span>(cluster, city) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href=""></a>  <span class="fu">group_by</span>(cluster, city) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href=""></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href=""></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb19-6"><a href=""></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> n, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-7"><a href=""></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-8"><a href=""></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">cluster</th>
+<th style="text-align: left;">city</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Houston</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Nashville</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Milwaukee</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Canton</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Louisville</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Omaha</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Houston</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Birmingham</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Charleston</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Columbia</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Lexington</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Salem</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Raleigh</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Abilene</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Hobbs</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Carlsbad</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Pittsburgh</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Roswell</td>
+<td style="text-align: right;">12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="cluster-1-fuel-focused-low-volume-stores" class="slide level2 scrollable">
+<h2>Cluster 1: Fuel-Focused, Low-Volume Stores</h2>
+<p><strong>These appear to be fuel-dominant convenience stores with very limited in-store purchases. Possibly rural or highway locations.</strong></p>
+<ul>
+<li><p>Few customers (~1.94 avg.)</p></li>
+<li><p>Very low sales (~$267 total)</p></li>
+<li><p>Very limited product diversity (~1.5 products)</p></li>
+<li><p>Almost all transactions are fuel (fuel share ~1.01)</p></li>
+<li><p>Small to mid-size chains (avg. chain size ~16.5)</p></li>
 </ul>
 </section>
-<section id="summarizing-data-and-visualizing-patterns" class="slide level2">
+<section id="cluster-2-low-volume-non-fuel-stores" class="slide level2 scrollable">
+<h2>Cluster 2: Low-Volume, Non-Fuel Stores</h2>
+<p><strong>These are likely small-format, low-traffic stores that don’t rely heavily on fuel. Possibly struggling or underutilized stores.</strong></p>
+<ul>
+<li><p>Fewest customers (~1.27)</p></li>
+<li><p>Lowest sales (~$21 total)</p></li>
+<li><p>Slightly more product diversity (~2.5 products)</p></li>
+<li><p>Very low fuel share (~7%)</p></li>
+<li><p>Mid-size chains (avg. chain size ~27)</p></li>
+</ul>
+</section>
+<section id="cluster-3-high-volume-high-diversity-stores" class="slide level2 scrollable">
+<h2>Cluster 3: High-Volume, High-Diversity Stores</h2>
+<p><strong>These stores appear to be high-performing, full-service stores, possibly flagship locations or urban/high-traffic sites. Strong sales, product range, and large customer base.</strong></p>
+<ul>
+<li><p>Most customers (~11.66)</p></li>
+<li><p>Highest sales (~$2,855)</p></li>
+<li><p>High product diversity (~7.5 products)</p></li>
+<li><p>High fuel share (~91%)</p></li>
+<li><p>Large chains (avg. chain size ~105)</p></li>
+</ul>
+</section>
+<section id="revisiting-the-research-question" class="slide level2 scrollable">
+<h2>Revisiting the Research Question</h2>
+<p><strong>Can we identify meaningful segments of convenience stores based on transaction-level data?</strong></p>
+<p>Answer: Yes!</p>
+<ul>
+<li>The clusters suggest three distinct operational models among stores in the dataset</li>
+<li>These segments differ not only in customer base and sales</li>
+</ul>
+<p>Why it matters:</p>
+<ul>
+<li>Product suppliers may target Cluster 3 with broader assortments.</li>
+<li>Clusters 1 and 2 may benefit from operational support or format redesign.</li>
+</ul>
+<!-- ## Additional Clustering Analysis {.scrollable} -->
+<!-- :::{.incremental} -->
+<!-- - Perform additional clustering analysis using other relevant variables (e.g., demographics, competition, accessibility) -->
+<!-- - Interpret the clusters and identify potential opportunities for new grocery store locations -->
+<!-- - Use visualization techniques (e.g., scatter plots, maps) to explore the clusters and their characteristics -->
+<!-- ::: -->
+</section></section>
+<section>
+<section id="project-2-qa" class="title-slide slide level1 center">
+<h1>Project 2: Q&amp;A</h1>
+
+</section>
+<section id="break-into-groups" class="slide level2 scrollable">
+<h2>Break into groups</h2>
+<p>Based on your initial cluster analysis:</p>
+<ul>
+<li><p>What are some effective ways to present summary statistics and visualize your data?</p></li>
+<li><p>How do the results of the clustering analysis inform your research question?</p></li>
+<li><p>What insights can you take away from your analysis? What story does it tell?</p></li>
+</ul>
+</section>
+<section id="summarizing-data-and-visualizing-patterns" class="slide level2 scrollable">
 <h2>Summarizing Data and Visualizing Patterns</h2>
 <div>
 <ul>
@@ -500,20 +882,20 @@ How do the economics work in this context?  What should influence grocery store 
 </ul>
 </div>
 </section>
-<section id="communicating-cluster-analysis" class="slide level2">
-<h2>Communicating cluster analysis</h2>
+<section id="communicating-cluster-analysis" class="slide level2 scrollable">
+<h2>Communicating Cluster Analysis</h2>
 <ul>
 <li><p>What story does your cluster analysis tell?</p>
 <ul>
-<li>Sales in segment x are strong.</li>
+<li>“Sales in segment x are strong.”</li>
 </ul></li>
-<li><p>Create visuals to support your story.</p>
+<li><p>Create visuals to support your story</p>
 <ul>
-<li>Bar chart with sales by segment.</li>
+<li>Bar chart with sales by segment</li>
 </ul></li>
 <li><p>What is your call to action?</p>
 <ul>
-<li>We should market segment x.</li>
+<li>“We should market segment x.”</li>
 </ul></li>
 </ul>
 </section>
@@ -592,10 +974,12 @@ $$ forGS_i - GS_i $$
 
 ![](includes/dumbell.png)
 -->
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
-</section>
+</div>
+</section></section>
     </div>
   </div>
 
@@ -622,7 +1006,6 @@ $$ forGS_i - GS_i $$
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -807,6 +1190,82 @@ $$ forGS_i - GS_i $$
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -839,18 +1298,7 @@ $$ forGS_i - GS_i $$
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -882,11 +1330,50 @@ $$ forGS_i - GS_i $$
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -896,8 +1383,17 @@ $$ forGS_i - GS_i $$
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -911,7 +1407,11 @@ $$ forGS_i - GS_i $$
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

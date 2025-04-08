@@ -1,0 +1,315 @@
+---
+title: "Week 11: <br>Data Analysis in Practice"
+format: 
+  revealjs:
+    theme: [night, ../../custom.scss]
+    slide-number: c/t
+    width: 1400
+    # logo: path.png
+    # center: TRUE
+---
+
+## Motivation
+
+Our goal in this course is to teach tools and processes for analyzing data to inform decision-making.
+
+You now have some tools for data analysis.
+
+Today, let's revisit the process.
+
+How do we get from question to answer?
+
+## Agenda 
+
+Finding patterns in grocery store location
+
+Identifying target markets
+
+Project 2: Q\&A
+
+
+<!-- image -->
+<!-- ![](includes/ggpairs.png) -->
+
+<!-- example of big text fit to slide width -->
+
+<!-- ::: {.r-fit-text} -->
+<!-- Big Text -->
+<!-- ::: -->
+
+<!-- :::: {.columns style="text-align: center"} -->
+<!-- ::: {.column width="40%"} -->
+<!-- ::: -->
+<!-- ::: {.column width="60%"} -->
+<!-- ::: -->
+<!-- :::: -->
+
+
+
+
+## Where should we open a grocery store in AZ? {.scrollable}
+
+From Chat GPT
+
+The ideal location for a grocery store in Arizona depends on various factors such as population density, demographics, competition, accessibility, and local zoning laws. Here are a few things to consider when choosing a location for a grocery store in Arizona:
+
+Population density: Look for areas with a high population density, as this is likely to increase foot traffic to the store.
+
+Demographics: Consider the demographics of the area you are targeting, such as age, income, and household size. These factors will affect what types of products will sell well in your store.
+
+Competition: Analyze the competition in the area, including the number and types of grocery stores, to determine the level of demand for a new store in the area.
+
+Accessibility: Consider the accessibility of the location, such as its proximity to major roads and public transportation. This can affect the convenience of shopping for customers.
+
+Local zoning laws: Check local zoning laws to ensure that the location you choose is zoned for commercial use and that there are no restrictions on operating a grocery store in the area.
+
+Some potential locations to consider for a grocery store in Arizona could include areas with growing populations, such as Phoenix, Tucson, and Mesa, or areas with a high concentration of college students, such as Tempe. Ultimately, conducting thorough research and analyzing the factors above can help you make an informed decision about the best location for your grocery store in Arizona.
+
+## Refining the question {.scrollable}
+
+Our current question: ``Where should we open a grocery store in AZ?''
+
+Normative. Can we clarify our objective?
+<!-- Where would opening a grocery store in AZ most likely generate the most profit in 30 years? -->
+
+Spatial scope. Can we clarify the spatial unit of analysis?
+<!-- In which county would opening a grocery store in AZ generate the most profit in 30 years? -->
+
+Store format. Can we clarify the type of grocery store?
+<!-- What type of grocery store format (e.g., supermarket, discount, specialty) would be most suitable in different areas of AZ? -->
+
+## Refining the question {.scrollable}
+
+Normative. Can we clarify our objective?
+
+- Where would opening a grocery store in AZ most likely generate the most profit in 30 years?
+
+Spatial scope. Can we clarify the spatial unit of analysis?
+
+- In which county would opening a grocery store in AZ generate the most profit in 30 years?
+
+Store format. Can we clarify the type of grocery store?
+
+- What type of grocery store format (e.g., supermarket, discount, specialty) would be most suitable in different areas of AZ?
+
+<!--
+## Conceptual framework 
+
+:::{.incremental}
+
+How do the economics work in this context?  What should influence grocery store profitability?
+
+- Profit = Revenue - Costs
+
+- Sales/revenue: people shop for groceries where convenient; they may be willing to travel further or pay more for specialty items; groceries are generally normal goods so more income -> more sales
+
+- Cost: labor costs may be higher in higher income areas; land/building rental rates, taxes and operating expenses (power, water)
+
+:::
+-->
+## Data
+
+- Grocery stores
+
+- Population 
+
+- Income
+
+- Unemployment rate
+
+- Land area
+
+
+## EDA (Cluster Analysis)
+
+Let's explore the data with a cluster analysis
+
+Also, if the market is not in (or close) to equilibrium, cluster analysis may help identify areas with opportunities
+
+3 clusters on: stores, population, income, land area, unemployment
+
+## Store Number and Population
+
+![](includes/Store Number x Pop 2020.png)
+
+## Store Number and Unemployment
+
+![](includes/Store Number x Unemployment percent.png)
+
+
+## Store Number and Land Area
+
+![](includes/Store Number x Land Area sq mi.png)
+
+## Additional Clustering Analysis
+
+:::{.incremental}
+
+- Perform additional clustering analysis using other relevant variables (e.g., demographics, competition, accessibility)
+
+- Interpret the clusters and identify potential opportunities for new grocery store locations
+
+- Use visualization techniques (e.g., scatter plots, maps) to explore the clusters and their characteristics
+
+:::
+
+## Clustering Interpretation and Recommendations
+
+:::{.incremental}
+
+- Summarize the key findings from the clustering analysis
+
+- Discuss which clusters or areas appear to be underserved or have potential for a new grocery store
+
+- Provide recommendations on potential locations based on the clustering results and other factors considered
+
+- Highlight any limitations or caveats of the analysis
+
+:::
+
+## Project 2: Q\&A
+
+Let's discuss your ideas and approaches for Project 2:
+
+- Summarizing data and visualizing patterns
+
+- Conducting cluster analysis
+
+- Communicating cluster analysis
+
+
+## Summarizing Data and Visualizing Patterns
+
+:::{.incremental}
+
+- What are some effective ways to present summary statistics and visualize your data?
+
+  - Scatterplots, histograms, maps
+
+  - Descriptive statistics (mean, standard deviation, range)
+
+- How can you highlight geographical differences in your variables?
+
+  - Choropleth maps, bubble maps
+
+- What other visualizations or techniques could be useful for your specific project?
+
+:::
+
+## Conducting Cluster Analysis {.scrollable}
+
+:::{.incremental}
+
+- What is your rationale for using cluster analysis to answer your research question?
+
+  - Identifying groups or segments with similar characteristics
+
+  - Exploring patterns and relationships in the data
+
+- How will you choose the appropriate variables for clustering?
+
+  - Relevant to your research question
+
+  - Capturing different aspects of the data (e.g., demographics, economic factors)
+
+- What are some potential challenges or limitations of your cluster analysis?
+
+  - Choosing the right number of clusters
+
+  - Interpreting and validating the clusters
+
+:::
+
+## Communicating cluster analysis
+
+- What story does your cluster analysis tell?
+
+  - Sales in segment x are strong. 
+  
+- Create visuals to support your story.
+
+  - Bar chart with sales by segment.
+
+- What is your call to action?
+
+  - We should market segment x.
+
+## Summary
+
+- Summarizing data and visualizing patterns
+
+- Conducting cluster analysis
+
+- Communicating cluster analysis
+
+<!--
+## Analysis
+
+Regression model to establish relationship between an areas population, income, and grocery stores
+
+We are assuming that the current markets are near equilibrium - there are currently the *right* number of stores based on population and income
+
+$GS_i = \beta_1 pop_i + \beta_2 income_i + \beta_3 unemp_i + \beta_4 area_i + \varepsilon_i$
+
+##
+![](includes/reg_line.png)
+
+
+## Regression Results
+
+Variable                 Estimate    Std. Error    t-statistic     p.value
+----------------------  -----------  -----------  ------------  ----------
+(Intercept)              74.515      94.867       0.785         0.450
+A. Pop 2020 (1000)          0.464       0.011        40.486        <0.001
+B. Median HH Inc           -1.067       1.428        -0.747        0.472
+C. Area (sq mi)            -0.848       2.450        -0.346        0.737
+D. Unemployment               1.692       4.875       0.347        0.736
+
+Obs: 15, R2 Adjusted: 0.994    
+  
+Which of the covariates is statistically significant at $\alpha=0.05$?
+
+## Interpret the coefficient estimate on population
+
+Variable                 Estimate    Std. Error    t-statistic     p.value
+----------------------  -----------  -----------  ------------  ----------
+(Intercept)              74.515      94.867       0.785         0.450
+Pop 2020 (1000)          0.464       0.011        40.486        <0.001
+Median HH Inc           -1.067       1.428        -0.747        0.472
+Area (sq mi)            -0.848       2.450        -0.346        0.737
+Unemployment               1.692       4.875       0.347        0.736
+
+Obs: 15, R2 Adjusted: 0.994    
+  
+
+
+## How well does the model fit the data? How do you know?
+
+Variable                 Estimate    Std. Error    t-statistic     p.value
+----------------------  -----------  -----------  ------------  ----------
+(Intercept)              74.515      94.867       0.785         0.450
+Pop 2020 (1000)          0.464       0.011        40.486        <0.001
+Median HH Inc           -1.067       1.428        -0.747        0.472
+Area (sq mi)            -0.848       2.450        -0.346        0.737
+Unemployment               1.692       4.875       0.347        0.736
+
+Obs: 15, R2 Adjusted: 0.994    
+  
+
+## Application
+
+Use population and income projections to estimate opportunities for expansion
+
+$$ forGS_i = \hat{\beta_1} 2050pop_i + \hat{\beta_2} income_i + \hat{\beta_3} unemp_i + \hat{\beta_4} area_i $$
+
+Identify growth potential as counties where increased population increases equilibrium number of stores
+
+$$ forGS_i - GS_i $$
+
+## Expand stores where gap is blue
+
+![](includes/dumbell.png)
+-->
+
+
+

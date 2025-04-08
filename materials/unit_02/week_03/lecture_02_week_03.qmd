@@ -21,164 +21,380 @@ How do we get from question to answer?
 
 ## Agenda 
 
-Finding patterns in grocery store location
-
-Identifying target markets
+Finding patterns in convenience store sales
 
 Project 2: Q\&A
 
 
-<!-- image -->
-<!-- ![](includes/ggpairs.png) -->
+# Project Context
 
-<!-- example of big text fit to slide width -->
+## Who am I? {.scrollable}
 
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
+I'm a researcher interested in **store-level variation** in product offerings, consumer behavior, and store performance across the U.S. convenience store sector. 
+
+I focus on how retail format, customer base, and product mix interact across locations.
+
+## Who are you?
+
+**Scenario**: A supplier of packaged snacks or beverages wants to know which types of stores would be best targets for a new product line.
+
+## What is my research question? {.scrollable}
+
+**Can we identify meaningful segments of convenience stores based on transaction-level data?**
+
+This leads to sub-questions like:
+
+- Are there distinguishable store clusters based on number of customers, product diversity, and fuel share?
+
+- How do consumer shopping patterns vary across those clusters?
+
+- How are clusters positioned across the United States?
+
+## Why does it matter? {.scrollable}
+
+Understanding store segments helps us:
+
+- Identify business strategies that different store types pursue (e.g., fuel-heavy vs. product-diverse)
+
+- Highlight variation in access to different products, which matters for consumer choice
+
+- Support targeted business decisions, like vendor partnerships or tailored promotions
+
+- Potentially link to spatial inequities in access to goods and services
+
+## How do I answer it? {.scrollable}
+
+I use a cluster analysis of national convenience store data:
+
+- **Data**: Transaction-level data linked to store and product characteristics
+
+- **Variables**: Total sales, unique customers, product diversity, fuel share, and chain size
+
+- **Method**: K-means clustering on log-transformed and scaled variables
+
+- **Interpretation**: Examine features of each cluster to understand differences in store types
+
+
+# EDA (Cluster Analysis)
+
+## Read In Data {.scrollable}
+
+```{r}
+#| echo: true
+#| include: false
+
+# Load required libraries
+library(dplyr)
+library(ggplot2)
+library(GGally)
+library(factoextra)
+library(readr)
+library(knitr)
+```
+```{r}
+#| echo: true
+
+# Read in the shopper_info dataset
+# This dataset contains detailed information on shoppers and their transactions for July 2023
+shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_info.csv")
+
+# Separate data file with shopper ID and their zipcode
+shopper_zip <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/shopper_zip.csv")
+
+# Read in the GTIN dataset
+# This file links products to their Global Trade Item Numbers, akin to SKUs or UPCs
+gtin <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/gtin.csv")
+
+# Read in the store_info dataset
+# Contains details about each store, linkable to shopper_info via store_id
+store_info <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/store_info.csv")
+```
+
+## Clean the Data {.scrollable}
+
+```{r}
+#| echo: true
+
+# Join the data frames together
+store_shopper_gtin_left <- left_join(store_info, shopper_info, by = "store_id") %>%
+  left_join(gtin, by = "gtin")
+
+# Look at the raw count of observations after join
+total_observations <- nrow(store_shopper_gtin_left)
+print(paste0("Total observations of raw data: ", total_observations))
+
+# Look at the number of distinct store id's prior to cleaning the data
+store_count_raw <- length(unique(store_shopper_gtin_left$store_id))
+print(paste0("Count of distinct stores in raw data: ", store_count_raw))
+
+# Clean and transform the raw data
+clean_data <- store_shopper_gtin_left %>%
+
+    # Remove observations with negative or zero unit price (e.g., returns or invalid entries)
+  filter(unit_price > 0) %>% 
+  
+  # Remove observations of stores missing shopper IDs
+  filter(!is.na(shopper_id)) %>%
+  
+  # Calculate total spending per line item
+  mutate(total = unit_price * unit_quantity) %>%
+  
+  # Convert transaction_set_id and transaction_item_id to integers without decimals
+  mutate(transaction_set_id = format(transaction_set_id, scientific = FALSE, trim = TRUE), 
+         transaction_item_id = format(transaction_item_id, scientific = FALSE, trim = TRUE)) %>%
+  
+  # Arrange data by store_id and zip_code
+  arrange(store_id, zip_code)
+```
+
+## What is my Unit of Analysis? {.scrollable}
+
+```{r}
+#| echo: true
+
+# Check how many distinct shoppers are in the clean dataset
+unit_of_analysis <- length(unique(clean_data$store_id))
+print(paste0("Unit of analysis (store-level): ", unit_of_analysis))
+```
+
+## Cluster Analysis Setup {.scrollable}
+
+I want to analyze stores using:
+
+- Unique customers  
+- Total sales  
+- Product diversity  
+- Fuel share  
+- Chain size  
+
+I need to summarize these metrics to the **store-level** as this is my unit of analysis.
+
+```{r}
+#| echo: true
+
+# Summarize metrics at the store level
+store_summary <- clean_data %>%
+  group_by(store_id) %>%
+  summarise(
+    total_sales = sum(unit_price * unit_quantity, na.rm = TRUE),               # Total revenue
+    unique_customers = n_distinct(shopper_id),                                 # Number of unique customers
+    product_diversity = n_distinct(gtin),                                      # Number of unique products sold
+    fuel_transactions = sum(is.na(gtin) | gtin == 0),                          # Number of fuel transactions
+    total_transactions = n_distinct(transaction_set_id),                       # Total number of transactions
+    fuel_share = fuel_transactions / total_transactions,                       # Fuel share of transactions
+    .groups = "drop"
+  ) %>%
+  left_join(store_info %>% select(store_id, chain_size), by = "store_id") %>%      # Add chain size
+  filter(!is.na(chain_size))
+
+# Final dataset: merge summaries if desired
+final_dataset <- store_summary %>%
+  left_join(store_info %>% select(-chain_size), by = c("store_id")) %>%
+  arrange(store_id, zip_code)
+```
+
+## Log-Transformations {.scrollable}
+
+Because these variables are very skewed, I log-transform `unique_customers`, `total_sales`, `product_diversity`, and `chain_size`.
+
+```{r}
+#| echo: true
+
+# I noticed that the distribution of my store attributes is very skewed, so I want to rescale them.
+final_dataset <- final_dataset %>%
+  mutate(
+    log_customers = log(unique_customers + 1),
+    log_sales = log(total_sales + 1),
+    log_products = log(product_diversity + 1),
+    log_chain_size = log(chain_size + 1)
+  )
+```
+
+## GGPairs Plot
+
+```{r}
+#| echo: true
+
+# Run the ggpairs() command
+final_dataset %>%
+  select(log_customers, log_sales, log_products, fuel_share, log_chain_size) %>% 
+  ggpairs()
+```
+
+## Almost there... Need to rescale variables {.scrollable}
+
+```{r}
+#| echo: true
+
+# Prepare data for clustering
+cluster_data <- final_dataset %>%
+  select(log_customers, log_sales, log_products, fuel_share, log_chain_size)
+
+cluster_scaled <- scale(cluster_data)
+```
+
+## Choosing the Number of Clusters {.scrollable}
+
+```{r}
+#| echo: true
+
+# Use two common methods to help choose the number of clusters.
+
+# Elbow Method
+fviz_nbclust(cluster_scaled, kmeans, method = "wss")
+
+# Silhouette Method
+fviz_nbclust(cluster_scaled, kmeans, method = "silhouette")
+```
+
+
+## Perform Clustering and Add to Data {.scrollable}
+
+```{r}
+#| echo: true
+
+# Perform k-means clustering on logged and scaled data
+set.seed(123)
+kmeans_fit <- kmeans(cluster_scaled, centers = 3, nstart = 25)
+
+# Add cluster to dataset
+final_dataset$cluster <- factor(kmeans_fit$cluster)
+```
+
+## Visualizing the Clusters {.scrollable}
+
+```{r}
+#| echo: true
+
+fviz_cluster(kmeans_fit, data = cluster_scaled, geom = "point", ellipse.type = "norm")
+```
+
+## Cluster Summary Stats {.scrollable}
+
+```{r}
+#| echo: true
+#| include: false
+sumstats <- final_dataset %>%
+  group_by(cluster) %>%
+  summarise(
+    mean_customers = mean(unique_customers),
+    mean_sales = mean(total_sales),
+    mean_products = mean(product_diversity),
+    mean_fuel_share = mean(fuel_share),
+    mean_chain_size = mean(chain_size),
+    .groups = "drop"
+  )
+```
+
+```{r}
+#| echo: true
+
+print(sumstats, n = Inf, width = Inf)
+```
+## Most Frequent City by Cluster {.scrollable}
+
+**What are the top 5 cities where stores of each cluster are located?**
+
+```{r}
+#| echo: true
+
+final_dataset %>%
+  select(cluster, city) %>%
+  group_by(cluster, city) %>%
+  summarize(n = n(), .groups = "drop") %>%
+  group_by(cluster) %>%
+  slice_max(order_by = n, n = 5) %>%
+  ungroup() %>%
+  kable()
+```
+
+## Cluster 1: Fuel-Focused, Low-Volume Stores {.scrollable}
+
+**These appear to be fuel-dominant convenience stores with very limited in-store purchases. Possibly rural or highway locations.**
+
+- Few customers (~1.94 avg.)
+
+- Very low sales (~$267 total)
+
+- Very limited product diversity (~1.5 products)
+
+- Almost all transactions are fuel (fuel share ~1.01)
+
+- Small to mid-size chains (avg. chain size ~16.5)
+
+
+## Cluster 2: Low-Volume, Non-Fuel Stores {.scrollable}
+
+**These are likely small-format, low-traffic stores that don’t rely heavily on fuel. Possibly struggling or underutilized stores.**
+
+- Fewest customers (~1.27)
+
+- Lowest sales (~$21 total)
+
+- Slightly more product diversity (~2.5 products)
+
+- Very low fuel share (~7%)
+
+- Mid-size chains (avg. chain size ~27)
+
+## Cluster 3: High-Volume, High-Diversity Stores {.scrollable}
+
+**These stores appear to be high-performing, full-service stores, possibly flagship locations or urban/high-traffic sites. Strong sales, product range, and large customer base.**
+
+- Most customers (~11.66)
+
+- Highest sales (~$2,855)
+
+- High product diversity (~7.5 products)
+
+- High fuel share (~91%)
+
+- Large chains (avg. chain size ~105)
+
+## Revisiting the Research Question {.scrollable}
+
+**Can we identify meaningful segments of convenience stores based on transaction-level data?**
+
+Answer: Yes!
+
+- The clusters suggest three distinct operational models among stores in the dataset
+- These segments differ not only in customer base and sales
+
+Why it matters:
+
+- Product suppliers may target Cluster 3 with broader assortments.
+- Clusters 1 and 2 may benefit from operational support or format redesign.
+
+
+
+<!-- ## Additional Clustering Analysis {.scrollable} -->
+
+<!-- :::{.incremental} -->
+
+<!-- - Perform additional clustering analysis using other relevant variables (e.g., demographics, competition, accessibility) -->
+
+<!-- - Interpret the clusters and identify potential opportunities for new grocery store locations -->
+
+<!-- - Use visualization techniques (e.g., scatter plots, maps) to explore the clusters and their characteristics -->
+
 <!-- ::: -->
 
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
 
 
+# Project 2: Q\&A
 
+## Break into groups {.scrollable}
 
-## Where should we open a grocery store in AZ? {.scrollable}
+Based on your initial cluster analysis:
 
-From Chat GPT
+- What are some effective ways to present summary statistics and visualize your data?
 
-The ideal location for a grocery store in Arizona depends on various factors such as population density, demographics, competition, accessibility, and local zoning laws. Here are a few things to consider when choosing a location for a grocery store in Arizona:
+- How do the results of the clustering analysis inform your research question?
 
-Population density: Look for areas with a high population density, as this is likely to increase foot traffic to the store.
+- What insights can you take away from your analysis? What story does it tell?
 
-Demographics: Consider the demographics of the area you are targeting, such as age, income, and household size. These factors will affect what types of products will sell well in your store.
 
-Competition: Analyze the competition in the area, including the number and types of grocery stores, to determine the level of demand for a new store in the area.
-
-Accessibility: Consider the accessibility of the location, such as its proximity to major roads and public transportation. This can affect the convenience of shopping for customers.
-
-Local zoning laws: Check local zoning laws to ensure that the location you choose is zoned for commercial use and that there are no restrictions on operating a grocery store in the area.
-
-Some potential locations to consider for a grocery store in Arizona could include areas with growing populations, such as Phoenix, Tucson, and Mesa, or areas with a high concentration of college students, such as Tempe. Ultimately, conducting thorough research and analyzing the factors above can help you make an informed decision about the best location for your grocery store in Arizona.
-
-## Refining the question {.scrollable}
-
-Our current question: ``Where should we open a grocery store in AZ?''
-
-Normative. Can we clarify our objective?
-<!-- Where would opening a grocery store in AZ most likely generate the most profit in 30 years? -->
-
-Spatial scope. Can we clarify the spatial unit of analysis?
-<!-- In which county would opening a grocery store in AZ generate the most profit in 30 years? -->
-
-Store format. Can we clarify the type of grocery store?
-<!-- What type of grocery store format (e.g., supermarket, discount, specialty) would be most suitable in different areas of AZ? -->
-
-## Refining the question {.scrollable}
-
-Normative. Can we clarify our objective?
-
-- Where would opening a grocery store in AZ most likely generate the most profit in 30 years?
-
-Spatial scope. Can we clarify the spatial unit of analysis?
-
-- In which county would opening a grocery store in AZ generate the most profit in 30 years?
-
-Store format. Can we clarify the type of grocery store?
-
-- What type of grocery store format (e.g., supermarket, discount, specialty) would be most suitable in different areas of AZ?
-
-<!--
-## Conceptual framework 
-
-:::{.incremental}
-
-How do the economics work in this context?  What should influence grocery store profitability?
-
-- Profit = Revenue - Costs
-
-- Sales/revenue: people shop for groceries where convenient; they may be willing to travel further or pay more for specialty items; groceries are generally normal goods so more income -> more sales
-
-- Cost: labor costs may be higher in higher income areas; land/building rental rates, taxes and operating expenses (power, water)
-
-:::
--->
-## Data
-
-- Grocery stores
-
-- Population 
-
-- Income
-
-- Unemployment rate
-
-- Land area
-
-
-## EDA (Cluster Analysis)
-
-Let's explore the data with a cluster analysis
-
-Also, if the market is not in (or close) to equilibrium, cluster analysis may help identify areas with opportunities
-
-3 clusters on: stores, population, income, land area, unemployment
-
-## Store Number and Population
-
-![](includes/Store Number x Pop 2020.png)
-
-## Store Number and Unemployment
-
-![](includes/Store Number x Unemployment percent.png)
-
-
-## Store Number and Land Area
-
-![](includes/Store Number x Land Area sq mi.png)
-
-## Additional Clustering Analysis
-
-:::{.incremental}
-
-- Perform additional clustering analysis using other relevant variables (e.g., demographics, competition, accessibility)
-
-- Interpret the clusters and identify potential opportunities for new grocery store locations
-
-- Use visualization techniques (e.g., scatter plots, maps) to explore the clusters and their characteristics
-
-:::
-
-## Clustering Interpretation and Recommendations
-
-:::{.incremental}
-
-- Summarize the key findings from the clustering analysis
-
-- Discuss which clusters or areas appear to be underserved or have potential for a new grocery store
-
-- Provide recommendations on potential locations based on the clustering results and other factors considered
-
-- Highlight any limitations or caveats of the analysis
-
-:::
-
-## Project 2: Q\&A
-
-Let's discuss your ideas and approaches for Project 2:
-
-- Summarizing data and visualizing patterns
-
-- Conducting cluster analysis
-
-- Communicating cluster analysis
-
-
-## Summarizing Data and Visualizing Patterns
+## Summarizing Data and Visualizing Patterns {.scrollable}
 
 :::{.incremental}
 
@@ -220,19 +436,19 @@ Let's discuss your ideas and approaches for Project 2:
 
 :::
 
-## Communicating cluster analysis
+## Communicating Cluster Analysis {.scrollable}
 
 - What story does your cluster analysis tell?
 
-  - Sales in segment x are strong. 
+  - "Sales in segment x are strong." 
   
-- Create visuals to support your story.
+- Create visuals to support your story
 
-  - Bar chart with sales by segment.
+  - Bar chart with sales by segment
 
 - What is your call to action?
 
-  - We should market segment x.
+  - "We should market segment x."
 
 ## Summary
 
