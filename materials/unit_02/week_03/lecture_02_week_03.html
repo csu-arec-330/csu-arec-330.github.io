@@ -563,60 +563,83 @@
 <span id="cb9-19"><a href=""></a>  <span class="fu">arrange</span>(store_id, zip_code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="summary-stats" class="slide level2 scrollable">
+<h2>Summary Stats</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>sumstats <span class="ot">&lt;-</span> store_summary <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href=""></a>  <span class="fu">summarise</span>(</span>
+<span id="cb10-3"><a href=""></a>    <span class="at">mean_sales =</span> <span class="fu">mean</span>(total_sales),</span>
+<span id="cb10-4"><a href=""></a>    <span class="at">mean_customers =</span> <span class="fu">mean</span>(unique_customers),</span>
+<span id="cb10-5"><a href=""></a>    <span class="at">mean_products =</span> <span class="fu">mean</span>(product_diversity),</span>
+<span id="cb10-6"><a href=""></a>    <span class="at">mean_fuel_share =</span> <span class="fu">mean</span>(fuel_share),</span>
+<span id="cb10-7"><a href=""></a>    <span class="at">mean_chain_size =</span> <span class="fu">mean</span>(chain_size),</span>
+<span id="cb10-8"><a href=""></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb10-9"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">print</span>(sumstats, <span class="at">n =</span> <span class="cn">Inf</span>, <span class="at">width =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  mean_sales mean_customers mean_products mean_fuel_share mean_chain_size
+       &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;
+1       858.           4.21          3.19           0.809            40.3</code></pre>
+</div>
+</div>
+</section>
 <section id="log-transformations" class="slide level2 scrollable">
 <h2>Log-Transformations</h2>
 <p>Because these variables are very skewed, I log-transform <code>unique_customers</code>, <code>total_sales</code>, <code>product_diversity</code>, and <code>chain_size</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="co"># I noticed that the distribution of my store attributes is very skewed, so I want to rescale them.</span></span>
-<span id="cb10-2"><a href=""></a>final_dataset <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb10-4"><a href=""></a>    <span class="at">log_customers =</span> <span class="fu">log</span>(unique_customers <span class="sc">+</span> <span class="dv">1</span>),</span>
-<span id="cb10-5"><a href=""></a>    <span class="at">log_sales =</span> <span class="fu">log</span>(total_sales <span class="sc">+</span> <span class="dv">1</span>),</span>
-<span id="cb10-6"><a href=""></a>    <span class="at">log_products =</span> <span class="fu">log</span>(product_diversity <span class="sc">+</span> <span class="dv">1</span>),</span>
-<span id="cb10-7"><a href=""></a>    <span class="at">log_chain_size =</span> <span class="fu">log</span>(chain_size <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb10-8"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># I noticed that the distribution of my store attributes is very skewed, so I want to rescale them.</span></span>
+<span id="cb13-2"><a href=""></a>final_dataset <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-4"><a href=""></a>    <span class="at">log_customers =</span> <span class="fu">log</span>(unique_customers <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb13-5"><a href=""></a>    <span class="at">log_sales =</span> <span class="fu">log</span>(total_sales <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb13-6"><a href=""></a>    <span class="at">log_products =</span> <span class="fu">log</span>(product_diversity <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb13-7"><a href=""></a>    <span class="at">log_chain_size =</span> <span class="fu">log</span>(chain_size <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb13-8"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="ggpairs-plot" class="slide level2">
 <h2>GGPairs Plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="co"># Run the ggpairs() command</span></span>
-<span id="cb11-2"><a href=""></a>final_dataset <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href=""></a>  <span class="fu">select</span>(log_customers, log_sales, log_products, fuel_share, log_chain_size) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-4"><a href=""></a>  <span class="fu">ggpairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="co"># Run the ggpairs() command</span></span>
+<span id="cb14-2"><a href=""></a>final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href=""></a>  <span class="fu">select</span>(log_customers, log_sales, log_products, fuel_share, log_chain_size) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href=""></a>  <span class="fu">ggpairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
 <section id="almost-there-need-to-rescale-variables" class="slide level2 scrollable">
 <h2>Almost there… Need to rescale variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="co"># Prepare data for clustering</span></span>
-<span id="cb12-2"><a href=""></a>cluster_data <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href=""></a>  <span class="fu">select</span>(log_customers, log_sales, log_products, fuel_share, log_chain_size)</span>
-<span id="cb12-4"><a href=""></a></span>
-<span id="cb12-5"><a href=""></a>cluster_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(cluster_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="co"># Prepare data for clustering</span></span>
+<span id="cb15-2"><a href=""></a>cluster_data <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href=""></a>  <span class="fu">select</span>(log_customers, log_sales, log_products, fuel_share, log_chain_size)</span>
+<span id="cb15-4"><a href=""></a></span>
+<span id="cb15-5"><a href=""></a>cluster_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(cluster_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="choosing-the-number-of-clusters" class="slide level2 scrollable">
 <h2>Choosing the Number of Clusters</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># Use two common methods to help choose the number of clusters.</span></span>
-<span id="cb13-2"><a href=""></a></span>
-<span id="cb13-3"><a href=""></a><span class="co"># Elbow Method</span></span>
-<span id="cb13-4"><a href=""></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="co"># Use two common methods to help choose the number of clusters.</span></span>
+<span id="cb16-2"><a href=""></a></span>
+<span id="cb16-3"><a href=""></a><span class="co"># Elbow Method</span></span>
+<span id="cb16-4"><a href=""></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+<p><img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="co"># Silhouette Method</span></span>
-<span id="cb14-2"><a href=""></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="co"># Silhouette Method</span></span>
+<span id="cb17-2"><a href=""></a><span class="fu">fviz_nbclust</span>(cluster_scaled, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-9-2.png" width="960"></p>
+<p><img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-11-2.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -625,37 +648,37 @@
 <section id="perform-clustering-and-add-to-data" class="slide level2 scrollable">
 <h2>Perform Clustering and Add to Data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="co"># Perform k-means clustering on logged and scaled data</span></span>
-<span id="cb15-2"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb15-3"><a href=""></a>kmeans_fit <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(cluster_scaled, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span>
-<span id="cb15-4"><a href=""></a></span>
-<span id="cb15-5"><a href=""></a><span class="co"># Add cluster to dataset</span></span>
-<span id="cb15-6"><a href=""></a>final_dataset<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(kmeans_fit<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="co"># Perform k-means clustering on logged and scaled data</span></span>
+<span id="cb18-2"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb18-3"><a href=""></a>kmeans_fit <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(cluster_scaled, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span>
+<span id="cb18-4"><a href=""></a></span>
+<span id="cb18-5"><a href=""></a><span class="co"># Add cluster to dataset</span></span>
+<span id="cb18-6"><a href=""></a>final_dataset<span class="sc">$</span>cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(kmeans_fit<span class="sc">$</span>cluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualizing-the-clusters" class="slide level2 scrollable">
 <h2>Visualizing the Clusters</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">fviz_cluster</span>(kmeans_fit, <span class="at">data =</span> cluster_scaled, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">ellipse.type =</span> <span class="st">"norm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">fviz_cluster</span>(kmeans_fit, <span class="at">data =</span> cluster_scaled, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">ellipse.type =</span> <span class="st">"norm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
-<section id="cluster-summary-stats" class="slide level2 scrollable">
-<h2>Cluster Summary Stats</h2>
+<img data-src="lecture_02_week_03_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="compare-cluster-averages" class="slide level2">
+<h2>Compare Cluster Averages</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">print</span>(sumstats, <span class="at">n =</span> <span class="cn">Inf</span>, <span class="at">width =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="co"># Use the original (non-logged) variables because you're summarizing actual store characteristics — not the transformed versions.</span></span>
+<span id="cb20-2"><a href=""></a>final_clusters <span class="ot">&lt;-</span> final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href=""></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href=""></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">c</span>(unique_customers, total_sales, product_diversity, fuel_share, chain_size), mean))</span>
+<span id="cb20-5"><a href=""></a></span>
+<span id="cb20-6"><a href=""></a><span class="fu">print</span>(final_clusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 6
-  cluster mean_customers mean_sales mean_products mean_fuel_share
-  &lt;fct&gt;            &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
-1 1                 1.94      267.           1.55          1.01  
-2 2                 1.27       20.7          2.51          0.0707
-3 3                11.7      2855.           7.47          0.906 
-  mean_chain_size
-            &lt;dbl&gt;
-1            16.5
-2            27.1
-3           105. </code></pre>
+  cluster unique_customers total_sales product_diversity fuel_share chain_size
+  &lt;fct&gt;              &lt;dbl&gt;       &lt;dbl&gt;             &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+1 1                   1.94       267.               1.55     1.01         16.5
+2 2                   1.27        20.7              2.51     0.0707       27.1
+3 3                  11.7       2855.               7.47     0.906       105. </code></pre>
 </div>
 </div>
 </section>
@@ -663,14 +686,14 @@
 <h2>Most Frequent City by Cluster</h2>
 <p><strong>What are the top 5 cities where stores of each cluster are located?</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>final_dataset <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href=""></a>  <span class="fu">select</span>(cluster, city) <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href=""></a>  <span class="fu">group_by</span>(cluster, city) <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href=""></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-5"><a href=""></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
-<span id="cb19-6"><a href=""></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> n, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-7"><a href=""></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb19-8"><a href=""></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>final_dataset <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href=""></a>  <span class="fu">select</span>(cluster, city) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href=""></a>  <span class="fu">group_by</span>(cluster, city) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href=""></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href=""></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href=""></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> n, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href=""></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href=""></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>

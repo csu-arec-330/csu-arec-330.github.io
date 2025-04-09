@@ -193,6 +193,28 @@ final_dataset <- store_summary %>%
   arrange(store_id, zip_code)
 ```
 
+## Summary Stats {.scrollable}
+
+```{r}
+#| echo: true
+
+sumstats <- store_summary %>%
+  summarise(
+    mean_sales = mean(total_sales),
+    mean_customers = mean(unique_customers),
+    mean_products = mean(product_diversity),
+    mean_fuel_share = mean(fuel_share),
+    mean_chain_size = mean(chain_size),
+    .groups = "drop"
+  )
+```
+
+```{r}
+#| echo: true
+
+print(sumstats, n = Inf, width = Inf)
+```
+
 ## Log-Transformations {.scrollable}
 
 Because these variables are very skewed, I log-transform `unique_customers`, `total_sales`, `product_diversity`, and `chain_size`.
@@ -269,28 +291,20 @@ final_dataset$cluster <- factor(kmeans_fit$cluster)
 fviz_cluster(kmeans_fit, data = cluster_scaled, geom = "point", ellipse.type = "norm")
 ```
 
-## Cluster Summary Stats {.scrollable}
+
+## Compare Cluster Averages
 
 ```{r}
 #| echo: true
-#| include: false
-sumstats <- final_dataset %>%
+
+# Use the original (non-logged) variables because you're summarizing actual store characteristics — not the transformed versions.
+final_clusters <- final_dataset %>%
   group_by(cluster) %>%
-  summarise(
-    mean_customers = mean(unique_customers),
-    mean_sales = mean(total_sales),
-    mean_products = mean(product_diversity),
-    mean_fuel_share = mean(fuel_share),
-    mean_chain_size = mean(chain_size),
-    .groups = "drop"
-  )
+  summarize(across(c(unique_customers, total_sales, product_diversity, fuel_share, chain_size), mean))
+
+print(final_clusters)
 ```
 
-```{r}
-#| echo: true
-
-print(sumstats, n = Inf, width = Inf)
-```
 ## Most Frequent City by Cluster {.scrollable}
 
 **What are the top 5 cities where stores of each cluster are located?**
