@@ -158,7 +158,7 @@ fviz_nbclust(cluster_scaled, kmeans, method = "wss")
 
 # K-means clustering
 set.seed(123)
-kmeans_fit <- kmeans(cluster_scaled, centers = 4, nstart = 25)
+kmeans_fit <- kmeans(cluster_scaled, centers = 3, nstart = 25)
 
 final_clusters <- final_dataset %>%
   mutate(cluster = kmeans_fit$cluster)
@@ -171,6 +171,7 @@ View(final_clusters)
 
 length(unique(final_clusters$store_id))
 nrow(final_clusters)
+
 # =======================================================
 # WHAT DO YOUR CLUSTERS REVEAL?
 # =======================================================

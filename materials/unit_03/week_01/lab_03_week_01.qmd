@@ -1,5 +1,5 @@
 ---
-title: "Week 13 Lab: Introduction to Panel Data Analysis"
+title: "Week 13 Lab: Introduction to Panel Data Analysis and Spatial Data in R"
 format: 
   html:
     theme: zephyr
@@ -13,16 +13,162 @@ format:
 This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 :::
 
-
+<!-- In spring 2024, Lauren moved the R section on spatial data from lab week 11 to lab week 13 -->
 
 ## Learning Objectives R
+
+- Read and process spatial data
 
 - Read in and manipulate spatial data in R
 
 - Join spatial data
 
+- Prepare data for mapping in Tableau
 
-# R
+
+
+# Part 1: Introduction to Spatial Data in R
+
+Spatial data is a form of cross-sectional data that contains geographic information.^[Spatial data can also have temporal dimensions, and the concepts we cover here extend to those data too.] Examples include the location of a store or park, the boundary of a parcel of land, or the location of a weather measurement. In many cases, we need to process that data in some way or join it to other (potentially spatial) data for analysis.
+
+## Orientation and terms
+
+Two common types of spatial data in R are *vector* and *raster* data. Vector data represent geographic features as points, lines, and polygons, while raster data represent geographic features as a grid of cells with values assigned to each cell. Vector data is often used to represent discrete features such as the boundaries of a city or the location of a specific point of interest. Raster data, on the other hand, is often used to represent phenomena such as elevation or temperature that are continuous across the landscape.
+
+Working with spatial data in R involves using specialized packages and functions to read, manipulate, and visualize the data. Some popular packages for working with spatial data in R include `sf` and `raster`. With these tools, it's possible to perform a wide range of spatial analyses, such as overlaying different layers of data to find areas of overlap or proximity, extracting data for specific regions of interest, and creating custom maps and visualizations.
+
+## Task overview
+
+It is common to find data with specific location information (e.g., latitude and longitude coordinates). You may have separate data with other information that you want to associate with your location data. We will develop an example in which you have grocery store location data and county level data on population, unemployment, land area and income. You want to construct a dataset with county as the unit of observation, so you need to associate each grocery store with a county and count the number of occurrences within each county.
+
+## Setup
+
+Our first step is to start an R script and load packages. We start by reading in the grocery store data set we have been using, along with population data from [SEDAC](https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100/data-download) and income data.
+
+```{r}
+#| eval: false
+
+# This script will demonstrate how to work with spatial data and conduct some basic operations (e.g., intersection)
+
+# load packages
+library(pacman)
+p_load(tidyverse,janitor,sf,tigris,mapview)
+
+# read in grocery store location dataset
+gs_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/arizona_grocery_foot_traffic.csv")
+
+inc_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/inc.csv") 
+
+pop_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_02/inputs/hauer_county_totpop_SSPs.csv") 
+
+```
+## Converting to a spatial format
+
+The field of geography and geographic information systems (GIS) specialize in understanding and working with geospatial data. Locations are known because of a commonly understood reference system called a Coordinate Reference System (CRS). Think about a graph with $x$ and $y$ dimensions. A point on that graph has a set of coordinates that tell you the location. CRS in GIS can be more complicated because we are thinking about points that exist on a globe (this would be easier if the earth were flat). 
+
+The `gs_raw` dataframe has latitude and longitude coordinates. At this point, R considers these numbers like any other numeric variable. There are packages built to understand and work with geospatial data. `sf` stands for simple features and is a commonly used package. We will use it to convert the `gs_raw` data into a spatially aware data frame.
+
+```{r}
+#| eval: false
+
+# convert data frame to a points simple feature object
+gs_geo <- gs_raw %>%
+  select(placekey,latitude,longitude) %>% 
+  st_as_sf(coords=c("longitude","latitude"),crs=4326)
+
+```
+
+Notice that we first subset the variables `placekey` and the coordinates. The next line tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). `gs_geo` is a different object than we have worked with before but it looks and behaves like a familiar dataframe. 
+
+
+## Getting Census boundaries
+The dataframe `gs_raw` contained a lot of meta information but not county. Boundaries for commonly used geometries are available from the US Census and accessible through an API to the census repository of these boundaries (called Tiger). The R package `tigris` provides a very convenient API to access them. 
+
+```{r}
+#| eval: false
+
+#need county polygons
+az_co <- tigris::counties(state = "AZ",cb=T,class="sf") %>%
+  janitor::clean_names() %>%
+  mutate(aland=aland/2.59e+6) %>%
+  st_transform(4326)
+
+```
+
+This command extracts the county boundaries for arizona and reads them into an sf object called `az_co`.  The names are capitalized, so I like to clean them, the land area reported is in square meters so I convert it to square miles, and we want to ensure that it is in the same coordinate reference system as our store locations. Notice that the spatial type of these data are POLYGONs rather than POINTs.
+
+It is often helpful to look at data especially when mapping. R can leverage very powerful mapping tools, but we will just use them to make sure we are doing what we think we are doing. We can use mapview to look at the data. You can do the same with `az_co`.
+
+```{r}
+#| eval: false
+#Set the option to make mapview render the points in preview
+mapviewOptions(fgb = FALSE)
+
+#map the grocery stores
+mapview(gs_geo)
+
+```
+
+## Intersecting points with polygons
+
+Spatial data processing tools can understand the shared location of points and polygons to associate data from one dataset with another.  Our objective is to associate a county name and identifier with each grocery store so that we can count the number of stores in each county.
+
+```{r}
+#| eval: false
+
+#join county to gs
+gs_co_geo <- st_intersection(gs_geo,az_co)
+
+```
+
+Notice that `gs_co_geo` has all of the observations from `gs_geo` and has the corresponding variables from `az_co` attached to it. Now we have the information to count the number of store in each county. The group_by and summarize combination can also be used to conduct spatial operations like mashing polygons together.  Moreover, we don't need the spatial information anymore since everything will be at the county level. We use `st_set_geometry(NULL)` to convert an sf object back to a data frame (without spatial information).
+
+```{r}
+#| eval: false
+
+#make nonspatial object and join with other datasets
+gs_co <- gs_co_geo %>%
+  st_set_geometry(NULL) %>% #converts back to dataframe
+  group_by(geoid) %>% 
+  summarize(stores=n()) %>%
+  ungroup()  #forgets the grouping information otherwise it can affect future opertations
+
+```
+
+## Merging county data
+
+Now all datasets are aggregated to the county level, so we can merge or join them together. Many counties in the US share the same name even in different states.  Federal Information Processing Standard (FIPS) codes are a more reliable key to join on. Before joining the data together, lets process the individual datasets to prepare them for easy merging.
+
+```{r}
+#| eval: false
+
+#Constructing a name and land area reference to join to analysis dataset
+co_name_land <- az_co %>% 
+  st_set_geometry(NULL) %>% 
+  select(geoid,aland,name)
+
+#process population data (source: https://sedac.ciesin.columbia.edu/data/set/popdynamics-us-county-level-pop-projections-sex-race-age-ssp-2020-2100/data-download)
+pop <- pop_raw %>%
+  janitor::clean_names() %>%
+  filter(statefp10=="04") %>% #filter only arizona fips==04
+  select(geoid=geoid10,ssp22020,ssp22050)  #keep only the middle of the road projection
+  
+hh_inc <- inc_raw %>%
+  rename(geoid=FIPS)
+
+#sequence of inner join statements all based on fips or geoid
+analysis_ds <- gs_co %>%
+  inner_join(co_name_land ,by = "geoid") %>% #converting sq meters to sq miles
+  inner_join(pop,by = "geoid") %>%
+  inner_join(hh_inc,by = "geoid")
+
+```
+
+You can continue using this dataset to analyze in R or export for use in Tableau.
+
+{{< video https://youtu.be/LeZTDS3MDBY aspect-ratio="16x9" >}}
+
+# Part 2: Using R to Perform Spatial Joins
 
 Spatial data is a form of cross-sectional data that contains geographic information.^[Spatial data can also have temporal dimensions, and the concepts we cover here extend to those data too.] Examples include the location of a store or park, the boundary of a parcel of land, or the location of a weather measurement. In many cases, we need to process that data in some way or join it to other (potentially spatial) data for analysis.
 
@@ -310,10 +456,100 @@ store_sales_weather <- store_sales_co %>%
 
 
 
+<!-- Originally part of week 11 lab notes, but as of Spring 2024 we only covered regression in unit 03. -->
 
-## Summary
+<!-- ## Summary -->
 
-This lab demonstrates how to join spatial point data (convenience store locations) with spatial polygon data (county boundaries). Standard political boundaries like counties can be used as a common identifier to join US Census data. The lab also covered joining data that varies over space and time.
+<!-- This lab demonstrates how to join spatial point data (convenience store locations) with spatial polygon data (county boundaries). Standard political boundaries like counties can be used as a common identifier to join US Census data. The lab also covered joining data that varies over space and time. -->
 
 
 
+<!-- # Tableau -->
+
+<!-- ## Learning Objectives Tableau -->
+
+<!-- - Create visualizations that highlight outliers in regression results -->
+
+<!-- - Incorporate other important variables in your visualizations of regression results -->
+
+<!-- ### Visualizing Regression Results in Tableau -->
+
+<!-- Last time we discussed how to plot your linear regression output from R. Today we will go into more detail on improving the utility of your regression estimates as well as ideas for plotting predicted versus observed values. -->
+
+<!-- #### 1. Annotate figures to highlight points that are outliers or far from your regression line -->
+
+<!-- Let's connect to the dataset we used in R to conduct a regression analysis (I named this `analysis_ds.csv`).  -->
+
+<!-- 1. Create a scatterplot that shows the relationship between the number of stores and the population in 2020 (divided by 1000, **how?**) -->
+
+<!-- 2. Create a new calculated field that captures your regression output using *reasonable* values for median household income, land area, and unemployment. (Hint: what are the summary statistics for these variables?) -->
+
+<!-- 3. Add the line that results from this calculated field to your scatterplot. -->
+
+<!-- 4. Now let's add some annotation to highlight Maricopa county to explain to the audience why this is such an outlier. Drag the field `Name` to the Label card. Deselect the `show mark labels` option. Right click the outlier point, select `Mark Label` -> `Always Show`. -->
+
+<!-- 5. You can also add some text to help explain this outlier. Right click the point again and select `Annotate` -> `Point`. You might add some text like `This county contains Pheonix, which has the highest population and number of stores in Arizona.` (Or whatever you want to say.) -->
+
+<!-- 6. You can also add some color to highlight this point. Right click on the point and select `Create Set`. Name this set `Outlier`. Once this set is created you will see a new field called `Outlier`. Drag this to the Color card. Change the colors as you desire, and hide the legend. -->
+
+<!-- 7. Finally, we can incorporate another dimension in our analysis using the `Size` card. Choose one of the other variables you used in your regression analysis (I will use land area) and drag it to the Size card. You can then play with opacity, colors, and the relative sizes to make your visualization more effective. -->
+
+<!-- #### 2. Create visualizations to show differences between future predictions of the number of stores and current number of stores -->
+
+<!-- In R you used projections of population size in 2050 to produce estimates of the number of stores that we expect each county to support in 2050. Let's explore some different ways of visualizing these data. -->
+
+<!-- 1. Connect to the dataset we created in R with results from our projections and current store numbers (I named this `gs_all.csv`). You can either join this with the dataset used for the regression analysis on the geoid variable (to stay in the same workbook) or open a new workbook. -->
+
+<!-- 2. Create a new calculated field equal to the difference between the number of (predicted) stores in 2050 and the number of (observed) stores in 2020. Name this `Store Diff`. -->
+
+<!-- 3. Create one more calculated field that indicates whether there is an increase or decrease in the number of stores. Call this field `Change in Stores` and use an `IF` `THEN` statement to create it.  -->
+
+<!-- **Bullet Graphs** -->
+
+<!-- 4. First, let's create a bullet graph. Select the fields `Name` `Stores 2020` and `Stores 2050` and go to Show Me -> Bullet Graph. By default the bullet graph shades regions associated with different percentiles of the variable on the x-axis (here 60% and 80% values of the Stores in 2020), and adds lines that represent the values of our second variable (here Stores in 2050). -->
+
+<!-- 5. Let's make the bullet graph more useful for our purposes. Click on one of the markers showing the value of Stores in 2050. Click `Format` and in the left format pane that appears select `Fill below` and select a shade of gray. Now your figure shows the number of current stores (in blue) and the number of future stores (in gray).  -->
+
+<!-- 6. Now let's add some useful color to demonstrate which counties have expected growth in store numbers and which have expected losses. Drag your calculated `Change in Stores` field to the Colors card. (You will need to assign it as a dimension and discrete) Let's change the colors so that red is associated with a decrease in the number of stores and green is associated with an increase. -->
+
+<!-- 7. Finally, you may want the colored bars to indicate the projected store values rather than current. We can do this quickly by right clicking the x-axis and selecting `Swap reference line fields`. -->
+
+<!-- **Dumbbell Charts** -->
+
+<!-- 8. Next let's create a dumbbell chart (what you created in R). Open a new sheet in your Tableau workbook. Drag `Name` to the Rows shelf and `Measure Values` to the Columns shelf. This will add all of our measures to our viz. Let's delete everything except Stores 2020 and Stores 2050. Note that the level of aggregation doesn't really matter because there is only one observation per county. -->
+
+<!-- 9. Let's change this fram bars to points my changing the graph type from automatic to circle. Then drag `Measure Names` to the Color card to change the colors of these points to be associated with the number of stores at the two different time points. -->
+
+<!-- 10. Now we need to add lines connecting these points. Drag the `Measure Values` field to the Columns shelf (next to the current one). Create dual x-axes, synchronize them, and hide the upper x-axis header. Now we have two plots, but both are doing the same thing. Change one of your plots to a line (from circle). By default, Tableau connects all the points across counties, but we can change this behavior by dragging `Measure Names` to the Path card. -->
+
+<!-- 11. Let's again add some color to indicate increases and decreases. Drag your calculated `Change in Stores` field to the Color card. (You will need to assign it as a dimension and discrete) -->
+
+<!-- 12. We might want this color to apply to both the lines and points instead of just the lines. To do this go to the card for your circle plot. Drag `Measure Names` to the Detail card. Drag your calculated `Change in Stores` field to the Color card. (You will need to assign it as a dimension and discrete). Then let's change this from a circle plot to a Shape plot and drag `Measure Names` to the Shape card. Choose some shapes that scream to you "beginning" and "end". -->
+
+<!-- 13. Finally, you might want to add the option to hide Maricopa county to make your visualization more readable. Drag the `Name` field to the Filters card and deselect `Maricopa` -->
+
+<!-- **Maps** -->
+
+<!-- 14. Now let's create a filled map to highlight these changes. Open a new sheet in your workbook, select `Geoid` and `Store Diff` (your calculated field) and go to Show Me -> Filled map.  -->
+
+<!-- 15. Tableau's default coloring is not incredibly useful here, so let's edit these. Go to your Color card and Edit Colors. Select the `Red-Green Diverging` color palette and click ok. This is a bit better, but because of the large change in Maricopa county, it's a little hard to see the negative changes. Let's go back to the Color editing window and select `Use Full Color Range`. -->
+
+<!-- 16. Finally, it might be more useful to see the percentage change, rather than numeric change in the number of stores. Create a new calculated field called `Percent Change` using the equation `([Stores 2050]-[Stores 2020])/[Stores 2020]`. Create a new filled map following the previous steps to show percentage, rather than level, changes in store counts. -->
+
+<!-- ### Visualizing Clusters in Tableau -->
+
+<!-- Last time we showed you how to visualize your cluster analysis from R in Tableau. This time, let's look at Tableau's clustering capabilities. It turns out that you can apply K-means clustering in Tableau! Unfortunately you cannot apply other clustering techniques, which is a limitation of doing this in Tableau instead of R. But, you can quickly and effectively perform fairly simple clustering analysis within Tableau. Read more about Tableau's clustering algorithm (and see a tutorial) [here](https://help.tableau.com/current/pro/desktop/en-us/clustering.htm). -->
+
+<!-- 1. Let's open a new sheet in the workbook connected to your analysis dataset (`analysis_ds.csv`). Select `Geoid` and Show Me a Filled Map. Drag all the fields used in your cluster analysis to the Detail card (`Aland`, `Median hh inc`, `Ssp2020`, `Stores`, and `Unemployment`). -->
+
+<!-- 2. Go to the `Analytics` tab on the left and drag `Cluster` onto your map (drop it on the pop-up window that appears). You can let Tableau automatically determine the number of custers, or you can assign a number of clusters. (The link above offers details on how Tableau determines the optimal number of clusters.) -->
+
+<!-- 3. By default, Tableau has created 4 clusters, but it is not immediately clear what these clusters represent. One fast way to understand these different clusters is by clicking the dropdown menu for our cluster variable and selecting `Describe Clusters`. Here you can see summary statistics across all the variables used to create the clusters. -->
+
+<!-- 4. We can also investigate the meaning of our clsuters using scatterplots across our relevant variables. First, let's add our clusters to our fields by dragging it to the data pane. Next, let's duplicate our first scatterplot showing our regression results. Let's filter out Maricopa county to make this easier to see. And let's drag our new `Clusters` field to the Color card. Here, we are intersted in understanding if any clusters highlight counties that have few stores relative to their population size. Do any colors stand out to you? -->
+
+<!-- 5. We can replicate this analysis for each of our variables, but we will have to recreate our regression line so that it changes over the appropriate variable. Duplicate your calculated field `Regression Line 1` and edit this new field. Let's name it `Regression Line 2` and use the equation `74.51933 + 0.46365*(100) -1.06666*([Median Hh Inc]/1000) -0.84796*(7577/1000) + 1.69241*(6)` to make this line change over median household income, rather than population.  -->
+
+<!-- 6. Create a scatterplot that shows the relationship between the number of stores and the Median HH income and add this new regression line to your scatterplot. Again, we are interested in identifying counties that have few stores relative to their median household income. Do any clusters stand out to you? -->
+
+<!-- 7. If your cluster analysis does not reveal anything useful, you will likely want to adjust the variables included in your cluster analysis or perhaps the number of clusters. -->

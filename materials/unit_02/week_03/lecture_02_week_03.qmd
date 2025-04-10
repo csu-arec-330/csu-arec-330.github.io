@@ -277,7 +277,7 @@ fviz_nbclust(cluster_scaled, kmeans, method = "silhouette")
 
 # Perform k-means clustering on logged and scaled data
 set.seed(123)
-kmeans_fit <- kmeans(cluster_scaled, centers = 3, nstart = 25)
+kmeans_fit <- kmeans(cluster_scaled, centers = 4, nstart = 25)
 
 # Add cluster to dataset
 final_dataset$cluster <- factor(kmeans_fit$cluster)
@@ -322,48 +322,54 @@ final_dataset %>%
   kable()
 ```
 
-## Cluster 1: Fuel-Focused, Low-Volume Stores {.scrollable}
+## Cluster 1: Fuel-Dominant, Low-Volume Stores {.scrollable}
 
-**These appear to be fuel-dominant convenience stores with very limited in-store purchases. Possibly rural or highway locations.**
+**These stores are primarily fuel-oriented, with minimal in-store shopping. Likely located in rural or highway areas.**
 
-- Few customers (~1.94 avg.)
+- Very few customers (~1.63)
 
-- Very low sales (~$267 total)
+- Low sales (~$163)
 
-- Very limited product diversity (~1.5 products)
+- Very limited product variety (~1.36)
 
-- Almost all transactions are fuel (fuel share ~1.01)
-
-- Small to mid-size chains (avg. chain size ~16.5)
+- Fuel share > 1 (likely a data artifact, possibly due to fuel-only transactions dominating the count)
 
 
-## Cluster 2: Low-Volume, Non-Fuel Stores {.scrollable}
+## Mid-Volume, High-Diversity Stores {.scrollable}
 
-**These are likely small-format, low-traffic stores that don’t rely heavily on fuel. Possibly struggling or underutilized stores.**
+**These stores show a more balanced customer base and diverse product offerings, suggesting a hybrid model of fuel + general merchandise.**
 
-- Fewest customers (~1.27)
+- Moderate customers (~5.53)
 
-- Lowest sales (~$21 total)
+- Strong sales (~$1,796)
 
-- Slightly more product diversity (~2.5 products)
+- High product diversity (~6.81)
 
-- Very low fuel share (~7%)
+- High fuel share (~89%)
 
-- Mid-size chains (avg. chain size ~27)
+## Cluster 3: High-Volume, High-Sales Stores {.scrollable}
 
-## Cluster 3: High-Volume, High-Diversity Stores {.scrollable}
+**These stores are top performers in both customer traffic and revenue. Possibly urban or destination stores with strong retail and fuel performance.**
 
-**These stores appear to be high-performing, full-service stores, possibly flagship locations or urban/high-traffic sites. Strong sales, product range, and large customer base.**
+- Most customers (~19.79)
 
-- Most customers (~11.66)
+- Highest sales (~$3,641)
 
-- Highest sales (~$2,855)
+- Moderately high product diversity (~4.78)
 
-- High product diversity (~7.5 products)
+- High fuel share (~94%)
 
-- High fuel share (~91%)
+## Cluster 4: Low-Volume, Non-Fuel Stores {.scrollable}
 
-- Large chains (avg. chain size ~105)
+**These appear to be underperforming stores with limited traffic, low sales, and minimal fuel activity. May represent struggling or niche-format stores.**
+
+- Fewest customers (~1.25)
+
+- Lowest sales (~$17.90)
+
+- Low product diversity (~2.38)
+
+- Very low fuel share (~6.5%)
 
 ## Revisiting the Research Question {.scrollable}
 
@@ -371,13 +377,16 @@ final_dataset %>%
 
 Answer: Yes!
 
-- The clusters suggest three distinct operational models among stores in the dataset
-- These segments differ not only in customer base and sales
+- The clusters suggest four distinct operational models among stores in the dataset.
+- These segments differ in customer base, sales volume, product assortment, and fuel reliance — reflecting meaningful variation in store strategy and performance.
 
 Why it matters:
 
-- Product suppliers may target Cluster 3 with broader assortments.
-- Clusters 1 and 2 may benefit from operational support or format redesign.
+- Product suppliers may target Clusters 2 and 3 with expanded assortments or promotions.
+
+- Clusters 1 and 4 may signal opportunities for format innovation, operational improvement, or market exit.
+
+- Retailers can use this segmentation to prioritize investments, tailor inventory strategies, and benchmark performance.
 
 
 
