@@ -20,19 +20,6 @@ Analyzing cross-sectional data
 Project 2 overview and example
 
 
-<!-- example of big text fit to slide width -->
-
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
-
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
-
 ## Data Types (Recall)
 
 ![](https://static.vecteezy.com/system/resources/previews/031/089/964/non_2x/the-relational-model-usually-operates-on-cross-sectional-or-time-series-data-while-the-sequential-model-works-with-more-complex-panel-data-which-combines-bot-vector.jpg)
@@ -137,6 +124,8 @@ For example:
 
 ## How does K-means clustering work? {.scrollable}
 
+[Watch this video on K-means clustering](https://youtu.be/4b5d3muPQmA)
+
 - The algorithm finds groups ("clusters") within data by minimizing the distance between observations in each cluster.
 
 1. Choose the number of clusters (k) that you want to identify in the data.
@@ -149,8 +138,6 @@ For example:
 Usually, we repeat this whole process a number of times and choose the group assignment that minimizes the overall variance.
 
 After clustering, summarize attributes of the clusters to understand the groups.
-
-[Watch this video on K-means clustering](https://youtu.be/4b5d3muPQmA)
 
 ## Choosing the Optimal Number of Clusters (k)  {.scrollable}
 
@@ -194,6 +181,25 @@ Goal: Use sales data to divide your customers into groups to better tailor promo
 
 ![](includes/customer_segmentation.png)
 
+## Why segment your customers?
+
+We live in a noisy world and crowded marketplace
+
+People are getting better at ignoring and there are more niches
+
+Increase the chances of of reaching the right customers with the right message at the right time
+
+Increase sales, revenue, and hopefully profit
+
+## Dimensions of customer segmentation
+
+Identify customer personas
+
+Customer stage - leads, prospects, existing customers
+
+Customer demographics - age, gender, income, location, occupation
+
+Customer behaviors - purchase history, web browsing activity
 
 ## Example of Cluster Analysis Application {.scrollable}
 
@@ -211,6 +217,48 @@ After doing the cluster analysis, you identify three clusters:
 - Cluster 2: Infrequent but high-spend visits. Target with loyalty rewards.
 - Cluster 3: Rare, low-spend visits for soft drinks. Use promos to drive return trips.
 
+
+## Following customer segmentation, we can create maps like this one...
+
+The [ESRI Tapestry Segmentation Example](https://doc.arcgis.com/en/esri-demographics/latest/regional-data/tapestry-segmentation.htm) uses cluster analysis on census demographic data (+ others) to define groups.
+
+![](includes/esri_tapestry.jpeg){fig-align="center"}
+
+# MetLife Case Study 
+
+## Customer segmentation analysis
+
+A common application of cluster analysis is to use sales data to divide customers into groups to improve target marketing.
+
+Let's look at a case study. . .
+
+##
+
+```{=html}
+<iframe width="100%" height="500" src="https://d3.harvard.edu/platform-rctom/submission/metlife-a-case-study-in-customer-segmentation/"></iframe>
+```
+
+<!-- ## How do you know if you are achieving your goal? -->
+
+<!-- ::: .columns -->
+
+<!-- ::: {.column width="45%"} -->
+<!-- Measuring Key Performance Indicators (KPIs) -->
+
+<!-- Conversion rates - online click through -->
+
+<!-- Customer loyalty - rates of repeat purchases -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+
+<!-- ![](https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2023_02_Clickthrough-rate-1.jpg) -->
+
+<!-- ::: -->
+<!-- ::: -->
+
+
 ## Connection to Your Project
 
 In your analysis, you'll:
@@ -218,7 +266,6 @@ In your analysis, you'll:
 1. Identify segments clearly from cross-sectional convenience store data.
 2. Characterize each cluster to understand customer/store/product groups.
 3. Use clusters as a foundation for deeper analysis in Unit 3, where we'll track these segments over time to see how membership predicts future behavior.
-
 
 <!-- Make these clicker questions -->
 
