@@ -21,7 +21,10 @@ This problem set helps you continue analyzing your data and prepares you for you
 
 3. Generate a `ggpairs` plot (i.e., the density/scatter/correlation plot) of your clustering variables. 
 
-4. Write a narrative that interprets the `ggpairs()` plot. Describe the distribution of each variable and the correlations between variables, or other notable features you observe and explain their relevance to your analysis.
+4. Write a narrative that interprets the `ggpairs()` plot. Describe the distribution of each variable (the figures along the diagonal) and the correlations between variables (the values in the upper triangle), or other notable features you observe and explain their relevance to your analysis.
+
+  - Do the log-transformations reduce the skew in the distributions of your cluster variables?
+  - Are any of the correlation coefficients close to one (greater than 0.8 indicates variables that are collinear)? If so, this is evidence that some of the the variables appear to be redundant.
 
 ### K-Means Cluster Analysis in R
 

@@ -23,7 +23,7 @@ title: "Week 10: Intro to Mapping and Visualizing Cross-Sectional Data"
 
 <b>Problem Set: Due Apr 11 at 11:59 PM</b> <br>
 
-<a  href="/materials/unit_02/week_02/ps_02_week_02.html" target="_blank">Project 02: Problem Set 01 Instructions</a> <br> 
+<a  href="/materials/unit_02/week_02/ps_02_week_02.html" target="_blank">Project 02: Problem Set 02 Instructions</a> <br> 
 
 </div>
 

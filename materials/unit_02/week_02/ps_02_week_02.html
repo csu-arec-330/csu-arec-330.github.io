@@ -76,8 +76,12 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Update your R script to reflect <strong>any additional cleaning and processing steps</strong> you performed (e.g., handling missing data, dropping observations, transformations, aggregations) since Project 02 - Problem set 01. Add comments throughout your code so that a reader would be able to reproduce your steps based solely on your descriptions.</p></li>
 <li><p>Summarize the variables using <code>datasummary()</code>. Present a nicely formatted table and discuss your results.</p></li>
 <li><p>Generate a <code>ggpairs</code> plot (i.e., the density/scatter/correlation plot) of your clustering variables.</p></li>
-<li><p>Write a narrative that interprets the <code>ggpairs()</code> plot. Describe the distribution of each variable and the correlations between variables, or other notable features you observe and explain their relevance to your analysis.</p></li>
+<li><p>Write a narrative that interprets the <code>ggpairs()</code> plot. Describe the distribution of each variable (the figures along the diagonal) and the correlations between variables (the values in the upper triangle), or other notable features you observe and explain their relevance to your analysis.</p></li>
 </ol>
+<ul>
+<li>Do the log-transformations reduce the skew in the distributions of your cluster variables?</li>
+<li>Are any of the correlation coefficients close to one (greater than 0.8 indicates variables that are collinear)? If so, this is evidence that some of the the variables appear to be redundant.</li>
+</ul>
 </section>
 <section id="k-means-cluster-analysis-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="k-means-cluster-analysis-in-r">K-Means Cluster Analysis in R</h3>

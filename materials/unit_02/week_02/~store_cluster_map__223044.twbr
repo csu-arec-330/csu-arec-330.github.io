@@ -1,0 +1,1910 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20243.25.0208.0338                               -->
+<workbook original-version='18.1' source-build='2024.3.4 (20243.25.0208.0338)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <AnimationOnByDefault />
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <MapboxVectorStylesAndLayers />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <SavingAnalyticObjects />
+    <SchemaViewerObjectModel />
+    <SetMembershipControl />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+    <WorksheetBackgroundTransparency />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='final_clusters_out' inline='true' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='final_clusters_out' name='textscan.18syycy0pezre91cla61110lojfk'>
+            <connection class='textscan' directory='C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_02/week_02' filename='final_clusters_out.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.18syycy0pezre91cla61110lojfk' name='final_clusters_out.csv' table='[final_clusters_out#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='integer' name='store_id' ordinal='0' />
+            <column datatype='real' name='total_sales' ordinal='1' />
+            <column datatype='integer' name='unique_customers' ordinal='2' />
+            <column datatype='integer' name='product_diversity' ordinal='3' />
+            <column datatype='integer' name='fuel_transactions' ordinal='4' />
+            <column datatype='integer' name='total_transactions' ordinal='5' />
+            <column datatype='real' name='fuel_share' ordinal='6' />
+            <column datatype='integer' name='chain_size' ordinal='7' />
+            <column datatype='string' name='store_name' ordinal='8' />
+            <column datatype='integer' name='store_chain_id' ordinal='9' />
+            <column datatype='string' name='store_chain_name' ordinal='10' />
+            <column datatype='string' name='street_address' ordinal='11' />
+            <column datatype='string' name='city' ordinal='12' />
+            <column datatype='integer' name='zip_code' ordinal='13' />
+            <column datatype='real' name='latitude' ordinal='14' />
+            <column datatype='real' name='longitude' ordinal='15' />
+            <column datatype='real' name='log_customers' ordinal='16' />
+            <column datatype='real' name='log_sales' ordinal='17' />
+            <column datatype='real' name='log_products' ordinal='18' />
+            <column datatype='real' name='log_chain_size' ordinal='19' />
+            <column datatype='integer' name='cluster' ordinal='20' />
+            <column datatype='string' name='subcategory' ordinal='21' />
+            <column datatype='integer' name='purchase_count' ordinal='22' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>store_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[store_id]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>store_id</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_sales</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[total_sales]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>total_sales</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>unique_customers</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[unique_customers]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>unique_customers</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>product_diversity</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[product_diversity]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>product_diversity</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fuel_transactions</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[fuel_transactions]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>fuel_transactions</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>total_transactions</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[total_transactions]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>total_transactions</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>fuel_share</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[fuel_share]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>fuel_share</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>chain_size</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[chain_size]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>chain_size</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>store_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[store_name]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>store_name</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>store_chain_id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[store_chain_id]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>store_chain_id</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>store_chain_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[store_chain_name]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>store_chain_name</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>street_address</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[street_address]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>street_address</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>city</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[city]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>city</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zip_code</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[zip_code]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>zip_code</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>latitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[latitude]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>latitude</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>longitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[longitude]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>longitude</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>log_customers</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[log_customers]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>log_customers</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>log_sales</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[log_sales]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>log_sales</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>log_products</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[log_products]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>log_products</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>log_chain_size</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[log_chain_size]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>log_chain_size</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cluster</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[cluster]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>cluster</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>subcategory</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[subcategory]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>subcategory</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>purchase_count</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[purchase_count]</local-name>
+            <parent-name>[final_clusters_out.csv]</parent-name>
+            <remote-alias>purchase_count</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Sales Category' datatype='string' name='[Calculation_-6643935283676909566]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF [total_sales] &lt; 100 THEN &apos;Low&apos;&#13;&#10;ELSEIF [total_sales] &lt; 550 THEN &apos;Medium&apos;&#13;&#10;ELSE &apos;High&apos;&#13;&#10;END' />
+      </column>
+      <column caption='final_clusters_out.csv' datatype='table' name='[__tableau_internal_object_id__].[final_clusters_out.csv_47734341501742B598FB64853AA4EA9F]' role='measure' type='quantitative' />
+      <column caption='Chain Size' datatype='integer' name='[chain_size]' role='measure' type='quantitative' />
+      <column caption='City' datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+      <column caption='Fuel Share' datatype='real' name='[fuel_share]' role='measure' type='quantitative' />
+      <column caption='Fuel Transactions' datatype='integer' name='[fuel_transactions]' role='measure' type='quantitative' />
+      <column aggregation='Avg' caption='Latitude' datatype='real' name='[latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column caption='Log Chain Size' datatype='real' name='[log_chain_size]' role='measure' type='quantitative' />
+      <column caption='Log Customers' datatype='real' name='[log_customers]' role='measure' type='quantitative' />
+      <column caption='Log Products' datatype='real' name='[log_products]' role='measure' type='quantitative' />
+      <column caption='Log Sales' datatype='real' name='[log_sales]' role='measure' type='quantitative' />
+      <column aggregation='Avg' caption='Longitude' datatype='real' name='[longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <column caption='Product Diversity' datatype='integer' name='[product_diversity]' role='measure' type='quantitative' />
+      <column caption='Purchase Count' datatype='integer' name='[purchase_count]' role='measure' type='quantitative' />
+      <column caption='Store Chain Id' datatype='integer' name='[store_chain_id]' role='dimension' type='ordinal' />
+      <column caption='Store Chain Name' datatype='string' name='[store_chain_name]' role='dimension' type='nominal' />
+      <column caption='Store Id' datatype='integer' name='[store_id]' role='dimension' type='ordinal' />
+      <column caption='Store Name' datatype='string' name='[store_name]' role='dimension' type='nominal' />
+      <column caption='Street Address' datatype='string' name='[street_address]' role='dimension' type='nominal' />
+      <column caption='Subcategory' datatype='string' name='[subcategory]' role='dimension' type='nominal' />
+      <column caption='Total Sales' datatype='real' name='[total_sales]' role='measure' type='quantitative' />
+      <column caption='Total Transactions' datatype='integer' name='[total_transactions]' role='measure' type='quantitative' />
+      <column caption='Unique Customers' datatype='integer' name='[unique_customers]' role='measure' type='quantitative' />
+      <column aggregation='Sum' caption='Zip Code' datatype='integer' default-format='*00000' name='[zip_code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+      <column-instance column='[fuel_share]' derivation='Sum' name='[sum:fuel_share:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[log_chain_size]' derivation='Sum' name='[sum:log_chain_size:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[log_customers]' derivation='Sum' name='[sum:log_customers:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[log_products]' derivation='Sum' name='[sum:log_products:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[log_sales]' derivation='Sum' name='[sum:log_sales:qk]' pivot='key' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:AdhocCluster:2:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>1</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>4</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>3</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:AdhocCluster:5:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>1</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>4</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>3</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <analytic-model>
+        <name>
+          <field name='[AnalyticModel:{352d62ed-9ebb-4117-a25a-e2ea341c35e7}]' />
+        </name>
+        <analytic-model-specifications class='cluster-specifications'>
+          <analysis-fields>
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:fuel_share:qk]' />
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_chain_size:qk]' />
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_customers:qk]' />
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_products:qk]' />
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_sales:qk]' />
+          </analysis-fields>
+          <filter-fields />
+          <lod-fields />
+          <number-of-desired-clusters>4</number-of-desired-clusters>
+          <is-dissagregate>false</is-dissagregate>
+        </analytic-model-specifications>
+        <result-fields />
+      </analytic-model>
+      <analytic-model>
+        <name>
+          <field name='[AnalyticModel:{80bf0f6e-0c45-413c-8d79-1f23685d6d13}]' />
+        </name>
+        <analytic-model-specifications class='cluster-specifications'>
+          <analysis-fields>
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:fuel_share:qk]' />
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_chain_size:qk]' />
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_customers:qk]' />
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_products:qk]' />
+            <field name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_sales:qk]' />
+          </analysis-fields>
+          <filter-fields />
+          <lod-fields />
+          <number-of-desired-clusters>4</number-of-desired-clusters>
+          <is-dissagregate>false</is-dissagregate>
+        </analytic-model-specifications>
+        <result-fields />
+      </analytic-model>
+      <object-graph>
+        <objects>
+          <object caption='final_clusters_out.csv' id='final_clusters_out.csv_47734341501742B598FB64853AA4EA9F'>
+            <properties context=''>
+              <relation connection='textscan.18syycy0pezre91cla61110lojfk' name='final_clusters_out.csv' table='[final_clusters_out#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='integer' name='store_id' ordinal='0' />
+                  <column datatype='real' name='total_sales' ordinal='1' />
+                  <column datatype='integer' name='unique_customers' ordinal='2' />
+                  <column datatype='integer' name='product_diversity' ordinal='3' />
+                  <column datatype='integer' name='fuel_transactions' ordinal='4' />
+                  <column datatype='integer' name='total_transactions' ordinal='5' />
+                  <column datatype='real' name='fuel_share' ordinal='6' />
+                  <column datatype='integer' name='chain_size' ordinal='7' />
+                  <column datatype='string' name='store_name' ordinal='8' />
+                  <column datatype='integer' name='store_chain_id' ordinal='9' />
+                  <column datatype='string' name='store_chain_name' ordinal='10' />
+                  <column datatype='string' name='street_address' ordinal='11' />
+                  <column datatype='string' name='city' ordinal='12' />
+                  <column datatype='integer' name='zip_code' ordinal='13' />
+                  <column datatype='real' name='latitude' ordinal='14' />
+                  <column datatype='real' name='longitude' ordinal='15' />
+                  <column datatype='real' name='log_customers' ordinal='16' />
+                  <column datatype='real' name='log_sales' ordinal='17' />
+                  <column datatype='real' name='log_products' ordinal='18' />
+                  <column datatype='real' name='log_chain_size' ordinal='19' />
+                  <column datatype='integer' name='cluster' ordinal='20' />
+                  <column datatype='string' name='subcategory' ordinal='21' />
+                  <column datatype='integer' name='purchase_count' ordinal='22' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column-instance column='[store_name]' derivation='Attribute' name='[attr:store_name:nk]' pivot='key' type='nominal' />
+            <column aggregation='Avg' caption='Latitude' datatype='real' name='[latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+            <column aggregation='Avg' caption='Longitude' datatype='real' name='[longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+            <column-instance column='[latitude]' derivation='None' name='[none:latitude:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[longitude]' derivation='None' name='[none:longitude:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[store_chain_name]' derivation='None' name='[none:store_chain_name:nk]' pivot='key' type='nominal' />
+            <column caption='Store Chain Name' datatype='string' name='[store_chain_name]' role='dimension' type='nominal' />
+            <column caption='Store Name' datatype='string' name='[store_name]' role='dimension' type='nominal' />
+            <column-instance column='[unique_customers]' derivation='Sum' name='[sum:unique_customers:qk]' pivot='key' type='quantitative' />
+            <column caption='Unique Customers' datatype='integer' name='[unique_customers]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:longitude:qk]' field-type='quantitative' max='30222691.15421097' min='27838626.114572916' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:latitude:qk]' field-type='quantitative' max='5686715.3380632577' min='4114804.2745088749' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='map-layer'>
+            <format attr='enabled' id='parks' value='false' />
+            <format attr='enabled' id='landcover_wood' value='false' />
+            <format attr='enabled' id='landcover_scrub' value='false' />
+            <format attr='enabled' id='landcover_grass' value='false' />
+            <format attr='enabled' id='landcover_crop' value='false' />
+            <format attr='enabled' id='admin-2-boundaries-bg' value='true' />
+            <format attr='enabled' id='admin-2-boundaries' value='true' />
+            <format attr='enabled' id='place-village' value='true' />
+            <format attr='enabled' id='place-town' value='true' />
+            <format attr='enabled' id='place-islands' value='true' />
+            <format attr='enabled' id='place-islands-2' value='true' />
+            <format attr='enabled' id='place-city-sm' value='true' />
+            <format attr='enabled' id='place-city-md-s' value='true' />
+            <format attr='enabled' id='place-city-md-n' value='true' />
+            <format attr='enabled' id='place-city-lg-s' value='true' />
+            <format attr='enabled' id='place-city-lg-n' value='true' />
+            <format attr='enabled' id='place-capital-s' value='true' />
+            <format attr='enabled' id='place-capital-n' value='true' />
+            <format attr='enabled' id='tunnel-service-link-track-case' value='true' />
+            <format attr='enabled' id='tunnel-street_limited-case' value='true' />
+            <format attr='enabled' id='tunnel-street-case' value='true' />
+            <format attr='enabled' id='tunnel-secondary-tertiary-case' value='true' />
+            <format attr='enabled' id='tunnel-primary-case' value='true' />
+            <format attr='enabled' id='tunnel-trunk_link-case' value='true' />
+            <format attr='enabled' id='tunnel-motorway_link-case' value='true' />
+            <format attr='enabled' id='tunnel-trunk-case' value='true' />
+            <format attr='enabled' id='tunnel-motorway-case' value='true' />
+            <format attr='enabled' id='tunnel-trunk_link' value='true' />
+            <format attr='enabled' id='tunnel-motorway_link' value='true' />
+            <format attr='enabled' id='tunnel-service-link-track' value='true' />
+            <format attr='enabled' id='tunnel-street_limited' value='true' />
+            <format attr='enabled' id='tunnel-street' value='true' />
+            <format attr='enabled' id='tunnel-tertiary' value='true' />
+            <format attr='enabled' id='tunnel-secondary' value='true' />
+            <format attr='enabled' id='tunnel-primary' value='true' />
+            <format attr='enabled' id='tunnel-trunk' value='true' />
+            <format attr='enabled' id='tunnel-motorway' value='true' />
+            <format attr='enabled' id='road-street-low' value='true' />
+            <format attr='enabled' id='road-street_limited-low' value='true' />
+            <format attr='enabled' id='road-pedestrian-case' value='true' />
+            <format attr='enabled' id='road-service-link-track-case' value='true' />
+            <format attr='enabled' id='road-street_limited-case' value='true' />
+            <format attr='enabled' id='road-street-case' value='true' />
+            <format attr='enabled' id='road-tertiary-case' value='true' />
+            <format attr='enabled' id='road-secondary-case' value='true' />
+            <format attr='enabled' id='road-primary-case' value='true' />
+            <format attr='enabled' id='road-motorway_link-case' value='true' />
+            <format attr='enabled' id='road-trunk_link-case' value='true' />
+            <format attr='enabled' id='road-trunk-case' value='true' />
+            <format attr='enabled' id='road-motorway-case' value='true' />
+            <format attr='enabled' id='road-trunk_link' value='true' />
+            <format attr='enabled' id='road-motorway_link' value='true' />
+            <format attr='enabled' id='road-path' value='true' />
+            <format attr='enabled' id='road-pedestrian' value='true' />
+            <format attr='enabled' id='road-polygon' value='true' />
+            <format attr='enabled' id='road-service-link-track' value='true' />
+            <format attr='enabled' id='road-street_limited' value='true' />
+            <format attr='enabled' id='road-street' value='true' />
+            <format attr='enabled' id='road-tertiary' value='true' />
+            <format attr='enabled' id='road-secondary' value='true' />
+            <format attr='enabled' id='road-primary' value='true' />
+            <format attr='enabled' id='road-trunk' value='true' />
+            <format attr='enabled' id='road-motorway' value='true' />
+            <format attr='enabled' id='road-rail' value='true' />
+            <format attr='enabled' id='road-rail-tracks' value='true' />
+            <format attr='enabled' id='bridge-street-low' value='true' />
+            <format attr='enabled' id='bridge-street_limited-low' value='true' />
+            <format attr='enabled' id='bridge-pedestrian-case' value='true' />
+            <format attr='enabled' id='bridge-service-link-track-case' value='true' />
+            <format attr='enabled' id='bridge-street_limited-case' value='true' />
+            <format attr='enabled' id='bridge-street-case' value='true' />
+            <format attr='enabled' id='bridge-tertiary-case' value='true' />
+            <format attr='enabled' id='bridge-secondary-case' value='true' />
+            <format attr='enabled' id='bridge-primary-case' value='true' />
+            <format attr='enabled' id='bridge-trunk_link-case' value='true' />
+            <format attr='enabled' id='bridge-motorway_link-case' value='true' />
+            <format attr='enabled' id='bridge-trunk-case' value='true' />
+            <format attr='enabled' id='bridge-motorway-case' value='true' />
+            <format attr='enabled' id='bridge-trunk_link' value='true' />
+            <format attr='enabled' id='bridge-motorway_link' value='true' />
+            <format attr='enabled' id='bridge-path' value='true' />
+            <format attr='enabled' id='bridge-pedestrian' value='true' />
+            <format attr='enabled' id='bridge-service-link-track' value='true' />
+            <format attr='enabled' id='bridge-street_limited' value='true' />
+            <format attr='enabled' id='bridge-street' value='true' />
+            <format attr='enabled' id='bridge-tertiary' value='true' />
+            <format attr='enabled' id='bridge-secondary' value='true' />
+            <format attr='enabled' id='bridge-primary' value='true' />
+            <format attr='enabled' id='bridge-trunk' value='true' />
+            <format attr='enabled' id='bridge-motorway' value='true' />
+            <format attr='enabled' id='bridge-rail' value='true' />
+            <format attr='enabled' id='bridge-rail-tracks' value='true' />
+            <format attr='enabled' id='bridge-trunk_link-2-case' value='true' />
+            <format attr='enabled' id='bridge-motorway_link-2-case' value='true' />
+            <format attr='enabled' id='bridge-trunk-2-case' value='true' />
+            <format attr='enabled' id='bridge-motorway-2-case' value='true' />
+            <format attr='enabled' id='bridge-trunk_link-2' value='true' />
+            <format attr='enabled' id='bridge-motorway_link-2' value='true' />
+            <format attr='enabled' id='bridge-trunk-2' value='true' />
+            <format attr='enabled' id='bridge-motorway-2' value='true' />
+            <format attr='enabled' id='road-shields-2-white' value='true' />
+            <format attr='enabled' id='road-shields-2-black' value='true' />
+            <format attr='enabled' id='road-shields-1-white' value='true' />
+            <format attr='enabled' id='road-shields-1-black' value='true' />
+            <format attr='enabled' id='road-label-small' value='true' />
+            <format attr='enabled' id='road-label-big' value='true' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:store_chain_name:nk]' />
+              <size column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[attr:store_name:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:latitude:qk]</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:longitude:qk]</cols>
+      </table>
+      <simple-id uuid='{33FF9E81-A183-4DDC-8A67-5B85C069D704}' />
+    </worksheet>
+    <worksheet name='Sheet 10'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+            <column-instance column='[cluster]' derivation='None' name='[none:cluster:ok]' pivot='key' type='ordinal' />
+            <column-instance aggregation-param='25' column='[total_sales]' derivation='Percentile' name='[prc25:total_sales:qk]' pivot='key' type='quantitative' />
+            <column-instance aggregation-param='75' column='[total_sales]' derivation='Percentile' name='[prc75:total_sales:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[total_sales]' derivation='Sum' name='[sum:total_sales:qk]' pivot='key' type='quantitative' />
+            <column caption='Total Sales' datatype='real' name='[total_sales]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <natural-sort column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' direction='ASC' />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[prc75:total_sales:qk]' />
+              <text column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[prc25:total_sales:qk]' />
+              <text column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_sales:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]</cols>
+      </table>
+      <simple-id uuid='{0C0B752A-B8E6-4C08-9907-6C6F5DD670EA}' />
+    </worksheet>
+    <worksheet name='Sheet 2'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column-instance column='[zip_code]' derivation='None' name='[none:zip_code:ok]' pivot='key' type='ordinal' />
+            <column caption='Product Diversity' datatype='integer' name='[product_diversity]' role='measure' type='quantitative' />
+            <column-instance column='[product_diversity]' derivation='Sum' name='[sum:product_diversity:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[unique_customers]' derivation='Sum' name='[sum:unique_customers:qk]' pivot='key' type='quantitative' />
+            <column caption='Unique Customers' datatype='integer' name='[unique_customers]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Zip Code' datatype='integer' default-format='*00000' name='[zip_code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Longitude (generated)]' field-type='quantitative' max='-8149075.1886240346' min='-14247906.956021514' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)]' field-type='quantitative' max='6906368.5773677947' min='1653786.1713520554' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='map-layer'>
+            <format attr='enabled' id='parks' value='false' />
+            <format attr='enabled' id='landcover_wood' value='false' />
+            <format attr='enabled' id='landcover_scrub' value='false' />
+            <format attr='enabled' id='landcover_grass' value='false' />
+            <format attr='enabled' id='landcover_crop' value='false' />
+            <format attr='enabled' id='admin-2-boundaries-bg' value='true' />
+            <format attr='enabled' id='admin-2-boundaries' value='true' />
+            <format attr='enabled' id='place-village' value='true' />
+            <format attr='enabled' id='place-town' value='true' />
+            <format attr='enabled' id='place-islands' value='true' />
+            <format attr='enabled' id='place-islands-2' value='true' />
+            <format attr='enabled' id='place-city-sm' value='true' />
+            <format attr='enabled' id='place-city-md-s' value='true' />
+            <format attr='enabled' id='place-city-md-n' value='true' />
+            <format attr='enabled' id='place-city-lg-s' value='true' />
+            <format attr='enabled' id='place-city-lg-n' value='true' />
+            <format attr='enabled' id='place-capital-s' value='true' />
+            <format attr='enabled' id='place-capital-n' value='true' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:zip_code:ok]' />
+              <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:product_diversity:qk]' />
+              <geometry column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Geometry (generated)]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Zip Code:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:zip_code:ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Product Diversity:&#9;</run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Unique Customers:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+          </pane>
+        </panes>
+        <rows>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)]</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{2EB75018-D0A9-4597-AFEA-696B609EAD64}' />
+    </worksheet>
+    <worksheet name='Sheet 3'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column aggregation='Avg' caption='Latitude' datatype='real' name='[latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+            <column aggregation='Avg' caption='Longitude' datatype='real' name='[longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+            <column-instance column='[latitude]' derivation='None' name='[none:latitude:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[longitude]' derivation='None' name='[none:longitude:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[store_chain_name]' derivation='None' name='[none:store_chain_name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[zip_code]' derivation='None' name='[none:zip_code:ok]' pivot='key' type='ordinal' />
+            <column caption='Product Diversity' datatype='integer' name='[product_diversity]' role='measure' type='quantitative' />
+            <column caption='Store Chain Name' datatype='string' name='[store_chain_name]' role='dimension' type='nominal' />
+            <column-instance column='[product_diversity]' derivation='Sum' name='[sum:product_diversity:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[unique_customers]' derivation='Sum' name='[sum:unique_customers:qk]' pivot='key' type='quantitative' />
+            <column caption='Unique Customers' datatype='integer' name='[unique_customers]' role='measure' type='quantitative' />
+            <column aggregation='Sum' caption='Zip Code' datatype='integer' default-format='*00000' name='[zip_code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='1' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)]' field-type='quantitative' fold='true' max='6928169.2725961348' min='2363763.5484501272' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Longitude (generated)]' field-type='quantitative' max='31853973.672372814' min='26548427.068084259' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)]' field-type='quantitative' max='6928169.2725961348' min='2363763.5484501272' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='map-layer'>
+            <format attr='enabled' id='parks' value='false' />
+            <format attr='enabled' id='landcover_wood' value='false' />
+            <format attr='enabled' id='landcover_scrub' value='false' />
+            <format attr='enabled' id='landcover_grass' value='false' />
+            <format attr='enabled' id='landcover_crop' value='false' />
+            <format attr='enabled' id='admin-2-boundaries-bg' value='true' />
+            <format attr='enabled' id='admin-2-boundaries' value='true' />
+            <format attr='enabled' id='place-village' value='true' />
+            <format attr='enabled' id='place-town' value='true' />
+            <format attr='enabled' id='place-islands' value='true' />
+            <format attr='enabled' id='place-islands-2' value='true' />
+            <format attr='enabled' id='place-city-sm' value='true' />
+            <format attr='enabled' id='place-city-md-s' value='true' />
+            <format attr='enabled' id='place-city-md-n' value='true' />
+            <format attr='enabled' id='place-city-lg-s' value='true' />
+            <format attr='enabled' id='place-city-lg-n' value='true' />
+            <format attr='enabled' id='place-capital-s' value='true' />
+            <format attr='enabled' id='place-capital-n' value='true' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:zip_code:ok]' />
+              <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]' />
+              <geometry column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Geometry (generated)]' />
+            </encodings>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)]' y-index='1'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:store_chain_name:nk]' />
+              <size column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:product_diversity:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:latitude:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:longitude:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)] + [federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)])</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{CE69D646-62CB-4D27-B1D8-8B1867656CD8}' />
+    </worksheet>
+    <worksheet name='Sheet 4'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column-instance column='[city]' derivation='Attribute' name='[attr:city:nk]' pivot='key' type='nominal' />
+            <column-instance column='[store_chain_name]' derivation='Attribute' name='[attr:store_chain_name:nk]' pivot='key' type='nominal' />
+            <column caption='City' datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+            <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+            <column aggregation='Avg' caption='Latitude' datatype='real' name='[latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+            <column aggregation='Avg' caption='Longitude' datatype='real' name='[longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+            <column-instance column='[cluster]' derivation='None' name='[none:cluster:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[latitude]' derivation='None' name='[none:latitude:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[longitude]' derivation='None' name='[none:longitude:qk]' pivot='key' type='quantitative' />
+            <column caption='Store Chain Name' datatype='string' name='[store_chain_name]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:longitude:qk]' field-type='quantitative' max='32298585.950236574' min='25605516.119984001' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:latitude:qk]' field-type='quantitative' max='7415722.17656493' min='1651355.7907675325' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='map-layer'>
+            <format attr='enabled' id='parks' value='false' />
+            <format attr='enabled' id='landcover_wood' value='false' />
+            <format attr='enabled' id='landcover_scrub' value='false' />
+            <format attr='enabled' id='landcover_grass' value='false' />
+            <format attr='enabled' id='landcover_crop' value='false' />
+            <format attr='enabled' id='admin-2-boundaries-bg' value='true' />
+            <format attr='enabled' id='admin-2-boundaries' value='true' />
+            <format attr='enabled' id='place-village' value='true' />
+            <format attr='enabled' id='place-town' value='true' />
+            <format attr='enabled' id='place-islands' value='true' />
+            <format attr='enabled' id='place-islands-2' value='true' />
+            <format attr='enabled' id='place-city-sm' value='true' />
+            <format attr='enabled' id='place-city-md-s' value='true' />
+            <format attr='enabled' id='place-city-md-n' value='true' />
+            <format attr='enabled' id='place-city-lg-s' value='true' />
+            <format attr='enabled' id='place-city-lg-n' value='true' />
+            <format attr='enabled' id='place-capital-s' value='true' />
+            <format attr='enabled' id='place-capital-n' value='true' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[attr:city:nk]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[attr:store_chain_name:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.36182320117950439' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:latitude:qk]</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:longitude:qk]</cols>
+      </table>
+      <simple-id uuid='{AC88AF17-F3F4-4F59-861A-9CE32C3BE206}' />
+    </worksheet>
+    <worksheet name='Sheet 5'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontsize='9'>Summary Statistics by Cluster</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+            <column-instance column='[total_sales]' derivation='Max' name='[max:total_sales:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[cluster]' derivation='None' name='[none:cluster:ok]' pivot='key' type='ordinal' />
+            <column-instance aggregation-param='25' column='[total_sales]' derivation='Percentile' name='[prc25:total_sales:qk]' pivot='key' type='quantitative' />
+            <column-instance aggregation-param='50' column='[total_sales]' derivation='Percentile' name='[prc50:total_sales:qk]' pivot='key' type='quantitative' />
+            <column-instance aggregation-param='75' column='[total_sales]' derivation='Percentile' name='[prc75:total_sales:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[total_sales]' derivation='Sum' name='[sum:total_sales:qk]' pivot='key' type='quantitative' />
+            <column caption='Total Sales' datatype='real' name='[total_sales]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_sales:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0pggdv60k9qf6z18b82fq07v1p3g].[prc25:total_sales:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0pggdv60k9qf6z18b82fq07v1p3g].[prc50:total_sales:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0pggdv60k9qf6z18b82fq07v1p3g].[prc75:total_sales:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_sales:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0pggdv60k9qf6z18b82fq07v1p3g].[prc25:total_sales:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0pggdv60k9qf6z18b82fq07v1p3g].[max:total_sales:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[:Measure Names]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='width' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[:Measure Names]' value='103' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Multiple Values]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[:Measure Names]</cols>
+      </table>
+      <simple-id uuid='{88843C2E-F64E-42D4-8B4B-705BAD3EB9D6}' />
+    </worksheet>
+    <worksheet name='Sheet 6'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column-instance column='[product_diversity]' derivation='Avg' name='[avg:product_diversity:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[purchase_count]' derivation='Avg' name='[avg:purchase_count:qk]' pivot='key' type='quantitative' />
+            <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+            <column-instance column='[cluster]' derivation='None' name='[none:cluster:ok]' pivot='key' type='ordinal' />
+            <column caption='Product Diversity' datatype='integer' name='[product_diversity]' role='measure' type='quantitative' />
+            <column caption='Purchase Count' datatype='integer' name='[purchase_count]' role='measure' type='quantitative' />
+            <column-instance column='[total_sales]' derivation='Sum' name='[sum:total_sales:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[total_transactions]' derivation='Sum' name='[sum:total_transactions:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[unique_customers]' derivation='Sum' name='[sum:unique_customers:qk]' pivot='key' type='quantitative' />
+            <column caption='Total Sales' datatype='real' name='[total_sales]' role='measure' type='quantitative' />
+            <column caption='Total Transactions' datatype='integer' name='[total_transactions]' role='measure' type='quantitative' />
+            <column caption='Unique Customers' datatype='integer' name='[unique_customers]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_sales:qk]' field-type='quantitative' max='5076394.71249' min='0.0' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='width' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' value='187' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[avg:product_diversity:qk]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[avg:purchase_count:qk]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_transactions:qk]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Cluster:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Mean Product Diversity:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[avg:product_diversity:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Mean Purchase Count:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[avg:purchase_count:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Total Sales:&#9;$</run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Total Transactions:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_transactions:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Total Unique Customers:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minheight' value='838' />
+                <format attr='maxheight' value='838' />
+                <format attr='aspect' value='0' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_sales:qk]</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]</cols>
+      </table>
+      <simple-id uuid='{9959AAF6-0D64-41E6-8B5B-1401DC478492}' />
+    </worksheet>
+    <worksheet name='Sheet 7'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column caption='Sales Category' datatype='string' name='[Calculation_-6643935283676909566]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF [total_sales] &lt; 100 THEN &apos;Low&apos;&#13;&#10;ELSEIF [total_sales] &lt; 550 THEN &apos;Medium&apos;&#13;&#10;ELSE &apos;High&apos;&#13;&#10;END' />
+            </column>
+            <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_-6643935283676909566]' derivation='None' name='[none:Calculation_-6643935283676909566:nk]' pivot='key' type='nominal' />
+            <column-instance column='[cluster]' derivation='None' name='[none:cluster:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[store_id]' derivation='None' name='[none:store_id:ok]' pivot='key' type='ordinal' />
+            <column caption='Store Id' datatype='integer' name='[store_id]' role='dimension' type='ordinal' />
+            <column-instance column='[total_sales]' derivation='Sum' name='[sum:total_sales:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[total_transactions]' derivation='Sum' name='[sum:total_transactions:qk]' pivot='key' type='quantitative' />
+            <column caption='Total Sales' datatype='real' name='[total_sales]' role='measure' type='quantitative' />
+            <column caption='Total Transactions' datatype='integer' name='[total_transactions]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <manual-sort column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:Calculation_-6643935283676909566:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;Low&quot;</bucket>
+              <bucket>&quot;Medium&quot;</bucket>
+              <bucket>&quot;High&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_transactions:qk]' field-type='quantitative' scale='log' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='width' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' value='148' />
+            <format attr='width' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:Calculation_-6643935283676909566:nk]' value='327' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Shape' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_sales:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:store_id:ok]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Sales Category:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:Calculation_-6643935283676909566:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Cluster:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Store Id:&#9;</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:store_id:ok]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Total Sales:&#9;$</run>
+                <run bold='true'><![CDATA[<[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_sales:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.053977899253368378' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+                <format attr='shape' value='circle' />
+                <format attr='mark-transparency' value='255' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_transactions:qk]</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:Calculation_-6643935283676909566:nk]</cols>
+        <annotations>
+          <annotation class='area' id='0' text-pinx='0.5' text-piny='0.5' text-width-delta='-18'>
+            <formatted-text>
+              <run bold='true' fontalignment='0' underline='true'>Important Takeaways:</run>
+              <run fontalignment='0'>
+Scatter plot of stores by sales category and total transactions. Colors represent the cluster assignment for each store. From this visualization, we see that stores across spending categories belong to different clusters. So, while total spending does correlate with cluster (we see more orange [cluster 2] stores in High Sales group), that is not the only metric that determines cluster assignment. Total transactions tends to be higher among stores in cluster 2.</run>
+            </formatted-text>
+            <top-left>
+              <visual-coordinate class='axis'>
+                <x-coord cell-offset='0.0703364'>
+                  <node-reference>
+                    <fields>
+                      <field>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:Calculation_-6643935283676909566:nk]</field>
+                    </fields>
+                    <multibucket>
+                      <bucket>&quot;Low&quot;</bucket>
+                    </multibucket>
+                  </node-reference>
+                </x-coord>
+                <y-coord axis-value='1787.8929928948066'>
+                  <node-reference>
+                    <axis>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_transactions:qk]</axis>
+                  </node-reference>
+                </y-coord>
+                <page-reference />
+              </visual-coordinate>
+            </top-left>
+            <bottom-right>
+              <visual-coordinate class='axis'>
+                <x-coord cell-offset='0.504587'>
+                  <node-reference>
+                    <fields>
+                      <field>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:Calculation_-6643935283676909566:nk]</field>
+                    </fields>
+                    <multibucket>
+                      <bucket>&quot;Medium&quot;</bucket>
+                    </multibucket>
+                  </node-reference>
+                </x-coord>
+                <y-coord axis-value='388.75584980299766'>
+                  <node-reference>
+                    <axis>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_transactions:qk]</axis>
+                  </node-reference>
+                </y-coord>
+                <page-reference />
+              </visual-coordinate>
+            </bottom-right>
+            <text x='0.5' y='0.5' />
+          </annotation>
+        </annotations>
+      </table>
+      <simple-id uuid='{75738A6D-8F2B-4FB2-83BE-B75C08FDCAA3}' />
+    </worksheet>
+    <worksheet name='Sheet 8'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column auto-hidden='true' caption='Clusters (1)' datatype='integer' hidden='true' is-adhoc-cluster='true' name='[AdhocCluster:2]' parent-model='[AnalyticModel:{352d62ed-9ebb-4117-a25a-e2ea341c35e7}]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='-1' value='Cluster Outliers' />
+                <alias key='0' value='Not Clustered' />
+                <alias key='1' value='Cluster 1' />
+                <alias key='2' value='Cluster 2' />
+                <alias key='3' value='Cluster 3' />
+                <alias key='4' value='Cluster 4' />
+                <alias key='5' value='Cluster 5' />
+                <alias key='6' value='Cluster 6' />
+                <alias key='7' value='Cluster 7' />
+                <alias key='8' value='Cluster 8' />
+                <alias key='9' value='Cluster 9' />
+                <alias key='10' value='Cluster 10' />
+                <alias key='11' value='Cluster 11' />
+                <alias key='12' value='Cluster 12' />
+                <alias key='13' value='Cluster 13' />
+                <alias key='14' value='Cluster 14' />
+                <alias key='15' value='Cluster 15' />
+                <alias key='16' value='Cluster 16' />
+                <alias key='17' value='Cluster 17' />
+                <alias key='18' value='Cluster 18' />
+                <alias key='19' value='Cluster 19' />
+                <alias key='20' value='Cluster 20' />
+                <alias key='21' value='Cluster 21' />
+                <alias key='22' value='Cluster 22' />
+                <alias key='23' value='Cluster 23' />
+                <alias key='24' value='Cluster 24' />
+                <alias key='25' value='Cluster 25' />
+                <alias key='26' value='Cluster 26' />
+                <alias key='27' value='Cluster 27' />
+                <alias key='28' value='Cluster 28' />
+                <alias key='29' value='Cluster 29' />
+                <alias key='30' value='Cluster 30' />
+                <alias key='31' value='Cluster 31' />
+                <alias key='32' value='Cluster 32' />
+                <alias key='33' value='Cluster 33' />
+                <alias key='34' value='Cluster 34' />
+                <alias key='35' value='Cluster 35' />
+                <alias key='36' value='Cluster 36' />
+                <alias key='37' value='Cluster 37' />
+                <alias key='38' value='Cluster 38' />
+                <alias key='39' value='Cluster 39' />
+                <alias key='40' value='Cluster 40' />
+                <alias key='41' value='Cluster 41' />
+                <alias key='42' value='Cluster 42' />
+                <alias key='43' value='Cluster 43' />
+                <alias key='44' value='Cluster 44' />
+                <alias key='45' value='Cluster 45' />
+                <alias key='46' value='Cluster 46' />
+                <alias key='47' value='Cluster 47' />
+                <alias key='48' value='Cluster 48' />
+                <alias key='49' value='Cluster 49' />
+                <alias key='50' value='Cluster 50' />
+              </aliases>
+            </column>
+            <column caption='Fuel Share' datatype='real' name='[fuel_share]' role='measure' type='quantitative' />
+            <column caption='Log Chain Size' datatype='real' name='[log_chain_size]' role='measure' type='quantitative' />
+            <column caption='Log Customers' datatype='real' name='[log_customers]' role='measure' type='quantitative' />
+            <column caption='Log Products' datatype='real' name='[log_products]' role='measure' type='quantitative' />
+            <column caption='Log Sales' datatype='real' name='[log_sales]' role='measure' type='quantitative' />
+            <column-instance column='[AdhocCluster:2]' derivation='None' is-adhoc-cluster='true' name='[none:AdhocCluster:2:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[zip_code]' derivation='None' name='[none:zip_code:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[fuel_share]' derivation='Sum' name='[sum:fuel_share:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[log_chain_size]' derivation='Sum' name='[sum:log_chain_size:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[log_customers]' derivation='Sum' name='[sum:log_customers:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[log_products]' derivation='Sum' name='[sum:log_products:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[log_sales]' derivation='Sum' name='[sum:log_sales:qk]' pivot='key' type='quantitative' />
+            <column aggregation='Sum' caption='Zip Code' datatype='integer' default-format='*00000' name='[zip_code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+            <style>
+              <style-rule element='mark'>
+                <encoding attr='color' field='[none:AdhocCluster:2:ok]' type='palette'>
+                  <map to='#4e79a7'>
+                    <bucket>1</bucket>
+                  </map>
+                  <map to='#76b7b2'>
+                    <bucket>4</bucket>
+                  </map>
+                  <map to='#e15759'>
+                    <bucket>3</bucket>
+                  </map>
+                  <map to='#f28e2b'>
+                    <bucket>2</bucket>
+                  </map>
+                </encoding>
+              </style-rule>
+            </style>
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Longitude (generated)]' field-type='quantitative' max='-7363056.4709526673' min='-15083559.707804788' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)]' field-type='quantitative' max='7017083.134538223' min='1926641.2831465681' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='map-layer'>
+            <format attr='enabled' id='parks' value='false' />
+            <format attr='enabled' id='landcover_wood' value='false' />
+            <format attr='enabled' id='landcover_scrub' value='false' />
+            <format attr='enabled' id='landcover_grass' value='false' />
+            <format attr='enabled' id='landcover_crop' value='false' />
+            <format attr='enabled' id='admin-2-boundaries-bg' value='true' />
+            <format attr='enabled' id='admin-2-boundaries' value='true' />
+            <format attr='enabled' id='place-village' value='true' />
+            <format attr='enabled' id='place-town' value='true' />
+            <format attr='enabled' id='place-islands' value='true' />
+            <format attr='enabled' id='place-islands-2' value='true' />
+            <format attr='enabled' id='place-city-sm' value='true' />
+            <format attr='enabled' id='place-city-md-s' value='true' />
+            <format attr='enabled' id='place-city-md-n' value='true' />
+            <format attr='enabled' id='place-city-lg-s' value='true' />
+            <format attr='enabled' id='place-city-lg-n' value='true' />
+            <format attr='enabled' id='place-capital-s' value='true' />
+            <format attr='enabled' id='place-capital-n' value='true' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Multipolygon' />
+            <encodings>
+              <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:AdhocCluster:2:ok]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:zip_code:ok]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:fuel_share:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_chain_size:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_customers:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_products:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_sales:qk]' />
+              <geometry column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Geometry (generated)]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Latitude (generated)]</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{556C15B3-DB42-4F04-A992-3036E18CD748}' />
+    </worksheet>
+    <worksheet name='Sheet 9'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='final_clusters_out' name='federated.0pggdv60k9qf6z18b82fq07v1p3g' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0pggdv60k9qf6z18b82fq07v1p3g'>
+            <column auto-hidden='true' caption='Clusters (4)' datatype='integer' hidden='true' is-adhoc-cluster='true' name='[AdhocCluster:5]' parent-model='[AnalyticModel:{80bf0f6e-0c45-413c-8d79-1f23685d6d13}]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='-1' value='Cluster Outliers' />
+                <alias key='0' value='Not Clustered' />
+                <alias key='1' value='Cluster 1' />
+                <alias key='2' value='Cluster 2' />
+                <alias key='3' value='Cluster 3' />
+                <alias key='4' value='Cluster 4' />
+                <alias key='5' value='Cluster 5' />
+                <alias key='6' value='Cluster 6' />
+                <alias key='7' value='Cluster 7' />
+                <alias key='8' value='Cluster 8' />
+                <alias key='9' value='Cluster 9' />
+                <alias key='10' value='Cluster 10' />
+                <alias key='11' value='Cluster 11' />
+                <alias key='12' value='Cluster 12' />
+                <alias key='13' value='Cluster 13' />
+                <alias key='14' value='Cluster 14' />
+                <alias key='15' value='Cluster 15' />
+                <alias key='16' value='Cluster 16' />
+                <alias key='17' value='Cluster 17' />
+                <alias key='18' value='Cluster 18' />
+                <alias key='19' value='Cluster 19' />
+                <alias key='20' value='Cluster 20' />
+                <alias key='21' value='Cluster 21' />
+                <alias key='22' value='Cluster 22' />
+                <alias key='23' value='Cluster 23' />
+                <alias key='24' value='Cluster 24' />
+                <alias key='25' value='Cluster 25' />
+                <alias key='26' value='Cluster 26' />
+                <alias key='27' value='Cluster 27' />
+                <alias key='28' value='Cluster 28' />
+                <alias key='29' value='Cluster 29' />
+                <alias key='30' value='Cluster 30' />
+                <alias key='31' value='Cluster 31' />
+                <alias key='32' value='Cluster 32' />
+                <alias key='33' value='Cluster 33' />
+                <alias key='34' value='Cluster 34' />
+                <alias key='35' value='Cluster 35' />
+                <alias key='36' value='Cluster 36' />
+                <alias key='37' value='Cluster 37' />
+                <alias key='38' value='Cluster 38' />
+                <alias key='39' value='Cluster 39' />
+                <alias key='40' value='Cluster 40' />
+                <alias key='41' value='Cluster 41' />
+                <alias key='42' value='Cluster 42' />
+                <alias key='43' value='Cluster 43' />
+                <alias key='44' value='Cluster 44' />
+                <alias key='45' value='Cluster 45' />
+                <alias key='46' value='Cluster 46' />
+                <alias key='47' value='Cluster 47' />
+                <alias key='48' value='Cluster 48' />
+                <alias key='49' value='Cluster 49' />
+                <alias key='50' value='Cluster 50' />
+              </aliases>
+            </column>
+            <column-instance column='[cluster]' derivation='Attribute' name='[attr:cluster:qk]' pivot='key' type='quantitative' />
+            <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+            <column caption='Fuel Share' datatype='real' name='[fuel_share]' role='measure' type='quantitative' />
+            <column aggregation='Avg' caption='Latitude' datatype='real' name='[latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+            <column caption='Log Chain Size' datatype='real' name='[log_chain_size]' role='measure' type='quantitative' />
+            <column caption='Log Customers' datatype='real' name='[log_customers]' role='measure' type='quantitative' />
+            <column caption='Log Products' datatype='real' name='[log_products]' role='measure' type='quantitative' />
+            <column caption='Log Sales' datatype='real' name='[log_sales]' role='measure' type='quantitative' />
+            <column aggregation='Avg' caption='Longitude' datatype='real' name='[longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+            <column-instance column='[AdhocCluster:5]' derivation='None' is-adhoc-cluster='true' name='[none:AdhocCluster:5:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[latitude]' derivation='None' name='[none:latitude:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[longitude]' derivation='None' name='[none:longitude:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[fuel_share]' derivation='Sum' name='[sum:fuel_share:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[log_chain_size]' derivation='Sum' name='[sum:log_chain_size:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[log_customers]' derivation='Sum' name='[sum:log_customers:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[log_products]' derivation='Sum' name='[sum:log_products:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[log_sales]' derivation='Sum' name='[sum:log_sales:qk]' pivot='key' type='quantitative' />
+            <style>
+              <style-rule element='mark'>
+                <encoding attr='color' field='[none:AdhocCluster:5:ok]' type='palette'>
+                  <map to='#4e79a7'>
+                    <bucket>1</bucket>
+                  </map>
+                  <map to='#76b7b2'>
+                    <bucket>4</bucket>
+                  </map>
+                  <map to='#e15759'>
+                    <bucket>3</bucket>
+                  </map>
+                  <map to='#f28e2b'>
+                    <bucket>2</bucket>
+                  </map>
+                </encoding>
+              </style-rule>
+            </style>
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:longitude:qk]' field-type='quantitative' max='32208277.98945931' min='26658588.759441659' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:latitude:qk]' field-type='quantitative' max='6544421.4904427826' min='2769122.7305164635' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='map-layer'>
+            <format attr='enabled' id='parks' value='false' />
+            <format attr='enabled' id='landcover_wood' value='false' />
+            <format attr='enabled' id='landcover_scrub' value='false' />
+            <format attr='enabled' id='landcover_grass' value='false' />
+            <format attr='enabled' id='landcover_crop' value='false' />
+            <format attr='enabled' id='admin-2-boundaries-bg' value='true' />
+            <format attr='enabled' id='admin-2-boundaries' value='true' />
+            <format attr='enabled' id='place-village' value='true' />
+            <format attr='enabled' id='place-town' value='true' />
+            <format attr='enabled' id='place-islands' value='true' />
+            <format attr='enabled' id='place-islands-2' value='true' />
+            <format attr='enabled' id='place-city-sm' value='true' />
+            <format attr='enabled' id='place-city-md-s' value='true' />
+            <format attr='enabled' id='place-city-md-n' value='true' />
+            <format attr='enabled' id='place-city-lg-s' value='true' />
+            <format attr='enabled' id='place-city-lg-n' value='true' />
+            <format attr='enabled' id='place-capital-s' value='true' />
+            <format attr='enabled' id='place-capital-n' value='true' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:fuel_share:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_chain_size:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_customers:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_products:qk]' />
+              <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:log_sales:qk]' />
+              <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:AdhocCluster:5:ok]' />
+              <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[attr:cluster:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.33983424305915833' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:latitude:qk]</rows>
+        <cols>[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:longitude:qk]</cols>
+      </table>
+      <simple-id uuid='{D09E27F0-A667-4396-AF91-B8843C5C68A7}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Dashboard 1'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='3' name='Sheet 6' w='98400' x='800' y='1000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='20000' id='5' name='Sheet 5' w='51000' x='44500' y='12250' />
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='84000' id='1' param='vert' type-v2='layout-flow' w='84000' x='8000' y='8000' />
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{C0156E0B-EE1D-4AB8-B6F3-308C7B49A42E}' />
+    </dashboard>
+  </dashboards>
+  <windows source-height='30'>
+    <window class='worksheet' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:store_chain_name:nk]' type='color' />
+            <card pane-specification-id='0' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]' type='size' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='1' />
+      </viewpoint>
+      <simple-id uuid='{815DD9DA-F898-49EF-9D94-412AC8A51E14}' />
+    </window>
+    <window class='worksheet' name='Sheet 2'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='1' />
+      </viewpoint>
+      <simple-id uuid='{8F6637A2-E1A5-41DF-B352-383B14673E32}' />
+    </window>
+    <window class='worksheet' name='Sheet 3'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='1' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:unique_customers:qk]' type='color' />
+            <card pane-specification-id='2' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:store_chain_name:nk]' type='color' />
+            <card pane-specification-id='2' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:product_diversity:qk]' type='size' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='1' />
+      </viewpoint>
+      <simple-id uuid='{F6971A05-7F6C-4012-94AD-FDFA3D4E4E24}' />
+    </window>
+    <window class='worksheet' name='Sheet 4'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='1' />
+      </viewpoint>
+      <simple-id uuid='{6C364441-1CBE-48B3-9FF6-7271CFD84F17}' />
+    </window>
+    <window class='worksheet' name='Sheet 5'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{F751C868-D944-483D-8BC0-4ACD624D31F5}' />
+    </window>
+    <window class='worksheet' name='Sheet 10'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{4F671B4A-1C3F-4828-89B9-D49F00743103}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Sheet 6'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{0B60EBC7-D43F-442F-AEB4-42E25E6C4C42}' />
+    </window>
+    <window class='worksheet' name='Sheet 7'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{9100E87B-2CA1-4209-B0BC-894D2C1CC4C0}' />
+    </window>
+    <window class='worksheet' name='Sheet 8'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='1' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:AdhocCluster:2:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{80D5C416-533C-4F34-BA48-2E03375640BC}' />
+    </window>
+    <window class='worksheet' name='Sheet 9'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:AdhocCluster:5:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='1' />
+      </viewpoint>
+      <simple-id uuid='{B265D29F-AAD8-4F5D-AB0F-6C4777E53FE1}' />
+    </window>
+    <window class='dashboard' name='Dashboard 1'>
+      <viewpoints>
+        <viewpoint name='Sheet 5' />
+        <viewpoint name='Sheet 6'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='5' />
+      <simple-id uuid='{F512C01C-26ED-413B-896B-340D1A7AFE6D}' />
+    </window>
+  </windows>
+</workbook>
