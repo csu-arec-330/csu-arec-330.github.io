@@ -28,7 +28,7 @@ This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
 
 # Summarizing Data in Tableau
 
-Last week in R, we used k-means clustering to segment stores into four[^Note: I have aligned Week 10 Lab with Week 11 Lecture so all of the output is replicable and you can follow along in the videos.] distinct groups based on their customer base, total sales, product diversity, fuel transaction share, and chain size. These clusters appear to reflect different store strategies:
+Last week in R, we used k-means clustering to segment stores into four^[Note: I have aligned Week 10 Lab with Week 11 Lecture so all of the output is replicable and you can follow along in the videos.] distinct groups based on their customer base, total sales, product diversity, fuel transaction share, and chain size. These clusters appear to reflect different store strategies:
 
 - Cluster 1: Fuel-dominant, low-volume stores
 

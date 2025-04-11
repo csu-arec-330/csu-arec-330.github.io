@@ -395,6 +395,7 @@
       <column caption='Total Transactions' datatype='integer' name='[total_transactions]' role='measure' type='quantitative' />
       <column caption='Unique Customers' datatype='integer' name='[unique_customers]' role='measure' type='quantitative' />
       <column aggregation='Sum' caption='Zip Code' datatype='integer' default-format='*00000' name='[zip_code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+      <column-instance column='[Calculation_-6643935283676909566]' derivation='None' name='[none:Calculation_-6643935283676909566:nk]' pivot='key' type='nominal' />
       <column-instance column='[fuel_share]' derivation='Sum' name='[sum:fuel_share:qk]' pivot='key' type='quantitative' />
       <column-instance column='[log_chain_size]' derivation='Sum' name='[sum:log_chain_size:qk]' pivot='key' type='quantitative' />
       <column-instance column='[log_customers]' derivation='Sum' name='[sum:log_customers:qk]' pivot='key' type='quantitative' />
@@ -429,6 +430,17 @@
             </map>
             <map to='#f28e2b'>
               <bucket>2</bucket>
+            </map>
+          </encoding>
+          <encoding attr='shape' field='[none:Calculation_-6643935283676909566:nk]' type='shape'>
+            <map to='circle'>
+              <bucket>&quot;Low&quot;</bucket>
+            </map>
+            <map to='plus'>
+              <bucket>&quot;High&quot;</bucket>
+            </map>
+            <map to='square'>
+              <bucket>&quot;Medium&quot;</bucket>
             </map>
           </encoding>
         </style-rule>
@@ -1166,6 +1178,7 @@
               <color column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' />
               <tooltip column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[sum:total_sales:qk]' />
               <lod column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:store_id:ok]' />
+              <shape column='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:Calculation_-6643935283676909566:nk]' />
             </encodings>
             <customized-tooltip>
               <formatted-text>
@@ -1609,7 +1622,7 @@ Scatter plot of stores by sales category and total transactions. Colors represen
     </dashboard>
   </dashboards>
   <windows source-height='30'>
-    <window class='worksheet' name='Sheet 1'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1783,7 +1796,7 @@ Scatter plot of stores by sales category and total transactions. Colors represen
       </cards>
       <simple-id uuid='{4F671B4A-1C3F-4828-89B9-D49F00743103}' />
     </window>
-    <window class='worksheet' maximized='true' name='Sheet 6'>
+    <window class='worksheet' name='Sheet 6'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1829,6 +1842,7 @@ Scatter plot of stores by sales category and total transactions. Colors represen
         <edge name='right'>
           <strip size='160'>
             <card pane-specification-id='0' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:cluster:ok]' type='color' />
+            <card pane-specification-id='0' param='[federated.0pggdv60k9qf6z18b82fq07v1p3g].[none:Calculation_-6643935283676909566:nk]' type='shape' />
           </strip>
         </edge>
       </cards>
