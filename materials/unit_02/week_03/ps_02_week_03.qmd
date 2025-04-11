@@ -4,6 +4,9 @@ format:
   html:
     theme: zephyr
 ---
+
+<!-- We did not do this problem set in Spring 2024 -->
+
 ## Problem Set Overview
 
 This problem set is designed to apply both clustering and spatial data analysis.

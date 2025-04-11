@@ -18,11 +18,13 @@ You will use the following datasets:
 
 **<a  href="../inputs/store_info.csv" download>store_info.csv</a>**: This file includes information about the stores, such as location, size, and other characteristics, which can be linked to the shopper_info.csv file using the store_id variable.
 
-See the Canvas assignment for a downloadable codebook describing the data files.
+Review the [Lab Notes for Week 09](lab_02_week_01.html) for a codebook describing the three data files.
 
 ## Part 1: Specify Your Research Question
 
-1. Review [Project 2 Instructions](../week_04/project_2.qmd). Then, clearly outline the segmentation and question you will analyze:
+1. Review [Project 2 Instructions](../week_04/project_2.qmd). 
+
+2. Clearly outline the segmentation and question you will analyze:
 
 - Specify **one segmentation area** you have chosen for the analysis (customers, stores, or products).
 
@@ -36,21 +38,15 @@ See the Canvas assignment for a downloadable codebook describing the data files.
 
 **Customer Segmentation:**
 
-- Who are the highest-spending customers?
-
-- Are there differences in what products customers purchase across stores?
+- Example: Can we identify customer groups based on product preferences, purchase frequency, or spending level?
 
 **Store Segmentation:**
 
-- Which stores have the highest total sales?
-
-- Which regions or cities have the most stores?
+- Example: Are there distinct types of stores based on sales performance, product diversity, or customer base?
 
 **Product Segmentation:**
 
-- What are the top-selling products?
-
-- Are there clear differences in product popularity by region or store type?
+- Example: Can we group products based on shared characteristics (e.g., price, package size, brand, category)?
 
 :::
 

@@ -17,7 +17,7 @@ This problem set helps you continue analyzing your data and prepares you for you
 
 1. Update your R script to reflect **any additional cleaning and processing steps** you performed (e.g., handling missing data, dropping observations, transformations, aggregations) since Project 02 - Problem set 01. Add comments throughout your code so that a reader would be able to reproduce your steps based solely on your descriptions.
 
-2. Summarize the variables using `datasummary()`. Present a nicely formatted table and discuss your results.
+2. Summarize the variables using `datasummary()`. Present a nicely formatted table on your website and discuss your results.
 
 3. Generate a `ggpairs` plot (i.e., the density/scatter/correlation plot) of your clustering variables. 
 
@@ -34,7 +34,7 @@ Using your merged and cleaned dataset, perform your final K-means cluster analys
 
 6. Provide evidence supporting your choice of K (number of clusters). Include either a silhouette plot or elbow plot and explain your decision.
 
-7. Perform the k-means clustering. Then, export a dataset containing all variables used in your cluster analysis along with each observation's assigned cluster.
+7. Perform the k-means clustering. Then, export a dataset (using `write_csv()`) containing all variables used in your cluster analysis along with each observation's assigned cluster.
 
 ## Part 2: Tableau Visualizations
 
@@ -57,6 +57,7 @@ This assignment has two components:
 - Start with your R code from Problem Set 1. 
 - Make any changes you to your code from Problem Set 1 based on feedback you received from Problem Set 1
 - Include comments throughout your code that describe each step
+- Generate your summary stats table
 - Add the `ggpairs()` visualizations 
 - Write your interpretation of the `ggpairs()` plot 
 - Finalize your k-means cluster analysis and show supporting evidence
