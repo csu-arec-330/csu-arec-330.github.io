@@ -22,13 +22,15 @@ For this project, you will use the convenience store data (shopper_info, store_i
 - **Option 1:** Convenience store data combined with Demographic data from the US Census
 - **Option 2:** Convenience store data combined with Weather data from NOAA
 
+Your unit of analysis will be either the **shopper** or the **store**.
+
 ## Bringing It Together
 
 Here’s how to approach Project 3:
 
 1. Select one of the two options above.
 
-2. Identify an outcome \$y\$ from the convenience store data.
+2. Identify an outcome \$y\$ from the convenience store data. *Reminder*: Your unit of analysis will be either the **shopper** or the **store**.
 
 3. Choose control variables (e.g., population density from the Census data or precipitation from the weather data) which will serve as your explanatory variable(s), \$x$.
 
@@ -59,12 +61,12 @@ Here’s how to approach Project 3:
 ### Data and Analysis (35 points total)
 
 - **Data Description:** Detail the sources of your data, any modifications made, and how you integrated different datasets. (10 points)
-- **Summary Statistics and Visualizations:** Provide and explain the summary statistics and visualizations of your data. (5 points)
-- **Analysis Discussion:** Describe your analysis assumptions, limitations, and present your findings visually and descriptively. (20 points)
+- **Summary Statistics and Visualizations:** Provide and explain the summary statistics and visualizations of your data. (10 points)
+- **Analysis Discussion:** Describe your analysis assumptions, limitations, and present your findings visually and descriptively. (15 points)
 
 ### Discussion/Conclusion (10 points total)
 
-- **Conclusions Drawn from Analysis:** Explain how your analysis answers your research question and discuss the key takeaways for your intended audience. (10 points)
+- **Conclusions Drawn from Analysis:** Explain how your analysis answers your research question (5 points) and discuss the key takeaways for your intended audience (5 points). 
 
 ## The Report/Online Submission (40 points)
 
@@ -72,9 +74,9 @@ You and your partner are required to produce a written version of this analysis 
 
 Grading for the report will focus on several key areas:
 
-1. **Code Accuracy and Explanation:** Is your code correct and adequately explained? Use comments within your code to clarify each step of your analysis. Generate an R log file using the `sink()` command and append it to your report as an appendix. (15 points)
+1. **Code Accuracy and Explanation:** Is your code correct and adequately explained? Use comments within your code to clarify each step of your analysis. Generate an R log file using the **Compile Report** option and append it to your report as an appendix. (15 points)
 
-2. **Readability and Utility:** Is your report clear and informative? While the quality of your research question is not being assessed here, the clarity with which you present your findings is crucial. Your report should be understandable and actionable for your intended audience. (10 points)
+2. **Readability and Utility:** Is your report clear and informative? While the quality of your research question is not being assessed here, the clarity with which you present your findings is. Your report should be understandable and actionable for your intended audience. (10 points)
 
 3. **Feedback Incorporation:** Does your report effectively incorporate the feedback you received after your presentation? Your ability to integrate suggestions and improvements will be evaluated. (10 points)
 

@@ -8,7 +8,7 @@
 <link href="lecture_03_week_01_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_03_week_01_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_03_week_01_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Week 13:  Spatial Data and   Project 3 Introduction</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -155,7 +155,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -335,20 +336,40 @@
 <p>Spatial data overview</p>
 <p>Spatial joins</p>
 <p>Project 3 overview</p>
-<!-- example of big text fit to slide width -->
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
+</section>
+<section id="before-we-start-lets-recap" class="slide level2 scrollable">
+<h2>Before we start, let’s recap…</h2>
+<p>In unit 1, we learned about <strong>time series data</strong>.</p>
+<ul>
+<li>The tool to analyze time series data is <strong>time series decomposition and forecasting</strong>.</li>
+</ul>
+<p>In unit 2, we learned about <strong>cross-sectional data</strong>.</p>
+<ul>
+<li>The tool to analyze cross-sectional data is <strong>cluster analysis</strong>.</li>
+</ul>
+</section>
+<section id="and-heres-where-were-going." class="slide level2 scrollable">
+<h2>…and here’s where we’re going.</h2>
+<p>In unit 3, we will learn about <strong>panel data</strong>.</p>
+<ul>
+<li>The tool to analyze panel data is <strong>regression analysis</strong>.</li>
+</ul>
+<p>Panel data is a combination of time series and cross-sectional data, where we observe multiple units over multiple time periods.</p>
+</section>
+<section id="on-our-way-to-regression-analysis" class="slide level2 scrollable">
+<h2>On our way to regression analysis</h2>
+<p>Before we get to regression, we’ll take a short detour into spatial data.</p>
+<p>Why?</p>
+<ul>
+<li><p>Many panel datasets include geographic identifiers (like zip codes or counties).</p></li>
+<li><p>To work with these, we need to know how to connect (i.e., <strong>join</strong>) different layers of spatial information (like store locations to zip codes).</p></li>
+<li><p>This week’s tool: spatial joins.</p></li>
+</ul>
+<p>To use spatial joins, we need to know what kind of spatial data we’re working with.</p>
 </section>
 <section id="what-is-spatial-data" class="slide level2">
 <h2>What is spatial data?</h2>
-<p>Data about a point or area defined in space</p>
+<p>Data about a point or area defined in space.</p>
 <div class="columns" style="text-align: left">
 <div class="column" style="width:50%;">
 <p>Vector Data</p>
@@ -362,8 +383,7 @@
 <ul>
 <li>Grid/raster data is reported in a uniformly sized grid over some area (e.g., satellite images)</li>
 </ul>
-</div>
-</div>
+</div></div>
 <!-- ##  -->
 <!-- <section data-background-image="includes/cross-sectional.png" data-background-size="contain"> -->
 <!-- </section> -->
@@ -416,8 +436,7 @@
 <p><img data-src="https://i0.wp.com/peter-horton.com/wp-content/uploads/2022/05/selected_point_state_adjacencies.png?resize=840%2C888&amp;ssl=1" class="fragment fade-in-then-out" data-fragment-index="2"></p>
 <p><img data-src="https://idlewords.com/images/fb_graph.png" class="fragment fade-in-then-out" data-fragment-index="3"></p>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <ul>
 <li>Calculating distances between points on a globe requires accounting for the curvature of the earth.</li>
@@ -465,13 +484,24 @@
 <li>Remote sensing and aerial photography</li>
 </ul>
 </div>
+<div class="fragment fade-in" data-fragment-index="3">
+<ul>
+<li>Digitizing from paper maps or other datasets</li>
+</ul>
+</div>
+<div class="fragment fade-in" data-fragment-index="4">
+<ul>
+<li>Public datasets (e.g., Census, USDA Cropland Data Layer)</li>
+</ul>
+</div>
 </div><div class="column" style="width:40%;">
 <div class="r-stack">
 <p><img data-src="https://www.quadrant.io/hubfs/New%20website%20images%202023/Hero/Final/Screenshot%202023-07-18%20at%202.07.50%20PM.png" class="fragment fade-in-then-out" data-fragment-index="1"></p>
 <p><img data-src="https://www.space-intelligence.com/wp-content/uploads/2018/04/Sentinel-1_radar_vision.jpg" class="fragment fade-in-then-out" data-fragment-index="2"></p>
+<p><img data-src="https://www.qgistutorials.com/en/_images/553.png" class="fragment fade-in-then-out" data-fragment-index="3"></p>
+<p><img data-src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/thumbnails/image/Cropland%20Data%20Layer.jpg?itok=Wdpl4iZ0" class="fragment fade-in-then-out" data-fragment-index="4"></p>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <ul>
 <li><p>GPS devices record location information based on satellite triangulation. There are many applications: your phone uses this to help you navigate; on wildland fires, trained analysts record the location of built fire line.</p></li>
@@ -501,8 +531,7 @@
 </ul>
 </div><div class="column" style="width:50%;">
 <p><img data-src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/sf.png"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="geocoding-and-reverse-geocoding" class="slide level2">
 <h2>Geocoding and Reverse Geocoding</h2>
@@ -514,8 +543,7 @@
 </ul>
 </div><div class="column" style="width:50%;">
 <p><img data-src="https://geospatialmedia.s3.amazonaws.com/wp-content/uploads/2018/05/geocoding-graph.jpg"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="spatial-joins" class="slide level2">
 <h2>Spatial Joins</h2>
@@ -546,15 +574,22 @@
 <p><img data-src="https://gisgeography.com/wp-content/uploads/2019/04/Spatial-Join.png" class="fragment fade-in-then-out" data-fragment-index="1"></p>
 <p><img data-src="https://pygis.io/_images/overlay_intersects.jpg" class="fragment fade-in" data-fragment-index="2"></p>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="conclusion" class="slide level2">
-<h2>Conclusion</h2>
+<section id="takeaways" class="slide level2">
+<h2>Takeaways</h2>
 <ul>
 <li><p>Spatial data references a location</p></li>
 <li><p>Spatial data enables calculation and manipulation</p></li>
 <li><p>Spatial information enables joining to other data (e.g., census)</p></li>
+</ul>
+</section>
+<section id="lab-this-week" class="slide level2">
+<h2>Lab This Week</h2>
+<ul>
+<li><p>Read and process spatial data in R</p></li>
+<li><p>Join spatial data</p></li>
+<li><p>Prepare data for mapping in Tableau</p></li>
 </ul>
 </section></section>
 <section>
@@ -564,8 +599,8 @@
 </section>
 <section id="the-question" class="slide level2">
 <h2>The Question</h2>
-<p>The goal of this project is for you to apply panel data analysis to answer a real world question. This is also a chance to showcase your creativity and analytic skills, putting everything together that you have learned over the semester</p>
-<p>Your question for project 3 should be in the form of: What is the association between <span class="math inline">\(x\)</span> (an explanatory variable) and <span class="math inline">\(y\)</span> (some outcome)?</p>
+<p>The goal of this project is for you to apply panel data analysis to answer a real world question.</p>
+<p>This is also a chance to showcase your creativity and analytic skills, putting everything together that you have learned over the semester.</p>
 </section>
 <section id="the-data" class="slide level2">
 <h2>The Data</h2>
@@ -577,18 +612,34 @@
 </section>
 <section id="bringing-it-together" class="slide level2 scrollable">
 <h2>Bringing It Together</h2>
-<p>You are posing some form of the question: What is the impact of <span class="math inline">\(x\)</span> (treatment or exposure) on some outcome <span class="math inline">\(y\)</span>?</p>
+<p>Your question for project 3 should be in the form of: What is the association between <span class="math inline">\(x\)</span> (an explanatory variable) and <span class="math inline">\(y\)</span> (some outcome)?</p>
 <ol type="1">
 <li><p>Choose one of the two options.</p></li>
-<li><p>Find an outcome to evaluate. In other words, you need to identify an outcome <span class="math inline">\(y\)</span> from the convenience store data.</p></li>
-<li><p>Identify any controls that you may need (e.g., weather, population density) – this (or these) will serve as your treatment or exposure variable(s), <span class="math inline">\(x\)</span>.</p></li>
+<li><p>Based on your question, determine the outcome (<span class="math inline">\(y\)</span>) to evaluate from the <strong>convenience store data</strong>.</p></li>
+<li><p>Identify the controls (e.g., weather, population density) that you want to include. This (or these) will serve as your treatment or exposure variable(s), <span class="math inline">\(x\)</span>.</p></li>
 </ol>
 <ul>
 <li>Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation.</li>
 </ul>
-<p>You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.</p>
+<p>You are responsible for merging or joining your datasets. This means that you must identify the <strong>unit of analysis</strong> in your datasets and aggregate data to the common unit of analysis.</p>
+</section>
+<section id="example-questions" class="slide level2 scrollable">
+<h2>Example Questions</h2>
+<p><strong>Using Census</strong></p>
+<ul>
+<li>What is the correlation between population size and total store count at the zip code level?</li>
+<li>What is the association between the number of convenience store locations and median income within a county?</li>
+<li>What is the association between the number of energy drinks sold and the average age of individuals living in a county?</li>
+</ul>
+<p><strong>Using Weather</strong></p>
+<ul>
+<li>What is the correlation between total daily rain fall and packaged beverages sales at Allsups locations in Texas?</li>
+<li>What is the correlation between the total daily rain fall rained areas and total sales in an area?</li>
+</ul>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>
@@ -617,7 +668,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -834,18 +884,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -877,11 +916,50 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -891,8 +969,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -906,7 +993,11 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

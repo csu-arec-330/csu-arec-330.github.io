@@ -17,23 +17,42 @@ Spatial joins
 
 Project 3 overview 
 
+## Before we start, let's recap... {.scrollable}
 
-<!-- example of big text fit to slide width -->
+In unit 1, we learned about **time series data**. 
 
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
+- The tool to analyze time series data is **time series decomposition and forecasting**.
 
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
+In unit 2, we learned about **cross-sectional data**.
+
+- The tool to analyze cross-sectional data is **cluster analysis**.
+
+
+## ...and here's where we're going. {.scrollable}
+
+In unit 3, we will learn about **panel data**.
+
+- The tool to analyze panel data is **regression analysis**.
+
+Panel data is a combination of time series and cross-sectional data, where we observe multiple units over multiple time periods.
+
+## On our way to regression analysis {.scrollable}
+
+Before we get to regression, we’ll take a short detour into spatial data.
+
+Why?
+
+- Many panel datasets include geographic identifiers (like zip codes or counties).
+
+- To work with these, we need to know how to connect (i.e., **join**) different layers of spatial information (like store locations to zip codes).
+
+- This week’s tool: spatial joins.
+
+To use spatial joins, we need to know what kind of spatial data we're working with.
 
 ## What is spatial data? 
 
-Data about a point or area defined in space
+Data about a point or area defined in space.
 
 :::: {.columns style="text-align: left"}
 
@@ -157,6 +176,14 @@ Raster Data
 - Remote sensing and aerial photography
 :::
 
+::: {.fragment .fade-in fragment-index=3}
+- Digitizing from paper maps or other datasets
+:::
+
+::: {.fragment .fade-in fragment-index=4}
+- Public datasets (e.g., Census, USDA Cropland Data Layer)
+:::
+
 :::
 
 ::: {.column width="40%"}
@@ -165,6 +192,9 @@ Raster Data
 
 ![](https://www.space-intelligence.com/wp-content/uploads/2018/04/Sentinel-1_radar_vision.jpg){.fragment .fade-in-then-out fragment-index=2}
 
+![](https://www.qgistutorials.com/en/_images/553.png){.fragment .fade-in-then-out fragment-index=3}
+
+![](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/thumbnails/image/Cropland%20Data%20Layer.jpg?itok=Wdpl4iZ0){.fragment .fade-in-then-out fragment-index=4}
 :::
 
 :::
@@ -263,12 +293,7 @@ Raster Data
 
 ::::
 
-
-
-
-
-
-## Conclusion
+## Takeaways
 
 - Spatial data references a location
 
@@ -276,13 +301,21 @@ Raster Data
 
 - Spatial information enables joining to other data (e.g., census)
 
+## Lab This Week
+
+- Read and process spatial data in R
+
+- Join spatial data
+
+- Prepare data for mapping in Tableau
+
 # Project 3
 
 ## The Question
 
-The goal of this project is for you to apply panel data analysis to answer a real world question. This is also a chance to showcase your creativity and analytic skills, putting everything together that you have learned over the semester. 
+The goal of this project is for you to apply panel data analysis to answer a real world question. 
 
-Your question for project 3 should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)? 
+This is also a chance to showcase your creativity and analytic skills, putting everything together that you have learned over the semester. 
 
 ## The Data
 
@@ -294,16 +327,29 @@ For this project, you will use the convenience store data (shopper_info, store_i
 
 ## Bringing It Together {.scrollable}
 
-You are posing some form of the question: What is the impact of $x$ (treatment or exposure) on some outcome $y$?
+Your question for project 3 should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)? 
 
 1. Choose one of the two options. 
 
-2. Find an outcome to evaluate. In other words, you need to identify an outcome $y$ from the convenience store data. 
+2. Based on your question, determine the outcome ($y$) to evaluate from the **convenience store data**. 
 
-3. Identify any controls that you may need (e.g., weather, population density) -- this (or these) will serve as your treatment or exposure variable(s), $x$.  
+3. Identify the controls (e.g., weather, population density) that you want to include. This (or these) will serve as your treatment or exposure variable(s), $x$.  
 
 - Including control variables in the regression explains a portion of the variation in your data leaving your variable of interest to explain the remaining variation. 
 
-You are responsible for merging or joining your datasets. This means that you must identify the common unit of analysis in each of your datasets and aggregate data if necessary.
+You are responsible for merging or joining your datasets. This means that you must identify the **unit of analysis** in your datasets and aggregate data to the common unit of analysis.
+
+## Example Questions {.scrollable}
+
+**Using Census**
+
+- What is the correlation between population size and total store count at the zip code level? 
+- What is the association between the number of convenience store locations and median income within a county?
+- What is the association between the number of energy drinks sold and the average age of individuals living in a county? 
+
+**Using Weather**
+
+- What is the correlation between total daily rain fall and packaged beverages sales at Allsups locations in Texas?
+- What is the correlation between the total daily rain fall rained areas and total sales in an area? 
 
 

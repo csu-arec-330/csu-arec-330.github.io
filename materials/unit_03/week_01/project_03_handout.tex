@@ -1,0 +1,221 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{setspace}
+\setlength{\parindent}{0pt}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Project 03 Handout},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Project 03 Handout}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\subsubsection{Objective}\label{objective}
+
+Work with a simplified example from your Project 3 data to identify:
+
+\begin{itemize}
+\tightlist
+\item
+  The spatial unit of analysis\\
+\item
+  The type of spatial join required\\
+\item
+  Potential problems with the join
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Instructions}\label{instructions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Get into pairs} (or groups of 3).
+\item
+  \textbf{Review the mini datasets} shown below.
+\item
+  As a group, answer the following questions:
+\end{enumerate}
+
+\textbf{Group Worksheet Questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is your outcome variable (\(y\))?
+\item
+  What is your explanatory variable (\(x\))?
+\item
+  What is the spatial unit of analysis in each dataset?
+\item
+  What type of spatial data is this? (point, polygon, raster)
+\item
+  What kind of spatial join is needed? (e.g., point-to-polygon,
+  polygon-to-polygon)
+\item
+  What could go wrong with this join?
+\end{enumerate}
+
+\cleardoublepage
+
+\subsubsection{Example Mini Datasets}\label{example-mini-datasets}
+
+\textbf{Shopper Sample}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+shopper\_id
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+store\_id
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+tr\_set\_id
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+gtin
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+price
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+quantity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+purchase\_date
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+zip
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+a1 & 101 & 10001 & 0001 & 2.99 & 1 & 2023-07-01 & 80021 \\
+b2 & 102 & 10002 & 0002 & 1.50 & 2 & 2023-07-01 & 80022 \\
+c3 & 103 & 10003 & 0003 & 3.25 & 1 & 2023-07-01 & 80023 \\
+\end{longtable}
+
+\textbf{Store Sample}
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule\noalign{}
+store\_id & store\_name & zip\_code & latitude & longitude & \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+101 & Store A & 80021 & 39.9205 & -105.092 & \\
+102 & Store B & 80022 & 39.9206 & -105.093 & \\
+103 & Store C & 80023 & 39.9207 & -105.094 & \\
+\end{longtable}
+
+\textbf{Census Sample}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+zip\_code & population & median\_income & percent\_college\_degree \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+80021 & 25,000 & 68,000 & 0.45 \\
+80022 & 18,000 & 59,000 & 0.32 \\
+80023 & 22,000 & 63,000 & 0.38 \\
+\end{longtable}
+
+\textbf{Weather Sample}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+zip\_code & date & avg\_temp & precip \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+80021 & 2023-07-01 & 85.2 & 0.10 \\
+80022 & 2023-07-01 & 87.1 & 0.00 \\
+80023 & 2023-07-01 & 86.4 & 0.05 \\
+\end{longtable}
+
+\end{document}

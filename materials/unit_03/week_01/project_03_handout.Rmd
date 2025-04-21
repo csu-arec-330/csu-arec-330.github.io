@@ -1,0 +1,74 @@
+---
+title: "Project 03 Handout"
+output: 
+  pdf_document:
+    keep_tex: true
+geometry: margin=1in
+fontsize: 11pt
+header-includes:
+  - \usepackage{setspace}
+  - \setlength{\parindent}{0pt}
+---
+
+### Objective
+
+Work with a simplified example from your Project 3 data to identify:
+
+-   The spatial unit of analysis\
+-   The type of spatial join required\
+-   Potential problems with the join
+
+------------------------------------------------------------------------
+
+### Instructions
+
+1.  **Get into pairs** (or groups of 3).
+2.  **Review the mini datasets** shown below.
+3.  As a group, answer the following questions:
+
+**Group Worksheet Questions**
+
+1.  What is your outcome variable ($y$)?
+2.  What is your explanatory variable ($x$)?
+3.  What is the spatial unit of analysis in each dataset?
+4.  What type of spatial data is this? (point, polygon, raster)
+5.  What kind of spatial join is needed? (e.g., point-to-polygon, polygon-to-polygon)
+6.  What could go wrong with this join?
+
+\cleardoublepage
+
+### Example Mini Datasets
+
+**Shopper Sample**
+
+| shopper_id | store_id | tr_set_id | gtin | price | quantity | purchase_date | zip |
+|---------|---------|---------|---------|---------|---------|---------|---------|
+| a1 | 101 | 10001 | 0001 | 2.99 | 1 | 2023-07-01 | 80021 |
+| b2 | 102 | 10002 | 0002 | 1.50 | 2 | 2023-07-01 | 80022 |
+| c3 | 103 | 10003 | 0003 | 3.25 | 1 | 2023-07-01 | 80023 |
+
+**Store Sample**
+
+| store_id | store_name | zip_code | latitude | longitude |     |
+|----------|------------|----------|----------|-----------|-----|
+| 101      | Store A    | 80021    | 39.9205  | -105.092  |     |
+| 102      | Store B    | 80022    | 39.9206  | -105.093  |     |
+| 103      | Store C    | 80023    | 39.9207  | -105.094  |     |
+
+**Census Sample**
+
+| zip_code | population | median_income | percent_college_degree |
+|----------|------------|---------------|------------------------|
+| 80021    | 25,000     | 68,000        | 0.45                   |
+| 80022    | 18,000     | 59,000        | 0.32                   |
+| 80023    | 22,000     | 63,000        | 0.38                   |
+
+**Weather Sample**
+
+| zip_code | date       | avg_temp | precip |
+|----------|------------|----------|--------|
+| 80021    | 2023-07-01 | 85.2     | 0.10   |
+| 80022    | 2023-07-01 | 87.1     | 0.00   |
+| 80023    | 2023-07-01 | 86.4     | 0.05   |
+
+

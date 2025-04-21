@@ -10,30 +10,43 @@ This problem set is intended to get you started on your third project for the co
 
 ### The Question & The Data
 
-Your question for project 3 should be in the form of: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)? For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
+Your question for project 3 should be in the form of: What is the association (or correlation) between $x$ (an explanatory variable) and $y$ (some outcome)? 
+
+For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
 
 - Option 1: Convenience store data and [Demographic data from the US Census](https://www.census.gov/data/developers/data-sets/acs-5year.html)
 
 - Option 2: Convenience store data and [Weather data from NOAA](https://csu-arec-330.github.io/materials/unit_03/inputs/gridmet_county_daily_2023-2023.csv.gz)
 
-### Building your panel dataset
+
+## Part 1: Research Question
+
+1. Indicate whether you are selecting Option 1 or Option 2, described above.
+
+2. What is the relationship you want to examine? Formulate the relationship you want to examine as a question.
+
+3. What is your hypothesis? Before you begin your analysis, what do you expect the relationship to be?
+
+4. Who would benefit from knowing your results? Explain why answering this question is valuable and specify who will benefit from the insights (e.g., business executives, store managers, marketers).
+
+## Part 2: Building your panel dataset
 
 Once you have the question in mind, you need to build the dataset. Building the dataset may look different depending on your question and the regression model you intend to estimate. For this problem set, you will practice building datasets using both the Census data and the weather data.
 
-#### Part 1: Using Census data
+### Option 1: Using Census data
 1. In the lab, we loaded median income from the American Community Survey (ACS) Census data. For your problem set, find the table associated population. Then, create a new spatial dataframe that does the following:
 
 - Only includes the data for the 48 contiguous US states.
 
 - Joins population to the geocoded store data. 
 
-- Calculates the population *density* (population per square miles). Note: You will need to refer to the [Tiger Shapefile data dictionary](https://www.census.gov/programs-surveys/geography/technical-documentation/records-layout/gaz-record-layouts.html#) to determine what units **aland** is measured in and perform the necessary mutation. Tip: Refer back to the lab notes from Week 3.
+- Calculates the population *density* (population per square miles). Note: You will need to refer to the [Tiger Shapefile data dictionary](https://www.census.gov/programs-surveys/geography/technical-documentation/records-layout/gaz-record-layouts.html#) to determine what units **aland** is measured in and perform the necessary mutation.
 
 - Export the data to a csv file that can be read into Tableau.
 
 2. Generate a filled map in Tableau that plots county-level population density. Your final map should only include the data for the 48 contiguous US states. Note: We covered filled maps in Tableau in Week 10.
 
-#### Part 2: Using weather data
+### Option 2: Using Weather Data
 
 1. Read in the weather data and create a dataframe with the total monthly rainfall for each county. Tip: Refer back to the lab notes from Week 3.
 
@@ -43,14 +56,16 @@ Once you have the question in mind, you need to build the dataset. Building the 
 
 3. Generate a map in Tableau that plots county-level total rainfall and total sales. You decide how best to display the data so that both pieces of information are portrayed effectively. Only include the data for the 48 contiguous US states.
 
-### Project 3
-
-1. Who are your Project 3 team members?
-
-2. Indicate whether you are selecting Option 1 or Option 2, described above.
-
-3. What is the relationship you want to examine? 
+ 
 
 ## How to Submit
 
-You should create a new webpage on your Google site titled `Project 3 Problem Set 1`. Your webpage should include the code you used to generate the data for the two maps, the two maps themselves, and responses to the questions, where pertinent. Submit the link to your Google site webpage in Canvas. You should work on building your own webpage, but only one member of the group needs to submit the link.
+Create a new webpage on your Google site titled `Project 3 Problem Set 1`. 
+
+Your webpage should include:
+
+- Responses to Part 1.
+- The code you used to generate the data for the two maps (Part 2, either option 1 or option 2). **Use the Compile Report option.**
+- The map you created (Part 2, either option 1 or option 2). **Please embed the maps. Do not put screen shots.**
+
+Submit the link to your Google site webpage in Canvas.**Even though you are working in teams, please submit the link to your individual webpage, updated with this problem set.**
