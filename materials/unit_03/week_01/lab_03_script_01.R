@@ -5,6 +5,8 @@
 library(pacman)
 p_load(tidyverse,janitor,sf,tigris,mapview,tidycensus,dplyr)
 
+# ==== Read in Spatial Data ==== #
+
 # Read in convenience store location dataset
 store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
 
@@ -51,13 +53,17 @@ store_co_geo <- st_join(store_geo, us_co_filtered, join=st_intersects)
 # Aggregate store count by county
 store_count_by_county <- store_co_geo %>%
   group_by(geoid) %>%
-  summarize(store_count = n(), .groups = 'drop')  # Drop groups to prevent regrouping
+  summarize(
+    store_count = n(), 
+    .groups = 'drop')  # Drop groups to prevent regrouping
 
 # Join aggregated data back with county geometries for mapping
-county_store_map <- st_join(us_co_filtered,store_count_by_county,join=st_intersects)
+county_store_map <- st_join(us_co_filtered, store_count_by_county, join=st_intersects)
 
 # Visualize the result with mapview (showing number of stores per county)
 mapview(county_store_map, zcol = "store_count")
+
+# ==== Spatial Joins - Census ==== #
 
 # Load variable metadata for the 2022 ACS 5-year estimates (used to look up variable codes and labels)
 census_22 <- load_variables(2022, "acs5", cache = TRUE)
@@ -85,8 +91,12 @@ store_hhi <- store_co_geo %>%
 county_stores <- store_co_geo %>%
   st_set_geometry(NULL) %>%            # Drop geometry to simplify data manipulation
   group_by(geoid, county = name, state = stusps) %>%  # Group by county GEOID, name, and state abbreviation
-  summarize(total_stores = n()) %>%    # Count the number of stores in each county
+  summarize(
+    total_stores = n()
+    ) %>%    # Count the number of stores in each county
   ungroup()                            # Remove grouping to avoid unexpected behavior in downstream steps
+
+# ==== Spatial Joins - Weather ==== #
 
 # Read in the transaction level data
 shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
@@ -94,14 +104,18 @@ shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/input
 # Read in the weather data
 weather_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/gridmet_county_daily_2023-2023.csv.gz")
 
+# ==== Store-related questions ==== #
+
 # Aggregate daily sales by store from transaction-level data
 store_sales <- shopper_info %>%
+  mutate(gtin = ifelse(is.na(gtin), 0, gtin)) %>%
   mutate(measure_date = as_date(date_time)) %>%              # Extract date component from timestamp
   group_by(store_id, measure_date) %>%                       # Group by store and date
   summarize(
     sales = sum(unit_price * unit_quantity, na.rm = TRUE)   # Compute total sales (price × quantity)
   ) %>%
   ungroup()                                                  # Remove grouping to clean up the result
+
 # Add county GEOID to the store-level sales data (so we can link to county-level data like weather)
 store_sales_co <- st_set_geometry(store_co_geo, NULL) %>%
   select(store_id, geoid) %>%                      # Keep only store_id (for joining) and geoid (for county-level linkage)
@@ -118,3 +132,48 @@ weather_wide <- weather_raw %>%
 # Join daily store sales to weather data using date and county identifiers
 store_sales_weather <- store_sales_co %>%
   inner_join(weather_wide, by = c("measure_date" = "date", "geoid" = "county"))  # Match on date and county FIPS
+
+# Results in a data frame of daily sales at the store level with daily precipitation levels, humidity levels, and air temperature.
+
+# ==== Shopper-related questions ==== #
+
+# First need to assign location information to each shopper
+shopper_home_co <- shopper_info %>%
+  left_join(store_co_geo %>% select(store_id, geoid), by = "store_id") %>%
+  filter(!is.na(geoid)) %>%
+  group_by(shopper_id, geoid) %>%
+  summarize(
+    visits = n(), 
+    .groups = "drop") %>%
+  group_by(shopper_id) %>%
+  filter(visits == max(visits)) %>% # Assign the shopper to the county of the store they most frequently visit
+  ungroup() %>%
+  distinct(shopper_id, .keep_all = TRUE) %>%
+  select(shopper_id, home_co = geoid)
+
+shopper_sales <- shopper_info %>%
+  mutate(
+    gtin = ifelse(is.na(gtin), 0, gtin),     # Replace NA with 0, ensure numeric
+    measure_date = as_date(date_time)                    # Extract date from timestamp
+  ) %>%
+  group_by(shopper_id, measure_date) %>%
+  summarize(
+    total_spent = sum(unit_price * unit_quantity, na.rm = TRUE),
+    visit_count = n(),
+    .groups = "drop"
+  ) %>%
+  left_join(shopper_home_co, by = "shopper_id")  # Add home county
+
+# Reshape weather data from long to wide format (each variable becomes a column)
+weather_wide <- weather_raw %>%
+  pivot_wider(
+    id_cols = c(county, date),              # Keep county and date as identifiers
+    names_from = variable,                  # Each unique variable becomes a new column
+    values_from = value                     # Fill those columns with the corresponding values
+  )
+
+# Join daily store sales to weather data using date and county identifiers
+shopper_sales_weather <- shopper_sales %>%
+  inner_join(weather_wide, by = c("measure_date" = "date", "home_co" = "county"))  # Match on date and county FIPS
+
+# Results in a data frame of daily expenditures at the shopper level with daily precipitation levels, humidity levels, and air temperature.
