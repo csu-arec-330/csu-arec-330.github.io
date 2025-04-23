@@ -350,6 +350,6 @@ You are responsible for merging or joining your datasets. This means that you mu
 **Using Weather**
 
 - What is the correlation between total daily rain fall and packaged beverages sales at Allsups locations in Texas?
-- What is the correlation between the total daily rain fall rained areas and total sales in an area? 
+- What is the correlation between the total daily rain fall and total sales in an area? 
 
 
