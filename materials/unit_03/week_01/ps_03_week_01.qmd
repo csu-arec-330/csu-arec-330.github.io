@@ -38,7 +38,7 @@ Once you have the question in mind, you need to build the dataset. Building the 
 
 - Only includes the data for the 48 contiguous US states.
 
-- Joins population to the geocoded store data. 
+- Joins population to the geo-coded store data. 
 
 - Calculates the population *density* (population per square miles). Note: You will need to refer to the [Tiger Shapefile data dictionary](https://www.census.gov/programs-surveys/geography/technical-documentation/records-layout/gaz-record-layouts.html#) to determine what units **aland** is measured in and perform the necessary mutation.
 
@@ -48,15 +48,14 @@ Once you have the question in mind, you need to build the dataset. Building the 
 
 ### Option 2: Using Weather Data
 
-1. Read in the weather data and create a dataframe with the total monthly rainfall for each county. Tip: Refer back to the lab notes from Week 3.
+1. Follow the steps from lab to read in the weather data. Then, create a dataframe with the total **monthly** rainfall for each county. 
 
-2. Read in the shopper info data and create a dataframe that aggregates total sales across stores at the county-level by month. Note: There is only one month of data.
+2. Follow the steps from lab to read in the shopper info data and create a dataframe that aggregates total sales across stores at the county-level by month. *Note: You will have to follow the steps in lab that add county GEOID to the store-level sales data (so you can link to county-level data like weather).*
 
 3. Join the dataframe from #1 (total precipitation) with the dataframe from #2 (total sales) and create a dataset where the unit of analysis is at the county level. Export the data into a csv file that can be read into Tableau.
 
-3. Generate a map in Tableau that plots county-level total rainfall and total sales. You decide how best to display the data so that both pieces of information are portrayed effectively. Only include the data for the 48 contiguous US states.
+3. Generate a map in Tableau that plots county-level total rainfall and total sales. You decide how best to display the data so that both pieces of information are portrayed effectively. **Only include the data for the 48 contiguous US states.**
 
- 
 
 ## How to Submit
 

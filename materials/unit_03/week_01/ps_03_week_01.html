@@ -123,7 +123,7 @@ window.Quarto = {
 </ol>
 <ul>
 <li><p>Only includes the data for the 48 contiguous US states.</p></li>
-<li><p>Joins population to the geocoded store data.</p></li>
+<li><p>Joins population to the geo-coded store data.</p></li>
 <li><p>Calculates the population <em>density</em> (population per square miles). Note: You will need to refer to the <a href="https://www.census.gov/programs-surveys/geography/technical-documentation/records-layout/gaz-record-layouts.html#">Tiger Shapefile data dictionary</a> to determine what units <strong>aland</strong> is measured in and perform the necessary mutation.</p></li>
 <li><p>Export the data to a csv file that can be read into Tableau.</p></li>
 </ul>
@@ -134,10 +134,10 @@ window.Quarto = {
 <section id="option-2-using-weather-data" class="level3">
 <h3 class="anchored" data-anchor-id="option-2-using-weather-data">Option 2: Using Weather Data</h3>
 <ol type="1">
-<li><p>Read in the weather data and create a dataframe with the total monthly rainfall for each county. Tip: Refer back to the lab notes from Week 3.</p></li>
-<li><p>Read in the shopper info data and create a dataframe that aggregates total sales across stores at the county-level by month. Note: There is only one month of data.</p></li>
+<li><p>Follow the steps from lab to read in the weather data. Then, create a dataframe with the total <strong>monthly</strong> rainfall for each county.</p></li>
+<li><p>Follow the steps from lab to read in the shopper info data and create a dataframe that aggregates total sales across stores at the county-level by month. <em>Note: You will have to follow the steps in lab that add county GEOID to the store-level sales data (so you can link to county-level data like weather).</em></p></li>
 <li><p>Join the dataframe from #1 (total precipitation) with the dataframe from #2 (total sales) and create a dataset where the unit of analysis is at the county level. Export the data into a csv file that can be read into Tableau.</p></li>
-<li><p>Generate a map in Tableau that plots county-level total rainfall and total sales. You decide how best to display the data so that both pieces of information are portrayed effectively. Only include the data for the 48 contiguous US states.</p></li>
+<li><p>Generate a map in Tableau that plots county-level total rainfall and total sales. You decide how best to display the data so that both pieces of information are portrayed effectively. <strong>Only include the data for the 48 contiguous US states.</strong></p></li>
 </ol>
 </section>
 </section>

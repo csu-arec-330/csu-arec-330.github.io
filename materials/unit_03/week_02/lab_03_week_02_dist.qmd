@@ -1,0 +1,255 @@
+---
+title: "Week 14 Lab: Introduction to Regression"
+format: 
+  html:
+    theme: zephyr
+    toc: true
+---
+
+
+![](includes/long_ai.jpeg){height=60%, fig-align="center"}
+
+::: {style="font-size: 1.5em"}
+This Lab Contributes to Course Objectives: 1, 3, 4, 5, 7, 8
+:::
+
+
+
+## Learning Objectives R
+
+- Estimate regression in R
+
+
+## Lab overview
+
+The objective of this lab is to answer the question: Do fuel stations (i.e., convenience stores) charge more for fuel when they are closer to major roadways in the US? 
+
+> What do you think? Can you formulate a hypothesis?
+
+We will answer this question by estimating the following regression:
+
+$$ price_i = \alpha + \beta ~ dist_i + \varepsilon_i $$
+
+where $price$ is the average price of all fuel sold at store $i$ in July 2023, $dist_i$ is the distance between the store and its nearest major roadway (e.g., interstate, US/State highway) in kilometers, $\alpha$ is the intercept, and $\beta$ is the slope. 
+
+> What is the conceptual interpretation of $\beta$?
+
+
+
+
+## Data processing
+
+We will continue using the convenience store data that we have been using, but we will focus on the fuel products. **You do not need to run the following code. It is here as a reference** 
+
+
+
+```{r}
+#| eval: false
+
+#This script constructs a dataset of convenience stores, fuel prices, and distance from major roads and estimates a regression
+
+library(pacman)
+p_load(tidyverse,modelsummary,sf,progress)
+
+# read in the transaction level data
+shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
+
+
+# Function to classify fuel and not fuel based on descriptions
+classify_fuel <- function(description) {
+  # Check if the description is not NA and is a character
+  if (!is.na(description) && is.character(description)) {
+    # Convert description to lower case for case-insensitivity
+    description_lower <- tolower(description)
+    
+    # Define keywords associated with fuel
+    fuel_keywords <- c("unld","unlead", "unleaded", "regular", "mid", "premium", "diesel", 
+                       "gas", "ethanol", "e85", "fuel", "octane", "ultra", "prem","super")
+    
+    # Check for the presence of fuel-related keywords or a number in the description
+    if (any(sapply(fuel_keywords, grepl, x = description_lower)) || grepl("[0-9]", description_lower)) {
+      return("fuel")
+    } else {
+      return("not fuel")
+    }
+  } else {
+    return("not fuel")
+  }
+}
+
+store_gas <- shopper_info %>%
+  filter(is.na(gtin)) %>%
+  mutate(gas = sapply(pos_description, classify_fuel)) %>% #classify all observations as fuel or not
+  filter(gas=="fuel") %>% #remove non-fuel observations
+  group_by(store_id) %>% 
+  summarise(unit_price=mean(unit_price,na.rm = T)) %>% #calculate the average price of fuel items sold at the location
+  ungroup() %>%
+  filter(between(unit_price,2.5,5)) #based on a distribution of the data, remove fuel prices less than $2.50 and above $5.00
+
+#plot the distribution of price data
+#ggplot(store_gas,aes(x=unit_price)) + geom_histogram()
+
+
+####################################################
+#Now we need to calculate the distance between each store and its nearest major road
+####################################################
+
+# read in convenience store location dataset
+store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
+
+#join the store-level fuel price back to the raw store dataset to attach the coordinates
+store_gas_geo <- inner_join(store_gas,select(store_raw,store_id,latitude,longitude),by="store_id") %>%
+  st_as_sf(coords=c("longitude","latitude"),crs=st_crs(4326))
+
+
+#Load all US primary roads - downloaded from https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Roads
+us_roads <- st_read("tl_2021_us_primaryroads/tl_2021_us_primaryroads.shp") %>%
+  st_transform(4326)
+
+
+
+#testing
+df=store_gas_geo[1:5,]
+#Find nearest primary road
+nd <- st_nearest_feature(df,us_roads)
+#Calculate distance from store to nearest primary road
+df <- mutate(df,dist=as.numeric(st_distance(df,us_roads[nd,],by_element = T))/1000)
+
+library(mapview)
+mapview(df,col.region="red") + mapview(us_roads[nd,],col.region="blue")
+
+#split store gas into chunks to process and cache
+# Calculate the number of groups needed
+group_size <- 100
+number_of_groups <- ceiling(nrow(store_gas_geo) / group_size)
+
+#Create cache directory if it doesn't exist
+if(!dir.exists("rd_cache")) dir.create("rd_cache")
+
+#Create progress bar
+pb <- progress_bar$new(total = number_of_groups)
+
+#Loop through chunks first calculating the nearest road to each store, then calculating the distance to that road and caching the results
+store_gas_geo %>%
+  group_split(gid=rep(1:number_of_groups, each=group_size, length.out=nrow(.))) %>%
+  walk(function(df){
+    pb$tick()
+    #Find nearest primary road
+    nd <- st_nearest_feature(df,us_roads)
+    
+    #Calculate distance from store to nearest primary road
+    mutate(df,dist=as.numeric(st_distance(df,us_roads[nd,],by_element = T))/1000) %>%
+      saveRDS(paste0("rd_cache/dist",df$gid[1],".rds"))
+    
+  })
+
+
+#Read in all the cached data and append (bind) into a single dataframe
+store_dist <- list.files("rd_cache",full.names = TRUE) %>%
+  map(readRDS) %>%
+  data.table::rbindlist() %>%
+  st_as_sf()
+
+#Cache a dataframe with store
+store_dist %>%
+  st_set_geometry(NULL) %>% #convert from sf to dataframe
+  select(-gid) %>%
+  write_csv("store_dist.csv")
+
+```
+
+
+### EDA
+
+
+```{r}
+#| eval: false
+
+#This script constructs a dataset of convenience stores, fuel prices, and distance from major roads and estimates a regression
+
+library(pacman)
+p_load(tidyverse,modelsummary,GGally)
+
+# Read in data
+store_dist <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_dist.csv")
+
+
+
+```
+
+Let's briefly explore the data:
+
+- summary statistics
+
+```{r}
+#| eval: false
+
+datasummary(unit_price + dist ~ Mean + sd + min + max,data=store_dist)
+
+```
+
+- plot distributions
+
+```{r}
+#| eval: false
+
+ggpairs(data=store_dist,columns = 2:3)
+
+```
+
+
+Let's remove any stores that are further than 40km from a major road.
+
+
+```{r}
+#| eval: false
+
+# keep only stores within 40 km of major road
+store_dist_40 <- store_dist %>%
+  filter(dist<40)
+
+
+```
+
+## Regression
+
+Now, we can estimate a regression model to test our hypothesis. The `lm()` function (linear model) estimates a linear regression. `lm` requires a formula and a dataset. The formula is similar to how we would write the equation using the `~` as the equals sign. `lm` understands that it needs to estimate coefficients based on this model. We specify `data=store_dist_40` to indicate which dataset we want it to use to estimate the model coefficients.
+
+
+```{r}
+#| eval: false
+
+# Estimate regression
+reg1 <- lm(unit_price ~ dist,
+           data=store_dist_40) 
+  
+summary(reg1)
+
+```
+
+The `summary()` behaves differently depending on the argument. In this case, it will print out the regression results including the coefficient estimates, standard errors, t-values and p-values. 
+
+> Interpret the coefficients. What does the (Intercept) mean? What does the dist coefficient mean?
+
+> How credible are the estimates? What are the results of the statistical hypothesis test?
+
+
+
+You can export your regression results in a nicer looking table using the function `modelsummary()`. See the documentation for additional options to include additional information like p-values or confidence intervals.
+
+```{r}
+#| eval: false
+
+#output the regression table
+modelsummary(reg1)
+
+modelsummary(reg1,statistic = "conf.int")
+
+```
+
+
+
+
+
+
+

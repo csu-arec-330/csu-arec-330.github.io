@@ -8,7 +8,7 @@
 <link href="lecture_03_week_02_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="lecture_03_week_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="lecture_03_week_02_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>Week 14:  Regression Analysis and Hypothesis Testing  </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,7 +30,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -41,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -220,7 +220,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -383,9 +384,6 @@
       margin-right: 0; 
     }
   </style>
-  
-  <script src="lecture_03_week_02_files/libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="lecture_03_week_02_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -402,19 +400,19 @@
 <h2>Agenda</h2>
 <p>Linear Regression</p>
 <p>Hypothesis testing</p>
-<!-- example of big text fit to slide width -->
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
 <!-- ============================= -->
-<!-- (4-22-2024) Lauren moved material in from Week 06 (Lecture 01 Week 02) For next year, plan is to re-do Week 06 lecture to be more about forecasting and decomposition. I left the content in there for Week 05 (commented out) for now. -->
+<!-- (4-22-2024) Lauren moved material in from Week 06 (Lecture 01 Week 02) For Spring 2025, plan is to re-do Week 06 lecture to be more about forecasting and decomposition. I left the content in Week 05 commented out. -->
 <!-- ============================= -->
+</section>
+<section id="recap" class="slide level2">
+<h2>Recap</h2>
+<p>Last week (week 13) we covered:</p>
+<ul>
+<li>Reading in spatial data</li>
+<li>Understanding and implementing spatial joins</li>
+<li>Building panel datasets for regression analysis</li>
+</ul>
+<p>This week: Apply regression analysis to panel data.</p>
 </section>
 <section id="linear-regression" class="title-slide slide level1 center">
 <h1>Linear Regression</h1>
@@ -424,7 +422,7 @@
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p><strong>The objective:</strong> <br> We want to understand the <br> relationship between two variables</p>
+<p><strong>The objective:</strong> <br> We want to understand the <br> relationship between two variables.</p>
 </div>
 </section>
 
@@ -432,15 +430,23 @@
 <section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p><strong>The simple solution:</strong> <br> Assume the relationship is linear <br> and estimate the “average” trend</p>
+<p><strong>The simple solution:</strong> <br> Assume the relationship is linear <br> and estimate the “average” trend.</p>
 </div>
 </section>
 <section id="linear-regression-the-intuition" class="slide level2 scrollable">
 <h2>Linear regression: The intuition</h2>
-<p>Imagine you’re trying to figure out a relationship between two things.</p>
-<p>For instance, how the number of hours you study affects your score on a test.</p>
-<p>Intuitively, you might think that the more you study, the better your score.</p>
-<p>Linear regression helps us quantify this relationship.</p>
+<p>Imagine you’re trying to figure out a relationship between two things:</p>
+<ul>
+<li>What is the relationship (correlation, association) between <span class="math inline">\(x\)</span> (explanatory variable) and <span class="math inline">\(y\)</span> (outcome)?</li>
+</ul>
+<p>For instance, what is the association between the number of hours you study (<span class="math inline">\(x\)</span>) and your test score (<span class="math inline">\(y\)</span>)?</p>
+<ul>
+<li>Hypothesis: The more you study, the better your score <span class="math inline">\(\rightarrow\)</span> positively related.</li>
+</ul>
+<p>Linear regression helps us <strong>quantify</strong> this relationship.</p>
+<ul>
+<li>For each additional hour studied, <em>by how many points</em> will my test score increase?</li>
+</ul>
 <aside class="notes">
 
 <style type="text/css">
@@ -464,172 +470,379 @@
 <p>Which variable represents the intercept?</p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(ggplot2,<span class="at">quietly =</span> T)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">seq.int</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">1</span>),</span>
-<span id="cb1-3"><a href="#cb1-3"></a>           <span class="at">y=</span><span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">22</span>,<span class="at">length.out=</span><span class="dv">11</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x,y)) <span class="sc">+</span> </span>
-<span id="cb1-5"><a href="#cb1-5"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq.int</span>(<span class="dv">0</span>,<span class="dv">24</span>,<span class="dv">2</span>),<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">24</span>)) <span class="sc">+</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq.int</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> </span>
+<span id="cb1-2"><a href=""></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb1-3"><a href=""></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb1-4"><a href=""></a>    <span class="at">breaks =</span> <span class="fu">seq.int</span>(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">2</span>),</span>
+<span id="cb1-5"><a href=""></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">24</span>),</span>
+<span id="cb1-6"><a href=""></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb1-7"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb1-8"><a href=""></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb1-9"><a href=""></a>    <span class="at">breaks =</span> <span class="fu">seq.int</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>),</span>
+<span id="cb1-10"><a href=""></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb1-11"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb1-12"><a href=""></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb1-13"><a href=""></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-14"><a href=""></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),   <span class="co"># Draw axis lines</span></span>
+<span id="cb1-15"><a href=""></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>()               <span class="co"># Remove default plot border</span></span>
+<span id="cb1-16"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-1-1.png" width="576"></p>
+<div>
+<figure>
+<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-2-1.png" width="576"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
+</div></div>
 </section>
 <section id="studying-and-test-scores" class="slide level2">
 <h2>Studying and Test Scores</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>We observe hours studied and test scores</p>
-<p>Always plot your data</p>
+<p><strong>Our data:</strong> We observe hours studied and test scores</p>
+<ul>
+<li>Plotted on the right using <code>ggpairs()</code> (Always plot your data!)</li>
+</ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-3-1.png" width="576"></p>
+<div>
+<figure>
+<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-4-1.png" width="576"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
+</div></div>
 </section>
 <section id="scatter-plot" class="slide level2">
 <h2>Scatter plot</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>We observe hours studied and test scores</p>
-<p>Always plot your data</p>
+<p><strong>Our data:</strong> We observe hours studied and test scores</p>
 <p>What is the apparent relationship?</p>
-<p>Slope? Intercept?</p>
+<ul>
+<li>Slope?</li>
+<li>Intercept?</li>
+</ul>
 <p><span class="math display">\[y=mx+b \]</span></p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-4-1.png" width="576"></p>
+<div>
+<figure>
+<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-5-1.png" width="576"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
+</div></div>
+</section>
+<section id="general-expression-of-a-regression-equation" class="slide level2">
+<h2>General Expression of a Regression Equation</h2>
+<p>The equation of a regression line is very similar to the equation of a line:</p>
+<p><span class="math display">\[y= \beta_0 + \beta_1 x + \varepsilon ;~~ \varepsilon \sim N(0,1)\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> is our intercept</li>
+<li><span class="math inline">\(\beta_1\)</span> is our slope</li>
+</ul>
 </section></section>
 <section>
 <section id="section-2" class="title-slide slide level1 center">
 <h1></h1>
 <div class="r-fit-text">
-<p>How does OLS estimate regression coefficients? <br> Shiny App</p>
+<p>How does OLS estimate regression coefficients? <a href="https://tomicapretto.shinyapps.io/LeastSquaresRegression/">Shiny app</a><br></p>
+<iframe src="https://tomicapretto.shinyapps.io/LeastSquaresRegression/" width="100%" height="500px">
+</iframe>
 </div>
+</section>
+<section id="what-is-ordinary-least-squares-ols" class="slide level2 scrollable">
+<h2>What is Ordinary Least Squares (OLS)?</h2>
+<ul>
+<li><p><strong>OLS</strong> is a method for estimating the relationship between one or more independent variables and a dependent variable.</p></li>
+<li><p>It finds the <strong>best-fitting line</strong> by minimizing the <strong>sum of squared differences</strong> between the observed values and the predicted values.</p></li>
+<li><p>The goal is to find coefficients (slopes and intercept) that make the model’s predictions as close as possible to the actual data.</p></li>
+<li><p>Assumes that errors are normally distributed with constant variance and that there is a linear relationship between predictors and outcome.</p></li>
+</ul>
 </section>
 <section id="estimate-regression" class="slide level2 scrollable">
 <h2>Estimate Regression</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(test_scores <span class="sc">~</span> hours_studied,data)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>m_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1,<span class="at">stars =</span> <span class="cn">TRUE</span>,<span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,<span class="st">"hours_studied"</span><span class="ot">=</span><span class="st">"Hours Studied"</span>),<span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>m_out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>m_out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">&nbsp;(1)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Intercept</td>
-<td style="text-align: center;">40.389***</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: center;">(2.895)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Hours Studied</td>
-<td style="text-align: center;">0.783***</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; box-shadow: 0px 1.5px;"></td>
-<td style="text-align: center; box-shadow: 0px 1.5px;">(0.090)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Num.Obs.</td>
-<td style="text-align: center;">133</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">R2</td>
-<td style="text-align: center;">0.364</td>
-</tr>
-</tbody><tfoot>
-<tr class="odd">
-<td style="text-align: left; padding: 0;"><sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td>
-<td style="text-align: center;"></td>
-</tr>
-</tfoot>
+<!-- preamble start -->
 
-</table>
+    <script>
 
+      function styleCell_ormws9thyc6iam9dzxrf(i, j, css_id) {
+          var table = document.getElementById("tinytable_ormws9thyc6iam9dzxrf");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_ormws9thyc6iam9dzxrf');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_ormws9thyc6iam9dzxrf(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_ormws9thyc6iam9dzxrf");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 6, j: 1 },  ], css_id: 'tinytable_css_se4krtofl4my6siadcyf',}, 
+          { positions: [ { i: 4, j: 1 },  ], css_id: 'tinytable_css_ueswrm6a2hwy1xwpeey3',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_p88fo3xh18gwxz2uvw6x',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_hzz3y2pcsai0tjy9mqjq',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_4hh73vhain50bqr1xnk6',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_4rm8pvjdcgxozyuvwmla',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_pab3663kpajjc5kw5u4y',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_uxx6ay8kfuf1g0bxvoav',}, 
+          ];
 
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_ormws9thyc6iam9dzxrf(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_se4krtofl4my6siadcyf, .table th.tinytable_css_se4krtofl4my6siadcyf { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_ueswrm6a2hwy1xwpeey3, .table th.tinytable_css_ueswrm6a2hwy1xwpeey3 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_p88fo3xh18gwxz2uvw6x, .table th.tinytable_css_p88fo3xh18gwxz2uvw6x { text-align: center; }
+      .table td.tinytable_css_hzz3y2pcsai0tjy9mqjq, .table th.tinytable_css_hzz3y2pcsai0tjy9mqjq { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_4hh73vhain50bqr1xnk6, .table th.tinytable_css_4hh73vhain50bqr1xnk6 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_4rm8pvjdcgxozyuvwmla, .table th.tinytable_css_4rm8pvjdcgxozyuvwmla { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_pab3663kpajjc5kw5u4y, .table th.tinytable_css_pab3663kpajjc5kw5u4y { text-align: left; }
+      .table td.tinytable_css_uxx6ay8kfuf1g0bxvoav, .table th.tinytable_css_uxx6ay8kfuf1g0bxvoav { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_ormws9thyc6iam9dzxrf" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">(1)</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>Intercept</td>
+                  <td>40.389***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(2.895)</td>
+                </tr>
+                <tr>
+                  <td>Hours Studied</td>
+                  <td>0.783***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.090)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>133</td>
+                </tr>
+                <tr>
+                  <td>R2</td>
+                  <td>0.364</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
+<p>In lab, we will learn about <code>lm()</code> which is the function that estimates a linear regression that generates this regression output.</p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-6-1.png" width="576"></p>
+<div>
+<figure>
+<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-8-1.png" width="576"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
+</div></div>
 </section>
 <section id="true-model-vs-estimates" class="slide level2">
 <h2>True model vs estimates</h2>
-<p><span class="math display">\[scores=40 + 0.8 * hours + \varepsilon ;~~ \varepsilon \sim N(0,15)\]</span></p>
+<p>We use the regression output to construct our linear regression model:</p>
+<p><span class="math display">\[scores=40 + 0.8 * hours + \varepsilon ;~~ \varepsilon \sim N(0,1)\]</span></p>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">&nbsp;(1)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Intercept</td>
-<td style="text-align: center;">40.389***</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: center;">(2.895)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Hours Studied</td>
-<td style="text-align: center;">0.783***</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; box-shadow: 0px 1.5px;"></td>
-<td style="text-align: center; box-shadow: 0px 1.5px;">(0.090)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Num.Obs.</td>
-<td style="text-align: center;">133</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">R2</td>
-<td style="text-align: center;">0.364</td>
-</tr>
-</tbody><tfoot>
-<tr class="odd">
-<td style="text-align: left; padding: 0;"><sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td>
-<td style="text-align: center;"></td>
-</tr>
-</tfoot>
+<!-- preamble start -->
 
-</table>
+    <script>
 
+      function styleCell_4pnzfyjk8u1yg20spcav(i, j, css_id) {
+          var table = document.getElementById("tinytable_4pnzfyjk8u1yg20spcav");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_4pnzfyjk8u1yg20spcav');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_4pnzfyjk8u1yg20spcav(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_4pnzfyjk8u1yg20spcav");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 6, j: 1 },  ], css_id: 'tinytable_css_0ps2gtplhd3qk1jssydo',}, 
+          { positions: [ { i: 4, j: 1 },  ], css_id: 'tinytable_css_vw5sjzfvfvtmb7ldnbs9',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_8a6gh271htxs9zjyszsn',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_bijpjoevkcyslmf3h7sc',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_94rn2qvao3bz9rcsvhtn',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_g586h2cnttu5singw1tq',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_3r283kqeeqx6mk4cssxx',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_70ujxkdhiuhetnojaius',}, 
+          ];
 
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_4pnzfyjk8u1yg20spcav(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_0ps2gtplhd3qk1jssydo, .table th.tinytable_css_0ps2gtplhd3qk1jssydo { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_vw5sjzfvfvtmb7ldnbs9, .table th.tinytable_css_vw5sjzfvfvtmb7ldnbs9 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_8a6gh271htxs9zjyszsn, .table th.tinytable_css_8a6gh271htxs9zjyszsn { text-align: center; }
+      .table td.tinytable_css_bijpjoevkcyslmf3h7sc, .table th.tinytable_css_bijpjoevkcyslmf3h7sc { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_94rn2qvao3bz9rcsvhtn, .table th.tinytable_css_94rn2qvao3bz9rcsvhtn { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_g586h2cnttu5singw1tq, .table th.tinytable_css_g586h2cnttu5singw1tq { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_3r283kqeeqx6mk4cssxx, .table th.tinytable_css_3r283kqeeqx6mk4cssxx { text-align: left; }
+      .table td.tinytable_css_70ujxkdhiuhetnojaius, .table th.tinytable_css_70ujxkdhiuhetnojaius { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_4pnzfyjk8u1yg20spcav" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">(1)</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>Intercept</td>
+                  <td>40.389***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(2.895)</td>
+                </tr>
+                <tr>
+                  <td>Hours Studied</td>
+                  <td>0.783***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.090)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>133</td>
+                </tr>
+                <tr>
+                  <td>R2</td>
+                  <td>0.364</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
 </section>
@@ -660,13 +873,17 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="putting-the-coefficients-on-trial" class="slide level2">
+<section id="putting-the-coefficients-on-trial" class="slide level2 scrollable">
 <h2>Putting the coefficients on trial</h2>
-<p>Did we observe our estimate by chance or can we trust it?</p>
+<p>Did we observe our estimate <strong>by chance</strong> <em>or</em> <strong>can we trust it</strong>?</p>
 <p><strong>The Hypotheses:</strong></p>
+<p><span class="math inline">\(H_0\)</span> (Null Hypothesis): posits that the regression coefficient is equal to zero.</p>
 <ul>
-<li><p>Null Hypothesis (H0): posits that the regression coefficient is equal to zero - no effect of the independent variable (e.g., hours studied) on the dependent variable (e.g., test scores).</p></li>
-<li><p>Alternative Hypothesis (H1): posits that the coefficient is not zero - there is an effect, and the amount of studying does influence test scores.</p></li>
+<li>There is no effect of the independent variable (e.g., hours studied) on the dependent variable (e.g., test scores).</li>
+</ul>
+<p><span class="math inline">\(H_A\)</span> (Alternative Hypothesis): posits that the coefficient is not zero.</p>
+<ul>
+<li>There there is an effect, and this effect is different from zero. The amount of studying does influence test scores.</li>
 </ul>
 </section>
 <section id="testing-the-hypothesis" class="slide level2">
@@ -679,12 +896,12 @@
 <h2>Student’s t-distribution</h2>
 <p>The shaded area is the probability that we observe the value by chance (p-value)</p>
 
-<img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="students-t-distribution-1" class="slide level2">
 <h2>Student’s t-distribution</h2>
 <p>Locating our t-statistic on the density of the t-distribution quantifies the probability that we observe our result by chance (p-val = 1.199041e-14)</p>
 
-<img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="confidence-interval" class="slide level2">
 <h2>95% Confidence Interval</h2>
 <p>Reverse engineer the p-value of 0.05 to find the test statistic (1.96)</p>
@@ -696,7 +913,7 @@
 <h2>Inference - back to the trial</h2>
 <p>The p-val = 0.00000000000001199041 suggests the probability of observing the relationship between studying and test score by chance is small.</p>
 <p>Formally, we reject the null hypothesis H0 (no relationship) at an alpha=.05</p>
-<p>Our test does not prove that H1 is correct, but it provides strong evidence</p>
+<p>Our test does not prove that H1 is correct, but it provides strong evidence.</p>
 </section>
 <section id="interpreting-regression-coefficients" class="slide level2">
 <h2>Interpreting regression coefficients</h2>
@@ -704,56 +921,136 @@
 <div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">&nbsp;(1)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Intercept</td>
-<td style="text-align: center;">40.389***</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: center;">(2.895)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Hours Studied</td>
-<td style="text-align: center;">0.783***</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; box-shadow: 0px 1.5px;"></td>
-<td style="text-align: center; box-shadow: 0px 1.5px;">(0.090)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Num.Obs.</td>
-<td style="text-align: center;">133</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">R2</td>
-<td style="text-align: center;">0.364</td>
-</tr>
-</tbody><tfoot>
-<tr class="odd">
-<td style="text-align: left; padding: 0;"><sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td>
-<td style="text-align: center;"></td>
-</tr>
-</tfoot>
+<!-- preamble start -->
 
-</table>
+    <script>
 
+      function styleCell_jf3vvl2d7p5pvmnokx4x(i, j, css_id) {
+          var table = document.getElementById("tinytable_jf3vvl2d7p5pvmnokx4x");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_jf3vvl2d7p5pvmnokx4x');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_jf3vvl2d7p5pvmnokx4x(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_jf3vvl2d7p5pvmnokx4x");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 6, j: 1 },  ], css_id: 'tinytable_css_vlejw0qg0gvqf5s63de9',}, 
+          { positions: [ { i: 4, j: 1 },  ], css_id: 'tinytable_css_qivzptslrwrnd5yy00up',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_k1ud9qzknruc9ytwri9c',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_ec8z79mfo5cigjp6quvu',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_8vd1bxqwmadabaypga4m',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_b18s0cbmxmhikrbu5k9p',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_2pbz43relk9fkmjs0kod',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_b4yhjyp15yyznxxd1hgn',}, 
+          ];
 
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_jf3vvl2d7p5pvmnokx4x(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_vlejw0qg0gvqf5s63de9, .table th.tinytable_css_vlejw0qg0gvqf5s63de9 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_qivzptslrwrnd5yy00up, .table th.tinytable_css_qivzptslrwrnd5yy00up { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_k1ud9qzknruc9ytwri9c, .table th.tinytable_css_k1ud9qzknruc9ytwri9c { text-align: center; }
+      .table td.tinytable_css_ec8z79mfo5cigjp6quvu, .table th.tinytable_css_ec8z79mfo5cigjp6quvu { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_8vd1bxqwmadabaypga4m, .table th.tinytable_css_8vd1bxqwmadabaypga4m { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_b18s0cbmxmhikrbu5k9p, .table th.tinytable_css_b18s0cbmxmhikrbu5k9p { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_2pbz43relk9fkmjs0kod, .table th.tinytable_css_2pbz43relk9fkmjs0kod { text-align: left; }
+      .table td.tinytable_css_b4yhjyp15yyznxxd1hgn, .table th.tinytable_css_b4yhjyp15yyznxxd1hgn { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_jf3vvl2d7p5pvmnokx4x" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">(1)</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>Intercept</td>
+                  <td>40.389***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(2.895)</td>
+                </tr>
+                <tr>
+                  <td>Hours Studied</td>
+                  <td>0.783***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.090)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>133</td>
+                </tr>
+                <tr>
+                  <td>R2</td>
+                  <td>0.364</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<p>A student that does not study is expected to get a score of 40.389</p>
-<p>A student’s score should improve by 0.78 points per hour of additional studying</p>
+<p>A student that does not study is expected to get a score of 40.389.</p>
+<p>A student’s score should improve by 0.78 points per hour of additional studying.</p>
 <p>How many hours should a student study to get 80 points or better?</p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="predicting-new-values" class="slide level2">
 <h2>Predicting new values</h2>
@@ -762,18 +1059,346 @@
 </section>
 <section id="multivariate-regression" class="slide level2">
 <h2>Multivariate regression</h2>
-<p>You can add additional independent variables (aka regressors)</p>
+<p>You can add additional independent variables (a.k.a. regressors).</p>
 <p><span class="math display">\[ y=\alpha + \beta_1 X_1 + \beta_2 X_2 + ... +\varepsilon \]</span></p>
-<p>The <span class="math inline">\(\beta\)</span>’s are <strong>conditional</strong> on the other covariates</p>
-<p>Inference is similar</p>
+<p>The <span class="math inline">\(\beta\)</span>’s are <strong>conditional</strong> on the other covariates.</p>
+<p>Inference is similar.</p>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <p>Regression is a tool to estimate relationships between variables (measurements)</p>
 <p>When assumptions are met, the regression provides the best estimates of the relationship</p>
 <p>Hypothesis testing helps us understand the quality of our estimates</p>
+</section></section>
+<section id="project-3" class="title-slide slide level1 center">
+<h1>Project 3</h1>
+
+</section>
+
+<section>
+<section id="section-3" class="title-slide slide level1 center">
+<h1></h1>
+<div class="r-fit-text">
+<p><strong>Option 1:</strong> <br> What is the relationship between <br> median income and total store count <br> at the county level?</p>
+</div>
+</section>
+<section id="plot-your-data" class="slide level2">
+<h2>Plot Your Data</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">p_load</span>(GGally)</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a><span class="co"># Basic scatter plot with ggplot</span></span>
+<span id="cb3-4"><a href=""></a>county_hhi <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href=""></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">store_count =</span> <span class="fu">replace_na</span>(store_count, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href=""></a>  <span class="fu">select</span>(hhi, store_count) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href=""></a>  <span class="fu">ggpairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" class="r-stretch"></section>
+<section id="zoom-in-on-scatter-plot" class="slide level2">
+<h2>Zoom in on Scatter Plot</h2>
+
+<img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" class="r-stretch"></section>
+<section id="estimate-regression-1" class="slide level2">
+<h2>Estimate Regression</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>m_out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_43bi9euyubrl2b2qzxig(i, j, css_id) {
+          var table = document.getElementById("tinytable_43bi9euyubrl2b2qzxig");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_43bi9euyubrl2b2qzxig');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_43bi9euyubrl2b2qzxig(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_43bi9euyubrl2b2qzxig");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 6, j: 1 },  ], css_id: 'tinytable_css_anncak3gb1rr2r1f6oes',}, 
+          { positions: [ { i: 4, j: 1 },  ], css_id: 'tinytable_css_9uu12fqoc518cpz49icq',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_xu5ttcvfjd5qjorzy648',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_4kho24ae7ikhyghyqjf5',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_uomnwqxxnpjvasyf2q6e',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_nmdxivl3jvxmabfvnkhf',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_te2mv6oxxiosfs44fjoe',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_ug3lozbgyxjasvxouibg',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_43bi9euyubrl2b2qzxig(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_anncak3gb1rr2r1f6oes, .table th.tinytable_css_anncak3gb1rr2r1f6oes { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_9uu12fqoc518cpz49icq, .table th.tinytable_css_9uu12fqoc518cpz49icq { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_xu5ttcvfjd5qjorzy648, .table th.tinytable_css_xu5ttcvfjd5qjorzy648 { text-align: center; }
+      .table td.tinytable_css_4kho24ae7ikhyghyqjf5, .table th.tinytable_css_4kho24ae7ikhyghyqjf5 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_uomnwqxxnpjvasyf2q6e, .table th.tinytable_css_uomnwqxxnpjvasyf2q6e { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_nmdxivl3jvxmabfvnkhf, .table th.tinytable_css_nmdxivl3jvxmabfvnkhf { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_te2mv6oxxiosfs44fjoe, .table th.tinytable_css_te2mv6oxxiosfs44fjoe { text-align: left; }
+      .table td.tinytable_css_ug3lozbgyxjasvxouibg, .table th.tinytable_css_ug3lozbgyxjasvxouibg { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_43bi9euyubrl2b2qzxig" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">(1)</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>Intercept</td>
+                  <td>-4.38605***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(1.00645)</td>
+                </tr>
+                <tr>
+                  <td>Median Inc</td>
+                  <td>0.00019***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.00002)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>3108</td>
+                </tr>
+                <tr>
+                  <td>R2</td>
+                  <td>0.046</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<p>:::</p>
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lecture_03_week_02_files/figure-revealjs/unnamed-chunk-18-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></section>
+<section id="linear-regression-model" class="slide level2 scrollable">
+<h2>Linear Regression Model</h2>
+<p><span class="math display">\[StoreCount= -4.38605 + 0.00019 * MedianIncome + \varepsilon ;~~ \varepsilon \sim N(0,1)\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_h4mp744f76ar1naolhoo(i, j, css_id) {
+          var table = document.getElementById("tinytable_h4mp744f76ar1naolhoo");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_h4mp744f76ar1naolhoo');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_h4mp744f76ar1naolhoo(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_h4mp744f76ar1naolhoo");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 6, j: 1 },  ], css_id: 'tinytable_css_0c378ox9lrt7th5c7ltl',}, 
+          { positions: [ { i: 4, j: 1 },  ], css_id: 'tinytable_css_o468wmxdzh61ke72gd07',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 5, j: 1 },  ], css_id: 'tinytable_css_5avysqn7fft5v83jc29l',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_23zpc4tg780bw4vggbuj',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_9bbn11ye4fetrh647myl',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_75emrui6wpc9uydw6w7b',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 },  ], css_id: 'tinytable_css_4t0zvm9vmi2ca889flxs',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_npyhc39tla492oi4n24k',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_h4mp744f76ar1naolhoo(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_0c378ox9lrt7th5c7ltl, .table th.tinytable_css_0c378ox9lrt7th5c7ltl { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_o468wmxdzh61ke72gd07, .table th.tinytable_css_o468wmxdzh61ke72gd07 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_5avysqn7fft5v83jc29l, .table th.tinytable_css_5avysqn7fft5v83jc29l { text-align: center; }
+      .table td.tinytable_css_23zpc4tg780bw4vggbuj, .table th.tinytable_css_23zpc4tg780bw4vggbuj { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_9bbn11ye4fetrh647myl, .table th.tinytable_css_9bbn11ye4fetrh647myl { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_75emrui6wpc9uydw6w7b, .table th.tinytable_css_75emrui6wpc9uydw6w7b { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_4t0zvm9vmi2ca889flxs, .table th.tinytable_css_4t0zvm9vmi2ca889flxs { text-align: left; }
+      .table td.tinytable_css_npyhc39tla492oi4n24k, .table th.tinytable_css_npyhc39tla492oi4n24k { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_h4mp744f76ar1naolhoo" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">(1)</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>Intercept</td>
+                  <td>-4.38605***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(1.00645)</td>
+                </tr>
+                <tr>
+                  <td>Median Inc</td>
+                  <td>0.00019***</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.00002)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>3108</td>
+                </tr>
+                <tr>
+                  <td>R2</td>
+                  <td>0.046</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</section>
+<section id="interpreting-the-results" class="slide level2 scrollable">
+<h2>Interpreting the Results</h2>
+<ol type="1">
+<li><p>The <span class="math inline">\(R^2\)</span> is very low at 0.046, meaning that median income does not explain much of the variation in store count. In general, this is not a well-fitted model.</p></li>
+<li><p>The <strong>intercept</strong> (<span class="math inline">\(\beta_0\)</span>) is −4.38605, meaning that when median income=0, the model predicts a negative store count. Since an income of 0 isn’t meaningful, the intercept mainly acts as a mathematical anchor. (We usually don’t over-interpret it here.)</p></li>
+<li><p>The <strong>slope</strong> (<span class="math inline">\(\beta_1\)</span>) is 0.00019, meaning that for every 1 unit increase in median income, store count increases by 0.00019.</p></li>
+</ol>
+<ul>
+<li>One way to make this more interpretable is to imagine that median income increases by $10,000. Then, we would expect store count to increase by 1.9 (because 10,000 <span class="math inline">\(\times\)</span> 0.00019 = 1.9), which is almost 2 stores. At the county level, this could make sense.</li>
+</ul>
+</section>
+<section id="action-items" class="slide level2 scrollable">
+<h2>Action Items</h2>
+<p>If we take these results to be true, we might suggest to a policymaker that <strong>higher median income areas are slightly more likely to attract more stores</strong>.</p>
+<p>However, given the low <span class="math inline">\(R^2\)</span>, other factors likely play a much larger role in determining store count.</p>
+<p>Further steps could include:</p>
+<ul>
+<li>Using a multivariate model to better capture the drivers of store count variation by adding more predictors (e.g., population density, rural or urban status, infrastructure).</li>
+</ul>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>
@@ -802,7 +1427,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -988,42 +1612,80 @@
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1057,18 +1719,7 @@
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1100,11 +1751,50 @@
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1114,8 +1804,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1129,7 +1828,11 @@
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
