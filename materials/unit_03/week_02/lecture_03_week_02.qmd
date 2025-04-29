@@ -22,13 +22,15 @@ Hypothesis testing
 <!-- (4-22-2024) Lauren moved material in from Week 06 (Lecture 01 Week 02) For Spring 2025, plan is to re-do Week 06 lecture to be more about forecasting and decomposition. I left the content in Week 05 commented out. -->
 <!-- ============================= -->
 
-## Recap
+## Recap {.scrollable}
 
 Last week (week 13) we covered:
 
 - Reading in spatial data
 - Understanding and implementing spatial joins
 - Building panel datasets for regression analysis
+
+Why this is important: Researchers might want to control for geographic variation in the outcome variable.
 
 This week: Apply regression analysis to panel data.
 
