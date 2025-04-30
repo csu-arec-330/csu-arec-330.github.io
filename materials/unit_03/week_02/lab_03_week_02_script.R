@@ -19,6 +19,9 @@ getwd() # Confirm you are in the correct working directory
 # Read in convenience store location dataset
 store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
 
+# Read in the shopper sales dataset
+shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
+
 # Convert data frame to a points simple feature object
 store_geo <- store_raw %>%
   
@@ -46,7 +49,9 @@ us_co_filtered <- us_co %>%
   filter(!statefp %in% c("60", "66", "72", "02", "15", "69", "78"))
 
 # Join county to store_geo
-store_co_geo <- st_join(store_geo, us_co_filtered, join=st_intersects)
+store_co_geo <- st_join(store_geo, 
+                        us_co_filtered, 
+                        join=st_intersects)
 
 # Aggregate store count by county
 store_count_by_county <- store_co_geo %>%
@@ -59,6 +64,22 @@ store_count_by_county <- store_co_geo %>%
 county_store_map <- st_join(us_co_filtered, 
                             store_count_by_county, 
                             join=st_intersects)
+
+# Create store sales by county
+sales_by_county <- shopper_info %>%
+  select(store_id, unit_price, unit_quantity) %>%
+  mutate(sales = unit_price * unit_quantity) %>%
+  group_by(store_id) %>%
+  summarize(
+    total_sales = sum(sales),
+    .groups = 'drop'
+  ) %>%
+  left_join(store_co_geo, by = "store_id") %>%
+  group_by(geoid) %>%
+  summarize(
+    county_sales = sum(total_sales),
+    .groups = 'drop'
+  )
 
 # Part 2: Bring in Census Data
 
@@ -85,7 +106,7 @@ hhi <- census_hhi %>%
 census_pop <- get_acs(
   geography = "county",                      # Get data for all U.S. counties
   survey = "acs5",                           # Use 5-year ACS data (more reliable for small areas)
-  variables = c(medincome = "B01003_001"),   # B01003_001 = total population
+  variables = c(pop = "B01003_001"),         # B01003_001 = total population
   state = NULL,                              # NULL = include all states (not just one)
   year = 2022                                # Use the most recent available year
 )
@@ -96,17 +117,16 @@ pop <- census_pop %>%
   select(geoid, pop = estimate)
 
 # Join median household income (hhi) to the store-level dataset using county GEOID
-store_hhi <- store_co_geo %>%
-  st_set_geometry(NULL) %>%        # Remove geometry to work with as a regular data frame
-  inner_join(hhi, by = "geoid")    # Join on county identifier (GEOID)
+demo <- hhi %>%
+  left_join(pop, by = "geoid")
 
 # Join median household income (hhi) and total population (pop) to the county-store map using county GEOID
 county_demo <- county_store_map %>%
   select(-geoid.y) %>%
   rename(geoid = geoid.x) %>%
-  inner_join(hhi, by = "geoid") %>%   # Join on county identifier (GEOID)
-  inner_join(pop, by = "geoid") %>% # Join on county identifies (GEOID)
-  mutate(popden = pop/aland) # Calculate population density
+  inner_join(demo, by = "geoid") %>%   # Join on county identifier (GEOID)
+  mutate(popden = pop/aland) %>% # Calculate population density (population over land in square miles)
+  left_join(sales_by_county, by = "geoid")
 
 write_csv(county_demo, "C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/county_demo.csv")
 
