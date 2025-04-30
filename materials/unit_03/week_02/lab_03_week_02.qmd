@@ -608,7 +608,7 @@ modelsummary(model1, statistic = "conf.int")
 Based on our results for the univariate regression, our model fit is low. Let's try adding another explanatory variable to estimate the following regression:
 
 
-$$ StoreCount_i = \beta_0 + \beta_1 ~ MedianIncome_i + \beta_2 ~ AverageTemperature_i + \varepsilon_i $$
+$$ TotalSales_i = \beta_0 + \beta_1 ~ TotalRainfall_i + \beta_2 ~ AverageTemperature_i + \varepsilon_i $$
 
 
 ```{r}

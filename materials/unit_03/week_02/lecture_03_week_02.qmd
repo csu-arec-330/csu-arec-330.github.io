@@ -125,6 +125,14 @@ ggplot(df, aes(x, y)) +
 
 ::::
 
+## General Expression of a Regression Equation
+
+The equation of a regression line is very similar to the equation of a line:
+
+$$y= \beta_0 + \beta_1 x + \varepsilon ;~~ \varepsilon \sim N(0,1)$$
+
+- $\beta_0$ is our intercept
+- $\beta_1$ is our slope
 
 ## Studying and Test Scores
 
@@ -194,7 +202,7 @@ What is the apparent relationship?
 - Slope? 
 - Intercept?
 
-$$y=mx+b $$
+$$y= \beta_0 + \beta_1~x + \varepsilon $$
 
 :::
 
@@ -220,23 +228,8 @@ p1
 
 ::::
 
-## General Expression of a Regression Equation
 
-The equation of a regression line is very similar to the equation of a line:
 
-$$y= \beta_0 + \beta_1 x + \varepsilon ;~~ \varepsilon \sim N(0,1)$$
-
-- $\beta_0$ is our intercept
-- $\beta_1$ is our slope
-
-#
-
-::: {.r-fit-text}
-How does OLS estimate regression coefficients? [Shiny app](https://tomicapretto.shinyapps.io/LeastSquaresRegression/)<br>
-
-<iframe src="https://tomicapretto.shinyapps.io/LeastSquaresRegression/" width="100%" height="500px"></iframe>
-
-:::
  
 ## What is Ordinary Least Squares (OLS)? {.scrollable}
 
@@ -248,6 +241,14 @@ How does OLS estimate regression coefficients? [Shiny app](https://tomicapretto.
 
 - Assumes that errors are normally distributed with constant variance and that there is a linear relationship between predictors and outcome.
 
+#
+
+::: {.r-fit-text}
+How does OLS estimate regression coefficients? [Shiny app](https://tomicapretto.shinyapps.io/LeastSquaresRegression/)<br>
+
+<iframe src="https://tomicapretto.shinyapps.io/LeastSquaresRegression/" width="100%" height="500px"></iframe>
+
+:::
 
 ## Estimate Regression {.scrollable}
 

@@ -686,7 +686,7 @@ window.Quarto = {
 <section id="multivariate-regression-analysis-1" class="level3">
 <h3 class="anchored" data-anchor-id="multivariate-regression-analysis-1">Multivariate Regression Analysis</h3>
 <p>Based on our results for the univariate regression, our model fit is low. Let’s try adding another explanatory variable to estimate the following regression:</p>
-<p><span class="math display">\[ StoreCount_i = \beta_0 + \beta_1 ~ MedianIncome_i + \beta_2 ~ AverageTemperature_i + \varepsilon_i \]</span></p>
+<p><span class="math display">\[ TotalSales_i = \beta_0 + \beta_1 ~ TotalRainfall_i + \beta_2 ~ AverageTemperature_i + \varepsilon_i \]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall <span class="sc">+</span> avg_temp, sales_weather_month_slim) <span class="co"># Modeling the relationship between total rainfall, average temperature, and total sales at the county level. Store it as "model2"</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
