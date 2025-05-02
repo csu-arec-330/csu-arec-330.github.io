@@ -477,9 +477,25 @@ store_sales_weather <- store_sales_co %>%
              by = c("measure_date" = "date", 
                     "geoid" = "county"))
 
-length(unique(store_sales_weather$geoid))
+length(unique(store_sales_weather$geoid)) # N=1,987
 
-write_csv(store_sales_weather, "store_sales_weather.csv")
+# Join daily weather data to full county data using date and county identifiers
+co_weather <- us_co_filtered %>%
+  st_set_geometry(NULL) %>%
+  select(geoid) %>%
+  right_join(weather_wide, by = c("geoid" = "county"))
+
+length(unique(co_weather$geoid)) # N=3,104
+
+store_sales_weather_co <- co_weather %>%
+  left_join(store_sales_weather, 
+            by = c("date" = "measure_date", 
+                   "geoid" = "geoid")) %>%
+  filter(month(date)==7)
+
+length(unique(store_sales_weather_co$geoid)) # N=3,104
+
+write_csv(store_sales_weather_co, "store_sales_weather_co")
 ```
 
 
@@ -493,30 +509,25 @@ library(pacman)
 p_load(tidyverse,modelsummary,sf,progress,janitor,tigris,mapview,tidycensus,dplyr,GGally,scales)
 
 # Read in data
-store_sales_weather <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather.csv")
+store_sales_weather_co <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather_co.csv")
 
 # Aggregate store sales and weather data to the month
-sales_weather_month <- store_sales_weather %>%
-  mutate(month = month(measure_date)) %>%
-  mutate(year = year(measure_date)) %>%
-  mutate(day = day(measure_date)) %>%
+sales_weather_month <- store_sales_weather_co %>%
+  mutate(month = month(date)) %>%
+  mutate(year = year(date)) %>%
+  mutate(day = day(date)) %>%
   group_by(geoid, month) %>%
   summarize(
-    total_rainfall = sum(pr_precipitation_amount),
-    avg_humidity = mean(rmax_relative_humidity),
-    avg_temp = mean(tmmx_air_temperature),
+    total_rainfall = sum(pr_precipitation_amount, na.rm = TRUE),
+    avg_humidity = mean(rmax_relative_humidity, na.rm = TRUE),
+    avg_temp = mean(tmmx_air_temperature, na.rm = TRUE),
     total_sales = sum(sales, na.rm = TRUE),
     .groups = 'drop'
-  ) %>% # Match on date and county FIPS
-  full_join(us_co_filtered %>% 
-              st_set_geometry(NULL) %>%    # Remove the spatial element
-              select(geoid), 
-            by = "geoid")  # Join in the county level fips codes
+  ) 
 
-length(unique(sales_weather_month$geoid))
+length(unique(sales_weather_month$geoid)) # N=3,104
 
 write_csv(sales_weather_month, "sales_weather_month.csv")
-
 ```
 
 Let's briefly explore the data:
@@ -714,13 +725,13 @@ library(pacman)
 p_load(tidyverse,modelsummary,sf,progress,janitor,tigris,mapview,tidycensus,dplyr,GGally,scales)
 
 # Read in data
-store_sales_weather <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather.csv")
+store_sales_weather_co <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather_co.csv")
 
 # Aggregate store sales and weather data to the day
 sales_weather_day <- store_sales_weather %>%
-  mutate(month = month(measure_date)) %>%
-  mutate(year = year(measure_date)) %>%
-  mutate(day = day(measure_date)) %>%
+  mutate(month = month(date())) %>%
+  mutate(year = year(date)) %>%
+  mutate(day = day(date)) %>%
   group_by(geoid, day) %>%
   summarize(
     total_rainfall = sum(pr_precipitation_amount),
@@ -1064,33 +1075,45 @@ store_sales_weather <- store_sales_co %>%
              by = c("measure_date" = "date", 
                     "geoid" = "county"))
 
-length(unique(store_sales_weather$geoid))
+length(unique(store_sales_weather$geoid)) # N=1,987
 
-write_csv(store_sales_weather, "C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather.csv")
+# Join daily weather data to full county data using date and county identifiers
+co_weather <- us_co_filtered %>%
+  st_set_geometry(NULL) %>%
+  select(geoid) %>%
+  right_join(weather_wide, by = c("geoid" = "county"))
+
+length(unique(co_weather$geoid)) # N=3,104
+
+store_sales_weather_co <- co_weather %>%
+  left_join(store_sales_weather, 
+            by = c("date" = "measure_date", 
+                   "geoid" = "geoid")) %>%
+  filter(month(date)==7)
+
+length(unique(store_sales_weather_co$geoid)) # N=3,104
+
+write_csv(store_sales_weather_co, "C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather_co.csv")
 
 # ======================================== #
 # ------ Monthly ------ #
 # ======================================== #
 
 # Aggregate store sales and weather data to the month
-sales_weather_month <- store_sales_weather %>%
-  mutate(month = month(measure_date)) %>%
-  mutate(year = year(measure_date)) %>%
-  mutate(day = day(measure_date)) %>%
+sales_weather_month <- store_sales_weather_co %>%
+  mutate(month = month(date)) %>%
+  mutate(year = year(date)) %>%
+  mutate(day = day(date)) %>%
   group_by(geoid, month) %>%
   summarize(
-    total_rainfall = sum(pr_precipitation_amount),
-    avg_humidity = mean(rmax_relative_humidity),
-    avg_temp = mean(tmmx_air_temperature),
+    total_rainfall = sum(pr_precipitation_amount, na.rm = TRUE),
+    avg_humidity = mean(rmax_relative_humidity, na.rm = TRUE),
+    avg_temp = mean(tmmx_air_temperature, na.rm = TRUE),
     total_sales = sum(sales, na.rm = TRUE),
     .groups = 'drop'
-  ) %>% # Match on date and county FIPS
-  full_join(us_co_filtered %>% 
-              st_set_geometry(NULL) %>%    # Remove the spatial element
-              select(geoid), 
-            by = "geoid")  # Join in the county level fips codes
+  ) 
 
-length(unique(sales_weather_month$geoid))
+length(unique(sales_weather_month$geoid)) # N=3,104
 
 write_csv(sales_weather_month, "sales_weather_month.csv")
 
