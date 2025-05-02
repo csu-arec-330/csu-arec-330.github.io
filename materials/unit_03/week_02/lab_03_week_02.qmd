@@ -81,7 +81,7 @@ store_geo <- store_raw %>%
   # First, we subset the variables `store_id` and the coordinates.
   select(store_id, latitude, longitude) %>% 
   
-  # Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). See <https://epsg.io/> for more information.
+  # Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). 
   st_as_sf(coords=c("longitude","latitude"), crs = st_crs(4326))  
 
 # Fetch data for county polygons using the 'tigris' package
@@ -126,7 +126,7 @@ sales_by_county <- shopper_info %>%
   summarize(
     total_sales = sum(sales),
     .groups = 'drop'
-    ) %>%
+  ) %>%
   left_join(store_co_geo, by = "store_id") %>%
   group_by(geoid) %>%
   summarize(
@@ -180,8 +180,10 @@ county_demo <- county_store_map %>%
   inner_join(demo, by = "geoid") %>%   # Join on county identifier (GEOID)
   mutate(popden = pop/aland) %>% # Calculate population density (population over land in square miles)
   left_join(sales_by_county, by = "geoid") %>%
-  st_set_geometry(NULL)          # Drop geometry to read into Tableau
+  st_set_geometry(NULL)          # Drop geometry to simplify data manipulation
   
+length(county_demo$geoid)
+
 write_csv(county_demo, "county_demo.csv")
 ```
 
@@ -219,7 +221,6 @@ datasummary_skim(county_demo, type = "categorical")
 #| eval: false
 
 county_demo %>%
-  st_set_geometry(NULL) %>% # Remove the spatial data feature in order to run ggpairs()
   mutate(store_count = replace_na(store_count, 0)) %>% # Replace counties that have "NA" values with "0"
   filter(!is.na(hhi)) %>% # Drop counties with missing household income 
   select(hhi, store_count) %>%
@@ -235,7 +236,6 @@ county_demo %>%
 
 # Zoom in on scatter plot
 county_demo_slim <- county_demo %>%
-  st_set_geometry(NULL) %>%
   mutate(store_count = replace_na(store_count, 0)) %>%
   filter(!is.na(hhi)) %>% # Drop counties with missing household income
   select(hhi, popden, store_count)
@@ -280,7 +280,7 @@ uni_out # Print regression output
 
 The `modelsummary()` function is used to create clean, customizable regression tables from one or more model objects (like those from `lm()`). It formats the output in a way that's clean and supports multiple output types, including MS Word.
 
-> Interpret the coefficients. What does the (Intercept) mean? What does the dist coefficient mean?
+> Interpret the coefficients. What does the $\beta_0$ coefficient (Intercept) mean? What does the $\beta_1$ coefficient mean?
 
 > How credible are the estimates? What are the results of the statistical hypothesis test?
 
@@ -321,7 +321,7 @@ multi_out # Print regression output
 
 The $R^2$ increased from 0.046 to 0.054, which means that adding population density improved the fit our of model.
 
-> Interpret the coefficients. What does the (Intercept) mean? What does the dist coefficient mean?
+> Interpret the coefficients. What does the $\beta_0$ coefficient (Intercept) mean? What do the $\beta_1$ and $beta_2$ coefficients mean?
 
 > How credible are the estimates? What are the results of the statistical hypothesis test?
 
@@ -420,7 +420,7 @@ getwd() # Confirm you are in the correct working directory
 # Research Question: 
 # What is the relationship between **total monthly rainfall** and **total montly sales** at the county level?
 
-# Part 1: Read in Spatial Data
+# Part 1: Read in raw data
 shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
 
 # Read in the weather data
@@ -429,31 +429,21 @@ weather_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs
 # Read in convenience store location dataset
 store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
 
-# Convert data frame to a points simple feature object
+# Plot store coordinates and convert to spatial data frame
 store_geo <- store_raw %>%
   
   # First, we subset the variables `store_id` and the coordinates.
   select(store_id, latitude, longitude) %>% 
   
-  # Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). See <https://epsg.io/> for more information.
+  # Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326).
   st_as_sf(coords=c("longitude","latitude"), crs = st_crs(4326))  
 
 # Fetch data for county polygons using the 'tigris' package
-us_co <- tigris::counties(cb=T,class="sf") %>%
+us_co_filtered <- tigris::counties(cb=T,class="sf") %>%
   janitor::clean_names() %>%
   mutate(aland=aland/2.59e+6) %>%
-  st_transform(4326)
-
-# Look at the distinct state list by statefp code
-unique_statefp <- us_co %>%
-  st_set_geometry(NULL) %>%  # Remove geometry column
-  select(stusps, statefp) %>%  # Select the columns of interest
-  distinct() %>%  # Remove duplicates, keeping only unique rows
-  arrange(stusps)  # Arrange alphabetically by stusps
-
-# Filter out counties from American Samoa (60), Guam (66), Saipan Municipality (69), Puerto Rico (72), Virgin Islands (78), Alaska (02), and Hawaii (15)
-us_co_filtered <- us_co %>%
-  filter(!statefp %in% c("60", "66", "72", "02", "15", "69", "78"))
+  st_transform(4326) %>%
+  filter(!statefp %in% c("60", "66", "72", "02", "15", "69", "78")) # Keep only counties in contiguous US
 
 # Join county to store_geo
 store_co_geo <- st_join(store_geo, us_co_filtered, join=st_intersects)
@@ -468,9 +458,10 @@ store_sales <- shopper_info %>%
   ungroup()                                                  # Remove grouping to clean up the result
 
 # Add county GEOID to the store-level sales data (so we can link to county-level data like weather)
-store_sales_co <- st_set_geometry(store_co_geo, NULL) %>%
-  select(store_id, geoid) %>%                      # Keep only store_id (for joining) and geoid (for county-level linkage)
-  inner_join(store_sales, ., by = "store_id")      # Join to sales data using store_id; keep only stores with known county info
+store_sales_co <- store_co_geo %>%
+  st_set_geometry(NULL) %>%
+  select(store_id, geoid) %>%                # Keep only store_id (for joining) and geoid (for county-level linkage)
+  inner_join(store_sales, by = "store_id")   # Join to sales data using store_id; keep only stores with known county info
 
 # Reshape weather data from long to wide format (each variable becomes a column)
 weather_wide <- weather_raw %>%
@@ -484,7 +475,9 @@ weather_wide <- weather_raw %>%
 store_sales_weather <- store_sales_co %>%
   inner_join(weather_wide, 
              by = c("measure_date" = "date", 
-                    "geoid" = "county"))  # Match on date and county FIPS
+                    "geoid" = "county"))
+
+length(unique(store_sales_weather$geoid))
 
 write_csv(store_sales_weather, "store_sales_weather.csv")
 ```
@@ -512,9 +505,17 @@ sales_weather_month <- store_sales_weather %>%
     total_rainfall = sum(pr_precipitation_amount),
     avg_humidity = mean(rmax_relative_humidity),
     avg_temp = mean(tmmx_air_temperature),
-    total_sales = sum(sales),
+    total_sales = sum(sales, na.rm = TRUE),
     .groups = 'drop'
-  )
+  ) %>% # Match on date and county FIPS
+  full_join(us_co_filtered %>% 
+              st_set_geometry(NULL) %>%    # Remove the spatial element
+              select(geoid), 
+            by = "geoid")  # Join in the county level fips codes
+
+length(unique(sales_weather_month$geoid))
+
+write_csv(sales_weather_month, "sales_weather_month.csv")
 
 ```
 
@@ -764,6 +765,7 @@ In this setup:
 #| eval: false
 
 
+
 # These are the lab notes for Week 14
 
 library(pacman)
@@ -793,7 +795,7 @@ store_geo <- store_raw %>%
   # First, we subset the variables `store_id` and the coordinates.
   select(store_id, latitude, longitude) %>% 
   
-  # Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). See <https://epsg.io/> for more information.
+  # Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). 
   st_as_sf(coords=c("longitude","latitude"), crs = st_crs(4326))  
 
 # Fetch data for county polygons using the 'tigris' package
@@ -892,7 +894,9 @@ county_demo <- county_store_map %>%
   inner_join(demo, by = "geoid") %>%   # Join on county identifier (GEOID)
   mutate(popden = pop/aland) %>% # Calculate population density (population over land in square miles)
   left_join(sales_by_county, by = "geoid") %>%
-  st_set_geometry(NULL)          # Drop geometry to read into Tableau
+  st_set_geometry(NULL)          # Drop geometry to simplify data manipulation
+  
+length(county_demo$geoid)
 
 write_csv(county_demo, "C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/county_demo.csv")
 
@@ -905,7 +909,6 @@ datasummary_skim(county_demo, type = "categorical")
 
 # EDA with ggpairs
 county_demo %>%
-  st_set_geometry(NULL) %>% # Remove the spatial data feature in order to run ggpairs()
   mutate(store_count = replace_na(store_count, 0)) %>%
   filter(!is.na(hhi)) %>% # Drop counties with missing household income 
   select(hhi, popden, store_count) %>%
@@ -913,7 +916,6 @@ county_demo %>%
 
 # Zoom in on scatter plot
 county_demo_slim <- county_demo %>%
-  st_set_geometry(NULL) %>%
   mutate(store_count = replace_na(store_count, 0)) %>%
   filter(!is.na(hhi)) %>% # Drop counties with missing household income
   select(hhi, popden, store_count)
@@ -1005,11 +1007,33 @@ scatter_plot +
 # Research Question: 
 # What is the relationship between **total monthly rainfall** and **total montly sales** at the county level?
 
-# Part 1: Read in Spatial Data
+# Part 1: Read in raw data
 shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
 
 # Read in the weather data
 weather_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/gridmet_county_daily_2023-2023.csv.gz")
+
+# Read in convenience store location dataset
+store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
+
+# Plot store coordinates and convert to spatial data frame
+store_geo <- store_raw %>%
+  
+  # First, we subset the variables `store_id` and the coordinates.
+  select(store_id, latitude, longitude) %>% 
+  
+  # Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326).
+  st_as_sf(coords=c("longitude","latitude"), crs = st_crs(4326))  
+
+# Fetch data for county polygons using the 'tigris' package
+us_co_filtered <- tigris::counties(cb=T,class="sf") %>%
+  janitor::clean_names() %>%
+  mutate(aland=aland/2.59e+6) %>%
+  st_transform(4326) %>%
+  filter(!statefp %in% c("60", "66", "72", "02", "15", "69", "78")) # Keep only counties in contiguous US
+
+# Join county to store_geo
+store_co_geo <- st_join(store_geo, us_co_filtered, join=st_intersects)
 
 # Aggregate daily sales by store from transaction-level data
 store_sales <- shopper_info %>%
@@ -1021,9 +1045,10 @@ store_sales <- shopper_info %>%
   ungroup()                                                  # Remove grouping to clean up the result
 
 # Add county GEOID to the store-level sales data (so we can link to county-level data like weather)
-store_sales_co <- st_set_geometry(store_co_geo, NULL) %>%
-  select(store_id, geoid) %>%                      # Keep only store_id (for joining) and geoid (for county-level linkage)
-  inner_join(store_sales, ., by = "store_id")      # Join to sales data using store_id; keep only stores with known county info
+store_sales_co <- store_co_geo %>%
+  st_set_geometry(NULL) %>%
+  select(store_id, geoid) %>%                # Keep only store_id (for joining) and geoid (for county-level linkage)
+  inner_join(store_sales, by = "store_id")   # Join to sales data using store_id; keep only stores with known county info
 
 # Reshape weather data from long to wide format (each variable becomes a column)
 weather_wide <- weather_raw %>%
@@ -1037,14 +1062,17 @@ weather_wide <- weather_raw %>%
 store_sales_weather <- store_sales_co %>%
   inner_join(weather_wide, 
              by = c("measure_date" = "date", 
-                    "geoid" = "county"))  # Match on date and county FIPS
+                    "geoid" = "county"))
 
-write_csv(county_demo, "C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather.csv")
+length(unique(store_sales_weather$geoid))
+
+write_csv(store_sales_weather, "C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather.csv")
 
 # ======================================== #
 # ------ Monthly ------ #
 # ======================================== #
 
+# Aggregate store sales and weather data to the month
 sales_weather_month <- store_sales_weather %>%
   mutate(month = month(measure_date)) %>%
   mutate(year = year(measure_date)) %>%
@@ -1054,9 +1082,17 @@ sales_weather_month <- store_sales_weather %>%
     total_rainfall = sum(pr_precipitation_amount),
     avg_humidity = mean(rmax_relative_humidity),
     avg_temp = mean(tmmx_air_temperature),
-    total_sales = sum(sales),
+    total_sales = sum(sales, na.rm = TRUE),
     .groups = 'drop'
-  )
+  ) %>% # Match on date and county FIPS
+  full_join(us_co_filtered %>% 
+              st_set_geometry(NULL) %>%    # Remove the spatial element
+              select(geoid), 
+            by = "geoid")  # Join in the county level fips codes
+
+length(unique(sales_weather_month$geoid))
+
+write_csv(sales_weather_month, "sales_weather_month.csv")
 
 # Part 2: Plot the Data
 
@@ -1164,7 +1200,11 @@ sales_weather_day <- store_sales_weather %>%
     avg_temp = mean(tmmx_air_temperature),
     total_sales = sum(sales),
     .groups = 'drop'
-  )
+  ) %>% # Match on date and county FIPS
+  full_join(us_co_filtered %>% 
+              st_set_geometry(NULL) %>%    # Remove the spatial element
+              select(geoid), 
+            by = "geoid")  # Join in the county level fips codes
 
 # Part 2: Plot the Data
 
@@ -1247,12 +1287,12 @@ fe_out # Print regression output
 model2_fe <- lm(total_sales ~ total_rainfall + avg_temp + factor(day), sales_weather_day_slim) # Modeling the relationship between total rainfall, average temperature, and total sales at the county level. Store it as "model2"
 
 multi_out_fe <- modelsummary(model2_fe,
-                          fmt = 5, # Format estimate so it shows five decimal places
-                          stars = TRUE,
-                          coef_rename = c("(Intercept)"="Intercept",
-                                          "total_rainfall"="Total Rainfall",
-                                          "avg_temp" = "Average Temperature"),
-                          gof_map = c("nobs", "r.squared"))
+                             fmt = 5, # Format estimate so it shows five decimal places
+                             stars = TRUE,
+                             coef_rename = c("(Intercept)"="Intercept",
+                                             "total_rainfall"="Total Rainfall",
+                                             "avg_temp" = "Average Temperature"),
+                             gof_map = c("nobs", "r.squared"))
 
 multi_out_fe # Print regression output
 
