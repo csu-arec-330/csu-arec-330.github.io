@@ -126,7 +126,9 @@ county_demo <- county_store_map %>%
   rename(geoid = geoid.x) %>%
   inner_join(demo, by = "geoid") %>%   # Join on county identifier (GEOID)
   mutate(popden = pop/aland) %>% # Calculate population density (population over land in square miles)
-  left_join(sales_by_county, by = "geoid")
+  left_join(sales_by_county, by = "geoid") %>%
+  st_set_geometry(NULL)          # Drop geometry to simplify data manipulation
+  
 
 write_csv(county_demo, "C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/county_demo.csv")
 

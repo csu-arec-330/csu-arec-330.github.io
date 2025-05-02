@@ -319,9 +319,10 @@ window.Quarto = {
 <span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">geoid =</span> geoid.x) <span class="sc">%&gt;%</span></span>
 <span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(demo, <span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">%&gt;%</span>   <span class="co"># Join on county identifier (GEOID)</span></span>
 <span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">popden =</span> pop<span class="sc">/</span>aland) <span class="sc">%&gt;%</span> <span class="co"># Calculate population density (population over land in square miles)</span></span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sales_by_county, <span class="at">by =</span> <span class="st">"geoid"</span>)</span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(county_demo, <span class="st">"county_demo.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sales_by_county, <span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>)          <span class="co"># Drop geometry to read into Tableau</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(county_demo, <span class="st">"county_demo.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -841,466 +842,489 @@ Lab Script for Week 14: Introduction to Regression in R
 <span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in convenience store location dataset</span></span>
 <span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>store_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz"</span>)</span>
 <span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data frame to a points simple feature object</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>store_geo <span class="ot">&lt;-</span> store_raw <span class="sc">%&gt;%</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, we subset the variables `store_id` and the coordinates.</span></span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(store_id, latitude, longitude) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the shopper sales dataset</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>shopper_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz"</span>)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data frame to a points simple feature object</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>store_geo <span class="ot">&lt;-</span> store_raw <span class="sc">%&gt;%</span></span>
 <span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). See &lt;https://epsg.io/&gt; for more information.</span></span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords=</span><span class="fu">c</span>(<span class="st">"longitude"</span>,<span class="st">"latitude"</span>), <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">4326</span>))  </span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch data for county polygons using the 'tigris' package</span></span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>us_co <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">counties</span>(<span class="at">cb=</span>T,<span class="at">class=</span><span class="st">"sf"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">aland=</span>aland<span class="sc">/</span><span class="fl">2.59e+6</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)</span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the distinct state list by statefp code</span></span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>unique_statefp <span class="ot">&lt;-</span> us_co <span class="sc">%&gt;%</span></span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co"># Remove geometry column</span></span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(stusps, statefp) <span class="sc">%&gt;%</span>  <span class="co"># Select the columns of interest</span></span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span>  <span class="co"># Remove duplicates, keeping only unique rows</span></span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(stusps)  <span class="co"># Arrange alphabetically by stusps</span></span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out counties from American Samoa (60), Guam (66), Saipan Municipality (69), Puerto Rico (72), Virgin Islands (78), Alaska (02), and Hawaii (15)</span></span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>us_co_filtered <span class="ot">&lt;-</span> us_co <span class="sc">%&gt;%</span></span>
-<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>statefp <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"60"</span>, <span class="st">"66"</span>, <span class="st">"72"</span>, <span class="st">"02"</span>, <span class="st">"15"</span>, <span class="st">"69"</span>, <span class="st">"78"</span>))</span>
-<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Join county to store_geo</span></span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>store_co_geo <span class="ot">&lt;-</span> <span class="fu">st_join</span>(store_geo, us_co_filtered, <span class="at">join=</span>st_intersects)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First, we subset the variables `store_id` and the coordinates.</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(store_id, latitude, longitude) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tells R that these are essentially $x$ and $y$ coordinates in a certain projection (represented by the code 4326). See &lt;https://epsg.io/&gt; for more information.</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords=</span><span class="fu">c</span>(<span class="st">"longitude"</span>,<span class="st">"latitude"</span>), <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">4326</span>))  </span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch data for county polygons using the 'tigris' package</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>us_co <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">counties</span>(<span class="at">cb=</span>T,<span class="at">class=</span><span class="st">"sf"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">aland=</span>aland<span class="sc">/</span><span class="fl">2.59e+6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the distinct state list by statefp code</span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>unique_statefp <span class="ot">&lt;-</span> us_co <span class="sc">%&gt;%</span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span>  <span class="co"># Remove geometry column</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(stusps, statefp) <span class="sc">%&gt;%</span>  <span class="co"># Select the columns of interest</span></span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span>  <span class="co"># Remove duplicates, keeping only unique rows</span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(stusps)  <span class="co"># Arrange alphabetically by stusps</span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out counties from American Samoa (60), Guam (66), Saipan Municipality (69), Puerto Rico (72), Virgin Islands (78), Alaska (02), and Hawaii (15)</span></span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>us_co_filtered <span class="ot">&lt;-</span> us_co <span class="sc">%&gt;%</span></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>statefp <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"60"</span>, <span class="st">"66"</span>, <span class="st">"72"</span>, <span class="st">"02"</span>, <span class="st">"15"</span>, <span class="st">"69"</span>, <span class="st">"78"</span>))</span>
 <span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate store count by county</span></span>
-<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>store_count_by_county <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
-<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid) <span class="sc">%&gt;%</span></span>
-<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">store_count =</span> <span class="fu">n</span>(), <span class="co"># Count the number of stores in each county</span></span>
-<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span>)  <span class="co"># Drop groups to prevent regrouping</span></span>
-<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Join aggregated data back with county geometries for mapping</span></span>
-<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a>county_store_map <span class="ot">&lt;-</span> <span class="fu">st_join</span>(us_co_filtered, </span>
-<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a>                            store_count_by_county, </span>
-<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a>                            <span class="at">join=</span>st_intersects)</span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Join county to store_geo</span></span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>store_co_geo <span class="ot">&lt;-</span> <span class="fu">st_join</span>(store_geo, </span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>                        us_co_filtered, </span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>                        <span class="at">join=</span>st_intersects)</span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate store count by county</span></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a>store_count_by_county <span class="ot">&lt;-</span> store_co_geo <span class="sc">%&gt;%</span></span>
+<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid) <span class="sc">%&gt;%</span></span>
+<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">store_count =</span> <span class="fu">n</span>(), <span class="co"># Count the number of stores in each county</span></span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span>)  <span class="co"># Drop groups to prevent regrouping</span></span>
 <span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 2: Bring in Census Data</span></span>
-<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Load variable metadata for the 2022 ACS 5-year estimates (used to look up variable codes and labels)</span></span>
-<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a>census_22 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2022</span>, <span class="st">"acs5"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Join aggregated data back with county geometries for mapping</span></span>
+<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a>county_store_map <span class="ot">&lt;-</span> <span class="fu">st_join</span>(us_co_filtered, </span>
+<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a>                            store_count_by_county, </span>
+<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a>                            <span class="at">join=</span>st_intersects)</span>
 <span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Household income --- #</span></span>
-<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Download median household income data from the 2022 ACS 5-year estimates at the county level</span></span>
-<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a>census_hhi <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(</span>
-<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">geography =</span> <span class="st">"county"</span>,                      <span class="co"># Get data for all U.S. counties</span></span>
-<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey =</span> <span class="st">"acs5"</span>,                           <span class="co"># Use 5-year ACS data (more reliable for small areas)</span></span>
-<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>),   <span class="co"># B19013_001 = median household income</span></span>
-<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">state =</span> <span class="cn">NULL</span>,                              <span class="co"># NULL = include all states (not just one)</span></span>
-<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2022</span>                                <span class="co"># Use the most recent available year</span></span>
-<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean column names and keep only GEOID and the income estimate, renamed as 'hhi'</span></span>
-<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a>hhi <span class="ot">&lt;-</span> census_hhi <span class="sc">%&gt;%</span></span>
-<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geoid, <span class="at">hhi =</span> estimate)</span>
-<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Population --- #</span></span>
-<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Download population data from the 2022 ACS 5-year estimates at the county level</span></span>
-<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a>census_pop <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(</span>
-<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a>  <span class="at">geography =</span> <span class="st">"county"</span>,                      <span class="co"># Get data for all U.S. counties</span></span>
-<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey =</span> <span class="st">"acs5"</span>,                           <span class="co"># Use 5-year ACS data (more reliable for small areas)</span></span>
-<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B01003_001"</span>),   <span class="co"># B01003_001 = total population</span></span>
-<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">state =</span> <span class="cn">NULL</span>,                              <span class="co"># NULL = include all states (not just one)</span></span>
-<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2022</span>                                <span class="co"># Use the most recent available year</span></span>
-<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean column names and keep only GEOID and the population estimate, renamed as 'pop'</span></span>
-<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> census_pop <span class="sc">%&gt;%</span></span>
-<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geoid, <span class="at">pop =</span> estimate)</span>
-<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe that combines hhi and pop</span></span>
-<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a>demo <span class="ot">&lt;-</span> hhi <span class="sc">%&gt;%</span></span>
-<span id="cb23-99"><a href="#cb23-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(pop, <span class="at">by =</span> <span class="st">"geoid"</span>)</span>
-<span id="cb23-100"><a href="#cb23-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a><span class="co"># Join median household income (hhi) and total population (pop) to the county-store map using county GEOID</span></span>
-<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a>county_demo <span class="ot">&lt;-</span> county_store_map <span class="sc">%&gt;%</span></span>
-<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>geoid.y) <span class="sc">%&gt;%</span></span>
-<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">geoid =</span> geoid.x) <span class="sc">%&gt;%</span></span>
-<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(demo, <span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">%&gt;%</span> <span class="co"># Join on county identifies (GEOID)</span></span>
-<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">popden =</span> pop<span class="sc">/</span>aland) <span class="co"># Calculate population density</span></span>
-<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(county_demo, <span class="st">"C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/county_demo.csv"</span>)</span>
-<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 3: Plot the Data</span></span>
+<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Create store sales by county</span></span>
+<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a>sales_by_county <span class="ot">&lt;-</span> shopper_info <span class="sc">%&gt;%</span></span>
+<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(store_id, unit_price, unit_quantity) <span class="sc">%&gt;%</span></span>
+<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sales =</span> unit_price <span class="sc">*</span> unit_quantity) <span class="sc">%&gt;%</span></span>
+<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(store_id) <span class="sc">%&gt;%</span></span>
+<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_sales =</span> <span class="fu">sum</span>(sales),</span>
+<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span></span>
+<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(store_co_geo, <span class="at">by =</span> <span class="st">"store_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid) <span class="sc">%&gt;%</span></span>
+<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">county_sales =</span> <span class="fu">sum</span>(total_sales),</span>
+<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span></span>
+<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 2: Bring in Census Data</span></span>
+<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Load variable metadata for the 2022 ACS 5-year estimates (used to look up variable codes and labels)</span></span>
+<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a>census_22 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2022</span>, <span class="st">"acs5"</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Household income --- #</span></span>
+<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Download median household income data from the 2022 ACS 5-year estimates at the county level</span></span>
+<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a>census_hhi <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(</span>
+<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a>  <span class="at">geography =</span> <span class="st">"county"</span>,                      <span class="co"># Get data for all U.S. counties</span></span>
+<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey =</span> <span class="st">"acs5"</span>,                           <span class="co"># Use 5-year ACS data (more reliable for small areas)</span></span>
+<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">medincome =</span> <span class="st">"B19013_001"</span>),   <span class="co"># B19013_001 = median household income</span></span>
+<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a>  <span class="at">state =</span> <span class="cn">NULL</span>,                              <span class="co"># NULL = include all states (not just one)</span></span>
+<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2022</span>                                <span class="co"># Use the most recent available year</span></span>
+<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean column names and keep only GEOID and the income estimate, renamed as 'hhi'</span></span>
+<span id="cb23-99"><a href="#cb23-99" aria-hidden="true" tabindex="-1"></a>hhi <span class="ot">&lt;-</span> census_hhi <span class="sc">%&gt;%</span></span>
+<span id="cb23-100"><a href="#cb23-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geoid, <span class="at">hhi =</span> estimate)</span>
+<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Population --- #</span></span>
+<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Download population data from the 2022 ACS 5-year estimates at the county level</span></span>
+<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a>census_pop <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(</span>
+<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a>  <span class="at">geography =</span> <span class="st">"county"</span>,                      <span class="co"># Get data for all U.S. counties</span></span>
+<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey =</span> <span class="st">"acs5"</span>,                           <span class="co"># Use 5-year ACS data (more reliable for small areas)</span></span>
+<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a>  <span class="at">variables =</span> <span class="fu">c</span>(<span class="at">pop =</span> <span class="st">"B01003_001"</span>),         <span class="co"># B01003_001 = total population</span></span>
+<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a>  <span class="at">state =</span> <span class="cn">NULL</span>,                              <span class="co"># NULL = include all states (not just one)</span></span>
+<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2022</span>                                <span class="co"># Use the most recent available year</span></span>
+<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb23-112"><a href="#cb23-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Data summary</span></span>
-<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_skim</span>(county_demo, <span class="at">type =</span> <span class="st">"numeric"</span>)</span>
-<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_skim</span>(county_demo, <span class="at">type =</span> <span class="st">"categorical"</span>)</span>
-<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a><span class="co"># EDA with ggpairs</span></span>
-<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a>county_demo <span class="sc">%&gt;%</span></span>
-<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span> <span class="co"># Remove the spatial data feature in order to run ggpairs()</span></span>
-<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">store_count =</span> <span class="fu">replace_na</span>(store_count, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hhi)) <span class="sc">%&gt;%</span> <span class="co"># Drop counties with missing household income </span></span>
-<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhi, popden, store_count) <span class="sc">%&gt;%</span></span>
-<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span>
-<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in on scatter plot</span></span>
-<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>county_demo_slim <span class="ot">&lt;-</span> county_demo <span class="sc">%&gt;%</span></span>
-<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">store_count =</span> <span class="fu">replace_na</span>(store_count, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hhi)) <span class="sc">%&gt;%</span> <span class="co"># Drop counties with missing household income</span></span>
-<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhi, popden, store_count)</span>
-<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
-<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(county_demo_slim, </span>
-<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> store_count)) <span class="sc">+</span> </span>
-<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
-<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Median Household Income and Number of Stores"</span>,</span>
-<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Household Income (2022)"</span>,</span>
-<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Store Count (County Level)"</span>) <span class="sc">+</span></span>
-<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span>
-<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
-<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced scatter plot with ggplot (additional formatting)</span></span>
-<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(county_demo_slim, </span>
-<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> store_count)) <span class="sc">+</span> </span>
-<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  <span class="co"># Add points for scatter plot</span></span>
-<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Median Household Income and Number of Stores"</span>,</span>
-<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Household Income (2022)"</span>,</span>
-<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Store Count (County Level)"</span>) <span class="sc">+</span></span>
-<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># &lt;- x-axis line at y = 0</span></span>
-<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),   <span class="co"># Draw axis lines</span></span>
-<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>()               <span class="co"># Remove default plot border</span></span>
-<span id="cb23-155"><a href="#cb23-155" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq.int</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>),</span>
-<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
-<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 4: Estimate Regression - univariate</span></span>
-<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(store_count <span class="sc">~</span> hhi, county_demo_slim) <span class="co"># Modeling the relationship between household income and store count at the county level. Store it as "model1"</span></span>
+<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean column names and keep only GEOID and the population estimate, renamed as 'pop'</span></span>
+<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> census_pop <span class="sc">%&gt;%</span></span>
+<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geoid, <span class="at">pop =</span> estimate)</span>
+<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Join median household income (hhi) to the store-level dataset using county GEOID</span></span>
+<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a>demo <span class="ot">&lt;-</span> hhi <span class="sc">%&gt;%</span></span>
+<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(pop, <span class="at">by =</span> <span class="st">"geoid"</span>)</span>
+<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a><span class="co"># Join median household income (hhi) and total population (pop) to the county-store map using county GEOID</span></span>
+<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a>county_demo <span class="ot">&lt;-</span> county_store_map <span class="sc">%&gt;%</span></span>
+<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>geoid.y) <span class="sc">%&gt;%</span></span>
+<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">geoid =</span> geoid.x) <span class="sc">%&gt;%</span></span>
+<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(demo, <span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">%&gt;%</span>   <span class="co"># Join on county identifier (GEOID)</span></span>
+<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">popden =</span> pop<span class="sc">/</span>aland) <span class="sc">%&gt;%</span> <span class="co"># Calculate population density (population over land in square miles)</span></span>
+<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sales_by_county, <span class="at">by =</span> <span class="st">"geoid"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>)          <span class="co"># Drop geometry to read into Tableau</span></span>
+<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(county_demo, <span class="st">"C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/county_demo.csv"</span>)</span>
+<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 3: Plot the Data</span></span>
+<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a><span class="co"># Data summary</span></span>
+<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_skim</span>(county_demo, <span class="at">type =</span> <span class="st">"numeric"</span>)</span>
+<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a><span class="fu">datasummary_skim</span>(county_demo, <span class="at">type =</span> <span class="st">"categorical"</span>)</span>
+<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a><span class="co"># EDA with ggpairs</span></span>
+<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a>county_demo <span class="sc">%&gt;%</span></span>
+<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span> <span class="co"># Remove the spatial data feature in order to run ggpairs()</span></span>
+<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">store_count =</span> <span class="fu">replace_na</span>(store_count, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hhi)) <span class="sc">%&gt;%</span> <span class="co"># Drop counties with missing household income </span></span>
+<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhi, popden, store_count) <span class="sc">%&gt;%</span></span>
+<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span>
+<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in on scatter plot</span></span>
+<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a>county_demo_slim <span class="ot">&lt;-</span> county_demo <span class="sc">%&gt;%</span></span>
+<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">store_count =</span> <span class="fu">replace_na</span>(store_count, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hhi)) <span class="sc">%&gt;%</span> <span class="co"># Drop counties with missing household income</span></span>
+<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhi, popden, store_count)</span>
+<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-155"><a href="#cb23-155" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
+<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(county_demo_slim, </span>
+<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> store_count)) <span class="sc">+</span> </span>
+<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
+<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Median Household Income and Number of Stores"</span>,</span>
+<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Household Income (2022)"</span>,</span>
+<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Store Count (County Level)"</span>) <span class="sc">+</span></span>
+<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span>
+<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
 <span id="cb23-165"><a href="#cb23-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a>uni_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1,</span>
-<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
-<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a>                      <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>                      <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
-<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"hhi"</span><span class="ot">=</span><span class="st">"Median Inc"</span>),</span>
-<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a>                      <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
-<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a>uni_out <span class="co"># Print regression output</span></span>
-<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
-<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a>pred_data1 <span class="ot">&lt;-</span> county_demo_slim <span class="sc">%&gt;%</span></span>
-<span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(hhi) <span class="sc">%&gt;%</span></span>
-<span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(hhi) <span class="sc">%&gt;%</span></span>
-<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> .))</span>
-<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
-<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
-<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
+<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced scatter plot with ggplot (additional formatting)</span></span>
+<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(county_demo_slim, </span>
+<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> store_count)) <span class="sc">+</span> </span>
+<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  <span class="co"># Add points for scatter plot</span></span>
+<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Median Household Income and Number of Stores"</span>,</span>
+<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Household Income (2022)"</span>,</span>
+<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Store Count (County Level)"</span>) <span class="sc">+</span></span>
+<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># &lt;- x-axis line at y = 0</span></span>
+<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),   <span class="co"># Draw axis lines</span></span>
+<span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>()               <span class="co"># Remove default plot border</span></span>
+<span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq.int</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">2</span>),</span>
+<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
 <span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate regression - multivariate</span></span>
-<span id="cb23-187"><a href="#cb23-187" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(store_count <span class="sc">~</span> hhi <span class="sc">+</span> popden, county_demo_slim) <span class="co"># Modeling the relationship between household income, pop density, and store count at the county level. Store it as "model2"</span></span>
+<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 4: Estimate Regression - univariate</span></span>
+<span id="cb23-187"><a href="#cb23-187" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(store_count <span class="sc">~</span> hhi, county_demo_slim) <span class="co"># Modeling the relationship between household income and store count at the county level. Store it as "model1"</span></span>
 <span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a>multi_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model2,</span>
+<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a>uni_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1,</span>
 <span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
 <span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a>                      <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a>                      <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
-<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"hhi"</span><span class="ot">=</span><span class="st">"Median Inc"</span>,</span>
-<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"popden"</span> <span class="ot">=</span> <span class="st">"Population Density"</span>),</span>
-<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a>                      <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
-<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a>multi_out <span class="co"># Print regression output</span></span>
-<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
-<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a>pred_data2 <span class="ot">&lt;-</span> county_demo_slim <span class="sc">%&gt;%</span></span>
-<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(hhi, popden) <span class="sc">%&gt;%</span></span>
-<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(hhi) <span class="sc">%&gt;%</span></span>
-<span id="cb23-204"><a href="#cb23-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model2, <span class="at">newdata =</span> .))</span>
-<span id="cb23-205"><a href="#cb23-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
-<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
-<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data2, <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
-<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"hhi"</span><span class="ot">=</span><span class="st">"Median Inc"</span>),</span>
+<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a>                      <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
+<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a>uni_out <span class="co"># Print regression output</span></span>
+<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
+<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a>pred_data1 <span class="ot">&lt;-</span> county_demo_slim <span class="sc">%&gt;%</span></span>
+<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(hhi) <span class="sc">%&gt;%</span></span>
+<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(hhi) <span class="sc">%&gt;%</span></span>
+<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> .))</span>
+<span id="cb23-204"><a href="#cb23-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-205"><a href="#cb23-205" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
+<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
+<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
+<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate regression - multivariate</span></span>
+<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(store_count <span class="sc">~</span> hhi <span class="sc">+</span> popden, county_demo_slim) <span class="co"># Modeling the relationship between household income, pop density, and store count at the county level. Store it as "model2"</span></span>
 <span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a><span class="co"># =============== Option 2 =============== #</span></span>
-<span id="cb23-213"><a href="#cb23-213" aria-hidden="true" tabindex="-1"></a><span class="co"># ------- Working with Weather Data ------ #</span></span>
-<span id="cb23-214"><a href="#cb23-214" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
-<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a><span class="co"># Research Question: </span></span>
-<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the relationship between **total monthly rainfall** and **total montly sales** at the county level?</span></span>
-<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 1: Read in Spatial Data</span></span>
-<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a>shopper_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz"</span>)</span>
+<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a>multi_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model2,</span>
+<span id="cb23-213"><a href="#cb23-213" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
+<span id="cb23-214"><a href="#cb23-214" aria-hidden="true" tabindex="-1"></a>                      <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a>                      <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
+<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"hhi"</span><span class="ot">=</span><span class="st">"Median Inc"</span>,</span>
+<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"popden"</span> <span class="ot">=</span> <span class="st">"Population Density"</span>),</span>
+<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a>                      <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
+<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a>multi_out <span class="co"># Print regression output</span></span>
 <span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the weather data</span></span>
-<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a>weather_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/gridmet_county_daily_2023-2023.csv.gz"</span>)</span>
-<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate daily sales by store from transaction-level data</span></span>
-<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a>store_sales <span class="ot">&lt;-</span> shopper_info <span class="sc">%&gt;%</span></span>
-<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date =</span> <span class="fu">as_date</span>(date_time)) <span class="sc">%&gt;%</span>              <span class="co"># Extract date component from timestamp</span></span>
-<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(store_id, measure_date) <span class="sc">%&gt;%</span>                       <span class="co"># Group by store and date</span></span>
-<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb23-230"><a href="#cb23-230" aria-hidden="true" tabindex="-1"></a>    <span class="at">sales =</span> <span class="fu">sum</span>(unit_price <span class="sc">*</span> unit_quantity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   <span class="co"># Compute total sales (price × quantity)</span></span>
-<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()                                                  <span class="co"># Remove grouping to clean up the result</span></span>
+<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
+<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a>pred_data2 <span class="ot">&lt;-</span> county_demo_slim <span class="sc">%&gt;%</span></span>
+<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(hhi, popden) <span class="sc">%&gt;%</span></span>
+<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(hhi) <span class="sc">%&gt;%</span></span>
+<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model2, <span class="at">newdata =</span> .))</span>
+<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
+<span id="cb23-230"><a href="#cb23-230" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
+<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data2, <span class="fu">aes</span>(<span class="at">x =</span> hhi, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
 <span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a><span class="co"># Add county GEOID to the store-level sales data (so we can link to county-level data like weather)</span></span>
-<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a>store_sales_co <span class="ot">&lt;-</span> <span class="fu">st_set_geometry</span>(store_co_geo, <span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(store_id, geoid) <span class="sc">%&gt;%</span>                      <span class="co"># Keep only store_id (for joining) and geoid (for county-level linkage)</span></span>
-<span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(store_sales, ., <span class="at">by =</span> <span class="st">"store_id"</span>)      <span class="co"># Join to sales data using store_id; keep only stores with known county info</span></span>
+<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a><span class="co"># =============== Option 2 =============== #</span></span>
+<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a><span class="co"># ------- Working with Weather Data ------ #</span></span>
+<span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
 <span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape weather data from long to wide format (each variable becomes a column)</span></span>
-<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a>weather_wide <span class="ot">&lt;-</span> weather_raw <span class="sc">%&gt;%</span></span>
-<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a>    <span class="at">id_cols =</span> <span class="fu">c</span>(county, date),              <span class="co"># Keep county and date as identifiers</span></span>
-<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> variable,                  <span class="co"># Each unique variable becomes a new column</span></span>
-<span id="cb23-244"><a href="#cb23-244" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> value                     <span class="co"># Fill those columns with the corresponding values</span></span>
-<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-247"><a href="#cb23-247" aria-hidden="true" tabindex="-1"></a><span class="co"># Join daily store sales to weather data using date and county identifiers</span></span>
-<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a>store_sales_weather <span class="ot">&lt;-</span> store_sales_co <span class="sc">%&gt;%</span></span>
-<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(weather_wide, </span>
-<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a>             <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"measure_date"</span> <span class="ot">=</span> <span class="st">"date"</span>, </span>
-<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"geoid"</span> <span class="ot">=</span> <span class="st">"county"</span>))  <span class="co"># Match on date and county FIPS</span></span>
-<span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-253"><a href="#cb23-253" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(county_demo, <span class="st">"C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather.csv"</span>)</span>
-<span id="cb23-254"><a href="#cb23-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
-<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a><span class="co"># ------ Monthly ------ #</span></span>
-<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
-<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a>sales_weather_month <span class="ot">&lt;-</span> store_sales_weather <span class="sc">%&gt;%</span></span>
-<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(measure_date)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(measure_date)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day =</span> <span class="fu">day</span>(measure_date)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid, month) <span class="sc">%&gt;%</span></span>
-<span id="cb23-264"><a href="#cb23-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_rainfall =</span> <span class="fu">sum</span>(pr_precipitation_amount),</span>
-<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_humidity =</span> <span class="fu">mean</span>(rmax_relative_humidity),</span>
-<span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_temp =</span> <span class="fu">mean</span>(tmmx_air_temperature),</span>
-<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_sales =</span> <span class="fu">sum</span>(sales),</span>
-<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span></span>
-<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-272"><a href="#cb23-272" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 2: Plot the Data</span></span>
-<span id="cb23-273"><a href="#cb23-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-274"><a href="#cb23-274" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
-<span id="cb23-275"><a href="#cb23-275" aria-hidden="true" tabindex="-1"></a>sales_weather_month <span class="sc">%&gt;%</span></span>
-<span id="cb23-276"><a href="#cb23-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_rainfall, avg_temp, total_sales) <span class="sc">%&gt;%</span></span>
-<span id="cb23-277"><a href="#cb23-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span>
-<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in on scatter plot</span></span>
-<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a>sales_weather_month_slim <span class="ot">&lt;-</span> sales_weather_month <span class="sc">%&gt;%</span></span>
-<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_rainfall, avg_temp, total_sales, month)</span>
-<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
-<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sales_weather_month_slim, </span>
-<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> total_sales)) <span class="sc">+</span> </span>
-<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
-<span id="cb23-287"><a href="#cb23-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Total Rainfall and Total Sales"</span>,</span>
-<span id="cb23-288"><a href="#cb23-288" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Inches of Rain"</span>,</span>
-<span id="cb23-289"><a href="#cb23-289" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Sales (Dollars)"</span>) <span class="sc">+</span></span>
-<span id="cb23-290"><a href="#cb23-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span>
-<span id="cb23-291"><a href="#cb23-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-292"><a href="#cb23-292" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
-<span id="cb23-293"><a href="#cb23-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-294"><a href="#cb23-294" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced scatter plot with ggplot (additional formatting)</span></span>
-<span id="cb23-295"><a href="#cb23-295" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sales_weather_month_slim, </span>
-<span id="cb23-296"><a href="#cb23-296" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> total_sales)) <span class="sc">+</span> </span>
-<span id="cb23-297"><a href="#cb23-297" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
-<span id="cb23-298"><a href="#cb23-298" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Total Rainfall and Total Sales"</span>,</span>
-<span id="cb23-299"><a href="#cb23-299" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Inches of Rain"</span>,</span>
-<span id="cb23-300"><a href="#cb23-300" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Sales (Dollars)"</span>) <span class="sc">+</span></span>
-<span id="cb23-301"><a href="#cb23-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb23-302"><a href="#cb23-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># &lt;- x-axis line at y = 0</span></span>
-<span id="cb23-303"><a href="#cb23-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb23-304"><a href="#cb23-304" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),                  <span class="co"># Remove border</span></span>
-<span id="cb23-305"><a href="#cb23-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),     <span class="co"># Only y-axis line</span></span>
-<span id="cb23-306"><a href="#cb23-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.x =</span> <span class="fu">element_blank</span>()                    <span class="co"># Remove x-axis line at y = 0</span></span>
-<span id="cb23-307"><a href="#cb23-307" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb23-308"><a href="#cb23-308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb23-309"><a href="#cb23-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>()))  <span class="co"># e.g., 100,000 → 100K</span></span>
-<span id="cb23-310"><a href="#cb23-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-311"><a href="#cb23-311" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
-<span id="cb23-312"><a href="#cb23-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-313"><a href="#cb23-313" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 4: Estimate Regression - univariate</span></span>
-<span id="cb23-314"><a href="#cb23-314" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall, sales_weather_month_slim) <span class="co"># Modeling the relationship between total rainfall and store sales at the county level. Store it as "model1"</span></span>
-<span id="cb23-315"><a href="#cb23-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-316"><a href="#cb23-316" aria-hidden="true" tabindex="-1"></a>uni_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1,</span>
-<span id="cb23-317"><a href="#cb23-317" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
-<span id="cb23-318"><a href="#cb23-318" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb23-319"><a href="#cb23-319" aria-hidden="true" tabindex="-1"></a>                        <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
-<span id="cb23-320"><a href="#cb23-320" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>),</span>
-<span id="cb23-321"><a href="#cb23-321" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
-<span id="cb23-322"><a href="#cb23-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-323"><a href="#cb23-323" aria-hidden="true" tabindex="-1"></a>uni_out <span class="co"># Print regression output</span></span>
-<span id="cb23-324"><a href="#cb23-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-325"><a href="#cb23-325" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
-<span id="cb23-326"><a href="#cb23-326" aria-hidden="true" tabindex="-1"></a>pred_data1 <span class="ot">&lt;-</span> sales_weather_month_slim <span class="sc">%&gt;%</span></span>
-<span id="cb23-327"><a href="#cb23-327" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(total_rainfall) <span class="sc">%&gt;%</span></span>
-<span id="cb23-328"><a href="#cb23-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-329"><a href="#cb23-329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total_rainfall) <span class="sc">%&gt;%</span></span>
-<span id="cb23-330"><a href="#cb23-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> .))</span>
-<span id="cb23-331"><a href="#cb23-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-332"><a href="#cb23-332" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
-<span id="cb23-333"><a href="#cb23-333" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
-<span id="cb23-334"><a href="#cb23-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
+<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a><span class="co"># Research Question: </span></span>
+<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the relationship between **total monthly rainfall** and **total montly sales** at the county level?</span></span>
+<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 1: Read in Spatial Data</span></span>
+<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a>shopper_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz"</span>)</span>
+<span id="cb23-244"><a href="#cb23-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the weather data</span></span>
+<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a>weather_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://csu-arec-330.github.io/materials/unit_03/inputs/gridmet_county_daily_2023-2023.csv.gz"</span>)</span>
+<span id="cb23-247"><a href="#cb23-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate daily sales by store from transaction-level data</span></span>
+<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a>store_sales <span class="ot">&lt;-</span> shopper_info <span class="sc">%&gt;%</span></span>
+<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">measure_date =</span> <span class="fu">as_date</span>(date_time)) <span class="sc">%&gt;%</span>              <span class="co"># Extract date component from timestamp</span></span>
+<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(store_id, measure_date) <span class="sc">%&gt;%</span>                       <span class="co"># Group by store and date</span></span>
+<span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb23-253"><a href="#cb23-253" aria-hidden="true" tabindex="-1"></a>    <span class="at">sales =</span> <span class="fu">sum</span>(unit_price <span class="sc">*</span> unit_quantity, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   <span class="co"># Compute total sales (price × quantity)</span></span>
+<span id="cb23-254"><a href="#cb23-254" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()                                                  <span class="co"># Remove grouping to clean up the result</span></span>
+<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a><span class="co"># Add county GEOID to the store-level sales data (so we can link to county-level data like weather)</span></span>
+<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a>store_sales_co <span class="ot">&lt;-</span> <span class="fu">st_set_geometry</span>(store_co_geo, <span class="cn">NULL</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(store_id, geoid) <span class="sc">%&gt;%</span>                      <span class="co"># Keep only store_id (for joining) and geoid (for county-level linkage)</span></span>
+<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(store_sales, ., <span class="at">by =</span> <span class="st">"store_id"</span>)      <span class="co"># Join to sales data using store_id; keep only stores with known county info</span></span>
+<span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape weather data from long to wide format (each variable becomes a column)</span></span>
+<span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a>weather_wide <span class="ot">&lt;-</span> weather_raw <span class="sc">%&gt;%</span></span>
+<span id="cb23-264"><a href="#cb23-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">id_cols =</span> <span class="fu">c</span>(county, date),              <span class="co"># Keep county and date as identifiers</span></span>
+<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> variable,                  <span class="co"># Each unique variable becomes a new column</span></span>
+<span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> value                     <span class="co"># Fill those columns with the corresponding values</span></span>
+<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a><span class="co"># Join daily store sales to weather data using date and county identifiers</span></span>
+<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a>store_sales_weather <span class="ot">&lt;-</span> store_sales_co <span class="sc">%&gt;%</span></span>
+<span id="cb23-272"><a href="#cb23-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(weather_wide, </span>
+<span id="cb23-273"><a href="#cb23-273" aria-hidden="true" tabindex="-1"></a>             <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"measure_date"</span> <span class="ot">=</span> <span class="st">"date"</span>, </span>
+<span id="cb23-274"><a href="#cb23-274" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"geoid"</span> <span class="ot">=</span> <span class="st">"county"</span>))  <span class="co"># Match on date and county FIPS</span></span>
+<span id="cb23-275"><a href="#cb23-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-276"><a href="#cb23-276" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(county_demo, <span class="st">"C:/Users/lachenar/OneDrive - Colostate/Documents/GitProjectsWithR/csu-arec-330.github.io/materials/unit_03/inputs/store_sales_weather.csv"</span>)</span>
+<span id="cb23-277"><a href="#cb23-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
+<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a><span class="co"># ------ Monthly ------ #</span></span>
+<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
+<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a>sales_weather_month <span class="ot">&lt;-</span> store_sales_weather <span class="sc">%&gt;%</span></span>
+<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(measure_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(measure_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day =</span> <span class="fu">day</span>(measure_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid, month) <span class="sc">%&gt;%</span></span>
+<span id="cb23-287"><a href="#cb23-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb23-288"><a href="#cb23-288" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_rainfall =</span> <span class="fu">sum</span>(pr_precipitation_amount),</span>
+<span id="cb23-289"><a href="#cb23-289" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_humidity =</span> <span class="fu">mean</span>(rmax_relative_humidity),</span>
+<span id="cb23-290"><a href="#cb23-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_temp =</span> <span class="fu">mean</span>(tmmx_air_temperature),</span>
+<span id="cb23-291"><a href="#cb23-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_sales =</span> <span class="fu">sum</span>(sales),</span>
+<span id="cb23-292"><a href="#cb23-292" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span></span>
+<span id="cb23-293"><a href="#cb23-293" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-294"><a href="#cb23-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-295"><a href="#cb23-295" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 2: Plot the Data</span></span>
+<span id="cb23-296"><a href="#cb23-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-297"><a href="#cb23-297" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
+<span id="cb23-298"><a href="#cb23-298" aria-hidden="true" tabindex="-1"></a>sales_weather_month <span class="sc">%&gt;%</span></span>
+<span id="cb23-299"><a href="#cb23-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_rainfall, avg_temp, total_sales) <span class="sc">%&gt;%</span></span>
+<span id="cb23-300"><a href="#cb23-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span>
+<span id="cb23-301"><a href="#cb23-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-302"><a href="#cb23-302" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in on scatter plot</span></span>
+<span id="cb23-303"><a href="#cb23-303" aria-hidden="true" tabindex="-1"></a>sales_weather_month_slim <span class="ot">&lt;-</span> sales_weather_month <span class="sc">%&gt;%</span></span>
+<span id="cb23-304"><a href="#cb23-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_rainfall, avg_temp, total_sales, month)</span>
+<span id="cb23-305"><a href="#cb23-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-306"><a href="#cb23-306" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
+<span id="cb23-307"><a href="#cb23-307" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sales_weather_month_slim, </span>
+<span id="cb23-308"><a href="#cb23-308" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> total_sales)) <span class="sc">+</span> </span>
+<span id="cb23-309"><a href="#cb23-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
+<span id="cb23-310"><a href="#cb23-310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Total Rainfall and Total Sales"</span>,</span>
+<span id="cb23-311"><a href="#cb23-311" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Inches of Rain"</span>,</span>
+<span id="cb23-312"><a href="#cb23-312" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Sales (Dollars)"</span>) <span class="sc">+</span></span>
+<span id="cb23-313"><a href="#cb23-313" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span>
+<span id="cb23-314"><a href="#cb23-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-315"><a href="#cb23-315" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
+<span id="cb23-316"><a href="#cb23-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-317"><a href="#cb23-317" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced scatter plot with ggplot (additional formatting)</span></span>
+<span id="cb23-318"><a href="#cb23-318" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sales_weather_month_slim, </span>
+<span id="cb23-319"><a href="#cb23-319" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> total_sales)) <span class="sc">+</span> </span>
+<span id="cb23-320"><a href="#cb23-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
+<span id="cb23-321"><a href="#cb23-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Total Rainfall and Total Sales"</span>,</span>
+<span id="cb23-322"><a href="#cb23-322" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Inches of Rain"</span>,</span>
+<span id="cb23-323"><a href="#cb23-323" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Sales (Dollars)"</span>) <span class="sc">+</span></span>
+<span id="cb23-324"><a href="#cb23-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb23-325"><a href="#cb23-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># &lt;- x-axis line at y = 0</span></span>
+<span id="cb23-326"><a href="#cb23-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-327"><a href="#cb23-327" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),                  <span class="co"># Remove border</span></span>
+<span id="cb23-328"><a href="#cb23-328" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),     <span class="co"># Only y-axis line</span></span>
+<span id="cb23-329"><a href="#cb23-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.x =</span> <span class="fu">element_blank</span>()                    <span class="co"># Remove x-axis line at y = 0</span></span>
+<span id="cb23-330"><a href="#cb23-330" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb23-331"><a href="#cb23-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb23-332"><a href="#cb23-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>()))  <span class="co"># e.g., 100,000 → 100K</span></span>
+<span id="cb23-333"><a href="#cb23-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-334"><a href="#cb23-334" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
 <span id="cb23-335"><a href="#cb23-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-336"><a href="#cb23-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-337"><a href="#cb23-337" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate regression - multivariate</span></span>
-<span id="cb23-338"><a href="#cb23-338" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall <span class="sc">+</span> avg_temp, sales_weather_month_slim) <span class="co"># Modeling the relationship between total rainfall, average temperature, and total sales at the county level. Store it as "model2"</span></span>
-<span id="cb23-339"><a href="#cb23-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-340"><a href="#cb23-340" aria-hidden="true" tabindex="-1"></a>multi_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model2,</span>
-<span id="cb23-341"><a href="#cb23-341" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
-<span id="cb23-342"><a href="#cb23-342" aria-hidden="true" tabindex="-1"></a>                          <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb23-343"><a href="#cb23-343" aria-hidden="true" tabindex="-1"></a>                          <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
-<span id="cb23-344"><a href="#cb23-344" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>,</span>
-<span id="cb23-345"><a href="#cb23-345" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"avg_temp"</span> <span class="ot">=</span> <span class="st">"Average Temperature"</span>),</span>
-<span id="cb23-346"><a href="#cb23-346" aria-hidden="true" tabindex="-1"></a>                          <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
+<span id="cb23-336"><a href="#cb23-336" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 4: Estimate Regression - univariate</span></span>
+<span id="cb23-337"><a href="#cb23-337" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall, sales_weather_month_slim) <span class="co"># Modeling the relationship between total rainfall and store sales at the county level. Store it as "model1"</span></span>
+<span id="cb23-338"><a href="#cb23-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-339"><a href="#cb23-339" aria-hidden="true" tabindex="-1"></a>uni_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1,</span>
+<span id="cb23-340"><a href="#cb23-340" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
+<span id="cb23-341"><a href="#cb23-341" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-342"><a href="#cb23-342" aria-hidden="true" tabindex="-1"></a>                        <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
+<span id="cb23-343"><a href="#cb23-343" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>),</span>
+<span id="cb23-344"><a href="#cb23-344" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
+<span id="cb23-345"><a href="#cb23-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-346"><a href="#cb23-346" aria-hidden="true" tabindex="-1"></a>uni_out <span class="co"># Print regression output</span></span>
 <span id="cb23-347"><a href="#cb23-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-348"><a href="#cb23-348" aria-hidden="true" tabindex="-1"></a>multi_out <span class="co"># Print regression output</span></span>
-<span id="cb23-349"><a href="#cb23-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-350"><a href="#cb23-350" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
-<span id="cb23-351"><a href="#cb23-351" aria-hidden="true" tabindex="-1"></a>pred_data2 <span class="ot">&lt;-</span> sales_weather_month_slim <span class="sc">%&gt;%</span></span>
-<span id="cb23-352"><a href="#cb23-352" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(total_rainfall, avg_temp) <span class="sc">%&gt;%</span></span>
-<span id="cb23-353"><a href="#cb23-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-354"><a href="#cb23-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total_rainfall, avg_temp) <span class="sc">%&gt;%</span></span>
-<span id="cb23-355"><a href="#cb23-355" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model2, <span class="at">newdata =</span> .))</span>
-<span id="cb23-356"><a href="#cb23-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-357"><a href="#cb23-357" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
-<span id="cb23-358"><a href="#cb23-358" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
-<span id="cb23-359"><a href="#cb23-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb23-360"><a href="#cb23-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data2, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
-<span id="cb23-361"><a href="#cb23-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-348"><a href="#cb23-348" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
+<span id="cb23-349"><a href="#cb23-349" aria-hidden="true" tabindex="-1"></a>pred_data1 <span class="ot">&lt;-</span> sales_weather_month_slim <span class="sc">%&gt;%</span></span>
+<span id="cb23-350"><a href="#cb23-350" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(total_rainfall) <span class="sc">%&gt;%</span></span>
+<span id="cb23-351"><a href="#cb23-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-352"><a href="#cb23-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total_rainfall) <span class="sc">%&gt;%</span></span>
+<span id="cb23-353"><a href="#cb23-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> .))</span>
+<span id="cb23-354"><a href="#cb23-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-355"><a href="#cb23-355" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
+<span id="cb23-356"><a href="#cb23-356" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
+<span id="cb23-357"><a href="#cb23-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
+<span id="cb23-358"><a href="#cb23-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-359"><a href="#cb23-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-360"><a href="#cb23-360" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate regression - multivariate</span></span>
+<span id="cb23-361"><a href="#cb23-361" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall <span class="sc">+</span> avg_temp, sales_weather_month_slim) <span class="co"># Modeling the relationship between total rainfall, average temperature, and total sales at the county level. Store it as "model2"</span></span>
 <span id="cb23-362"><a href="#cb23-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-363"><a href="#cb23-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-364"><a href="#cb23-364" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
-<span id="cb23-365"><a href="#cb23-365" aria-hidden="true" tabindex="-1"></a><span class="co"># ------ Daily ------ # </span></span>
-<span id="cb23-366"><a href="#cb23-366" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
-<span id="cb23-367"><a href="#cb23-367" aria-hidden="true" tabindex="-1"></a>sales_weather_day <span class="ot">&lt;-</span> store_sales_weather <span class="sc">%&gt;%</span></span>
-<span id="cb23-368"><a href="#cb23-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(measure_date)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-369"><a href="#cb23-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(measure_date)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-370"><a href="#cb23-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day =</span> <span class="fu">day</span>(measure_date)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-371"><a href="#cb23-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid, day) <span class="sc">%&gt;%</span></span>
-<span id="cb23-372"><a href="#cb23-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb23-373"><a href="#cb23-373" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_rainfall =</span> <span class="fu">sum</span>(pr_precipitation_amount),</span>
-<span id="cb23-374"><a href="#cb23-374" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_humidity =</span> <span class="fu">mean</span>(rmax_relative_humidity),</span>
-<span id="cb23-375"><a href="#cb23-375" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_temp =</span> <span class="fu">mean</span>(tmmx_air_temperature),</span>
-<span id="cb23-376"><a href="#cb23-376" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_sales =</span> <span class="fu">sum</span>(sales),</span>
-<span id="cb23-377"><a href="#cb23-377" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span></span>
-<span id="cb23-378"><a href="#cb23-378" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-363"><a href="#cb23-363" aria-hidden="true" tabindex="-1"></a>multi_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model2,</span>
+<span id="cb23-364"><a href="#cb23-364" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
+<span id="cb23-365"><a href="#cb23-365" aria-hidden="true" tabindex="-1"></a>                          <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-366"><a href="#cb23-366" aria-hidden="true" tabindex="-1"></a>                          <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
+<span id="cb23-367"><a href="#cb23-367" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>,</span>
+<span id="cb23-368"><a href="#cb23-368" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"avg_temp"</span> <span class="ot">=</span> <span class="st">"Average Temperature"</span>),</span>
+<span id="cb23-369"><a href="#cb23-369" aria-hidden="true" tabindex="-1"></a>                          <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
+<span id="cb23-370"><a href="#cb23-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-371"><a href="#cb23-371" aria-hidden="true" tabindex="-1"></a>multi_out <span class="co"># Print regression output</span></span>
+<span id="cb23-372"><a href="#cb23-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-373"><a href="#cb23-373" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
+<span id="cb23-374"><a href="#cb23-374" aria-hidden="true" tabindex="-1"></a>pred_data2 <span class="ot">&lt;-</span> sales_weather_month_slim <span class="sc">%&gt;%</span></span>
+<span id="cb23-375"><a href="#cb23-375" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(total_rainfall, avg_temp) <span class="sc">%&gt;%</span></span>
+<span id="cb23-376"><a href="#cb23-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-377"><a href="#cb23-377" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total_rainfall, avg_temp) <span class="sc">%&gt;%</span></span>
+<span id="cb23-378"><a href="#cb23-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model2, <span class="at">newdata =</span> .))</span>
 <span id="cb23-379"><a href="#cb23-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-380"><a href="#cb23-380" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 2: Plot the Data</span></span>
-<span id="cb23-381"><a href="#cb23-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-382"><a href="#cb23-382" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
-<span id="cb23-383"><a href="#cb23-383" aria-hidden="true" tabindex="-1"></a>sales_weather_day <span class="sc">%&gt;%</span></span>
-<span id="cb23-384"><a href="#cb23-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_rainfall, avg_temp, total_sales) <span class="sc">%&gt;%</span></span>
-<span id="cb23-385"><a href="#cb23-385" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span>
+<span id="cb23-380"><a href="#cb23-380" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
+<span id="cb23-381"><a href="#cb23-381" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
+<span id="cb23-382"><a href="#cb23-382" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-383"><a href="#cb23-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data2, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
+<span id="cb23-384"><a href="#cb23-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-385"><a href="#cb23-385" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-386"><a href="#cb23-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-387"><a href="#cb23-387" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in on scatter plot</span></span>
-<span id="cb23-388"><a href="#cb23-388" aria-hidden="true" tabindex="-1"></a>sales_weather_day_slim <span class="ot">&lt;-</span> sales_weather_day <span class="sc">%&gt;%</span></span>
-<span id="cb23-389"><a href="#cb23-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_rainfall, avg_temp, total_sales, day)</span>
-<span id="cb23-390"><a href="#cb23-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-391"><a href="#cb23-391" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
-<span id="cb23-392"><a href="#cb23-392" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sales_weather_day_slim, </span>
-<span id="cb23-393"><a href="#cb23-393" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> total_sales)) <span class="sc">+</span> </span>
-<span id="cb23-394"><a href="#cb23-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
-<span id="cb23-395"><a href="#cb23-395" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Total Rainfall and Total Sales"</span>,</span>
-<span id="cb23-396"><a href="#cb23-396" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Inches of Rain"</span>,</span>
-<span id="cb23-397"><a href="#cb23-397" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Sales (Dollars)"</span>) <span class="sc">+</span></span>
-<span id="cb23-398"><a href="#cb23-398" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span>
-<span id="cb23-399"><a href="#cb23-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-400"><a href="#cb23-400" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
-<span id="cb23-401"><a href="#cb23-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-402"><a href="#cb23-402" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced scatter plot with ggplot (additional formatting)</span></span>
-<span id="cb23-403"><a href="#cb23-403" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sales_weather_day_slim, </span>
-<span id="cb23-404"><a href="#cb23-404" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> total_sales)) <span class="sc">+</span> </span>
-<span id="cb23-405"><a href="#cb23-405" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
-<span id="cb23-406"><a href="#cb23-406" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Total Rainfall and Total Sales"</span>,</span>
-<span id="cb23-407"><a href="#cb23-407" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Inches of Rain"</span>,</span>
-<span id="cb23-408"><a href="#cb23-408" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Sales (Dollars)"</span>) <span class="sc">+</span></span>
-<span id="cb23-409"><a href="#cb23-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb23-410"><a href="#cb23-410" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># &lt;- x-axis line at y = 0</span></span>
-<span id="cb23-411"><a href="#cb23-411" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb23-412"><a href="#cb23-412" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),                  <span class="co"># Remove border</span></span>
-<span id="cb23-413"><a href="#cb23-413" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),     <span class="co"># Only y-axis line</span></span>
-<span id="cb23-414"><a href="#cb23-414" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.x =</span> <span class="fu">element_blank</span>()                    <span class="co"># Remove x-axis line at y = 0</span></span>
-<span id="cb23-415"><a href="#cb23-415" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb23-416"><a href="#cb23-416" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb23-417"><a href="#cb23-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>()))  <span class="co"># e.g., 100,000 → 100K</span></span>
-<span id="cb23-418"><a href="#cb23-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-419"><a href="#cb23-419" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
-<span id="cb23-420"><a href="#cb23-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-421"><a href="#cb23-421" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 4: Estimate Regression - univariate</span></span>
-<span id="cb23-422"><a href="#cb23-422" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall, sales_weather_day_slim) <span class="co"># Modeling the relationship between total rainfall and store sales at the county level. Store it as "model1"</span></span>
-<span id="cb23-423"><a href="#cb23-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-424"><a href="#cb23-424" aria-hidden="true" tabindex="-1"></a>uni_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1,</span>
-<span id="cb23-425"><a href="#cb23-425" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
-<span id="cb23-426"><a href="#cb23-426" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb23-427"><a href="#cb23-427" aria-hidden="true" tabindex="-1"></a>                        <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
-<span id="cb23-428"><a href="#cb23-428" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>),</span>
-<span id="cb23-429"><a href="#cb23-429" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
-<span id="cb23-430"><a href="#cb23-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-431"><a href="#cb23-431" aria-hidden="true" tabindex="-1"></a>uni_out <span class="co"># Print regression output</span></span>
-<span id="cb23-432"><a href="#cb23-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-433"><a href="#cb23-433" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
-<span id="cb23-434"><a href="#cb23-434" aria-hidden="true" tabindex="-1"></a>pred_data1 <span class="ot">&lt;-</span> sales_weather_day_slim <span class="sc">%&gt;%</span></span>
-<span id="cb23-435"><a href="#cb23-435" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(total_rainfall) <span class="sc">%&gt;%</span></span>
-<span id="cb23-436"><a href="#cb23-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-437"><a href="#cb23-437" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total_rainfall) <span class="sc">%&gt;%</span></span>
-<span id="cb23-438"><a href="#cb23-438" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> .))</span>
-<span id="cb23-439"><a href="#cb23-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-440"><a href="#cb23-440" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
-<span id="cb23-441"><a href="#cb23-441" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
-<span id="cb23-442"><a href="#cb23-442" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
+<span id="cb23-387"><a href="#cb23-387" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
+<span id="cb23-388"><a href="#cb23-388" aria-hidden="true" tabindex="-1"></a><span class="co"># ------ Daily ------ # </span></span>
+<span id="cb23-389"><a href="#cb23-389" aria-hidden="true" tabindex="-1"></a><span class="co"># ======================================== #</span></span>
+<span id="cb23-390"><a href="#cb23-390" aria-hidden="true" tabindex="-1"></a>sales_weather_day <span class="ot">&lt;-</span> store_sales_weather <span class="sc">%&gt;%</span></span>
+<span id="cb23-391"><a href="#cb23-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(measure_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-392"><a href="#cb23-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(measure_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-393"><a href="#cb23-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day =</span> <span class="fu">day</span>(measure_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-394"><a href="#cb23-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geoid, day) <span class="sc">%&gt;%</span></span>
+<span id="cb23-395"><a href="#cb23-395" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb23-396"><a href="#cb23-396" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_rainfall =</span> <span class="fu">sum</span>(pr_precipitation_amount),</span>
+<span id="cb23-397"><a href="#cb23-397" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_humidity =</span> <span class="fu">mean</span>(rmax_relative_humidity),</span>
+<span id="cb23-398"><a href="#cb23-398" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_temp =</span> <span class="fu">mean</span>(tmmx_air_temperature),</span>
+<span id="cb23-399"><a href="#cb23-399" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_sales =</span> <span class="fu">sum</span>(sales),</span>
+<span id="cb23-400"><a href="#cb23-400" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span></span>
+<span id="cb23-401"><a href="#cb23-401" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-402"><a href="#cb23-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-403"><a href="#cb23-403" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 2: Plot the Data</span></span>
+<span id="cb23-404"><a href="#cb23-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-405"><a href="#cb23-405" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
+<span id="cb23-406"><a href="#cb23-406" aria-hidden="true" tabindex="-1"></a>sales_weather_day <span class="sc">%&gt;%</span></span>
+<span id="cb23-407"><a href="#cb23-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_rainfall, avg_temp, total_sales) <span class="sc">%&gt;%</span></span>
+<span id="cb23-408"><a href="#cb23-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span>
+<span id="cb23-409"><a href="#cb23-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-410"><a href="#cb23-410" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in on scatter plot</span></span>
+<span id="cb23-411"><a href="#cb23-411" aria-hidden="true" tabindex="-1"></a>sales_weather_day_slim <span class="ot">&lt;-</span> sales_weather_day <span class="sc">%&gt;%</span></span>
+<span id="cb23-412"><a href="#cb23-412" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_rainfall, avg_temp, total_sales, day)</span>
+<span id="cb23-413"><a href="#cb23-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-414"><a href="#cb23-414" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic scatter plot with ggplot</span></span>
+<span id="cb23-415"><a href="#cb23-415" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sales_weather_day_slim, </span>
+<span id="cb23-416"><a href="#cb23-416" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> total_sales)) <span class="sc">+</span> </span>
+<span id="cb23-417"><a href="#cb23-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
+<span id="cb23-418"><a href="#cb23-418" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Total Rainfall and Total Sales"</span>,</span>
+<span id="cb23-419"><a href="#cb23-419" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Inches of Rain"</span>,</span>
+<span id="cb23-420"><a href="#cb23-420" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Sales (Dollars)"</span>) <span class="sc">+</span></span>
+<span id="cb23-421"><a href="#cb23-421" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>)</span>
+<span id="cb23-422"><a href="#cb23-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-423"><a href="#cb23-423" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
+<span id="cb23-424"><a href="#cb23-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-425"><a href="#cb23-425" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced scatter plot with ggplot (additional formatting)</span></span>
+<span id="cb23-426"><a href="#cb23-426" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sales_weather_day_slim, </span>
+<span id="cb23-427"><a href="#cb23-427" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> total_sales)) <span class="sc">+</span> </span>
+<span id="cb23-428"><a href="#cb23-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">6</span>) <span class="sc">+</span>  </span>
+<span id="cb23-429"><a href="#cb23-429" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Relationship between Total Rainfall and Total Sales"</span>,</span>
+<span id="cb23-430"><a href="#cb23-430" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Total Inches of Rain"</span>,</span>
+<span id="cb23-431"><a href="#cb23-431" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Sales (Dollars)"</span>) <span class="sc">+</span></span>
+<span id="cb23-432"><a href="#cb23-432" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb23-433"><a href="#cb23-433" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span>  <span class="co"># &lt;- x-axis line at y = 0</span></span>
+<span id="cb23-434"><a href="#cb23-434" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-435"><a href="#cb23-435" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),                  <span class="co"># Remove border</span></span>
+<span id="cb23-436"><a href="#cb23-436" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),     <span class="co"># Only y-axis line</span></span>
+<span id="cb23-437"><a href="#cb23-437" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line.x =</span> <span class="fu">element_blank</span>()                    <span class="co"># Remove x-axis line at y = 0</span></span>
+<span id="cb23-438"><a href="#cb23-438" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb23-439"><a href="#cb23-439" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb23-440"><a href="#cb23-440" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_short_scale</span>()))  <span class="co"># e.g., 100,000 → 100K</span></span>
+<span id="cb23-441"><a href="#cb23-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-442"><a href="#cb23-442" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="co"># Print scatter plot</span></span>
 <span id="cb23-443"><a href="#cb23-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-444"><a href="#cb23-444" aria-hidden="true" tabindex="-1"></a><span class="co"># What if we control for day?</span></span>
-<span id="cb23-445"><a href="#cb23-445" aria-hidden="true" tabindex="-1"></a>model1_fe <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall <span class="sc">+</span> <span class="fu">factor</span>(day), sales_weather_day_slim) <span class="co"># Modeling the relationship between total rainfall and store sales at the county level. Store it as "model1"</span></span>
+<span id="cb23-444"><a href="#cb23-444" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 4: Estimate Regression - univariate</span></span>
+<span id="cb23-445"><a href="#cb23-445" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall, sales_weather_day_slim) <span class="co"># Modeling the relationship between total rainfall and store sales at the county level. Store it as "model1"</span></span>
 <span id="cb23-446"><a href="#cb23-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-447"><a href="#cb23-447" aria-hidden="true" tabindex="-1"></a>fe_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1_fe,</span>
+<span id="cb23-447"><a href="#cb23-447" aria-hidden="true" tabindex="-1"></a>uni_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1,</span>
 <span id="cb23-448"><a href="#cb23-448" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
 <span id="cb23-449"><a href="#cb23-449" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb23-450"><a href="#cb23-450" aria-hidden="true" tabindex="-1"></a>                        <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
 <span id="cb23-451"><a href="#cb23-451" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>),</span>
 <span id="cb23-452"><a href="#cb23-452" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
 <span id="cb23-453"><a href="#cb23-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-454"><a href="#cb23-454" aria-hidden="true" tabindex="-1"></a>fe_out <span class="co"># Print regression output</span></span>
+<span id="cb23-454"><a href="#cb23-454" aria-hidden="true" tabindex="-1"></a>uni_out <span class="co"># Print regression output</span></span>
 <span id="cb23-455"><a href="#cb23-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-456"><a href="#cb23-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-457"><a href="#cb23-457" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate regression - multivariate</span></span>
-<span id="cb23-458"><a href="#cb23-458" aria-hidden="true" tabindex="-1"></a>model2_fe <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall <span class="sc">+</span> avg_temp <span class="sc">+</span> <span class="fu">factor</span>(day), sales_weather_day_slim) <span class="co"># Modeling the relationship between total rainfall, average temperature, and total sales at the county level. Store it as "model2"</span></span>
-<span id="cb23-459"><a href="#cb23-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-460"><a href="#cb23-460" aria-hidden="true" tabindex="-1"></a>multi_out_fe <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model2_fe,</span>
-<span id="cb23-461"><a href="#cb23-461" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
-<span id="cb23-462"><a href="#cb23-462" aria-hidden="true" tabindex="-1"></a>                          <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb23-463"><a href="#cb23-463" aria-hidden="true" tabindex="-1"></a>                          <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
-<span id="cb23-464"><a href="#cb23-464" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>,</span>
-<span id="cb23-465"><a href="#cb23-465" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"avg_temp"</span> <span class="ot">=</span> <span class="st">"Average Temperature"</span>),</span>
-<span id="cb23-466"><a href="#cb23-466" aria-hidden="true" tabindex="-1"></a>                          <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
-<span id="cb23-467"><a href="#cb23-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-468"><a href="#cb23-468" aria-hidden="true" tabindex="-1"></a>multi_out_fe <span class="co"># Print regression output</span></span>
+<span id="cb23-456"><a href="#cb23-456" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
+<span id="cb23-457"><a href="#cb23-457" aria-hidden="true" tabindex="-1"></a>pred_data1 <span class="ot">&lt;-</span> sales_weather_day_slim <span class="sc">%&gt;%</span></span>
+<span id="cb23-458"><a href="#cb23-458" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(total_rainfall) <span class="sc">%&gt;%</span></span>
+<span id="cb23-459"><a href="#cb23-459" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-460"><a href="#cb23-460" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total_rainfall) <span class="sc">%&gt;%</span></span>
+<span id="cb23-461"><a href="#cb23-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> .))</span>
+<span id="cb23-462"><a href="#cb23-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-463"><a href="#cb23-463" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
+<span id="cb23-464"><a href="#cb23-464" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
+<span id="cb23-465"><a href="#cb23-465" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span>
+<span id="cb23-466"><a href="#cb23-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-467"><a href="#cb23-467" aria-hidden="true" tabindex="-1"></a><span class="co"># What if we control for day?</span></span>
+<span id="cb23-468"><a href="#cb23-468" aria-hidden="true" tabindex="-1"></a>model1_fe <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall <span class="sc">+</span> <span class="fu">factor</span>(day), sales_weather_day_slim) <span class="co"># Modeling the relationship between total rainfall and store sales at the county level. Store it as "model1"</span></span>
 <span id="cb23-469"><a href="#cb23-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-470"><a href="#cb23-470" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
-<span id="cb23-471"><a href="#cb23-471" aria-hidden="true" tabindex="-1"></a>pred_data2 <span class="ot">&lt;-</span> sales_weather_day_slim <span class="sc">%&gt;%</span></span>
-<span id="cb23-472"><a href="#cb23-472" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(total_rainfall, avg_temp) <span class="sc">%&gt;%</span></span>
-<span id="cb23-473"><a href="#cb23-473" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-474"><a href="#cb23-474" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total_rainfall, avg_temp) <span class="sc">%&gt;%</span></span>
-<span id="cb23-475"><a href="#cb23-475" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model2, <span class="at">newdata =</span> .))</span>
+<span id="cb23-470"><a href="#cb23-470" aria-hidden="true" tabindex="-1"></a>fe_out <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model1_fe,</span>
+<span id="cb23-471"><a href="#cb23-471" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
+<span id="cb23-472"><a href="#cb23-472" aria-hidden="true" tabindex="-1"></a>                        <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-473"><a href="#cb23-473" aria-hidden="true" tabindex="-1"></a>                        <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
+<span id="cb23-474"><a href="#cb23-474" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>),</span>
+<span id="cb23-475"><a href="#cb23-475" aria-hidden="true" tabindex="-1"></a>                        <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
 <span id="cb23-476"><a href="#cb23-476" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-477"><a href="#cb23-477" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
-<span id="cb23-478"><a href="#cb23-478" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
-<span id="cb23-479"><a href="#cb23-479" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb23-480"><a href="#cb23-480" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data2, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-477"><a href="#cb23-477" aria-hidden="true" tabindex="-1"></a>fe_out <span class="co"># Print regression output</span></span>
+<span id="cb23-478"><a href="#cb23-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-479"><a href="#cb23-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-480"><a href="#cb23-480" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate regression - multivariate</span></span>
+<span id="cb23-481"><a href="#cb23-481" aria-hidden="true" tabindex="-1"></a>model2_fe <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_sales <span class="sc">~</span> total_rainfall <span class="sc">+</span> avg_temp <span class="sc">+</span> <span class="fu">factor</span>(day), sales_weather_day_slim) <span class="co"># Modeling the relationship between total rainfall, average temperature, and total sales at the county level. Store it as "model2"</span></span>
+<span id="cb23-482"><a href="#cb23-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-483"><a href="#cb23-483" aria-hidden="true" tabindex="-1"></a>multi_out_fe <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(model2_fe,</span>
+<span id="cb23-484"><a href="#cb23-484" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fmt =</span> <span class="dv">5</span>, <span class="co"># Format estimate so it shows five decimal places</span></span>
+<span id="cb23-485"><a href="#cb23-485" aria-hidden="true" tabindex="-1"></a>                          <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-486"><a href="#cb23-486" aria-hidden="true" tabindex="-1"></a>                          <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span><span class="ot">=</span><span class="st">"Intercept"</span>,</span>
+<span id="cb23-487"><a href="#cb23-487" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"total_rainfall"</span><span class="ot">=</span><span class="st">"Total Rainfall"</span>,</span>
+<span id="cb23-488"><a href="#cb23-488" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"avg_temp"</span> <span class="ot">=</span> <span class="st">"Average Temperature"</span>),</span>
+<span id="cb23-489"><a href="#cb23-489" aria-hidden="true" tabindex="-1"></a>                          <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span>
+<span id="cb23-490"><a href="#cb23-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-491"><a href="#cb23-491" aria-hidden="true" tabindex="-1"></a>multi_out_fe <span class="co"># Print regression output</span></span>
+<span id="cb23-492"><a href="#cb23-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-493"><a href="#cb23-493" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new data for predictions</span></span>
+<span id="cb23-494"><a href="#cb23-494" aria-hidden="true" tabindex="-1"></a>pred_data2 <span class="ot">&lt;-</span> sales_weather_day_slim <span class="sc">%&gt;%</span></span>
+<span id="cb23-495"><a href="#cb23-495" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(total_rainfall, avg_temp) <span class="sc">%&gt;%</span></span>
+<span id="cb23-496"><a href="#cb23-496" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-497"><a href="#cb23-497" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(total_rainfall, avg_temp) <span class="sc">%&gt;%</span></span>
+<span id="cb23-498"><a href="#cb23-498" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">predict</span>(model2, <span class="at">newdata =</span> .))</span>
+<span id="cb23-499"><a href="#cb23-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-500"><a href="#cb23-500" aria-hidden="true" tabindex="-1"></a><span class="co"># Add to plot</span></span>
+<span id="cb23-501"><a href="#cb23-501" aria-hidden="true" tabindex="-1"></a>scatter_plot <span class="sc">+</span></span>
+<span id="cb23-502"><a href="#cb23-502" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data1, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-503"><a href="#cb23-503" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> pred_data2, <span class="fu">aes</span>(<span class="at">x =</span> total_rainfall, <span class="at">y =</span> fitted), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
