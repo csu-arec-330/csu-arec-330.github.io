@@ -277,7 +277,7 @@ store_sales <- shopper_info %>%
   ) %>%
   ungroup()                                                  # Remove grouping to clean up the result
 
-# Add county GEOID to the store-level sales data (so we can link to county-level data like weather)
+# Add county GEOID to the store-level sales data (so we can link to county-level weather data)
 store_sales_co <- store_co_geo %>%
   st_set_geometry(NULL) %>%
   select(store_id, geoid) %>%                # Keep only store_id (for joining) and geoid (for county-level linkage)
@@ -291,14 +291,6 @@ weather_wide <- weather_raw %>%
     values_from = value                     # Fill those columns with the corresponding values
   )
 
-# Join daily store sales to weather data using date and county identifiers
-store_sales_weather <- store_sales_co %>%
-  inner_join(weather_wide, 
-             by = c("measure_date" = "date", 
-                    "geoid" = "county"))
-
-length(unique(store_sales_weather$geoid)) # N=1,987
-
 # Join daily weather data to full county data using date and county identifiers
 co_weather <- us_co_filtered %>%
   st_set_geometry(NULL) %>%
@@ -307,11 +299,20 @@ co_weather <- us_co_filtered %>%
 
 length(unique(co_weather$geoid)) # N=3,104
 
+# # Join daily store sales to weather data using date and county identifiers
+# store_sales_weather <- store_sales_co %>%
+#   inner_join(weather_wide, 
+#              by = c("measure_date" = "date", 
+#                     "geoid" = "county"))
+# 
+# length(unique(store_sales_weather$geoid)) # N=1,987
+
 store_sales_weather_co <- co_weather %>%
-  left_join(store_sales_weather, 
+  left_join(store_sales_co, 
             by = c("date" = "measure_date", 
                    "geoid" = "geoid")) %>%
-  filter(month(date)==7)
+  filter(month(date)==7) %>%
+  arrange(geoid, date, store_id)
 
 length(unique(store_sales_weather_co$geoid)) # N=3,104
 
