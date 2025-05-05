@@ -13,11 +13,11 @@ The goal of this project is for you to apply the regression analysis techniques 
 
 ## The Question
 
-Your question for Project 3 should be formulated as: What is the association between \$x\$ (an explanatory variable) and \$y\$ (some outcome)?
+Your question for Project 3 should be formulated as: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?
 
 ## The Data
 
-For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your \$y\$, and choose **one** of the two additional datasets (census data or weather data) to choose your \$x\$.
+For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
 
 - **Option 1:** Convenience store data combined with Demographic data from the US Census
 - **Option 2:** Convenience store data combined with Weather data from NOAA
@@ -30,9 +30,9 @@ Here’s how to approach Project 3:
 
 1. Select one of the two options above.
 
-2. Identify an outcome \$y\$ from the convenience store data. *Reminder*: Your unit of analysis will be either the **shopper** or the **store**.
+2. Identify an outcome $y$ from the convenience store data. *Reminder*: Your unit of analysis will be either the **shopper** or the **store**.
 
-3. Choose control variables (e.g., population density from the Census data or precipitation from the weather data) which will serve as your explanatory variable(s), \$x$.
+3. Choose control variables (e.g., population density from the Census data or precipitation from the weather data) which will serve as your explanatory variable(s), $x$.
 
 4. You are responsible for merging or joining your datasets, ensuring you identify and use the common unit of analysis in each dataset and aggregate data as necessary.
 
@@ -40,7 +40,7 @@ Here’s how to approach Project 3:
 
     (1) Present summary statistics of your data, highlighting the number of observations.
     (2) Conduct a univariate regression analysis.
-    (3) Perform a multivariate regression analysis by including one additional variable in your regression equation from (2).
+    (3) Perform a multivariate regression analysis by including one additional variable in your univariate regression equation.
     (4) Thoroughly explain your analysis and how it answers your research question.
     (5) Discuss any assumptions and identify limitations in your analysis.
     (6) Present and interpret your results clearly, explaining the implications of your findings and using appropriate visualizations to communicate these results.

@@ -1,0 +1,544 @@
+---
+title: "Week 15: <br>Regression Analysis Example and Course Summary <br>"
+format: 
+  revealjs:
+    theme: [night, ../../custom.scss]
+    slide-number: c/t
+    width: 1400
+    # logo: path.png
+    # center: TRUE
+execute:
+  echo: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Agenda 
+
+Project overview emphasizing connection between questions and analysis
+
+Economics research example
+
+Course recap 
+
+
+## [Project Overview](project_3.html) {.scrollable}
+
+**The Question:** Your question for Project 3 should be formulated as: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?
+
+**The Data:** You will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
+ 
+- **Option 1:** Convenience store data combined with Demographic data from the US Census
+
+- **Option 2:** Convenience store data combined with Weather data from NOAA
+
+## How to succeed for Project 3
+
+Review the lab notes from Week 14 
+
+Convey to us that you can turn your question into a model
+
+Spend time interpreting your results 
+
+# Understanding Gas Prices in Our Community: <br>A Town Hall Discussion
+
+## Introduction {.smaller}
+
+Good evening. I'm Lauren, a local economic analyst.
+
+We're here today because the community needs to consider adding a new access road to Highway 101.
+
+There is room in the town's budget for infrastructure improvements, but there is a concern that developing new roads might lead to higher fuel costs.
+
+Tonight, I'll present to you analysis my team and I conducted on how gas prices vary with distance to the highway. 
+
+**Goal:** To better understand the trade-offs involved with improving highway access so that you, the town planning committee, can decide to add a new access road.
+
+
+## The Question
+
+**How does the distance to the nearest highway relate to the price of gas paid by consumers?**
+
+Understanding this relationship can help predict expected costs to consumers and manage the town's budget more effectively.
+
+
+## Background {.scrollable}
+
+Concerns about re-routing the highway: 
+
+- Could create more traffic for the town
+
+- Could lead to an increase in gas prices (gas stations could charge a higher price due to proximity to the highway)
+
+
+Benefits about re-routing the highway:
+
+- Shorter commuting time for residents
+
+- Better-conditioned road which offers ancillary benefits 
+
+- More tax revenue from more gas sales
+
+
+## Data Collection {.scrollable}
+
+We gathered data from U.S. convenience stores with gas stations. 
+
+We calculated their distance to the nearest highway and removed stores located further than 40 kilometers away. 
+
+```{r}
+#| echo: false
+
+# Load necessary packages
+library(pacman)
+p_load(tidyverse, modelsummary, sf, progress, GGally, knitr, readr)
+
+# Read in the transaction level data
+shopper_info <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/shopper_info.csv.gz")
+
+# Read in store distance data
+store_dist <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_dist.csv")
+
+# read in convenience store location dataset
+store_raw <- read_csv("https://csu-arec-330.github.io/materials/unit_03/inputs/store_info.csv.gz")
+
+# Function to classify fuel and not fuel based on descriptions
+classify_fuel <- function(description) {
+  # Check if the description is not NA and is a character
+  if (!is.na(description) && is.character(description)) {
+    # Convert description to lower case for case-insensitivity
+    description_lower <- tolower(description)
+    
+    # Define keywords associated with fuel
+    fuel_keywords <- c("unld","unlead", "unleaded", "regular", "mid", "premium", "diesel", 
+                       "gas", "ethanol", "e85", "fuel", "octane", "ultra", "prem","super")
+    
+    # Check for the presence of fuel-related keywords or a number in the description
+    if (any(sapply(fuel_keywords, grepl, x = description_lower)) || grepl("[0-9]", description_lower)) {
+      return("fuel")
+    } else {
+      return("not fuel")
+    }
+  } else {
+    return("not fuel")
+  }
+}
+
+store_gas <- shopper_info %>%
+  filter(is.na(gtin)) %>%
+  mutate(gas = sapply(pos_description, classify_fuel)) %>% #classify all observations as fuel or not
+  filter(gas=="fuel") %>% #remove non-fuel observations
+  group_by(store_id) %>% 
+  summarise(unit_price=mean(unit_price,na.rm = T)) %>% #calculate the average price of fuel items sold at the location
+  ungroup() %>%
+  filter(between(unit_price,2.5,5)) #based on a distribution of the data, remove fuel prices less than $2.50 and above $5.00
+
+#join the store-level fuel price back to the raw store dataset to attach the coordinates
+store_gas_geo <- inner_join(store_gas,select(store_raw,store_id,latitude,longitude,zip_code),by="store_id") %>%
+  st_as_sf(coords=c("longitude","latitude"),crs=st_crs(4326))
+
+#Calculate the number of stores within 10km of each other
+
+store_geo_m <- store_gas_geo %>%
+  st_transform(5070)
+
+# Calculate the matrix of distances between all stores
+distance_matrix <- st_distance(store_geo_m)
+
+# Count stores within 5 km for each store
+# 5000 meters is equivalent to 5 kilometers
+stores_within_5km <- apply(distance_matrix, 1, function(distances) sum(distances <= 5000, na.rm = TRUE) - 1)
+
+# Add this count as a new column to the sf object
+stores_within <- store_gas %>%
+  mutate(count_within = stores_within_5km)
+
+
+#Load all US primary roads - downloaded from https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Roads
+us_roads <- st_read("tl_2022_us_primaryroads/tl_2022_us_primaryroads.shp") %>%
+  st_transform(4326)
+
+#testing
+Litchfield_County <- store_gas_geo %>%
+  arrange(zip_code) %>%
+  filter(zip_code == "06790") %>%
+  head(5)
+
+#Find nearest primary road
+nd <- st_nearest_feature(Litchfield_County,us_roads)
+
+#Calculate distance from store to nearest primary road
+Litchfield_County <- mutate(Litchfield_County,dist=as.numeric(st_distance(Litchfield_County,us_roads[nd,],by_element = T))/1000)
+
+library(mapview)
+mapview(Litchfield_County,col.region="red") + mapview(us_roads[nd,],col.region="blue")
+```
+
+
+## Summary Statistics
+
+Below is a summary table of average prices per gallon and distances from the nearest highway for our sample of gas stations.
+
+<h2 style="text-align: center; font-weight: bold; font-size:40px">Table 1: Summary Statistics for Unit Price and Distance</h2>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> Mean </th>
+   <th style="text-align:right;"> SD </th>
+   <th style="text-align:right;"> Min </th>
+   <th style="text-align:right;"> Max </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Price Per Gallon </td>
+   <td style="text-align:right;"> 3.49 </td>
+   <td style="text-align:right;"> 0.36 </td>
+   <td style="text-align:right;"> 2.50 </td>
+   <td style="text-align:right;"> 5.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Distance </td>
+   <td style="text-align:right;"> 14.75 </td>
+   <td style="text-align:right;"> 68.72 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 2,346.76 </td>
+  </tr>
+</tbody>
+</table>
+
+## Distribution of Unit Price and Distance
+
+Figure 1: Matrix of density plots for unit price and distance
+```{r}
+#| echo: false
+
+# Filter dataset to keep only stores within 40 km of a major road
+store_dist_40 <- store_dist %>%
+  filter(dist < 40) %>%
+  inner_join(select(stores_within,-unit_price),by="store_id")
+
+ggpairs(store_dist_40, columns = 2:3)
+
+```
+
+## Unit prices appear to decrease as distance to highway increases
+
+Figure 2: Scatter plot of unit price and distance
+```{r}
+#| echo: false
+
+# Scatter plot of unit prices and distance
+ggplot(store_dist_40, aes(x = dist, y = unit_price)) +
+  geom_point(alpha = 0.5, color = "blue") +
+  theme_minimal()
+```
+
+## Univariate Regression Analysis {.smaller}
+
+Although we can draw loose insights from the scatter plot, we use regression analysis to determine the relationship between distance and price. 
+
+$$ pr_{i} = \beta \cdot Dist_{i} + \alpha + \varepsilon_{i} $$
+
+- Outcome: price per gallon
+
+- Explanatory variable: distance to the highway (in kilometers)
+
+- Unit of observation: convenience stores with gas pumps
+
+## Univariate Regression Results {.smaller}
+
+```{r}
+#| echo: false
+
+# Estimate linear regression of unit_price on distance
+reg1 <- lm(unit_price ~ dist, data = store_dist_40) 
+
+# Extract model results
+results_df <- broom::tidy(reg1, conf.int = TRUE)
+
+# Convert results to wide format if necessary or customize the table manually
+kable(results_df, format = "html", caption = "Table 2: Regression Results for Unit Price vs. Distance")
+
+```
+
+Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices.
+
+## For each additional km away from the highway, unit prices decrease by $0.005 cents per gallon
+
+Figure 3: Scatter plot of unit price and distance, with line of best fit
+```{r}
+#| echo: false
+
+ggplot(store_dist_40, aes(x = dist, y = unit_price)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  labs(title = "Relationship between Distance and Unit Price",
+       x = "Distance from Highway (km)",
+       y = "Unit Price (cents per gallon)") +
+  theme_minimal()
+```
+
+
+## Multivariate Regression Analysis {.smaller}
+
+After adding additional control variables, we want to test if our results still hold.
+
+$$ pr_{i} = \beta_1 \cdot Dist_{i} + \beta_2 \cdot X_{i} + \alpha + \varepsilon_{i} $$
+
+- Outcome: price per gallon
+
+- Explanatory variable: distance to the highway (in kilometers)
+
+- Controls: number of gas stations within 5 kilometers
+
+- Unit of observation: convenience stores with gas pumps
+
+
+## Multivariate Regression Results {.smaller}
+
+```{r}
+#| echo: false
+
+# Estimate linear regression of unit_price on distance
+reg2 <- lm(unit_price ~ dist + count_within, data = store_dist_40) 
+
+# Extract model results
+results_df <- broom::tidy(reg2, conf.int = TRUE)
+
+# Convert results to wide format if necessary or customize the table manually
+kable(results_df, format = "html", caption = "Table 3: Regression Results for Unit Price vs. Distance and Number of Competitors")
+
+```
+
+The p-value associated with the number of gas stations within 5 km is not statistically significant, so we cannot reject the null hypothesis that the coefficient is different from zero.
+
+
+## Takeaways
+
+Our analysis shows consistent results between distance and unit price-each kilometer away from the highway corresponds with a decrease in gas prices.
+
+Adding a control variable that attempts to capture competition (number of gas stations within 5 km) does not explain variation in unit prices.
+
+
+## Assumptions and Limitations {.smaller}
+
+Assumptions:
+
+- We assume that a gas station will locate along the new highway access road (once it is built) near the highway to attract traffic flow from Highway 101.
+
+- We assume that gas stations compete uniformly along prices of their grades of gasoline.
+
+
+Limitations:
+
+- We use distance "as the crow flies" versus travel distance along the road.
+
+- We do not account for other confounding factors that could influence gas prices, such as the traffic flow on Highway 101 nearest to the town and distance to the nearest major metropolitan area.
+
+
+## Discussion
+
+The pattern we observe (inverse relationship between distance and price) suggests that stations closer to the highway charge a premium for the convenience of being located near the highway.
+
+<!--can offer lower prices due to higher traffic and potentially lower transportation costs.-->
+
+For those commuting to work places outside of town, this might mean higher travel expenses.
+
+
+## Conclusion
+
+Our analysis confirms that distance from the highway is a key factor affecting gas prices in our community.
+
+However, the considering the current travel cost to the highway without the access road, offsets the modest expected increase in gas prices.
+
+Possible solutions: 
+
+- Organize carpooling options 
+
+- Support local gas stations with loyalty programs
+
+
+<!--
+## Bats and Ag Land Prices ([Manning & Ando](https://www.journals.uchicago.edu/doi/full/10.1086/720303))
+
+![](includes/09-bats-1024x659.jpeg)
+
+## Research Question
+
+:::{.incremental}
+- What effect do bats have on crop production (e.g., corn and soy beans)?
+
+  - No good measure of bats, but we know white nose syndrome (WNS) kills bats
+  
+  - WNS is monitored by county over time
+
+- What effect does white nose syndrome have on production, and land values?
+:::
+
+## What data would you collect?
+
+iclicker short answer
+
+:::{.incremental}
+- Outcomes: cash rents, cropland acres
+
+- Treatment: presence of white nose syndrome
+
+- Controls: population, land quality, weather
+
+- Unit of observation: county-year
+:::
+
+## How would you specify the regression model?
+
+Think about it.  I'll pick someone to write it on the board.
+
+:::{.incremental}
+
+- $$ y_{it} = \beta \cdot WNS_{it} + \gamma X_{it} + \delta_t + \alpha_i + \varepsilon_{it} $$
+:::
+
+## Which coefficient answers the research question?
+
+$$ y_{it} = \beta \cdot WNS_{it} + \gamma X_{it} + \delta_t + \alpha_i + \varepsilon_{it} $$
+
+A. $\beta$
+
+B. $\gamma$
+
+C. $\delta_t$
+
+D. $\alpha_i$
+
+## What is the role of $\alpha_i$ in the regression?
+
+$$ y_{it} = \beta \cdot WNS_{it} + \gamma X_{it} + \delta_t + \alpha_i + \varepsilon_{it} $$
+
+A. To capture the average treatment effect of white nose syndrome on ag land prices
+
+B. To capture unobserved factors in a county that do not vary over time
+
+C. To capture unobserved factors common to all counties at a given point in time
+
+D. To control for federal agricultural policies that may change over time
+
+# Results
+
+## What is the effect of WNS on land rents?
+
+![](includes/bats_tab_1.png)
+
+## How might you visualize this result?
+
+## Event study plot
+
+![](includes/bats_event.png)
+
+## Summarize the implications of the analysis?
+
+iclicker
+-->
+
+# Course Review
+
+## What was this course about?
+
+## Topics and themes
+
+- Effective and appropriate data visualizations
+
+- Data storytelling
+
+- Scripted data management and analysis (in R)
+
+
+## Organization
+
+- Time series
+
+- Cross sectional and spatial data
+
+- Regression analysis 
+
+What methods did we cover in these areas?
+
+
+
+## What is the purpose of decomposing a time series into its components?
+
+A. To remove any anomalies or outliers from the data.
+
+B. To prepare the data for regression analysis.
+
+C. To determine the forecast accuracy of the time series.
+
+D. To identify the underlying patterns and relationships within the data.
+
+<!-- Answer D
+
+Explanation: Decomposing a time series into its components is primarily done to understand and identify the underlying patterns and relationships within the data, including trends, seasonal variations, and irregular components. This process allows analysts to better understand the time series dynamics and can aid in improving forecasting models by clarifying what influences the data's movements over time.
+
+-->
+
+## When is clustering analysis an appropriate technique for data analysis?
+
+A. When the data is unlabeled or unstructured.
+
+B. When the data has a clear target variable or outcome.
+
+C. When the data has a linear relationship between variables.
+
+D. When the data is in a time series format.
+
+<!-- Answer A
+
+Explanation: Clustering analysis is particularly suitable when you are dealing with unlabeled or unstructured data, as it helps to identify inherent groupings or patterns within the data without any prior labels. This technique is used to explore data and discover natural segments, groups, or classes by analyzing the structure based solely on the properties of the data.
+
+-->
+
+
+## Which of the following analysis techniques is regression *not* suitable for?
+
+A. Predicting a continuous outcome based on multiple input variables.
+
+B. Estimating the effect of price changes on sales volume.
+
+C. Analyzing the relationship between temperature and energy consumption.
+
+D. Identifying distinct clusters of customers based on shopping behavior.
+
+<!-- Answer: D 
+
+Explanation: Regression analysis is used to model and predict continuous outcomes, estimate effects, and analyze relationships between variables. It is not suitable for identifying clusters, which is a task for cluster analysis techniques like k-means or hierarchical clustering that are designed to detect patterns and groupings in data.
+
+-->
+
+## How can color be used effectively in a data visualization?
+
+A. To highlight important data points or trends.
+
+B. To make the visualization more visually appealing.
+
+C. To confuse the viewer with too many colors.
+
+D. To distract from the key message of the visualization.
+
+
+
+## Our key takeaways from this course
+
+:::{.incremental}
+- Let the business or research question guide your analysis
+
+- Once you have something to say, develop a compelling story
+
+- Support your story with effective and appropriate visualizations 
+
+:::
+
+# What are your takeaways from the course?
+

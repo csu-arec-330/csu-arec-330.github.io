@@ -6,7 +6,7 @@ title: "Week 15: Regression Analysis Project"
 
 <b>Lecture: May 7</b> <br>
 
-<a  href="/materials/unit_03/week_02/lecture_03_week_02.html" target="_blank">Lecture Slides</a> <br> <br>
+<a  href="/materials/unit_03/week_03/lecture_03_week_03.html" target="_blank">Lecture Slides</a> <br> <br>
 
 <b>Lab: May 9</b> <br>
 *Note: We will meet on Wednesday, May 14 (8:00 am) in Nutrien 103 for student presentation summaries.* <br><br>

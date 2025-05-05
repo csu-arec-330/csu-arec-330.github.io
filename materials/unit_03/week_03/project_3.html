@@ -34,6 +34,35 @@ ul.task-list li input[type="checkbox"] {
 <link href="project_3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="project_3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -68,11 +97,11 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="project_3_rubric.html"><strong>Rubric</strong></a></p>
 <section id="the-question" class="level2">
 <h2 class="anchored" data-anchor-id="the-question">The Question</h2>
-<p>Your question for Project 3 should be formulated as: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?</p>
+<p>Your question for Project 3 should be formulated as: What is the association between <span class="math inline">\(x\)</span> (an explanatory variable) and <span class="math inline">\(y\)</span> (some outcome)?</p>
 </section>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The Data</h2>
-<p>For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose <strong>one</strong> of the two additional datasets (census data or weather data) to choose your $x$.</p>
+<p>For this project, you will use the convenience store data (shopper_info, store_info, gtin) to select your <span class="math inline">\(y\)</span>, and choose <strong>one</strong> of the two additional datasets (census data or weather data) to choose your <span class="math inline">\(x\)</span>.</p>
 <ul>
 <li><strong>Option 1:</strong> Convenience store data combined with Demographic data from the US Census</li>
 <li><strong>Option 2:</strong> Convenience store data combined with Weather data from NOAA</li>
@@ -84,14 +113,14 @@ ul.task-list li input[type="checkbox"] {
 <p>Here’s how to approach Project 3:</p>
 <ol type="1">
 <li><p>Select one of the two options above.</p></li>
-<li><p>Identify an outcome $y$ from the convenience store data. <em>Reminder</em>: Your unit of analysis will be either the <strong>shopper</strong> or the <strong>store</strong>.</p></li>
-<li><p>Choose control variables (e.g., population density from the Census data or precipitation from the weather data) which will serve as your explanatory variable(s), $x$.</p></li>
+<li><p>Identify an outcome <span class="math inline">\(y\)</span> from the convenience store data. <em>Reminder</em>: Your unit of analysis will be either the <strong>shopper</strong> or the <strong>store</strong>.</p></li>
+<li><p>Choose control variables (e.g., population density from the Census data or precipitation from the weather data) which will serve as your explanatory variable(s), <span class="math inline">\(x\)</span>.</p></li>
 <li><p>You are responsible for merging or joining your datasets, ensuring you identify and use the common unit of analysis in each dataset and aggregate data as necessary.</p></li>
 <li><p>You are expected to use regression analysis to address your research question. The requirements include:</p>
 <ol type="1">
 <li>Present summary statistics of your data, highlighting the number of observations.</li>
 <li>Conduct a univariate regression analysis.</li>
-<li>Perform a multivariate regression analysis by including one additional variable in your regression equation from (2).</li>
+<li>Perform a multivariate regression analysis by including one additional variable in your univariate regression equation.</li>
 <li>Thoroughly explain your analysis and how it answers your research question.</li>
 <li>Discuss any assumptions and identify limitations in your analysis.</li>
 <li>Present and interpret your results clearly, explaining the implications of your findings and using appropriate visualizations to communicate these results.</li>

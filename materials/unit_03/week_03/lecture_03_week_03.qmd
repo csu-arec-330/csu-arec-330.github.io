@@ -24,29 +24,18 @@ Economics research example
 Course recap 
 
 
-
-<!-- example of big text fit to slide width -->
-
-<!-- ::: {.r-fit-text} -->
-<!-- Big Text -->
-<!-- ::: -->
-
-<!-- :::: {.columns style="text-align: center"} -->
-<!-- ::: {.column width="40%"} -->
-<!-- ::: -->
-<!-- ::: {.column width="60%"} -->
-<!-- ::: -->
-<!-- :::: -->
-
 ## [Project Overview](project_3.html) {.scrollable}
 
-**The Question:** Your question for Project 3 should be formulated as: What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?
+**The Question:** Your question for Project 3 should be formulated as: 
+
+What is the association between $x$ (an explanatory variable) and $y$ (some outcome)?
 
 **The Data:** You will use the convenience store data (shopper_info, store_info, gtin) to select your $y$, and choose **one** of the two additional datasets (census data or weather data) to choose your $x$.
  
 - **Option 1:** Convenience store data combined with Demographic data from the US Census
 
 - **Option 2:** Convenience store data combined with Weather data from NOAA
+
 
 ## How to succeed for Project 3
 
@@ -55,6 +44,7 @@ Review the lab notes from Week 14
 Convey to us that you can turn your question into a model
 
 Spend time interpreting your results 
+
 
 # Understanding Gas Prices in Our Community: <br>A Town Hall Discussion
 
@@ -71,11 +61,15 @@ Tonight, I'll present to you analysis my team and I conducted on how gas prices 
 **Goal:** To better understand the trade-offs involved with improving highway access so that you, the town planning committee, can decide to add a new access road.
 
 
-## The Question
+# How does the distance to the nearest highway relate to the price of gas paid by consumers?
 
-**How does the distance to the nearest highway relate to the price of gas paid by consumers?**
+## Why Does It Matter? 
 
-Understanding this relationship can help predict expected costs to consumers and manage the town's budget more effectively.
+As we consider building a new access road to Highway 101, it's important to understand the broader implications for our community—especially how it might affect gas prices.
+
+If gas stations located closer to highway access charge more, then adding a new access point could inadvertently **raise fuel costs** for residents.
+
+This analysis helps us weigh the **potential economic benefit to consumers** against the **infrastructure costs**, giving the town planning committee better information to guide your decision.
 
 
 ## Background {.scrollable}
@@ -98,7 +92,7 @@ Benefits about re-routing the highway:
 
 ## Data Collection {.scrollable}
 
-We gathered data from U.S. convenience stores with gas stations. 
+We gathered price data from U.S. convenience stores with gas stations. 
 
 We calculated their distance to the nearest highway and removed stores located further than 40 kilometers away. 
 
@@ -221,6 +215,13 @@ Below is a summary table of average prices per gallon and distances from the nea
    <td style="text-align:right;"> 0.00 </td>
    <td style="text-align:right;"> 2,346.76 </td>
   </tr>
+  <tr>
+   <td style="text-align:left;"> N. Obs. </td>
+   <td style="text-align:right;"> 6058 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
 </tbody>
 </table>
 
@@ -274,12 +275,26 @@ reg1 <- lm(unit_price ~ dist, data = store_dist_40)
 # Extract model results
 results_df <- broom::tidy(reg1, conf.int = TRUE)
 
+# Extract model statistics
+model_stats <- glance(reg1) %>%
+  select(r.squared, nobs) %>%
+  rename(`R-squared` = r.squared, `Observations` = nobs) %>%
+  pivot_longer(cols = everything(), names_to = "term", values_to = "estimate")
+
+# Combine coefficients and model stats
+results_combined <- bind_rows(results_df, model_stats)
+
+# Display table
+kable(results_combined, format = "html", caption = "Table 2: Regression Results for Unit Price vs. Distance")
+
 # Convert results to wide format if necessary or customize the table manually
-kable(results_df, format = "html", caption = "Table 2: Regression Results for Unit Price vs. Distance")
+# kable(results_df, format = "html", caption = "Table 2: Regression Results for Unit Price vs. Distance")
 
 ```
 
 Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices.
+
+We also see that the $R^2$ value is low at 1.69%, which suggests we should include additional variables.
 
 ## For each additional km away from the highway, unit prices decrease by $0.005 cents per gallon
 
@@ -307,7 +322,7 @@ $$ pr_{i} = \beta_1 \cdot Dist_{i} + \beta_2 \cdot X_{i} + \alpha + \varepsilon_
 
 - Explanatory variable: distance to the highway (in kilometers)
 
-- Controls: number of gas stations within 5 kilometers
+- Additional control: number of gas stations within 5 kilometers (a proxy for competitiveness)
 
 - Unit of observation: convenience stores with gas pumps
 
@@ -323,12 +338,24 @@ reg2 <- lm(unit_price ~ dist + count_within, data = store_dist_40)
 # Extract model results
 results_df <- broom::tidy(reg2, conf.int = TRUE)
 
+# Extract model statistics
+model_stats <- glance(reg2) %>%
+  select(r.squared, nobs) %>%
+  rename(`R-squared` = r.squared, `Observations` = nobs) %>%
+  pivot_longer(cols = everything(), names_to = "term", values_to = "estimate")
+
+# Combine coefficients and model stats
+results_combined <- bind_rows(results_df, model_stats)
+
+# Display table
+kable(results_combined, format = "html", caption = "Table 3: Regression Results for Unit Price vs. Distance and Number of Competitors")
+
 # Convert results to wide format if necessary or customize the table manually
-kable(results_df, format = "html", caption = "Table 3: Regression Results for Unit Price vs. Distance and Number of Competitors")
+# kable(results_df, format = "html", caption = "Table 3: Regression Results for Unit Price vs. Distance and Number of Competitors")
 
 ```
 
-The p-value associated with the number of gas stations within 5 km is not statistically significant, so we cannot reject the null hypothesis that the coefficient is different from zero.
+Although our model fit improved (1.7%), the p-value associated with the number of gas stations within 5 km is not statistically significant, so we cannot reject the null hypothesis that the coefficient is different from zero.
 
 
 ## Takeaways
@@ -358,23 +385,54 @@ Limitations:
 
 The pattern we observe (inverse relationship between distance and price) suggests that stations closer to the highway charge a premium for the convenience of being located near the highway.
 
-<!--can offer lower prices due to higher traffic and potentially lower transportation costs.-->
-
 For those commuting to work places outside of town, this might mean higher travel expenses.
 
+## Annual Economic Impact (on average)
+
+**What would the impact of a half-cent per km increase in gas price be on a typical household?**
+
+- Coefficient: \$0.0005 (per 1 KM) = \$0.0008 (per 1 MI)
+- Fuel economy of a standard sedan: 30 miles per gallon
+- Annual driving distance: 13,500 miles (US average, per FHWA)
+
+*How much more would a household spend on fuel if their nearest gas station is 3 miles closer to the highway?*
+
+## Annual Economic Impact (on average)
+
+1. Change in price per gallon
+
+- Assume 3 miles difference in distance to the highway:
+- 3 miles $\times$ \$0.008 per mile = \$0.024 (2.4 cents)
+
+2. Gallons used annually
+
+- 13,500 miles / 30 mpg = 450 gallons/year
+
+3. Annual cost impact
+
+- \$0.024 $\times$ 450 gallons = **\$10.80 per year**
 
 ## Conclusion
 
-Our analysis confirms that distance from the highway is a key factor affecting gas prices in our community.
+Our analysis confirms that distance from the highway is a factor related to gas prices in our community.
 
 However, the considering the current travel cost to the highway without the access road, offsets the modest expected increase in gas prices.
 
-Possible solutions: 
+Possible alternatives: 
 
 - Organize carpooling options 
 
 - Support local gas stations with loyalty programs
 
+## As you prepare to vote tonight
+
+Consider that building the access road could offer long-term savings for many households, even if prices near the highway remain slightly elevated.
+
+Possible ways to balance these outcomes:
+- Organize carpooling or shuttle programs to reduce fuel usage.
+- Encourage local gas stations to adopt loyalty programs or price-matching to stay competitive.
+
+**Ultimately, this decision is about access, affordability, and how we support our community's everyday needs.**
 
 <!--
 ## Bats and Ag Land Prices ([Manning & Ando](https://www.journals.uchicago.edu/doi/full/10.1086/720303))
