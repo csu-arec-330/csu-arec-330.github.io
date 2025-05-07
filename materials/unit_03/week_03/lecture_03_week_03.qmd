@@ -70,9 +70,19 @@ Tonight, I'll present to you analysis my team and I conducted on how gas prices 
 
 **Decision Needed:** To better understand the trade-offs involved with improving highway access so that you, the town planning committee, can decide to add a new access road.
 
-## Question {.larger}
+## Question
 
-How does the distance to the nearest highway relate to the price of gas paid by consumers?
+**What is the relationship between *gas stations' proximity to the nearest highway* and *the price of gas* paid by consumers?**
+
+## Breaking Down the Question
+
+**What is the relationship between *gas stations' proximity to the nearest highway* and *the price of gas* paid by consumers?**
+
+- Outcome: Price of gas
+- Variable of interest: Distance between gas station and highway
+- Unit of analysis: Convenience stores with gas stations
+
+$H_0$: There is a negative correlation between distance to the highway and price of gas. (i.e., As distance between the gas station and highway decreases, the price of gas increases.)
 
 ## Why Does It Matter? 
 
@@ -83,7 +93,7 @@ If gas stations located closer to highway access charge more, then adding a new 
 This analysis helps us weigh the **potential economic benefit to consumers** against the **infrastructure costs**, giving the town planning committee better information to guide your decision.
 
 
-## Background {.scrollable}
+##  {.scrollable}
 
 <div style="display: flex; gap: 2em;">
 
@@ -112,7 +122,7 @@ This analysis helps us weigh the **potential economic benefit to consumers** aga
 
 ## Analysis Plan {.scrollable}
 
-In order to answer our question: **How does the distance to the nearest highway relate to the price of gas paid by consumers?** we need data on the following:
+In order to answer our question: **What is the relationship between *the distance to the nearest highway* and *the price of gas* paid by consumers?** we need data on the following:
 
 - Location of gas stations (unit of analysis)
 
@@ -268,6 +278,8 @@ Below is a summary table of average prices per gallon and distances from the nea
   </tr>
 </tbody>
 </table>
+
+## *Aside:* Here would be a great place to add my Tableau visualizations
 
 ## Distribution of Unit Price and Distance
 
