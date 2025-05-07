@@ -48,6 +48,16 @@ Spend time interpreting your results
 
 # Understanding Gas Prices in Our Community: <br>A Town Hall Discussion
 
+## Presentation Components
+
+1. Introduction, Question, Background
+
+2. Data and Analysis
+
+3. Discussion and Conclusion
+
+# 1. Introduction, Question, Background
+
 ## Introduction {.smaller}
 
 Good evening. I'm Lauren, a local economic analyst.
@@ -58,10 +68,11 @@ There is room in the town's budget for infrastructure improvements, but there is
 
 Tonight, I'll present to you analysis my team and I conducted on how gas prices vary with distance to the highway. 
 
-**Goal:** To better understand the trade-offs involved with improving highway access so that you, the town planning committee, can decide to add a new access road.
+**Decision Needed:** To better understand the trade-offs involved with improving highway access so that you, the town planning committee, can decide to add a new access road.
 
+## Question {.larger}
 
-# How does the distance to the nearest highway relate to the price of gas paid by consumers?
+How does the distance to the nearest highway relate to the price of gas paid by consumers?
 
 ## Why Does It Matter? 
 
@@ -74,27 +85,60 @@ This analysis helps us weigh the **potential economic benefit to consumers** aga
 
 ## Background {.scrollable}
 
-Concerns about re-routing the highway: 
+<div style="display: flex; gap: 2em;">
 
-- Could create more traffic for the town
+<div style="flex: 1;">
 
+### Concerns about re-routing the highway
+
+- Could create more traffic for the town  
 - Could lead to an increase in gas prices (gas stations could charge a higher price due to proximity to the highway)
 
+</div>
 
-Benefits about re-routing the highway:
+<div style="flex: 1;">
 
-- Shorter commuting time for residents
+### Benefits of re-routing the highway
 
-- Better-conditioned road which offers ancillary benefits 
-
+- Shorter commuting time for residents  
+- Better-conditioned road which offers ancillary benefits  
 - More tax revenue from more gas sales
 
+</div>
+
+</div>
+
+# 2. Data and Analysis
+
+## Analysis Plan {.scrollable}
+
+In order to answer our question: **How does the distance to the nearest highway relate to the price of gas paid by consumers?** we need data on the following:
+
+- Location of gas stations (unit of analysis)
+
+- Price of gas (outcome variable)
+
+- Distance between gas station and the nearest highway (variable of interest)
+
+These will serve as inputs into my linear regression model.
 
 ## Data Collection {.scrollable}
 
-We gathered price data from U.S. convenience stores with gas stations. 
+1. Location of gas stations ($i$)
 
-We calculated their distance to the nearest highway and removed stores located further than 40 kilometers away. 
+- We gathered data on U.S. convenience stores with gas stations (`store_info`)
+
+2. Price of gas ($pr_i$)
+
+- We also have data on the price per gallon of gas for all transactions during the month of July 2023 (`shopper_info`)
+
+$\rightarrow$ Using these datasets, we filter out only the convenience stores with a gas station, leaving a sample of conveniences stores that sell gas and the price at which they sell it.
+
+## Data Collection {.scrollable}
+
+3. Distance between gas stations and the nearest highway ($Dist_i$)
+
+$\rightarrow$  For each convenience store with a gas station, we calculated the distance to the nearest highway and removed stores located further than 40 kilometers away (about 25 mi). 
 
 ```{r}
 #| echo: false
@@ -292,7 +336,7 @@ kable(results_combined, format = "html", caption = "Table 2: Regression Results 
 
 ```
 
-Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices.
+Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices. (Refer to next slide.)
 
 We also see that the $R^2$ value is low at 1.69%, which suggests we should include additional variables.
 
@@ -357,6 +401,9 @@ kable(results_combined, format = "html", caption = "Table 3: Regression Results 
 
 Although our model fit improved (1.7%), the p-value associated with the number of gas stations within 5 km is not statistically significant, so we cannot reject the null hypothesis that the coefficient is different from zero.
 
+However, the coefficient on distance ($\beta_1$) remains statistically significant, suggesting the results are robust.
+
+# 3. Discussion and Conclusion
 
 ## Takeaways
 
@@ -391,7 +438,7 @@ For those commuting to work places outside of town, this might mean higher trave
 
 **What would the impact of a half-cent per km increase in gas price be on a typical household?**
 
-- Coefficient: \$0.0005 (per 1 KM) = \$0.0008 (per 1 MI)
+- Coefficient: \$0.005 (per 1 KM) = \$0.008 (per 1 MI)
 - Fuel economy of a standard sedan: 30 miles per gallon
 - Annual driving distance: 13,500 miles (US average, per FHWA)
 
@@ -418,17 +465,12 @@ Our analysis confirms that distance from the highway is a factor related to gas 
 
 However, the considering the current travel cost to the highway without the access road, offsets the modest expected increase in gas prices.
 
-Possible alternatives: 
-
-- Organize carpooling options 
-
-- Support local gas stations with loyalty programs
-
 ## As you prepare to vote tonight
 
 Consider that building the access road could offer long-term savings for many households, even if prices near the highway remain slightly elevated.
 
 Possible ways to balance these outcomes:
+
 - Organize carpooling or shuttle programs to reduce fuel usage.
 - Encourage local gas stations to adopt loyalty programs or price-matching to stay competitive.
 
@@ -515,9 +557,7 @@ D. To control for federal agricultural policies that may change over time
 iclicker
 -->
 
-# Course Review
-
-## What was this course about?
+# Course Review: *What was this course about?*
 
 ## Topics and themes
 
@@ -540,15 +580,15 @@ What methods did we cover in these areas?
 
 
 
-## What is the purpose of decomposing a time series into its components?
+<!-- ## What is the purpose of decomposing a time series into its components? -->
 
-A. To remove any anomalies or outliers from the data.
+<!-- A. To remove any anomalies or outliers from the data. -->
 
-B. To prepare the data for regression analysis.
+<!-- B. To prepare the data for regression analysis. -->
 
-C. To determine the forecast accuracy of the time series.
+<!-- C. To determine the forecast accuracy of the time series. -->
 
-D. To identify the underlying patterns and relationships within the data.
+<!-- D. To identify the underlying patterns and relationships within the data. -->
 
 <!-- Answer D
 
@@ -556,15 +596,15 @@ Explanation: Decomposing a time series into its components is primarily done to 
 
 -->
 
-## When is clustering analysis an appropriate technique for data analysis?
+<!-- ## When is clustering analysis an appropriate technique for data analysis? -->
 
-A. When the data is unlabeled or unstructured.
+<!-- A. When the data is unlabeled or unstructured. -->
 
-B. When the data has a clear target variable or outcome.
+<!-- B. When the data has a clear target variable or outcome. -->
 
-C. When the data has a linear relationship between variables.
+<!-- C. When the data has a linear relationship between variables. -->
 
-D. When the data is in a time series format.
+<!-- D. When the data is in a time series format. -->
 
 <!-- Answer A
 
@@ -573,15 +613,15 @@ Explanation: Clustering analysis is particularly suitable when you are dealing w
 -->
 
 
-## Which of the following analysis techniques is regression *not* suitable for?
+<!-- ## Which of the following analysis techniques is regression *not* suitable for? -->
 
-A. Predicting a continuous outcome based on multiple input variables.
+<!-- A. Predicting a continuous outcome based on multiple input variables. -->
 
-B. Estimating the effect of price changes on sales volume.
+<!-- B. Estimating the effect of price changes on sales volume. -->
 
-C. Analyzing the relationship between temperature and energy consumption.
+<!-- C. Analyzing the relationship between temperature and energy consumption. -->
 
-D. Identifying distinct clusters of customers based on shopping behavior.
+<!-- D. Identifying distinct clusters of customers based on shopping behavior. -->
 
 <!-- Answer: D 
 
@@ -589,15 +629,15 @@ Explanation: Regression analysis is used to model and predict continuous outcome
 
 -->
 
-## How can color be used effectively in a data visualization?
+<!-- ## How can color be used effectively in a data visualization? -->
 
-A. To highlight important data points or trends.
+<!-- A. To highlight important data points or trends. -->
 
-B. To make the visualization more visually appealing.
+<!-- B. To make the visualization more visually appealing. -->
 
-C. To confuse the viewer with too many colors.
+<!-- C. To confuse the viewer with too many colors. -->
 
-D. To distract from the key message of the visualization.
+<!-- D. To distract from the key message of the visualization. -->
 
 
 
