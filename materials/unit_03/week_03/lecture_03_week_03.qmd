@@ -74,7 +74,7 @@ Tonight, I'll present to you analysis my team and I conducted on how gas prices 
 
 **What is the relationship between *gas stations' proximity to the nearest highway* and *the price of gas* paid by consumers?**
 
-## Breaking Down the Question
+## Breaking Down the Question {.scrollable}
 
 **What is the relationship between *gas stations' proximity to the nearest highway* and *the price of gas* paid by consumers?**
 
@@ -82,7 +82,11 @@ Tonight, I'll present to you analysis my team and I conducted on how gas prices 
 - Variable of interest: Distance between gas station and highway
 - Unit of analysis: Convenience stores with gas stations
 
-$H_0$: There is a negative correlation between distance to the highway and price of gas. (i.e., As distance between the gas station and highway decreases, the price of gas increases.)
+$H_0$: There is no statistically significant relationship between distance and the price of gas. 
+
+$H_A$: There is a negative relationship between distance to the highway and gas prices (i.e., as the distance decreases, gas prices increase).
+
+I will use linear regression to test this hypothesis. If the coefficient on distance is statistically significant, I will reject the null hypothesis. (I also believe the relationship is negative...)
 
 ## Why Does It Matter? 
 
@@ -320,7 +324,7 @@ $$ pr_{i} = \beta \cdot Dist_{i} + \alpha + \varepsilon_{i} $$
 
 - Unit of observation: convenience stores with gas pumps
 
-## Univariate Regression Results {.smaller}
+## Univariate Regression Results {.smaller .scrollable}
 
 ```{r}
 #| echo: false
@@ -347,6 +351,8 @@ kable(results_combined, format = "html", caption = "Table 2: Regression Results 
 # kable(results_df, format = "html", caption = "Table 2: Regression Results for Unit Price vs. Distance")
 
 ```
+
+The coefficient on distance is statistically significant. Therefore I reject the null hypothesis in favor of the alternative. 
 
 Our analysis shows a clear trend—each kilometer away from the highway corresponds with a decrease in gas prices. (Refer to next slide.)
 
